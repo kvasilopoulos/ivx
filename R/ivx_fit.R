@@ -135,8 +135,4 @@ ivx.fit <- function(y, x, h = 1) {
 
   return(list(Aivx =  Aivx, Wivx = Wivx,
               WivxInd = WivxInd, Q = Q, corrmat))
-}
 
-ivx.fit2 <- function(x, y, h) {
-  return(x + y/h)
-}
