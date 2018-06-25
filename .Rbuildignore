@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^appveyor\.yml$
+^matlab$
+^data-raw$
+^LICENSE\.md$

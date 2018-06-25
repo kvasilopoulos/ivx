@@ -1,0 +1,15 @@
+Package: ivx
+Type: Package
+Title: Robust Econometric Inference
+Version: 0.1.0
+Author: Who wrote it
+Authors@R: c(
+            person("Kostas", "Vasilopoulos", , email = "k.vasilopoulo@gmail.com", c("cre", "aut")),
+            person("Eftymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL-3
+URL: https://github.com/kvasilopoulos/ivx
+BugReports: https://github.com/kvasilopoulos/ivx/issues
+Encoding: UTF-8
+LazyData: true

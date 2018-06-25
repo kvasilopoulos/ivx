@@ -1,0 +1,47 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# ivx
+
+The goal of ivx is to ...
+
+## Installation
+
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("kvasilopoulos/ivx")
+```
+## Example
+
+```{r}
+library(ivx)
+```
+
+This is a basic example, lets load the data first:
+```{r example}
+# Monthly data from Kostakis et al (2014)
+X <- monthly[, 2, drop = F]
+Y <- monthly[, 13, drop = F]
+reg <- data.frame(X = X$`D/E`, Y = Y$LOG_EXCESS_VW)
+
+```
+
+And then do the estimation:
+```{r}
+est <- ivx(Y ~ X, data = reg)
+str(est)
+```
