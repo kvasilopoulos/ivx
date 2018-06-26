@@ -43,5 +43,5 @@ reg <- data.frame(X = X$`D/E`, Y = Y$LOG_EXCESS_VW)
 And then do the estimation:
 ```{r}
 est <- ivx(Y ~ X, data = reg)
-str(est)
+est
 ```
