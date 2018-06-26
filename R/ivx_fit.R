@@ -28,7 +28,8 @@ ivx.fit <- function(y, x, h = 1) {
   u <- xt - xlag %*% rn
 
   # residuals' correlation matrix
-  corrmat <- cor(cbind(epshat, u))
+  # corrmat <- cor(cbind(epshat, u))
+  corrmat <- c(epshat, u)
 
   # covariance matrix estimation (predictive regression)
   covepshat <- crossprod(epshat) / nn
@@ -133,6 +134,21 @@ ivx.fit <- function(y, x, h = 1) {
   WivxInd[1, ] <- Aivx / t(diag(Q)^(1 / 2))
   WivxInd[2, ] <- 1 - pchisq(WivxInd[1, ]^2, 1)
 
-  return(list(Aivx =  Aivx, Wivx = Wivx,
-              WivxInd = WivxInd, Q = Q, corrmat))
+  return(list(coefficients =  Aivx[-1], Wivx = Wivx,
+              WivxInd = WivxInd, q = Q, corrmat))
+}
+
+print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+  cat("\nCall:\n",
+      paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+  if (length(coef(x))) {
+    cat("Coefficients:\n")
+    print.default(format(coef(x), digits = digits),
+                  print.gap = 2L, quote = FALSE)
+  } else {
+    cat ("No coefficients\n")
+  }
+  invisible(x)
+}
+
 
