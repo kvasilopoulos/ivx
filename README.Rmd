@@ -27,21 +27,40 @@ devtools::install_github("kvasilopoulos/ivx")
 ```
 ## Example
 
-```{r}
+Load ivx and dplyr for data managment
+```{r message = FALSE}
 library(ivx)
+library(dplyr)
 ```
 
 This is a basic example, lets load the data first:
 ```{r example}
 # Monthly data from Kostakis et al (2014)
-X <- monthly[, 2, drop = F]
-Y <- monthly[, 13, drop = F]
-reg <- data.frame(X = X$`D/E`, Y = Y$LOG_EXCESS_VW)
+datam %>%
+  names()
+
+univariate <- datam %>%
+  select(Ret, D_P)
+
+multivariate <- datam %>%
+  select(Ret, D_P, TBL)
 
 ```
 
-And then do the estimation:
-```{r}
-est <- ivx(Y ~ X, data = reg)
-est
+And then do the univariate estimation:
+```{r uni}
+ivx(Ret ~ D_P, data = univariate) %>% 
+  summary()
+
+qtest(univariate$Ret, univariate$D_P)
+```
+
+And the multivariate estimation, for one or multiple horizons:
+```{r multi}
+ivx(Ret ~ D_P + TBL, data = multivariate) %>% 
+  summary()
+
+ivx(Ret ~ D_P + TBL, data = multivariate, horizon = 4) %>% 
+  summary()
+
 ```
