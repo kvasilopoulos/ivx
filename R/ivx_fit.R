@@ -1,7 +1,8 @@
-ivx.fit <- function(y, x, h = 1) {
+ivx.fit <- function(y, x, h = 1, offset = NULL, ...) {
 
-  x <- as.matrix(x)
+  cnames <- colnames(x)
   y <- as.matrix(y)
+  x <- as.matrix(x)
   nr <- NROW(x)
 
   xlag <- x[1:(nr - 1), , drop = FALSE]
@@ -11,13 +12,11 @@ ivx.fit <- function(y, x, h = 1) {
   nn <- NROW(xlag)
   l <- NCOL(xlag)
 
-  Wivx <- matrix(0, 2, 1)
-  WivxInd <- matrix(0, 2, l)
-
   # predictive regression residual estimation
   lm1 <- lm(yt ~ xlag)
   Aols <- coefficients(lm1)
   epshat <- matrix(residuals(lm1))
+
 
   rn <- matrix(0, l, l)
   for (i in 1:l) {
@@ -29,7 +28,8 @@ ivx.fit <- function(y, x, h = 1) {
 
   # residuals' correlation matrix
   # corrmat <- cor(cbind(epshat, u))
-  corrmat <- c(epshat, u)
+  suppressWarnings(
+  corrmat <- cor(epshat, u))
 
   # covariance matrix estimation (predictive regression)
   covepshat <- crossprod(epshat) / nn
@@ -49,7 +49,7 @@ ivx.fit <- function(y, x, h = 1) {
   covuhat <- t(covuhat) / nn
 
 
-  m <- floor(nn^(1 / 3))
+  m <- floor(nn^(1 / 3)) # bandwith parameter
   uu <- matrix(0, l, l)
   for (i in 1:m) {
     a <- matrix(0, l, l)
@@ -65,46 +65,42 @@ ivx.fit <- function(y, x, h = 1) {
   for (i in 1:m) {
     p <- matrix(0, nn - i, l)
     for (j in (i + 1):nn) {
-      p[j - i, ] <- u[j, , drop = F] * epshat[j - i]
+      p[j - i, ] <- u[j, , drop = F] * epshat[j - i] # epshat should be transposed
     }
     q[i, ] <- (1 - i / (1 + m)) * colSums(p)
   }
   residue <- apply(q, 2, sum) / nn
-  Omegaeu <- covuhat + residue
+  Omegaeu <- covuhat + residue # resideue should be transposed
+
 
   # instrument construction
   n <- nn - h + 1
   Rz <- (1 - 1 / (nn^0.95)) * diag(l)
   diffx <- xt - xlag
+
   z <- matrix(0, nn, l)
   z[1, ] <- diffx[1, ]
-
   for (i in 2:nn) {
     z[i, ] <- z[i - 1, ] %*% Rz + diffx[i, ]
   }
-  Z <- rbind(
-    matrix(0, 1, l),
-    z[1:(n - 1), , drop = F]
-  )
 
-  zz <- rbind(
-    matrix(0, 1, l),
-    z[1:(nn - 1), , drop = F]
-  )
+
+  Z  <- rbind(matrix(0, 1, l), z[1:(n - 1), , drop = F])
+  zz <- rbind(matrix(0, 1, l), z[1:(nn - 1), , drop = F])
 
 
   ZK <- matrix(0, n, l)
-  for (i in 1:(n - h + 1)) {
+  for (i in 1:n) {
     ZK[i, ] <- colSums(zz[i:(i + h - 1), , drop = F])
   }
 
   yy <- matrix(0, n, 1)
-  for (i in 1:(n - h + 1)) {
+  for (i in 1:n) {
     yy[i] <- sum(yt[i:(i + h - 1), drop = F])
   }
 
   xK <- matrix(0, n, l)
-  for (i in 1:(n - h + 1)) {
+  for (i in 1:n) {
     xK[i, ] <- colSums(xlag[i:(i + h - 1), , drop = F])
   }
 
@@ -115,40 +111,50 @@ ivx.fit <- function(y, x, h = 1) {
     Xt[, i] <- xK[, i, drop = F] - meanxK[i] * matrix(1, n, 1)
   }
 
-  library(pracma)
-  # library(MASS)
-  # tol <- max(size(A)) * eps(norm(A))
-
-  Aivx <- t(Yt) %*% Z %*% pinv(t(Xt) %*% Z)
+  Aivx <- t(Yt) %*% Z %*% pracma::pinv(t(Xt) %*% Z)
+  # set(Aivc) <- names(coefficients(Aols))
   meanzK <- colMeans(ZK)
 
-  FM <- covepshat - t(Omegaeu) %*% Omegauu^(-1) %*% Omegaeu
+  FM <- covepshat - t(Omegaeu) %*% pracma::inv(Omegauu) %*% Omegaeu
   # meanzK drop to column dimension so I have to suse tcross instead of cross
-  M <- crossprod(ZK) * covepshat[1] - n * tcrossprod(meanzK) * FM[1]
+  M <- crossprod(ZK) * covepshat[1] - kronecker(n * tcrossprod(meanzK), FM)
 
   H <- matrix(1, l, l)
-  Q <- H %*% pinv(t(Z) %*% Xt) %*% M %*% pinv(t(Xt) %*% Z) * t(H)
+  # Q <- H * pinv(t(Z) %*% Xt) %*% M %*% pinv(t(Xt) %*% Z) * t(H)
+  Q <- pinv(t(Z) %*% Xt) %*% M %*% pinv(t(Xt) %*% Z)
 
-  Wivx[1, 1] <- t(H %*% t(Aivx)) %*% pinv(Q) %*% (H %*% t(Aivx))
-  Wivx[2, 1] <- 1 - pchisq(Wivx[1, 1], l)
-  WivxInd[1, ] <- Aivx / t(diag(Q)^(1 / 2))
-  WivxInd[2, ] <- 1 - pchisq(WivxInd[1, ]^2, 1)
+  # Wivx <- t(H * t(Aivx)) %*% pracma::pinv(Q) %*% (H * t(Aivx))
+  Wivx <- Aivx %*% pracma::pinv(Q) %*% t(Aivx)
+  Wivx_pvalue <- 1 - pchisq(Wivx, l)
+  WivxInd <- Aivx / diag(Q)^(1/2) # t(diag(Q)^(1/2))
+  WivxInd_pvalue <- 1 - pchisq(WivxInd[1, ]^2, 1)
 
-  return(list(coefficients =  Aivx[-1], Wivx = Wivx,
-              WivxInd = WivxInd, q = Q, corrmat))
+  coefficients_ivx <- drop(Aivx)
+  names(coefficients_ivx) <- cnames
+
+  coefficients_ols <- coefficients(summary(lm1))
+  rownames(coefficients_ols) <- c("(intercept)", cnames)
+
+
+  output <- structure(list(coefficients_ivx =  coefficients_ivx,
+                           coefficients_ols = coefficients_ols,
+                           horizon = h,
+                           cnames = cnames,
+                           delta = drop(corrmat),
+                           ar = diag(rn),
+                           Wivx = drop(Wivx),
+                           Wivx_pvalue = Wivx_pvalue,
+                           WivxInd = drop(WivxInd),
+                           WivxInd_pvalue = WivxInd_pvalue,
+                           varcovIVX = Q))
+  # class = "ivx")
+
+
+  output
 }
 
-print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
-  cat("\nCall:\n",
-      paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-  if (length(coef(x))) {
-    cat("Coefficients:\n")
-    print.default(format(coef(x), digits = digits),
-                  print.gap = 2L, quote = FALSE)
-  } else {
-    cat ("No coefficients\n")
-  }
-  invisible(x)
-}
+
+
+
 
 
