@@ -4,9 +4,7 @@
 \name{ivx}
 \alias{ivx}
 \alias{ivx-package}
-\alias{ivx-package}
-\alias{ivx}
-\title{ivx: Robust Econometric Inference}
+\title{Robust Econometric Inference}
 \usage{
 ivx(formula, data, horizon, subset, na.action, model = TRUE,
   contrasts = NULL, offset, ...)
