@@ -1,12 +1,14 @@
 library(pdftools)
 library(stringr)
 library(dplyr)
+
 options(stringsAsFactors = FALSE)
 text <- pdf_text("./data-raw/crit.pdf")
 text2 <- strsplit(text, "\n")
 dfex <- list()
 delta <- matrix()
 j <- 1
+
 for (i in 9:28) {
   temp <- text2[[i]] # when you will sort out the df-gls remove 1col
   if (i %% 2 == 1) {
@@ -40,8 +42,6 @@ c_low_crit <- matrix(c_crit[, c_odd], length(dfgls_sim), length(delta_sim),
 c_up_crit <- matrix(c_crit[, c_even], length(dfgls_sim), length(delta_sim),
                     dimnames = list(dfgls_sim, delta_sim))
 options(stringsAsFactors = TRUE)
-
-
 
 
 # usethis::use_data(c_low_crit, overwrite = T)
