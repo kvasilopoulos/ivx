@@ -1,9 +1,28 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ivx
+# ivx: Predictive Regressions
 
-The goal of ivx is to …
+[![Travis build
+status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
+
+The goal of ivx is to offer robust econometric inference for predictive
+regressions.
+
+![first
+equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20y_t%20%26%3D%20%5Cbeta%20y_%7Bt-1%7D%20+%20%5Cepsilon_t%5C%5C%20x_t%20%26%3D%20%5Crho%20x_%7Bt-1%7D%20+%20u_t%20%5Cend%7Balign*%7D)
+
+### Solution methods
+
+  - The Bonferroni method
+      - Cavanagh et al (1995)
+      - Campbell and Yogo (2006)
+  - A conditional likelihood approach
+      - Jansson and Moreira (2006)
+  - A control function approach
+      - Elliot (2001)
+  - The IVX approach
+      - Magdalinos and Phillips (2009b)
 
 ## Installation
 
@@ -50,10 +69,10 @@ ivx(Ret ~ D_P, data = univariate) %>%
 #> ivx(formula = Ret ~ D_P, data = univariate, horizon = 1)
 #> 
 #> Coefficients:
-#>      Estimate  Wald Ind Pr(> chi)     delta Rn
-#> D_P  0.006489  1.425087  0.154132 -0.975352  1
+#>     Estimate Wald Ind
+#> D_P    0.006     1.42
 #> 
-#> Joint Wald statistic 2.031 , p-value 0.1541
+#> Joint Wald statistic:  2.018 on 1 DF, p-value 0.04358
 
 qtest(univariate$Ret, univariate$D_P)
 #>  CI for beta: [ -0.001058309 , -0.004163946 ]
@@ -62,31 +81,3 @@ qtest(univariate$Ret, univariate$D_P)
 ```
 
 And the multivariate estimation, for one or multiple horizons:
-
-``` r
-ivx(Ret ~ D_P + TBL, data = multivariate) %>% 
-  summary()
-#> 
-#> Call:
-#> ivx(formula = Ret ~ D_P + TBL, data = multivariate, horizon = 1)
-#> 
-#> Coefficients:
-#>      Estimate  Wald Ind Pr(> chi)     delta    Rn
-#> D_P  0.006145  1.348538  0.177485 -0.975575 1.000
-#> TBL -0.080717 -1.398871  0.161852 -0.061043 0.997
-#> 
-#> Joint Wald statistic 3.644 , p-value 0.1617
-
-ivx(Ret ~ D_P + TBL, data = multivariate, horizon = 4) %>% 
-  summary()
-#> 
-#> Call:
-#> ivx(formula = Ret ~ D_P + TBL, data = multivariate, horizon = 4)
-#> 
-#> Coefficients:
-#>      Estimate  Wald Ind Pr(> chi)     delta    Rn
-#> D_P  0.006579  1.429957  0.152729 -0.975575 1.000
-#> TBL -0.073549 -1.262909  0.206622 -0.061043 0.997
-#> 
-#> Joint Wald statistic 3.527 , p-value 0.1715
-```

@@ -12,7 +12,7 @@ df_gls <- function(x) {
   return(tstat)
 }
 
-#' Campel Yogo bonferroni confidenci intervals Q-test
+#' Campel Yogo bonferroni confidenc intervals Q-test
 #'
 #' @param y the regressand
 #' @param x the regressor
@@ -104,8 +104,6 @@ qtest <- function(y, x, method = c("bonferroni", "infeasible", "sup"),
 
   # xlag_m <- xlag - mean(xlag)
 
-
-
   ylow <- yt - sigma_ue[1]*sigma_e[1]^(-2)*(xt - rho_low*xlag)
   main_low_reg <- coefficients(summary(lm(ylow ~ xlag))) # this should be xlag_m
   beta_low <- main_low_reg[2,1] - zsig*(1 - delta^2)^(1/2) * main_low_reg[2,2]
@@ -124,7 +122,7 @@ qtest <- function(y, x, method = c("bonferroni", "infeasible", "sup"),
 }
 
 #' @export
-print.qtest <- function(x) {
+print.qtest <- function(x, ...) {
   cat(" CI for beta: [", x$ci_b[1], ",", x$ci_b[2], "]")
   cat("\n CI for rho: [", x$ci_rho[1], ",", x$ci_rho[2], "]")
   cat("\n delta = ", x$delta)

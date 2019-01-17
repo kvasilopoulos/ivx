@@ -66,7 +66,6 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   uu = uu/nn;
   arma::mat Omegauu = covu + uu + uu.t();
 
-
   arma::mat q = zeros<mat>(m,l);
   for (int h = 1; h <= m; ++h){
     arma::mat p = zeros<mat>(nn-h,l);
@@ -78,9 +77,6 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   }
   arma::mat residue = sum(q)/nn;
   arma::mat Omegaeu = covuhat + residue.t();
-
-
-
 
   // instrument construction
   arma::mat Rz = (1-1/(pow(nn, 0.95)))*eye(l,l);
@@ -118,27 +114,29 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     Xt.col(i) = xK.col(i) - ones(n,1)*meanxK.col(i);
   }
 
-
   ////////////////////////////////////////////////
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
   arma::mat M = ZK.t()*ZK*as_scalar(covepshat)-n*meanzK.t()*meanzK*as_scalar(FM);
   arma::mat H = eye<mat>(l,l);
-  arma::mat Q =H*pinv(Z.t()*Xt)*M*pinv(Xt.t()*Z)*H.t();
+  arma::mat Q = H*pinv(Z.t()*Xt)*M*pinv(Xt.t()*Z)*H.t();
 
-  arma::colvec Wivx =(H*Aivx.t()).t()*pinv(Q)*(H*Aivx.t());
+  arma::colvec wivx = (H*Aivx.t()).t()*pinv(Q)*(H*Aivx.t());
 
-  arma::mat WivxInd= Aivx/sqrt(diagvec(Q).t());
+  arma::mat wivxind = Aivx/sqrt(diagvec(Q).t());
 
   return List::create(
-    _("Aols") = Aols,
     _("Aivx") = Aivx.t(),
+    _("wivx") = wivx,
+    _("wivxind") = wivxind.t(),
+    _("Aols") = Aols,
     _("horizons") = K,
-    _("Rn") = diagvec(Rn),
+    _("df") = l,
     _("delta") = corrmat,
-    _("Wivx") = Wivx,
-    _("WivxInd") = WivxInd.t()
+    _("Rn") = diagvec(Rn),
+    _("Rz") = diagvec(Rz),
+    _("varcov") = Q
   );
 
 }

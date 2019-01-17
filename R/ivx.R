@@ -35,12 +35,8 @@ ivx <- function(formula, data, horizon, subset, na.action,
 {
 
   cl <- match.call()
-  # attr(formula, "intercept") <- 0
 
-  if (missing(horizon)) {
-    horizon = 1
-    cl$horizon <- 1
-  }
+  if (missing(horizon)) horizon <- cl$horizon <- 1
 
   ## keep only the arguments which should go into the model frame
   mf <- match.call(expand.dots = FALSE)
@@ -58,6 +54,10 @@ ivx <- function(formula, data, horizon, subset, na.action,
 
   ## 1) allow model.frame to update the terms object before saving it.
   mt <- attr(mf, "terms")
+  if (attr(mt, "intercept") == 0) {
+    warning("ivx estimation does not include an intercept by construction",
+            call. = FALSE)
+  }
   attr(mt, "intercept") <- 0
   y <- model.response(mf, "numeric")
 
@@ -88,25 +88,22 @@ ivx <- function(formula, data, horizon, subset, na.action,
 
 #' @export
 print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-
-  res <- x$coefficients_ivx
-
+  res <- x$coefficients
   if (length(res)) {
     cat("Coefficients:\n")
-    print.default(format(res, digits = digits),
-                  print.gap = 2L, quote = FALSE)
+    print.default(format(res, digits = digits), print.gap = 2L, quote = FALSE)
   } else {
     cat("No coefficients\n")
   }
   invisible(x)
-  cat("\nNote: ivx estimation does not include an intercept.")
 }
 
 #' @export
 #' @importFrom stats printCoefmat
-summary.ivx <- function(object, ...) {
+summary.ivx <- function(object, ols = FALSE, ...) {
   z <- object
 
   if (is.null(z$terms))
@@ -115,60 +112,123 @@ summary.ivx <- function(object, ...) {
     stop("calling summary.ivx(<fake-ivx-object>) ...")
 
   ans <- z[c("call", "terms")]
-  ans$coefficients_ivx <- cbind(z$coefficients_ivx, z$WivxInd, z$WivxInd_pvalue,
-                                z$delta, z$ar)
-  dimnames(ans$coefficients_ivx) <- list(z$cnames, c("Estimate", "Wald Ind",
-                                       "Pr(> chi)", "delta", "Rn"))#\u03c7
+  ans$coefficients <- cbind(z$coefficients, z$Wald_Ind) #, z$WivxInd_pvalue
+  ans$delta <- z$delta
+  # z$delta, z$ar
+  dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind")) #,"Pr(> chi)")
+                                         #\u03c7 #, "delta", "Rn")
   ans$coefficients_ols <- z$coefficients_ols
-  ans$aliased <- is.na(z$coefficients_ivx)
+  # ans$fstatistic <- z$fstatistic
+  ans$aliased <- is.na(z$coefficients)
   ans$horizon <- z$horizon
-  ans$Wivx <- z$Wivx
-  ans$Wivx_pvalue <- z$Wivx_pvalue
-  ans$sigma <- z$varcovIVX
+  ans$Wivx <- z$Wald_Joint
+
+  ans$df <- z$df
+  ans$pv_ivx <- 1 - pchisq(z$Wald_Ind, z$df);
+  ans$pv_wivxind <- 1 - pchisq(z$Wald_Joint^2, 1);
+
+  # ans$sigma <- z$varcovIVX
+
   if (is.null(z$na.action)) ans$na.action <- z$na.action
   class(ans) <- "summary.ivx"
-  #print(ans$coefficients_ivx, digits = max(3L, getOption("digits") - 3L))
+  attr(ans, "ols") <- ols
   ans
 }
 
 #' @export
-print.summary.ivx <- function(x, digits = max(3L, getOption("digits") - 3L),
+print.summary.ivx <- function(x,
+                              digits = max(3L, getOption("digits") - 3L),
                               signif.stars = getOption("show.signif.stars"),
                               ...){
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+
   if (length(x$aliased) == 0L) {
     cat("No coefficients\n")
   }else{
-    cat("Coefficients:\n")
-    coefs <- x$coefficients_ivx
+
+    coefs <- x$coefficients_ols
     aliased <- x$aliased
 
     if (!is.null(aliased) && any(aliased)) {
       cn <- names(aliased)
-      civx <- x$coefficients_ivx
-      coefs <- matrix(NA, NROW(civx), 5,dimnames = list(cn , colnames(civx)))
+      civx <- x$coefficients_ols
+      coefs <- matrix(NA, NROW(civx), 5, dimnames = list(cn , colnames(civx)))
       coefs[!aliased, ] <- civx
     }
 
-    printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
-               na.print = "NA", ...)
+    if (attr(x, "ols")) {
+      cat("\n\nCoefficients OLS:\n")
+
+      printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
+                   signif.legend = TRUE, na.print = "NA", ...)
+      if (!is.null(x$fstatistic)) {
+        cat("\nF-statistic:", formatC(x$fstatistic[1L], digits = digits),
+            "on", x$fstatistic[2L], "and",
+            x$fstatistic[3L], "DF,  p-value:",
+            format.pval(pf(x$fstatistic[1L], x$fstatistic[2L],
+                           x$fstatistic[3L], lower.tail = FALSE),
+                        digits = digits))
+      }
+    }else{
+
+      coefs <- x$coefficients
+      aliased <- x$aliased
+
+      if (!is.null(aliased) && any(aliased)) {
+        cn <- names(aliased)
+        civx <- x$coefficients
+        coefs <- matrix(NA, NROW(civx), 5, dimnames = list(cn , colnames(civx)))
+        coefs[!aliased, ] <- civx
+      }
+
+      cat("Coefficients:\n")
+      printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
+                   if (attr(x, "ols")) signif.legend = TRUE else signif.legend = FALSE,
+                   has.Pvalue = TRUE, P.values = TRUE, na.print = "NA", ...)
+
+      cat("\nJoint Wald statistic: ", formatC(x$wivx, digits = digits),
+          "on", x$df, "DF, p-value",
+          format.pval(x$pv_wivx, digits = digits))
+    }
+
   }
 
- cat("\nJoint Wald statistic", format(x$Wivx, digits = digits),
-     ", p-value", format(x$Wivx_pvalue, digits = digits))
-
- # cat("\n\n Coefficients OLS:\n")
- # printCoefmat(x$coefficients_ols, digits = digits, signif.stars = signif.stars,
- #              na.print = "NA", ...)
  invisible(x)
 }
 
+#' Finding the delta coefficient
+#'
+#' @param object class "ivx"
+#' @param mat matrix format
+#' @param diag include diagonal elements
+#'
+#' @importFrom gdata upperTriangle
+#' @export
+delta <- function(object, mat = F, diag = FALSE) {
 
-# coef.ivx <- function(x, ols = FALSE) {
-#   if (ols) {
-#     x$coefficients_ols
-#   }else{
-#     x$coefficients_ivx
-#   }
-# }
+  if (!inherits(object, c("ivx", "summary.ivx"))) {
+    stop("Wrong object", call. = F)
+  }
+  delta <- object$delta
+  if (mat) {
+    upperTriangle(delta, diag = diag) <- NA
+  }else{
+    delta <- drop(delta[-1, 1])
+  }
+  delta
+}
+
+varcov <- function(object) {
+  if (!inherits(x, c("ivx", "summary.ivx"))) stop("Wrong object", call. = F)
+  varcov <- object$varcov
+
+}
+
+coef.ivx <- function(x, ols = FALSE) {
+  if (ols) {
+    x$coefficients
+  }else{
+    x$coefficients_ivx
+  }
+}

@@ -12,12 +12,28 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ivx
+# ivx: Predictive Regressions
 
-The goal of ivx is to ...
+ [![Travis build status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
+
+The goal of ivx is to offer robust econometric inference for predictive regressions.
+
+![first equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20y_t%20%26%3D%20%5Cbeta%20y_%7Bt-1%7D%20&plus;%20%5Cepsilon_t%5C%5C%20x_t%20%26%3D%20%5Crho%20x_%7Bt-1%7D%20&plus;%20u_t%20%5Cend%7Balign*%7D)
+
+
+### Solution methods
+
+* The Bonferroni method
+  - Cavanagh et al (1995)
+  - Campbell and Yogo (2006)
+* A conditional likelihood approach
+  - Jansson and Moreira (2006)
+* A control function approach
+  - Elliot (2001)
+* The IVX approach
+  - Magdalinos and Phillips (2009b)
 
 ## Installation
-
 
 You can install the development version from [GitHub](https://github.com/) with:
 
@@ -56,7 +72,7 @@ qtest(univariate$Ret, univariate$D_P)
 ```
 
 And the multivariate estimation, for one or multiple horizons:
-```{r multi}
+```{r multi, eval=FALSE, include=FALSE}
 ivx(Ret ~ D_P + TBL, data = multivariate) %>% 
   summary()
 
