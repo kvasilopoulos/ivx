@@ -1,21 +1,3 @@
-# library(tidyverse)
-#
-# y <- cumsum(rnorm(100))
-# x <- cumsum(rnorm(100))
-# df <- data.frame(y, x)
-# purrr::map(df, uroot) %>%
-#   purrr::reduce(rbind)
-#
-# s1 <- datam %>%
-#   select(-Date, -Ret) %>%
-#   map(uroot)
-#
-# cbind(
-#   names(s1),
-#   reduce(s1, rbind)
-# )
-
-
 #' Unit root and stationarity test overview
 #'
 #'
@@ -24,9 +6,14 @@
 #' @param lag.max maximum number of lags
 #'
 #' @importFrom urca ur.df ur.ers ur.pp ur.kpss
+#' @importFrom dplyr select
+#' @importFrom purrr reduce map
+#' @importFrom stats lm.fit
+#'
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' names <- datam %>%
 #'   select(-Date, -Ret) %>%
 #'   names()
@@ -35,7 +22,7 @@
 #'            select(-Date, -Ret) %>%
 #'            map(uroot) %>%
 #'            reduce(rbind))
-#'
+#'}
 uroot <- function(y, model = c("constant", "trend"), lag.max = 4) {
 
   nr <- length(y)

@@ -37,12 +37,17 @@ c_even <- seq(2, NCOL(c_crit), 2)
 delta_sim <- c(-0.999, seq(-0.975, -0.025, 0.025))
 dfgls_sim <- seq(1, -5, -0.1)
 
-c_low_crit <- matrix(c_crit[, c_odd], length(dfgls_sim), length(delta_sim),
+c_low_crit <- matrix(c_crit[, c_odd],
+                     length(dfgls_sim),
+                     length(delta_sim),
                      dimnames = list(dfgls_sim, delta_sim))
-c_up_crit <- matrix(c_crit[, c_even], length(dfgls_sim), length(delta_sim),
-                    dimnames = list(dfgls_sim, delta_sim))
-options(stringsAsFactors = TRUE)
 
+c_up_crit <- matrix(c_crit[, c_even],
+                    length(dfgls_sim),
+                    length(delta_sim),
+                    dimnames = list(dfgls_sim, delta_sim))
+
+options(stringsAsFactors = TRUE)
 
 # usethis::use_data(c_low_crit, overwrite = T)
 # usethis::use_data(c_up_crit, overwrite = T)

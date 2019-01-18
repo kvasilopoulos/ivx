@@ -12,7 +12,8 @@ Imports: pracma,
   gdata,
   magrittr,
   urca,
-  dplyr
+  dplyr,
+  purrr
 Suggests: pdftools,
   stringr
 LinkingTo: Rcpp, RcppArmadillo

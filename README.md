@@ -5,6 +5,8 @@
 
 [![Travis build
 status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
 
 The goal of ivx is to offer robust econometric inference for predictive
 regressions.
@@ -14,6 +16,14 @@ equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20y_t%20%26%
 
 ### Solution methods
 
+#### The workforce of the model hence the name is:
+
+  - The IVX approach
+      - Magdalinos and Phillips (2009b)
+      - Kostakis Magdalinos and Stamatogiannis (2015)
+
+#### The rest
+
   - The Bonferroni method
       - Cavanagh et al (1995)
       - Campbell and Yogo (2006)
@@ -21,8 +31,6 @@ equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20y_t%20%26%
       - Jansson and Moreira (2006)
   - A control function approach
       - Elliot (2001)
-  - The IVX approach
-      - Magdalinos and Phillips (2009b)
 
 ## Installation
 
@@ -72,7 +80,7 @@ ivx(Ret ~ D_P, data = univariate) %>%
 #>     Estimate Wald Ind
 #> D_P    0.006     1.42
 #> 
-#> Joint Wald statistic:  2.018 on 1 DF, p-value 0.04358
+#> Joint Wald statistic:   on 1 DF, p-value 0.04358
 
 qtest(univariate$Ret, univariate$D_P)
 #>  CI for beta: [ -0.001058309 , -0.004163946 ]

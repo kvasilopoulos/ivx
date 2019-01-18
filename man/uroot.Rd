@@ -17,6 +17,7 @@ uroot(y, model = c("constant", "trend"), lag.max = 4)
 Unit root and stationarity test overview
 }
 \examples{
+\donttest{
 names <- datam \%>\%
   select(-Date, -Ret) \%>\%
   names()
@@ -25,5 +26,5 @@ ur <- cbind(names, datam \%>\%
            select(-Date, -Ret) \%>\%
            map(uroot) \%>\%
            reduce(rbind))
-
+}
 }

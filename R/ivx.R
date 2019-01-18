@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @importFrom pracma pinv
-#' @importFrom stats .getXlevels coef coefficients cor lm model.matrix
+#' @importFrom stats .getXlevels coef coefficients cor lm model.matrix pf
 #' model.offset model.response pchisq qnorm residuals symnum
 ivx <- function(formula, data, horizon, subset, na.action,
                  model = TRUE, contrasts = NULL, offset, ...)
@@ -212,7 +212,7 @@ delta <- function(object, mat = F, diag = FALSE) {
   }
   delta <- object$delta
   if (mat) {
-    upperTriangle(delta, diag = diag) <- NA
+    # upperTriangle(delta, diag = diag) <- NA
   }else{
     delta <- drop(delta[-1, 1])
   }
@@ -220,15 +220,15 @@ delta <- function(object, mat = F, diag = FALSE) {
 }
 
 varcov <- function(object) {
-  if (!inherits(x, c("ivx", "summary.ivx"))) stop("Wrong object", call. = F)
+  if (!inherits(object, c("ivx", "summary.ivx"))) stop("Wrong object", call. = F)
   varcov <- object$varcov
 
 }
 
-coef.ivx <- function(x, ols = FALSE) {
-  if (ols) {
-    x$coefficients
-  }else{
-    x$coefficients_ivx
-  }
-}
+# coef.ivx <- function(x, ols = FALSE) {
+#   if (ols) {
+#     x$coefficients
+#   }else{
+#     x$coefficients_ivx
+#   }
+# }

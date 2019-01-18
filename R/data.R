@@ -45,9 +45,7 @@
 "dataq"
 
 #' Critical values for the lower bound c
-#'
 "c_low_crit"
 
 #' Critical values for the upper bound c
-#'
 "c_up_crit"

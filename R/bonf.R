@@ -20,6 +20,7 @@ df_gls <- function(x) {
 #' @param cest for sup test the user have to provide an estimation of c
 #' @param sig 10\%
 #'
+#' @importFrom stats rnorm
 #' @return the upper and lower bound of the regression coefficient and the
 #' autoregressive coefficient
 #' @export
@@ -84,8 +85,8 @@ qtest <- function(y, x, method = c("bonferroni", "infeasible", "sup"),
     s1 <- which.min(abs(dfgls_sim == tstat))
     s2 <- which.min(abs(delta_sim - delta[1]))
 
-    c_low <- c_low_crit[s1, s2]
-    c_up <- c_up_crit[s1, s2]
+    c_low <- get("c_low_crit")[s1, s2]
+    c_up <- get("c_up_crit")[s1, s2]
     rho_low <- 1 + c_low/nr
     rho_up <- 1 + c_up/nr
   } else if (method == "sup") {

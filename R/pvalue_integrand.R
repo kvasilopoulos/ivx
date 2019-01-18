@@ -41,18 +41,18 @@ integrand <- function(rtilde_b, ttilde_gg, r_g, r_bb, r_gg, z_bb, rhobarhat, k) 
 # minus -------------------------------------------------------------------
 
   # Exponent minus real
-  exp_m_real <- -(r_b^2)/(2*r_bb) + remat_11*q_g - remat_1221*sqrt(q_g)*z_bb + remat_22*(z_bb^2)
+  exp_m_re <- -(r_b^2)/(2*r_bb) + remat11*q_g - remat1221*sqrt(q_g)*z_bb + remat22*(z_bb^2)
   # Exponent minus imaginary
-  exp_m_imag <- log(1 - ttilde_gg)*r_gg + imat_11*q_g - imat_1221*sqrt(q_g)*z_bb + imat_22*(z_bb^2)
+  exp_m_im <- log(1 - ttilde_gg)*r_gg + imat11*q_g - imat1221*sqrt(q_g)*z_bb + imat22*(z_bb^2)
 
-  f_minus <- exp(exp_m_real) * (multi_real * cos(exp_m_imag) - multi_imag * sin(exp_m_im)) * ((-log(1 - rtilde_b))^(k/2 - 1) / ((1 - rtilde_b)*(1 - ttilde_gg))) / (abs(rhobarhat)*sqrt(r_bb)*z_bb)
+  f_minus <- exp(exp_m_re) * (multi_re * cos(exp_m_im) - multi_im * sin(exp_m_im)) * ((-log(1 - rtilde_b))^(k/2 - 1) / ((1 - rtilde_b)*(1 - ttilde_gg))) / (abs(rhobarhat)*sqrt(r_bb)*z_bb)
 
 
 # plus --------------------------------------------------------------------
 
-  exp_p_re <- -(r_b^2)/(2*r_bb) + remat_11*q_g + remat_1221*sqrt(q_g)*z_bb + remat_22*(z_bb^2)
+  exp_p_re <- -(r_b^2)/(2*r_bb) + remat11*q_g + remat1221*sqrt(q_g)*z_bb + remat22*(z_bb^2)
 
-  exp_p_im <-  log(1 - ttilde_gg)*r_gg + imat_11*q_g + imat_1221*sqrt(q_g)*z_bb + imat_22*(z_bb^2)
+  exp_p_im <-  log(1 - ttilde_gg)*r_gg + imat11*q_g + imat1221*sqrt(q_g)*z_bb + imat22*(z_bb^2)
 
   f_plus <- exp(exp_p_re) * (multi_re * cos(exp_p_im) - multi_im * sin(exp_p_im)) * ((-log(1 - rtilde_b))^(k/2 - 1) / ((1 - rtilde_b)*(1 - ttilde_gg))) / (abs(rhobarhat)*sqrt(r_bb)*z_bb)
 
