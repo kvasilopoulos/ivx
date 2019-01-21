@@ -1,9 +1,8 @@
-library(pdftools)
 library(stringr)
 library(dplyr)
 
 options(stringsAsFactors = FALSE)
-text <- pdf_text("./data-raw/crit.pdf")
+text <- pdftools::pdf_text("./data-raw/crit.pdf")
 text2 <- strsplit(text, "\n")
 dfex <- list()
 delta <- matrix()

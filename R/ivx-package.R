@@ -7,6 +7,7 @@
 #' @docType package
 #' @useDynLib ivx, .registration = TRUE
 #' @importFrom Rcpp evalCpp
+#' @import RcppArmadillo
 #' @keywords internal
 "_PACKAGE"
 

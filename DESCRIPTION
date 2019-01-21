@@ -14,8 +14,7 @@ Imports: pracma,
   urca,
   dplyr,
   purrr
-Suggests: pdftools,
-  stringr
+Suggests: stringr
 LinkingTo: Rcpp, RcppArmadillo
 License: GPL-3 + file LICENSE
 URL: https://github.com/kvasilopoulos/ivx
