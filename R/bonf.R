@@ -12,7 +12,7 @@ df_gls <- function(x) {
   return(tstat)
 }
 
-#' Campel Yogo bonferroni confidenc intervals Q-test
+#' Campel Yogo bonferroni confidence intervals Q-test
 #'
 #' @param y the regressand
 #' @param x the regressor
@@ -87,6 +87,7 @@ qtest <- function(y, x, method = c("bonferroni", "infeasible", "sup"),
 
     c_low <- get("c_low_crit")[s1, s2]
     c_up <- get("c_up_crit")[s1, s2]
+
     rho_low <- 1 + c_low/nr
     rho_up <- 1 + c_up/nr
   } else if (method == "sup") {
@@ -113,13 +114,16 @@ qtest <- function(y, x, method = c("bonferroni", "infeasible", "sup"),
   main_up_reg <- coefficients(summary(lm(yup ~ xlag)))
   beta_up <- main_up_reg[2,1] + zsig*(1 - delta^2)^(1/2) * main_up_reg[2,2]
 
-  return(structure(list(ci_b = c(beta_low, beta_up),
-                        ci_rho = c(rho_low, rho_up),
-                        ci_c = c(c_low, c_up),
-                        method = method,
-                        delta = delta[1],
-                        dfgls = tstat),
-                   class = "qtest"))
+  return(
+    structure(
+      list(ci_b = c(beta_low, beta_up),
+           ci_rho = c(rho_low, rho_up),
+           ci_c = c(c_low, c_up),
+           method = method,
+           delta = delta[1],
+           dfgls = tstat),
+      class = "qtest")
+    )
 }
 
 #' @export

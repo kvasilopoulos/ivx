@@ -15,12 +15,17 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::colvec yt = y.rows(1, nr -1);
 
   int  nn = xlag.n_rows, l = xlag.n_cols;
+  NumericVector df(2); df(0) = l, df(1) = nn -l;
 
   //join_horiz to include intercept
-  arma::mat x_con = join_rows(ones(nr-1, 1), xlag);
+  arma::mat Xols = join_rows(ones(nr-1, 1), xlag);
 
-  arma::colvec Aols = arma::solve(x_con, yt); //inv(x_con.t()*x_con)*x_con.t()*yt;
-  arma::colvec epshat = yt - x_con*Aols;
+  arma::colvec Aols = arma::solve(Xols, yt); //inv(x_con.t()*x_con)*x_con.t()*yt;
+  arma::colvec epshat = yt - Xols*Aols;
+
+  double s2 = std::inner_product(epshat.begin(), epshat.end(), epshat.begin(), 0.0)/(nn - l);
+  arma::colvec std_err = arma::sqrt(s2 * arma::diagvec(arma::pinv(arma::trans(Xols)*Xols)));
+  arma::colvec tstat = Aols/std_err;
 
   arma::mat Rn = zeros<mat>(l, l);
   for (int i = 0; i < l; i++) {
@@ -116,6 +121,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   ////////////////////////////////////////////////
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
+  arma::colvec residuals = Yt - Xt*Aivx;
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
   arma::mat M = ZK.t()*ZK*as_scalar(covepshat)-n*meanzK.t()*meanzK*as_scalar(FM);
@@ -128,11 +134,13 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   return List::create(
     _("Aivx") = Aivx.t(),
+    _("residuals") = residuals,
     _("wivx") = wivx,
-    _("wivxind") = wivxind.t(),
+    _("wivxind") = pow(wivxind.t(),2),
     _("Aols") = Aols,
+    _("tstat_ols") = tstat,
     _("horizons") = K,
-    _("df") = l,
+    _("df") =  df,
     _("delta") = corrmat,
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),

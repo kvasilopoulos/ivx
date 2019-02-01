@@ -68,7 +68,7 @@ ivx <- function(formula, data, horizon, subset, na.action,
   x <- model.matrix(mt, mf, contrasts)
   ## if any subsetting is done, retrieve the "contrasts" attribute here.
 
-  z <- ivx.fit(y, x, h = horizon, offset, ...) # offset = offset,
+  z <- ivx_fit(y, x, h = horizon, offset, ...) # offset = offset,
   class(z) <- "ivx"
 
   ## 3) return the na.action info
@@ -85,6 +85,71 @@ ivx <- function(formula, data, horizon, subset, na.action,
   if (model)  z$model <- mf
   z
 }
+
+#' @export
+ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
+
+  if (is.null(n <- NROW(x))) stop("'x' must be a matrix")
+  if (n == 0L)  stop("0 (non-NA) cases")
+  p <- NCOL(x)
+  if (p == 0L) {
+    return(list(coefficients = numeric(), residuals = y,
+                fitted.values = 0 * y, rank = 0, df.residual = length(y)))
+  }
+  ny <- NCOL(y)
+  if (is.matrix(y) && ny == 1)
+    y <- drop(y)
+  if (!is.null(offset))
+    y <- y - offset
+  if (NROW(y) != n)  stop("incompatible dimensions")
+
+  chkDots(...)
+
+  z <- ivx_fit_cpp(y, x, h)
+
+  cnames <- colnames(x)
+  coef <- drop(z$Aivx)
+  coef_ols <- drop(z$Aols)
+
+
+  if (is.null(cnames)) cnames <- paste0("x", 1L:p)
+  # nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
+  z$coefficients <- coef
+  z$coefficients_ols <- coef_ols
+  # r1 <- y - z$residuals
+
+  if (!is.null(offset)) r1 <- r1 + offset
+
+  if (is.matrix(y)) {
+    dimnames(coef) <- list(cnames, colnames(y))
+    dimnames(coef_ols) <- list(c("Intercept", cnames), colnames(y))
+    # dimnames(z$effects) <- list(nmeffects, colnames(y))
+  }else{
+    names(coef) <- cnames
+    names(coef_ols) <- c("Intercept", cnames)
+  }
+
+  output <-
+    structure(
+      list(coefficients =  coef,
+           residuals = z$residuals,
+           Wald_Joint = z$wivx,
+           Wald_Ind = z$wivxind,
+           horizon = h,
+           df = z$df,
+           cnames = cnames,
+           AR = data.frame(Rn = z$Rn,
+                           Rz = z$Rz,
+                           row.names = cnames),
+           delta = z$delta,
+           varcov = z$varcov,
+           coefficients_ols = coef_ols,
+           tstat_ols = z$tstat_ols
+      )
+    )
+  output
+}
+
 
 #' @export
 print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
@@ -112,22 +177,27 @@ summary.ivx <- function(object, ols = FALSE, ...) {
     stop("calling summary.ivx(<fake-ivx-object>) ...")
 
   ans <- z[c("call", "terms")]
-  ans$coefficients <- cbind(z$coefficients, z$Wald_Ind) #, z$WivxInd_pvalue
+
+  ans$aliased <- if (ols) is.na(z$coefficients_ols) else is.na(z$coefficients)
+
   ans$delta <- z$delta
-  # z$delta, z$ar
-  dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind")) #,"Pr(> chi)")
-                                         #\u03c7 #, "delta", "Rn")
-  ans$coefficients_ols <- z$coefficients_ols
-  # ans$fstatistic <- z$fstatistic
-  ans$aliased <- is.na(z$coefficients)
+
+  # OLS
+  p_value_ols <- 2*(1 - pt(abs(z$tstat_ols), z$df[2]))
+  ans$coefficients_ols <- cbind(z$coefficients_ols, z$tstat_ols, p_value_ols)
+  colnames(ans$coefficients_ols) <- c("Estimate", "t value", "Pr(> |t|)")
+
+  # IVX
+  p_value_ivx <- 1 - pchisq(z$Wald_Ind, 1)
+  ans$coefficients <- cbind(z$coefficients, z$Wald_Ind, p_value_ivx)
+  dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind", "Pr(> chi)"))
+
+
   ans$horizon <- z$horizon
-  ans$Wivx <- z$Wald_Joint
-
+  ans$Wald_Joint <- z$Wald_Joint
+  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1]);
+  ans$sigma <- z$varcov
   ans$df <- z$df
-  ans$pv_ivx <- 1 - pchisq(z$Wald_Ind, z$df);
-  ans$pv_wivxind <- 1 - pchisq(z$Wald_Joint^2, 1);
-
-  # ans$sigma <- z$varcovIVX
 
   if (is.null(z$na.action)) ans$na.action <- z$na.action
   class(ans) <- "summary.ivx"
@@ -140,6 +210,7 @@ print.summary.ivx <- function(x,
                               digits = max(3L, getOption("digits") - 3L),
                               signif.stars = getOption("show.signif.stars"),
                               ...){
+  ols <- attr(x, "ols")
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
 
@@ -147,7 +218,8 @@ print.summary.ivx <- function(x,
     cat("No coefficients\n")
   }else{
 
-    coefs <- x$coefficients_ols
+    coefs_ols <- x$coefficients_ols
+    coefs <- x$coefficients
     aliased <- x$aliased
 
     if (!is.null(aliased) && any(aliased)) {
@@ -157,40 +229,28 @@ print.summary.ivx <- function(x,
       coefs[!aliased, ] <- civx
     }
 
-    if (attr(x, "ols")) {
-      cat("\n\nCoefficients OLS:\n")
+    cat("Coefficients:\n")
 
-      printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
-                   signif.legend = TRUE, na.print = "NA", ...)
-      if (!is.null(x$fstatistic)) {
-        cat("\nF-statistic:", formatC(x$fstatistic[1L], digits = digits),
-            "on", x$fstatistic[2L], "and",
-            x$fstatistic[3L], "DF,  p-value:",
-            format.pval(pf(x$fstatistic[1L], x$fstatistic[2L],
-                           x$fstatistic[3L], lower.tail = FALSE),
-                        digits = digits))
-      }
+    printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
+                 if (ols) signif.legend = FALSE else signif.legend = TRUE,
+                 has.Pvalue = TRUE, P.values = TRUE, na.print = "NA", ...)
+
+
+    if (ols) {
+      cat("\nCoefficients OLS:\n")
+
+      printCoefmat(coefs_ols, digits = digits, signif.stars = signif.stars,
+                   signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
+                   na.print = "NA", ...)
     }else{
 
-      coefs <- x$coefficients
-      aliased <- x$aliased
 
-      if (!is.null(aliased) && any(aliased)) {
-        cn <- names(aliased)
-        civx <- x$coefficients
-        coefs <- matrix(NA, NROW(civx), 5, dimnames = list(cn , colnames(civx)))
-        coefs[!aliased, ] <- civx
-      }
 
-      cat("Coefficients:\n")
-      printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
-                   if (attr(x, "ols")) signif.legend = TRUE else signif.legend = FALSE,
-                   has.Pvalue = TRUE, P.values = TRUE, na.print = "NA", ...)
-
-      cat("\nJoint Wald statistic: ", formatC(x$wivx, digits = digits),
-          "on", x$df, "DF, p-value",
-          format.pval(x$pv_wivx, digits = digits))
     }
+
+    cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
+        "on", x$df[1], "DF, p-value",
+        format.pval(x$pv_wivx, digits = digits))
 
   }
 
@@ -210,19 +270,19 @@ delta <- function(object, mat = F, diag = FALSE) {
   if (!inherits(object, c("ivx", "summary.ivx"))) {
     stop("Wrong object", call. = F)
   }
-  delta <- object$delta
+  delta <- object[["delta"]]
   if (mat) {
     # upperTriangle(delta, diag = diag) <- NA
   }else{
-    delta <- drop(delta[-1, 1])
+    delta <- drop(delta)
   }
   delta
 }
 
 varcov <- function(object) {
   if (!inherits(object, c("ivx", "summary.ivx"))) stop("Wrong object", call. = F)
-  varcov <- object$varcov
-
+  varcov <- drop(object[["varcov"]])
+  varcov
 }
 
 # coef.ivx <- function(x, ols = FALSE) {

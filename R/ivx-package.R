@@ -7,16 +7,7 @@
 #' @docType package
 #' @useDynLib ivx, .registration = TRUE
 #' @importFrom Rcpp evalCpp
-#' @import RcppArmadillo
 #' @keywords internal
 "_PACKAGE"
 
-#' Pipe operator
-#'
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @export
-#' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
-NULL
+
