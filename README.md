@@ -3,11 +3,13 @@
 
 # ivx: Predictive Regressions
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/package=ivx)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 The goal of ivx is to offer robust econometric inference for predictive
 regressions.
