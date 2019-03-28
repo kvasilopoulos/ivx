@@ -2,7 +2,7 @@
 % Please edit documentation in R/bonf.R
 \name{qtest}
 \alias{qtest}
-\title{Campel Yogo bonferroni confidenc intervals Q-test}
+\title{Campel Yogo bonferroni confidence intervals Q-test}
 \usage{
 qtest(y, x, method = c("bonferroni", "infeasible", "sup"), cest = NULL,
   sig = 0.1)
@@ -23,7 +23,7 @@ the upper and lower bound of the regression coefficient and the
 autoregressive coefficient
 }
 \description{
-Campel Yogo bonferroni confidenc intervals Q-test
+Campel Yogo bonferroni confidence intervals Q-test
 }
 \examples{
 x <- cumsum(rnorm(100))

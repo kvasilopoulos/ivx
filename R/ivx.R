@@ -242,15 +242,11 @@ print.summary.ivx <- function(x,
       printCoefmat(coefs_ols, digits = digits, signif.stars = signif.stars,
                    signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
                    na.print = "NA", ...)
-    }else{
-
-
-
     }
 
     cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
         "on", x$df[1], "DF, p-value",
-        format.pval(x$pv_wivx, digits = digits))
+        format.pval(x$pv_waldjoint, digits = digits))
 
   }
 
@@ -285,10 +281,10 @@ varcov <- function(object) {
   varcov
 }
 
-# coef.ivx <- function(x, ols = FALSE) {
-#   if (ols) {
-#     x$coefficients
-#   }else{
-#     x$coefficients_ivx
-#   }
-# }
+coefficients.ivx <- function(x, ols = FALSE) {
+  if (ols) {
+    x$coefficients
+  }else{
+    x$coefficients_ols
+  }
+}

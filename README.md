@@ -7,6 +7,7 @@
 status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 The goal of ivx is to offer robust econometric inference for predictive
 regressions.
@@ -77,10 +78,10 @@ ivx(Ret ~ D_P, data = univariate) %>%
 #> ivx(formula = Ret ~ D_P, data = univariate, horizon = 1)
 #> 
 #> Coefficients:
-#>     Estimate Wald Ind
-#> D_P    0.006     1.42
+#>     Estimate Wald Ind Pr(> chi)
+#> D_P 0.006489    2.018     0.155
 #> 
-#> Joint Wald statistic:   on 1 DF, p-value 0.04358
+#> Joint Wald statistic:  2.018 on 1 DF, p-value 0.1554
 
 qtest(univariate$Ret, univariate$D_P)
 #>  CI for beta: [ -0.001058309 , -0.004163946 ]
