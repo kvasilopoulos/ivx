@@ -1,34 +1,16 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: r
-sudo: false
+language: R
 cache: packages
 
-r:
-  - release
-  - devel
-
-os:
-  - linux
-  - osx
-
-warnings_are_errors: true
-
 matrix:
-  fast_finish: true
-  allow_failures:
-    - r: devel
+  include:
+  - r: devel
+  - r: release
+    after_success:
+    - Rscript -e 'covr::codecov()'
+  - r: oldrel
+  - r: 3.3
+  - r: 3.2
+  - r: 3.1
 
-before_install:
-  - export TZ=US/Central
-
-r_packages:
-  - covr
-
-after_success:
-  - Rscript -e 'library(covr); codecov()'
-
-notifications:
-  email:
-    on_success: never # default: change
-    on_failure: always # default: always

@@ -6,7 +6,8 @@ Authors@R: c(
             person("Kostas", "Vasilopoulos", , email = "k.vasilopoulo@gmail.com", c("cre", "aut")),
             person("Eftymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
 Description: Conducting inference on the regression coefficient with a highly persistent regressor.
-Depends: R(>= 2.10)
+Depends: 
+    R (>= 3.1)
 Imports: pracma,
   Rcpp (>= 0.12.18),
   gdata,
@@ -14,7 +15,9 @@ Imports: pracma,
   urca,
   dplyr,
   purrr
-Suggests: stringr
+Suggests: 
+    stringr,
+    covr
 LinkingTo: Rcpp, RcppArmadillo
 License: GPL-3 + file LICENSE
 URL: https://github.com/kvasilopoulos/ivx

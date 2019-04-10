@@ -8,8 +8,8 @@ status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/pa
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
 
 The goal of ivx is to offer robust econometric inference for predictive
 regressions.
@@ -92,3 +92,7 @@ qtest(univariate$Ret, univariate$D_P)
 ```
 
 And the multivariate estimation, for one or multiple horizons:
+
+Please note that the ‘ivx’ project is released with a [Contributor Code
+of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
+project, you agree to abide by its terms.
