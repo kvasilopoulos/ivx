@@ -24,7 +24,7 @@
 #'            reduce(rbind))
 #'}
 uroot <- function(y, model = c("constant", "trend"), lag.max = 4) {
-
+a
   nr <- length(y)
   yt <- as.matrix(y[2:nr])
   ylag <- cbind(1, y[1:(nr - 1)]) # 1 for constant

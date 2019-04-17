@@ -86,7 +86,7 @@ ivx <- function(formula, data, horizon, subset, na.action,
   z
 }
 
-#' @export
+
 ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
 
   if (is.null(n <- NROW(x))) stop("'x' must be a matrix")
@@ -168,6 +168,7 @@ print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 
 #' @export
 #' @importFrom stats printCoefmat
+#' @importFrom stats pt
 summary.ivx <- function(object, ols = FALSE, ...) {
   z <- object
 
@@ -247,7 +248,6 @@ print.summary.ivx <- function(x,
     cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
         "on", x$df[1], "DF, p-value",
         format.pval(x$pv_waldjoint, digits = digits))
-
   }
 
  invisible(x)
