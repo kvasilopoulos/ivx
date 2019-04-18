@@ -5,19 +5,20 @@ Version: 0.1.0
 Authors@R: c(
             person("Kostas", "Vasilopoulos", , email = "k.vasilopoulo@gmail.com", c("cre", "aut")),
             person("Eftymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
-Description: Conducting inference on the regression coefficient with a highly persistent regressor.
+Description: 
+    Conducting inference on the regression coefficient with a highly persistent regressor,
+    using the the IVX approach for univariate (Magdalinos and Phillips, 2009b) and multivariate
+    (Kostakis Magdalinos and Stamatogiannis, 2015) regression. Testing can be used for long-horizon 
+    predictability as well.
 Depends: 
     R (>= 3.1)
-Imports: pracma,
+Imports:
   Rcpp (>= 0.12.18),
-  gdata,
-  magrittr,
-  urca,
-  dplyr,
-  purrr
+  magrittr
 Suggests: 
-    stringr,
-    covr
+    covr,
+    spelling,
+    testthat
 LinkingTo: Rcpp, RcppArmadillo
 License: GPL-3 + file LICENSE
 URL: https://github.com/kvasilopoulos/ivx
@@ -25,3 +26,4 @@ BugReports: https://github.com/kvasilopoulos/ivx/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Language: en-US
