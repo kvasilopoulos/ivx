@@ -1,4 +1,3 @@
-
 #' Robust Econometric Inference
 #'
 #' Conducting inference on the regression coefficient with a highly persistent regressor.

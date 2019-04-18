@@ -1,0 +1,24 @@
+year <- sub("-.*", "", meta$Date)
+if(!length(year))
+  year <- substr(Sys.Date(),1,4)
+vers <- meta$Version
+if(is.null(vers))
+  vers <- packageVersion("ivx")
+vers <- paste("R package version", vers)
+
+citHeader("To cite package 'ivx' in publications, please use:")
+
+citEntry(entry  = "Manual",
+  title  = "ivx: Robust Econometric Inference",
+  author = personList(as.person("Kostas Vasilopoulos"),
+                   as.person("Efthymios Pavlidis")
+                   ),
+  year  = year,
+  note  = vers,
+  url   = "https://CRAN.R-project.org/package=ivx",
+
+  textVersion =
+  paste0("Vasilopoulos Kostas and Pavlidis Efthymios", " (", year , ") ",
+        "ivx: Robust Econometric Inference. ", vers, ". ",
+        "https://CRAN.R-project.org/package=ivx")
+)

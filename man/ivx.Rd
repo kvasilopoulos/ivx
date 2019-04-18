@@ -4,10 +4,16 @@
 \name{ivx}
 \alias{ivx}
 \alias{ivx-package}
+\alias{ivx_fit}
+\alias{print.ivx}
 \title{Robust Econometric Inference}
 \usage{
 ivx(formula, data, horizon, subset, na.action, model = TRUE,
   contrasts = NULL, offset, ...)
+
+ivx_fit(y, x, h = 1, offset = NULL, ...)
+
+\method{print}{ivx}(x, digits = max(3L, getOption("digits") - 3L), ...)
 }
 \arguments{
 \item{formula}{an object of class \code{"\link{formula}"} (or one that
@@ -51,6 +57,16 @@ short-horizon regression)}
 
 \item{...}{additional arguments to be passed to the low level
     regression fitting functions (see below).}
+
+\item{y}{logicals.  If \code{TRUE} the corresponding
+    components of the fit (the model frame, the model matrix, the
+    response, the QR decomposition) are returned.
+  }
+
+\item{x}{logicals.  If \code{TRUE} the corresponding
+    components of the fit (the model frame, the model matrix, the
+    response, the QR decomposition) are returned.
+  }
 }
 \value{
 ivx returns an object of class "ivx".
@@ -65,7 +81,7 @@ An object of class "ivx" is a list containing the following components:
 \description{
 Conducting inference on the regression coefficient with a highly persistent regressor.
 
-Date-filtering procedure that removes endogeneity.
+`lm` is used to fit ivx models.
 }
 \references{
 Phillips, P. C., & Magdalinos, T. (2009). Econometric inference

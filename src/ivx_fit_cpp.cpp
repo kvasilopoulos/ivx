@@ -120,8 +120,10 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   }
 
   ////////////////////////////////////////////////
+
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
-  arma::colvec residuals = Yt - Xt*trans(Aivx);
+  arma::colvec fitted = Xt*trans(Aivx);
+  arma::colvec residuals = Yt - fitted;
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
   arma::mat M = ZK.t()*ZK*as_scalar(covepshat)-n*meanzK.t()*meanzK*as_scalar(FM);
@@ -133,14 +135,17 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::mat wivxind_z = Aivx/sqrt(diagvec(Q).t());
   arma::mat wivxind = pow(wivxind_z.t(), 2);
 
+
+
   return List::create(
     _("Aivx") = Aivx.t(),
+    _("fitted") = fitted,
     _("residuals") = residuals,
-    _("residuals_ols") = epshat,
     _("wivx") = wivx,
     _("wivxind") = wivxind,
     _("Aols") = Aols,
     _("tstat_ols") = tstat,
+    _("residuals_ols") = epshat,
     _("horizons") = K,
     _("df") =  df,
     _("delta") = corrmat,

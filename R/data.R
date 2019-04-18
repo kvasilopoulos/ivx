@@ -1,51 +1,46 @@
 #' Monthly data
 #'
-#'	year and month
-#'  dividend payout ratio (DE)
-#'	long-term yield (LTY)
-#'	dividend yield (DY)
-#'	dividend-price ratio (DP)
-#'	T-bill rate (TBL)
-#'	earnings-price ratio (EP)
-#'	book-to-market value ratio (BM)
-#'	inflation rate (INF)
-#'	default yield spread (DFY)
-#'	net equity expansion (NTIS)
-#'	term spread (TMS)
-#'	S&P 500 value-weighted log excess returns (LOG EXCESS VW)
+#' \itemize{
+#'  \item Date: year-month-date (monthly frequency)
+#'  \item DE: dividend payout ratio
+#'	\item LTY: long-term yield
+#'	\item DY: dividend yield
+#'	\item DP: dividend-price ratio
+#'	\item TBL: T-bill rate
+#'	\item EP: earnings-price ratio
+#'	\item BM: book-to-market value ratio
+#'	\item INF: inflation rate
+#'	\item DFY: default yield spread
+#'	\item NTIS: net equity expansion
+#'	\item TMS: term spread
+#'	\item Ret: S&P 500 value-weighted log excess returns
+#'}
 #'
-#' @format A data.frame with 1680 observations
-#' \describe{
-#'   \item{sp.500.ratio}{S and P 500 Price-Dividen Ratio}
-#'  }
-#' @source \url{http://www.econ.yale.edu/~shiller/data.htm}
-"datam"
+#' @format A data.frame with 13 variables and 1,033 observations.
+#'
+#' @source \url{https://drive.google.com/open?id=1FdT2STHO2Lnlweom4AwICVf-rpVMfgV4}
+"monthly"
 
 #' Quarterly data
 #'
-#'	year and month
-#'	dividend payout ratio (DE)
-#'	long-term yield (LTY)
-#'	dividend yield (DY)
-#'	dividend-price ratio (DP)
-#'	T-bill rate (TBL)
-#'	earnings-price ratio (EP)
-#'	book-to-market value ratio (BM)
-#'	inflation rate (INF)
-#'	default yield spread (DFY)
-#'	net equity expansion (NTIS)
-#'	term spread (TMS)
-#'	S&P 500 value-weighted log excess returns (LOG EXCESS VW)
+#' \itemize{
+#'  \item Date: year-month-date (quarterly frequency)
+#'  \item DE: dividend payout ratio
+#'	\item LTY: long-term yield
+#'	\item DY: dividend yield
+#'	\item DP: dividend-price ratio
+#'	\item TBL: T-bill rate
+#'	\item EP: earnings-price ratio
+#'	\item BM: book-to-market value ratio
+#'	\item INF: inflation rate
+#'	\item DFY: default yield spread
+#'	\item NTIS: net equity expansion
+#'	\item TMS: term spread
+#'	\item Ret: S&P 500 value-weighted log excess returns
+#'}
 #'
-#' @format A data.frame with 1680 observations
-#' \describe{
-#'   \item{sp.500.ratio}{S and P 500 Price-Dividen Ratio}
-#'  }
-#' @source \url{http://www.econ.yale.edu/~shiller/data.htm}
-"dataq"
+#' @format A data.frame with 13 variables and 345 observations.
+#'
+#' @source \url{https://drive.google.com/open?id=1FdT2STHO2Lnlweom4AwICVf-rpVMfgV4}
+"quarterly"
 
-#' Critical values for the lower bound c
-"c_low_crit"
-
-#' Critical values for the upper bound c
-"c_up_crit"

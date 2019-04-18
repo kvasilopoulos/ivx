@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -12,7 +10,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ivx: Predictive Regressions
+# ivx: Robust Econometric Inference
 
 [![CRAN status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/package=ivx)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -20,28 +18,8 @@ knitr::opts_chunk$set(
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
 
 
-The goal of ivx is to offer robust econometric inference for predictive regressions.
-
-![first equation](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20y_t%20%26%3D%20%5Cbeta%20y_%7Bt-1%7D%20&plus;%20%5Cepsilon_t%5C%5C%20x_t%20%26%3D%20%5Crho%20x_%7Bt-1%7D%20&plus;%20u_t%20%5Cend%7Balign*%7D)
-
-
-### Solution methods
-
-#### The workforce of the model hence the name is:
-
-* The IVX approach
-  - Magdalinos and Phillips (2009b)
-  - Kostakis Magdalinos and Stamatogiannis (2015)
-
-#### The rest
-
-* The Bonferroni method
-  - Cavanagh et al (1995)
-  - Campbell and Yogo (2006)
-* A conditional likelihood approach
-  - Jansson and Moreira (2006)
-* A control function approach
-  - Elliot (2001)
+Conducting inference on the regression coefficient with a highly persistent regressor, using the the IVX approach for univariate (Magdalinos and Phillips, 2009b) and multivariate (Kostakis Magdalinos and Stamatogiannis, 2015) regression. Testing can be used for long-horizon  predictability as well.
+    
 
 ## Installation
 
@@ -51,43 +29,49 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("kvasilopoulos/ivx")
 ```
-## Example
+## Usage
 
 Load ivx and dplyr for data managment
+
 ```{r message = FALSE}
 library(ivx)
-library(dplyr)
 ```
 
 This is a basic example, lets load the data first:
+
 ```{r example}
 # Monthly data from Kostakis et al (2014)
-datam %>%
+monthly %>%
   names()
 
-univariate <- datam %>%
-  select(Ret, D_P)
-
-multivariate <- datam %>%
-  select(Ret, D_P, TBL)
-
 ```
+
+## Univariate
 
 And then do the univariate estimation:
+
 ```{r uni}
-ivx(Ret ~ D_P, data = univariate) %>% 
+ivx(Ret ~ DP, data = monthly) %>% 
   summary()
 
-qtest(univariate$Ret, univariate$D_P)
+ivx(Ret ~ DP, data = monthly, horizon = 4) %>% 
+  summary()
+
 ```
+
+## Multivariate
 
 And the multivariate estimation, for one or multiple horizons:
-```{r multi, eval=FALSE, include=FALSE}
-ivx(Ret ~ D_P + TBL, data = multivariate) %>% 
+
+```{r multi}
+ivx(Ret ~ DP + TBL, data = monthly) %>% 
   summary()
 
-ivx(Ret ~ D_P + TBL, data = multivariate, horizon = 4) %>% 
+ivx(Ret ~ DP + TBL, data = monthly, horizon = 4) %>% 
   summary()
 
 ```
+
+---
+
 Please note that the 'ivx' project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

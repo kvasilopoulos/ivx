@@ -2,17 +2,18 @@
 % Please edit documentation in R/ivx.R
 \name{delta}
 \alias{delta}
-\title{Finding the delta coefficient}
+\title{Caclulate the delta coefficient}
 \usage{
-delta(object, mat = F, diag = FALSE)
+delta(object)
 }
 \arguments{
 \item{object}{class "ivx"}
-
-\item{mat}{matrix format}
-
-\item{diag}{include diagonal elements}
+}
+\value{
+This should have row and column names corresponding to the parameter
+names given by the coef method.
 }
 \description{
-Finding the delta coefficient
+Calculate the correlation coefficient between the residuals of regression between
+the predictive and the the autoregressive regression.
 }
