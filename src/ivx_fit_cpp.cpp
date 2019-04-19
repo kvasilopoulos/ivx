@@ -56,8 +56,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   }
   covuhat = covuhat.t() / nn;
 
-
-  double m = floor(pow(nn, 0.33));
+  double m = floor(pow(nn, 0.3333333));
   arma::mat uu = zeros<mat>(l,l);
   for (int h = 1; h <= m; ++h) {
     arma::mat a = zeros<mat>(l,l);
@@ -134,7 +133,6 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   arma::mat wivxind_z = Aivx/sqrt(diagvec(Q).t());
   arma::mat wivxind = pow(wivxind_z.t(), 2);
-
 
 
   return List::create(
