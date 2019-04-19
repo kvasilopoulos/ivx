@@ -1,7 +1,5 @@
 #' Fiting IVX Models
 #'
-#' `lm` is used to fit ivx models.
-#'
 #' @inheritParams stats::lm
 #' @param horizon is the horizon (default horizon=1 corresponds to a
 #' short-horizon regression)
@@ -219,7 +217,7 @@ summary.ivx <- function(object,  ...) {
   ans
 }
 
-#' @inheritParams summary
+#' @inheritParams stats::summary.lm
 #' @rdname summary.ivx
 #' @export
 print.summary.ivx <- function(x,
