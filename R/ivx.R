@@ -65,7 +65,7 @@ ivx <- function(formula, data, horizon, subset, na.action,
   x <- model.matrix(mt, mf, contrasts)
   ## if any subsetting is done, retrieve the "contrasts" attribute here.
 
-  z <- ivx_fit(y, x, h = horizon, offset, ...) # offset = offset,
+  z <- ivx_fit(y, x, horizon = horizon, offset, ...) # offset = offset,
   class(z) <- "ivx"
 
   ## 3) return the na.action info
@@ -87,7 +87,7 @@ ivx <- function(formula, data, horizon, subset, na.action,
 
 #' @rdname ivx
 #' @export
-ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
+ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 
   n <- NROW(x)
   p <- NCOL(x)
@@ -108,7 +108,7 @@ ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
 
   chkDots(...)
 
-  z <- ivx_fit_cpp(y, x, h)
+  z <- ivx_fit_cpp(y, x, horizon)
 
   cnames <- colnames(x)
   coef <- drop(z$Aivx)
@@ -138,7 +138,7 @@ ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
            residuals = drop(z$residuals),
            Wald_Joint = z$wivx,
            Wald_Ind = z$wivxind,
-           horizon = h,
+           horizon = horizon,
            df = z$df,
            cnames = cnames,
            AR = data.frame(Rn = z$Rn,
@@ -154,6 +154,7 @@ ivx_fit <- function(y, x, h = 1, offset = NULL, ...) {
 }
 
 #' @rdname ivx
+#' @inheritParams stats::summary.lm
 #' @export
 print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 

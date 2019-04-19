@@ -2,7 +2,8 @@
 #'
 #' Conducting inference on the regression coefficient with a highly persistent regressor.
 #'
-#' @name ivx-package
+#' @name ivx
+#' @aliases ivx-package
 #' @docType package
 #' @useDynLib ivx, .registration = TRUE
 #' @importFrom Rcpp evalCpp
