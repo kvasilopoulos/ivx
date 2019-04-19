@@ -1,4 +1,4 @@
-#' Fiting IVX Models
+#' Fitting IVX Models
 #'
 #' @inheritParams stats::lm
 #' @param horizon is the horizon (default horizon=1 corresponds to a
@@ -257,7 +257,7 @@ print.summary.ivx <- function(x,
  invisible(x)
 }
 
-#' Caclulate the delta coefficient
+#' Calculate the delta coefficient
 #'
 #' Calculate the correlation coefficient between the residuals of regression between
 #' the predictive and the the autoregressive regression.

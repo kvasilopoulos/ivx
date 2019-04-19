@@ -28,8 +28,6 @@ devtools::install_github("kvasilopoulos/ivx")
 
 ## Usage
 
-Load ivx and dplyr for data managment
-
 ``` r
 library(ivx)
 ```

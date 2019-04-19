@@ -2,7 +2,7 @@
 % Please edit documentation in R/ivx.R
 \name{delta}
 \alias{delta}
-\title{Caclulate the delta coefficient}
+\title{Calculate the delta coefficient}
 \usage{
 delta(object)
 }

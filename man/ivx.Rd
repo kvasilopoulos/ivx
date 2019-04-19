@@ -4,7 +4,7 @@
 \alias{ivx}
 \alias{ivx_fit}
 \alias{print.ivx}
-\title{Fiting IVX Models}
+\title{Fitting IVX Models}
 \usage{
 ivx(formula, data, horizon, subset, na.action, model = TRUE,
   contrasts = NULL, offset, ...)
@@ -77,7 +77,7 @@ An object of class "ivx" is a list containing the following components:
 \item{model}{ model}
 }
 \description{
-Fiting IVX Models
+Fitting IVX Models
 }
 \references{
 Phillips, P. C., & Magdalinos, T. (2009). Econometric inference
