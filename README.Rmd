@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
+[![codecov](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx)
 
 
 Conducting inference on the regression coefficient with a highly persistent regressor, using the the IVX approach for univariate (Magdalinos and Phillips, 2009b) and multivariate (Kostakis Magdalinos and Stamatogiannis, 2015) regression. Testing can be used for long-horizon  predictability as well.

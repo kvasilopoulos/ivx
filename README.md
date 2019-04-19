@@ -8,6 +8,7 @@ status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/pa
 status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://travis-ci.org/kvasilopoulos/ivx)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
+[![codecov](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx)
 
 Conducting inference on the regression coefficient with a highly
 persistent regressor, using the the IVX approach for univariate
@@ -56,9 +57,9 @@ ivx(Ret ~ DP, data = monthly) %>%
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
-#> DP 0.006489    2.018     0.155
+#> DP 0.006489    2.031     0.154
 #> 
-#> Joint Wald statistic:  2.018 on 1 DF, p-value 0.1554
+#> Joint Wald statistic:  2.031 on 1 DF, p-value 0.1541
 
 ivx(Ret ~ DP, data = monthly, horizon = 4) %>% 
   summary()
@@ -68,9 +69,9 @@ ivx(Ret ~ DP, data = monthly, horizon = 4) %>%
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
-#> DP 0.006931    2.257     0.133
+#> DP 0.006931    2.271     0.132
 #> 
-#> Joint Wald statistic:  2.257 on 1 DF, p-value 0.133
+#> Joint Wald statistic:  2.271 on 1 DF, p-value 0.1318
 ```
 
 ## Multivariate
@@ -86,10 +87,10 @@ ivx(Ret ~ DP + TBL, data = monthly) %>%
 #> 
 #> Coefficients:
 #>      Estimate Wald Ind Pr(> chi)
-#> DP   0.006145    1.809     0.179
-#> TBL -0.080717    1.956     0.162
+#> DP   0.006145    1.819     0.177
+#> TBL -0.080717    1.957     0.162
 #> 
-#> Joint Wald statistic:  3.628 on 2 DF, p-value 0.163
+#> Joint Wald statistic:  3.644 on 2 DF, p-value 0.1617
 
 ivx(Ret ~ DP + TBL, data = monthly, horizon = 4) %>% 
   summary()
@@ -99,10 +100,10 @@ ivx(Ret ~ DP + TBL, data = monthly, horizon = 4) %>%
 #> 
 #> Coefficients:
 #>      Estimate Wald Ind Pr(> chi)
-#> DP   0.006579    2.034     0.154
-#> TBL -0.073549    1.594     0.207
+#> DP   0.006579    2.045     0.153
+#> TBL -0.073549    1.595     0.207
 #> 
-#> Joint Wald statistic:   3.51 on 2 DF, p-value 0.1729
+#> Joint Wald statistic:  3.527 on 2 DF, p-value 0.1715
 ```
 
 -----
