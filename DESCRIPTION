@@ -4,7 +4,7 @@ Title: Robust Econometric Inference
 Version: 0.1.0
 Authors@R: c(
             person("Kostas", "Vasilopoulos", , email = "k.vasilopoulo@gmail.com", c("cre", "aut")),
-            person("Eftymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
+            person("Efthymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
 Description: 
     Conducting inference on the regression coefficient with a highly persistent regressor,
     using the the IVX approach for univariate (Magdalinos and Phillips, 2009b) and multivariate
