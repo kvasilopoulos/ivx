@@ -10,11 +10,10 @@ status](https://travis-ci.org/kvasilopoulos/ivx.svg?branch=master)](https://trav
 status](https://ci.appveyor.com/api/projects/status/github/kvasilopoulos/ivx?branch=master&svg=true)](https://ci.appveyor.com/project/kvasilopoulos/ivx)
 [![codecov](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx)
 
-Conducting inference on the regression coefficient with a highly
-persistent regressor, using the the IVX approach for univariate
-(Magdalinos and Phillips, 2009b) and multivariate (Kostakis Magdalinos
-and Stamatogiannis, 2015) regression. Testing can be used for
-long-horizon predictability as well.
+Drawing statistical inference on the coefficients of a short- or
+long-horizon predictive regression with persistent regressors by using
+the IVX method of Kostakis, [Magdalinos and Stamatogiannis
+(2015)](https://doi.org/10.1093/rfs/hhu139).
 
 ## Installation
 
