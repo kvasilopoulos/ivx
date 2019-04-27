@@ -1,8 +1,10 @@
 #' Robust Econometric Inference
 #'
-#' Conducting inference on the regression coefficient with a highly persistent regressor.
+#' Drawing statistical inference on the coefficients of a short- or long-horizon
+#' predictive regression with persistent regressors by using the IVX method of
+#' Kostakis, Magdalinos and Stamatogiannis (2015) <doi:10.1093/rfs/hhu139>.
 #'
-#' @name ivx
+#' @name ivx-package
 #' @aliases ivx-package
 #' @docType package
 #' @useDynLib ivx, .registration = TRUE

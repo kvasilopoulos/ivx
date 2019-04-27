@@ -10,22 +10,17 @@
 \method{vcov}{summary.ivx}(object, complete = TRUE, ...)
 }
 \arguments{
-\item{object}{
-    a fitted model object, typically.  Sometimes also a
-    \code{\link{summary}()} object of such a fitted model.
-  }
+\item{object}{a fitted ivx and summary.ivx object.}
 
 \item{complete}{logical indicating if the full variance-covariance matrix
-should be returned also in case of an over-determined system where some
-coefficients are undefined and coef(.) contains NAs correspondingly. When
-complete = TRUE, vcov() is compatible with coef() also in this singular case.}
+should be returned. When complete = TRUE, vcov() is compatible with coef().}
 
 \item{...}{additional arguments for method functions.}
 }
 \value{
 A matrix of the estimated covariances between the parameter estimates
-in the linear or non-linear predictor of the model. This should have row and
-column names corresponding to the parameter names given by the coef method.
+of the model. This should have row and column names corresponding to the
+parameter names given by the coef method.
 }
 \description{
 Calculate Variance-Covariance Matrix for a Fitted Model Object

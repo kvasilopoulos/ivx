@@ -1,34 +1,30 @@
 #' Fitting IVX Models
 #'
+#'ivx is used to fit predictive regression models. The procedure robustifies
+#'inference to regressors’ degree of persistence, accommodates testing the joint
+#'predictive ability of variables in multiple regression, and can be used
+#'for long-horizon predictability tests.
+#'
 #' @inheritParams stats::lm
-#' @param horizon is the horizon (default horizon=1 corresponds to a
+#' @param horizon is the horizon (default horizon = 1 corresponds to a
 #' short-horizon regression)
 #'
-#' @return ivx returns an object of class "ivx".
+#' @return an object of class "ivx".
 #'
-#' An object of class "ivx" is a list containing the following components:
-#' \item{coefficients_ols}{coefficients}
-#' \item{coefficients_ivx}{coefficients}
-#' \item{call}{call}
-#' \item{terms}{terms}
-#' \item{model}{ model}
-#'
-#' @references Phillips, P. C., & Magdalinos, T. (2009). Econometric inference
-#' in the vicinity of unity. Singapore Management University, CoFie Working
-#' Paper, 7.
+#' @references Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated
+#' Systems with Moderately Integrated and Moderately Explosive Regressors.
+#' Econometric Theory, 25(2), 482-526.
 #' @references Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2014).
 #' Robust econometric inference for stock return predictability. The Review of
 #' Financial Studies, 28(5), 1506-1553.
-#' @references Phillips, P. C., & Lee, J. H. (2013). Predictive regression under
-#' various degrees of persistence and robust long-horizon regression. Journal
-#' of Econometrics, 177(2), 250-264.
 #'
 #' @export
+#' @aliases ivx
 #'
 #' @importFrom stats .getXlevels coef coefficients cor lm model.matrix pf
 #' model.offset model.response pchisq qnorm residuals symnum
-ivx <- function(formula, data, horizon, subset, na.action,
-                 model = TRUE, contrasts = NULL, offset, ...)
+ivx <- function(formula, data, horizon, na.action,
+                contrasts = NULL, offset, ...)
 {
 
   cl <- match.call()
@@ -37,7 +33,7 @@ ivx <- function(formula, data, horizon, subset, na.action,
 
   ## keep only the arguments which should go into the model frame
   mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "horizon","subset", "na.action",
+  m <- match(c("formula", "data", "horizon", "na.action",
                "offset"), names(mf), 0)
 
   mf <- mf[c(1, m)]
@@ -79,13 +75,18 @@ ivx <- function(formula, data, horizon, subset, na.action,
   z$xlevels <- .getXlevels(mt, mf)
   z$call <- cl
   z$terms <- mt
-  if (model)  z$model <- mf
   z
 }
 
 
 
-#' @rdname ivx
+#' Fitter Functions for ivx Models
+#'
+#' These are the basic computing engines called by `ivx` to fit models.
+#' These should usually not be used directly unless by experienced users.
+#'
+#' @inheritParams stats::lm.fit
+#' @inheritParams ivx
 #' @export
 ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 
@@ -197,7 +198,6 @@ summary.ivx <- function(object,  ...) {
   ans$coefficients <- cbind(z$coefficients, z$Wald_Ind, p_value_ivx)
   dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind", "Pr(> chi)"))
 
-
   ans$vcov <- z$vcov
   dimnames(ans$vcov) <- dimnames(ans$coefficients)[c(1, 1)]
 
@@ -209,7 +209,7 @@ summary.ivx <- function(object,  ...) {
 
   ans$horizon <- z$horizon
   ans$Wald_Joint <- z$Wald_Joint
-  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1]);
+  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1])
   ans$df <- z$df
 
   if (is.null(z$na.action)) ans$na.action <- z$na.action
@@ -260,13 +260,13 @@ print.summary.ivx <- function(x,
 
 #' Calculate the delta coefficient
 #'
-#' Calculate the correlation coefficient between the residuals of regression between
-#' the predictive and the the autoregressive regression.
+#' Computes the long-run correlation coefficient between the residuals of the
+#' predictive regression and the autoregressive model for the regressor.
 #'
-#' @param object class "ivx"
+#' @param object on object of class "ivx"
 #'
-#' @return This should have row and column names corresponding to the parameter
-#' names given by the coef method.
+#' @return A vector of the estimated correlation coefficients. This should have
+#' row and column names corresponding to the parameter names given by the coef method.
 #'
 #' @export
 delta <- function(object) {
@@ -280,16 +280,14 @@ delta <- function(object) {
 
 #' Calculate Variance-Covariance Matrix for a Fitted Model Object
 #'
-#' @inheritParams stats::vcov.lm
+#' @param object a fitted ivx and summary.ivx object.
 #' @param complete logical indicating if the full variance-covariance matrix
-#' should be returned also in case of an over-determined system where some
-#' coefficients are undefined and coef(.) contains NAs correspondingly. When
-#' complete = TRUE, vcov() is compatible with coef() also in this singular case.
+#' should be returned. When complete = TRUE, vcov() is compatible with coef().
 #' @param ... additional arguments for method functions.
 #'
 #' @return A matrix of the estimated covariances between the parameter estimates
-#' in the linear or non-linear predictor of the model. This should have row and
-#' column names corresponding to the parameter names given by the coef method.
+#' of the model. This should have row and column names corresponding to the
+#' parameter names given by the coef method.
 #'
 #' @export
 vcov.ivx <- function(object, complete = TRUE, ...) {

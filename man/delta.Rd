@@ -7,13 +7,13 @@
 delta(object)
 }
 \arguments{
-\item{object}{class "ivx"}
+\item{object}{on object of class "ivx"}
 }
 \value{
-This should have row and column names corresponding to the parameter
-names given by the coef method.
+A vector of the estimated correlation coefficients. This should have
+row and column names corresponding to the parameter names given by the coef method.
 }
 \description{
-Calculate the correlation coefficient between the residuals of regression between
-the predictive and the the autoregressive regression.
+Computes the long-run correlation coefficient between the residuals of the
+predictive regression and the autoregressive model for the regressor.
 }
