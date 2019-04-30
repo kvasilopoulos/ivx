@@ -1,28 +1,36 @@
-Package: ivx
 Type: Package
+Package: ivx
 Title: Robust Econometric Inference
 Version: 0.1.0
-Authors@R: c(
-            person("Kostas", "Vasilopoulos", , email = "k.vasilopoulo@gmail.com", c("cre", "aut")),
-            person("Efthymios", "Pavlidis", email = "e.pavlidis@lancaster.ac.uk", role = "aut"))
-Description: 
-    Drawing statistical inference on the coefficients of a short- or long-horizon 
-    predictive regression with persistent regressors by using the IVX method of 
-    Kostakis, Magdalinos and Stamatogiannis (2015) <doi:10.1093/rfs/hhu139>. 
+Authors@R: 
+    c(person(given = "Kostas",
+             family = "Vasilopoulos",
+             role = c("cre", "aut"),
+             email = "k.vasilopoulo@gmail.com"),
+      person(given = "Efthymios",
+             family = "Pavlidis",
+             role = "aut",
+             email = "e.pavlidis@lancaster.ac.uk"))
+Description: Drawing statistical inference on the
+    coefficients of a short- or long-horizon predictive regression with
+    persistent regressors by using the IVX method of Kostakis, Magdalinos
+    and Stamatogiannis (2015) <doi:10.1093/rfs/hhu139>. 
+License: GPL-3
+URL: https://github.com/kvasilopoulos/ivx
+BugReports: https://github.com/kvasilopoulos/ivx/issues
 Depends: 
     R (>= 3.1)
 Imports:
-  Rcpp (>= 0.12.18),
-  magrittr
+    magrittr (>= 1.5),
+    Rcpp (>= 0.12.18)
 Suggests: 
-    covr,
-    spelling,
-    testthat
-LinkingTo: Rcpp, RcppArmadillo
-License: GPL-3 + file LICENSE
-URL: https://github.com/kvasilopoulos/ivx
-BugReports: https://github.com/kvasilopoulos/ivx/issues
+    covr (>= 3.2.1),
+    spelling (>= 2.1),
+    testthat (>= 2.1.1)
+LinkingTo: 
+    Rcpp (>= 1.0.1),
+    RcppArmadillo (>= 0.9.300.2.0)
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 RoxygenNote: 6.1.1
-Language: en-US

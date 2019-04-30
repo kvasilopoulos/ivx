@@ -6,7 +6,9 @@
 ^matlab$
 ^data-raw$
 ^LICENSE\.md$
+^LICENSE$
 ^\.github$
 ^codecov\.yml$
 ^\.covrignore$
 ^cran-comments\.md$
+^CRAN-RELEASE$
