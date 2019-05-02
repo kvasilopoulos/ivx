@@ -26,3 +26,8 @@
 \description{
 summary method for class "ivx".
 }
+\examples{
+mod <- ivx(Ret ~ LTY, data = monthly)
+
+summary(mod)
+}

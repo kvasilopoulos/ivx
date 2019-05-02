@@ -22,6 +22,9 @@ short-horizon regression)}
 \item{...}{currently disregarded.}
 }
 \description{
-These are the basic computing engines called by `ivx` to fit models.
-These should usually not be used directly unless by experienced users.
+asic functions called by `ivx` to fit predictive models.
+These should only be used directly by experienced users.
+}
+\examples{
+ivx_fit(monthly$Ret, as.matrix(monthly$LTY))
 }

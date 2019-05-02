@@ -1,9 +1,9 @@
 #' Fitting IVX Models
 #'
-#'ivx is used to fit predictive regression models. The procedure robustifies
-#'inference to regressors’ degree of persistence, accommodates testing the joint
-#'predictive ability of variables in multiple regression, and can be used
-#'for long-horizon predictability tests.
+#' ivx fits predictive regression models. The method allows standard
+#' chi-square testing for regressors with different degrees of persistence,
+#' from stationary to mildly explosive, and can be used for both short-
+#' and long-horizon predictive regressions.
 #'
 #' @inheritParams stats::lm
 #' @param horizon is the horizon (default horizon = 1 corresponds to a
@@ -18,11 +18,22 @@
 #' Robust econometric inference for stock return predictability. The Review of
 #' Financial Studies, 28(5), 1506-1553.
 #'
-#' @export
 #' @aliases ivx
 #'
 #' @importFrom stats .getXlevels coef coefficients cor lm model.matrix pf
 #' model.offset model.response pchisq qnorm residuals symnum
+#'
+#' @export
+#' @examples
+#'
+#' # Univariate
+#' ivx(Ret ~ LTY, data = monthly)
+#'
+#' # Multivariate
+#' ivx(Ret ~ LTY + TBL , data = monthly)
+#'
+#' # Longer horizon
+#' ivx(Ret ~ LTY + TBL, data = monthly, horizon = 4)
 ivx <- function(formula, data, horizon, na.action,
                 contrasts = NULL, offset, ...)
 {
@@ -82,12 +93,14 @@ ivx <- function(formula, data, horizon, na.action,
 
 #' Fitter Functions for ivx Models
 #'
-#' These are the basic computing engines called by `ivx` to fit models.
-#' These should usually not be used directly unless by experienced users.
+#' asic functions called by `ivx` to fit predictive models.
+#' These should only be used directly by experienced users.
 #'
 #' @inheritParams stats::lm.fit
 #' @inheritParams ivx
 #' @export
+#' @examples
+#' ivx_fit(monthly$Ret, as.matrix(monthly$LTY))
 ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 
   n <- NROW(x)
@@ -182,6 +195,10 @@ print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #' @export
 #' @importFrom stats printCoefmat
 #' @importFrom stats pt
+#' @examples
+#' mod <- ivx(Ret ~ LTY, data = monthly)
+#'
+#' summary(mod)
 summary.ivx <- function(object,  ...) {
   z <- object
 
@@ -269,6 +286,10 @@ print.summary.ivx <- function(x,
 #' row and column names corresponding to the parameter names given by the coef method.
 #'
 #' @export
+#' @examples
+#' mod <- ivx(Ret ~ LTY, data = monthly)
+#'
+#' delta(mod)
 delta <- function(object) {
 
   if (!inherits(object, c("ivx", "summary.ivx"))) {
@@ -290,6 +311,10 @@ delta <- function(object) {
 #' parameter names given by the coef method.
 #'
 #' @export
+#' @examples
+#' mod <- ivx(Ret ~ LTY, data = monthly)
+#'
+#' vcov(mod)
 vcov.ivx <- function(object, complete = TRUE, ...) {
   vcov.summary.ivx(summary.ivx(object), complete = complete, ...)
 }
@@ -298,17 +323,6 @@ vcov.ivx <- function(object, complete = TRUE, ...) {
 #' @export
 vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
-}
-
-#' @export
-residuals.ivx <- function(object, ...) {
-  residuals.summary.ivx(summary.ivx(object), ...)
-}
-#' @importFrom stats naresid
-#' @export
-residuals.summary.ivx <- function(object, ...) {
-  r <- object$residuals
-  stats::naresid(object$na.action, r)
 }
 
 

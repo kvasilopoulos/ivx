@@ -55,10 +55,21 @@ short-horizon regression)}
 an object of class "ivx".
 }
 \description{
-ivx is used to fit predictive regression models. The procedure robustifies
-inference to regressors’ degree of persistence, accommodates testing the joint
-predictive ability of variables in multiple regression, and can be used
-for long-horizon predictability tests.
+ivx fits predictive regression models. The method allows standard
+chi-square testing for regressors with different degrees of persistence,
+from stationary to mildly explosive, and can be used for both short-
+and long-horizon predictive regressions.
+}
+\examples{
+
+# Univariate
+ivx(Ret ~ LTY, data = monthly)
+
+# Multivariate
+ivx(Ret ~ LTY + TBL , data = monthly)
+
+# Longer horizon
+ivx(Ret ~ LTY + TBL, data = monthly, horizon = 4)
 }
 \references{
 Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated

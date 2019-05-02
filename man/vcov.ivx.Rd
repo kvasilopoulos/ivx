@@ -25,3 +25,8 @@ parameter names given by the coef method.
 \description{
 Calculate Variance-Covariance Matrix for a Fitted Model Object
 }
+\examples{
+mod <- ivx(Ret ~ LTY, data = monthly)
+
+vcov(mod)
+}

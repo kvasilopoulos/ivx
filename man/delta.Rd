@@ -17,3 +17,8 @@ row and column names corresponding to the parameter names given by the coef meth
 Computes the long-run correlation coefficient between the residuals of the
 predictive regression and the autoregressive model for the regressor.
 }
+\examples{
+mod <- ivx(Ret ~ LTY, data = monthly)
+
+delta(mod)
+}

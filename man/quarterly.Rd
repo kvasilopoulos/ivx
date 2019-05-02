@@ -13,7 +13,7 @@ quarterly
 }
 \description{
 \itemize{
- \item Date: year-month-date (quarterly frequency)
+ \item Date: year-month-date
  \item DE: dividend payout ratio
 \item LTY: long-term yield
 \item DY: dividend yield
