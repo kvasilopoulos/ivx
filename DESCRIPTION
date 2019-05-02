@@ -24,7 +24,7 @@ Depends:
 Imports:
     magrittr (>= 1.5),
     Rcpp (>= 0.12.18),
-    tibble
+    tibble (>= 2.1.1)
 Suggests: 
     covr (>= 3.2.1),
     spelling (>= 2.1),

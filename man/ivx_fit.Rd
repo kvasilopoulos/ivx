@@ -22,7 +22,7 @@ short-horizon regression)}
 \item{...}{currently disregarded.}
 }
 \description{
-asic functions called by `ivx` to fit predictive models.
+Basic function called by `ivx` to fit predictive models.
 These should only be used directly by experienced users.
 }
 \examples{

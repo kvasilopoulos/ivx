@@ -93,7 +93,7 @@ ivx <- function(formula, data, horizon, na.action,
 
 #' Fitter Functions for ivx Models
 #'
-#' asic functions called by `ivx` to fit predictive models.
+#' Basic function called by `ivx` to fit predictive models.
 #' These should only be used directly by experienced users.
 #'
 #' @inheritParams stats::lm.fit
