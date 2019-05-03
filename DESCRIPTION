@@ -1,7 +1,7 @@
 Type: Package
 Package: ivx
 Title: Robust Econometric Inference
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Kostas",
              family = "Vasilopoulos",
