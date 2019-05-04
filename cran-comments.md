@@ -16,5 +16,7 @@ New submission
 
 ## General Comments
 
+* Added examples on all exported functions.
+
 * The procedure is called IVX  because the instrumental variable relies directly 
 on the regressor, X. Since it is not exactly an acronym it is not explained in the description.
