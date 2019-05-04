@@ -23,6 +23,10 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
+# Install release version from CRAN
+install.packages("ivx")
+
+
 # install.packages("devtools")
 devtools::install_github("kvasilopoulos/ivx")
 ```
