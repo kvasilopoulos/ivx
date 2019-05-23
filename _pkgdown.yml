@@ -1,0 +1,53 @@
+title: ivx
+url: https://kvasilopoulos.github.io/ivx/
+
+template:
+  params:
+    bootswatch: cosmo
+
+authors:
+  Kostas Vasilopoulos:
+    href: https://kvasilopoulos.netlify.com/
+  Efthymios Pavlidis:
+    href: https://sites.google.com/site/etpavlidis/
+
+reference:
+  - title: Estimation
+    contents:
+      - ivx
+      - ivx_fit
+
+  - title: Methods
+    contents:
+      - summary.ivx
+      - vcov.ivx
+      - delta
+
+  - title: Data
+    contents:
+      - monthly
+      - quarterly
+
+
+navbar:
+  type: default
+  structure:
+    left:
+    - home
+    - reference
+    right:
+    - news
+    - github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: News
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/kvasilopoulos/ivx

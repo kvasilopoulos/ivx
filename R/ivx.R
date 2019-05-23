@@ -91,7 +91,7 @@ ivx <- function(formula, data, horizon, na.action,
 
 
 
-#' Fitter Functions for ivx Models
+#' Fitter Functions for IVX Models
 #'
 #' Basic function called by `ivx` to fit predictive models.
 #' These should only be used directly by experienced users.

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//index.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/delta.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/ivx-package.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/ivx.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/ivx_fit.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/monthly.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/quarterly.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/summary.ivx.html</loc>
+  </url>
+  <url>
+    <loc>https://kvasilopoulos.github.io/ivx//reference/vcov.ivx.html</loc>
+  </url>
+</urlset>

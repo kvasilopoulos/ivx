@@ -1,5 +1,5 @@
 
-# ivx: Robust Econometric Inference
+# ivx: Robust Econometric Inference <img src='man/figures/logo.png' align="right" height="136.5" />
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/package=ivx)
