@@ -299,6 +299,7 @@ delta <- function(object) {
 
 }
 
+
 #' Calculate Variance-Covariance Matrix for a Fitted Model Object
 #'
 #' @param object a fitted ivx and summary.ivx object.
