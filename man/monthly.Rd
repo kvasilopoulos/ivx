@@ -12,6 +12,9 @@
 monthly
 }
 \description{
+The dataset that was used in Kostakis et al (2015), containing
+a range of financial variables.
+
 \itemize{
  \item Date: year-month-date (monthly frequency)
  \item DE: dividend payout ratio

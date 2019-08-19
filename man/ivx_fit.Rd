@@ -2,7 +2,7 @@
 % Please edit documentation in R/ivx.R
 \name{ivx_fit}
 \alias{ivx_fit}
-\title{Fitter Functions for ivx Models}
+\title{Fitter Functions for IVX Models}
 \usage{
 ivx_fit(y, x, horizon = 1, offset = NULL, ...)
 }

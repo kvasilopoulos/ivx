@@ -325,4 +325,4 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
 }
 
-
+# TODO texreg method to build into latex

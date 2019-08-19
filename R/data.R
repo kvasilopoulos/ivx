@@ -1,4 +1,7 @@
-#' Monthly data
+#' @title Monthly data
+#'
+#' @description The dataset that was used in Kostakis et al (2015), containing
+#'a range of financial variables.
 #'
 #' \itemize{
 #'  \item Date: year-month-date (monthly frequency)
@@ -22,7 +25,12 @@
 #' @importFrom tibble tibble
 "monthly"
 
-#' Quarterly data
+
+
+#' @title Quarterly data
+#'
+#' @description The dataset that was used in Kostakis et al (2015), containing
+#'a range of financial variables.
 #'
 #' \itemize{
 #'  \item Date: year-month-date
@@ -39,6 +47,7 @@
 #'	\item TMS: term spread
 #'	\item Ret: S&P 500 value-weighted log excess returns
 #'}
+#'
 #'
 #' @format A data.frame with 13 variables and 345 observations.
 #'
