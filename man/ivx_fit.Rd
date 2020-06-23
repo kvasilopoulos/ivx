@@ -13,7 +13,7 @@ ivx_fit(y, x, horizon = 1, offset = NULL, ...)
 \item{x}{design matrix of dimension \code{n * p}.}
 
 \item{horizon}{is the horizon (default horizon = 1 corresponds to a
-short-horizon regression)}
+short-horizon regression).}
 
 \item{offset}{(numeric of length \code{n}).  This can be used to
     specify an \emph{a priori} known component to be included in the

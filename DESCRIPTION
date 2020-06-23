@@ -1,7 +1,7 @@
 Type: Package
 Package: ivx
 Title: Robust Econometric Inference
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: 
     c(person(given = "Kostas",
              family = "Vasilopoulos",
@@ -22,17 +22,18 @@ BugReports: https://github.com/kvasilopoulos/ivx/issues
 Depends: 
     R (>= 3.1)
 Imports:
-    magrittr (>= 1.5),
-    Rcpp (>= 0.12.18),
-    tibble (>= 2.1.1)
+    Rcpp (>= 0.12.18)
 Suggests: 
     covr (>= 3.2.1),
+    forecast (>= 8.12),
     spelling (>= 2.1),
     testthat (>= 2.1.1)
+Enhances: 
+    texreg
 LinkingTo: 
     Rcpp (>= 1.0.1),
     RcppArmadillo (>= 0.9.300.2.0)
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

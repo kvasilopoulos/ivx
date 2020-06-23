@@ -2,7 +2,11 @@
 library(readxl)
 library(dplyr)
 
-monthly <- readxl::read_excel("data-raw/monthly.xlsx",
+
+# KMS ---------------------------------------------------------------------
+
+
+kms <- readxl::read_excel("data-raw/kms-monthly.xlsx",
                       col_types = c("text", "numeric", "numeric",
                                     "numeric", "numeric", "numeric",
                                     "numeric", "numeric", "numeric",
@@ -12,18 +16,28 @@ monthly <- readxl::read_excel("data-raw/monthly.xlsx",
   rename(DE = "D/E", DY = "D/Y", DP = "D/P", Ret = "LOG_EXCESS_VW",
          EP = "E/P", BM = "B/M")
 
-quarterly <- readxl::read_excel("data-raw/quarterly.xlsx", col_names = FALSE,
+kms_quarterly <- readxl::read_excel("data-raw/kms-quarterly.xlsx", col_names = FALSE,
                             col_types = c("text",
                                           "numeric", "numeric", "numeric",
                                           "numeric", "numeric", "numeric",
                                           "numeric", "numeric", "numeric",
                                           "numeric", "numeric", "numeric",
                                           "numeric")) %>%
-  setNames(c(colnames(datam), "dont")) %>%
+  setNames(c(colnames(kms), "dont")) %>%
   select(-dont) %>%
   mutate(Date = Date  %>%
               zoo::as.yearqtr(format = "%Y%q") %>%
               zoo::as.Date())
 
-usethis::use_data(monthly, overwrite = T)
-usethis::use_data(quarterly, overwrite = T)
+usethis::use_data(kms, overwrite = T)
+usethis::use_data(kms_quarterly, overwrite = T)
+
+
+# YLPC --------------------------------------------------------------------
+
+rdiffx <- function(x) c(0, x[-1]/x[-length(x)] - 1)
+
+ylpc <- readr::read_csv("data-raw/ylpc-data.csv") %>%
+  mutate_at(vars(hpi), rdiffx)
+
+usethis::use_data(ylpc, overwrite = T)

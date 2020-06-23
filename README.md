@@ -36,13 +36,14 @@ devtools::install_github("kvasilopoulos/ivx")
 
 ``` r
 library(ivx)
+library(magrittr)
 ```
 
 This is a basic example, lets load the data first:
 
 ``` r
 # Monthly data from Kostakis et al (2014)
-monthly %>%
+kms %>%
   names()
 #>  [1] "Date" "DE"   "LTY"  "DY"   "DP"   "TBL"  "EP"   "BM"   "INF"  "DFY" 
 #> [11] "NTIS" "TMS"  "Ret"
@@ -53,29 +54,31 @@ monthly %>%
 And then do the univariate estimation:
 
 ``` r
-ivx(Ret ~ DP, data = monthly) %>% 
+ivx(Ret ~ DP, data = kms) %>% 
   summary()
 #> 
 #> Call:
-#> ivx(formula = Ret ~ DP, data = monthly, horizon = 1)
+#> ivx(formula = Ret ~ DP, data = kms, horizon = 1)
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
 #> DP 0.006489    2.031     0.154
 #> 
 #> Joint Wald statistic:  2.031 on 1 DF, p-value 0.1541
+#> Multiple R-squared:  0.002844,   Adjusted R-squared:  0.001877
 
-ivx(Ret ~ DP, data = monthly, horizon = 4) %>% 
+ivx(Ret ~ DP, data = kms, horizon = 4) %>% 
   summary()
 #> 
 #> Call:
-#> ivx(formula = Ret ~ DP, data = monthly, horizon = 4)
+#> ivx(formula = Ret ~ DP, data = kms, horizon = 4)
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
 #> DP 0.006931    2.271     0.132
 #> 
 #> Joint Wald statistic:  2.271 on 1 DF, p-value 0.1318
+#> Multiple R-squared:  0.01167,    Adjusted R-squared:  0.01358
 ```
 
 ## Multivariate
@@ -83,11 +86,11 @@ ivx(Ret ~ DP, data = monthly, horizon = 4) %>%
 And the multivariate estimation, for one or multiple horizons:
 
 ``` r
-ivx(Ret ~ DP + TBL, data = monthly) %>% 
+ivx(Ret ~ DP + TBL, data = kms) %>% 
   summary()
 #> 
 #> Call:
-#> ivx(formula = Ret ~ DP + TBL, data = monthly, horizon = 1)
+#> ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 1)
 #> 
 #> Coefficients:
 #>      Estimate Wald Ind Pr(> chi)
@@ -95,12 +98,13 @@ ivx(Ret ~ DP + TBL, data = monthly) %>%
 #> TBL -0.080717    1.957     0.162
 #> 
 #> Joint Wald statistic:  3.644 on 2 DF, p-value 0.1617
+#> Multiple R-squared:  0.004968,   Adjusted R-squared:  0.003036
 
-ivx(Ret ~ DP + TBL, data = monthly, horizon = 4) %>% 
+ivx(Ret ~ DP + TBL, data = kms, horizon = 4) %>% 
   summary()
 #> 
 #> Call:
-#> ivx(formula = Ret ~ DP + TBL, data = monthly, horizon = 4)
+#> ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 4)
 #> 
 #> Coefficients:
 #>      Estimate Wald Ind Pr(> chi)
@@ -108,7 +112,33 @@ ivx(Ret ~ DP + TBL, data = monthly, horizon = 4) %>%
 #> TBL -0.073549    1.595     0.207
 #> 
 #> Joint Wald statistic:  3.527 on 2 DF, p-value 0.1715
+#> Multiple R-squared:  0.018,  Adjusted R-squared:  0.01895
 ```
+
+## Yang et al. (2020) IVX-AR methodology
+
+``` r
+ivx_ar(hpi ~ cpi, data = ylpc)
+#> 
+#> Call:
+#> ivx_ar(formula = hpi ~ cpi, data = ylpc, horizon = 1)
+#> 
+#> Auto (bic) with AR terms q = 4
+#> 
+#> Coefficients:
+#>        cpi  
+#> -0.0001775
+```
+
+#### To-do
+
+  - The Bonferroni method
+      - Cavanagh et al (1995)  
+      - Campbell and Yogo (2006)  
+  - A conditional likelihood approach
+      - Jansson and Moreira (2006)  
+  - A control function approach
+      - Elliot (2001)
 
 -----
 

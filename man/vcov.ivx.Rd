@@ -2,12 +2,18 @@
 % Please edit documentation in R/ivx.R
 \name{vcov.ivx}
 \alias{vcov.ivx}
+\alias{vcov.ivx_ar}
 \alias{vcov.summary.ivx}
+\alias{vcov.summary.ivx_ar}
 \title{Calculate Variance-Covariance Matrix for a Fitted Model Object}
 \usage{
 \method{vcov}{ivx}(object, complete = TRUE, ...)
 
+\method{vcov}{ivx_ar}(object, complete = TRUE, ...)
+
 \method{vcov}{summary.ivx}(object, complete = TRUE, ...)
+
+\method{vcov}{summary.ivx_ar}(object, complete = TRUE, ...)
 }
 \arguments{
 \item{object}{a fitted ivx and summary.ivx object.}

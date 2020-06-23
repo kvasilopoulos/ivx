@@ -5,10 +5,26 @@
 #' from stationary to mildly explosive, and can be used for both short-
 #' and long-horizon predictive regressions.
 #'
-#' @inheritParams stats::lm
+#' @param data n optional data frame, list or environment (or object coercible by
+#' \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
+#' the variables in the model. If not found in data, the variables are taken
+#' from environment(formula), typically the environment from which lm is called.
 #' @param horizon is the horizon (default horizon = 1 corresponds to a
-#' short-horizon regression)
-#'
+#' short-horizon regression).
+#' @param na.action a function which indicates what should happen when the data
+#' contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
+#' and is \code{\link[stats:na.fail]{na.fail}} if that is unset. The ‘factory-fresh’
+#' default is \code{\link[stats:na.fail]{na.omit}}. Another possible value is \code{NULL},
+#' no action. Value \code{\link[stats:na.fail]{na.exclude}} can be useful.
+#' @param contrasts an optional list. See the \code{contrasts.arg} of
+#' \code{\link[stats:model.matrix]{model.matrix.default}}.
+#' @param offset 	this can be used to specify an a priori known component to be
+#' included in the linear predictor during fitting. This should be NULL or a
+#' numeric vector or matrix of extents matching those of the response. One or
+#' more offset terms can be included in the formula instead or as well, and if more
+#' than one are specified their sum is used. See \link[stats:model.extract]{model.offset}
+#' @param ... additional arguments to be passed to the low level regression fitting
+#' functions (see \link[stats:lm]{lm}).
 #' @return an object of class "ivx".
 #'
 #' @references Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated
@@ -161,13 +177,15 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
            delta = z$delta,
            vcov = z$varcov,
            coefficients_ols = coef_ols,
-           tstat_ols = z$tstat_ols
+           tstat_ols = z$tstat_ols,
+           residuals_ols = drop(z$residuals_ols)
       )
     )
   output
 }
 
 #' @rdname ivx
+#' @param x an object of class "ivx", usually, a result of a call to ivx.
 #' @inheritParams stats::summary.lm
 #' @export
 print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
@@ -181,6 +199,7 @@ print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   } else {
     cat("No coefficients\n")
   }
+  cat("\n")
   invisible(x)
 }
 
@@ -229,6 +248,13 @@ summary.ivx <- function(object,  ...) {
   ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1])
   ans$df <- z$df
 
+  rss <- sum(ans$residuals^2)
+  mss <- sum(ans$fitted^2)
+  n <- NROW(ans$residuals)
+  ans$r.squared <- mss/(rss + mss)
+  ans$adj.r.squared <- 1 - (1 - ans$r.squared) * n/ans$df[2]
+
+
   if (is.null(z$na.action)) ans$na.action <- z$na.action
   class(ans) <- "summary.ivx"
 
@@ -270,9 +296,13 @@ print.summary.ivx <- function(x,
     cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
         "on", x$df[1], "DF, p-value",
         format.pval(x$pv_waldjoint, digits = digits))
+    cat("\n")
+    cat("Multiple R-squared: ", formatC(x$r.squared, digits = digits))
+    cat(",\tAdjusted R-squared: ", formatC(x$adj.r.squared, digits = digits))
+    cat("\n")
   }
-
- invisible(x)
+  cat("\n")
+  invisible(x)
 }
 
 #' Calculate the delta coefficient
@@ -292,7 +322,7 @@ print.summary.ivx <- function(x,
 #' delta(mod)
 delta <- function(object) {
 
-  if (!inherits(object, c("ivx", "summary.ivx"))) {
+  if (!inherits(object, c("ivx", "summary.ivx", "ivx_ar", "summary.ivx_ar"))) {
     stop("Wrong object", call. = FALSE)
   }
   drop(object[["delta"]])
@@ -322,8 +352,19 @@ vcov.ivx <- function(object, complete = TRUE, ...) {
 
 #' @rdname vcov.ivx
 #' @export
+vcov.ivx_ar <- function(object, complete = TRUE, ...) {
+  vcov.summary.ivx_ar(summary.ivx_ar(object), complete = complete, ...)
+}
+
+#' @rdname vcov.ivx
+#' @export
 vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
 }
 
-# TODO texreg method to build into latex
+#' @rdname vcov.ivx
+#' @export
+vcov.summary.ivx_ar <- function(object, complete = TRUE, ...) {
+  stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
+}
+

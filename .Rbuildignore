@@ -3,7 +3,7 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^appveyor\.yml$
-^matlab$
+^replication$
 ^data-raw$
 ^LICENSE\.md$
 ^LICENSE$

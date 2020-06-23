@@ -134,6 +134,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::mat wivxind_z = Aivx/sqrt(diagvec(Q).t());
   arma::mat wivxind = pow(wivxind_z.t(), 2);
 
+  ////////////////////////////////////////////////
 
   return List::create(
     _("Aivx") = Aivx.t(),
