@@ -2,9 +2,12 @@
 % Please edit documentation in R/ivx.R
 \name{ivx_fit}
 \alias{ivx_fit}
+\alias{ivx_wfit}
 \title{Fitter Functions for IVX Models}
 \usage{
 ivx_fit(y, x, horizon = 1, offset = NULL, ...)
+
+ivx_wfit(y, x, w, horizon = 1, offset = NULL, ...)
 }
 \arguments{
 \item{y}{vector of observations of length \code{n}, or a matrix with
@@ -20,6 +23,10 @@ short-horizon regression).}
     linear predictor during fitting.}
 
 \item{...}{currently disregarded.}
+
+\item{w}{vector of weights (length \code{n}) to be used in the fitting
+    process for the \code{wfit} functions.  Weighted least squares is
+    used with weights \code{w}, i.e., \code{sum(w * e^2)} is minimized.}
 }
 \description{
 Basic function called by `ivx` to fit predictive models.

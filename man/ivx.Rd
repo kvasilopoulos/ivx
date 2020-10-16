@@ -5,7 +5,19 @@
 \alias{print.ivx}
 \title{Fitting IVX Models}
 \usage{
-ivx(formula, data, horizon, na.action, contrasts = NULL, offset, ...)
+ivx(
+  formula,
+  data,
+  horizon,
+  na.action,
+  weights,
+  contrasts = NULL,
+  offset,
+  model = TRUE,
+  x = FALSE,
+  y = FALSE,
+  ...
+)
 
 \method{print}{ivx}(x, digits = max(3L, getOption("digits") - 3L), ...)
 }
@@ -33,10 +45,14 @@ numeric vector or matrix of extents matching those of the response. One or
 more offset terms can be included in the formula instead or as well, and if more
 than one are specified their sum is used. See \link[stats:model.extract]{model.offset}}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{model}{logical. If `TRUE` the model.frame of the fit is returned.}
 
 \item{x}{an object of class "ivx", usually, a result of a call to ivx.}
+
+\item{y}{logical. If `TRUE` the response of the fit is returned.}
+
+\item{...}{additional arguments to be passed to the low level regression fitting
+functions (see \link[stats:lm]{lm}).}
 
 \item{digits}{the number of significant digits to use when printing.}
 }
@@ -52,13 +68,17 @@ and long-horizon predictive regressions.
 \examples{
 
 # Univariate
-ivx(Ret ~ LTY, data = monthly)
+ivx(Ret ~ LTY, data = kms)
 
 # Multivariate
-ivx(Ret ~ LTY + TBL , data = monthly)
+ivx(Ret ~ LTY + TBL, data = kms)
 
 # Longer horizon
-ivx(Ret ~ LTY + TBL, data = monthly, horizon = 4)
+ivx(Ret ~ LTY + TBL, data = kms, horizon = 4)
+
+wt <- runif(nrow(kms))
+ivx(Ret ~ LTY, data = kms, weights = wt)
+
 }
 \references{
 Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated

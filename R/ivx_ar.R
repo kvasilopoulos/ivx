@@ -58,70 +58,97 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   y <- model.response(mf, "numeric")
   offset <- model.offset(mf)
   x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_fit_ar(y, x, horizon = horizon, ar = ar, max = ar_max, ic = ar_ic,
+  z <- ivx_ar_fit(y, x, horizon = horizon, ar = ar, max = ar_max, ic = ar_ic,
                   grid_seq = ar_grid, offset = offset, ...)
-  class(z) <- if (ar==0) "ivx" else "ivx_ar"
+  class(z) <- if (ar == 0) "ivx" else c("ivx_ar", "ivx")
   z$na.action <- attr(mf, "na.action")
   z$offset <- offset
   z$contrasts <- attr(x, "contrasts")
   z$xlevels <- .getXlevels(mt, mf)
   z$call <- cl
   z$terms <- mt
+  z$assign <- attr(x, "assign")
   z
 }
 is_numeric0 <- function(x) {
   is.numeric(x) && length(x) == 0
 }
 
+# TODO na.fail in auto_ar selection
 
-ivx_fit_ar <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, ic = "bic",
+ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, ic = "bic",
                        grid_seq =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
 
-  ivx_mdl <- ivx_fit(y, x, horizon = horizon)
+  mdl_ivx <- ivx_fit(y, x, horizon = horizon)
   if (ar == "auto") {
-    # ar_mdl <- forecast::auto.arima(ivx_mdl$residuals_ols, d = 0, max.q = 0, ic = ic)
-    ar_mdl <- auto_ar(ivx_mdl$residuals_ols, d = 0, max.p = max, ic = ic)
-  }else if (ar == 0) {
+    mdl_ar <- auto_ar(mdl_ivx$residuals_ols, d = 0, max.p = max, ic = ic, ...)
+
+  } else if (ar == 0) {
     message("Using `ivx` instead.")
-    return(ivx_mdl)
+    return(mdl_ivx)
   }else {
-    ar_mdl <- arima(ivx_mdl$residuals_ols, order = c(ar, 0, 0), include.mean = FALSE, method = "CSS")
+    mdl_ar <- arima(mdl_ivx$residuals_ols, order = c(ar, 0, 0), include.mean = FALSE, method = "CSS", ...)
   }
-  ar_coefs <- coefficients(ar_mdl)
+  ar_coefs <- coefficients(mdl_ar)
   if (is_numeric0(ar_coefs)) {
-    return(ar_mdl)
+    return(mdl_ar)
   }
 
-  ar_res <- residuals(ar_mdl)
+  res_ar <- residuals(mdl_ar)
   q <- length(ar_coefs)
   ar_grid <- sapply(ar_coefs, grid_seq)
   ngrid <- nrow(ar_grid)
 
-  ivx_res <- vector("list", length = ngrid)
+  res_ivx <- vector("list", length = ngrid)
   rse <- vector("numeric", length = ngrid)
   for (i in 1:ngrid) {
     y_adj <- tilt(y, ar_grid[i,], q)
     x_adj <- tilt(x, ar_grid[i,], q)
-    ivx_res[[i]] <- ivx:::ivx_fit(y_adj, x_adj, horizon = horizon)
-    eps <- y_adj - sum(x_adj * ivx_res[[i]]$coefficients)
+    res_ivx[[i]] <- ivx:::ivx_fit(y_adj, x_adj, horizon = horizon)
+    eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
   }
 
   rse_min <- which.min(rse)
-  z <- ivx_res[[rse_min]]
+  z <- res_ivx[[rse_min]]
   z$rse <- rse[rse_min]
-  z$ar_coefs <- ar_grid[rse_min, ]
+  z$coefs_ar <- ar_grid[rse_min, ]
   z$ar_method <- ar
   z$ar_aic <- ic
 
-  nr <- NROW(ivx_mdl$residuals_ols)
-  u <- matrix(ivx_mdl$residuals_ols[(q + 2 - 1):(q + 2 - q)], nrow = q)
+  # TODO fix this part with wald_ar
+  # res_ols <- x
+  # nr <- NROW(res_ols)
+  # war <- vector("numeric", max)
+  # for(q in 1:max) {
+  #   fit_ar <- arima(res_ols, order = c(q, 0, 0), method = "ML", include.mean = F)
+  #   res_ar <- as.matrix(residuals(fit_ar))
+  #   coef_ar <- coefficients(fit_ar)
+  #
+  #   if(q == 1) {
+  #     war[1] <- (nr - 1 - 1) * coef_ar * sum(res_ols^2) / (nr - 1 - 1) * (1 / (sum(res_ols^2 * res_ar^2) / (nr - 1 - 1))) * sum(res_ols^2) / (nr - 1 - 1) * coef_ar
+  #   }else{
+  #     u1 <- matrix(res_ols[(q + 2 - 1):(q + 2 - q)], nrow = q)
+  #     sum_u <- tcrossprod(u1)
+  #     sum_v <- tcrossprod(u1) * res_ar[q + 2]
+  #
+  #     for (t in c(q + 3):nr) {
+  #       u <- matrix(res_ols[(t - 1):(t - q)], nrow = q)
+  #       sum_u <- sum_u + tcrossprod(u)
+  #       sum_v <- sum_v + tcrossprod(u) * res_ar[t]^2
+  #     }
+  #     war[q] <- matrix(coef_ar, nrow = 1) %*% sum_u %*% solve(sum_v) %*% sum_u %*% matrix(coef_ar, ncol = 1)
+  #   }
+  # }
+  # war
+  nr <- NROW(mdl_ivx$residuals_ols)
+  u <- matrix(mdl_ivx$residuals_ols[(q + 2 - 1):(q + 2 - q)], nrow = q)
   sum_u <- tcrossprod(u)
-  sum_v <- tcrossprod(u) * ar_res[q + 2]
+  sum_v <- tcrossprod(u) * res_ar[q + 2]
   for (t in c(q + 3):nr) {
-    uu <- matrix(ivx_mdl$residuals_ols[(t - 1):(t - q)], nrow = q)
+    uu <- matrix(mdl_ivx$residuals_ols[(t - 1):(t - q)], nrow = q)
     sum_u <- sum_u + tcrossprod(uu)
-    sum_v <- sum_v + tcrossprod(uu) *  ar_res[t]^2
+    sum_v <- sum_v + tcrossprod(uu) *  res_ar[t]^2
   }
   W <- matrix(ar_coefs, nrow = 1) %*% sum_u %*% solve(sum_v) %*% sum_u %*% matrix(ar_coefs, ncol = 1)
 
@@ -139,7 +166,7 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), sep = "")
-  cat("\n\n",
+  cat("\nLag Selection:\n",
       if(x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
       " with AR terms q = ", x$q, "\n\n", sep ="")
   res <- x$coefficients
@@ -259,50 +286,6 @@ print.summary.ivx_ar <- function(x,
   cat("\n")
   invisible(x)
 }
-
-
-
-
-auto_ar <- function(x, max.p = 5, ic = "aic", ...) {
-  p <- max.p
-  bestfit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE)
-  while (p >= 0) {
-    fit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE)
-    # print(fit[[ic]])
-    if (fit[[ic]] < bestfit[[ic]]) {
-      bestfit <- fit
-    }
-    p <- p - 1
-  }
-  bestfit
-}
-
-arima2 <- function(x, order = c(0, 0, 0), ic = "aic", method = "CSS", ...) {
-  fit <- arima(x = x, order = order, ...)
-  npar <- length(fit$coef[fit$mask]) + 1
-  n <- NROW(x)
-  m <- frequency(x)
-  nstar <- n - m
-  dots <- list(...)
-  if (is.null(dots$xreg)) {
-    nxreg <- 0
-  } else {
-    nxreg <- ncol(as.matrix(xreg))
-  }
-  # if (method == "CSS") {
-  #   fit$aic <- nstar * log(fit$sigma2) + 2 * npar
-  # }
-  if (!is.na(fit$aic)) {
-    fit$bic <- fit$aic + npar * (log(nstar) - 2)
-    fit$aicc <- fit$aic + 2 * npar * (npar + 1) / (nstar - npar - 1)
-    fit$ic <- switch(ic, bic = fit$bic, aic = fit$aic, aicc = fit$aicc)
-  }
-  else {
-    fit$aic <- fit$bic <- fit$aicc <- fit$ic <- Inf
-  }
-  fit
-}
-
 
 
 tilt <- function(x, grid_vec, ar_length) {

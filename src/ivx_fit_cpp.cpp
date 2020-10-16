@@ -15,7 +15,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::colvec yt = y.rows(1, nr -1);
 
   int  nn = xlag.n_rows, l = xlag.n_cols;
-  NumericVector df(2); df(0) = l, df(1) = nn -l;
+  // NumericVector df(2); df(0) = l, df(1) = nn -l;
 
   //join_horiz to include intercept
   arma::mat Xols = join_rows(ones(nr-1, 1), xlag);
@@ -121,6 +121,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   ////////////////////////////////////////////////
 
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
+  arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
   arma::colvec fitted = Xt*trans(Aivx);
   arma::colvec residuals = Yt - fitted;
 
@@ -138,15 +139,20 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   return List::create(
     _("Aivx") = Aivx.t(),
+    _("intercept") = intercept,
     _("fitted") = fitted,
     _("residuals") = residuals,
     _("wivx") = wivx,
     _("wivxind") = wivxind,
+    _("zinvxind") = wivxind_z,
     _("Aols") = Aols,
     _("tstat_ols") = tstat,
     _("residuals_ols") = epshat,
+    _("rank") = rank(Xt),
+    _("rank_ols") = rank(X),
     _("horizons") = K,
-    _("df") =  df,
+    _("df.residuals") = nn - l,
+    _("df") = l,
     _("delta") = corrmat,
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),

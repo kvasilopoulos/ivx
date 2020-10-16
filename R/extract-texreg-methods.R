@@ -1,5 +1,4 @@
-
-
+# TODO not sure this works right
 
 #' \code{\link{extract}} method for \code{ivx} objects
 #'
