@@ -64,8 +64,8 @@ ivx <- function(formula, data, horizon, na.action, weights,
   ret.x <- x
   ret.y <- y
   cl <- match.call()
-
-  if (missing(horizon)) horizon <- cl$horizon <- 1
+  if (missing(horizon))
+    horizon <- cl$horizon <- 1
 
   ## keep only the arguments which should go into the model frame
   mf <- match.call(expand.dots = FALSE)
@@ -87,7 +87,7 @@ ivx <- function(formula, data, horizon, na.action, weights,
   mt <- attr(mf, "terms")
   if (attr(mt, "intercept") == 0) {
     warning("ivx estimation does not include an intercept by construction",
-      call. = FALSE
+            call. = FALSE
     )
   }
   attr(mt, "intercept") <- 0
@@ -97,15 +97,11 @@ ivx <- function(formula, data, horizon, na.action, weights,
   if(is.matrix(y)) {
     stop("multivariate model are not available",call. = FALSE)
   }
-
+  ny <- length(y)
   w <- as.vector(model.weights(mf))
   if (!is.null(w) && !is.numeric(w)) {
     stop("'weights' must be a numeric vector")
   }
-
-  ## 2) retrieve the weights and offset from the model frame so
-  ## they can be functions of columns in arg data.
-  # w <- model.weights(mf)
   offset <- model.offset(mf)
   if (!is.null(offset)) {
     offset <- as.vector(offset)
@@ -132,20 +128,16 @@ ivx <- function(formula, data, horizon, na.action, weights,
       ivx_wfit(y, x, w, horizon = horizon, offset = offset, ...)
     }
   }
-
   class(z) <- "ivx"
-  ## 3) return the na.action info
   z$na.action <- attr(mf, "na.action")
   z$offset <- offset
-
-  ## 4) return the contrasts used in fitting: possibly as saved earlier.
   z$contrasts <- attr(x, "contrasts")
-
-  ## 5) return the levelsets for factors in the formula
   z$xlevels <- .getXlevels(mt, mf)
   z$call <- cl
   z$terms <- mt
+  z$assign <- attr(x, "assign")
   if (model) {
+
     z$model <- mf
   }
   if (ret.x) {
@@ -260,10 +252,6 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   if (n == 0) {
     stop("0 (non-NA) cases")
   }
-  # ny <- NCOL(y)
-  # if (is.matrix(y) && ny == 1L) {
-  #   y <- drop(y)
-  # }
   if (!is.null(offset)) {
     y <- y - offset
   }
@@ -327,10 +315,6 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
-  # if (!singular.ok && z$rank < p)
-  # stop("singular fit encountered")
-  # return(z)
-
   # pivot <- z$pivot
   r1 <- seq_len(z$rank)
   dn <- colnames(x)
@@ -343,28 +327,17 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   } else {
     integer()
   }
-  # if (is.matrix(y)) {
-  #   coef[r2, ] <- NA
-  #   if (z$pivoted) {
-  #     coef[pivot, ] <- coef
-  #   }
-  #   dimnames(coef) <- list(dn, colnames(y))
-  #   dimnames(z$effects) <- list(nmeffects, colnames(y))
-  # }
-  # else {
-    # coef[r2] <- NA
-    # if (z$pivoted) {
-    #   coef[pivot] <- coef
-    # }
-    # names(coef) <- dn
-    # names(z$effects) <- nmeffects
-  # }
+
+  coef[r2] <- NA
+  if (z$pivoted) {
+    coef[pivot] <- coef
+  }
+  names(coef) <- dn
+  names(z$effects) <- nmeffects
 
   z$coefficients <- coef
-
-  # TODO different dimenisons
-  # z$residuals <- z$residuals / wts
-  # z$fitted.values <- y - z$residuals
+  z$residuals <- z$residuals / wts
+  z$fitted.values <- y - z$residuals
 
   z$weights <- w
   if (zero.weights) {
@@ -389,14 +362,7 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   if (!is.null(offset)) {
     z$fitted.values <- z$fitted.values + offset
   }
-  # if (z$pivoted) {
-  #   colnames(z$qr) <- colnames(x)[z$pivot]
-  # }
 
-  # c(
-  #   z[c("coefficients", "residuals", "fitted.values","effects", "weights")],
-  #   list(assign = x.asgn)
-  # )
   structure(
     list(
       coefficients = coef,
@@ -433,8 +399,8 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
 #' @export
 print.ivx <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   cat("\nCall:\n",
-    paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n",
-    sep = ""
+      paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n",
+      sep = ""
   )
   res <- x$coefficients
   if (length(res)) {
@@ -491,14 +457,15 @@ summary.ivx <- function(object, ...) {
 
   ans$horizon <- z$horizon
   ans$Wald_Joint <- z$Wald_Joint
-  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1])
   ans$df <- z$df
+  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df)
 
+  ans$df.residuals <- z$df.residuals
   rss <- sum(ans$residuals^2)
   mss <- sum(ans$fitted^2)
   n <- NROW(ans$residuals)
   ans$r.squared <- mss / (rss + mss)
-  ans$adj.r.squared <- 1 - (1 - ans$r.squared) * n / ans$df[2]
+  ans$adj.r.squared <- 1 - (1 - ans$r.squared) * n / ans$df.residuals
 
 
   if (is.null(z$na.action)) ans$na.action <- z$na.action
@@ -514,8 +481,8 @@ print.summary.ivx <- function(x,
                               signif.stars = getOption("show.signif.stars"),
                               ...) {
   cat("\nCall:\n",
-    paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n",
-    sep = ""
+      paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n",
+      sep = ""
   )
 
   if (length(x$aliased) == 0L) {
@@ -534,7 +501,8 @@ print.summary.ivx <- function(x,
 
     cat("Coefficients:\n")
 
-    printCoefmat(coefs,
+    printCoefmat(
+      coefs,
       digits = digits, signif.stars = signif.stars,
       signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
       na.print = "NA", ...
@@ -542,11 +510,10 @@ print.summary.ivx <- function(x,
 
     cat(
       "\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
-      "on", x$df[1], "DF, p-value",
+      "on", x$df, "DF, p-value",
       format.pval(x$pv_waldjoint, digits = digits)
     )
-    cat("\n")
-    cat("Multiple R-squared: ", formatC(x$r.squared, digits = digits))
+    cat("\nMultiple R-squared: ", formatC(x$r.squared, digits = digits))
     cat(",\tAdjusted R-squared: ", formatC(x$adj.r.squared, digits = digits))
     cat("\n")
   }

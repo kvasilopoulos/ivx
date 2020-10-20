@@ -25,11 +25,14 @@
 #' @export
 ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", "aicc"),
                    ar_max = 5, ar_grid =  function(x) seq(x - 0.3, x + 0.3, by = 0.02),
-                   na.action, contrasts = NULL, offset, ...) {
+                    na.action, contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
+                   ...) {
+  ret.x <- x
+  ret.y <- y
   cl <- match.call()
   if (missing(horizon))
     horizon <- cl$horizon <- 1
-  if (! ar %in% c("auto", c(0:50))) {
+  if (! ar %in% c("auto", c(0:24))) {
     stop("`ar` should be either 'auto' or a non-negative integer.",
          call. = FALSE)
   }
@@ -37,13 +40,12 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   if(ar_max != trunc(ar_max) || ar_max <= 0) {
     stop("`ar_max` should be a positive integer.", call. = FALSE)
   }
-  # if(!is.function(ar_grid)) {
-  #   stop("`ar_grid` should be function with sequence generation see `?seq`",
-  #        call. = FALSE)
-  # }
+  if(!is.function(ar_grid)) {
+    stop("`ar_grid` should be function with sequence generation see `?seq`",
+         call. = FALSE)
+  }
   mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "horizon",
-               "na.action", "offset"), names(mf), 0)
+  m <- match(c("formula", "data", "horizon", "na.action", "offset"), names(mf), 0)
   mf <- mf[c(1, m)]
   mf$drop.unused.levels <- TRUE
   mf[[1]] <- quote(stats::model.frame)
@@ -56,6 +58,10 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   }
   attr(mt, "intercept") <- 0
   y <- model.response(mf, "numeric")
+  if(is.matrix(y)) {
+    stop("multivariate model are not available",call. = FALSE)
+  }
+  ny <- length(y)
   offset <- model.offset(mf)
   x <- model.matrix(mt, mf, contrasts)
   z <- ivx_ar_fit(y, x, horizon = horizon, ar = ar, max = ar_max, ic = ar_ic,
@@ -68,13 +74,20 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   z$call <- cl
   z$terms <- mt
   z$assign <- attr(x, "assign")
+  if (model) {
+    z$model <- mf
+  }
+  if (ret.x) {
+    z$x <- x
+  }
+  if (ret.y) {
+    z$y <- y
+  }
   z
 }
 is_numeric0 <- function(x) {
   is.numeric(x) && length(x) == 0
 }
-
-# TODO na.fail in auto_ar selection
 
 ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, ic = "bic",
                        grid_seq =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
@@ -116,43 +129,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, i
   z$ar_method <- ar
   z$ar_aic <- ic
 
-  # TODO fix this part with wald_ar
-  # res_ols <- x
-  # nr <- NROW(res_ols)
-  # war <- vector("numeric", max)
-  # for(q in 1:max) {
-  #   fit_ar <- arima(res_ols, order = c(q, 0, 0), method = "ML", include.mean = F)
-  #   res_ar <- as.matrix(residuals(fit_ar))
-  #   coef_ar <- coefficients(fit_ar)
-  #
-  #   if(q == 1) {
-  #     war[1] <- (nr - 1 - 1) * coef_ar * sum(res_ols^2) / (nr - 1 - 1) * (1 / (sum(res_ols^2 * res_ar^2) / (nr - 1 - 1))) * sum(res_ols^2) / (nr - 1 - 1) * coef_ar
-  #   }else{
-  #     u1 <- matrix(res_ols[(q + 2 - 1):(q + 2 - q)], nrow = q)
-  #     sum_u <- tcrossprod(u1)
-  #     sum_v <- tcrossprod(u1) * res_ar[q + 2]
-  #
-  #     for (t in c(q + 3):nr) {
-  #       u <- matrix(res_ols[(t - 1):(t - q)], nrow = q)
-  #       sum_u <- sum_u + tcrossprod(u)
-  #       sum_v <- sum_v + tcrossprod(u) * res_ar[t]^2
-  #     }
-  #     war[q] <- matrix(coef_ar, nrow = 1) %*% sum_u %*% solve(sum_v) %*% sum_u %*% matrix(coef_ar, ncol = 1)
-  #   }
-  # }
-  # war
-  nr <- NROW(mdl_ivx$residuals_ols)
-  u <- matrix(mdl_ivx$residuals_ols[(q + 2 - 1):(q + 2 - q)], nrow = q)
-  sum_u <- tcrossprod(u)
-  sum_v <- tcrossprod(u) * res_ar[q + 2]
-  for (t in c(q + 3):nr) {
-    uu <- matrix(mdl_ivx$residuals_ols[(t - 1):(t - q)], nrow = q)
-    sum_u <- sum_u + tcrossprod(uu)
-    sum_v <- sum_v + tcrossprod(uu) *  res_ar[t]^2
-  }
-  W <- matrix(ar_coefs, nrow = 1) %*% sum_u %*% solve(sum_v) %*% sum_u %*% matrix(ar_coefs, ncol = 1)
-
-  z$Wald_AR <- W
+  z$Wald_AR <- ac_test_wald(mdl_ivx$residuals_ols, q)
   z$q <- q
   z
 }
@@ -166,7 +143,7 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), sep = "")
-  cat("\nLag Selection:\n",
+  cat("\n\nLag Selection:\n",
       if(x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
       " with AR terms q = ", x$q, "\n\n", sep ="")
   res <- x$coefficients
@@ -222,8 +199,15 @@ summary.ivx_ar <- function(object,  ...) {
 
   ans$horizon <- z$horizon
   ans$Wald_Joint <- z$Wald_Joint
-  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df[1])
+  ans$pv_waldjoint <- 1 - pchisq(z$Wald_Joint, z$df)
   ans$df <- z$df
+
+  ans$df.residuals <- z$df.residuals
+  rss <- sum(ans$residuals^2)
+  mss <- sum(ans$fitted^2)
+  n <- NROW(ans$residuals)
+  ans$r.squared <- mss / (rss + mss)
+  ans$adj.r.squared <- 1 - (1 - ans$r.squared) * n / ans$df.residuals
 
   ans$q <- z$q
   ans$chi_crit <- qchisq(0.95, ans$q)
@@ -277,11 +261,17 @@ print.summary.ivx_ar <- function(x,
                  na.print = "NA", ...)
 
     cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
-        "on", x$df[1], "DF, p-value",
+        "on", x$df, "DF, p-value",
         format.pval(x$pv_waldjoint, digits = digits))
+
+    cat("\nMultiple R-squared: ", formatC(x$r.squared, digits = digits))
+    cat(",\tAdjusted R-squared: ", formatC(x$adj.r.squared, digits = digits))
+
     cat("\nWald AR statistic:", formatC(x$Wald_AR, digits = digits),
         "on", x$q, "DF, p-value",
         format.pval(x$pv_waldar, digits = digits))
+
+    cat("\n")
   }
   cat("\n")
   invisible(x)

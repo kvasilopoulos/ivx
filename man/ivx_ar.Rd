@@ -16,6 +16,9 @@ ivx_ar(
   na.action,
   contrasts = NULL,
   offset,
+  model = TRUE,
+  x = FALSE,
+  y = FALSE,
   ...
 )
 
@@ -55,10 +58,14 @@ numeric vector or matrix of extents matching those of the response. One or
 more offset terms can be included in the formula instead or as well, and if more
 than one are specified their sum is used. See \link[stats:model.extract]{model.offset}}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{model}{logical. If `TRUE` the model.frame of the fit is returned.}
 
 \item{x}{an object of class "ivx_ar", usually, a result of a call to ivx_ar.}
+
+\item{y}{logical. If `TRUE` the response of the fit is returned.}
+
+\item{...}{additional arguments to be passed to the low level regression fitting
+functions (see \link[stats:lm]{lm}).}
 
 \item{digits}{the number of significant digits to use when printing.}
 }

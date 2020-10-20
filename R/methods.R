@@ -4,12 +4,11 @@
 
 ## residuals.default
 ## df.residuals
+## AIC
+## BIC
 
 
 # New methods -------------------------------------------------------------
-
-
-
 
 #' Calculate the delta coefficient
 #'
@@ -110,9 +109,5 @@ model.frame.ivx <- function (formula, ...) {
 
 # Unfinished --------------------------------------------------------------
 
-
-
-# TODO
-predict.ivx <- function() {}
-# TODO
-simulate.ivx <- function() {}
+# TODO predict.ivx <- function() {}
+# TODO simulate.ivx <- function() {}
