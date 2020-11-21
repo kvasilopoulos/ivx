@@ -18,6 +18,8 @@ ac_test(x, lag_max = 5)
 \arguments{
 \item{x}{the residuals or an \code{ivx} object.}
 
+\item{lag}{the number of lags.}
+
 \item{order}{lag TODO}
 
 \item{type}{the type of test statistic to be returned. Either "Chisq" for

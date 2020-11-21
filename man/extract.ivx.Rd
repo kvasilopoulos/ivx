@@ -8,7 +8,7 @@
 extract.ivx(
   model,
   include.wald = TRUE,
-  inlude.nobs = TRUE,
+  include.nobs = TRUE,
   include.aic = FALSE,
   include.bic = FALSE,
   include.rsquared = FALSE,
@@ -18,7 +18,7 @@ extract.ivx(
 extract.ivx_ar(
   model,
   include.wald = TRUE,
-  inlude.nobs = TRUE,
+  include.nobs = TRUE,
   include.aic = FALSE,
   include.bic = FALSE,
   include.rsquared = FALSE,
@@ -30,6 +30,8 @@ extract.ivx_ar(
 
 \item{include.wald}{Report the Wald statistic.}
 
+\item{include.nobs}{Report the number of observations in the GOF block?}
+
 \item{include.aic}{Report Akaike's Information Criterion (AIC) in the GOF
 block?}
 
@@ -39,8 +41,6 @@ block?}
 \item{include.rsquared}{Report the R-squared.}
 
 \item{include.adjrs}{Report the Adjusted R-squared.}
-
-\item{include.nobs}{Report the number of observations in the GOF block?}
 
 \item{...}{Custom parameters, which are handed over to subroutines. Currently
 not in use.}

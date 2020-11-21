@@ -17,7 +17,7 @@
 #' @export
 extract.ivx <- function(model,
                         include.wald = TRUE,
-                        inlude.nobs = TRUE,
+                        include.nobs = TRUE,
                         include.aic = FALSE,
                         include.bic = FALSE,
                         include.rsquared = FALSE,
@@ -62,7 +62,7 @@ extract.ivx <- function(model,
     gof.names <- c(gof.names, "Adj.\\ R$^2$")
     gof.decimal <- c(gof.decimal, TRUE)
   }
-  if(inlude.nobs == TRUE) {
+  if(include.nobs == TRUE) {
     n <- NROW(model$residuals)
     gof <- c(gof, n)
     gof.names <- c(gof.names, "Num.\\ obs.")

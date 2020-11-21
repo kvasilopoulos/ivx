@@ -97,6 +97,7 @@ print.ac_test_ <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 # Ljung-Box ---------------------------------------------------------------
 
 #' @rdname ac_test
+#' @param lag the number of lags.
 #' @export
 ac_test_lb <- function(x, lag) {
   UseMethod("ac_test_lb")
@@ -154,8 +155,7 @@ ac_test_bp.ivx <- function(x, lag = 1) {
 
 # Breusch–Godfrey ----------------------------------------------------------
 
-#' @inheritParams
-#'
+
 #' @param order lag TODO
 #' @param type the type of test statistic to be returned. Either "Chisq" for
 #' the Chi-squared test statistic or "F" for the F test statistic.
