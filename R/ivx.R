@@ -5,12 +5,18 @@
 #' from stationary to mildly explosive, and can be used for both short-
 #' and long-horizon predictive regressions.
 #'
+#' @param formula an object of class "formula" (or one that can be coerced to that class):
+#' a symbolic description of the model to be fitted.
 #' @param data n optional data frame, list or environment (or object coercible by
 #' \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 #' the variables in the model. If not found in data, the variables are taken
 #' from environment(formula), typically the environment from which lm is called.
 #' @param horizon is the horizon (default horizon = 1 corresponds to a
 #' short-horizon regression).
+#' @param weights an optional vector of weights to be used in the fitting process.
+#' Should be `NULL` or a numeric vector. If non-NULL, weighted least squares is used
+#' with weights `weights` (that is, minimizing `sum(w*e^2)`); otherwise ordinary
+#' least squares is used.
 #' @param na.action a function which indicates what should happen when the data
 #' contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
 #' and is \code{\link[stats:na.fail]{na.fail}} if that is unset. The ‘factory-fresh’
@@ -246,6 +252,7 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 #' @rdname ivx_fit
 ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   n <- nrow(x)
+  ny <- NCOL(x)
   if (is.null(n)) {
     stop("'x' must be a matrix")
   }
@@ -316,28 +323,28 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   names(wald_ind) <- cnames
 
   # pivot <- z$pivot
-  r1 <- seq_len(z$rank)
+  # r1 <- seq_len(z$rank)
   dn <- colnames(x)
   if (is.null(dn)) {
     dn <- paste0("x", 1L:p)
   }
   # nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
-  r2 <- if (z$rank < p) {
-    (z$rank + 1L):p
-  } else {
-    integer()
-  }
+  # r2 <- if (z$rank < p) {
+  #   (z$rank + 1L):p
+  # } else {
+  #   integer()
+  # }
 
-  coef[r2] <- NA
-  if (z$pivoted) {
-    coef[pivot] <- coef
-  }
+  # coef[r2] <- NA
+  # if (z$pivoted) {
+  #   coef[pivot] <- coef
+  # }
   names(coef) <- dn
-  names(z$effects) <- nmeffects
+  # names(z$effects) <- nmeffects
 
   z$coefficients <- coef
-  z$residuals <- z$residuals / wts
-  z$fitted.values <- y - z$residuals
+  z$residuals <- z$residuals / wts[-(1:horizon)]
+  z$fitted.values <- y[-(1:horizon)] - z$residuals
 
   z$weights <- w
   if (zero.weights) {

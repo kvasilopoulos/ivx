@@ -1,34 +1,18 @@
+# Bayesian Criterion k = log(nrow(model.matrix(object)))
+
+assert_ivx <- function(object) {
+  if(length(class(object)) > 1) {
+    stop("only supported for ivx models")
+  }
+}
 
 
-#' Add or Drop All Possible Single Terms to a Model
-#'
-#' Compute all the single terms in the scope argument that can be added to or
-#' dropped from the model, fit those models and compute a table of the changes in fit.
-#'
-#'
-#'
-#' @examples
-#' object <- ivx(hpi ~ inc + cpi, data = ylpc)
-#'
-#' drop1(object)
-#' drop1(object, scope = ~cpi)
-#' drop1(object, test = "Chisq")
-#'
-#' add1(object, scope = "gdp")
-#' add1(object, scope = "gdp", test = "Chisq")
-#'
-#' step(object)
-#'
-#' object_ar <- ivx_ar(hpi ~ inc + cpi, data = ylpc)
-#' drop1(object_ar)
-#' step(object_ar)
-#'
-#'
-#'
 #' @export
+#' @importFrom stats model.frame drop.scope terms update.formula deviance formula
 drop1.ivx <- function (object, scope, scale = 0, all.cols = TRUE, test = c("none", "Chisq", "F"), k = 2, ...) {
 
-  stats:::check_exact(object)
+  assert_ivx(object)
+  check_exact(object)
   x <- model.matrix(object)
   offset <- model.offset(model.frame(object))
   wt <- object$weights
@@ -98,7 +82,7 @@ drop1.ivx <- function (object, scope, scale = 0, all.cols = TRUE, test = c("none
     }
     df <- aod$Df
     nas <- !is.na(df)
-    dev[nas] <- stats:::safe_pchisq(dev[nas], df[nas], lower.tail = FALSE)
+    dev[nas] <- safe_pchisq(dev[nas], df[nas], lower.tail = FALSE)
     aod[, "Pr(>Chi)"] <- dev
   }else if (test == "F") {
     dev <- aod$"Sum of Sq"
@@ -109,7 +93,7 @@ drop1.ivx <- function (object, scope, scale = 0, all.cols = TRUE, test = c("none
     Fs[dfs < 0.0001] <- NA
     P <- Fs
     nas <- !is.na(Fs)
-    P[nas] <- stats:::safe_pf(Fs[nas], dfs[nas], rdf, lower.tail = FALSE)
+    P[nas] <- safe_pf(Fs[nas], dfs[nas], rdf, lower.tail = FALSE)
     aod[, c("F value", "Pr(>F)")] <- list(Fs, P)
   }
   head <- c("Single term deletions", "\nModel:", deparse(formula(object)),
@@ -127,15 +111,17 @@ Fstat <- function(table, RSS, rdf) {
   Fs[df < .Machine$double.eps] <- NA
   P <- Fs
   nnas <- !is.na(Fs)
-  P[nnas] <- stats:::safe_pf(Fs[nnas], df[nnas], rdf - df[nnas],
+  P[nnas] <- safe_pf(Fs[nnas], df[nnas], rdf - df[nnas],
                      lower.tail = FALSE)
   list(Fs = Fs, P = P)
 }
 
 #' @export
+#' @importFrom stats arima add.scope update.formula terms model.frame
+#' model.weights deviance formula
 add1.ivx <- function (object, scope, scale = 0, test = c("none", "Chisq", "F"), x = NULL, k = 2, ...) {
-
-  stats:::check_exact(object)
+  assert_ivx(object)
+  check_exact(object)
   if (missing(scope) || is.null(scope))
     stop("no terms in scope", call. = FALSE)
   if (!is.character(scope))
@@ -223,7 +209,7 @@ add1.ivx <- function (object, scope, scale = 0, test = c("none", "Chisq", "F"), 
     else dev <- dev/scale
     df <- aod$Df
     nas <- !is.na(df)
-    dev[nas] <- stats:::safe_pchisq(dev[nas], df[nas], lower.tail = FALSE)
+    dev[nas] <- safe_pchisq(dev[nas], df[nas], lower.tail = FALSE)
     aod[, "Pr(>Chi)"] <- dev
   }
   else if (test == "F") {
@@ -238,12 +224,13 @@ add1.ivx <- function (object, scope, scale = 0, test = c("none", "Chisq", "F"), 
 }
 
 #' @export
+#' @importFrom stats weighted.residuals
 deviance.ivx <- function(object, ...) {
   sum(weighted.residuals(object)^2, na.rm = TRUE)
 }
 
 #' @export
-extractAIC.ivx <- function(fit, scale = 0, k = 2, ..) {
+extractAIC.ivx <- function(fit, scale = 0, k = 2, ...) {
   n <- length(fit$residuals)
   edf <- n - fit$df.residual
   RSS <- deviance.ivx(fit)
@@ -282,6 +269,35 @@ logLik.ivx <- function (object, REML = FALSE, ...) {
   attr(val, "df") <- p + 1
   class(val) <- "logLik"
   val
+}
+
+
+# non-exporeted functions from stats ----------------------------------------
+
+
+check_exact <- function (object) {
+  w <- object$weights
+  if (is.null(w)) {
+    mss <- sum(object$fitted.values^2)
+    rss <- sum(object$residuals^2)
+  }
+  else {
+    mss <- sum(w * object$fitted.values^2)
+    rss <- sum(w * object$residuals^2)
+  }
+  if (rss < 0.0000000001 * mss)
+    warning("attempting model selection on an essentially perfect fit is nonsense",
+            call. = FALSE)
+}
+
+safe_pchisq <- function (q, df, ...) {
+  df[df <= 0] <- NA
+  pchisq(q = q, df = df, ...)
+}
+
+safe_pf <- function (q, df1, ...) {
+  df1[df1 <= 0] <- NA
+  pf(q = q, df1 = df1, ...)
 }
 
 

@@ -25,6 +25,9 @@ ivx_ar(
 \method{print}{ivx_ar}(x, digits = max(3L, getOption("digits") - 3L), ...)
 }
 \arguments{
+\item{formula}{an object of class "formula" (or one that can be coerced to that class):
+a symbolic description of the model to be fitted.}
+
 \item{data}{n optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
@@ -34,14 +37,14 @@ from environment(formula), typically the environment from which lm is called.}
 short-horizon regression).}
 
 \item{ar}{Method to include the autoregressive terms. "auto" find the optimal
-ar order by using the infomration criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
+ar order by using the information criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
 \code{ar > 1} uses a fixed order to estimate the model.}
 
 \item{ar_ic}{Information criterion to be used in model selection.}
 
 \item{ar_max}{Maximum ar order of model to fit.}
 
-\item{ar_grid}{The ar grid sequence of which to iterate}
+\item{ar_grid}{The ar grid sequence of which to iterate.}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
@@ -58,11 +61,11 @@ numeric vector or matrix of extents matching those of the response. One or
 more offset terms can be included in the formula instead or as well, and if more
 than one are specified their sum is used. See \link[stats:model.extract]{model.offset}}
 
-\item{model}{logical. If `TRUE` the model.frame of the fit is returned.}
+\item{model}{logical. If \code{TRUE} the model.frame of the fit is returned.}
 
 \item{x}{an object of class "ivx_ar", usually, a result of a call to ivx_ar.}
 
-\item{y}{logical. If `TRUE` the response of the fit is returned.}
+\item{y}{logical. If \code{TRUE} the response of the fit is returned.}
 
 \item{...}{additional arguments to be passed to the low level regression fitting
 functions (see \link[stats:lm]{lm}).}

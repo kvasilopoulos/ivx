@@ -61,3 +61,14 @@
 #' @source \url{https://www.tandfonline.com/doi/suppl/10.1080/01621459.2019.1686392/suppl_file/uasa_a_1686392_sm7226.zip}
 #'
 "ylpc"
+
+#' Monthly dataset of KMS
+#'
+#' @keywords internal
+"monthly"
+
+#' Quarterly dataset of KMS
+#'
+#' @keywords internal
+"quarterly"
+

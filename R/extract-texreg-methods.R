@@ -1,25 +1,25 @@
-# TODO not sure this works right
-
 #' \code{\link{extract}} method for \code{ivx} objects
 #'
-#' \code{\link{extract}} method for \code{Arima} objects created by the
-#' \code{\link[stats]{arima}} function in the \pkg{stats} package.
 #'
 #' @param model A statistical model object.
-#' @param include.pvalues Report p-values?
+#' @param include.wald Report the Wald statistic.
+#' @param include.nobs Report the number of observations in the GOF block?
 #' @param include.aic Report Akaike's Information Criterion (AIC) in the GOF
 #'   block?
 #' @param include.bic Report the Bayesian Information Criterion (BIC) in the GOF
 #'   block?
-#' @param include.loglik Report the log likelihood in the GOF block?
-#' @param include.nobs Report the number of observations in the GOF block?
+#' @param include.rsquared Report the R-squared.
+#' @param include.adjrs Report the Adjusted R-squared.
 #' @param ... Custom parameters, which are handed over to subroutines. Currently
 #'   not in use.
 #'
-#'
+#' @importFrom stats AIC BIC
 #' @export
-extract.ivx <- function(model, include.wald = TRUE,
+extract.ivx <- function(model,
+                        include.wald = TRUE,
                         inlude.nobs = TRUE,
+                        include.aic = FALSE,
+                        include.bic = FALSE,
                         include.rsquared = FALSE,
                         include.adjrs = FALSE) {
   s <- summary(model)
@@ -37,6 +37,17 @@ extract.ivx <- function(model, include.wald = TRUE,
     wl <- s$Wald_Joint
     gof <- c(gof, wl)
     gof.names <- c(gof.names, "Joint Wald$")
+    gof.decimal <- c(gof.decimal, TRUE)
+  }
+  if (include.aic == TRUE) {
+    aic <- AIC(model)
+    gof <- c(gof, aic)
+    gof.names <- c(gof.names, "AIC")
+    gof.decimal <- c(gof.decimal, TRUE)
+  }
+  if (include.bic == TRUE) {
+    gof <- c(gof, BIC(model))
+    gof.names <- c(gof.names, "BIC")
     gof.decimal <- c(gof.decimal, TRUE)
   }
   if (include.rsquared == TRUE) {
@@ -57,7 +68,7 @@ extract.ivx <- function(model, include.wald = TRUE,
     gof.names <- c(gof.names, "Num.\\ obs.")
     gof.decimal <- c(gof.decimal, FALSE)
   }
-  tr <- texreg::createTexreg(
+  texreg::createTexreg(
     coef.names = names,
     coef = co,
     se = wald,
@@ -66,18 +77,19 @@ extract.ivx <- function(model, include.wald = TRUE,
     gof = gof,
     gof.decimal = gof.decimal
   )
-  return(tr)
 }
 
+#' @importFrom methods setGeneric setMethod className
+#' @rdname extract.ivx
 #' @export
 extract.ivx_ar <- extract.ivx
 
 .onLoad <- function(libname, pkgname) {
   if (suppressWarnings(requireNamespace("texreg", quietly = TRUE))) {
-    setGeneric("extract", function(model, ...) standardGeneric("extract"),
+    methods::setGeneric("extract", function(model, ...) standardGeneric("extract"),
                package = "texreg"
     )
-    setMethod("extract", signature = className("ivx", "ivx"),
+    methods::setMethod("extract", signature = methods::className("ivx", "ivx"),
               definition = extract.ivx)
   }
 }

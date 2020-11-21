@@ -59,14 +59,15 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
 }
 
-#' @export
-case.names.ivx <- function (object, full = FALSE, ...) {
-  w <- weights(object)
-  dn <- names(residuals(object))
-  if (full || is.null(w))
-    dn
-  else dn[w != 0]
-}
+# case.names.ivx <- function (object, full = FALSE, ...) {
+#   w <- weights(object)
+#   dn <- names(residuals(object))
+#   if (full || is.null(w)) {
+#     dn
+#   } else {
+#     dn[w != 0]
+#   }
+# }
 
 
 #' @export

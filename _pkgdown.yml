@@ -12,10 +12,23 @@ authors:
     href: https://sites.google.com/site/etpavlidis/
 
 reference:
-  - title: Estimation
+  - title: Modesl
     contents:
       - ivx
+      - ivx_ar
+      - ivx_roll
+
+  - title: Fitter Functions
       - ivx_fit
+      - ivx_wfit
+      - ivx_ar_fit
+      - ivx_roll_fit
+
+  - title: Serial Corelation Test
+      - ac_test
+      - ac_test_bp
+      - ac_test_bg
+      - ac_test_lb
 
   - title: Methods
     contents:
@@ -25,8 +38,9 @@ reference:
 
   - title: Data
     contents:
-      - monthly
-      - quarterly
+      - kms
+      - kms_quarterly
+      - ylpc
 
 
 navbar:

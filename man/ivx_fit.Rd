@@ -29,7 +29,7 @@ short-horizon regression).}
     used with weights \code{w}, i.e., \code{sum(w * e^2)} is minimized.}
 }
 \description{
-Basic function called by `ivx` to fit predictive models.
+Basic function called by \code{ivx} to fit predictive models.
 These should only be used directly by experienced users.
 }
 \examples{

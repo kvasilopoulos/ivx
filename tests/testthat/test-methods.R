@@ -1,7 +1,7 @@
 context("test-methods")
 
-object <- ivx(Ret ~ TBL + EP + LTY, kms)
-obj_ar <- ivx(Ret ~ DP + LTY, kms)
+obj <- ivx(Ret ~ TBL + EP + LTY, kms)
+obj_ar <- ivx_ar(Ret ~ DP + LTY, kms)
 
 test_that("summary.ivx return the same with ivx", {
   expect_equal(residuals(summary(obj)), residuals(obj))
@@ -14,10 +14,10 @@ test_that("summary.ivx return the same with ivx", {
 
 
 test_that("step-methods",{
-  expect_error(drop1(object), NA)
-  expect_error(add1(object, "DE"), NA)
-  expect_error(capture.output(step(object)), NA)
-  expect_error(deviance(object), NA)
-  expect_error(logLik(object), NA)
+  expect_error(drop1(obj), NA)
+  expect_error(add1(obj, "DE"), NA)
+  expect_error(capture.output(step(obj)), NA)
+  expect_error(deviance(obj), NA)
+  expect_error(logLik(obj), NA)
 })
 

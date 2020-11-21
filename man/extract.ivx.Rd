@@ -2,12 +2,25 @@
 % Please edit documentation in R/extract-texreg-methods.R
 \name{extract.ivx}
 \alias{extract.ivx}
+\alias{extract.ivx_ar}
 \title{\code{\link{extract}} method for \code{ivx} objects}
 \usage{
 extract.ivx(
   model,
   include.wald = TRUE,
   inlude.nobs = TRUE,
+  include.aic = FALSE,
+  include.bic = FALSE,
+  include.rsquared = FALSE,
+  include.adjrs = FALSE
+)
+
+extract.ivx_ar(
+  model,
+  include.wald = TRUE,
+  inlude.nobs = TRUE,
+  include.aic = FALSE,
+  include.bic = FALSE,
   include.rsquared = FALSE,
   include.adjrs = FALSE
 )
@@ -15,7 +28,7 @@ extract.ivx(
 \arguments{
 \item{model}{A statistical model object.}
 
-\item{include.pvalues}{Report p-values?}
+\item{include.wald}{Report the Wald statistic.}
 
 \item{include.aic}{Report Akaike's Information Criterion (AIC) in the GOF
 block?}
@@ -23,7 +36,9 @@ block?}
 \item{include.bic}{Report the Bayesian Information Criterion (BIC) in the GOF
 block?}
 
-\item{include.loglik}{Report the log likelihood in the GOF block?}
+\item{include.rsquared}{Report the R-squared.}
+
+\item{include.adjrs}{Report the Adjusted R-squared.}
 
 \item{include.nobs}{Report the number of observations in the GOF block?}
 
@@ -31,6 +46,5 @@ block?}
 not in use.}
 }
 \description{
-\code{\link{extract}} method for \code{Arima} objects created by the
-\code{\link[stats]{arima}} function in the \pkg{stats} package.
+\code{\link{extract}} method for \code{ivx} objects
 }

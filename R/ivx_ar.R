@@ -6,11 +6,11 @@
 #'
 #' @inheritParams ivx
 #' @param ar Method to include the autoregressive terms. "auto" find the optimal
-#' ar order by using the infomration criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
+#' ar order by using the information criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
 #' \code{ar > 1} uses a fixed order to estimate the model.
 #' @param ar_ic Information criterion to be used in model selection.
 #' @param ar_max	 Maximum ar order of model to fit.
-#' @param ar_grid The ar grid sequence of which to iterate
+#' @param ar_grid The ar grid sequence of which to iterate.
 #'
 #' @references Yang, B., Long, W., Peng, L., & Cai, Z. (2020). Testing the
 #' Predictability of US Housing Price Index Returns Based on an IVX-AR Model.
@@ -85,26 +85,31 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   }
   z
 }
-is_numeric0 <- function(x) {
-  is.numeric(x) && length(x) == 0
-}
 
+#' @importFrom stats arima var
 ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, ic = "bic",
                        grid_seq =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
 
   mdl_ivx <- ivx_fit(y, x, horizon = horizon)
   if (ar == "auto") {
     mdl_ar <- auto_ar(mdl_ivx$residuals_ols, d = 0, max.p = max, ic = ic, ...)
-
   } else if (ar == 0) {
     message("Using `ivx` instead.")
     return(mdl_ivx)
   }else {
-    mdl_ar <- arima(mdl_ivx$residuals_ols, order = c(ar, 0, 0), include.mean = FALSE, method = "CSS", ...)
+    mdl_ar <- arima(mdl_ivx$residuals_ols, order = c(ar, 0, 0),
+                    include.mean = FALSE, method = "CSS", ...)
   }
   ar_coefs <- coefficients(mdl_ar)
+  # in case the arima does not converge
   if (is_numeric0(ar_coefs)) {
-    return(mdl_ar)
+    return(
+      list(
+        coefficients = numeric(), residuals = y,
+        fitted = 0 * y, df.residuals = length(y),
+        ar_method = ar, ar_aic = ic
+      )
+    )
   }
 
   res_ar <- residuals(mdl_ar)
@@ -117,7 +122,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, i
   for (i in 1:ngrid) {
     y_adj <- tilt(y, ar_grid[i,], q)
     x_adj <- tilt(x, ar_grid[i,], q)
-    res_ivx[[i]] <- ivx:::ivx_fit(y_adj, x_adj, horizon = horizon)
+    res_ivx[[i]] <- ivx::ivx_fit(y_adj, x_adj, horizon = horizon)
     eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
   }
@@ -167,7 +172,7 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #'
 #' @export
 #' @importFrom stats printCoefmat
-#' @importFrom stats pt
+#' @importFrom stats pt qchisq
 #' @examples
 #' mod <- ivx_ar(Ret ~ LTY, data = kms)
 #'
@@ -277,7 +282,7 @@ print.summary.ivx_ar <- function(x,
   invisible(x)
 }
 
-
+#' @importFrom stats embed
 tilt <- function(x, grid_vec, ar_length) {
   x <- as.matrix(x)
   out <- matrix(NA, nrow = NROW(x) - ar_length, ncol = NCOL(x))

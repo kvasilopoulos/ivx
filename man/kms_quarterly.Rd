@@ -18,8 +18,8 @@ The dataset that was used in Kostakis et al (2015), containing
 a range of financial variables.
 
 \itemize{
- \item Date: year-month-date
- \item DE: dividend payout ratio
+\item Date: year-month-date
+\item DE: dividend payout ratio
 \item LTY: long-term yield
 \item DY: dividend yield
 \item DP: dividend-price ratio
