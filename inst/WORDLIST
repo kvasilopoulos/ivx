@@ -1,6 +1,7 @@
 al
 ar
 AppVeyor
+Breusch
 bgtest
 Cai
 cpi
@@ -9,6 +10,7 @@ codecov
 coercible
 coef
 Cointegrated
+Chisq
 DFY
 dplyr
 doi
@@ -16,14 +18,17 @@ EP
 et
 fresh’
 GOF
+Godfrey
 hpi
 hhu
 ivx’
 KMS
 Kostakis
+Ljung
 lifecycle
 lm
 lmtest
+ols
 priori
 regressors’
 rfs
