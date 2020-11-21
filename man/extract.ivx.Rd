@@ -3,7 +3,7 @@
 \name{extract.ivx}
 \alias{extract.ivx}
 \alias{extract.ivx_ar}
-\title{\code{\link{extract}} method for \code{ivx} objects}
+\title{\code{extract} method for \code{ivx} objects}
 \usage{
 extract.ivx(
   model,
@@ -12,7 +12,8 @@ extract.ivx(
   include.aic = FALSE,
   include.bic = FALSE,
   include.rsquared = FALSE,
-  include.adjrs = FALSE
+  include.adjrs = FALSE,
+  ...
 )
 
 extract.ivx_ar(
@@ -22,7 +23,8 @@ extract.ivx_ar(
   include.aic = FALSE,
   include.bic = FALSE,
   include.rsquared = FALSE,
-  include.adjrs = FALSE
+  include.adjrs = FALSE,
+  ...
 )
 }
 \arguments{
@@ -46,5 +48,5 @@ block?}
 not in use.}
 }
 \description{
-\code{\link{extract}} method for \code{ivx} objects
+\code{extract} method for \code{ivx} objects
 }

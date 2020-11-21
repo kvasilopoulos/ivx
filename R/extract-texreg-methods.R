@@ -1,4 +1,4 @@
-#' \code{\link{extract}} method for \code{ivx} objects
+#' \code{extract} method for \code{ivx} objects
 #'
 #'
 #' @param model A statistical model object.
@@ -21,7 +21,8 @@ extract.ivx <- function(model,
                         include.aic = FALSE,
                         include.bic = FALSE,
                         include.rsquared = FALSE,
-                        include.adjrs = FALSE) {
+                        include.adjrs = FALSE,
+                        ...) {
   s <- summary(model)
 
   names <- rownames(s$coef)
@@ -79,8 +80,9 @@ extract.ivx <- function(model,
   )
 }
 
-#' @importFrom methods setGeneric setMethod className
+
 #' @rdname extract.ivx
+#' @importFrom methods setGeneric setMethod className
 #' @export
 extract.ivx_ar <- extract.ivx
 

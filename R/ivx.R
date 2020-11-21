@@ -47,7 +47,7 @@
 #' @aliases ivx
 #'
 #' @importFrom stats .getXlevels coef coefficients cor lm model.matrix pf
-#' model.offset model.response pchisq qnorm residuals symnum
+#' model.offset model.response pchisq qnorm residuals symnum is.empty.model
 #'
 #' @export
 #' @examples

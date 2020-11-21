@@ -81,9 +81,5 @@ terms of the linear predictive regression model.
 Yang, B., Long, W., Peng, L., & Cai, Z. (2020). Testing the
 Predictability of US Housing Price Index Returns Based on an IVX-AR Model.
 Journal of the American Statistical Association, 1-22. DOI:
-\href{https://doi.org/10.1080/01621459.2019.1686392}{10.1080/01621459.2019.1686392}
-
-Yang, B., Long, W., Peng, L., & Cai, Z. (2020). Testing the predictability
-of US housing price index returns based on an IVX-AR model. Journal of the American
-Statistical Association, 1-22.
+\doi{10.1080/01621459.2019.1686392}
 }
