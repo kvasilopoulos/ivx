@@ -28,7 +28,8 @@ Suggests:
     covr (>= 3.2.1),
     forecast (>= 8.12),
     spelling (>= 2.1),
-    testthat (>= 2.1.1)
+    testthat (>= 2.1.1),
+    lmtest
 Enhances: 
     texreg
 LinkingTo: 
