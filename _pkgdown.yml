@@ -18,11 +18,13 @@ reference:
       - ivx_ar
 
   - title: Fitter Functions
+    contents:
       - ivx_fit
       - ivx_wfit
       - ivx_ar_fit
 
   - title: Serial Corelation Test
+    contents:
       - ac_test
       - ac_test_bp
       - ac_test_bg
@@ -33,6 +35,7 @@ reference:
       - summary.ivx
       - vcov.ivx
       - delta
+      - extract.ivx
 
   - title: Data
     contents:
