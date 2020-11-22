@@ -18,7 +18,5 @@ Autocorrelation tests
 obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
 lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
 ac_test(obj, 5)
-ac_test.ivx(x)
-t2 <- ivx_ar(hpi ~ cpi + def + int + log(res), data = ylpc)
 
 }

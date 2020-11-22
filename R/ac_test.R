@@ -219,8 +219,6 @@ ac_test_bg.default <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
 #' obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
 #' lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
 #' ac_test(obj, 5)
-#' ac_test.ivx(x)
-#' t2 <- ivx_ar(hpi ~ cpi + def + int + log(res), data = ylpc)
 #'
 ac_test <- function(x, lag_max = 5) {
   UseMethod("ac_test")
