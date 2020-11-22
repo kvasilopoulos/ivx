@@ -3,24 +3,41 @@
 \name{ac_test_}
 \alias{ac_test_}
 \alias{ac_test_wald}
+\alias{ac_test_lb}
+\alias{ac_test_bp}
+\alias{ac_test_bg}
 \title{Tests  for autocorrelation}
 \usage{
 ac_test_wald(x, lag)
+
+ac_test_lb(x, lag)
+
+ac_test_bp(x, lag)
+
+ac_test_bg(x, order, type, fill)
 }
 \arguments{
 \item{x}{an \code{ivx} model or a \verb{numeric vector}, usually the residuals from an ols regression.}
 
 \item{lag}{the number of lags.}
+
+\item{order}{lag TODO}
+
+\item{type}{the type of test statistic to be returned. Either "Chisq" for
+the Chi-squared test statistic or "F" for the F test statistic.}
+
+\item{fill}{starting values for the lagged residuals in the auxiliary regression.
+By default 0 but can also be set to NA.}
 }
 \value{
 a numeric scalar or numeric vector.
 }
 \description{
 \itemize{
-\item \code{ac_test_wald} Wald test
-\item \code{ac_test_lb} Ljung-Box
-\item \code{ac_test_bp} Box-Pierce
-\item \code{ac_test_bg}Breusch-Godfrey
+\item \code{ac_test_wald}: Wald test
+\item \code{ac_test_lb}: Ljung-Box
+\item \code{ac_test_bp}:  Box-Pierce
+\item \code{ac_test_bg}: Breusch-Godfrey
 }
 }
 \details{

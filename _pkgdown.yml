@@ -16,13 +16,11 @@ reference:
     contents:
       - ivx
       - ivx_ar
-      - ivx_roll
 
   - title: Fitter Functions
       - ivx_fit
       - ivx_wfit
       - ivx_ar_fit
-      - ivx_roll_fit
 
   - title: Serial Corelation Test
       - ac_test

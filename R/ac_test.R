@@ -7,10 +7,10 @@
 #'
 #' @description
 #'
-#' * `ac_test_wald` Wald test
-#' * `ac_test_lb` Ljung-Box
-#' * `ac_test_bp` Box-Pierce
-#' * `ac_test_bg`Breusch-Godfrey
+#' * `ac_test_wald`: Wald test
+#' * `ac_test_lb`: Ljung-Box
+#' * `ac_test_bp`:  Box-Pierce
+#' * `ac_test_bg`: Breusch-Godfrey
 #'
 #' @param x an `ivx` model or a `numeric vector`, usually the residuals from an ols regression.
 #' @param lag the number of lags.
@@ -96,7 +96,7 @@ print.ac_test_ <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 
 # Ljung-Box ---------------------------------------------------------------
 
-#' @rdname ac_test
+#' @rdname ac_test_
 #' @param lag the number of lags.
 #' @export
 ac_test_lb <- function(x, lag) {
@@ -126,7 +126,7 @@ ac_test_lb.ivx <- function(x, lag = 1) {
 
 # Box-Pierce --------------------------------------------------------------
 
-#' @rdname ac_test
+#' @rdname ac_test_
 #' @export
 ac_test_bp <- function(x, lag) {
   UseMethod("ac_test_bp")
@@ -155,14 +155,19 @@ ac_test_bp.ivx <- function(x, lag = 1) {
 
 # Breusch–Godfrey ----------------------------------------------------------
 
-
 #' @param order lag TODO
 #' @param type the type of test statistic to be returned. Either "Chisq" for
 #' the Chi-squared test statistic or "F" for the F test statistic.
 #' @param fill starting values for the lagged residuals in the auxiliary regression.
 #' By default 0 but can also be set to NA.
 #'
-#' @rdname ac_test
+#' @rdname ac_test_
+#' @export
+ac_test_bg <- function(x, order, type, fill) {
+  UseMethod("ac_test_bp")
+}
+
+
 #' @export
 ac_test_bg.default <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
 
@@ -205,17 +210,18 @@ ac_test_bg.default <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
 
 #' Autocorrelation tests
 #'
-#'
 #' @param x the residuals or an `ivx` object.
 #' @param lag_max the maximum length of lags.
 #'
+#' @name ac_test
+#' @export
+#' @examples
 #' obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
 #' lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
 #' ac_test(obj, 5)
 #' ac_test.ivx(x)
 #' t2 <- ivx_ar(hpi ~ cpi + def + int + log(res), data = ylpc)
 #'
-#' @export
 ac_test <- function(x, lag_max = 5) {
   UseMethod("ac_test")
 }
