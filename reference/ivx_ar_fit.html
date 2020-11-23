@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ivx</title>
+<title>Fitter Functions for IVX-AR Models — ivx_ar_fit • ivx</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Fitter Functions for IVX-AR Models — ivx_ar_fit" />
+<meta property="og:description" content="Basic function called by ivx_ar to fit predictive models.
+These should only be used directly by experienced users." />
 <meta property="og:image" content="https://kvasilopoulos.github.io/ivx/logo.png" />
 
 
@@ -66,7 +68,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -116,166 +118,88 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Fitter Functions for IVX-AR Models</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kvasilopoulos/ivx/blob/master/R/ivx_ar.R'><code>R/ivx_ar.R</code></a></small>
+    <div class="hidden name"><code>ivx_ar_fit.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Basic function called by <code>ivx_ar</code> to fit predictive models.
+These should only be used directly by experienced users.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>ivx_ar_fit</span><span class='op'>(</span>
+  <span class='va'>y</span>,
+  <span class='va'>x</span>,
+  horizon <span class='op'>=</span> <span class='fl'>1</span>,
+  offset <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ar <span class='op'>=</span> <span class='st'>"auto"</span>,
+  ar_max <span class='op'>=</span> <span class='fl'>5</span>,
+  ar_ic <span class='op'>=</span> <span class='st'>"bic"</span>,
+  ar_grid <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='fl'>0.3</span>, <span class='va'>x</span> <span class='op'>+</span> <span class='fl'>0.3</span>, by <span class='op'>=</span> <span class='fl'>0.02</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-modesl" class="hasAnchor"><a href="#section-modesl" class="anchor"></a>Modesl</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ivx.html">ivx()</a></code> <code><a href="ivx.html">print(<i>&lt;ivx&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fitting IVX Models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ivx_ar.html">ivx_ar()</a></code> <code><a href="ivx_ar.html">print(<i>&lt;ivx_ar&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Fitting IVX-AR Models</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-fitter-functions" class="hasAnchor"><a href="#section-fitter-functions" class="anchor"></a>Fitter Functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ivx_fit.html">ivx_fit()</a></code> <code><a href="ivx_fit.html">ivx_wfit()</a></code> </p>
-        </td>
-        <td><p>Fitter Functions for IVX Models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ivx_ar_fit.html">ivx_ar_fit()</a></code> </p>
-        </td>
-        <td><p>Fitter Functions for IVX-AR Models</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-serial-corelation-test" class="hasAnchor"><a href="#section-serial-corelation-test" class="anchor"></a>Serial Corelation Test</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="ac_test.html">ac_test()</a></code> </p>
-        </td>
-        <td><p>Autocorrelation tests</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ac_test_.html">ac_test_wald()</a></code> <code><a href="ac_test_.html">ac_test_lb()</a></code> <code><a href="ac_test_.html">ac_test_bp()</a></code> <code><a href="ac_test_.html">ac_test_bg()</a></code> </p>
-        </td>
-        <td><p>Tests  for autocorrelation</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-methods" class="hasAnchor"><a href="#section-methods" class="anchor"></a>Methods</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="summary.ivx.html">summary(<i>&lt;ivx&gt;</i>)</a></code> <code><a href="summary.ivx.html">print(<i>&lt;summary.ivx&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Summarizing IVX Model Fits</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vcov.ivx.html">vcov(<i>&lt;ivx&gt;</i>)</a></code> <code><a href="vcov.ivx.html">vcov(<i>&lt;summary.ivx&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Calculate Variance-Covariance Matrix for a Fitted Model Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delta.html">delta()</a></code> </p>
-        </td>
-        <td><p>Calculate the delta coefficient</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="extract.ivx.html">extract.ivx()</a></code> <code><a href="extract.ivx.html">extract.ivx_ar()</a></code> </p>
-        </td>
-        <td><p><code>extract</code> method for <code>ivx</code> objects</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="kms.html">kms</a></code> </p>
-        </td>
-        <td><p>KMS Monthly data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="kms_quarterly.html">kms_quarterly</a></code> </p>
-        </td>
-        <td><p>KMS Quarterly data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ylpc.html">ylpc</a></code> </p>
-        </td>
-        <td><p>YLPC Quarterly data</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>y</th>
+      <td><p>vector of observations of length <code>n</code>, or a matrix with
+    <code>n</code> rows.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>design matrix of dimension <code>n * p</code>.</p></td>
+    </tr>
+    <tr>
+      <th>horizon</th>
+      <td><p>is the horizon (default horizon = 1 corresponds to a
+short-horizon regression).</p></td>
+    </tr>
+    <tr>
+      <th>offset</th>
+      <td><p>(numeric of length <code>n</code>).  This can be used to
+    specify an <em>a priori</em> known component to be included in the
+    linear predictor during fitting.</p></td>
+    </tr>
+    <tr>
+      <th>ar</th>
+      <td><p>Method to include the autoregressive terms. "auto" find the optimal
+ar order by using the information criteria. <code>ar = 0</code> reduces to simple <code><a href='ivx.html'>ivx</a></code>.
+<code>ar &gt; 1</code> uses a fixed order to estimate the model.</p></td>
+    </tr>
+    <tr>
+      <th>ar_max</th>
+      <td><p>Maximum ar order of model to fit.</p></td>
+    </tr>
+    <tr>
+      <th>ar_ic</th>
+      <td><p>Information criterion to be used in model selection.</p></td>
+    </tr>
+    <tr>
+      <th>ar_grid</th>
+      <td><p>The ar grid sequence of which to iterate.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments passed to the function which is fitting the best AR model.
+If <code>ar = "auto"</code> then the internal function <code>auto_ar</code> is used, if <code>ar = "forecast"</code> then
+the the function <code><a href='https://pkg.robjhyndman.com/forecast/reference/auto.arima.html'>forecast::auto.arima</a></code> is used. If ar is of fixed length then <code>arima</code> is used.</p></td>
+    </tr>
     </table>
-  </div>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>ivx_ar_fit</span><span class='op'>(</span><span class='va'>monthly</span><span class='op'>$</span><span class='va'>Ret</span>, <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>monthly</span><span class='op'>$</span><span class='va'>LTY</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+<span class='fu'>ivx_ar_fit</span><span class='op'>(</span><span class='va'>monthly</span><span class='op'>$</span><span class='va'>Ret</span>, <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>monthly</span><span class='op'>$</span><span class='va'>LTY</span><span class='op'>)</span>, ar <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

@@ -241,6 +241,15 @@ Predictability of US Housing Price Index Returns Based on an IVX-AR Model.
 Journal of the American Statistical Association, 1-22. DOI:
 doi: <a href='https://doi.org/10.1080/01621459.2019.1686392'>10.1080/01621459.2019.1686392</a></p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'>ivx_ar</span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>cpi</span>, <span class='va'>ylpc</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+<span class='fu'>ivx_ar</span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>cpi</span>, <span class='va'>ylpc</span>, ar_ic <span class='op'>=</span> <span class='st'>"aic"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+<span class='fu'>ivx_ar</span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>+</span> <span class='va'>cpi</span>, <span class='va'>ylpc</span>, ar <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
