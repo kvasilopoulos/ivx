@@ -1,22 +1,13 @@
 ## Test environments
 
-* local OS MS install, R 3.6.0
-* ubuntu 14.04 on travis-ci (devel and release)
-* macOS on travis-ci (devel and release)
+* local mac MS install, R 4.0.0
+* ubuntu 16.04 (on github actions), R-devel, R 4.0.0, R 3.6.3, 3.5.3, R 3.4.4, R 3.3.3
+* mac OS 10.15.4 (on github actions) R-devel, R 3.6.0
+* Microsoft Windows Server 2019 10.0.17763 (on github actions) R 4.0.0
 * r-hub: windows-x86_64-devel, ubuntu-gcc-release, fedora-clang-devel
 * win-builder (devel and release)
 
+
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* Maintainer: 'Kostas Vasilopoulos <k.vasilopoulo@gmail.com>'
-
-New submission
-
-## General Comments
-
-* Added examples on all exported functions.
-
-* The procedure is called IVX  because the instrumental variable relies directly 
-on the regressor, X. Since it is not exactly an acronym it is not explained in the description.
+0 errors | 0 warnings | 0 notes

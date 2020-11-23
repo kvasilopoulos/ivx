@@ -17,9 +17,15 @@
 #' Journal of the American Statistical Association, 1-22. DOI:
 #' \doi{10.1080/01621459.2019.1686392}
 #'
-#'
-#'
 #' @export
+#' @examples
+#'
+#' ivx_ar(hpi ~ log(res) + cpi, ylpc)
+#'
+#' ivx_ar(hpi ~ log(res) + cpi, ylpc, ar_ic = "aic")
+#'
+#' ivx_ar(hpi ~ log(res) + cpi, ylpc, ar = 1)
+#'
 ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", "aicc"),
                    ar_max = 5, ar_grid =  function(x) seq(x - 0.3, x + 0.3, by = 0.02),
                     na.action, contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
@@ -29,7 +35,7 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   cl <- match.call()
   if (missing(horizon))
     horizon <- cl$horizon <- 1
-  if (! ar %in% c("auto", c(0:24))) {
+  if (! ar %in% c("auto", "forecast", c(0:24))) {
     stop("`ar` should be either 'auto' or a non-negative integer.",
          call. = FALSE)
   }
@@ -61,8 +67,8 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   ny <- length(y)
   offset <- model.offset(mf)
   x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_ar_fit(y, x, horizon = horizon, ar = ar, max = ar_max, ic = ar_ic,
-                  grid_seq = ar_grid, offset = offset, ...)
+  z <- ivx_ar_fit(y, x, horizon = horizon, ar = ar, ar_max = ar_max, ar_ic = ar_ic,
+                  ar_grid = ar_grid, offset = offset, ...)
   class(z) <- if (ar == 0) "ivx" else c("ivx_ar", "ivx")
   z$na.action <- attr(mf, "na.action")
   z$offset <- offset
@@ -83,19 +89,41 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   z
 }
 
+
+
+#' Fitter Functions for IVX-AR Models
+#'
+#' Basic function called by `ivx_ar` to fit predictive models.
+#' These should only be used directly by experienced users.
+#'
+#' @inheritParams stats::lm.fit
+#' @inheritParams ivx_ar
+#' @param ... Further arguments passed to the function which is fitting the best AR model.
+#' If `ar = "auto"` then the internal function `auto_ar` is used, if `ar = "forecast"` then
+#' the the function `forecast::auto.arima` is used. If ar is of fixed length then `arima` is used.
+#'
+#' @export
 #' @importFrom stats arima var
-ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, ic = "bic",
-                       grid_seq =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
+#' @examples
+#'
+#' ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY))
+#'
+#' ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY), ar = 1)
+#'
+ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5, ar_ic = "bic",
+                       ar_grid =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
 
   mdl_ivx <- ivx_fit(y, x, horizon = horizon)
   if (ar == "auto") {
-    mdl_ar <- auto_ar(mdl_ivx$residuals_ols, d = 0, max.p = max, ic = ic, ...)
+    mdl_ar <- auto_ar(mdl_ivx$residuals_ols, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
+  } else if( ar == "forecast") {
+    requireNamespace("forecast", quietly = TRUE)
+    mdl_ar <- forecast::auto.arima(mdl_ivx$residuals_ols, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
   } else if (ar == 0) {
     message("Using `ivx` instead.")
     return(mdl_ivx)
   }else {
-    mdl_ar <- arima(mdl_ivx$residuals_ols, order = c(ar, 0, 0),
-                    include.mean = FALSE, method = "CSS", ...)
+    mdl_ar <- arima2(mdl_ivx$residuals_ols, order = c(ar, 0, 0), include.mean = FALSE, ...)
   }
   ar_coefs <- coefficients(mdl_ar)
   # in case the arima does not converge
@@ -104,21 +132,21 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, i
       list(
         coefficients = numeric(), residuals = y,
         fitted = 0 * y, df.residuals = length(y),
-        ar_method = ar, ar_aic = ic
+        ar_method = ar, ar_aic = ar_ic
       )
     )
   }
 
   res_ar <- residuals(mdl_ar)
   q <- length(ar_coefs)
-  ar_grid <- sapply(ar_coefs, grid_seq)
-  ngrid <- nrow(ar_grid)
+  grid_seq <- sapply(ar_coefs, ar_grid)
+  ngrid <- nrow(grid_seq)
 
   res_ivx <- vector("list", length = ngrid)
   rse <- vector("numeric", length = ngrid)
   for (i in 1:ngrid) {
-    y_adj <- tilt(y, ar_grid[i,], q)
-    x_adj <- tilt(x, ar_grid[i,], q)
+    y_adj <- tilt(y, grid_seq[i,], q)
+    x_adj <- tilt(x, grid_seq[i,], q)
     res_ivx[[i]] <- ivx::ivx_fit(y_adj, x_adj, horizon = horizon)
     eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
@@ -127,9 +155,9 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", max = 5, i
   rse_min <- which.min(rse)
   z <- res_ivx[[rse_min]]
   z$rse <- rse[rse_min]
-  z$coefs_ar <- ar_grid[rse_min, ]
+  z$coefficients_ar <- grid_seq[rse_min, ]
   z$ar_method <- ar
-  z$ar_aic <- ic
+  z$ar_ic <- ar_ic
 
   z$Wald_AR <- ac_test_wald(mdl_ivx$residuals_ols, q)
   z$q <- q
@@ -146,7 +174,7 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   cat("\nCall:\n",
       paste(deparse(x$call), sep = "\n", collapse = "\n"), sep = "")
   cat("\n\nLag Selection:\n",
-      if(x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
+      if(x$ar_method == "auto") paste0("Auto (", x$ar_ic, ")") else "Fixed",
       " with AR terms q = ", x$q, "\n\n", sep ="")
   res <- x$coefficients
   if (length(res)) {

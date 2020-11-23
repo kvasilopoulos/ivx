@@ -169,7 +169,7 @@ ac_test_bg <- function(x, order, type, fill) {
 
 
 #' @export
-ac_test_bg.default <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
+ac_test_bg.ivx <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
 
   X <- model.frame(x)
   Y <- model.matrix(x)
@@ -202,7 +202,9 @@ ac_test_bg.default <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
 }
 
 # TODO this test
-# ac_test_bg.ivx <-
+ac_test_bg.default <- function(x, order, type, fill) {
+  stop("not available method.", call. = FALSE)
+}
 
 
 # Autocorrelation test ----------------------------------------------------

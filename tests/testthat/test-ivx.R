@@ -1,4 +1,4 @@
-context("test-ivx_fit")
+context("test-ivx")
 
 # KMS table6 p1531 (monthly data)
 test_that("univariate regression ", {

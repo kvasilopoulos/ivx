@@ -77,6 +77,15 @@ ivx_ar implements the Yang et al (2020) new instrumental variable based Wald sta
 (IVX-AR) which accounts for serial correlation and heteroscedasticity in the error
 terms of the linear predictive regression model.
 }
+\examples{
+
+ivx_ar(hpi ~ log(res) + cpi, ylpc)
+
+ivx_ar(hpi ~ log(res) + cpi, ylpc, ar_ic = "aic")
+
+ivx_ar(hpi ~ log(res) + cpi, ylpc, ar = 1)
+
+}
 \references{
 Yang, B., Long, W., Peng, L., & Cai, Z. (2020). Testing the
 Predictability of US Housing Price Index Returns Based on an IVX-AR Model.

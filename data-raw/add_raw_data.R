@@ -38,6 +38,8 @@ usethis::use_data(kms_quarterly, overwrite = T)
 rdiffx <- function(x) c(0, x[-1]/x[-length(x)] - 1)
 
 ylpc <- readr::read_csv("data-raw/ylpc-data.csv") %>%
-  mutate_at(vars(hpi), rdiffx)
+  mutate_at(vars(hpi), rdiffx) %>%
+  dplyr::select(date, cpi, def, gdp, inc, ind, int, inv, mog, res, une, hpi)
 
+# TODO update ordering of the data
 usethis::use_data(ylpc, overwrite = T)
