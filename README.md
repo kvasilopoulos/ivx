@@ -3,13 +3,16 @@
 
 <!-- badges: start -->
 
+[![DOI](https://zenodo.org/badge/137785074.svg)](https://zenodo.org/badge/latestdoi/137785074)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ivx)](https://cran.r-project.org/package=ivx)
-[![DOI](https://zenodo.org/badge/137785074.svg)](https://zenodo.org/badge/latestdoi/137785074)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![R build
 status](https://github.com/kvasilopoulos/ivx/workflows/R-CMD-check/badge.svg)](https://github.com/kvasilopoulos/ivx/actions)
-[![codecov](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx)
+[![Codecov test
+coverage](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx?branch=master)
+
 <!-- badges: end -->
 
 Drawing statistical inference on the coefficients of a short- or
