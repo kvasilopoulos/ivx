@@ -125,17 +125,15 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
 #> Call:
 #> ivx_ar(formula = hpi ~ cpi, data = ylpc, horizon = 1)
 #> 
-#> Auto (bic) with AR terms q = 4
+#> Auto () with AR terms q = 4
 #> 
 #> Coefficients:
-#>      Estimate Wald Ind Pr(> chi)  
-#> cpi -0.000177     4.33     0.038 *
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#>      Estimate Wald Ind Pr(> chi)
+#> cpi -0.000177     4.33     0.038
 #> 
 #> Joint Wald statistic:  4.33 on 1 DF, p-value 0.0375
 #> Multiple R-squared:  0.0272, Adjusted R-squared:  0.0214
-#> Wald AR statistic:  132 on 4 DF, p-value <0.0000000000000002
+#> Wald AR statistic:  132 on 4 DF, p-value <2e-16
 ```
 
 <!--
@@ -150,8 +148,9 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
   - Elliot (2001)
 -->
 
------
+------------------------------------------------------------------------
 
 Please note that the ‘ivx’ project is released with a [Contributor Code
-of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
-project, you agree to abide by its terms.
+of
+Conduct](https://github.com/kvasilopoulos/ivx/blob/master/.github/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
