@@ -82,6 +82,7 @@ extract.ivx <- function(model,
 
 
 #' @rdname extract.ivx
+#' @importFrom texreg extract createTexreg
 #' @importFrom methods setGeneric setMethod className
 #' @export
 extract.ivx_ar <- extract.ivx
@@ -89,8 +90,7 @@ extract.ivx_ar <- extract.ivx
 .onLoad <- function(libname, pkgname) {
   if (suppressWarnings(requireNamespace("texreg", quietly = TRUE))) {
     methods::setGeneric("extract", function(model, ...) standardGeneric("extract"),
-               package = "texreg"
-    )
+               package = "texreg")
     methods::setMethod("extract", signature = methods::className("ivx", "ivx"),
               definition = extract.ivx)
   }
