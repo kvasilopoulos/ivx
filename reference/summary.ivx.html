@@ -169,9 +169,19 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivx.html'>ivx</a></span><span class='op'>(</span><span class='va'>Ret</span> <span class='op'>~</span> <span class='va'>LTY</span>, data <span class='op'>=</span> <span class='va'>monthly</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in summary(mod): object 'mod' not found</span></div></pre>
+</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ivx(formula = Ret ~ LTY, data = monthly, horizon = 1)
+#&gt; 
+#&gt; Coefficients:
+#&gt;     Estimate Wald Ind Pr(&gt; chi)
+#&gt; LTY -0.06649    1.064     0.302
+#&gt; 
+#&gt; Joint Wald statistic:  1.064 on 1 DF, p-value 0.3024
+#&gt; Multiple R-squared:  0.001133,	Adjusted R-squared:  0.0001645
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -86,6 +86,7 @@
 </h1></div>
 <!-- badges: start -->
 
+<!-- badges: end -->
 <p>Drawing statistical inference on the coefficients of a short- or long-horizon predictive regression with persistent regressors by using the IVX method of <a href="https://doi.org/10.1017/S0266466608090154">Magdalinos and Phillips (2009)</a> and <a href="https://doi.org/10.1093/rfs/hhu139">Kostakis, Magdalinos and Stamatogiannis (2015)</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -110,8 +111,8 @@
 <code class="sourceCode R"><span class="co"># Monthly data from Kostakis et al (2014)</span>
 <span class="va">kms</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;  [1] "Date" "DE"   "LTY"  "DY"   "DP"   "TBL"  "EP"   "BM"   "INF"  "DFY"  "NTIS" "TMS" </span>
-<span class="co">#&gt; [13] "Ret"</span></code></pre></div>
+<span class="co">#&gt;  [1] "Date" "DE"   "LTY"  "DY"   "DP"   "TBL"  "EP"   "BM"   "INF"  "DFY" </span>
+<span class="co">#&gt; [11] "NTIS" "TMS"  "Ret"</span></code></pre></div>
 </div>
 <div id="univariate" class="section level2">
 <h2 class="hasAnchor">
@@ -126,10 +127,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;    Estimate Wald Ind Pr(&gt; chi)</span>
-<span class="co">#&gt; DP  0.00649     2.03      0.15</span>
+<span class="co">#&gt; DP 0.006489    2.031     0.154</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Joint Wald statistic:  2.03 on 1 DF, p-value 0.154</span>
-<span class="co">#&gt; Multiple R-squared:  0.00284,    Adjusted R-squared:  0.00188</span>
+<span class="co">#&gt; Joint Wald statistic:  2.031 on 1 DF, p-value 0.1541</span>
+<span class="co">#&gt; Multiple R-squared:  0.002844,   Adjusted R-squared:  0.001877</span>
 
 <span class="fu"><a href="reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span>, horizon <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span>
@@ -139,10 +140,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;    Estimate Wald Ind Pr(&gt; chi)</span>
-<span class="co">#&gt; DP  0.00693     2.27      0.13</span>
+<span class="co">#&gt; DP 0.006931    2.271     0.132</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Joint Wald statistic:  2.27 on 1 DF, p-value 0.132</span>
-<span class="co">#&gt; Multiple R-squared:  0.0117, Adjusted R-squared:  0.0136</span></code></pre></div>
+<span class="co">#&gt; Joint Wald statistic:  2.271 on 1 DF, p-value 0.1318</span>
+<span class="co">#&gt; Multiple R-squared:  0.01167,    Adjusted R-squared:  0.01358</span></code></pre></div>
 </div>
 <div id="multivariate" class="section level2">
 <h2 class="hasAnchor">
@@ -156,12 +157,12 @@
 <span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 1)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;     Estimate Wald Ind Pr(&gt; chi)</span>
-<span class="co">#&gt; DP   0.00615     1.82      0.18</span>
-<span class="co">#&gt; TBL -0.08072     1.96      0.16</span>
+<span class="co">#&gt;      Estimate Wald Ind Pr(&gt; chi)</span>
+<span class="co">#&gt; DP   0.006145    1.819     0.177</span>
+<span class="co">#&gt; TBL -0.080717    1.957     0.162</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Joint Wald statistic:  3.64 on 2 DF, p-value 0.162</span>
-<span class="co">#&gt; Multiple R-squared:  0.00497,    Adjusted R-squared:  0.00304</span>
+<span class="co">#&gt; Joint Wald statistic:  3.644 on 2 DF, p-value 0.1617</span>
+<span class="co">#&gt; Multiple R-squared:  0.004968,   Adjusted R-squared:  0.003036</span>
 
 <span class="fu"><a href="reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, horizon <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span>
@@ -170,12 +171,12 @@
 <span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 4)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;     Estimate Wald Ind Pr(&gt; chi)</span>
-<span class="co">#&gt; DP   0.00658     2.04      0.15</span>
-<span class="co">#&gt; TBL -0.07355     1.59      0.21</span>
+<span class="co">#&gt;      Estimate Wald Ind Pr(&gt; chi)</span>
+<span class="co">#&gt; DP   0.006579    2.045     0.153</span>
+<span class="co">#&gt; TBL -0.073549    1.595     0.207</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Joint Wald statistic:  3.53 on 2 DF, p-value 0.171</span>
-<span class="co">#&gt; Multiple R-squared:  0.018,  Adjusted R-squared:  0.0189</span></code></pre></div>
+<span class="co">#&gt; Joint Wald statistic:  3.527 on 2 DF, p-value 0.1715</span>
+<span class="co">#&gt; Multiple R-squared:  0.018,  Adjusted R-squared:  0.01895</span></code></pre></div>
 </div>
 <div id="yang-et-al-2020-ivx-ar-methodology" class="section level2">
 <h2 class="hasAnchor">
@@ -190,12 +191,14 @@
 <span class="co">#&gt; Auto () with AR terms q = 4</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;      Estimate Wald Ind Pr(&gt; chi)</span>
-<span class="co">#&gt; cpi -0.000177     4.33     0.038</span>
+<span class="co">#&gt;       Estimate Wald Ind Pr(&gt; chi)  </span>
+<span class="co">#&gt; cpi -0.0001775    4.326    0.0375 *</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Joint Wald statistic:  4.33 on 1 DF, p-value 0.0375</span>
-<span class="co">#&gt; Multiple R-squared:  0.0272, Adjusted R-squared:  0.0214</span>
-<span class="co">#&gt; Wald AR statistic:  132 on 4 DF, p-value &lt;2e-16</span></code></pre></div>
+<span class="co">#&gt; Joint Wald statistic:  4.326 on 1 DF, p-value 0.03753</span>
+<span class="co">#&gt; Multiple R-squared:  0.02721,    Adjusted R-squared:  0.02142</span>
+<span class="co">#&gt; Wald AR statistic: 132.3 on 4 DF, p-value &lt; 2.2e-16</span></code></pre></div>
 <!--
 #### To-do  
 
@@ -258,11 +261,11 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=ivx"><img src="https://www.r-pkg.org/badges/version/ivx" alt="CRAN status"></a></li>
 <li><a href="https://zenodo.org/badge/latestdoi/137785074"><img src="https://zenodo.org/badge/137785074.svg" alt="DOI"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
+<li><a href="https://cran.r-project.org/package=ivx"><img src="https://www.r-pkg.org/badges/version/ivx" alt="CRAN status"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://github.com/kvasilopoulos/ivx/actions"><img src="https://github.com/kvasilopoulos/ivx/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/kvasilopoulos/ivx"><img src="https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://codecov.io/gh/kvasilopoulos/ivx?branch=master"><img src="https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 </div>

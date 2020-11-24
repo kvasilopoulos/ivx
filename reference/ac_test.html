@@ -146,14 +146,19 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>obj</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivx.html'>ivx</a></span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='va'>cpi</span> <span class='op'>+</span> <span class='va'>def</span> <span class='op'>+</span> <span class='va'>int</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>ylpc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'><span class='fu'>lmtest</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/bgtest.html'>bgtest</a></span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='va'>cpi</span> <span class='op'>+</span> <span class='va'>def</span> <span class='op'>+</span> <span class='va'>int</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>ylpc</span><span class='op'>)</span>
+<span class='fu'>lmtest</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lmtest/man/bgtest.html'>bgtest</a></span><span class='op'>(</span><span class='va'>hpi</span> <span class='op'>~</span> <span class='va'>cpi</span> <span class='op'>+</span> <span class='va'>def</span> <span class='op'>+</span> <span class='va'>int</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>ylpc</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 	Breusch-Godfrey test for serial correlation of order up to 1
 #&gt; 
 #&gt; data:  hpi ~ cpi + def + int + log(res)
 #&gt; LM test = 63.286, df = 1, p-value = 1.788e-15
 #&gt; </div><div class='input'><span class='fu'>ac_test</span><span class='op'>(</span><span class='va'>obj</span>, <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ac_test(obj, 5): object 'obj' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt;  Lag     Wald LjungBox BoxPierce
+#&gt;    1 27.68*** 61.86***   60.8***
+#&gt;    2 48.65*** 91.56***  89.82***
+#&gt;    3  47.7*** 145.2***  141.9***
+#&gt;    4 126.9*** 206.8***  201.4***
+#&gt;    5 125.4*** 236.4***  229.9***</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

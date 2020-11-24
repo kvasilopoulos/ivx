@@ -169,9 +169,22 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>mod</span> <span class='op'>&lt;-</span> <span class='fu'><a href='ivx_ar.html'>ivx_ar</a></span><span class='op'>(</span><span class='va'>Ret</span> <span class='op'>~</span> <span class='va'>LTY</span>, data <span class='op'>=</span> <span class='va'>kms</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in ivx_fit_cpp(y, x, horizon): object '_ivx_ivx_fit_cpp' not found</span></div><div class='input'>
+
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>mod</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in summary(mod): object 'mod' not found</span></div></pre>
+</div><div class='output co'>#&gt; 
+#&gt; Call:
+#&gt; ivx_ar(formula = Ret ~ LTY, data = kms, horizon = 1)
+#&gt; 
+#&gt; Auto () with AR terms q = 5
+#&gt; 
+#&gt; Coefficients:
+#&gt;     Estimate Wald Ind Pr(&gt; chi)
+#&gt; LTY -0.06808     0.89     0.346
+#&gt; 
+#&gt; Joint Wald statistic:  0.8897 on 1 DF, p-value 0.3456
+#&gt; Multiple R-squared:  0.0009652,	Adjusted R-squared:  -8.522e-06
+#&gt; Wald AR statistic: 9.517 on 5 DF, p-value 0.09013
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
