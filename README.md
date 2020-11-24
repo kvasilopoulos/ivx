@@ -46,8 +46,8 @@ This is a basic example, lets load the data first:
 # Monthly data from Kostakis et al (2014)
 kms %>%
   names()
-#>  [1] "Date" "DE"   "LTY"  "DY"   "DP"   "TBL"  "EP"   "BM"   "INF"  "DFY"  "NTIS" "TMS" 
-#> [13] "Ret"
+#>  [1] "Date" "DE"   "LTY"  "DY"   "DP"   "TBL"  "EP"   "BM"   "INF"  "DFY" 
+#> [11] "NTIS" "TMS"  "Ret"
 ```
 
 ## Univariate
@@ -63,10 +63,10 @@ ivx(Ret ~ DP, data = kms) %>%
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
-#> DP  0.00649     2.03      0.15
+#> DP 0.006489    2.031     0.154
 #> 
-#> Joint Wald statistic:  2.03 on 1 DF, p-value 0.154
-#> Multiple R-squared:  0.00284,    Adjusted R-squared:  0.00188
+#> Joint Wald statistic:  2.031 on 1 DF, p-value 0.1541
+#> Multiple R-squared:  0.002844,   Adjusted R-squared:  0.001877
 
 ivx(Ret ~ DP, data = kms, horizon = 4) %>% 
   summary()
@@ -76,10 +76,10 @@ ivx(Ret ~ DP, data = kms, horizon = 4) %>%
 #> 
 #> Coefficients:
 #>    Estimate Wald Ind Pr(> chi)
-#> DP  0.00693     2.27      0.13
+#> DP 0.006931    2.271     0.132
 #> 
-#> Joint Wald statistic:  2.27 on 1 DF, p-value 0.132
-#> Multiple R-squared:  0.0117, Adjusted R-squared:  0.0136
+#> Joint Wald statistic:  2.271 on 1 DF, p-value 0.1318
+#> Multiple R-squared:  0.01167,    Adjusted R-squared:  0.01358
 ```
 
 ## Multivariate
@@ -94,12 +94,12 @@ ivx(Ret ~ DP + TBL, data = kms) %>%
 #> ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 1)
 #> 
 #> Coefficients:
-#>     Estimate Wald Ind Pr(> chi)
-#> DP   0.00615     1.82      0.18
-#> TBL -0.08072     1.96      0.16
+#>      Estimate Wald Ind Pr(> chi)
+#> DP   0.006145    1.819     0.177
+#> TBL -0.080717    1.957     0.162
 #> 
-#> Joint Wald statistic:  3.64 on 2 DF, p-value 0.162
-#> Multiple R-squared:  0.00497,    Adjusted R-squared:  0.00304
+#> Joint Wald statistic:  3.644 on 2 DF, p-value 0.1617
+#> Multiple R-squared:  0.004968,   Adjusted R-squared:  0.003036
 
 ivx(Ret ~ DP + TBL, data = kms, horizon = 4) %>% 
   summary()
@@ -108,12 +108,12 @@ ivx(Ret ~ DP + TBL, data = kms, horizon = 4) %>%
 #> ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 4)
 #> 
 #> Coefficients:
-#>     Estimate Wald Ind Pr(> chi)
-#> DP   0.00658     2.04      0.15
-#> TBL -0.07355     1.59      0.21
+#>      Estimate Wald Ind Pr(> chi)
+#> DP   0.006579    2.045     0.153
+#> TBL -0.073549    1.595     0.207
 #> 
-#> Joint Wald statistic:  3.53 on 2 DF, p-value 0.171
-#> Multiple R-squared:  0.018,  Adjusted R-squared:  0.0189
+#> Joint Wald statistic:  3.527 on 2 DF, p-value 0.1715
+#> Multiple R-squared:  0.018,  Adjusted R-squared:  0.01895
 ```
 
 ## Yang et al. (2020) IVX-AR methodology
@@ -128,12 +128,14 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
 #> Auto () with AR terms q = 4
 #> 
 #> Coefficients:
-#>      Estimate Wald Ind Pr(> chi)
-#> cpi -0.000177     4.33     0.038
+#>       Estimate Wald Ind Pr(> chi)  
+#> cpi -0.0001775    4.326    0.0375 *
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
-#> Joint Wald statistic:  4.33 on 1 DF, p-value 0.0375
-#> Multiple R-squared:  0.0272, Adjusted R-squared:  0.0214
-#> Wald AR statistic:  132 on 4 DF, p-value <2e-16
+#> Joint Wald statistic:  4.326 on 1 DF, p-value 0.03753
+#> Multiple R-squared:  0.02721,    Adjusted R-squared:  0.02142
+#> Wald AR statistic: 132.3 on 4 DF, p-value < 2.2e-16
 ```
 
 <!--
@@ -148,7 +150,7 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
   - Elliot (2001)
 -->
 
-------------------------------------------------------------------------
+-----
 
 Please note that the ‘ivx’ project is released with a [Contributor Code
 of
