@@ -121,7 +121,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   ////////////////////////////////////////////////
 
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
-  arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
+  //arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
+  arma::mat intercept = mean(y) - mean(X) * Aivx.t();
   arma::colvec fitted = Xt*trans(Aivx);
   arma::colvec residuals = Yt - fitted;
 
