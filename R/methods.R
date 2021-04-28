@@ -145,9 +145,8 @@ extractAIC.ivx <- function(fit, scale = 0, k = 2, ...) {
   c(edf, dev + k * edf)
 }
 
-
-
 #' @export
+#' @importFrom stats case.names weights
 case.names.ivx <- function (object, full = FALSE, ...) {
   w <- weights(object)
   dn <- names(residuals(object))
