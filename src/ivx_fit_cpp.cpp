@@ -17,6 +17,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   int  nn = xlag.n_rows, l = xlag.n_cols;
   // NumericVector df(2); df(0) = l, df(1) = nn -l;
 
+  ////////////////////////////////////////////////
+
   //join_horiz to include intercept
   arma::mat Xols = join_rows(ones(nr-1, 1), xlag);
 
@@ -26,6 +28,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   double s2 = std::inner_product(epshat.begin(), epshat.end(), epshat.begin(), 0.0)/(nn - l);
   arma::colvec std_err = arma::sqrt(s2 * arma::diagvec(arma::pinv(arma::trans(Xols)*Xols)));
   arma::colvec tstat = Aols/std_err;
+
+  ////////////////////////////////////////////////
 
   arma::mat Rn = zeros<mat>(l, l);
   for (int i = 0; i < l; i++) {
@@ -82,7 +86,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::mat residue = sum(q)/nn;
   arma::mat Omegaeu = covuhat + residue.t();
 
-  // instrument construction
+  ////////// instrument construction ////////////
+
   arma::mat Rz = (1-1/(pow(nn, 0.95)))*eye(l,l);
   arma::mat diffx = xt - xlag;
   arma::mat z = zeros<mat>(nn,l);
@@ -100,6 +105,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     ZK.row(i) = sum(zz.rows(i, i+K-1)); // here should be sum(..., 1)
   }
   arma::mat meanzK = mean(ZK);
+
+  ////////////////////////////////////////////////
 
   arma::vec yy = zeros<vec>(n);
   for (int i = 0; i < n; ++i){
@@ -121,9 +128,9 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   ////////////////////////////////////////////////
 
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
-  //arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
   arma::mat intercept = mean(y) - mean(X) * Aivx.t();
-  arma::colvec fitted = Xt*trans(Aivx);
+  arma::mat interceptm = mean(Yt) - mean(Xt) * Aivx.t();
+  arma::colvec fitted =  Xt*trans(Aivx);
   arma::colvec residuals = Yt - fitted;
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
@@ -138,9 +145,21 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   ////////////////////////////////////////////////
 
+  List data = List::create(
+    _("X") = xlag,
+    _("y") = yt.col(0),
+    _("Xm") = Xt,
+    _("ym") = Yt.col(0)
+    );
+
+  List Lintercept = List::create(
+    _("intercept") = intercept,
+    _("interceptm") = interceptm
+    );
+
   return List::create(
     _("Aivx") = Aivx.t(),
-    _("intercept") = intercept,
+    _("intercept") = Lintercept,
     _("fitted") = fitted,
     _("residuals") = residuals,
     _("wivx") = wivx,
@@ -157,7 +176,9 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     _("delta") = corrmat,
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),
-    _("varcov") = Q
+    _("varcov") = Q,
+    _("data") = data
   );
 
 }
+

@@ -6,7 +6,7 @@
 ## df.residuals
 ## AIC
 ## BIC
-
+## model.response
 
 # New methods -------------------------------------------------------------
 
@@ -59,17 +59,6 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
 }
 
-# case.names.ivx <- function (object, full = FALSE, ...) {
-#   w <- weights(object)
-#   dn <- names(residuals(object))
-#   if (full || is.null(w)) {
-#     dn
-#   } else {
-#     dn[w != 0]
-#   }
-# }
-
-
 #' @export
 model.matrix.ivx <- function (object, ...) {
   if (n_match <- match("x", names(object), 0L)) {
@@ -107,6 +96,66 @@ model.frame.ivx <- function (formula, ...) {
   }
   else formula$model
 }
+
+#' @export
+logLik.ivx <- function (object, REML = FALSE, ...) {
+
+  res <- object$residuals
+  p <- object$rank
+  N <- length(res)
+  w <- object$weights
+  if (is.null(w)) {
+    w <- rep.int(1, N)
+  }
+  else {
+    excl <- w == 0
+    if (any(excl)) {
+      res <- res[!excl]
+      N <- length(res)
+      w <- w[!excl]
+    }
+  }
+  N0 <- N
+  if (REML)
+    N <- N - p
+  val <- 0.5 * (sum(log(w)) - N * (log(2 * pi) + 1 - log(N) + log(sum(w * res^2))))
+  if (REML)
+    val <- val - sum(log(abs(diag(object$qr$qr)[1L:p])))
+  attr(val, "nall") <- N0
+  attr(val, "nobs") <- N
+  attr(val, "df") <- p + 1
+  class(val) <- "logLik"
+  val
+}
+
+#' @export
+#' @importFrom stats weighted.residuals
+deviance.ivx <- function(object, ...) {
+  sum(weighted.residuals(object)^2, na.rm = TRUE)
+}
+
+#' @export
+extractAIC.ivx <- function(fit, scale = 0, k = 2, ...) {
+  n <- length(fit$residuals)
+  edf <- n - fit$df.residual
+  RSS <- deviance.ivx(fit)
+  dev <- if (scale > 0)
+    RSS/scale - n
+  else n * log(RSS/n)
+  c(edf, dev + k * edf)
+}
+
+
+
+#' @export
+case.names.ivx <- function (object, full = FALSE, ...) {
+  w <- weights(object)
+  dn <- names(residuals(object))
+  if (full || is.null(w))
+    dn
+  else dn[w != 0]
+}
+
 
 # Unfinished --------------------------------------------------------------
 

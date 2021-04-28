@@ -101,7 +101,7 @@ ivx <- function(formula, data, horizon, na.action, weights,
   y <- model.response(mf, "numeric")
   # Disable nultivariate model
   if(is.matrix(y)) {
-    stop("multivariate model are not available",call. = FALSE)
+    stop("multivariate model is not available",call. = FALSE)
   }
   ny <- length(y)
   w <- as.vector(model.weights(mf))
@@ -143,7 +143,6 @@ ivx <- function(formula, data, horizon, na.action, weights,
   z$terms <- mt
   z$assign <- attr(x, "assign")
   if (model) {
-
     z$model <- mf
   }
   if (ret.x) {
@@ -217,6 +216,8 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
+  colnames(z$data$X) <- colnames(z$data$Xm) <- cnames
+
   output <-
     structure(
       list(
@@ -238,6 +239,7 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
           Rz = z$Rz,
           row.names = cnames
         ),
+        data = z$data,
         delta = z$delta,
         vcov = z$varcov,
         coefficients_ols = coef_ols,

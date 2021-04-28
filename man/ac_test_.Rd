@@ -41,7 +41,7 @@ a numeric scalar or numeric vector.
 }
 }
 \details{
-#' If p-value < 0.051: You can reject the null hypothesis assuming a
+If p-value < 0.051: You can reject the null hypothesis assuming a
 5\% chance of making a mistake. So you can assume that your values are showing
 dependence on each other.
 }
