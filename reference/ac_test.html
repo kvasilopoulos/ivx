@@ -153,12 +153,12 @@
 #&gt; data:  hpi ~ cpi + def + int + log(res)
 #&gt; LM test = 63.286, df = 1, p-value = 1.788e-15
 #&gt; </div><div class='input'><span class='fu'>ac_test</span><span class='op'>(</span><span class='va'>obj</span>, <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  Lag     Wald LjungBox BoxPierce
-#&gt;    1 27.68*** 61.86***   60.8***
-#&gt;    2 48.65*** 91.56***  89.82***
-#&gt;    3  47.7*** 145.2***  141.9***
-#&gt;    4 126.9*** 206.8***  201.4***
-#&gt;    5 125.4*** 236.4***  229.9***</div><div class='input'>
+</div><div class='output co'>#&gt;  Lag     Wald LjungBox BoxPierce BreuschGodfrey
+#&gt;    1 27.68*** 61.86***   60.8***       61.87***
+#&gt;    2 48.65*** 91.56***  89.82***       62.89***
+#&gt;    3  47.7*** 145.2***  141.9***       84.85***
+#&gt;    4 126.9*** 206.8***  201.4***       90.76***
+#&gt;    5 125.4*** 236.4***  229.9***       90.81***</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -49,6 +49,7 @@
 <meta property="og:title" content="Tests  for autocorrelation — ac_test_" />
 <meta property="og:description" content="
 
+ac_test: For all tests
 ac_test_wald: Wald test
 ac_test_lb: Ljung-Box
 ac_test_bp:  Box-Pierce
@@ -134,6 +135,7 @@ ac_test_bg: Breusch-Godfrey
     <div class="ref-description">
     
 <ul>
+<li><p><code>ac_test</code>: For all tests</p></li>
 <li><p><code>ac_test_wald</code>: Wald test</p></li>
 <li><p><code>ac_test_lb</code>: Ljung-Box</p></li>
 <li><p><code>ac_test_bp</code>:  Box-Pierce</p></li>
@@ -195,7 +197,13 @@ dependence on each other.</p>
 <span class='fu'>ac_test_wald</span><span class='op'>(</span><span class='va'>mdl</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  Lag     Wald
 #&gt;    1 17.39***</div><div class='input'>
-
+<span class='fu'><a href='ac_test.html'>ac_test</a></span><span class='op'>(</span><span class='va'>mdl</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  Lag     Wald LjungBox BoxPierce BreuschGodfrey
+#&gt;    1 17.39*** 42.56***  41.83***       46.73***
+#&gt;    2 45.31*** 57.45***  56.38***       46.94***
+#&gt;    3 47.96*** 99.86***  97.57***       70.99***
+#&gt;    4 82.82*** 155.5***  151.3***       82.14***
+#&gt;    5 91.79*** 176.6***  171.6***       82.31***</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
