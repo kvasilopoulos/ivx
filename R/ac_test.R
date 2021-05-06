@@ -5,6 +5,7 @@
 #'
 #' @description
 #'
+#' * `ac_test`: For all tests
 #' * `ac_test_wald`: Wald test
 #' * `ac_test_lb`: Ljung-Box
 #' * `ac_test_bp`:  Box-Pierce
@@ -28,6 +29,7 @@
 #' mdl <- ivx(hpi ~ cpi + inv, data = ylpc)
 #' ac_test_wald(mdl)
 #'
+#' ac_test(mdl)
 #'
 #' @name ac_test_
 #' @export
@@ -196,10 +198,9 @@ ac_test_bg.ivx <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
       names(df) <- c("df1", "df2")
       p.val <- 1 - pf(bg, df1 = df[1], df2 = df[2])
     })
-  bg
+  structure(bg, pvalue = p.val)
 }
 
-# TODO this test
 ac_test_bg.default <- function(x, order, type, fill) {
   stop("not available method.", call. = FALSE)
 }
@@ -227,13 +228,21 @@ ac_test <- function(x, lag_max = 5) {
 #' @export
 ac_test.ivx <- function(x, lag_max = 5) {
   res <- x$residuals_ols
-  ac_test.default(res, lag_max)
+  stats <- ac_test.default(res, lag_max)
+  bg <- pval <-  vector("numeric", lag_max)
+  for(i in 1:lag_max) {
+    temp <- ac_test_bg.ivx(x, order = i)
+    pval[i] <- attr(temp, "pvalue")
+    bg[i] <- temp
+  }
+  stats$BreuschGodfrey <- bg
+  attr(stats, "pvalue")$BreuschGodfrey  <- pval
+  stats
 }
 
 #' @export
 ac_test.default <- function(x, lag_max = 5) {
-  lb <- vector("numeric", lag_max)
-  bp <- vector("numeric", lag_max)
+  bp <- lb <- vector("numeric", lag_max)
   for(i in 1:lag_max) {
     lb[i] <- Box.test(x, lag = i, type = "Ljung-Box")$statistic
     bp[i] <- Box.test(x, lag = i, type = "Box-Pierce")$statistic
@@ -269,7 +278,7 @@ stars_pval <- function (pval) {
 print.ac_test <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   pval <- attr(x, "pvalue")
   lst <- list()
-  for(i in 2:4) {
+  for(i in 2:5) {
     stars <- stars_pval(pval[,i])
     lst[[i]] <- paste0(formatC(x[,i], digits = digits), stars)
   }
@@ -277,7 +286,8 @@ print.ac_test <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
     Lag = 1:nrow(x),
     Wald = lst[[2]],
     LjungBox = lst[[3]],
-    BoxPierce = lst[[4]]
+    BoxPierce = lst[[4]],
+    BreuschGodfrey = lst[[5]]
   )
   print(out, row.names = FALSE)
 }

@@ -1,13 +1,4 @@
 
-
-# Default methods ---------------------------------------------------------
-
-## residuals.default
-## df.residuals
-## AIC
-## BIC
-## model.response
-
 # New methods -------------------------------------------------------------
 
 #' Calculate the delta coefficient
@@ -61,17 +52,18 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
 
 #' @export
 model.matrix.ivx <- function (object, ...) {
-  if (n_match <- match("x", names(object), 0L)) {
+  if (n_match <- match("x", names(object), 0L))
     object[[n_match]]
-  } else {
+  else {
     data <- model.frame(object, xlev = object$xlevels, ...)
     if (exists(".GenericCallEnv", inherits = FALSE))
       NextMethod("model.matrix", data = data, contrasts.arg = object$contrasts)
     else {
       dots <- list(...)
       dots$data <- dots$contrasts.arg <- NULL
-      do.call("model.matrix.default",
-              c(list(object = object, data = data, contrasts.arg = object$contrasts), dots))
+      do.call("model.matrix.default", c(list(object = object,
+                                             data = data, contrasts.arg = object$contrasts),
+                                        dots))
     }
   }
 }
@@ -79,10 +71,13 @@ model.matrix.ivx <- function (object, ...) {
 #' @export
 model.frame.ivx <- function (formula, ...) {
   dots <- list(...)
-  nargs <- dots[match(c("data", "na.action"), names(dots), 0)]
+  nargs <- dots[match(c("data", "na.action", "subset"),
+                      names(dots), 0)]
   if (length(nargs) || is.null(formula$model)) {
     fcall <- formula$call
-    m <- match(c("formula", "data", "na.action", "offset"), names(fcall), 0L)
+    m <- match(c("formula", "data", "subset",
+                 "weights", "na.action", "offset"),
+               names(fcall), 0L)
     fcall <- fcall[c(1L, m)]
     fcall$drop.unused.levels <- TRUE
     fcall[[1L]] <- quote(stats::model.frame)
@@ -95,6 +90,22 @@ model.frame.ivx <- function (formula, ...) {
     eval(fcall, env)
   }
   else formula$model
+}
+
+model_matrix <- function(object, raw = FALSE) {
+  data <- object$data
+  ret <- if(raw) data$X else data$Xm
+  rownames(ret) <- 1:NROW(ret)
+  ret
+}
+
+#' @importFrom stats model.frame
+model_frame <- function(object, raw = FALSE) {
+  data <- object$data
+  ret <- if(raw) cbind(data$y, data$X) else cbind(data$ym, data$Xm)
+  colnames(ret) <- colnames(model.frame(object))
+  rownames(ret) <- 1:NROW(ret)
+  ret
 }
 
 #' @export

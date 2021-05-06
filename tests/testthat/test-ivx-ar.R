@@ -50,7 +50,7 @@ test_that("ar estimation is identical", {
 
 # YLPC table6 p17
 test_that("ac-test", {
-  ac <- ac_test(ivx(hpi ~ cpi + def + int + log(res), ylpc))
+  ac <- ac_test(ivx(hpi ~ cpi + def + int + log(res), data =ylpc))
   expect_equal(ac$Wald[1:5], c(27.768, 48.649, 47.696, 126.944, 125.417), tol = 0.001)
   expect_equal(ac$LjungBox[1:5], c(61.855, 91.561, 145.191, 206.823, 236.423), tol = 0.001)
   expect_equal(ac$BoxPierce[1:5], c(60.795, 89.822, 141.919, 201.439, 229.854), tol = 0.001)

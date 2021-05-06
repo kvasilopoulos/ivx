@@ -34,6 +34,7 @@ a numeric scalar or numeric vector.
 }
 \description{
 \itemize{
+\item \code{ac_test}: For all tests
 \item \code{ac_test_wald}: Wald test
 \item \code{ac_test_lb}: Ljung-Box
 \item \code{ac_test_bp}:  Box-Pierce
@@ -50,6 +51,7 @@ dependence on each other.
 mdl <- ivx(hpi ~ cpi + inv, data = ylpc)
 ac_test_wald(mdl)
 
+ac_test(mdl)
 
 }
 \seealso{
