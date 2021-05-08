@@ -128,10 +128,12 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   ////////////////////////////////////////////////
 
   arma::mat Aivx = Yt.t()*Z*pinv(Xt.t()*Z);
-  arma::mat intercept = mean(y) - mean(X) * Aivx.t();
-  arma::mat interceptm = mean(Yt) - mean(Xt) * Aivx.t();
   arma::colvec fitted =  Xt*trans(Aivx);
+  arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
   arma::colvec residuals = Yt - fitted;
+
+  arma::mat interceptm = mean(y) - mean(xlag) * Aivx.t();
+  arma::colvec fittedm = as_scalar(interceptm) + xlag * trans(Aivx);
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
   arma::mat M = ZK.t()*ZK*as_scalar(covepshat)-n*meanzK.t()*meanzK*as_scalar(FM);
@@ -147,29 +149,33 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   List data = List::create(
     _("X") = xlag,
-    _("y") = yt.col(0),
-    _("Xm") = Xt,
-    _("ym") = Yt.col(0)
+    _("y") = yt.col(0)
     );
 
-  List Lintercept = List::create(
-    _("intercept") = intercept,
-    _("interceptm") = interceptm
+  List mod = List::create(
+    _("intercept") = interceptm,
+    _("fitted") = fittedm,
+    _("X") = Xt,
+    _("y") = Yt.col(0)
+    );
+
+  List OLS = List::create(
+    _("Aols") = Aols,
+    _("se") = std_err,
+    _("tstat_ols") = tstat,
+    _("residuals_ols") = epshat,
+    _("rank_ols") = rank(X)
     );
 
   return List::create(
     _("Aivx") = Aivx.t(),
-    _("intercept") = Lintercept,
+    _("intercept") = intercept,
     _("fitted") = fitted,
     _("residuals") = residuals,
     _("wivx") = wivx,
     _("wivxind") = wivxind,
     _("zinvxind") = wivxind_z,
-    _("Aols") = Aols,
-    _("tstat_ols") = tstat,
-    _("residuals_ols") = epshat,
     _("rank") = rank(Xt),
-    _("rank_ols") = rank(X),
     _("horizons") = K,
     _("df.residuals") = nn - l,
     _("df") = l,
@@ -177,7 +183,9 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),
     _("varcov") = Q,
-    _("data") = data
+    _("ols") = OLS,
+    _("data") = data,
+    _("mod") = mod
   );
 
 }

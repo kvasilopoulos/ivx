@@ -75,7 +75,7 @@ ac_test_wald.default <- function(x, lag = 1) {
 
 #' @export
 ac_test_wald.ivx <- function(x, lag = 1) {
-  res <- x$residuals_ols
+  res <- x$ols$residuals
   ac_test_wald.default(res, lag = lag)
 }
 
@@ -120,7 +120,7 @@ ac_test_lb.default <- function(x, lag = 1) {
 
 #' @export
 ac_test_lb.ivx <- function(x, lag = 1) {
-  res <- x$residuals_ols
+  res <- x$ols$residuals
   ac_test_lb.default(res, lag)
 }
 
@@ -149,7 +149,7 @@ ac_test_bp.default <- function(x, lag = 1) {
 
 #' @export
 ac_test_bp.ivx <- function(x, lag = 1) {
-  res <- x$residuals_ols
+  res <- x$ols$residuals
   ac_test_bp.default(res, lag)
 }
 
@@ -178,7 +178,7 @@ ac_test_bg.ivx <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
   k <- ncol(X)
   m <- length(order)
 
-  res_ <- c(x$residuals_ols, rep(0, x$horizon))
+  res_ <- c(x$ols$residuals, rep(0, x$horizon))
 
   Z <- sapply(order, function(x) c(rep(fill, length.out = x), res_[1:(n - x)]))
   auxfit <- lm(res_ ~.,  cbind(res_, X, Z))
@@ -227,7 +227,7 @@ ac_test <- function(x, lag_max = 5) {
 
 #' @export
 ac_test.ivx <- function(x, lag_max = 5) {
-  res <- x$residuals_ols
+  res <- x$ols$residuals
   stats <- ac_test.default(res, lag_max)
   bg <- pval <-  vector("numeric", lag_max)
   for(i in 1:lag_max) {

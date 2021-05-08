@@ -115,15 +115,15 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
 
   mdl_ivx <- ivx_fit(y, x, horizon = horizon)
   if (ar == "auto") {
-    mdl_ar <- auto_ar(mdl_ivx$residuals_ols, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
+    mdl_ar <- auto_ar(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
   } else if( ar == "forecast") {
     requireNamespace("forecast", quietly = TRUE)
-    mdl_ar <- forecast::auto.arima(mdl_ivx$residuals_ols, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
+    mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
   } else if (ar == 0) {
     message("Using `ivx` instead.")
     return(mdl_ivx)
   }else {
-    mdl_ar <- arima2(mdl_ivx$residuals_ols, order = c(ar, 0, 0), include.mean = FALSE, ...)
+    mdl_ar <- arima2(mdl_ivx$ols$residuals, order = c(ar, 0, 0), include.mean = FALSE, ...)
   }
   ar_coefs <- coefficients(mdl_ar)
   # in case the arima does not converge
@@ -159,7 +159,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
   z$ar_method <- ar
   z$ar_ic <- ar_ic
 
-  z$Wald_AR <- ac_test_wald(mdl_ivx$residuals_ols, q)
+  z$Wald_AR <- ac_test_wald(mdl_ivx$ols$residuals, q)
   z$q <- q
   z
 }

@@ -99,8 +99,7 @@ ivx <- function(formula, data, horizon, na.action, weights,
   attr(mt, "intercept") <- 0
 
   y <- model.response(mf, "numeric")
-  # Disable nultivariate model
-  if(is.matrix(y)) {
+  if(is.matrix(y)) {  # Disable nultivariate model
     stop("multivariate model is not available",call. = FALSE)
   }
   ny <- length(y)
@@ -193,30 +192,33 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
   z <- ivx_fit_cpp(y, x, horizon)
 
   cnames <- colnames(x)
+  if (is.null(cnames))
+    cnames <- paste0("x", 1L:p)
   coef <- drop(z$Aivx)
-  coef_ols <- drop(z$Aols)
-
-  if (is.null(cnames)) cnames <- paste0("x", 1L:p)
-  # nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
-  z$coefficients <- coef
-  z$coefficients_ols <- coef_ols
-
-  # r1 <- y - z$residuals
-  # if (!is.null(offset)) r1 <- r1 + offset
-
-  # if (is.matrix(y)) {
-  #   dimnames(coef) <- list(cnames, colnames(y))
-  #   dimnames(coef_ols) <- list(c("Intercept", cnames), colnames(y))
-  #   # dimnames(z$effects) <- list(nmeffects, colnames(y))
-  # } else {
   names(coef) <- cnames
-  names(coef_ols) <- c("Intercept", cnames)
-  # }
 
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
-  colnames(z$data$X) <- colnames(z$data$Xm) <- cnames
+  # OlS
+  lols <- list(
+    coefficients = drop(z$ols$Aols),
+    se = drop(z$ols$se),
+    tstat = drop(z$ols$tstat),
+    residuals = drop(z$ols$residuals)
+  )
+  names(lols$coefficients) <- names(lols$se) <- names(lols$tstat) <- c("Intercept", cnames)
+
+  # Modified
+  lmod <- list(
+    fitted = drop(z$mod$fitted),
+    intercept = drop(z$mod$intercept),
+    X = z$mod$X,
+    y = drop(z$mod$y)
+  )
+  colnames(lmod$X) <- cnames
+
+    colnames(z$data$X) <- cnames
 
   output <-
     structure(
@@ -228,7 +230,6 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
         Wald_Joint = drop(z$wivx),
         Wald_Ind = wald_ind,
         rank = z$rank,
-        rank_ols = z$rank_ols,
         horizon = horizon,
         df.residuals = z$df.residuals,
         df = z$df,
@@ -242,9 +243,8 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
         data = z$data,
         delta = z$delta,
         vcov = z$varcov,
-        coefficients_ols = coef_ols,
-        tstat_ols = z$tstat_ols,
-        residuals_ols = drop(z$residuals_ols)
+        ols = lols,
+        mod = lmod
       )
     )
   output
@@ -312,41 +312,34 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   z <- ivx_fit_cpp(y * wts, x * wts, ...)
 
   cnames <- colnames(x)
+  if (is.null(cnames))
+    cnames <- paste0("x", 1L:p)
   coef <- drop(z$Aivx)
-  coef_ols <- drop(z$Aols)
-
-  if (is.null(cnames)) cnames <- paste0("x", 1L:p)
-  # nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
-  z$coefficients <- coef
-  z$coefficients_ols <- coef_ols
   names(coef) <- cnames
-  names(coef_ols) <- c("Intercept", cnames)
+
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
-  # pivot <- z$pivot
-  # r1 <- seq_len(z$rank)
-  dn <- colnames(x)
-  if (is.null(dn)) {
-    dn <- paste0("x", 1L:p)
-  }
-  # nmeffects <- c(dn[pivot[r1]], rep.int("", n - z$rank))
-  # r2 <- if (z$rank < p) {
-  #   (z$rank + 1L):p
-  # } else {
-  #   integer()
-  # }
+  # OlS
+  lols <- list(
+    coefficients = drop(z$ols$Aols),
+    se = drop(z$ols$se),
+    tstat = drop(z$ols$tstat),
+    residuals = drop(z$ols$residuals)
+  )
+  names(lols$coefficients) <- names(lols$se) <- names(lols$tstat) <- c("Intercept", cnames)
 
-  # coef[r2] <- NA
-  # if (z$pivoted) {
-  #   coef[pivot] <- coef
-  # }
-  names(coef) <- dn
-  # names(z$effects) <- nmeffects
+  # Modified
+  lmod <- list(
+    fitted = drop(z$mod$fitted),
+    intercept = drop(z$mod$intercept),
+    X = z$mod$X,
+    y = drop(z$mod$y)
+  )
 
   z$coefficients <- coef
   z$residuals <- z$residuals / wts[-(1:horizon)]
-  z$fitted.values <- y[-(1:horizon)] - z$residuals
+  z$fitted <- y[-(1:horizon)] - z$residuals
 
   z$weights <- w
   if (zero.weights) {
@@ -355,13 +348,13 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
     if (ny > 1) {
       save.r[ok, ] <- z$residuals
       save.r[nok, ] <- y0 - f0
-      save.f[ok, ] <- z$fitted.values
+      save.f[ok, ] <- z$fitted
       save.f[nok, ] <- f0
     }
     else {
       save.r[ok] <- z$residuals
       save.r[nok] <- y0 - f0
-      save.f[ok] <- z$fitted.values
+      save.f[ok] <- z$fitted
       save.f[nok] <- f0
     }
     z$residuals <- save.r
@@ -369,36 +362,37 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
     z$weights <- save.w
   }
   if (!is.null(offset)) {
-    z$fitted.values <- z$fitted.values + offset
+    z$fitted.values <- z$fitted + offset
   }
 
-  structure(
-    list(
-      coefficients = coef,
-      intercept = drop(z$intercept),
-      fitted = drop(z$fitted),
-      residuals = drop(z$residuals),
-      Wald_Joint = drop(z$wivx),
-      Wald_Ind = wald_ind,
-      rank = z$rank,
-      rank_ols = z$rank_ols,
-      horizon = horizon,
-      df.residuals = z$df.residuals,
-      df = z$df,
-      assign = attr(x, "assign"),
-      cnames = cnames,
-      AR = data.frame(
-        Rn = z$Rn,
-        Rz = z$Rz,
-        row.names = cnames
-      ),
-      delta = z$delta,
-      vcov = z$varcov,
-      coefficients_ols = coef_ols,
-      tstat_ols = z$tstat_ols,
-      residuals_ols = drop(z$residuals_ols)
+  output <-
+    structure(
+      list(
+        coefficients = coef,
+        intercept = drop(z$intercept),
+        fitted = drop(z$fitted),
+        residuals = drop(z$residuals),
+        Wald_Joint = drop(z$wivx),
+        Wald_Ind = wald_ind,
+        rank = z$rank,
+        horizon = horizon,
+        df.residuals = z$df.residuals,
+        df = z$df,
+        assign = attr(x, "assign"),
+        cnames = cnames,
+        AR = data.frame(
+          Rn = z$Rn,
+          Rz = z$Rz,
+          row.names = cnames
+        ),
+        data = z$data,
+        delta = z$delta,
+        vcov = z$varcov,
+        ols = lols,
+        mod = lmod
+      )
     )
-  )
+  output
 }
 
 
