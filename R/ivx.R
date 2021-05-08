@@ -194,13 +194,14 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
   cnames <- colnames(x)
   if (is.null(cnames))
     cnames <- paste0("x", 1L:p)
+
+  # stats IVX
   coef <- drop(z$Aivx)
   names(coef) <- cnames
-
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
-  # OlS
+  # stats OlS
   lols <- list(
     coefficients = drop(z$ols$Aols),
     se = drop(z$ols$se),
@@ -209,16 +210,15 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
   )
   names(lols$coefficients) <- names(lols$se) <- names(lols$tstat) <- c("Intercept", cnames)
 
-  # Modified
-  lmod <- list(
-    fitted = drop(z$mod$fitted),
-    intercept = drop(z$mod$intercept),
-    X = z$mod$X,
-    y = drop(z$mod$y)
+  # Iniitial
+  linitial <- list(
+    fitted = drop(z$initial$fitted),
+    intercept = drop(z$initial$intercept)
   )
-  colnames(lmod$X) <- cnames
 
-    colnames(z$data$X) <- cnames
+  # data and datam
+  colnames(z$data$X) <- cnames
+  colnames(z$datam$X) <- cnames
 
   output <-
     structure(
@@ -241,10 +241,11 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
           row.names = cnames
         ),
         data = z$data,
+        datam = z$datam,
         delta = z$delta,
         vcov = z$varcov,
         ols = lols,
-        mod = lmod
+        initial = linitial
       )
     )
   output
@@ -314,13 +315,14 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   cnames <- colnames(x)
   if (is.null(cnames))
     cnames <- paste0("x", 1L:p)
+
+  # stats IVX
   coef <- drop(z$Aivx)
   names(coef) <- cnames
-
   wald_ind <- drop(z$wivxind)
   names(wald_ind) <- cnames
 
-  # OlS
+  # stats OlS
   lols <- list(
     coefficients = drop(z$ols$Aols),
     se = drop(z$ols$se),
@@ -329,13 +331,15 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
   )
   names(lols$coefficients) <- names(lols$se) <- names(lols$tstat) <- c("Intercept", cnames)
 
-  # Modified
-  lmod <- list(
-    fitted = drop(z$mod$fitted),
-    intercept = drop(z$mod$intercept),
-    X = z$mod$X,
-    y = drop(z$mod$y)
+  # Iniitial
+  linitial <- list(
+    fitted = drop(z$initial$fitted),
+    intercept = drop(z$initial$intercept)
   )
+
+  # data and datam
+  colnames(z$data$X) <- cnames
+  colnames(z$datam$X) <- cnames
 
   z$coefficients <- coef
   z$residuals <- z$residuals / wts[-(1:horizon)]
@@ -386,10 +390,11 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
           row.names = cnames
         ),
         data = z$data,
+        datam = z$datam,
         delta = z$delta,
         vcov = z$varcov,
         ols = lols,
-        mod = lmod
+        initial = linitial
       )
     )
   output

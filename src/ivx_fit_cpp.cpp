@@ -132,6 +132,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::mat intercept = mean(Yt) - mean(Xt) * Aivx.t();
   arma::colvec residuals = Yt - fitted;
 
+  ///////////////// No demeaning /////////////////
   arma::mat interceptm = mean(y) - mean(xlag) * Aivx.t();
   arma::colvec fittedm = as_scalar(interceptm) + xlag * trans(Aivx);
 
@@ -152,14 +153,17 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     _("y") = yt.col(0)
     );
 
-  List mod = List::create(
+  List initial = List::create(
     _("intercept") = interceptm,
-    _("fitted") = fittedm,
-    _("X") = Xt,
-    _("y") = Yt.col(0)
+    _("fitted") = fittedm
     );
 
-  List OLS = List::create(
+  List datam = List::create(
+    _("X") = Xt,
+    _("y") = Yt.col(0)
+  );
+
+  List ols = List::create(
     _("Aols") = Aols,
     _("se") = std_err,
     _("tstat_ols") = tstat,
@@ -183,9 +187,10 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),
     _("varcov") = Q,
-    _("ols") = OLS,
+    _("ols") = ols,
     _("data") = data,
-    _("mod") = mod
+    _("initial") = initial,
+    _("datam") = datam
   );
 
 }
