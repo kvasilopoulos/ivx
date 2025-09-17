@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // ivx_fit_cpp
 List ivx_fit_cpp(const arma::vec& y, const arma::mat& X, int K);
 RcppExport SEXP _ivx_ivx_fit_cpp(SEXP ySEXP, SEXP XSEXP, SEXP KSEXP) {
