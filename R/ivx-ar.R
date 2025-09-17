@@ -27,25 +27,28 @@
 #' ivx_ar(hpi ~ log(res) + cpi, ylpc, ar = 1)
 #'
 ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", "aicc"),
-                   ar_max = 5, ar_grid =  function(x) seq(x - 0.3, x + 0.3, by = 0.02),
-                    na.action, contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
+                   ar_max = 5, ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02),
+                   na.action, contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
                    ...) {
   ret.x <- x
   ret.y <- y
   cl <- match.call()
-  if (missing(horizon))
+  if (missing(horizon)) {
     horizon <- cl$horizon <- 1
-  if (! ar %in% c("auto", "forecast", c(0:24))) {
+  }
+  if (!ar %in% c("auto", "forecast", c(0:24))) {
     stop("`ar` should be either 'auto' or a non-negative integer.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   ar_ic <- match.arg(ar_ic)
-  if(ar_max != trunc(ar_max) || ar_max <= 0) {
+  if (ar_max != trunc(ar_max) || ar_max <= 0) {
     stop("`ar_max` should be a positive integer.", call. = FALSE)
   }
-  if(!is.function(ar_grid)) {
+  if (!is.function(ar_grid)) {
     stop("`ar_grid` should be function with sequence generation see `?seq`",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   mf <- match.call(expand.dots = FALSE)
   m <- match(c("formula", "data", "horizon", "na.action", "offset"), names(mf), 0)
@@ -57,18 +60,21 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   mt <- attr(mf, "terms")
   if (attr(mt, "intercept") == 0) {
     warning("ivx estimation does not include an intercept by construction",
-            call. = FALSE)
+      call. = FALSE
+    )
   }
   attr(mt, "intercept") <- 0
   y <- model.response(mf, "numeric")
-  if(is.matrix(y)) {
-    stop("multivariate model are not available",call. = FALSE)
+  if (is.matrix(y)) {
+    stop("multivariate model are not available", call. = FALSE)
   }
   ny <- length(y)
   offset <- model.offset(mf)
   x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_ar_fit(y, x, horizon = horizon, ar = ar, ar_max = ar_max, ar_ic = ar_ic,
-                  ar_grid = ar_grid, offset = offset, ...)
+  z <- ivx_ar_fit(y, x,
+    horizon = horizon, ar = ar, ar_max = ar_max, ar_ic = ar_ic,
+    ar_grid = ar_grid, offset = offset, ...
+  )
   class(z) <- if (ar == 0) "ivx" else c("ivx_ar", "ivx")
   z$na.action <- attr(mf, "na.action")
   z$offset <- offset
@@ -111,18 +117,17 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
 #' ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY), ar = 1)
 #'
 ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5, ar_ic = "bic",
-                       ar_grid =  function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
-
+                       ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
   mdl_ivx <- ivx_fit(y, x, horizon = horizon)
   if (ar == "auto") {
     mdl_ar <- auto_ar(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
-  } else if( ar == "forecast") {
+  } else if (ar == "forecast") {
     requireNamespace("forecast", quietly = TRUE)
-    mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
+    mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ..)
   } else if (ar == 0) {
     message("Using `ivx` instead.")
     return(mdl_ivx)
-  }else {
+  } else {
     mdl_ar <- arima2(mdl_ivx$ols$residuals, order = c(ar, 0, 0), include.mean = FALSE, ...)
   }
   ar_coefs <- coefficients(mdl_ar)
@@ -145,8 +150,8 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
   res_ivx <- vector("list", length = ngrid)
   rse <- vector("numeric", length = ngrid)
   for (i in 1:ngrid) {
-    y_adj <- tilt(y, grid_seq[i,], q)
-    x_adj <- tilt(x, grid_seq[i,], q)
+    y_adj <- tilt(y, grid_seq[i, ], q)
+    x_adj <- tilt(x, grid_seq[i, ], q)
     res_ivx[[i]] <- ivx::ivx_fit(y_adj, x_adj, horizon = horizon)
     eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
@@ -170,12 +175,15 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
 #' @inheritParams stats::summary.lm
 #' @export
 print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
-
   cat("\nCall:\n",
-      paste(deparse(x$call), sep = "\n", collapse = "\n"), sep = "")
+    paste(deparse(x$call), sep = "\n", collapse = "\n"),
+    sep = ""
+  )
   cat("\n\nLag Selection:\n",
-      if(x$ar_method == "auto") paste0("Auto (", x$ar_ic, ")") else "Fixed",
-      " with AR terms q = ", x$q, "\n\n", sep ="")
+    if (x$ar_method == "auto") paste0("Auto (", x$ar_ic, ")") else "Fixed",
+    " with AR terms q = ", x$q, "\n\n",
+    sep = ""
+  )
   res <- x$coefficients
   if (length(res)) {
     cat("Coefficients:\n")
@@ -202,13 +210,15 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
 #' mod <- ivx_ar(Ret ~ LTY, data = kms)
 #'
 #' summary(mod)
-summary.ivx_ar <- function(object,  ...) {
+summary.ivx_ar <- function(object, ...) {
   z <- object
 
-  if (is.null(z$terms))
+  if (is.null(z$terms)) {
     stop("invalid 'ivx' object: no 'terms' components")
-  if (!inherits(object, "ivx_ar"))
+  }
+  if (!inherits(object, "ivx_ar")) {
     stop("calling summary.ivx(<fake-ivx-object>) ...")
+  }
 
   ans <- z[c("call", "terms")]
 
@@ -259,20 +269,22 @@ summary.ivx_ar <- function(object,  ...) {
 #' @rdname summary.ivx_ar
 #' @export
 print.summary.ivx_ar <- function(x,
-                              digits = max(3L, getOption("digits") - 3L),
-                              signif.stars = getOption("show.signif.stars"),
-                              ...){
-
+                                 digits = max(3L, getOption("digits") - 3L),
+                                 signif.stars = getOption("show.signif.stars"),
+                                 ...) {
   cat("\nCall:\n",
-      paste(deparse(x$call), sep = "\n", collapse = "\n"), sep = "")
+    paste(deparse(x$call), sep = "\n", collapse = "\n"),
+    sep = ""
+  )
   cat("\n\n",
-      if(x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
-      " with AR terms q = ", x$q, "\n\n", sep ="")
+    if (x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
+    " with AR terms q = ", x$q, "\n\n",
+    sep = ""
+  )
 
   if (length(x$aliased) == 0L) {
     cat("No coefficients\n")
-  }else{
-
+  } else {
     coefs_ols <- x$coefficients_ols
     coefs <- x$coefficients
     aliased <- x$aliased
@@ -280,26 +292,32 @@ print.summary.ivx_ar <- function(x,
     if (!is.null(aliased) && any(aliased)) {
       cn <- names(aliased)
       civx <- x$coefficients_ols
-      coefs <- matrix(NA, NROW(civx), 5, dimnames = list(cn , colnames(civx)))
+      coefs <- matrix(NA, NROW(civx), 5, dimnames = list(cn, colnames(civx)))
       coefs[!aliased, ] <- civx
     }
 
     cat("Coefficients:\n")
 
-    printCoefmat(coefs, digits = digits, signif.stars = signif.stars,
-                 signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
-                 na.print = "NA", ...)
+    printCoefmat(coefs,
+      digits = digits, signif.stars = signif.stars,
+      signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
+      na.print = "NA", ...
+    )
 
-    cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
-        "on", x$df, "DF, p-value",
-        format.pval(x$pv_waldjoint, digits = digits))
+    cat(
+      "\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
+      "on", x$df, "DF, p-value",
+      format.pval(x$pv_waldjoint, digits = digits)
+    )
 
     cat("\nMultiple R-squared: ", formatC(x$r.squared, digits = digits))
     cat(",\tAdjusted R-squared: ", formatC(x$adj.r.squared, digits = digits))
 
-    cat("\nWald AR statistic:", formatC(x$Wald_AR, digits = digits),
-        "on", x$q, "DF, p-value",
-        format.pval(x$pv_waldar, digits = digits))
+    cat(
+      "\nWald AR statistic:", formatC(x$Wald_AR, digits = digits),
+      "on", x$q, "DF, p-value",
+      format.pval(x$pv_waldar, digits = digits)
+    )
 
     cat("\n")
   }
@@ -312,8 +330,8 @@ tilt <- function(x, grid_vec, ar_length) {
   x <- as.matrix(x)
   out <- matrix(NA, nrow = NROW(x) - ar_length, ncol = NCOL(x))
   for (i in 1:NCOL(x)) {
-    ds <- embed(x[,i], ar_length + 1)
-    out[,i] <- ds[,1] - ds[,-1, drop = FALSE] %*% grid_vec
+    ds <- embed(x[, i], ar_length + 1)
+    out[, i] <- ds[, 1] - ds[, -1, drop = FALSE] %*% grid_vec
   }
   colnames(out) <- colnames(x)
   out
