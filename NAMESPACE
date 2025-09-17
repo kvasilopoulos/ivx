@@ -2,6 +2,7 @@
 
 S3method(ac_test,default)
 S3method(ac_test,ivx)
+S3method(ac_test_bg,default)
 S3method(ac_test_bg,ivx)
 S3method(ac_test_bp,default)
 S3method(ac_test_bp,ivx)

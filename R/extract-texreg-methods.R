@@ -63,12 +63,18 @@ extract.ivx <- function(model,
     gof.names <- c(gof.names, "Adj.\\ R$^2$")
     gof.decimal <- c(gof.decimal, TRUE)
   }
-  if(include.nobs == TRUE) {
+  if (include.nobs == TRUE) {
     n <- NROW(model$residuals)
     gof <- c(gof, n)
     gof.names <- c(gof.names, "Num.\\ obs.")
     gof.decimal <- c(gof.decimal, FALSE)
   }
+
+  # Check if texreg is available
+  if (!requireNamespace("texreg", quietly = TRUE)) {
+    stop("Package 'texreg' is required for this function. Please install it with: install.packages('texreg')")
+  }
+
   texreg::createTexreg(
     coef.names = names,
     coef = co,
@@ -89,14 +95,16 @@ extract.ivx_ar <- extract.ivx
 .onLoad <- function(libname, pkgname) {
   if (suppressWarnings(requireNamespace("texreg", quietly = TRUE))) {
     setGeneric("extract", function(model, ...) standardGeneric("extract"),
-               package = "texreg")
+      package = "texreg"
+    )
     setMethod("extract",
-              signature = className("ivx", pkgname),
-              definition = extract.ivx)
+      signature = className("ivx", pkgname),
+      definition = extract.ivx
+    )
     setMethod("extract",
-              signature = className("ivx_ar", pkgname),
-              definition = extract.ivx)
+      signature = className("ivx_ar", pkgname),
+      definition = extract.ivx
+    )
   }
   invisible()
 }
-
