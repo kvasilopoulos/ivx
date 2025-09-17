@@ -201,6 +201,7 @@ ac_test_bg.ivx <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
   structure(bg, pvalue = p.val)
 }
 
+#' @export
 ac_test_bg.default <- function(x, order, type, fill) {
   stop("not available method.", call. = FALSE)
 }
