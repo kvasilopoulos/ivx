@@ -2,8 +2,8 @@
 #'
 #' Drawing statistical inference on the coefficients of a short- or long-horizon
 #' predictive regression with persistent regressors by using the IVX method of
-#' Magdalinos and Phillips (2009) \doi{10.1017/S0266466608090154} and
-#' Kostakis, Magdalinos and Stamatogiannis (2015) \doi{10.1093/rfs/hhu139}.
+#' Magdalinos and Phillips (2009) DOI: 10.1017/S0266466608090154 and
+#' Kostakis, Magdalinos and Stamatogiannis (2015) DOI: 10.1093/rfs/hhu139.
 #'
 #' @name ivx-package
 #' @aliases ivx-package

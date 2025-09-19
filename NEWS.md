@@ -1,3 +1,7 @@
+# ivx 1.1.1
+
+* Patch version to fix minor issues.
+
 # ivx 1.1.0
 
 * Added `ivx_ar` that implements Yang, B., Long, W., Peng, L., & Cai, Z. (2020) 

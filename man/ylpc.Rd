@@ -8,7 +8,10 @@
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 174 rows and 12 columns.
 }
 \source{
-\url{https://www.tandfonline.com/doi/suppl/10.1080/01621459.2019.1686392/suppl_file/uasa_a_1686392_sm7226.zip}
+Yang, B., Long, W., Peng, L., and Cai, Z. (2020).
+Autoregressive-model-based inference for predictive regressions with
+persistent predictors. Journal of the American Statistical Association,
+115(530), 1029-1039. DOI: 10.1080/01621459.2019.1686392
 }
 \usage{
 ylpc
