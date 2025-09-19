@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx?branch=master)
 
 [![R-CMD-check](https://github.com/kvasilopoulos/ivx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kvasilopoulos/ivx/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/kvasilopoulos/ivx/graph/badge.svg)](https://app.codecov.io/gh/kvasilopoulos/ivx)
 <!-- badges: end -->
 
 
