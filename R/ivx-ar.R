@@ -123,7 +123,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
     mdl_ar <- auto_ar(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
   } else if (ar == "forecast") {
     requireNamespace("forecast", quietly = TRUE)
-    mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, include.mean = FALSE, ...)
+    mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
   } else if (ar == 0) {
     message("Using `ivx` instead.")
     return(mdl_ivx)
