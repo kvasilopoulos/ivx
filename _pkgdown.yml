@@ -26,6 +26,7 @@ reference:
   - title: Serial Corelation Test
     contents:
       - ac_test
+      - ac_test_wald
       - ac_test_bp
       - ac_test_bg
       - ac_test_lb
@@ -33,14 +34,18 @@ reference:
   - title: Methods
     contents:
       - summary.ivx
+      - summary.ivx_ar
       - vcov.ivx
       - delta
       - extract.ivx
+      - extract.ivx_ar
 
   - title: Data
     contents:
       - kms
       - kms_quarterly
+      - monthly
+      - quarterly
       - ylpc
 
 
