@@ -13,6 +13,7 @@ status](https://github.com/kvasilopoulos/ivx/workflows/R-CMD-check/badge.svg)](h
 [![Codecov test
 coverage](https://codecov.io/gh/kvasilopoulos/ivx/branch/master/graph/badge.svg)](https://codecov.io/gh/kvasilopoulos/ivx?branch=master)
 
+[![R-CMD-check](https://github.com/kvasilopoulos/ivx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kvasilopoulos/ivx/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Drawing statistical inference on the coefficients of a short- or
