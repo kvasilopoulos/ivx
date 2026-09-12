@@ -58,19 +58,22 @@
 <div class="section level2">
 <h2 id="map">Map<a class="anchor" aria-label="anchor" href="#map"></a></h2>
 <ul><li>
-<code>R/ivx.R</code> — <code><a href="reference/ivx.html">ivx()</a></code> / <code><a href="reference/ivx_fit.html">ivx_fit()</a></code> (Kostakis, Magdalinos &amp; Stamatogiannis 2015); core is <code>src/ivx_fit_cpp.cpp</code>. Tuning via <code>beta</code>, <code>cz</code>, <code>bandwidth</code>; <code>robust = TRUE</code> for Eicker-White.</li>
+<code>R/ivx.R</code> — <code><a href="reference/ivx.html">ivx()</a></code> / <code><a href="reference/ivx_fit.html">ivx_fit()</a></code> (Kostakis, Magdalinos &amp; Stamatogiannis 2015); core is <code>src/ivx_fit_cpp.cpp</code>. Tuning via <code>beta</code>, <code>cz</code>, <code>bandwidth</code>; <code>robust = TRUE</code> for Eicker-White; <code>lag_y = TRUE</code> lag-augmented (Demetrescu 2014).</li>
 <li>
 <code>R/ivx-ar.R</code> — <code><a href="reference/ivx_ar.html">ivx_ar()</a></code> IVX-AR (Yang, Long, Peng &amp; Cai 2020).</li>
 <li>
-<code>R/ivx-ra.R</code> — <code><a href="reference/ivx_ra.html">ivx_ra()</a></code> residual-augmented IVX (Demetrescu &amp; Rodrigues 2022).</li>
+<code>R/ivx-ra.R</code> — <code><a href="reference/ivx_ra.html">ivx_ra()</a></code> residual-augmented IVX (Demetrescu &amp; Rodrigues 2022); <code>horizon &gt; 1</code> is the transformed-regression test (Demetrescu, Rodrigues &amp; Taylor 2023).</li>
 <li>
-<code>R/ivx-qr.R</code> — <code><a href="reference/ivx_qr.html">ivx_qr()</a></code> IVX quantile regression (Lee 2016); uses <code>quantreg</code>.</li>
+<code>R/ivx-qr.R</code> — <code><a href="reference/ivx_qr.html">ivx_qr()</a></code> IVX quantile regression (Lee 2016), <code><a href="reference/ivx_qr_boot.html">ivx_qr_boot()</a></code> block bootstrap (Fan &amp; Lee 2019); uses <code>quantreg</code>.</li>
 <li>
 <code>R/ivx-sys.R</code> — <code><a href="reference/ivx_sys.html">ivx_sys()</a></code> systems IVX (Magdalinos 2022); <code>src/ivx_sys_fit_cpp.cpp</code>.</li>
 <li>
 <code>R/ivx-boot.R</code> — <code><a href="reference/ivx_boot.html">ivx_boot()</a></code> residual / fixed-regressor wild bootstrap (DGRT 2023); <code>src/var_sim.cpp</code> for the regressor recursion.</li>
 <li>
 <code>R/ivx-episodic.R</code> — <code><a href="reference/ivx_episodic.html">ivx_episodic()</a></code> subsample sup/ave tests (DGRT 2022); <code>src/sub_ivx.cpp</code>.</li>
+<li>
+<code>R/ivx-iv.R</code> — <code><a href="reference/ivx_iv.html">ivx_iv()</a></code> 2SLS with sine/fractional/long-difference instruments (Breitung &amp; Demetrescu 2015).</li>
+<li>Non-IVX benchmarks: <code>R/arm.R</code> (<code><a href="reference/arm.html">arm()</a></code>, Amihud-Hurvich-Wang 2009), <code>R/hlt-test.R</code> (<code><a href="reference/hlt_test.html">hlt_test()</a></code>, Harvey-Leybourne-Taylor 2021), <code>R/el-test.R</code> (<code><a href="reference/el_test.html">el_test()</a></code>, Liu-Yang-Cai-Peng 2019; <code>el_ratio()</code> is a generic Owen EL solver).</li>
 <li>
 <code>R/ac_test.R</code> — serial-correlation diagnostics. <code>R/methods*.R</code>, <code>R/extract-texreg-methods.R</code> — S3 / texreg support. <code>R/auto-ar.R</code> — AR order selection helper.</li>
 <li>
