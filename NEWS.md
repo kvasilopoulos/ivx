@@ -1,3 +1,19 @@
+# ivx 1.2.0
+
+* `ivx()` and `ivx_fit()` gain `beta`, `cz` and `bandwidth` arguments that expose
+  the IVX instrument tuning (previously hard-coded to the Kostakis et al. (2015)
+  values) and the Newey-West bandwidth.
+* `ivx()` gains `robust = TRUE` for Eicker-White (heteroskedasticity-robust) IVX
+  standard errors (Demetrescu, Georgiev, Rodrigues & Taylor, 2023).
+* `summary()` coefficient tables now report `Std. Error` and `t value` next to the
+  individual Wald statistics; the fitted object stores `se` and `tstat`.
+* New `ivx_boot()` implementing the residual wild bootstrap and fixed regressor
+  wild bootstrap of Demetrescu et al. (2023), returning bootstrap p-values for
+  the joint and individual Wald statistics and one-sided t-tests.
+* Fixed: weighted fits ignored the `horizon` argument.
+* `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
+  in the `se` slot.
+
 # ivx 1.1.1
 
 * Patch version to fix minor issues.
