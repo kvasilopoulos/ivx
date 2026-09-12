@@ -1,0 +1,2636 @@
+                                TECHNICAL WORKING PAPER SERIES
+
+                         OPTIMAL INFERENCE IN REGRESSION MODELS
+                            WITH NEARLY INTEGRATED REGRESSORS
+                                                 Michael Jansson
+                                               Marcelo J. Moreira
+                                        Technical Working Paper 303
+                                      http://www.nber.org/papers/T0303
+
+                         NATIONAL BUREAU OF ECONOMIC RESEARCH
+                                         1050 Massachusetts Avenue
+                                             Cambridge, MA 02138
+                                                 November 2004
+
+The views expressed in this paper are those of the author(s) and not necessarily those of the National Bureau
+of Economic Research.
+© 2004 by Michael Jansson and Marcelo J. Moreira. All rights reserved. Short sections of text, not to
+exceed two paragraphs, may be quoted without explicit permission provided that full credit, including ©
+notice, is given to the source.
+Optimal Inference in Regression Models with Nearly Integrated Regressors
+Michael Jansson and Marcelo J. Moreira
+NBER Technical Working Paper No. 303
+November 2004
+JEL No. C12, C32
+
+                                                  ABSTRACT
+
+This paper considers the problem of conducting inference on the regression coefficient in a bivariate
+
+regression model with a highly persistent regressor. Gaussian power envelopes are obtained for a class
+
+of testing procedures satisfying a conditionality restriction. In addition, the paper proposes feasible testing
+
+procedures that attain these Gaussian power envelopes whether or not the innovations of the regression
+
+model are normally distributed.
+
+Michael Jansson
+University of California, Berkeley
+mjansson@econ.berkeley.edu
+
+Marcelo J. Moreira
+Littauer Center M-6
+Harvard University
+Cambridge, MA 02138
+and NBER
+moreira@fas.harvard.edu
+Optimal Inference in Regression Models
+    with Nearly Integrated Regressors
+
+Michael Jansson  Marcelo J. Moreira
+  UC Berkeley    Harvard University
+
+                            NBER
+
+October 12, 2004
+
+            Abstract. This paper considers the problem of conducting inference on
+        the regression coefficient in a bivariate regression model with a highly persistent
+        regressor. Gaussian power envelopes are obtained for a class of testing proce-
+        dures satisfying a conditionality restriction. In addition, the paper proposes
+        feasible testing procedures that attain these Gaussian power envelopes whether
+        or not the innovations of the regression model are normally distributed.
+
+                                         1. Introduction
+This paper considers the problem of conducting inference on the regression coefficient
+in a bivariate regression model with a highly persistent regressor. Several papers
+studying the problem of testing regression hypotheses in the presence of nearly inte-
+grated regressors have pointed out its nonstandard nature and/or proposed asymp-
+totically valid testing procedures.1 On the other hand, we know of only one paper,
+Stock and Watson (1996), that has obtained testing procedures with demonstrable
+optimality properties in a regression model with nearly integrated regressors.
+
+    Stock and Watson (1996) investigated tests maximizing a weighted average (local
+asymptotic) power criterion among tests of a certain level. The functional form of
+tests obtained by maximizing a weighted average power criterion depends on the
+underlying weighting function, implying that no uniformly most powerful (UMP)
+test exists among the class of all tests satisfying only a level restriction. It therefore
+
+    We are grateful to Laura Chioda, Guido Imbens, Jim Powell, Tom Rothenberg, Paul Ruud,
+Jim Stock, George Tauchen, Ed Vytlacil, Mark Watson, and seminar participants at Berkeley, Iowa
+State, Montr´eal, Princeton, Stanford, the Aarhus Econometrics conference at Svinkløv, and the 2003
+NBER Summer Institute for comments.
+
+    e-mail: mjansson@econ.berkeley.edu.
+    e-mail: moreira@kuznets.fas.harvard.edu.
+    1The problems caused by the presence of nearly integrated regressors have been pointed out by
+Cavanagh, Elliott, and Stock (1995), Elliott (1998), Elliott and Stock (1994), Jeganathan (1997),
+and Stock (1997). Inference procedures that are valid in the presence of nearly integrated regressors
+have been proposed by Campbell and Dufour (1997), Campbell and Yogo (2003), Cavanagh, Elliott,
+and Stock (1995), Lanne (2002), Stock and Watson (1996), and Wright (1999, 2000).
+
+                                                     1
+Optimal Inference with Nearly Integrated Regressors  2
+
+seems natural to ask whether it is possible to find "reasonable" restrictions subject
+to which a UMP test (of a hypothesis on the regression coefficient in a bivariate
+regression model with a nearly integrated regressor) can be derived.
+
+    In an attempt to provide an affirmative answer to that question, the present paper
+develops attainable finite sample and asymptotic efficiency bounds (power envelopes)
+under the assumption that the latent errors of the regression model are Gaussian
+white noise. In addition, the normality assumption is shown to be least favorable
+in the sense that even if this distributional assumption is dropped, it is possible to
+construct testing procedures whose local asymptotic power functions coincide with
+the Gaussian power envelopes.
+
+    Under the assumption of normality, the model exhibits the nonstandard feature of
+having a minimal sufficient statistic whose distribution belongs to a curved exponen-
+tial family [Efron (1975, 1978)]. In cross section econometrics, inference in regression
+models with random, exogenous regressors is conducted conditional on the regressors.
+In this paper, we adopt a similar approach, in which inference is conducted condi-
+tional on some functions of the regressors. Quite remarkably, it turns out that we
+can remove the statistical curvature from the inference problem by conducting the
+analysis conditional on the values of statistics whose distribution does not depend on
+the parameter of interest. It is this insight that enables us to develop finite sample
+optimality theory and motivates our asymptotic optimality theory, the development
+of which uses the theory of locally asymptotically quadratic (LAQ) likelihood ratios
+[Jeganathan (1995), Le Cam and Yang (2000)] to show that the limiting experiment
+associated with our regression model inherits the statistical properties of the finite
+sample model.
+
+    The bulk of this paper studies a model in which the error term of the equation
+of interest is a martingale difference sequence with respect to its lags and to current
+and lagged values of the nearly integrated regressor. Although somewhat restrictive,
+this model is of empirical relevance insofar as it captures the salient features of the
+predictive regression model, a popular model in empirical finance.2 The Gaussian ver-
+sion of the model enjoys the additional (expositional) advantage that its finite sample
+statistical properties are in one-to-one correspondence with the statistical properties
+of the associated limiting experiment, hereby enabling us to introduce the main ideas
+of the paper without the use of asymptotics. Because our asymptotic results depend
+on the underlying model only through the associated limiting experiment, they can
+be extended to models more general than the model in which the error term of the
+equation of interest is a martingale difference sequence with respect to its lags and
+
+    2Recent papers studying predictive regressions include Ang and Bekaert (2003), Campbell and
+Yogo (2003), Ferson, Sarkissian, and Simin (2003), Lanne (2002), Lewellen (2002), Polk, Thompson,
+and Vuolteenaho (2004), and Torus, Valkanov, and Yan (2001). See also Stambaugh (1999) and the
+references therein.
+        Optimal Inference with Nearly Integrated Regressors                   3
+
+to current and lagged values of the nearly integrated regressor. We illustrate this
+point by showing that results extend in a straightforward way to a cointegration-
+type model accommodating correlation between the (potentially) serially correlated
+error term of the equation of interest and current (and lagged) values of the nearly
+integrated regressor.
+
+    Section 2 introduces the model used in the bulk of the paper. Sections 3 and 4
+develop finite sample and asymptotic optimality theory under the assumption that
+the latent errors of that model are Gaussian white noise. Section 5 constructs fea-
+sible testing procedures, asymptotically optimal under the assumptions of Section
+4, whose asymptotic validity requires less restrictive assumptions than the efficient
+testing procedures derived under the assumption of normality. Section 6 studies a
+cointegration-type model and shows that the limiting experiment of that model co-
+incides with the limiting experiment of the model of Sections 3 and 4, implying that
+the asymptotic optimality results of Section 4 can be extended to cointegration-type
+models. Mathematical derivations have been relegated to two Appendices.
+
+                            2. Predictive Regression Model
+
+Following Cavanagh, Elliott, and Stock (1995), Sections 3-5 consider a bivariate model
+in which the observed data (yt, xt) : 1  t  T is generated by the recursive system
+
+                yt =  + xt-1 + ty,                                            (1)
+
+                xt = µx + vtx,                vtx = vtx-1 +  (L) xt ,         (2)
+
+where3
+
+A1. v0x = 0.
+
+A2.  E (t|t-1, t-2, . . .) =  0, E (t  t|t-1, t-2, . . .)  =  for some positive definite
+     matrix , and supt E       t 2+     <  for some        > 0, where t = (ty, xt ) .
+
+A3.  (L) = 1 +       iLi,     where      (1)  =  0  and         i  |i|  <  .
+                i=1                                        i=1
+
+    By design, the model (1)-(2) captures the salient features of the predictive regres-
+sion model, a popular model in empirical finance.4 Our goal is to construct one- and
+two-sided tests of the null hypothesis  = 0, treating , , and the 's as unknown
+
+    3In assumption A2 and elsewhere in the paper, · denotes the Euclidean norm and (in)equalities
+involving conditional expectations are assumed to hold almost surely.
+
+    4In a predictive regression, yt denotes a stock return in period t, xt-1 is a predictor observed at
+time t - 1, and the hypothesis of interest is  = 0.
+Optimal Inference with Nearly Integrated Regressors                               4
+
+nuisance parameters. Regarding the nuisance parameter , particular attention will
+given to the (empirically relevant) case where the predetermined regressor xt-1 in (2)
+is highly persistent in the sense that  is "close" to (but not necessarily equal to)
+unity.
+
+    The development of inference procedures proceeds in three steps. First, Section 3
+develops finite sample optimality theory under the assumption that µx = 0,  (L) = 1,
+and t is Gaussian white noise. Then, employing the same assumptions, Section 4
+develops asymptotic optimality theory under the assumption that the persistence pa-
+rameter  is modeled as local-to-unity in the sense that  = 1 + T -1c for some fixed
+constant c. Finally, Section 5 proposes feasible testing procedures that enjoy asymp-
+totic optimality properties under the assumptions of Section 4 and are asymptotically
+valid under A1-A3 and local-to-unity asymptotics.
+
+ 3. Optimal Inference with Gaussian Errors: Finite Sample Theory
+
+Consider the Gaussian model
+
+yt =  + xt-1 + yt ,                                                              (3)
+
+xt = xt-1 + tx,                                                                  (4)
+
+where
+A1. x0 = 0.
+A2. t = (yt , tx)  i.i.d. N (0, ) , where  is a known, positive definite matrix.
+
+    Under these assumptions, the log likelihood function L (·) satisfies
+
+                     T    yt -  - xt-1 - x-x1xy (xt - xt-1) 2
+
+-2L (, , ) = -yy1.x
+
+                     t=1
+
+             T
+
++x-x1 (xt - xt-1)2 ,
+
+                     t=1
+
+where yy.x = yy - x-x1x2y and  has been partitioned conformably with t.
+    Testing problems involving  are invariant under transformations of the form
+
+(yt, xt)  (yt + a, xt) , a  R.
+       Optimal Inference with Nearly Integrated Regressors                             5
+
+If  is unrelated to  (as is assumed here), then it seems reasonable to consider
+
+only tests that are invariant under location transformations of the y's. The statistic
+
+[(y1, . . . , yT ) , (x1, . . . , xT )] is a maximal invariant under this group of transforma-
+tions, where  is a T × (T - 1) matrix whose columns form an orthonormal basis
+for the set of T -vectors that sum to zero (i.e. are orthogonal to  = (1, . . . , 1) ).
+
+Apart from an additive constant, the log density of this maximal invariant is given
+
+by L (, ) = max L (, , ) .
+    Now,
+
+       L  (,  )  -  L  (0,  0)  =    S  +  S  -  1   - x-x1xy  2  S  -  1    2S  ,     (5)
+                                                 2                      2
+
+where
+
+                       T                                                   T
+
+       S = y-y1.x           xµt-1 yt - -xx1xyxt ,   xµt-1 = xt-1 - T -1         xs-1,
+
+                    t=1                                                    s=1
+
+                    T
+
+       S = x-x1           xt-1xt - x-x1xyS,
+
+                    t=1
+
+                       T
+
+       S = y-y1.x           xµt-21,
+
+                    t=1
+
+                    T
+
+       S = x-x1           x2t-1.
+
+                    t=1
+
+It follows from (5) that S = (S, S, S, S) is a sufficient statistic for the distribu-
+tion of the maximal invariant. When studying invariant tests of H0 :  = 0, we can
+therefore restrict attention to tests based on S. Any such test can be represented by
+
+means of a [0, 1]-valued function  (·) such that H0 is rejected with probability  (s)
+if S = s = (s, s, s, s) . The associated probability of rejecting H0 is E, (S) ,
+where the subscript on E indicates the distribution with respect to which the expec-
+
+tation is taken. Our aim is to explore the extent to which it is possible to maximize
+
+E, (S) uniformly in (, ) subject to "reasonable" restrictions on  (·) .
+    The distribution of S is a curved exponential family [in the sense of Efron (1975,
+
+1978)], the minimal sufficient statistic being of dimension four whereas the parameter
+
+vector (, ) is two-dimensional. (A precise statement is provided in Lemma 1 (a) be-
+
+low.) As a consequence, conventional optimality theory for exponential families [e.g.,
+Optimal Inference with Nearly Integrated Regressors              6
+
+Lehmann (1994)] does not apply.5 Nevertheless, it is possible to construct tests with
+interesting optimality properties because it turns out that a set of restrictions moti-
+vated by the conditionality principle are sufficient to remove the statistical curvature
+from the problem.
+
+    Since the distribution of (S, S) does not depend on , the pair (S, S) is
+a specific ancillary for  in the sense of Basu (1977). A conditionality argument
+therefore suggests that inference on  should be based on the conditional distribution
+of (S, S) given (S, S) . A remarkable property of that conditional distribution
+is given in part (b) of the following lemma.
+
+Lemma 1. Let (yt, xt) be generated by (3) - (4) and suppose A1-A2 hold.
+
+(a) The joint distribution of S is a curved exponential family with density
+
+fS (s; , ) = K (, ) fS0 (s)
+
+× exp  s  +  s               -  1   - -xx1xy  2  s  -  1  2s  ,
+                                2                      2
+
+where fS0 (·) is a density of S when  =  = 0 and K (·) is defined by the requirement
+ R4 fS (s; , ) ds = 1.
+
+(b) The conditional distribution of (S, S) given (S, S) is a linear exponential
+family with density
+
+        fS,S|S,S (s, s|s, s; , ) = g (, |s, s) h (s, s|s, s)
+                                                          × exp (s + s)
+
+for some functions g (·) and h (·) .
+
+    In view of Lemma 1 (b), we can remove the curvature from the testing problem
+by conditioning on the specific ancillary (S, S) . It is this property that enables
+us to use the classical results of Lehmann (1994) to find UMP conditionally unbiased
+(UMPCU) tests for one- and two-sided testing problems concerning .
+
+    First, consider the one-sided testing problem6
+
+    5Proofs of optimality results in linear exponential families rely on the monotone likelihood ratio
+property and (in testing problems with nuisance parameters) on completeness of minimal sufficient
+statistics. Neither property holds in the curved exponential family studied here.
+
+    6Results for the one-sided testing problem H0 :  = 0 vs. H1 :  < 0 are completely analogous
+and are omitted to conserve space.
+Optimal Inference with Nearly Integrated Regressors                                        7
+
+                               H0 :  = 0 vs. H1 :  > 0.
+A level  test with test function  (·) is conditionally unbiased if
+
+E0, [ (S) |S, S]                                          R,
+ E, [ (S) |S, S]                                         > 0,   R.
+
+Any conditionally unbiased test is conditionally similar in the sense that
+
+E0, [ (S) |S, S] =    R.                                                    (6)
+
+On the other hand, the properties of exponential families [e.g., Lehmann (1994, The-
+
+orem 2.9)] can be used to show that a test is UMP among conditionally similar tests
+
+only if it is conditionally unbiased. As a consequence, a test is UMPCU if and only
+
+if it is UMP among tests satisfying (6) .
+    Consider the test function  (·) given by
+
+ (s) = 1 [s > C (s, s, s)] ,                                                (7)
+
+where 1 [·] is the indicator function, C (·) satisfies
+
+E0  (S) |S, S, S = ,                                                        (8)
+
+and the subscript "" on E has been omitted in recognition of the fact that the distri-
+bution of S conditional on (S, S, S) does not depend on  (because (S, S, S)
+is sufficient for  for any fixed value of ). By construction, the test based on  (·)
+satisfies (6) . In fact, it follows from Theorem 2 (a) below that the test associated
+with  (·) is the UMPCU level  test.
+
+    Next, consider the two-sided testing problem
+
+                               H0 :  = 0 vs. H2 :  = 0.
+
+In this case, a level  test is conditionally unbiased if its test function  (·) satisfies
+Optimal Inference with Nearly Integrated Regressors                        8
+
+E0, [ (S) |S, S]                                    R,
+ E, [ (S) |S, S]                                   = 0,   R.
+
+It follows from Lemma 1 (b) and the properties of exponential families (e.g., Lehmann
+(1994, Theorem 2.9)) that a level  test is conditionally unbiased only if its test
+function  (·) satisfies
+
+  E,  [ (S) |S, S]                                =  0    R.
+
+                                              =0
+
+In turn, this condition holds if and only if
+
+E0, [ (S) S|S, S] = E0, [S|S, S]                          R.  (9)
+
+As a consequence, the class of test functions satisfying (6) and (9) contains all test
+functions associated with tests that are conditionally unbiased. On the other hand,
+it can be shown that a test is uniformly most powerful among tests satisfying (6) and
+(9) only if it is conditionally unbiased.
+
+    Theorem 2 (b) shows that a level  test is UMPCU if its test function is given by
+
+ (s) = 1 s < C (s, s, s) + 1 s > C (s, s, s) ,                (10)
+
+where C (·) and C (·) satisfy
+
+E0  (S) |S, S, S = ,                                          (11)
+
+E0  (S) S|S, S, S =  · E0 [S|S, S, S] .                       (12)
+
+Theorem 2. Let (yt, xt) be generated by (3) - (4) and suppose A1-A2 hold.
+
+(a) If  (·) satisfies (6) , then
+
+                                  E, (S)  E, (S)
+    Optimal Inference with Nearly Integrated Regressors                                          9
+
+for every   0 and every   R.
+
+(b) If  (·) satisfies (6) and (9) , then
+
+                                       E, (S)  E, (S)
+
+for every   R and every   R.
+
+Remarks. (i) Qualitatively similar results can be obtained if the intercept term 
+is known. For concreteness, suppose  = 0. In that case, the log likelihood function
+L0 (·) satisfies
+
+L0  (,  )  -  L0      (0,  0)  =  S0   +  S0  -  1        2 +   - x-x1xy 2 xx-yy1.x         S ,
+                                                 2
+
+where S0 = y-y1.x     T    xt-1   (yt  -   -xx1  xy xt )  and  S0  =  x-x1  T    xt-1xt  -   x-x1  xy S0 .
+                      t=1                                                   t=1
+
+The distribution of the minimal sufficient statistic S0, S0, S is a curved exponen-
+tial family, but the curvature disappears once we condition the specific ancillary S.
+
+Optimality results analogous to Theorem 2 are therefore readily available, but we
+
+omit a precise statement because the case where  is known appears to be of limited
+
+empirical relevance.
+
+(ii) In most applications, the autoregressive parameter  can be assumed to lie in
+
+some subset  of R. In such cases, the condition (6) might appear excessively strong.
+
+By the properties of exponential families (e.g., Lemma 1 (b) and Lehmann (1994,
+
+Theorem 4.1)), the condition
+
+                           E0, [ (S) |S, S] =    
+
+is equivalent to (6) whenever  contains an open interval. A similar remark applies
+to (9) . Therefore, although the optimality results of Theorem 2 obviously reflect the
+fact that  is assumed to be unknown, the (implicit) assumption that  can take on
+any real value is not crucial. On the other hand, although our proofs go through
+for any open non-empty interval , our results will more important empirically when
+there is substantial uncertainty about the parameter .
+
+    (iii) Any conditionally similar test is similar in the sense that
+
+                                  E0, (S) =    R.
+Optimal Inference with Nearly Integrated Regressors  10
+
+It can be shown that the converse does not hold. As a consequence, the class of
+similar tests is strictly greater than the class of conditionally similar tests. It is an
+open question whether the test based on  (·) is UMP within the class of unbiased
+tests.
+
+    (iv) Studying a more general (but closely related) model, Stock and Watson (1996)
+investigated tests maximizing a weighted average (local asymptotic) power criterion.
+When adapted to the model under consideration here, the approach of Stock and
+Watson (1996) involves maximization of
+
+E, (S) dG (, )                                       (13)
+
+among test functions  (·) satisfying
+
+E0, (S)     ,                                        (14)
+
+where  is some subset of R and G (·) is a weighting function defined on [0, ) × 
+(in the one-sided case) or R ×  (in the two-sided case). The class of tests satisfying
+(14) depends on , but is strictly larger than the class of conditionally similar tests.
+On the other hand, the test that maximizes (13) subject to (14) generally depends
+on the weighting function G (·) (and ), implying that no UMP test exists among
+tests satisfying (14) . Our approach to optimality theory therefore complements the
+approach of Stock and Watson (1996) in the sense that we are able to arrive at a
+stronger conclusion (existence of a UMP test) by confining attention to a strict subset
+of the set of testing procedures considered in the Stock and Watson (1996) approach.
+
+    (v) Starting from the maximal invariant [(y1, . . . , yT ) , (x1, . . . , xT )] , we em-
+ployed two dimension reduction techniques to arrive at Theorem 2. First, sufficiency
+reduced the problem to one involving the vector S. Then, conditioning on specific an-
+cillaries led to a further reduction of the dimension of the data, effectively removing
+(S, S) from the problem. Reducing by sufficiency before conditioning on (spe-
+cific) ancillaries is consistent with the recommendations of Lehmann (1994, Chapter
+10). Nevertheless, it might be tempting to attempt to condition on specific ancil-
+laries by reducing by sufficiency. However, it can be shown that  is not identified
+from the distribution of the maximal invariant [(y1, . . . , yT ) , (x1, . . . , xT )] given the
+specific ancillary (x1, . . . , xT ) . As a consequence, our model provides an illustration
+of the point that "it is desirable to reduce the data as far as possible through suffi-
+ciency, before attempting further reduction by means of (specific) ancillary statistics"
+[Lehmann (1994, pp. 545-546)].
+Optimal Inference with Nearly Integrated Regressors  11
+
+   4. Optimal Inference with Gaussian Errors: Asymptotic Theory
+
+This section develops an asymptotic counterpart of Theorem 2. Whereas the finite
+sample results of the previous section require no specific assumptions about the range
+of possible values of the persistence parameter  (cf. remark (ii) following Theorem 2),
+the asymptotic properties of the model (1) - (2) depend crucially on the assumptions
+made with respect to . When  is bounded away from unity in absolute value, the
+curvature of the model vanishes asymptotically and standard large-sample optimality
+theory based on the theory of locally asymptotically normal (LAN) likelihood ratios
+(e.g., Choi, Hall, and Shick (1996)) is applicable. In particular, one-sided testing
+problems admit asymptotically UMP tests and two-sided testing problems admit
+asymptotically UMP unbiased tests. In contrast, Jeganathan (1997) has shown that
+the statistical curvature persists asymptotically when  is modeled as local-to-unity
+in the sense that  = T (c) = 1 + T -1c for some fixed, unknown constant c.7
+
+    Because the statistical curvature does not vanish when  = T (c) , testing prob-
+lems concerning  exhibit nonstandard large-sample properties under local-to-unity
+asymptotics. For instance, the t-test testing  = 0 in (1) is not asymptotically
+pivotal under local-to-unity asymptotics [e.g., Cavanagh, Elliott, and Stock (1995),
+Elliott and Stock (1994)]. Moreover, testing procedures developed under the assump-
+tion that  = 1 are not robust to local departures from that assumption [e.g., Stock
+(1997)].8 Procedures that are asymptotically valid when  is local-to-unity have been
+proposed by Campbell and Dufour (1997), Campbell and Yogo (2003), Cavanagh, El-
+liott, and Stock (1995), and Lanne (2002), but all of these existing testing procedures
+are asymptotically biased.9 In particular, these procedures are too conservative for
+testing the region in the alternative hypothesis that is most likely to be the important
+one in practice: the one where  is close its null value. By developing an asymptotic
+counterpart of Theorem 2, this section demonstrates by example that (non-trivial)
+asymptotically unbiased testing procedures can be constructed even when  is local-
+to-unity.
+
+    Under the local-to-unity parameterization of , an appropriate parameterization
+
+    7When  = T (c) = 1 + T -1c for some known constant c (e.g., when the unit root hypothesis
+ = 1 is known to hold), the curvature also persists but the situation is much simpler because the
+likelihood ratios are locally asymptotically mixed normal (LAMN) and the conditional optimality
+results of Feigin (1986) are applicable.
+
+    8Because tests of the unit root hypothesis  = 1 are inconsistent against local-to-unity alternatives
+[e.g., Elliott, Rothenberg, and Stock (1996), Stock (1994)], this non-robustness result can also be
+used to establish the invalidity of two-step procedures based on unit root pretests [e.g., Stock and
+Watson (1996)].
+
+    9The tests proposed by Campbell and Dufour (1997), Campbell and Yogo (2003) and Cavanagh,
+Elliott, and Stock (1995), respectively, are asymptotically biased because they are not asymptotically
+similar. In spite of being asymptotically similar, Lanne's (2002) test is also asymptotically biased
+[Wright (2000)].
+       Optimal Inference with Nearly Integrated Regressors                      12
+
+of  is  = T (b) = 0 + T -1-xx1/21y/y2.xb, b being a fixed constant. Expressed in terms
+of b, the null hypothesis is b = 0, while the one- and two-sided alternatives are b > 0
+and b = 0, respectively.
+
+    Expanding L (·) around (, ) = (0, 1) = [T (0) , T (0)] , we have:
+
+               L [T (b) , T (c)] - L [T (0) , T (0)]
+
+                                                                                (15)
+
+                                   1          c          2        1
+                                   2         1 - 2                2
+       =       bR    +  cR  -         b-                    R  -     c2R  ,
+
+where
+
+                               T
+
+       R = x-x1/2y-y1./x2T -1         xµt-1 yt - 0xt-1 - x-x1xyxt ,
+
+                               t=1
+
+                     T                       
+                                             -
+       R = x-x1T -1       xt-1xt -        1     2  R  ,      = xy-xx1/2y-y1/2,
+
+                     t=1
+
+                     T
+
+       R = x-x1T -2       xtµ-21,
+
+                     t=1
+
+                     T
+
+       R = x-x1T -2       xt2-1.
+
+                     t=1
+
+As is S, the statistic R = (R, R, R, R) is minimal sufficient. When developing
+asymptotic counterparts of the results of Section 3, it turns out to be convenient
+to work with R. The following lemmas give some useful properties of its limiting
+distribution.
+
+Lemma 3. Let (yt, xt) be generated by (3) - (4) and suppose A1-A2 hold. If
+b = T ( - 0) 1x/x2-yy1./x2 and c = T ( - 1) are fixed as T increases without bound,
+then
+
+       R d R (b, c) = R (b, c) , R (b, c) , R (c) , R (c)
+
+as T  , where
+Optimal Inference with Nearly Integrated Regressors                                        13
+
+R (b, c) =    1                                  c               1
+R (b, c) =                                      1 - 2
+ R (c) =       Wxµ,c (r) dWy (r) + b -                            Wxµ,c (r)2 dr,
+ R (c) =
+            0                                                  0
+
+              1                           1     2  R  (b,  c)  ,
+                                             -
+               Wx,c (r) dWx,c (r) -
+
+            0
+
+              1
+
+               Wxµ,c (r)2 dr,
+
+            0
+              1
+
+               Wx,c (r)2 dr,
+
+            0
+
+Wx and Wy are independent Wiener processes, Wxµ,c (r) = Wx,c (r) -          1   Wx,c  (s)  ds,
+                                                                            0
+and Wx,c an Ornstein-Uhlenbeck process satisfying the stochastic differential equation
+
+dWx,c (r) = cWx,c (r) dr + dWx (r) with initial condition Wx,c (0) = 0.
+
+Lemma 4. Let R (b, c) be defined as in Lemma 3.
+
+(a) The joint distribution of R (b, c) is a curved exponential family with density
+
+fR (r; b, c, ) = K (b, c, ) fR0 (r; )                          2                   
+
+            ×  exp  br  +      cr  -   1  b-      c               r  -   1  c2  r     ,
+                                       2         1 - 2                   2
+
+where r = (r, r, r, r) , fR0 (·; ) is a density of R (0, 0) , and K (·) is defined by
+the requirement R4 fR (r; b, c, ) dr = 1.
+(b) The conditional distribution of R (b, c) , R (b, c) given (R (c) , R (c)) is
+a linear exponential family with density
+
+    fR,R|R,R (r, r|r, r; b, c, ) = g (b, c|r, r; ) h (r, r|r, r; )
+                                                         × exp (br + cr)
+
+for some functions g (·) and h (·) .
+    The characterizations of the limiting distribution of R given in Lemmas 3 and
+
+4 serve complementary purposes. Lemma 4, which is based on the theory of LAQ
+Optimal Inference with Nearly Integrated Regressors      14
+
+likelihood ratios [Jeganathan (1995), Le Cam and Yang (2000)], forms the basis of the
+development of asymptotic counterparts of the results of the previous section. In par-
+ticular, Lemma 4 (an asymptotic counterpart of Lemma 1) enables us to characterize
+one- and two-sided tests with asymptotic optimality properties. These characteriza-
+tions, given in Theorem 5, are abstract in the sense that they involve the density
+fR0 (·; ) for which no closed form expression appears to be known. To help make
+the asymptotically optimal tests operational, Theorem 7 of Section 5 uses Lemma
+3 to obtain an integral representation of fR0 (·; ) which is useful for computational
+purposes.
+
+    In view of Lemma 4, the functional R (b, c) inherits those distributional properties
+of S that were exploited in the development of the finite sample optimality results of
+Section 3. By implication, the limiting experiment associated with the sequence of
+models under study here has the same basic structure as the finite sample experiments
+studied in Section 3. Specifically, the log likelihood ratios associated with the limiting
+experiment are quadratic; that is, the log likelihood ratios are LAQ in the sense of
+Jeganathan (1995). Moreover, the quadratic terms R (c) and R (c) are specific
+ancillaries in the limiting experiment. It therefore seems plausible that appropriately
+constructed asymptotic counterparts of  (·) and  (·) should enjoy asymptotic
+optimality properties analogous to the finite sample optimality properties enjoyed by
+ (·) and  (·) . Theorem 5, the main result of the paper, verifies this conjecture.
+
+    Corresponding to any invariant test of H0 : b = 0 based on R, there is a [0, 1]-
+valued function  (·) such that the probability of rejecting H0 equals  (r) whenever
+R = r. This test function satisfies  =   , where  (·) is the test function associated
+with S and  (·) is any mapping such that  (S) = R (with probability one).
+
+    Asymptotic optimality results for the one-sided testing problem
+
+                                  H0 : b = 0 vs. H1 : b > 0
+
+can be obtained by restricting attention to test functions satisfying an asymptotic
+conditional similarity condition. Our formulation of an asymptotic counterpart of
+the conditional similarity condition (6) is motivated by the fact that    satisfies
+(6) if and only if
+
+ET (0),T (c) [( (R) - ) g (R, R)] = 0  c  R, g  Cb R2 ,  (16)
+
+where Cb (R2) denotes the set of bounded, continuous, real-valued functions on R2.
+The advantage of this characterization of conditional similarity is that it does not
+involve conditional distributions, implying that difficulties associated with conditional
+weak convergence [e.g., Sweeting (1989)] can be avoided by basing the formulation
+     Optimal Inference with Nearly Integrated Regressors                           15
+
+of an asymptotic conditional similarity condition on an asymptotic version of (16) .
+Following Feigin (1986), who attributes the approach to Le Cam, we say that a
+sequence of tests with associated test functions {T (·)} is locally asymptotically
+conditionally similar (at level ) if
+
+lim  ET (0),T (c)  [(T  (R)     -  )  g  (R ,  R )]  =     0     c  R, g  Cb R2 .  (17)
+
+T 
+
+In perfect analogy with Theorem 2 (a), Theorem 5 (a) below shows that a one-sided
+test of b = 0 has maximal local asymptotic power among locally asymptotically
+conditionally similar tests if its testing function is given by
+
+                         (r; ) = 1 [r > C (r, r, r; )] ,                           (18)
+
+where C (·) is the continuous function satisfying
+
+                        E  (R; ) |R, R, R = ,                                      (19)
+
+and R = R, R, R, R = R (0, 0) .10
+    An attainable efficiency bound for the two-sided testing problem
+                                 H0 : b = 0 vs. H2 : b = 0,
+
+is available for the class of testing functions {T (·)} satisfying (17) and the following
+asymptotic counterpart of (9) :
+
+lim  ET (0),T (c)  [(T  (R)  -  )  R     ·  g  (R ,  R )]  =  0  c  R, g  Cb R2 . (20)
+
+T 
+
+Indeed, it is shown in Theorem 5 (b) that
+
+      (r; ) = 1 r < C (r, r, r; ) + 1 r > C (r, r, r; )                            (21)
+
+is optimal among test functions satisfying (17) and (20) , where C (·) and C (·) are
+
+  10The existence of the continuous function C (·) (and the continuous functions C (·) and C (·)
+appearing in the definition of  (·)) is established in Lemma 11 of Appendix A. The domain of
+C (·) is a set S  R4 satisfying Pr R, R, R;   S = 1.
+Optimal Inference with Nearly Integrated Regressors                  16
+
+the continuous functions satisfying
+
+   E  (R; ) |R, R, R = ,                                             (22)
+
+E      (R;  )  ·  R  |R  ,            R  ,  R    =  · E R|R, R, R .  (23)
+     
+
+Theorem 5. Let (yt, xt) be generated by (3) - (4) and suppose A1-A2 hold.
+
+(a) If {T (·)} satisfies (17) , then
+
+   limT ET (b),T (c)T (R)  limT  ET (b),T (c) (R; )
+                                     = E  (R (b, c) ; )
+
+for every b  0 and every c  R.
+
+(b) If {T (·)} satisfies (17) and (20) , then
+
+                limT ET (b),T (c)T (R)  limT  ET (b),T (c) (R; )
+
+                                                   = E  (R (b, c) ; )
+
+for every b  R and every c  R.
+    In view of Theorem 5, the maximal attainable (by tests satisfying the restrictions
+
+we impose) local asymptotic power against the local alternative  = T (b) depends
+on the values of two nuisance parameters, the persistence parameter c and , the
+coefficient of correlation computed from .
+
+    Let  (·) and  (·) denote the asymptotic Gaussian power envelopes for one-
+and two-sided size  tests characterized in Theorem 5; that is, let
+
+ (b, c; ) = E  (R (b, c) ; )
+               = Pr R (b, c) > C R (b, c) , R (c) , R (c) ;  ,
+Optimal Inference with Nearly Integrated Regressors                       17
+
+           (b, c; ) = E  (R (b, c) ; )
+
+                          = Pr R (b, c) < C R (b, c) , R (c) , R (c) ; 
+                               + Pr R (b, c) > C R (b, c) , R (c) , R (c) ;  .
+
+The next section proposes feasible one- and two-sided test functions that attain  (·)
+and  (·) , respectively, under more general assumptions than those of Theorem 5.
+Remarks. (i) Theorem 5 (a) remains true if the requirement (17) is replaced with
+the following condition:
+
+lim  ET (0),T (c)  [(T  (R)  -  )  g  (R ,  R )]  =  0  c  C, g  Cb R2 ,
+
+T 
+
+where C  R contains an open interval. [A similar remark applies to Theorem 5
+(b).] The proof of this assertion is identical to the proof of Theorem 5 (a) because it
+follows from the properties of exponential families [e.g., Lemma 4 (b) and Lehmann
+(1994, Theorem 4.1)] that if C  R contains an open interval, then the class  (, )
+defined in the proof of Theorem 5 (a) coincides with the class of all functions  (·)
+satisfying
+
+           E [( (R) - ) g (R, R)  (0, c)] = 0 c  C, g  Cb R2 ,
+
+where  (·) is defined as in the proof of Theorem 5 (a).
+    (ii) In view of remark (i), the function  (·) constitutes a suitable power enve-
+
+lope also if c is treated as an unknown, non-positive nuisance parameter, a plausible
+assumption in most empirical applications. On the other hand, the local asymptotic
+conditional similarity condition (17) would be unnecessarily restrictive if a consistent
+estimator of c was available. No such estimator exists under the assumptions of our
+model, but consistent estimation of c is feasible if c is treated as a known (continuous)
+function of  [e.g., Valkanov (1999)]. (Consistent estimators of c are also available in
+certain panel versions of our model [e.g., Moon and Phillips (2000, 2004)].)
+
+                                    5. Feasible Inference
+This section considers the general case where (yt, xt) is generated by (1) - (2) ,
+assumptions A1-A3 hold and local-to-unity asymptotics are employed. Our aim is to
+Optimal Inference with Nearly Integrated Regressors                                        18
+
+construct test functions with desirable large-sample properties. Specifically, we wish
+
+to develop test functions that do not require knowledge of any nuisance parameters,
+
+are asymptotically equivalent to  (R; ) and  (R; ) under the assumptions of
+Theorem 5, and are well behaved more generally. This will be accomplished by con-
+structing a statistic R^, which is asymptotically equivalent to R under the assumptions
+
+of the previous section and is well behaved more generally.                           T    xs-1
+    Let x0 = x1, v^0x = 0, and define v^tx = xt - x1 and x^µt-1 = xt-1 - T -1         s=1
+
+(for t = 1, . . . , T ). Let
+
+       yy yx                         TT                 yt               sy
+       xy xx                                          (L) xt           (L) sx
+=             = lim T -1                      E
+                T 
+                                     t=1 s=1
+
+denote the long-run variance of (yt ,  (L) tx) and let ^ be a consistent estimator
+thereof. Finally, let
+
+                                T
+
+   R^ = ^ y-y1./x2^ -xx1/2T -1       x^µt-1 (yt - 0xt-1)
+
+                                t=1
+
+               ^      1                                               T
+              1 - ^2  2
+          -                     ^-xx1T -1v^Tx2 - 1   - ^-xx1T -2v^Tx       v^tx-1  ,
+
+                                                                      t=1
+
+   R^  =  1  ^-xx1T -1v^Tx2 - 1      -  1     ^  ^2  R^  ,
+          2                                   -
+
+                T
+
+R^ = ^x-x1T -2        x^µt-21,
+
+                t=1
+
+                T
+
+R^ = ^-xx1T -2        v^tx-21,
+
+                t=1
+
+where ^yy.x = ^yy - ^-xx1^2xy, ^ = ^xy^x-x1/2^y-y1/2, and ^ has been partitioned in the
+obvious way.
+
+    As is R, the statistic R^ = R^, R^, R^, R^ is invariant under transformations
+of the form (yt, xt)  (yt + a, xt) , where a  R.11 Under the assumptions of Section
+4, R^ is asymptotically equivalent to R. More generally, we have:
+
+  11In fact, R^ is invariant under transformations of the form (yt, xt)  (yt + a, xt + mx) , where
+a  R and mx  R.
+     Optimal Inference with Nearly Integrated Regressors                                                19
+
+Theorem 6. Let (yt, xt) be generated by (1) - (2) , suppose A1-A3 hold, and
+
+suppose b = T  ( -      0) x1/x2y-y1./x2 and  c = T (  - 1) are       fixed as T  increases without
+bound, where   yy.x     = yy - -xx12xy.       If ^ p   , then         R^ d R      (b, c) as T  ,
+
+where  = xy-xx1/2y-y1/2 is the coefficient of correlation computed from . Moreover,
+
+              limT  ET (b),T (c) R^; ^ =  (b, c; )                        b  0, c  R,
+
+and
+
+          limT  ET (b),T (c) R^; ^ =  (b, c; )                            b  R, c  R.
+
+    In view of Theorem 6, the Gaussian power envelopes  (·) and  (·) are attain-
+able whether or not the innovations of the regression model are normally distributed
+
+(with a known covariance matrix). Moreover, the presence of serial correlation does
+
+not affect our ability to attain the Gaussian power envelope as long as Assumption
+
+A3 holds. As usual, these predictions of asymptotic theory are not expected to be
+
+borne out in  finite samples if the     errors vtx are "nearly" I(-1) (i.e., if | (1)|      is "small"
+relative to                             I(1) (i.e., if | (1)| is "large" relative to        
+              i=0  i2)  or  "nearly"                                                        i=0    2i ).
+
+Construction of consistent long-run variance estimators is a problem that has re-
+
+ceived considerable attention and there is no shortage of estimators satisfying the
+high-level assumption ^ p  of Theorem 6.12 To describe a consistent kernel
+
+estimator of , let u^t = ytµ - ^x^µt-1, v^tx - ^v^tx-1 , where ytµ = yt - T -1                     T    ys,
+                                                                                                   s=1
+
+^ =  T    x^tµ-21  -1   T    x^tµ-1yt,  and   ^  =  T        v^tx-21  -1  T    v^tx-1v^tx.  Under  the  as-
+     t=1                t=1                         t=1                   t=1
+
+sumptions of Theorem 6 and fairly general conditions on the kernel k (·) and the
+
+bandwidth parameter BT , it follows from Jansson (2002) that
+
+                                        TT          |t - s|
+                                                     BT
+                        ^ = T -1                 k           u^tu^s p .
+
+                                  t=1 s=1
+
+To implement the tests based on  R^; ^ and  R^; ^ , knowledge of the
+
+critical value functions C (·) , C (·) , and C (·) is required. These critical value
+functions are implicitly defined in terms of the conditional distribution of R given
+ R, R, R . That distribution is non-standard and does not appear to be avail-
+able in closed form, but can easily be obtained (numerically) with the help of the
+following integral representation of the joint distribution of R.
+
+  12Important contributions to the literature on long-run variance estimation include Andrews
+(1991), Andrews and Monahan (1992), Hansen (1992), de Jong and Davidson (2000), and Newey
+and West (1987, 1994).
+       Optimal Inference with Nearly Integrated Regressors                                                        20
+
+Theorem 7. The joint distribution of R admits a density of the form
+
+fR0 (r; ) = 1 r +                            2 r    >  -  1  ,  0  <  r  <     r
+                                         1-               2
+
+       ×          1 exp                        -   r2     h        2r + 2             2  r  +   1,  r  -  r ,  r  ,
+                 2r                               2r                              1-
+
+where
+
+       h (q, q, q)  =        1                                      t; q, q exp [-itq]                    dt,
+                       2 q q
+                                                           Re
+
+                                                       0
+
+ (t; z, z) =  |A + iB|-1/2                        exp  -        z        AB-1A + B -1 AB-1                z
+                                                                z                                         z
+                 cosh -2it
+
+              × exp +i                         z         B-1 - B-1A AB-1A + B -1 AB-1                           z
+                                               z                                                                z
+
+              +  |A    +                 iB|-1/2  exp    -          z             AB-1A + B -1 AB-1             z
+                                                                   -z                                          -z
+                    cosh -2it
+
+              × exp +i                          z         B-1 - B-1A AB-1A + B -1 AB-1                             z  ,
+                                               -z                                                                 -z
+
+                                                                                     
+                                               1 sinh 2t+sin 2 t         1   2 sinh t sin   t
+       A = A (t) =                              t cosh 2 t+cos2 t        t  cosh 2 t+cos   2 t      ,
+
+                                               1   2 sinh t sin   t     1      sinh  2t-sin 2 t
+                                               t  cosh 2 t+cos   2t   2t3/2    cosh  2 t+cos 2 t
+
+                                                                                                          
+                                         1 sinh 2t-sin 2 t               1            2 cosh t cos t
+       B = B (t) =                          t cosh 2 t+cos 2 t           t     1  -  cosh 2 t+cos 2 t     .
+
+                                      1  1  -   2 cosh t cos t        1     1  -   1  sinh 2t+sin 2 t
+                                      t        cosh 2 t+cos 2 t       t           2t  cosh 2 t+cos 2 t
+
+                                        6. Cointegration
+
+A closely related problem to that considered in Sections 2-5 is the problem of conduct-
+ing inference on long run economic relationships between highly persistent variables.
+The concept of cointegration [Engle and Granger (1987)] provides a useful framework
+for doing inference when the individual time series are known to have unit roots. A
+Optimal Inference with Nearly Integrated Regressors  21
+
+celebrated result from cointegration analysis shows that standard Wald-type test sta-
+tistics based on asymptotically efficient estimators of cointegrating coefficients have
+asymptotic 2 null distributions when the individual time series have unit roots.13
+Elliott (1998) has shown that the validity of the 2 result depends crucially on the
+validity of the unit root assumption. Indeed, the 2 result breaks down when the
+largest autoregressive root is modeled as local to unity.14
+
+    Recognizing the importance of Elliott's (1998) result, Stock and Watson (1996)
+and Wright (1999, 2000) have developed cointegration-type inference procedures that
+are asymptotically valid in the absence of (exact) unit root assumptions on the indi-
+vidual time series. Although the test proposed by Stock and Watson (1996) enjoys
+certain optimality properties (see remark (iv) on Theorem 2), it is asymptotically bi-
+ased, as are the tests due to Wright (1999, 2000). In contrast, this section shows that
+results analogous to Theorems 5 and 6 are available for cointegration-type models
+accommodating correlation between the (potentially) serially correlated error term
+of the equation of interest and current (and lagged) values of the nearly integrated
+regressor.
+
+6.1. Optimal Inference with Gaussian Errors. Consider the model
+
+yt =  + xt + yt ,                                    (24)
+
+xt = xt-1 + tx,                                      (25)
+
+where
+
+B1. x0 = 0.
+
+B2. t = (yt , xt )  i.i.d. N (0, ) , where  is a known, positive definite matrix.
+
+    Utilizing the methods developed in Sections 3-4, it is straightforward to develop
+asymptotically unbiased cointegration-type testing procedures with demonstrable op-
+timality properties.
+
+    When (yt, xt) is generated by (24) - (25) , testing problems involving  are
+invariant under transformations of the form (yt, xt)  (yt + a, xt) , where a  R. The
+log density LCI (·) of the maximal invariant [(y1, . . . , yT ) , (x1, . . . , xT )] satisfies
+
+  13The class of asymptotically efficient [in the sense of Phillips (1991a) and Saikkonen (1991)]
+estimators includes the estimators proposed by Johansen (1988, 1991), Park (1992), Phillips and
+Hansen (1990), Phillips (1991a, 1991b), Saikkonen (1991, 1992), and Stock and Watson (1993). For
+a review, see Watson (1994).
+
+  14Kauppi (2004) establishes a similar non-robustness result about Phillips's (1995) fully modified
+VAR method.
+       Optimal Inference with Nearly Integrated Regressors                                                22
+
+          LCI (, ) - LCI (0, 0)
+
+                                                                                                          (26)
+
+       =  SCI    +    SCI        -  1                        SCI                       -  1    2SCI    ,
+                                    2    - -xx1  xy                     - x-x1  xy        2
+
+where
+
+                              T                                                                     T
+
+       SCI = -yy1.x              xtm yt - -xx1xyxt ,                 xmt = xt - T -1 xs,
+
+                           t=1                                                         s=1
+
+                           T                                    T
+
+       SCI = -xx1                xt-1xt - -xx1xyy-y1.x               xµt-1 yt - -xx1xyxt ,
+
+                      t=1                                       t=1
+
+       SCI =          y-y1.x           T    xtm2     -yy1.x     T    xtmxµt-1     ,
+                                       t=1                      t=1
+                      y-y1.x        T    xtm  xtµ-1       -1       T    xµt-21
+                                    t=1                   yy.x     t=1
+
+                           T
+
+       SCI = -xx1                x2t-1,
+
+                      t=1
+
+xtm = xt - T -1  T    xs,  xtµ-1    =    xt-1  -  T -1    T     xs-1,   and       has  been  partitioned  in
+                 s=1                                      s=1
+conformity with t.
+
+In view of (26) , the model admits a minimal sufficient statistic whose distribution
+
+is a curved exponential family. Moreover, the curvature disappears when we condition
+
+on specific ancillaries, but in this case the dimension of the specific ancillary is greater
+
+than two, suggesting that inference is more complicated in this case than in the case
+
+of the predictive regression model of Sections 3-4. Because the individual elements
+
+of SCI are asymptotically equivalent (in the appropriate sense), the source of this
+potential complication vanishes asymptotically. In fact, it turns out that the limiting
+
+experiment associated with the cointegration model of this section is exactly the same
+
+as the limiting experiment associated with the predictive regression model.
+
+Lemma 8. Let (yt, xt) be generated by (24) - (25) and suppose B1-B2 hold.
+
+(a) For every bounded sequence (bT , cT ) ,
+       Optimal Inference with Nearly Integrated Regressors                                         23
+
+          LCI [T (bT ) , T (cT )] - LCI [T (0) , T (0)]
+
+                                1                          2           1
+                                2                -                     2
+       =  bT RCI  +  cT RCI  -          bT -  1     2  cT      RCI  -     c2T  RCI  +  op0  (1) ,
+
+where
+
+                                   T
+
+       RCI = x-x1/2-yy1./x2T -1         xµt-1 yt - 0xt - x-x1xyxt ,
+
+                                   t=1
+
+                          T                      
+                                                 -
+       RCI = x-x1T -1          xt-1xt -       1     2  RCI  ,        = xyx-x1/2y-y1/2,
+
+                          t=1
+
+                          T
+
+       RCI = -xx1T -2          xµt-21,
+
+                          t=1
+
+                          T
+
+       RCI = -xx1T -2          xt2-1,
+
+                          t=1
+
+and "op0 (1) " is shorthand for "op (1) when (, ) = (0, 1) ".
+
+(b) If b = T ( - 0) x1/x2y-y1./x2 and c = T ( - 1) are fixed as T increases without
+bound, then RCI = RCI , RCI , RCI , RCI d R (b, c) as T  , where R (b, c) is
+defined as in Section 4.
+
+    It follows from Lemma 8 that RCI is an asymptotically sufficient statistic, imply-
+ing that there is no loss of attainable asymptotic power from confining attention to
+tests based on RCI. Because the limiting representation of RCI coincides with the lim-
+iting representation of the minimal sufficient statistic R of the predictive regression
+model, the limiting experiment of the cointegration model coincides with the limiting
+experiment of the predictive regression model. As a consequence, the asymptotic
+optimality theory of Section 4 carries over in an obvious way.
+
+Theorem 9. Let (yt, xt) be generated by (24) - (25) and suppose B1-B2 hold.
+
+(a) If {T (·)} satisfies
+
+          limT  ET (0),T (c) T RCI -  g RCI , RCI = 0                                              (27)
+Optimal Inference with Nearly Integrated Regressors                24
+
+for every c  R and every g  Cb (R2) , then
+
+limT ET (b),T (c)T RCI  limT  ET (b),T (c) RCI ; 
+                                      = E  (R (b, c) ; )
+
+for every b  0 and every c  R.
+
+(b) If {T (·)} satisfies (27) and                                  (28)
+                limT  ET (0),T (c) T RCI -  RCI · g RCI , RCI = 0
+
+for every c  R and every g  Cb (R2) , then
+
+limT ET (b),T (c)T RCI  limT  ET (b),T (c) RCI ; 
+                                      = E  (R (b, c) ; )
+
+for every b  R and every c  R.
+
+Remark. The proof of Theorem 9 is based on Lemma 8 and the methods developed
+in Section 4. In an attempt to shed additional light on the asymptotic equivalence
+between the model (24)-(25) and the predictive regression model (3)-(4) , we briefly
+sketch an alternative method of proof. Replacing yt with yt-0xt if necessary, there is
+no loss of generality from assuming that the null hypothesis of interest is H0 :  = 0.
+As in Jeganathan (1997), the model can be written as
+
+     yt =  + ~xt-1 + ~yt ,                                         (29)
+
+     xt = xt-1 + tx,                                               (30)
+
+where ~ = , ~ty = yt + xt , x0 = 0, and
+
+~ty   i.i.d. N 0, ~ ,                    ~ =  1     1   .
+tx                                            01    01
+       Optimal Inference with Nearly Integrated Regressors                               25
+
+If ~ is viewed as a fixed parameter (rather than a function of  (and )), this repa-
+rameterized model is in the form considered in Sections 3-4 and the null hypothesis
+can be expressed as a restriction on ~ (because  = 0 if and only if ~ = 0). Because
+~ =  + O (T -1) under contiguous alternatives (i.e. when  = O (T -1)), it can be
+shown that the dependence of ~ on  is asymptotically negligible (in the appropriate
+sense), implying that an alternative proof of Theorem 9 can proceed by applying
+Theorem 5 to the reparameterized model (29) - (30) .
+
+6.2. Feasible Inference. Suppose (yt, xt) is generated by the following gen-
+eralization of the model considered in the previous subsection:
+
+                 yt =  + xt + uty,                                                       (31)
+
+                 xt = µx + vtx,                 vtx = vtx-1 + utx,                       (32)
+
+where
+
+                              ut = (uyt , utx) =  (L) t                                  (33)
+
+and
+
+B1. v0x = 0.
+
+B2.  E (t|t-1, t-2, . . .) =  0, E (t  t|t-1, t-2, . . .)  =  for   some  positive  definite
+     matrix , and supt E       t 2+     <  for some        > 0.
+
+B3.  (L) = I2 +       iLi,    where    |  (1)|  =  0  and       i   i  < .
+                 i=1                                       i=1
+
+By accommodating correlation between the (potentially) serially correlated error
+
+term of the equation of interest and current (and lagged) values of the nearly inte-
+
+grated regressor, the model (31) - (33) generalizes the predictive regression model
+
+(1)-(2) in a couple of ways. Nevertheless, it turns out to be relatively straightforward
+
+to construct testing procedures with desirable large-sample properties. Once again,
+
+the idea is to base inference on a statistic whose limiting distribution (under B1-B3
+
+and local reparameterizations of  and ) is that of R (b, c) . For completeness, we
+
+give a precise description.                                                         T    xs-1
+    Let x0 = x1, v^0x = 0, and define v^tx = xt - x1 and x^tµ-1 = xt-1 - T -1       s=1
+
+(for t = 1, . . . , T ). Define
+     Optimal Inference with Nearly Integrated Regressors                                 26
+
+                  yy yx                                 TT
+                  xy xx
+              =                         = lim T -1               E (utus)
+
+                                            T           t=1 s=1
+
+and
+
+                                              T t-1
+
+                  xy     =    lim T -1                 E (uxt uys ) ,
+
+                              T               t=2 s=1
+
+and let ^ and ^xy be consistent estimators thereof. Finally, let
+
+                                        T
+
+     R^CI = ^ -yy1./x2^ x-x1/2 T -1          x^tµ-1 (yt - 0xt-1) - ^xy
+
+                                        t=1
+
+                   ^            1                                        T
+                  1 - ^2        2
+              -                    ^-xx1T -1v^Tx2 - 1   - ^-xx1T -2v^Tx       v^tx-1  ,
+
+                                                                         t=1
+
+     R^CI  =  1  ^x-x1T -1v^Tx2 - 1        -  1  ^  ^2  R^  ,
+              2                                  -
+
+                         T
+
+     R^CI = ^x-x1T -2         x^tµ-21,
+
+                         t=1
+
+                         T
+
+     R^CI = ^x-x1T -2         v^tx-21,
+
+                         t=1
+
+where ^yy.x = ^yy - ^x-x1^2xy, ^ = ^xy^x-x1/2^-yy1/2, and ^ has been partitioned in the
+obvious way.
+
+Theorem 10. Let (yt, xt) be generated by (31) - (33) , suppose B1-B3 hold, and
+suppose b = T ( - 0) x1/x2y-y1./x2 and c = T ( - 1) are fixed as T increases without
+bound, where yy.x = yy - -xx1x2y. If ^ , ^xy p (, xy) , then R^CI d R (b, c)
+
+as T  , where  = xy-xx1/2-yy1/2. Moreover,
+
+     limT     ET  (b),T  (c)       R^CI ; ^   =  (b, c; )              b  0, c  R,
+                              
+
+and
+
+     limT  ET (b),T (c) R^CI ; ^ =  (b, c; )                           b  R, c  R.
+     Optimal Inference with Nearly Integrated Regressors                                              27
+
+Remark. Let u^t = (u^ty, u^xt ) = ytµ - ^x^µt-1, v^tx - ^v^tx-1 , where ytµ = yt-T -1            T    ys,
+                                                                                                 s=1
+
+^ =  T    x^µt-21  -1  T    x^µt-1yt,  and  ^  =  T        v^tx-21  -1  T    v^tx-1v^tx.  Under  the  as-
+     t=1               t=1                        t=1                   t=1
+
+sumptions of Theorem 10 and fairly general conditions on k (·) and BT , it follows
+
+from Jansson (2002) that
+
+                                       TT         |t - s|
+                                                   BT
+                       ^ = T -1                k           u^tu^s p 
+
+                                   t=1 s=1
+
+and
+
+                                   T t-1          |t - s|
+                                                   BT
+                       ^xy = T -1           k              u^xt u^sy p xy.
+
+                                   t=2 s=1
+
+                                          7. Simulations
+
+In this section, we present some simulation evidence that reveals the pitfalls of some of
+the commonly used tests. In particular, we consider the tests based on the t-statistics
+centered around the OLS and DOLS estimators, and the test based on the L2 statistic
+of Wright (2000). The test based on the OLS estimator asymptotically has correct
+size if the explanatory variable is stationary. The test based on the DOLS estimator
+[e.g., Stock and Watson (1993)] is designed for the case in which the explanatory
+variable is exactly integrated of order one. The test based on the L2 statistic has
+asymptotically correct size if the explanatory variable is nearly integrated. Each test
+is designed to behave well under stationarity (OLS), exact integration (DOLS, L2),
+or near integration (L2). However, Monte Carlo simulations will show that none of
+them has good size or power properties for all three scenarios; see Wright (2000)
+for power comparison of other testing procedures using Bonferroni and size-adjusted
+tests. Instead, our UMPCU test has good size and power properties overall. The
+critical value function for this test is found numerically by approximating an integral
+using high order recursive adaptive quadrature. Since this numerical integration is
+rather slow, we consider only 200 replications. Although this number is very small
+for a precise size evaluation, it is large enough to illustrate some of our main points.
+
+    Following the design of Wright (2000), we simulate the simple model introduced
+in equations (3) and (4). The true value of the parameter b is assumed to be zero.
+We consider the sample size T of 100 observations, and assume that (yt , xt ) are
+i.i.d. random variables, normally distributed with unit variance and correlation .
+The variance  of (yt , xt ) is estimated by the OLS estimator ^ . To examine the
+size and power properties of each testing procedure, we consider different degrees of
+persistence of the explanatory variable: the exactly integrated case (fixed c = 0), the
+Optimal Inference with Nearly Integrated Regressors  28
+
+nearly integrated case (fixed c = -10) and the stationary i.i.d. case (c = -T ) . For the
+exactly and nearly integrated cases in which c is fixed, the finite-sample power curve
+for each test can be understood as a discrete approximation to its local asymptotic
+power function using Lemma 3. Following this perspective, the continuous stochastic
+processes are replaced by discrete approximations using 200 replications.
+
+                              TABLES IA-IB ABOUT HERE
+
+    Tables IA and IB report the rejection of the OLS, DOLS, and L2 tests as functions
+of the true value b for  = -0.50 and  = 0.50, respectively. The test based on the
+OLS estimator has null rejection probabilities of 6.5% and 3.0%, being very close
+to the 5% nominal level in the stationary i.i.d. case. However, this test has some
+size and power limitations in the exactly and nearly integrated cases. For  = 0.50,
+the null rejection probability is much smaller than the 5% nominal level. Hence,
+this test rejects the null less often under some alternatives than under the null, and
+is biased. Worse yet, for  = -0.50, the null rejection probability is considerably
+larger than the 5% nominal level. This is considerably worse when the explanatory
+variable is exactly integrated, in which case the null rejection probability is around
+16%. Hence, the rejection probabilities under alternative hypotheses of this test are
+artificially high. Of course, the size distortions reported here for the OLS test can be
+artificially high due to simulation error, but it is well-known that this test indeed has
+significant size distortions in the nearly integrated case [Cavanagh, Elliott, and Stock
+(1995)]. Our results are even more striking for the test based on the DOLS estimator.
+Although its null rejection probabilities of 3.5% and 3.0% is close to the 5% nominal
+level in the exactly integrated case, it has poor size and power properties for the other
+cases. In particular, in the stationary case, its null rejection probability is close to
+100% when  = 0.50, and its rejection probability under some alternatives is close to
+0% when  = -0.50. Even in the nearly integrated case, this test has as poor size and
+power properties as many other procedures designed for the exactly integrated case,
+a phenomenon observed by Elliott (1998). The bad size properties of the tests based
+on the t-statistics centered around the OLS and DOLS estimators is not observed
+for the L2 statistic. Its null rejection probabilities are quite close to the 5% nominal
+level, regardless of the degrees of persistence and of the correlation coefficient, c and
+. However, for the case  = -0.50, this test is biased. In particular, this test rejects
+the null hypothesis in the stationary case less often than the 5% nominal level for
+any value of the alternative considered here.
+
+                                  TABLE II ABOUT HERE
+
+    We now evaluate the UMPCU test for testing H1. Table II shows rejection rates for
+the UMPCU test for different degrees of persistency and correlation. Unlike the OLS
+Optimal Inference with Nearly Integrated Regressors  29
+
+and DOLS tests, its null rejection probabilities are reasonably close to the 5% nomi-
+nal level in all three cases, although they are a little off when c = 0. In the nearly and
+exactly integrated cases, this finding is consistent with our theoretical results. In the
+stationary i.i.d. case, on the other hand, it is perhaps surprising that our procedure
+exhibits only minimal size distortions. The size distortions in the exactly integrated
+case (which are guaranteed to vanish as the sample size increases) could reflect the
+fact that the critical value function is based on asymptotic instead of finite sample
+distributions and that the covariance matrix  is replaced by an estimator (or, of
+course, that the simulation error due the small number of replications). Importantly,
+the UMPCU test has reasonably good power properties regardless of the degrees of
+persistence and correlation.15 This reflects the fact that this test is by construction
+asymptotically optimal within the class of tests that satisfy our conditionality re-
+striction. Moreover, due to this optimality, our test is in particular asymptotically
+unbiased. This means that, unlike the test based on the L2 statistic, our test does
+not have the problem of rejecting the null less often than the 5% nominal level.
+
+                                          8. Conclusion
+
+This paper has proposed novel conditionality restrictions subject to which optimality
+results can be obtained for one- and two-sided testing problems involving the regres-
+sion coefficient in a bivariate regression model with a highly persistent regressor. We
+have developed finite sample and asymptotic optimality theory under the assumption
+of Gaussian errors and have shown the normality assumption to be least favorable.
+The derivation of finite sample optimality results uses classical statistical theory and
+the theory of (curved) exponential families, whereas the large sample optimality re-
+sults were obtained by using the finite sample optimality results and the theory of
+limits of experiments.
+
+    Our asymptotic optimality results complement those available in the existing lit-
+erature on limits of experiments. The optimality results currently available in that
+literature pertain almost exclusively to models exhibiting LAN or LAMN likelihood
+ratios. In contrast, our results are obtained for a model whose likelihood ratios are
+LAQ (but not LAMN) and differ from existing results in a nontrivial way.16 In models
+
+  15The peculiar pattern (decline and/or very limited increase in power as b increases) observed for
+moderately large values of b would appear to be due to inaccuracies of our numerical integration
+procedure. For any given data set, these inaccuracies are easy to fix, but we have been unable to
+come up with a fix that works well overall without being prohibitively slow.
+
+  16Another testing problem to which the theory of LAQ likelihood ratios applies but theory of
+LAMN likelihood ratios does not is the unit root testing problem. That testing problem has been
+extensively studied, celebrated results including those of Dickey and Fuller (1979, 1981), Elliott,
+Rothenberg, and Stock (1996), Phillips (1987a), and Phillips and Perron (1988). [For a review, see
+Stock (1994).] In the context of the unit root testing problem, the theory of limits of experiments
+can be used to give an alternative derivation of the optimality results of Elliott, Rothenberg, and
+Optimal Inference with Nearly Integrated Regressors  30
+
+with LAN likelihood ratios (such as (3) - (4) in the stationary case when || < 1),
+the commonly used Wald statistics are asymptotically optimal among tests with the
+same asymptotic level. Wald statistics also enjoy optimality properties in models
+with LAMN likelihood ratios (such as (3) - (4) in the unit root case when  = 1),
+being optimal among tests with correct asymptotic conditional size given the value
+of the observed information matrix.
+
+    In the LAMN context, conditioning on the observed information matrix is natural
+because its asymptotic counterpart acts as an ancillary statistic in the limiting ex-
+periment. The latter property characterizes LAMN models within the class of LAQ
+models [Jeganathan (1995, Proposition 6)], implying that conditioning on ancillaries
+does not suffice if we want to develop optimality theory for LAQ models outside the
+class of LAMN models. This paper provides an example of a testing problem with
+nuisance parameters where the stronger requirement of conditioning on specific an-
+cillaries (i.e., statistics that would be ancillary if the values of nuisance parameters
+were known) makes it possible to develop optimality results in a model with LAQ
+likelihood ratios. (Coincidentally, the specific ancillary in our example turns out to
+be given by the observed information matrix.) It would be of interest to explore
+whether the conditionality restriction proposed here can be applied to develop op-
+timality results for other testing problems involving nuisance parameters in models
+without LAMN structure.
+
+Stock (1996).
+    Optimal Inference with Nearly Integrated Regressors              31
+
+                            9. Appendix A: Auxiliary Lemmas
+The proof of Theorem 5 makes use of the following lemma.
+Lemma 11. Let   (0, 1) be given and define
+
+                 S = {(r, r, r; ) : r  R, 0 < r < r, -1 <  < 1} .
+
+(a) There exist a continuous function C : S  R such that  (·; ) satisfies (19) ,
+where  (·) is defined as in Section 4.
+
+(b) There exist continuous functions C : S  R and C : S  R such that  (·; )
+satisfies (22) - (23) , where  (·) is defined as in Section 4.
+
+    Lemma 11 is a special case of the following result, which gives general conditions
+under which critical value functions for one- and two-sided tests are continuous in
+their arguments.
+
+Lemma 12. Let (, d) be a metric space and let {f (·; ) :   } be a family of
+probability density functions on R. Let   (0, 1) and 0   be given and suppose
+f (r; ·) is continuous at 0 (with respect to the metric d) for almost every r  R.
+
+(a) Suppose that for every    there is a unique number C () such that
+
+                                                                  
+
+                                                 f (r; ) dr = .
+
+                                                                C ()
+
+Then C :   R is continuous at 0.
+
+(b) Suppose that for every    there are unique numbers C () and C () such that
+
+      C  ()
+
+           f (r; ) dr = 1 - ,
+
+    C  ()
+
+    C  ()                      
+
+           rf (r; ) dr = (1 - ) rf (r; ) dr.
+
+    C  ()                      -
+
+If
+
+                       
+
+    lim0 sup{:d(0,)<}     max (1, |r|) |f (r; 0) - f (r; )| dr = 0,  (A.1)
+
+                       -
+    Optimal Inference with Nearly Integrated Regressors                                       32
+
+then C :   R and C :   R are continuous at 0.
+(c) Condition (A.1) holds if, for any  > 0, there exists a constant  > 0, a set
+  R, and a function f¯ : R  R+ such that
+
+                      sup{:d(0,)<} max (1, |r|) f (r; ) dr < ,                           (A.2)
+                                                                                         (A.3)
+                                                         
+
+       sup{:d(0,)<} f (r; )  f¯(r)                                 r  R \ ,
+
+                                      max (1, |r|) f¯(r) dr < .                          (A.4)
+
+                                  R\
+
+Proof of Lemma 12. The proof is by contradiction.
+
+    Proof of (a). If C (·) is not continuous at 0, then there exists a sequence
+{n : n  1}   and a constant  > 0 such that limn n = 0 and either
+supn C (n) < C (0) -  or infn C (n) > C (0) + .
+
+    If supn C (n) < C (0) - , then
+
+                                                                     
+
+     = limn                            f (r; n) dr  limn                    f (r; n) dr
+
+                               C (n )                              C (0 )-
+
+                                                            
+
+                               [limnf (r; n)] dr =                   f (r; 0) dr
+
+                      C (0 )-                               C (0 )-
+
+                      
+
+    >                         f (r; 0) dr = ,
+
+                      C (0 )
+
+a contradiction. In the display, the first equality uses the defining property of C (·) ,
+the first inequality uses supn C (n) < C (0) - , the second inequality uses Fa-
+tou's lemma, the second equality uses continuity of f (r; ·) , the third inequality uses
+
+uniqueness of C (0) , and the last equality uses the definition of C (·) .
+    Analogous reasoning shows that infn C (n) > C (0) +  is impossible, complet-
+
+ing the proof of part (a).
+
+    Proof of (b). If  C  ()    f  (r; ) dr  =  1  -    for  every      ,  but  C (·) , C (·)  is
+                      C  ()
+not continuous at 0, then there exists a sequence {n : n  1}   and a constant
+
+ > 0 such that limn n = 0 and either
+
+    supn C (n) < C (0) -  and supn C (n) < C (0) -                                       (A.5)
+
+or
+Optimal Inference with Nearly Integrated Regressors                                                      33
+
+             infn C (n) > C (0) +  and infn C (n) > C (0) + .                                         (A.6)
+The equations defining C (·) and C (·) can be written as follows:
+
+                          I (, k) = J (, k)   , k  R,
+
+where I (, k) =  C  ()    (r  -  k)  f  (r; )  dr  and  J  (,  k)  =  (1  -  )     (r  -  k)  f  (r;  )  dr.
+                 C  ()                                                          -
+
+Now, by (A.1) ,
+
+                                                                      
+
+|J (0, k) - J (n, k)|  (1 - ) |r - k| |f (r; 0) - f (r; n)| dr
+
+                                                                    -
+
+                                                                                       
+
+                              (1 - ) (1 + |k|) max (1, |r|) |f (r; 0) - f (r; n)| dr
+
+                                                                                     -
+
+                            0
+
+as n  . To complete a proof by contradiction it therefore suffices to find a value
+
+of k such that I (0, k) - I (n, k) 0 as n  .
+    Suppose (A.5) holds. If C (n) < C (0) , then
+
+   I 0, C (0) - I n, C (0)
+
+      C  (0 )                                              C  (n )
+
+=                         r - C (0) f (r; 0) dr +                     C (0) - r f (r; n) dr
+
+   C  (0 )                                                 C  (n )
+
+      C  (0 )
+
+                          r - C (0) f (r; 0) dr > 0.
+
+   C  (0 )
+
+Otherwise, if C (n) < C (0) , then
+
+   I 0, C (0) - I n, C (0)
+
+      C  (0 )                                              C  (0 )
+
+=                         r - C (0) f (r; 0) dr +                     C (0) - r f (r; n) dr
+
+   C  (n )                                                 C  (n )
+
+                 C  (0 )
+
+   +                      r - C (0) [f (r; 0) - f (r; n)] dr,
+
+                 C  (0 )
+       Optimal Inference with Nearly Integrated Regressors                     34
+
+where
+
+       C  (0 )                          C  (0 )
+
+       C  (n )  r - C (0) f (r; 0) dr   C  (0 )-   r - C (0) f (r; 0) dr > 0,
+
+                                                  C  (0 )
+
+                                          C (0) - r f (r; n) dr  0,
+
+                                                C  (n )
+
+and
+
+                    C  (0 )
+
+                           r - C (0) [f (r; 0) - f (r; n)] dr
+
+                  C  (0 )
+
+                  
+
+                     r - C (0) |f (r; 0) - f (r; n)| dr  0,
+
+                  -
+
+where the last line uses (A.1). As a consequence,
+
+                           limn I 0, C (0) - I n, C (0)
+
+                                              C  (0 )
+
+                        max(C(0),C(0)-) r - C (0) f (r|0) dr > 0
+
+if (A.5) holds.
+    Analogous reasoning shows that
+
+                         limn I 0, C (0) - I n, C (0) < 0
+
+if (A.6) holds. The proof of (b) is therefore complete.
+    Proof of (c). To show that (A.1) is implied by (A.2) - (A.4) under the assump-
+
+tions of the lemma, suppose (A.1) does not hold. Then there exists a sequence
+{n : n  1}   and a constant  > 0 such that limn n = 0 and
+
+                                    
+
+                           max (1, |r|) |f (r; 0) - f (r; n)| dr > 2 n.
+
+                                  -
+Optimal Inference with Nearly Integrated Regressors                                            35
+
+Assuming we can pick a constant  > 0, a set   R, and a function f¯ : R  R+
+such that (A.2) - (A.4) hold, we have:
+
+                limn sup{:d(0,)<d(0,n)} max (1, |r|) f (r; ) dr  
+
+                                                                                       
+
+and
+
+                  limn      max (1, |r|) |f (r; 0) - f (r; n)| dr = 0,
+
+                        R\
+
+where the first display uses limn d (0, n) = 0 and (A.2) , while the second display
+uses limn d (0, n) = 0, continuity of f (r; ·) at 0, and the dominated convergence
+theorem (the applicability of which follows from (A.3) - (A.4)). As a consequence,
+
+                                      
+
+                  limn max (1, |r|) |f (r; 0) - f (r; n)| dr
+
+                                    -
+
+            2limn sup{:d(0,)<d(0,n)} max (1, |r|) f (r; ) dr
+
+                                                                                   
+
+                  +limn      max (1, |r|) |f (r; 0) - f (r; n)| dr
+
+                         R\
+
+            2,
+
+a contradiction.
+
+Proof of Lemma 11. The proof of Lemma 11 constructs a conditional proba-
+
+bility density function of R given R, R, R that satisfies the conditions of
+                                                       1
+Lemma 12.  Let Z = R-1/2R, Z = Wx (1) , Z =            0  Wx        (r)  dr,             Q  =  Z2,
+
+Q = Z2, and Q = R, where R = R, R, R, R = R (0, 0) . For any
+(r, r, r, )  S, let
+
+                  S (r, r, r; ) = r : r +      2 r  >  -      1     .
+                                           1-                 2
+
+By construction, S and S satisfy
+
+           Pr R  S R, R, R;  , R, R, R,   S = 1.
+       Optimal Inference with Nearly Integrated Regressors                                        36
+
+We now obtain a characterization of fR0 (·; ) , the density of R. Because
+
+(Z, Q, Q, Q) =                      R   ,   2R   +  2            2  R  +  1,  R  -  R ,  R     ,
+                                    R                     1-
+
+it follows from the changes of variables formula that
+
+       fR0 (r; )  =    2    fZ  ,Q    rr , 2r + 2                2  r  +  1,  r  -  r ,  r  ,
+                     r                                    1-
+                          
+
+where fZ,Q (·) is the density of (Z, Q ) = (Z, Q, Q, Q) .
+    Now, Z  N (0, 1) and Z is independent of Q. As a consequence,
+
+          fZ ,Q      rr , 2r + 2                 2  r     +  1,  r  -  r ,    r
+                                             1-
+
+       =  1 exp             -   r2      fQ   2r + 2              2  r  +  1,  r  -  r ,  r  ,
+            2                  2r                         1-
+
+where fQ (·) is the density of Q.
+    Since
+
+                            Z       N            0     ,      1 1/2           ,
+                            Z                    0           1/2 1/3
+
+the density of (Q, Q) is given by
+
+fQ ,Q     (q, q)     =         1        fZ ,Z       q, q            + fZ ,Z      -q, q         ,
+                          2q q
+
+where
+
+                                    
+                                     3              z               2 -3            z
+       fZ,Z (z , z) =                   exp  -      z                                          (A.7)
+                                                                    -3 6            z
+
+is the density of (Z, Z) .
+            Optimal Inference with Nearly Integrated Regressors                  37
+
+   Moreover,
+
+                      Pr sign (Z) = sign (Z) |Z2 = q, Z2 = q
+
+                   = 1 - Pr sign (-Z) = sign (Z) |Z2 = q, Z2 = q
+
+                   =  fZ ,Z  qf, Zq,Z  q, q
+                                       + fZ,Z -q , q
+
+whenever q > 0 and q > 0. (Because Pr Z2 = q, Z2 = q = 0, the object
+Pr sign (Z) = sign (Z) |Z2 = q, Z2 = q is to be interpreted as a regular con-
+ditional probability (in the measure theoretic sense [e.g., Dudley (2002)]).)
+
+    Finally, we characterize the density of Q conditional on (Z, Z) . Let the zero
+mean Gaussian process W~ x (·) be given by
+
+            W~ x (r) = Wx (r) - p (r)  Z  ,           p (r) =  -2r + 3r2      .
+                                       Z                        6r - 6r2
+
+By construction, W~ x (r) : 0  r  1 is independent of (Z, Z) . The covariance
+kernel K~ (·) of W~ x (·) is given by
+
+                K~ (r, s) = Cov W~ x (r) , W~ x (s)
+
+                           = min (r, s) (1 - max (r, s)) - 3 r - r2 s - s2 .
+
+It is easy to show that g0 (r) = 1 is the only continuous function g (·) satisfying
+1     (r)2
+0  g        dr  =  1  and
+
+                             1                        r  [0, 1] .
+
+                              K~ (r, s) g (s) ds = 0
+
+                           0
+
+It therefore follows from Mercer's Theorem [e.g. Shorack and Wellner (1986)] that
+
+                                                  
+
+                             K~ (r, s) = jgj (r) gj (s) ,
+
+                                                 j=1
+
+where j > 0 for every j, 1  2  . . . and {gj (·) : j  0} is an orthonormal basis of
+       Optimal Inference with Nearly Integrated Regressors                                              38
+
+the set of square integrable functions defined on the unit interval. As a consequence,
+W~ x (r) can be represented as
+
+                                                      
+
+                                  W~ x (r) = j1/2Zjgj (r) ,
+
+                                                     j=1
+
+where Zj = -j 1/2  1  W~ xµ  (r)  gj  (r)  dr    i.i.d.  N  (0,  1)  .  Because  the  function  p  (·)  can
+                   0
+be written as
+
+                                                               1
+
+                   p (r) = hjgj (r) ,            hj = p (r) gj (r) dr,
+
+                                  j=0                        0
+
+it follows from the preceding displays that
+
+                                                                         
+
+         Wx (r) = (Z, Z) h0g0 (r) + 1j/2 Zj + -j 1/2 (Z, Z) hj gj (r) ,
+
+                                                                        j=1
+
+implying
+
+                  1                                                                                2
+
+Q =                Wx (r)2 dr = [(Z, Z) h0]2 +                j      Zj + -j 1/2 (Z, Z) hj          ,
+
+               0                                         j=1
+
+where Zj  i.i.d. N (0, 1) and {Zj : j  1} is independent of (Z, Z) . Conditional
+on (Z, Z) = (z, z) , the characteristic function of Q is therefore given by
+
+                                                                     
+
+                   (t|z, z) = exp i [(z, z) h0]2 t                      j (t|z, z) ,
+
+                                                                 j=1
+
+where
+
+                  j (t|z, z) = (1 - i2jt)-1/2 exp                i [(z, z) hj]2 t
+                                                                     1 - i2jt
+
+denotes the conditional characteristic function of j                 Zj + j-1/2 (Z, Z) hj          2
+
+                                                                                                     given
+
+(Z, Z) = (z, z) and the dominated convergence theorem (for conditional expec-
+
+tations) has been used to show that
+       Optimal Inference with Nearly Integrated Regressors                             39
+
+       E exp          i · limn n j Zj + -j 1/2 (Z, Z) hj 2                  |Z, Z
+
+                                          j=1
+
+       = limn E exp i n j Zj + -j 1/2 (Z, Z) hj 2 |Z, Z .
+
+                                                  j=1
+
+It now follows from the inversion theorem for characteristic functions that the density
+of Q conditional on (Z, Z) = (z, z) is given by
+
+       fQ |Z ,Z           (q|z, z)  =   1                                              (A.8)
+                                        2
+                                               exp (-iqt)  (t|z, z) dt.
+
+                                           -
+
+(The inversion theorem is applicable because
+
+                                                                 
+
+    | (t|z, z)| dt =                    |j (t|z, z)| dt                        |j (t|0, 0)| dt
+
+-                               - j=1                            - j=1
+
+                                    3                            |3 (t|0, 0)|3 dt < .
+
+                                        |j (t|0, 0)| dt 
+
+                                - j=1                       -
+
+The first inequality in the display uses supz,z |j (t|z, z)| = |j (t|0, 0)| , which
+holds because
+
+                  Re  i [(z, z) hj]2 t  =  -  2j  [(z ,  z) hj   ]2  t2    0.
+                          1 - i2jt                 1+    42j t2
+
+The second inequality in the display uses supj1,tR |j (t|0, 0)|  1, the third inequal-
+ity uses 1  2  3, and the last inequality uses 3 > 0.)
+
+    Combining pieces, we have:
+
+       fR0 (r; )  =    2    fZ  ,Q  rr , 2r + 2       2  r  +    1,  r   -  r ,  r  ,
+                     r                            1-
+                          
+
+where
+     Optimal Inference with Nearly Integrated Regressors                         40
+
+     2fZ,Q (z, q, q, q)
+
+=    1 exp    -  z2   q  1        fZ  ,Z   q, q      fQ |Z ,Z            q|q, q
+       2         2       q
+
+     + 1 exp   -  z2  q      1        fZ   ,Z   -q, q       fQ |Z ,Z        q| - q, q   ,
+          2       2          q
+
+and fZ,Z (·) and fQ|Z,Z (·) are defined in (A.7) and (A.8) , respectively.
+    For any (r, r, r, )  S, let
+
+        f0               (r |r ,      r ,  r ;  )
+
+          R |R ,R ,R
+
+     =  1 [r  S (r, r, r; )]                         fR0 (r, r, r, r; )
+                                           S(r,r,r;) fR (r, r , r, r ; ) dr
+
+be the conditional density of R given R, R, R = (r, r, r) .
+    Let  (r; ) = 1 [r > C (r, r, r; )] , where C : S  R is implicitly given by
+
+                                 0
+                                 R |R ,R ,R
+              ( ) f C r ,r ,r ;                 (r|r, r, r; ) dr         =  .
+
+(Existence and uniqueness of C (·) is easily shown.) By construction,  (·; ) satisfies
+(19) . Moreover, Lemma 12 (a) can be used to used to show that C (·) is continuous
+on S.
+
+    Let  (r; ) = 1 r < C (r, r, r; ) + 1 r > C (r, r, r; ) , where the
+
+functions C : S  R and C : S  R satisfy
+
+            ( ) C r ,r ,r ;  f0                 (r|r, r, r; ) dr      =  1  -  
+
+        ( ) C r ,r ,r ;        R |R ,R ,R
+
+and
+
+                     ( ) C r ,r ,r ;  r f0           (r |r ,  r ,  r ;   )  dr
+
+                 ( ) C r ,r ,r ;         R |R ,R ,R
+
+                                 r f0
+
+            =    (1 - )             R |R ,R ,R     (r |r ,  r ,  r ;  )  dr .
+
+                         -
+Optimal Inference with Nearly Integrated Regressors  41
+
+(Existence and uniqueness of C (·) and C (·) follows from the development in Lehmann
+(1994, Section 4.2).) By construction,  (·; ) satisfies (22)-(23) . Moreover, Lemma
+12 (b)-(c) can be used to show that C (·) and C (·) are continuous on S.
+       Optimal Inference with Nearly Integrated Regressors                      42
+
+                                   10. Appendix B: Proofs
+Proof of Lemma 1. Lemma 1 follows from equation (5) and the properties of ex-
+ponential families (e.g., Lehmann (1994, Lemma 2.8)).
+
+Proof of Theorem 2. By Lemma 1 (b) and Lehmann (1994, Theorem 4.3),
+
+       E, [ (S, S, S, S) |S, S]  E,  (S, S, S, S) |S, S
+
+for any  (·) satisfying (6) , any  > 0, and any   R. Part (a) now follows from
+the law of iterated expectations.
+
+    Analogous reasoning establishes part (b) (including existence of the functions
+C (·) and C (·) satisfying (11) - (12)).
+
+Proof of Lemma 3. Lemma 3 follows from standard weak convergence arguments
+[e.g., Phillips (1987b, 1988a, 1988b) and Phillips and Solo (1992)] and straightforward
+algebra.
+
+Proof of Lemma 4. Lemma 4 follows from (15) , Lemma 3, Lehmann (1994, Lemma
+2.8), and Le Cam's third lemma [e.g., Jeganathan (1995, Proposition 1) and van der
+Vaart (2002, Lemma 3.1)]. Le Cam's third lemma is applicable because the family
+of distributions associated with the maximal invariant has LAQ likelihood ratios at
+(, ) = (0, 1) . In particular,
+
+          L [T (b) , T (c)] - L [T (0) , T (0)]
+
+                          1          c     2        1
+                          2         1 - 2           2
+       =  bR   +   cR  -     b-               R  -     c2R    d0      (b, c) ,
+
+where
+
+                                    1       c       2            1
+                                    2      1 - 2                 2
+          (b,  c)  =  bR  +  cR  -     b-              R      -     c2R  ,
+
+" d0 " is shorthand for " d when (, ) = (0, 1) " and the convergence result
+follows from Lemma 3.
+         Optimal Inference with Nearly Integrated Regressors                         43
+
+Proof of Theorem 5. The proof of Theorem 5 is based on Lemma 4 and the
+theory of LAQ likelihood ratios. Repeated use will be made of the fact that
+
+                              g (r) fR (r; b, c, ) dr = E g (R) e(b,c) ,
+
+                                         R4
+
+where b  R, c  R,  (·) is defined as in the proof of Lemma 4, and g : R4  R is
+any function such either side of the equality is well defined.
+
+    Proof of (a). Let  (, ) denote the class of all functions  (·) satisfying
+
+            E ( (R) - ) g (R, R) e(0,c) = 0 c  R, g  Cb R2 .
+
+By construction,  (·; )   (, ) . Applying Lehmann (1994, Theorem 4.3) and the
+law  of  iterated  expectations,  it  can  be  shown  that      (·;  )  satisfies
+                                                              
+
+     E  (R) e(b,c)  E  (R; ) e(b,c)                         b  0, c  R,    (, ) .
+
+    Because C (·) is continuous (Lemma 11), it follows from Lemma 3 and the con-
+tinuous mapping theorem (CMT) that  (R; ) d0  (R; ) . This convergence
+result, Le Cam's third lemma and Billingsley (1999, Theorem 3.5) can be used to
+show that  satisfies (17) and that
+
+         limT  ET (b),T (c) (R; ) = E  (R; ) e(b,c)                     b  0, c  R.
+
+    The proof of (a) will be completed by showing that for any {T (·)} satisfying
+(17) , any b  0, and any c  R, there exists a    (, ) such that
+
+                   limT ET (b),T (c)T (R; ) = E  (R; ) e(b,c) .                      (B.1)
+
+  Let {T (·)} , b  0 and c  R be given, and suppose {T (·)} satisfies (17) . Let
+T (m) (·) : m  1 be any subsequence of {T (·)} satisfying
+
+         limm ET (b),T (c)T (m) (R; ) = limT ET (b),T (c)T (R; ) .
+
+Because T (m) = Op (1) , it follows from Prohorov's theorem [e.g., Billingsley (1999)]
+that there exists a subsequence T (m(n)) (·) : n  1 such that
+
+                                  T (m(n)), R d0 (, R)                               (34)
+Optimal Inference with Nearly Integrated Regressors  44
+
+as n  , where  is some random variable (defined on the same probability space
+as R) and the dependence of R on n has been suppressed. Now,
+
+      limT ET (b),T (c)T (R; ) = limm ET (m)(b),T  (m)(c) T (m) (R; )
+
+                                            = limn ET (m(n))(b),T  (m(n))(c) T (m(n)) (R; )
+
+                                            = E [ exp ( (b, c))]
+
+                                            = E  (R; ) e(b,c) ,
+
+where  (R) = E (|R) , the third equality uses (34) , Le Cam's third lemma
+and Billingsley (1999, Theorem 3.5), and the last equality uses the law of iterated
+expectations. The result    (, ) now follows because
+
+                 E ( (R) - ) g (R, R) e(0,c)
+
+            = E ( - ) g (R, R) e(0,c)
+
+            = lim E n T (m(n))(0),T (m(n))(c) T (m(n)) (R; ) -  g (R , R )
+
+            =0
+
+for any c  R and any g  Cb (R2) , where the first equality uses the law of iter-
+ated expectations, the second equality uses (34) , Le Cam's third lemma, Lemma 3,
+Billingsley (1999, Theorem 3.5) and CMT, and the last equality uses the fact that
+{T (·)} satisfies (17) . This completes the proof of part (a).
+
+    Proof of (b). Let 0 (, )   (, ) denote the class of all functions  (·) satisfying
+   (, ) and
+
+         E ( (R) - ) R · g (R, R) e(0,c) = 0 c  R, g  Cb R2 .
+
+By construction,  (·; )  0 (, ) . Applying Lehmann (1994, Theorem 4.3) and
+the law of iterated expectations, it can be shown that  (·; ) satisfies
+Optimal Inference with Nearly Integrated Regressors                         45
+
+E  (R) e(b,c)  E  (R; ) e(b,c)                b  R, c  R,   0 (, ) .
+
+Because C (·) and C (·) are continuous (Lemma 11 (b)), it follows from Lemma 3
+and CMT that  (R; ) d0  (R; ) . This convergence result, Le Cam's third
+lemma, and Billingsley (1999, Theorem 3.5) can be used to show that  satisfies
+(17) , (20) , and
+
+limT  ET (b),T (c) (R; ) = E  (R; ) e(b,c)                     b  R, c  R.
+
+Finally, by proceeding as in the proof of (a) it can be shown that for any {T (·)}
+satisfying (17) and (20) , any b  R, and any c  R, there exists a   0 (, ) such
+that
+
+                 limT ET (b),T (c)T (R; ) = E  (R; ) e(b,c) .
+
+Proof of Theorem 6. The result R^ d R (b, c) follows from standard weak conver-
+gence arguments (e.g., Phillips (1987b, 1988a, 1988b) and Phillips and Solo (1992))
+
+and straightforward algebra. For instance,
+
+                T                        T
+
+R^ = ^x-x1T -2       v^tx-21 = -xx1T -2       vtx-21 + op (1)
+
+                t=1                      t=1
+
+=     1                     2 dr + op (1) d      1
+
+         -xx1/2T -1/2vxT r                        Wx,c (r)2 dr,
+
+   0                                          0
+
+where the second equality uses ^xx p xx and T -1/2 (x1 - µx) p 0, and the con-
+vergence result uses x-x1/2T -1/2vxT · d Wx,c (·) and CMT.
+
+    For any b  0 and any c  R,
+Optimal Inference with Nearly Integrated Regressors                             46
+
+ET (b),T (c) R^; ^ = PrT (b),T (c) R^ > C R^ , R^, R^ ; ^
+                             Pr R (b, c) > C R (b, c) , R (c) , R (c) ; 
+                            =  (b, c; ) ,
+
+where the convergence result uses R^ , ^ d R (b, c) ,  , continuity of C (·) ,
+and CMT. An analogous argument shows that
+
+lim  ET  (b),T  (c)       R^; ^         (b, c; )         (b, c)  R2.
+
+T 
+
+Proof of Theorem 7. Let Z, Z, Q, and Q be defined as in the proof of
+Lemma 11 and recall that
+
+fR0 (r; ) =           1 exp           -   r2
+                     2r                  2r
+
+                     ×2fQ  2r + 2              2  r  +  1,  r  -  r ,  r  ,
+                                         1-
+
+where fQ (·) is the density of Q and
+
+2fQ (q, q, q)          =   q          1  fZ  ,Z  ,Q  q, q, q
+                                      q
+
+                           +  q       1    fZ  ,Z  ,Q   q, -q, q             ,
+                                      q
+                                         
+
+where fZ,Z,Q (·) is the density of (Z, Z, Q) .
+    By the inversion theorem for characteristic functions,
+       Optimal Inference with Nearly Integrated Regressors                                             47
+
+       fZ,Z,Q (z , z , q )
+
+=        1              
+       (2)3  -    -
+                           (t, t, t) exp [-i (tz + tz + tq)] dtdtdt
+
+                      -
+
+=      1    
+       2
+               (t; z, z) exp [-itq] dt,
+
+          -
+
+where
+
+       (t; z, z)  =     1             
+                      (2)2  -
+                                         (t, t, t) exp [-i (tz + tz)] dtdt,
+
+                                    -
+
+and  (·) is the joint characteristic function of (Z, Z, Q) . It follows from Abadir
+and Larsson (2001) that
+
+        (t, t, t) = E exp [itZ + itZ + itQ]
+
+                      =     exp  1  (l1  (t  ,  t )  +  l2  (t  ,  t  ,  t  )  +  l3  (t ,  it  ))  ,
+                                 4
+
+                                                     cosh -2it
+
+where
+
+             l1 (t, t)   =  -2t2    tanh     -2it
+                                          -2it
+
+                         = -t2      1 sinh 2 |t| + sin 2 |t|
+                                    |t| cosh 2 |t| + cos 2 |t|
+
+                            -it2    sign (t     )  sinh     2   |t| - sin 2           |t| ,
+                                        |t |       cosh     2   |t| + cos 2           |t |
+            Optimal Inference with Nearly Integrated Regressors                                                     48
+
+        l2 (t, t, t)            =       2i  t t                  1        -1
+                                             t
+                                                        cosh -2it
+
+                                =       -2t t      1          2 sinh     |t| sin       2  |t |
+                                                  |t |      cosh 2     |t| + cos            |t |
+
+                                        -2it  t       sign (t       )  1 - 2 cosh |t| cos |t|                 ,
+                                                         |t |               cosh 2 |t| + cos 2 |t|
+
+     l3 (t, t)            =     i  t2        tanh -2it - 1
+                                   t               -2it
+
+                          =     -t2     2      1  |3/2  sinh  2     |t| - sin 2        |t |
+                                             |t         cosh  2     |t| + cos 2        |t |
+
+                                -it2    sign (t         )   1 - 1 sinh 2                  |t| + sin 2 |t|        .
+                                           |t |                  2 |t| cosh 2             |t| + cos 2 |t|
+
+Now,
+
+     1  Re  [l1  (t ,  t )   +     l2  (t ,  t ,  t )   +   l3  (t ,   t )]   =  -  1     t       A (t)  t
+     4                                                                              4     t              t
+
+and
+
+                 1     Im  [l1  (t ,    t )  +    l2  (t ,  t ,  t )   +  l3  (t ,  t )]  -  (t z   +  t z )
+                 4
+
+            =    -     1     t          B (t)              t        -     t            z     ,
+                       4     t                             t              t            z
+
+where
+
+                                                                                     
+                                       1 sinh 2|t|+sin 2 |t|              1 2 sinh |t| sin |t|
+                 A (t) =                 |t| cosh 2|t|+cos 2 |t|          |t| cosh 2 |t|+cos 2 |t|    ,
+                                        1 2 sinh |t| sin |t|              1 sinh 2|t|-sin 2 |t|
+                                        |t| cosh 2 |t|+cos 2 |t|       2|t|3/2 cosh 2 |t|+cos 2 |t|
+Optimal Inference with Nearly Integrated Regressors                                                49
+
+                                                                                                 
+
+B (t) =     sign(t) sinh 2|t|-sin 2 |t|                 sign(t)  1 - 2 cosh |t| cos |t|           .
+                   |t| cosh 2 |t|+cos 2 |t|                |t|        cosh 2 |t|+cos 2 |t|
+
+          sign(t)  1 - 2 cosh |t| cos |t|           sign(t)  1 - 1 sinh 2|t|+sin 2 |t|
+             |t|                                       |t|
+                           cosh 2 |t|+cos 2 |t|                      2 |t| cosh 2 |t|+cos 2 |t|
+
+    Using the properties of noncentral quadratic forms in normal random variables,
+it can be shown that
+
+                     1       exp   ix   z    -   1  ix  Bx   exp  -  1  x  Ax  dx
+                   (2)2                          4                   4
+                          R2
+
+          =        |A  +  iB|-1/2  exp  -z       AB-1A + B -1 AB-1z
+                          
+
+                   × exp iz B-1 - B-1A AB-1A + B -1 AB-1 z
+
+for any z  R2, any symmetric 2 × 2 matrix B, and any symmetric, positive definite
+2 × 2 matrix A. As a consequence,
+
+ (t; z, z)   =       1               
+                   (2)2      -
+                                        (t, t, t) exp [-i (tz + tz)] dtdt
+
+                                   -
+
+             =            |A + iB|-1/2 exp -                 z    AB-1A + B -1 AB-1                z
+                                                             z                                     z
+                    cosh -2it
+
+                   × exp +i        z             B-1 - B-1A AB-1A + B -1 AB-1                        z  ,
+                                   z                                                                 z
+
+where A = A (t) and B = B (t) .
+
+    The stated result now follows because  (t; z, z) =  (-t; z, z), im-
+plying
+
+fZ,Z,Q (z , z , q )       =  1       
+                             2
+                                        (t; z, z) exp [-itq] dt
+
+                                   -
+
+                          =  1       
+                             
+                                       Re { (t; z, z) exp [-itq]} dt.
+
+                                   0
+     Optimal Inference with Nearly Integrated Regressors                         50
+
+Proof of Lemma 8. Lemma 8 (a) follows simple algebra and the relations
+
+                         T
+
+     -xx1/2-yy1./x2T -1       xtm yt - 0xt - -xx1xyxt = RCI + op0 (1)
+
+                         t=1
+
+and
+
+               T                      T
+
+     x-x1T -2       xmt 2 = x-x1T -2       xtmxµt-1 + op0 (1) = RCI + op0 (1) .
+
+               t=1                    t=1
+
+Lemma 8 (b) follows from standard weak convergence arguments [e.g., Phillips (1987b,
+1988a, 1988b) and Phillips and Solo (1992)].
+
+Proof of Theorem 9. Theorem 9 follows as Theorem 5 using Lemma 8 instead
+of Lemma 3.
+
+Proof of Theorem 10. Theorem 10 follows from standard weak convergence ar-
+guments [e.g., Phillips (1987b, 1988a, 1988b) and Phillips and Solo (1992)] and the
+proof of Theorem 6.
+Optimal Inference with Nearly Integrated Regressors  51
+
+     11. Appendix C: Tables
+
+                TABLE IA
+     Power Function ( = 0.5)
+
+c=0            c = -10         c = -100
+
+b OLS DOLS L2 OLS DOLS L2 OLS DOLS L2
+0 0.5% 3.5% 5.5% 3.5% 27.0% 6.5% 6.5% 98.0% 5.5%
+
+5 31.5% 54.% 30.0% 12.5% 64.5% 13.0% 8.5% 100.0% 7.5%
+
+10 62.0% 87.0% 49.0% 41.5% 85.0% 21.5% 26.0% 100.0% 5.0%
+
+15 83.5% 96.5% 71.0% 62.5% 97.5% 29.5% 40.5% 100.0% 6.0%
+
+20 96.0% 100.0% 84.5% 88.5% 98.5% 46.5% 56.5% 100.0% 8.0%
+
+25 98.0% 100.0% 88.5% 96.5% 100.0% 65.0% 71.5% 100.0% 11.0%
+
+30 100.0% 100.0% 93.0% 98.0% 100.0% 65.0% 81.0% 100.0% 10.5%
+
+35 100.0% 100.0% 96.5% 99.0% 100.0% 74.0% 89.0% 100.0% 12.5%
+
+40 100.0% 100.0% 98.5% 99.5% 100.0% 79.0% 93.5% 100.0% 12.5%
+
+                  TABLE IB
+     Power Function ( = -0.5)
+
+c=0            c = -10         c = -100
+
+b OLS DOLS L2  OLS DOLS L2 OLS DOLS L2
+
+0 16.0% 3.0% 5.0% 6.5% 0.5% 4.5% 3.0% 0.0% 4.5%
+
+5 78.5% 57.5% 29.0% 31.5% 3.5% 1.5% 10.5% 0.0% 2.5%
+
+10 96.5% 87.5% 50.5% 57.5% 19.5% 2.0% 20.0% 0.0% 3.0%
+
+15 99.5% 96.5% 71.5% 93.5% 46.5% 7.5% 35.0% 0.0% 1.5%
+
+20 100.0% 100.0% 86.0% 98.5% 81.0% 14.5% 48.0% 0.0% 4.0%
+
+25 100.0% 100.0% 90.0% 100.0% 95.0% 34.5% 69.5% 0.0% 3.0%
+
+30 100.0% 100.0% 95.0% 100.0% 98.0% 42.5% 77.0% 0.0% 2.5%
+
+35 100.0% 100.0% 96.5% 100.0% 98.5% 50.0% 87.5% 0.0% 2.5%
+
+40 100.0% 100.0% 97.0% 100.0% 100.0% 60.5% 94.0% 0.0% 1.0%
+Optimal Inference with Nearly Integrated Regressors  52
+
+                             TABLE II
+          Power Function of UMPCU test
+
+           = 0.5                 = -0.5
+
+b c = 0 c = -10 c = -100 c = 0 c = -10 c = -100
+
+0 1.0% 1.5%       6.0%   9.0% 4.5%       5.5%
+5 37.5% 5.0%      9.0%   54.5% 10.0%     4.5%
+
+10 61.5% 16.0% 9.5% 79.0% 20.0% 6.0%
+
+15 71.5% 21.0% 10.5% 93.5% 43.0% 8.5%
+
+20 72.5%  26.5%   13.5%  99.0%  74.5%    10.0%
+25 74.0%  31.0%   18.5%  99.5%  91.5%    14.0%
+30 74.5%  34.0%   17.5%  98.0%  98.5%    14.0%
+35 76.5%  38.5%   17.0%  97.0%  99.0%    25.0%
+
+40 77.5% 46.5% 21.5% 90.5% 99.5% 32.0%
+Optimal Inference with Nearly Integrated Regressors  53
+
+                                             References
+Abadir, K. L., and R. Larsson (2001): "The Joint Moment Generating Func-
+
+   tion of Quadratic Forms in Multivariate Autoregressive Time Series," Econometric
+   Theory, 17, 222­246.
+
+Andrews, D. W. K. (1991): "Heteroskedasticity and Autocorrelation Consistent
+   Covariance Matrix Estimation," Econometrica, 59, 817­858.
+
+Andrews, D. W. K., and J. C. Monahan (1992): "An Improved Heteroskedastic-
+   ity and Autocorrelation Consistent Covariance Matrix Estimator," Econometrica,
+   60, 953­966.
+
+Ang, A., and G. Bekaert (2003): "Stock Return Predictability: Is It There?,"
+   Working paper, Columbia Business School.
+
+Basu, D. (1977): "On the Elimination of Nuisance Parameters," Journal of the
+   American Statistical Association, 72, 355­366.
+
+Billingsley, P. (1999): Convergence of Probability Measures. Second Edition. New
+   York: Wiley.
+
+Campbell, B., and J.-M. Dufour (1997): "Exact Nonparametric Tests of Or-
+   thogonality and Random Walk in the Presence of a Drift Parameter," International
+   Economic Review, 38, 151­173.
+
+Campbell, J. Y., and M. Yogo (2003): "Efficient Tests of Stock Return Pre-
+   dictability," NBER Working Paper No. 10026.
+
+Cavanagh, C. L., G. Elliott, and J. H. Stock (1995): "Inference in Models
+   with Nearly Integrated Regressors," Econometric Theory, 11, 1131­1147.
+
+Choi, S., W. J. Hall, and A. Shick (1996): "Asymptotically Uniformly Most
+   Powerful Tests in Parametric and Semiparametric Models," Annals of Statistics,
+   24, 841­861.
+
+de Jong, R. M., and J. Davidson (2000): "Consistency of Kernel Estimators
+   of Heteroscedastic and Autocorrelated Covariance Matrices," Econometrica, 68,
+   407­423.
+
+Dickey, D. A., and W. A. Fuller (1979): "Distribution of the Estimators for
+   Autoregressive Time Series with a Unit Root," Journal of the American Statistical
+   Association, 74, 427­431.
+Optimal Inference with Nearly Integrated Regressors  54
+
+            (1981): "Likelihood Ratio Statistics for Autoregressive Time Series with a
+   Unit Root," Econometrica, 49, 1057­1072.
+
+Dudley, R. M. (2002): Real Analysis and Probability. Cambridge, U.K.: Cambridge
+   University Press.
+
+Efron, B. (1975): "Defining the Curvature of a Statistical Problem (with Applica-
+   tions to Second Order Efficiency)," Annals of Statistics, 3, 1189­1242.
+
+            (1978): "The Geometry of Exponential Families," Annals of Statistics, 6,
+   362­376.
+
+Elliott, G. (1998): "On the Robustness of Cointegration Methods when Regressors
+   Almost have Unit Roots," Econometrica, 66, 149­158.
+
+Elliott, G., T. J. Rothenberg, and J. H. Stock (1996): "Efficient Tests for
+   an Autoregressive Unit Root," Econometrica, 64, 813­836.
+
+Elliott, G., and J. H. Stock (1994): "Inference in Time Series Regression When
+   the Order of Integration of a Regressor is Unknown," Econometric Theory, 10,
+   672­700.
+
+Engle, R. F., and C. W. J. Granger (1987): "Cointegration and Error Correc-
+   tion: Representation, Estimation, and Testing," Econometrica, 55, 251­276.
+
+Feigin, P. D. (1986): "Asymptotic Theory of Conditional Inference for Stochastic
+   Processes," Stochastic Processes and their Applications, 22, 89­102.
+
+Ferson, W. E., S. Sarkissian, and T. Simin (2003): "Spurious Regressions in
+   Financial Economics?," Journal of Finance, 58, 1393­1414.
+
+Hansen, B. E. (1992): "Consistent Covariance Matrix Estimation for Dependent
+   Heterogeneous Processes," Econometrica, 60, 967­972.
+
+Jansson, M. (2002): "Consistent Covariance Matrix Estimation for Linear
+   Processes," Econometric Theory, 18, 1449­1459.
+
+Jeganathan, P. (1995): "Some Aspects of Asymptotic Theory with Applications
+   to Time Series Models," Econometric Theory, 11, 818­887.
+
+            (1997): "On Asymptotic Inference in Linear Cointegrated Time Series Sys-
+   tems," Econometric Theory, 13, 692­745.
+
+Johansen, S. (1988): "Statistical Analysis of Cointegration Vectors," Journal of
+   Economic Dynamics and Control, 12, 231­254.
+Optimal Inference with Nearly Integrated Regressors  55
+
+            (1991): "Estimation and Hypothesis Testing of Cointegration Vectors in
+   Gaussian Vector Autoregressive Models," Econometrica, 59, 1551­1580.
+
+Kauppi, H. (2004): "On The Robustness of Hypothesis Testing Based on Fully
+   Modified Vector Autoregression When some Roots are Almost One," Econometric
+   Theory, 20, 341­359.
+
+Lanne, M. (2002): "Testing the Predictability of Stock Returns," Review of Eco-
+   nomics and Statistics, 84, 407­415.
+
+Le Cam, L., and G. L. Yang (2000): Asymptotics in Statistics: Some Basic
+   Concepts. Second Edition. New York: Springer-Verlag.
+
+Lehmann, E. L. (1994): Testing Statistical Hypotheses. Second Edition. New York:
+   Chapman and Hall.
+
+Lewellen, J. (2002): "Predicting Returns with Financial Ratios," Journal of Fi-
+   nancial Economics, forthcoming.
+
+Moon, H. R., and P. C. B. Phillips (2000): "Estimation of Autoregressive Roots
+   Near Unity Using Panel Data," Econometric Theory, 16, 927­997.
+
+            (2004): "GMM Estimation of Autoregressive Roots Near Unity with Panel
+   Data," Econometrica, 72, 467­522.
+
+Newey, W. K., and K. D. West (1987): "A Simple, Positive Semi-Definite, Het-
+   eroskedasticity and Autocorrelation Consistent Covariance Matrix," Econometrica,
+   55, 703­708.
+
+           (1994): "Automatic Lag Selection in Covariance Matrix Estimation," Review
+   of Economic Studies, 61, 631­653.
+
+Park, J. Y. (1992): "Canonical Cointegrating Regressions," Econometrica, 60, 119­
+   143.
+
+Phillips, P. C. B. (1987a): "Time Series Regression with a Unit Root," Econo-
+   metrica, 55, 277­301.
+
+            (1987b): "Towards a Unified Asymptotic Theory for Autoregression," Bio-
+   metrika, 74, 535­547.
+
+            (1988a): "Regression Theory for Near-Integrated Time Series," Economet-
+   rica, 56, 1021­1043.
+Optimal Inference with Nearly Integrated Regressors  56
+
+            (1988b): "Weak Convergence of Sample Covariance Matrices to Stochastic
+   Integrals Via Martingale Approximations," Econometric Theory, 4, 528­533.
+
+            (1991a): "Optimal Inference in Cointegrated Systems," Econometrica, 59,
+   283­306.
+
+            (1991b): "Spectral Regression for Cointegrated Time Series," in Nonpara-
+   metric and Semiparametric Methods in Economics and Statistics, ed. by W. A.
+   Barnett, J. Powell, and G. E. Tauchen. Cambridge, U.K.: Cambridge University
+   Press, pp. 413-435.
+
+            (1995): "Fully Modified Least Squares and Vector Autoregression," Econo-
+   metrica, 63, 1023­1078.
+
+Phillips, P. C. B., and B. E. Hansen (1990): "Statistical Inference in Instru-
+   mental Variables Regression with I(1) Variables," Review of Economic Studies, 57,
+   99­125.
+
+Phillips, P. C. B., and P. Perron (1988): "Testing for a Unit Root in Time
+   Series Regression," Biometrika, 75, 335­346.
+
+Phillips, P. C. B., and V. Solo (1992): "Asymptotics for Linear Processes,"
+   Annals of Statistics, 20, 971­1001.
+
+Polk, C., S. Thompson, and T. Vuolteenaho (2004): "Cross Sectional Fore-
+   casts of the Equity Premium," Working paper, Harvard University.
+
+Saikkonen, P. (1991): "Asymptotically Efficient Estimation of Cointegration Re-
+   gressions," Econometric Theory, 7, 1­21.
+
+            (1992): "Estimation and Testing of Cointegrated Systems by an Autore-
+   gressive Approximation," Econometric Theory, 8, 1­27.
+
+Shorack, G. R., and J. A. Wellner (1986): Empirical Processes with Applica-
+   tions to Statistics. New York: Wiley.
+
+Stambaugh, R. F. (1999): "Predictive Regressions," Journal of Financial Eco-
+   nomics, 54, 375­421.
+
+Stock, J. H. (1994): "Unit Roots, Structural Breaks and Trends," in Handbook of
+   Econometrics, Volume IV, ed. by R. F. Engle, and D. L. McFadden. New York:
+   North Holland, pp. 2739-2841.
+Optimal Inference with Nearly Integrated Regressors  57
+
+            (1997): "Cointegration, Long-Run Comovements, and Long-Horizon Fore-
+   casting," in Advances in Economics and Econometrics: Theory and Applications,
+   Seventh World Congress, Volume 3, ed. by D. Kreps, and K. F. Wallis. Cambridge:
+   Cambridge University Press, pp. 34-60.
+
+Stock, J. H., and M. W. Watson (1993): "A Simple Estimator of Cointegrating
+   Vectors in Higher Order Integrated Systems," Econometrica, 61, 783­820.
+
+            (1996): "Confidence Sets in Regressions with Highly Serially Correlated
+   Regressors," Working paper, Harvard University.
+
+Sweeting, T. J. (1989): "On Conditional Weak Convergence," Journal of Theoret-
+   ical Probability, 2, 461­474.
+
+Torus, W., R. Valkanov, and S. Yan (2001): "On Predicting Stock Returns
+   with Nearly Integrated Explanatory Variables," Journal of Business, forthcoming.
+
+Valkanov, R. (1999): "The Term Structure with Highly Persistent Interest Rates,"
+   Working paper, Anderson School of Management.
+
+van der Vaart, A. W. (2002): "The Statistical Work of Lucien Le Cam," Annals
+   of Statistics, 30, 631­682.
+
+Watson, M. W. (1994): "Vector Autoregressions and Cointegration," in Handbook
+   of Econometrics, Volume IV, ed. by R. F. Engle, and D. L. McFadden. New York:
+   North Holland, pp. 2843-2915.
+
+Wright, J. H. (1999): "A Simple Approach to Robust Inference in a Cointegrating
+   System," International Finance Discussion Paper 654, Board of Goveners.
+
+            (2000): "Confidence Sets for Cointegrating Coefficients Based on Station-
+   arity Tests," Journal of Business and Economic Statistics, 18, 211­222.
+

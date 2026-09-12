@@ -1,0 +1,884 @@
+Econometric Theory, 11, 1995, 1131-1147. Printed in the United States of America.
+
+      INFERENCE IN MODELS WITH
+           NEARLY INTEGRATED
+                 REGRESSORS
+
+                               CHRISTOPHER L. CAVANAGH
+                                   Columbia University
+
+                                    GRAHAM ELLIOTT
+                         University of California, San Diego
+
+                                    JAMES H. STOCK
+                          Kennedy School of Government
+
+                                    Harvard University
+                                               and
+
+                      National Bureau of Economic Research
+
+   This paper examines regression tests of whether x forecasts y when the largest
+   autoregressive root of the regressor is unknown. It is shown that previously pro-
+   posed two-step procedures, with first stages that consistently classify x as 1(1)
+   or 1(0), exhibit large size distortions when regressors have local-to-unit roots,
+   because of asymptotic dependence on a nuisance parameter that cannot be esti-
+   mated consistently. Several alternative procedures, based on Bonferroni and
+   Scheffe methods, are therefore proposed and investigated. For many param-
+   eter values, the power loss from using these conservative tests is small.
+
+1. INTRODUCTION
+
+In a bivariate model, the asymptotic null distribution of the F-statistic test-
+ing whether x is a useful predictor of .y depends on whether the largest auto-
+regressive root a of the regressor is 1 or less than 1. The application that
+motivates this paper is a special case of the general Granger causality test-
+ing problem, tests of the linear rational expectations hypothesis in finance.
+Examples include tests of the predictability of stock returns using lagged
+information--for example, the lagged dividend yield or, alternatively, the
+lagged slope of the term structure. A large body of research (see Campbell
+and Shiller, 1988; for a review, see Fama, 1991) finds significant predictive
+content in such relations using conventional critical values. However, with
+regressors such as the dividend yield, there is reason to suspect a large, pos-
+
+The authors thank Jean-Marie Dufour, Mark Watson, and three anonymous referees for helpful comments.
+The research was supported in part by National Science Foundation grant SES-91-22463. Address correspon-
+dence to: Professor James Stock, Kennedy School, Harvard University, Cambridge, MA 02138, USA.
+
+© 1995 Cambridge University Press 0266-4666/95 $9.00 + .10  1131
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1132 CHRISTOPHER L. CAVANAGH ET AL.
+
+sibly unit, autoregressive root. The presence of this arguably large autoregres-
+sive root calls into question the applicability of conventional critical values.
+
+   There are several approaches to this problem that, at least in large sam-
+ples, satisfactorily handle the cases a = 1 or, alternatively, | a | < 1, where
+a is fixed; an example is using a consistent sequence of pretests for a unit
+root in x (cf. Elliott and Stock, 1994; Kitamura and Phillips, 1992; Phillips,
+1995). However, these results are pointwise in a rather than uniform over
+| a | < 1. This distinction matters because controlling size in the sense of Leh-
+mann (1959, Ch. 3) and constructing an asymptotically similar test require
+controlling the size not just for a fixed but also for sequences of a. The se-
+quence that we focus on in this paper is the local-to unity model a = 1 4- c/T,
+where c is a fixed constant. It has been established elsewhere that the result-
+ing local-to-unity asymptotic distributions provide good approximations
+to finite-sample distributions when the root is close to 1 (cf. Chan, 1988;
+Nabeya and Sorensen, 1994). It is shown in Section 2 that a typical pro-
+cedure that asymptotically controls size pointwise fails to control size in
+Lehmann's uniform sense because the asymptotic critical values depend on
+the nuisance parameter c. The consequence is substantial overrejection of the
+null hypothesis, both in finite samples and asymptotically.
+
+  The specific model for which formal results are developed is the recursive
+system:
+
+x, = px + vt,            (1 -aL)b(L)v, = eW)  (1.1)
+
+yt = V-y + 7*/-i + «2r.                       (1-2)
+
+where b (L) = S f=o bt L'', b0 = 1, and e, = (e i,, e2,)' is a martingale difference
+sequence with E(ete', | e,_! ,e,_2,...) = 2 (with typical element o^) and with
+sup,2se,Y < oo, / = 1,2. Let 5 = corr(ei,,e2,). Assume that Ev£ < « . The
+roots of b(L) are assumed to be fixed and less than 1 in absolute value.
+
+If | a | < 1 and oc is fixed, then x, is integrated of order 0 (is 1(0)), whereas
+
+if a = 1, then x, is integrated of order 1 (is 1(1)). Thus, a can be taken to
+
+be the largest autoregressive root of the univariate representation of x,.
+
+Accordingly, it is useful to write (1.1) in standard augmented Dickey-Fuller
+
+(Dickey and Fuller, 1979) (ADF) form:
+
+Ax, = lix + /3x,_! + a(L)Ajf,_1 + e,,,        (1.3)
+
+wherefi.x= (1 - a)b{\)nx, 0 = (a - 1)6(1), and a} = -Sf=y+i Sh where
+S(L)=L-1[l- (1 -aL)b(L)].
+
+We consider the problem of testing the null hypothesis that 7 = 70 or,
+
+equivalently, constructing confidence intervals for 7. For this problem, the
+
+root a is a nuisance parameter. In the motivating application to tests of
+
+the linear rational expectations hypothesis, 70 = 0, although the theoretical
+
+results here hold for general 70.
+
+Limiting representations are presented for the case that a constant is
+
+included when (1.2) and (1.3) are estimated (the "demeaned" case). These
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+                       TESTS WITH NEARLY INTEGRATED REGRESSORS 1133
+
+results can be extended to regressions that include polynomials in time of gen-
+eral order, using the techniques in, for example, Park and Phillips (1988) and
+Sims, Stock, and Watson (1990). In practice, much empirical work includes
+a linear time trend in the specification. For this reason, although formulas
+are only given for the demeaned case, some numerical results are also pre-
+sented for the "detrended" case, in which a constant and linear time trend
+are included in the regressions of (x,,y,) on x,_x.
+
+   The paper is organized as follows. The asymptotic size of the conventional
+/-test of 7 = 70 based on a consistent pretest of a = 1 is derived and com-
+puted in Section 2. Section 3 describes several procedures for the construc-
+tion of tests and confidence intervals that are asymptotically valid, in the
+sense that size is controlled for local-to-unity sequences of a as well as for
+a fixed. The asymptotic power of these tests against local alternatives of the
+form 7 = To + g/T is also derived in this section. These tests are based on
+bounds that generally result in asymptotically conservative tests. Bounds tests
+are a classical device that has been used in related time series problems (e.g.,
+Dufour, 1990), and these tests are applied here to handle the nuisance param-
+eter c. Numerical results on the asymptotic size and power are presented in
+Section 4. Section 5 concludes the paper.
+
+2. ASYMPTOTIC REPRESENTATIONS AND SIZES OF
+PROCEDURES WITH A CONSISTENT PRETEST
+
+2.1. Asymptotic Representations of Test Statistics
+
+Let ty denote the /-statistic testing 7 = 70 in (1.2), and let t0 denote the ADF
+/-statistic testing # = 0 in (1.3). The joint limiting distribution of (ty,ts) is
+obtained by applying the theory of local-to-unity asymptotics developed by
+Bobkoski (1983), Cavanagh (1985), Chan (1988), Chan and Wei (1987), and
+Phillips (1987). Let B = {BUB2Y be a two-dimensional Brownian motion
+with covariance matrix 2, where S n = £22 = 1 a n d £12 = £21 = 5; let Jc be the
+diffusion process defined by dJc(s) = cJc(s) ds + dBx (s), where Jc(0) = 0;
+and let J?(s) = Jc(s) -f^JAr) dr. Also, let a denote equality in distribution,
+let =» denote weak convergence on D [0,1 ], and let [·] denote the greatest
+lesser integer function. Under the local-to-unity model a -- 1 + c/T,
+
+ll 7  [r.]          [r.]          X\T.\
+
+      Zl £l"ff22 T   2 J e2f.W I
+      t=\           /=1
+
+jointly, where u2 = au/b(\)2, xj1 -- x, -- (T -- I)"1 HT=2 *t-i (cf. Chan and
+Wei, 1987; Phillips, 1987). It follows that t& and ty have the joint limiting
+representation
+
+(h,ty)-> \Tic + cQc,T2c} = { T I C + C0C, « 5 T 1 C + (1 -52)1/2z),  (2.1)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1134 CHRISTOPHER L. CAVANAGH ET AL.
+
+where rlc = {$J?2j-"2jJ?dBu r2c = (f J?2)-i/2f J? dB2, Qc = (jVc*2)1/2,
+and z is a standard normal random variable distributed independently of
+
+(BltJc) (cf. Stock, 1991, Appendix A). The final expression in (2.1) is ob-
+tained by writing B2 = 8Bi + (1 -- 82)W2B2, where B2 is a standard Brown-
+ian motion distributed independently of Bx.
+
+  The limiting distribution of ty depends on both c and 5; however, 5 is
+consistently estimated by the sample correlation between iit and e2t, so we
+can treat 5 as known for the purposes of the asymptotic theory.
+
+  A joint test of c and y can be performed using an appropriate Wald statistic
+
+for the system (1.2) and (1.3). Let <t>T(y0,c0) = [T& - cob(l), T(y - To)]',
+where 5(1) = 1 - £*=i a,-_1? where {a,-} are the estimators of {a,-} from the
+OLS estimation of (1.3). Also, let t be the 2 x 2 matrix with typical element
+Ojj = (T-- I)"1 Sjli eitejt, where eu and e2t are the residuals from (1.3) and
+(1.2), respectively. Consider the test statistic
+
+.Co) = \ <!>T{y0,Co)'(t-lT-2j^x?l\<t>T(y0,c0).  (2.2)
+
+Extensions of the calculations in Stock (1991) show that, under the null
+hypothesis (y,c) = (yo,co),
+
+W(yo,co)~ Hrfco + Z2).                          (2.3)
+
+  The key difficulty for tests of the hypothesis y = 70 using either ty or
+^(7o,Co) is that the limiting distributions of these statistics depend on the
+local-to-unity parameter c. (The exception is if 8 = 0, in which event ty has
+a standard normal distribution for all values of c, as well as for a fixed,
+| a | < 1.) Although a is consistently estimable, c is not, so that asymptotic
+inference cannot in general rely on simply substituting a suitable estimator
+c for c when selecting critical values for tests of y.
+
+2.2. Asymptotic Size Distortions of Pretest-Based Procedures
+
+This section illustrates the size distortions of two-step tests of y = 70 when
+the critical values are selected using a consistent first-stage pretest. To make
+the discussion concrete, consider pretesting using the ADF ^-statistic. Let
+dlyiCt7l denote the 100r7% quantile of the distribution of 8T1C + (1 - 82)l/2z
+for a given value of 8. Consider the following sequential testing procedure
+based on a consistent ADF pretest, with an equal-tailed second-stage test with
+nominal level 5%:
+
+if tf, <bi - b2In T, reject y = y0 if | ty\ > 1.96,
+                                                                                   (2.4)
+
+if t0S:bi- b2 In T, reject y = y0 if ty £ (rf,7,0,.02J.^,o,.97s).
+where b{ and b2 are constants with b2 > 0. The asymptotic size of this test
+of 7 = 7o is l i m r ^ supM:Sl Pr[(2.4) rejects y = y0 \ y0 is true].
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+TESTS WITH NEARLY INTEGRATED REGRESSORS 1135
+
+   To compute a lower bound on this size, consider three possibilities: a = 1,
+a fixed and | a \ < 1, and a = 1 + c/T. Evidently, if a = 1 thefirst-stagetest
+asymptotically rejects with probability 0 and the second-stage test asymptot-
+ically rejects with probability 5%. If a is fixed and | a | < 1, then | ^ | =
+OP(TU2); it follows that the first-stage test asymptotically rejects with prob-
+ability 1, so again the correct critical values are used and the second-stage
+asymptotic rejection rate is 5%. If, however, a = 1 + c/T, the probability of
+rejecting a = 1 goes to 0 because, from (2.1), tp is Op(l) for c finite. Thus,
+asymptotically the a = 1 second-stage critical values are used. In this event,
+the rejection probability is Pr[|5rlc + (1 - 52)I/2z| £ (dty,o,.o25>dty,o,.9i5)]-
+Numerical evaluation reveals that, given 5, this is monotone increasing in -- c
+for c < 0. In the limit c -» --oo, 5rlc + (1 -- 52)W2z is distributed as a stan-
+dard normal random variable (this follows from the normality of {J? dBx/
+S(Jc)2 for c < 0; see Nabeya and Sorensen, 1994). It follows that the size
+of procedure (2.4) is at least
+
+size(2.4) > #(rf/T>O|.o2s) + *(-dhAm).  (2.5)
+
+  Asymptotic rejection rates for (2.4) and their limit, the size (2.5), are given
+in Table 1 for various values of 5 for tests of purported level 5%. When
+5 = 0, ty has a standard normal asymptotic distribution for all c so the size
+is the asymptotic level. For 5 < 0.3, the asymptotic size distortions of the two-
+step procedure are small and are arguably negligibly important for empirical
+work. However, for larger values of 5, the size distortions can be substan-
+tial. For example, for 5 = 0.9 in the detrended case, the rejection rate for test
+(2.4) with "level" 5% is 37% when c = -20, and the maximal rejection rate
+over all c (the size) is 64%.
+
+  To provide additional evidence of the dependence of the distribution of
+ty as a function of c, the median and upper and lower 5% quantiles of this
+distribution are plotted in Figure 1 for <5 = 0.7. Evidently, the critical distri-
+bution of ty is shifted most negatively in the region of c = 0, although a neg-
+ative shift is evident even for c = --20. Evidently, if c < --10, the c = 0
+percentiles will provide poor critical values for testing 7 = 7o. which is the
+source of the size distortions in Table 1.
+
+  Whether or not the issues addressed in this paper are important in a par-
+ticular application evidently depends on the correlation 5. In many applica-
+tions to financial markets, this correlation can reasonably be expected to be
+large. For example, the innovations in stock returns plausibly will be (neg-
+atively) correlated with the innovation in the log dividend yield, because the
+log stock price enters each of these variables.
+
+  These distortions are not an artifact of using an ADF-based procedure
+but, rather, arise because local-to-unity processes are classified as 1(1) with
+asymptotic probability 1. Thus, these size distortions are present in other
+sequential procedures that share this feature. It is worth noting that one such
+class of procedures are the Bayesian selection rules proposed by Phillips and
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1136 CHRISTOPHER L. CAVANAGH ET A L
+
+TABLE 1. Asymptotic rejection rates and size of two-step procedure
+with consistent Dickey-Fuller pretest
+
+c 5 = 0 . 0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+   0.0  0.050                        A. Demeaned case
+ -2.5   0.050
+ -5.0   0.050  0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050
+-10.0   0.050  0.051 0.051 0.052 0.053 0.056 0.058 0.062 0.065 0.066 0.069
+               0.051 0.052 0.056 0.060 0.066 0.073 0.084 0.094 0.103 0.117
+-15.0   0.050  0.052 0.054 0.060 0.068 0.079 0.092 0.110 0.134 0.154 0.178
+-20.0   0.050
+-25.0   0.050  0.052 0.054 0.062 0.073 0.085 0.102 0.128 0.156 0.181 0.215
+-30.0   0.050  0.053 0.055 0.065 0.076 0.091 0.109 0.137 0.169 0.199 0.235
+               0.053 0.056 0.066 0.077 0.095 0.114 0.144 0.177 0.210 0.251
+Limit   0.050  0.053 0.056 0.067 0.078 0.097 0.119 0.151 0.185 0.221 0.263
+Size    0.050
+               0.053 0.060 0.075 0.095 0.126 0.162 0.211 0.269 0.329 0.400
+               0.053 0.060 0.075 0.095 0.126 0.162 0.211 0.269 0.329 0.400
+
+   0.0  0.050                        B. Detrended case
+ -2.5   0.050
+ -5.0   0.050  0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050 0.050
+-10.0   0.050  0.051 0.052 0.055 0.058 0.063 0.068 0.077 0.088 0.102 0.115
+               0.051 0.054 0.059 0.067 0.077 0.090 0.110 0.137 0.169 0.205
+-15.0   0.050  0.052 0.058 0.069 0.084 0.103 0.129 0.165 0.211 0.268 0.335
+-20.0   0.050
+-25.0   0.050  0.054 0.061 0.075 0.096 0.120 0.154 0.201 0.259 0.333 0.407
+-30.0   0.050  0.054 0.063 0.079 0.102 0.130 0.172 0.225 0.291 0.373 0.457
+               0.055 0.064 0.081 0.107 0.139 0.184 0.241 0.311 0.399 0.491
+Limit   0.050  0.055 0.065 0.084 0.111 0.147 0.193 0.254 0.331 0.420 0.513
+Size    0.050
+               0.055 0.074 0.107 0.158 0.226 0.310 0.414 0.527 0.644 0.748
+               0.055 0.074 0.107 0.158 0.226 0.310 0.414 0.527 0.644 0.748
+
+Notes: Rejection rates of the two-step procedure in (2.4) are based on asymptotic representation (2.1). "Limit"
+is computed for c - s : 0, so ty ~ N ( 0 , l ) . Size is the maximum of the preceding rows and this limit. In the
+demeaned case, regresssions (1.2) and (1.3) contain a constant. In the detrended case, they contain a con-
+stant and a linear time trend. Based on 20,000 Monte Carlo replications of the limiting representations, sim-
+ulated with T = 500.
+
+Ploberger (1991) and Stock (1994), which both classify local-to-unity pro-
+cesses as 1(1) with probability 1 asymptotically (see Elliott and Stock, 1994).
+
+3. ASYMPTOTICALLY VALID CONFIDENCE
+INTERVALS AND TESTS
+
+This section describes several alternative procedures for the construction of
+asymptotically valid tests of y = 70 and confidence intervals for 7. Because
+the size distortions found in Section 2 occur when thesefirst-stageprocedures
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+                  TESTS WITH NEARLY INTEGRATED REGRESSORS 1137
+
+-40 -35 -30 -25 -20 - 1 5 - 1 0 -5         0
+
+       FIGURE 1. The 5, 50, and 95% percentiles of ty, demeaned case, 5 = 0.7.
+
+classify the process as 1(1), but a is in fact large but less than 1, this section
+focuses on asymptotically valid inference on y in the local-to-unity case. This
+provides an alternative to the second line of (2.4) while leaving the first line
+unchanged. While the procedures apply to general c, the analysis focuses on
+the mean-reverting case c < 0 for two reasons. First, the economic debate in
+the unit roots area has, in general, focused on the stationary vs. unit root
+model. Second, unit root tests typically have high power against close explo-
+sive alternatives, so with high probability the 1(1) specification would be
+rejected in these cases against an explosive model, which would take us out-
+side the range of applicability of the dichotomous treatment in (2.4).
+
+   Three types of procedures are considered: sup-bound intervals, Bonferroni
+intervals, and Scheffe-type intervals. Without subsequent adjustment, each
+can be shown to produce asymptotically conservative tests of y = y0. How-
+ever, the critical values for each procedure can be adjusted so that its nom-
+inal size equals its level asymptotically.
+
+3 . 1 . Sup-Bound Intervals
+
+A simple asymptotically valid test or confidence interval can be constructed by
+using the extrema of the asymptotic local-to-unity critical values of ty. Let
+
+(rf,.rf,) = (inf             rf,TiCi,,sup  rf,T>c,,).  (3.1)
+
+A conservative test of y = y0 with asymptotic level at most r\ can be per-
+formed by rejecting if ty <£ (cfi/2,,<ii-i/2,)- An asymptotically conservative
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1138 CHRISTOPHER L. CAVANAGH ET AL.
+
+confidence interval with confidence level at least 100(1 - 77)% can be con-
+structed by inverting the acceptance region of this test, that is, as
+
+( 7 : 7 - J , _ 1 / 2 , S E ( T ) < 7 ^ Y ~ d1/2nSE(y)},                (3.2)
+
+where SE(y) = [
+   In contrast, if ty e (c71/2,,cfi_i/2,), a test of y = y0 with asymptotic level
+
+7} will accept for any value of c. Thus, a confidence interval with confidence
+level of at most 100(1 -77)% can be constructed by inverting this test statis-
+tic. Values of ty within the conservative acceptance region, (cfi/2,,.^1-1/2,,).
+but outside the acceptance region, (rfi/2,,^i-i/2^)» constitute an indetermi-
+nate region in which ambiguity remains about whether a test of exactly size
+77 would accept or reject.
+
+   The actual size of the test of y = 70 using the upper and lower bounds is
+
+Pr[*7 £ (rfi/2,,<*i-i/2,)] - Pr[5rlc + (1 - 62)[/2z £ (dl/2v,d^l/2i))]
+
+= Ss(c,v),                                                              (3.3)
+
+where SS(C,T]) < 77. Because the size depends on cnly one asymptotically
+unknown nuisance parameter (c), it is possible to construct alternative sup-
+bound confidence intervals with the correct size asymptotically. Specifically,
+a test of 7 = 70 with an asymptotic rejection rate of, say, rj can be con-
+structed by choosing 77 to satisfy supc5^(c,7;) = rj. Evidently, the resulting
+value of rj, say 77', will be at least rj. The sup-bound confidence interval (test)
+with this additional size adjustment will be referred to as the size-adjusted
+sup-bound confidence interval (test). Note that the critical values used to con-
+struct the size-adjusted sup-bound confidence intervals depend on 5.
+
+   For the numerical work, the size-adjusted upper and lower bounds were
+computed by Monte Carlo simulation with T- 1,000 and 20,000 replications
+over a grid of c, -- 4 0 < c < 10; supcSs(c,r)') = ^ was solved numerically for
+17', and the resulting bounds, as a function of 5, were stored in a lookup table.
+
+3.2. Bonferroni Intervals
+
+The sup-bound confidence regions do not use sample information on a. An
+alternative, potentially more powerful approach is to construct intervals by
+inverting Bonferroni tests, where the bounds are determined by taking the
+extrema of the critical values of ty, evaluated over a first-stage confidence
+interval for a. Let Cc(r\x) denote a 100(1 - 171)% confidence region for c,
+and let C7|C(T72) denote a 100(1 - 772)% confidence region for 7, which
+depends on c. Then, a confidence region for 7 that does not depend on c can
+be constructed as
+
+                                                                                                       (3-4)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+TESTS WITH NEARLY INTEGRATED REGRESSORS 1139
+
+By Bonferroni's inequality, the region Cf (17) has confidence level of at least
+100(1 - 77)%, where 17 = 77, + T;2.
+
+   Asymptotically valid confidence intervals for c can be constructed by
+inverting the Dickey-Fuller /-statistic as developed in Stock (1991), which
+produces an equal-tailed confidence interval of the form, C / ^ ) < c <
+Cu(t)\)- Given the upper and lower limits of this confidence interval, the
+confidence region of (3.4) can be computed by inverting ty. Let
+
+(df{7ii,V2),du(.Vi,V2)) = ( min d, c<l/2n, max d, c>i_1/2,2).  (3.5)
+
+C/SC=SC                      Cl^CSC
+
+The Bonferroni confidence interval is given by
+
+7 - dS(vi,ri2)SE(y) < 7 ^ 7 - d?(Vuv2)SE(y).                   (3.6)
+
+   In principle, this confidence interval can be constructed using graphical
+methods. First, the interval (chcu) is obtained by the method of confidence
+belts using ts as in Stock (1991). Next, given this confidence interval for c,
+dp(y\,V2) and d%(t)i,r\2) are read off a plot of the asymptotic critical val-
+ues of ty, such as Figure 1. In practice, this is more efficiently implemented
+using computerized lookup tables.
+
+   The asymptotic size of Bonferroni test (3.6) is
+
++ (1 -82)l/2z<£              (d/'Ui.ifeJ.d'Ui.'to))] = SB(c,r,ur,2),
+                                                                            (3.7)
+
+where, by Bonferroni's inequality, SB(c,7/i,rj2) ^ Vi +1?2- Due to the corre-
+lation between the tests, these intervals can be quite conservative. As is the
+case with the sup-bound intervals, asymptotically valid size-adjusted confi-
+dence intervals can be constructed by choosing 771 and T/2 (where T/2 < 77) so
+that they achieve some desired level, say rj. In practice, this size-adjustment
+computation is lengthy because of the need to compute first-stage confidence
+intervals for each realization of a Bonferroni test statistic. After some exper-
+imentation, it was found that letting rj2 = V = 10% and choosing 771 to solve
+SB(C,7/,,7J) = 77, so that TJJ depends on 5, yielded a test with size 10% for
+5 = 0, 0.5 (77! = 30%), 0.7 (Vl = 24%), and 0.9 fa - 13%).
+
+3.3. Scheffe-Type Intervals
+
+A Scheffe-type confidence interval, say Cy(t]), can be constructed by pro-
+jecting an asymptotically valid 100(1 -- 17)% joint confidence set for (y,c),
+say C7IC(T7), onto the 7 axis; that is,
+
+C75(T7) = {7 :ac such that (T,c) e C7>C(T7)).                  (3.8)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1140 CHRISTOPHER L. CAVANAGH ET AL.
+
+This set will have asymptotic confidence level at least 100(1 -- rj)%. The joint
+confidence set Cy>c(if) can be constructed by inverting a level-17 test of the
+joint hypothesis, (y,c) = (yo,co).
+
+  The Wald statistic W(y, c) in (2.2) is a natural statistic to use to perform
+this test. For c finite, the limit distribution of PT based on (2.3) is nonstan-
+dard, although for c < 0, T\c approaches a normal distribution so the dis-
+tribution of W(yo,co) becomes well approximated by a xf/2. Let wCo,i_,
+denote the 100(1 - rj)°7o quantile of the distribution of the limiting random
+variable in (2.3). Selected critical values are presented in Table 2.
+
+  The set of (70,c0) for which W(yo,co) < vvCOil_, constitutes a confidence
+set with asymptotic confidence level 100(1 - 17)%. To construct a Scheffe-
+type confidence interval for 7, it is not necessary to construct this region
+for (y,c) but, rather, simply to find the set of 70 for which there exists
+some c0 such that (yo,co) is not rejected. Thus, the Scheffe interval is con-
+structed as
+
+Cys(rj) = (7o:min[^(T0)c0) - >%,,_,,] < 0).  (3.9)
+
+               CO
+
+If the critical value did not depend on c0, solving (3.9) would reduce to
+manipulating a quadratic in c0. However, because of the nonlinear depen-
+dence of wCo,i_, on c0, in our numerical work (3.9) is solved on a grid. Note
+that, like the Bonferroni interval, interval (3.9) does not restrict the range of
+c and so implicitly admits positive values of c.
+
+  An advantage of this Scheffe-type interval over the Bonferroni intervals
+is that, because 5 does not appear in the limit in (3.9), the critical values for
+the Scheffe interval do not depend on 5. Like the other intervals, the Scheffe
+tests are conservative, and size adjustment can be expected to increase power.
+Let Ss(c, 17) be the asymptotic size of the Scheffe test of 7 = 70; then, a size-
+adjusted Scheffe test can be constructed by using critical values {wCOj]_,),
+where t\ is chosen such that supcSs(c,?7) = rj. Note that although (wCol_,)
+does not depend on 5, the size Ss(c,77) does, so the critical values of the size-
+adjusted Scheffe test will depend on 8. Because a practical advantage of the
+unadjusted Scheffe test is that the critical values do not depend on 5, the
+numerical work focuses on the unadjusted (conservative) test.
+
+3.4. Local Asymptotic Power
+
+A natural way to compare these tests is to compare their power against local
+alternatives. Because ZJ12 xf-\ is OP(T2) in the local-to-unity setting, we
+consider the local alternative
+
+7 = 70 + g/T,                                (3.10)
+
+where g is a constant. The limiting representation of ty under (3.10) is
+
+ty => g6ee + 55rrllcc + (1 - 82)1/2z,        (3.11)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+         TESTS WITH NEARLY INTEGRATED REGRESSORS 1141
+
+TABLE 2. Asymptotic critical values wCfl>1_, of W(yo,co)
+
+  Co     Wc0,.90           Wc0..9S   Wc0..975             Wc0,.99
+
+    0.0  4.07     A. Demeaned case    5.79                 6.81
+ -1.0     3.69                        5.43                 6.50
+ -2.5     3.33           4.98         5.05                 6.13
+ -5.0     3.03           4.57         4.63                5.75
+ -7.5    2.82            4.18         4.44                5.54
+-10.0    2.69            3.84         4.31                5.41
+-12.5    2.64            3.66         4.25
+-15.0    2.59            3.50         4.19                5.33
+-17.5    2.55                         4.13                5.25
+-20.0    2.52            3.41         4.11                5.19
+-22.5    2.50            3.35         4.06                5.11
+-25.0    2.48            3.33         4.02                5.08
+-27.5    2.47            3.29         4.00                5.08
+-30.0    2.45                         3.98                5.08
+Limit    2.31            3.26         3.65                5.06
+                         3.26                             4.62
+   0.0   5.58            3.24         7.53
+ -1.0    5.11            3.24         7.04                8.68
+ -2.5    4.59                         6.53                8.18
+ -5.0    4.04            3.00         5.89                7.62
+ -7.5    3.65                         5.46                7.00
+-10.0    3.39     B. Detrended case                       6.67
+-12.5    3.25                         5.23                6.37
+-15.0    3.13            6.55         4.99                6.17
+-17.5    3.02            6.07         4.86                6.01
+-20.0    2.93            5.55         4.73                5.87
+-22.5    2.88            4.96                             5.73
+-25.0    2.83            4.57         4.63                5.65
+-27.5    2.79                         4.54                5.55
+-30.0    2.75            4.30         4.45                5.49
+Limit    2.31            4.09         4.37                5.45
+                         3.94         4.30                4.62
+                         3.83         3.65
+
+                         3.75
+                         3.67
+                         3.60
+                         3.57
+                         3.53
+
+                         3.00
+
+Notes: Entries HVO-1_, are the 100 (1 -- TJJVO quantiles of the limiting null distribution of Pf(7o, Co)- "Limit"
+refers to the case Co <C 0 and is computed using the x\/1 distribution. Entries for c0 a --30 are computed
+by asymptotic simulation with T= 1,000 and 20,000 Monte Carlo replications.
+
+where g = (w2/<x22)1/2£- Because there is no feedback from yt to x, by
+assumption, the distribution of t$ is the same under the local alternative as
+under the null.
+
+  Let dt and du generically denote the lower and upper critical values used
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1142 CHRISTOPHER L. CAVANAGH ET AL.
+
+to construct the sup-bound and Bonferroni tests. For 5 < 1, the local asymp-
+totic power of the test based on these critical values is
+
+P[Reject H0:y = y0\7,= 7o + g/T]
+       = £[*[(</, - g6c - 5 r l c ) / ( l - 52)1/2]
+
++ *[(-«/« + i e c + 5rlc)/(l - 52)1/2]}.              (3.12)
+
+   The derivation of the asymptotic power function of the Scheffe test pro-
+ceeds similarly. Suppose that the true value of a is 1 + c'/T. Under local
+alternative (3.10), W(yo,co) has the limiting representation
+
+i d -62)-'![rlc-+ (c'-co)ee-]2+ [r2
+
+                                                      Co), (3-13)
+
+where T,C<, T2C-, and 9C< are as defined following (2.1), evaluated for c = c'.
+Thus, the asymptotic power of the Scheffe test with level y\ against the alter-
+native (y,c) = (70 + g/T,c') is
+
+P[Reject / / 0 : 7 = 7o17 = 7 o + g/T, a = 1 + c'/T]  (3.14)
+       = />[min(^i|(7o,co) - wCo>1_,) > 0].
+
+4. NUMERICAL RESULTS: SIZE AND POWER
+
+This section evaluates the performance of the procedures in Section 3. Re-
+sults are reported in terms of asymptotic size and power of tests of 7 = 70;
+coverage rates for the corresponding confidence intervals for 7 are 1 minus
+the size. For the cases in which the distributions are nonstandard, asymptotic
+size and power results were computed by numerical evaluation of (3.12) and
+(3.14) using the asymptotic representations, which in turn were computed by
+Monte Carlo simulation of the various functionals of Brownian motion with
+T = 500. All asymptotic results are based on 20,000 Monte Carlo replications
+for each set of parameters.
+
+   Asymptotic rejection rates of the various procedures as a function of the
+true values of c and of 5 are summarized in Table 3 for tests with asymptotic
+level 10%. For a given value of 5, the size is the maximum (over c) rejection
+rate. Because the distribution of ty tends to a N(0,l) for c <sc 0, rejection
+rates for this limiting case can be computed using the standard normal c.d.f.,
+and these results are reported in the row labeled "limit." (The Scheffe limit
+is computed using the xf/2 limit for W(yo,c0).) For each 5, the size is com-
+puted as the maximum rejection rate in the preceding rows for that procedure.
+
+   A striking feature of Table 3 is that the rejection rates of the size-adjusted
+procedures (the sup-bound and Bonferroni tests) do not drop below 5% and
+often are close to 10%. For c < --5, the size-adjusted Bonferroni test rejec-
+tion rates exceed 9%. Because the Scheffe test is not size-adjusted, its re-
+jection rates are substantially below 10%. Interestingly, the rejection rates
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+            TESTS WITH NEARLY INTEGRATED REGRESSORS 1143
+
+TABLE 3. Asymptotic null rejection rates of tests of 7 = 70
+with asymptotic size <10%: Demeaned case
+
+                                  5
+
+Procedure   c       0      0.5       0.7                     0.9
+
+Sup-bound        0  0.100  0.090     0.081                   0.080
+Bonferroni     -5   0.100  0.075     0.055                   0.042
+Scheffe      -10    0.100  0.078     0.059                   0.046
+              -20   0.100  0.082     0.066                   0.055
+              -30   0.100  0.085     0.071                   0.061
+                    0.100  0.100     0.100                   0.100
+            Limit   0.100  0.100     0.100                   0.100
+             Size
+                    0.100  0.084     0.081                   0.067
+                 0  0.100  0.091     0.096                   0.093
+               -5   0.100  0.096     0.100                   0.099
+             -10    0.100  0.100     0.100                   0.099
+             -20    0.100  0.100     0.099                   0.098
+             -30    0.100  0.100     0.100                   0.100
+                    0.100  0.100     0.100                   0.100
+            Limit
+             Size   0.027  0.028     0.039                   0.052
+                    0.036  0.024     0.031                   0.041
+                 0  0.043  0.026     0.031                   0.038
+               -5   0.051  0.029     0.031                   0.037
+             -10    0.066  0.036     0.036                   0.035
+             -20    0.032  0.032     0.032                   0.032
+             -30    0.066  0.036     0.036                   0.052
+
+            Limit
+             Size
+
+Notes: See the text for definitions of the various procedures. The column 5 = 0 was computed using
+the N(0,1) distribution of ty. Entires for 5 > 0, c 2 --30 were computed by numerical evaluation of the
+limiting representations with 20,000 Monte Carlo replications and T-- 1,000. "Limit" refers to c <K 0, and
+entries in those rows are computed using the /V(0,1) approximation for ty and the x l /2 approximation for
+
+            )- "Size" is the maximum rejection rate in the column for the indicated test.
+
+of the sup-bound test decline for moderate c, as the distribution moves from
+a Dickey-Fuller type distribution with rejections in the lower tail to a nor-
+mal with rejections in the upper tail.
+
+  Local asymptotic power functions of the various procedures against alter-
+native (3.10) with g < 0 are plotted in Figure 2 for various values of 5. As
+points of reference, Figure 2 includes two additional power functions of
+infeasible tests in which c is taken as known. The first is the "simultaneous
+equations" test, which is asymptotically most powerful unbiased. This test
+is implemented using the cross-equation restrictions available if c is known,
+which, when b(L) = 1, amounts to including x, -- ax,_i as a regressor in
+(1.2). The second, termed % with c known," is the equal-tailed test of y = y0
+based on ty, which uses critical values for the true c, that is, the test with
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+1144 CHRISTOPHER L. CAVANAGH ET AL.
+
+16  -14  -12  -10  -8                -6  -4  -2
+
+FIGURE 2. Local asymptotic power of lOVo level tests of y = y0 against y = Y0 + g/T,
+demeaned case, 5 = 0. Top: c = - 5 , 5 = 0.5. Middle: c = -20, 5 = 0.5. Bottom: c -
+
+--5, 5 = 0.9. Key: Simultaneous equations test (solid line); ty with c known (long
+dashes); sup-bound (dots); Bonferroni (short dashes); Scheffe (dashes and dots).
+
+acceptance region d, jC,.O5 < ty ·< d, >c,.95- For 5= 0, these two tests are
+asymptotically equivalent, but for 8 & 0 the power function of the simulta-
+neous equations test (the Gaussian power envelope) lies above the power
+function of the c-known test. Because these tests are infeasible when c is
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+                        TESTS WITH NEARLY INTEGRATED REGRESSORS 1145
+
+unknown, the relative power loss of the other procedures indicates the cost
+of lack of knowledge of c. As can be seen in Figure 2, as <5 increases the rel-
+ative performance of the infeasible simultaneous equations test improves. For
+c = --5, the sup-bound test has higher power than the Bonferroni or Scheffe
+test, although for c = --20 the Bonferroni has the highest power of these
+three. The relatively better performance for c < 0 of the Bonferroni test is
+to be expected, because in this case the quantiles of ty depend only weakly
+on c (cf. Figure 1). In no case does the Scheffe test have power as high as
+the sup-bound test, which is not surprising considering the sup-bound test is
+size-adjusted, whereas the Scheffe test is not. Although the power functions
+are not, in general, symmetric in g, the qualitative results for g > 0 are similar.
+
+  In practice, 8 is typically unknown. Table 4 therefore reports test rejection
+rates found in a Monte Carlo experiment with T = 100 and 2,000 replica-
+tions. The data are generated according to (1.2) and (1.3) with Eu = £22 = 1>
+E12 = 6, y = 0, and b(L) = (1 + BL)~l, so (1 - aL)v, is an MA(1). The esti-
+mated system was (1.2) and (1.3), where the lag length in (1.3) was chosen
+by the Bayes information criterion with a maximum of four lags. The tests
+were implemented using an estimated value of 5, 8 = c o r r ^ , , e2f); given 5,
+the relevant critical values were interpolated from a lookup table of critical
+values as a function of 5 and, for the Bonferroni tests, c. Results are reported
+for 0 = -0.5, 0, 0.5, a = 1, 0.95, 0.90, 0.80, and 5 = 0.5, 0.9.
+
+TABLE 4. Monte Carlo results: Finite sample rejection rates,
+5 estimated, demeaned case
+
+                        5 = 0.5                5 = 0.9
+
+            c 6 = -0.5 8 = 0 8 = 0.5 8 = -0.5 6 = 0 6 = 0.5
+
+Sup-bound   0    0.095  0.101    0.100  0.086  0.099                                              0.106
+                 0.073  0.076    0.077  0.044  0.044                                              0.045
+            -5   0.081  0.072    0.077  0.048  0.047                                              0.047
+                 0.091  0.082    0.079  0.073  0.063                                              0.063
+            -10
+                 0.099  0.094    0.102  0.110  0.082                                              0.100
+            -20  0.094  0.092    0.091  0.092  0.093                                              0.096
+                 0.100  0.088    0.091  0.097  0.106                                              0.104
+Bonferroni  0    0.104  0.092    0.099  0.102  0.103                                              0.108
+
+            -5   0.042  0.031    0.038  0.076  0.066                                              0.082
+                 0.034  0.030    0.030  0.044  0.044                                              0.050
+            -10  0.052  0.032    0.036  0.052  0.040                                              0.041
+                 0.281  0.035    0.053  0.411  0.039                                              0.050
+            -20
+
+Scheffe     0
+
+            -5
+
+            -10
+
+            -20
+
+Notes: Results are based on 2,000 replications with T- 100. The design is described in the text.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+                                        1146 CHRISTOPHER L CAVANAGH ET A L
+
+                                    The Monte Carlo results suggest that the asymptotic results in Table 3 pro-
+                                 vide a good guide to finite sample rejection rates in almost all cases. The
+                                 Bonferroni and sup-bound procedures have Monte Carlo sizes close to 10%.
+                                 The Scheffe procedure is somewhat less conservative in this finite sample
+                                 experiment than it is asymptotically and has rejection rates less than 10% in
+                                 all cases except 6 = --0.5, c = --20. Because T= 100, this case corresponds
+                                 to a = 0.8, 0 = --0.5, so the AR and MA roots are approaching cancella-
+                                 tion. This is a case in which it is known that the asymptotics provide a poor
+                                 approximation in the univariate model (cf. Pantula,1991), and those dif-
+                                 ficulties evidently carry over to (2.3), particularly as the univariate case is
+                                 approached for |5| large.
+
+                                    5. DISCUSSION AND EXTENSIONS
+
+                                 This paper has investigated several procedures for handling the dependence
+                                 of the distribution of tests of 7 = 70 on c. The Monte Carlo simulations sug-
+                                 gest that these procedures control size in finite samples with 5 unknown, even
+                                 though they are based on asymptotic analysis in which 5 is consistently esti-
+                                 mated. When 6 is small or moderate, the cost of using these procedures is
+                                 small, relative to infeasible tests that use knowledge of c. However, for 5
+                                 large, the relative cost of not knowing c can be large.
+
+                                    The model considered here is simple and stylized. One extension is to
+                                 include lags of y, and additional lags of x, in (1.2). The asymptotic distribu-
+                                 tion theory for this extension is straightforward under the null that x, does
+                                 not enter; the calculations use the techniques in Park and Phillips (1988) and
+                                 Sims et al. (1990), as adapted in Stock (1991) for the local-to-unity case. The
+                                 qualitative feature of the current results--that the test statistics have non-
+                                 standard distributions that depend on c--will continue to hold under this
+                                 generalization, although the critical values for the F-statistic testing the co-
+                                 efficients on x,_1 and its lags will depend on the number of lags of x,. An-
+                                 other extension is to nonrecursive models in which (1.2) continues to hold,
+                                 but in which there is feedback from y to x in (1.1) and (1.3). After suitable
+                                 modification of 5 and the covariance matrix in the ff-test, the distributions
+                                 of the sup-bound and W(yo,co) statistics obtained for the current model
+                                 also hold for this extension under the null 7 = 0. A third extension is to infer-
+                                 ence about cointegrating vectors. Although the focus here has been on the
+                                 null 70 = 0, if 70 is nonzero then y, and x, are cointegrated, except both x,
+                                 and y, have local-to-unit roots in their univariate representation. This exten-
+                                 sion is pursued by Elliott (1994), who also considers the behavior of efficient
+                                 estimators of cointegrating vectors and their test statistics in this model. Even
+                                 though these extensions are possible, however, considerable work remains to
+                                 generalize this approach to higher dimensional models with possibly multi-
+                                 ple unit roots and cointegrated regressors.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+                                                                         TESTS WITH NEARLY INTEGRATED REGRESSORS 1147
+
+                                                       REFERENCES
+
+                                                 Bobkoski, M.J. (1983) Hypothesis Testing in Nonstationary Time Series. Unpublished Ph.D.
+                                                    Thesis, University of Wisconsin.
+
+                                                 Campbell, J.Y. & R.J. Shiller (1988) Stock prices, earnings and expected dividends. Journal of
+                                                    Finance 43, 661-676.
+
+                                                 Cavanagh, C. (1985) Roots Local to Unity. Manuscript, Harvard University.
+                                                 Chan, N.H. (1988) On the parameter inference for nearly nonstationary time series. Journal
+
+                                                    of the American Statistical Association 83 (403), 857-862.
+                                                 Chan, N.H. & C.Z. Wei (1987) Asymptotic inference for nearly nonstationary AR(1) processes.
+
+                                                    Annals of Statistics 15, 1050-1063.
+                                                 Dickey, D.A. & W.A. Fuller (1979) Distribution of the estimators for autoregressive time series
+
+                                                    with a unit root. Journal of the American Statistical Association 74 (366), 427-431.
+                                                 Dufour, J.M. (1990) Exact tests and confidence sets in linear regression with autocorrelated
+
+                                                    errors. Econometrica 58, 475-494.
+                                                 Elliott, G. (1994) Application of Local to Unity Asymptotic Theory to Time Series Regression.
+
+                                                    Ph.D. Dissertation, Harvard University.
+                                                 Elliott, G. & J.H. Stock (1994) Inference in time series regression when the order of integra-
+
+                                                    tion of a regressor is unknown. Econometric Theory 10, 672-700.
+                                                 Fama, E.F. (1991) Efficient capital markets II. Journal of Finance 46(5), 1575-1617.
+                                                 Kitamura, Y. & P.C.B. Phillips (1992) Fully Modified IV, GIVE, and GMM Estimation with
+
+                                                    Possibly Nonstationary Regressors and Instruments. Manuscript, Cowles Foundation, Yale
+                                                    University.
+                                                 Lehmann, E.L. (1959) Testing Statistical Hypotheses. New York: Wiley.
+                                                 Nabeya, S. & B.E. Sorensen (1994) Asymptotic distributions of the least-squares estimators and
+                                                    test statistics in the near unit root model with non-zero initial value and local drift and trend.
+                                                    Econometric Theory 10, 937-966.
+                                                 Pantula, S.G. (1991) Asymptotic distributions of the unit-root tests when the process is nearly
+                                                    stationary. Journal of Business and Economic Statistics 9, 63-71.
+                                                 Park, J.Y. & P.C.B. Phillips (1988) Statistical inference in regressions with integrated processes:
+                                                    Part I. Econometric Theory 4, 468-497.
+                                                 Phillips, P.C.B. (1987) Toward a unified asymptotic theory for autoregression. Biometrika 74,
+                                                    535-547.
+                                                 Phillips, P.C.B. (1995) Fully modified least squares and vector autoregression. Econometrica
+                                                    63, 1023-1078.
+                                                 Phillips, P.C.B. & W. Ploberger (1991) Time Series Modeling with a Bayesian Frame of Refer-
+                                                   ence: I. Concepts and Illustrations. Manuscript, Cowles Foundation, Yale University.
+                                                 Sims, C.A., J.H. Stock, & M.W. Watson (1990) Inference in Linear Time Series Models with
+                                                   Some Unit Roots. Econometrica 58, 113-144.
+                                                 Stock, J.H. (1991) Confidence intervals for the largest autoregressive root in U.S. economic time
+                                                   series. Journal of Monetary Economics 28 (3), 435-460.
+                                                 Stock, J.H. (1994) Deciding between 1(0) and 1(1). Journal of Econometrics 63, 105-131.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 12:33:20, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.
+https://doi.org/10.1017/S0266466600009981
+

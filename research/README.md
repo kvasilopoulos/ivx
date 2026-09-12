@@ -4,6 +4,8 @@
 versions otherwise; see "version" column); `txt/` holds `pdftotext -layout` extractions of the
 same files (same basename). Collected 2026-09-12.
 
+See `replication/` for per-article replication scripts, data and results.
+
 ## What the package has today
 
 - `ivx()` — Kostakis, Magdalinos & Stamatogiannis (2015, RFS) IVX Wald tests, short and long
@@ -34,6 +36,33 @@ same files (same basename). Collected 2026-09-12.
 | `xu-2020-multiple-horizon-predictability` | journal | Xu (2020) *Testing for multiple-horizon predictability: direct regression based versus implication based*, RFS 33(9) 4403-4443. [OUP](https://academic.oup.com/rfs/article-abstract/33/9/4403/5620729) | Implication-based multi-horizon test; IVX variant. |
 | `magdalinos-2022-systems-ivx-garch` | journal | Magdalinos (2022) *Least squares and IVX limit theory in systems of predictive regressions with GARCH innovations*, ET 38 875-912. [CUP](https://doi.org/10.1017/S0266466621000086) | Systems (multivariate y) IVX. |
 | `liu-long-peng-yang-2024-unified-predictive-qr` | journal | Liu, Long, Peng & Yang (2024) *A unified inference for predictive quantile regression*, JASA 119(546). [T&F](https://doi.org/10.1080/01621459.2023.2203354) | Non-IVX alternative to IVX-QR. |
+| `campbell-yogo-2006-efficient-tests` | journal | Campbell & Yogo (2006) *Efficient tests of stock return predictability*, JFE 81(1) 27-60. [SD](https://doi.org/10.1016/j.jfineco.2005.05.008) | Bonferroni Q-test; package README to-do. Non-IVX benchmark. |
+| `jansson-moreira-2006-optimal-inference` | NBER WP (journal: [10.1111/j.1468-0262.2006.00679.x](https://doi.org/10.1111/j.1468-0262.2006.00679.x)) | Jansson & Moreira (2006) *Optimal inference in regression models with nearly integrated regressors*, Econometrica 74(3) 681-714. | Conditional likelihood approach; package README to-do. Non-IVX benchmark. |
+| `cavanagh-elliott-stock-1995-nearly-integrated` | journal | Cavanagh, Elliott & Stock (1995) *Inference in models with nearly integrated regressors*, ET 11(5) 1131-1147. [CUP](https://doi.org/10.1017/S0266466600009981) | Bonferroni method; package README to-do. |
+| `elliott-2011-control-function` | journal | Elliott (2011) *A control function approach for testing the usefulness of trending variables in predictive regressions and econometric models*, JoE 164(1) 79-91. [SD](https://doi.org/10.1016/j.jeconom.2011.02.014) | Control function approach; package README to-do (cited there as "Elliott 2001"). |
+
+## Candidates not yet collected
+
+Papers with an implementable estimator/test that would fit the package, ranked by fit. Not in `pdf/`.
+
+Direct IVX extensions:
+
+1. Demetrescu (2014) *Enhancing the local power of IVX-based tests in predictive regressions*, Econ. Letters 124. [SD](https://doi.org/10.1016/j.econlet.2014.05.032). Lagged-y augmentation of the IVX regression; one `ivx()` argument.
+2. Breitung & Demetrescu (2015) *Instrumental variable and variable addition based inference in predictive regressions*, JoE 187. [SD](https://doi.org/10.1016/j.jeconom.2013.10.018). Alternative IV choices / combined IVs in the `ivx_fit` framework.
+3. Demetrescu, Rodrigues & Taylor (2023) *Transformed regression-based long-horizon predictability tests*, JoE 237. [SD](https://doi.org/10.1016/j.jeconom.2022.06.006). Competitor to KMS long-horizon; goes with the `horizon > 1` audit.
+4. Fan & Lee (2019) *Predictive quantile regressions under persistence and conditional heteroskedasticity*, JoE 213. [SSRN](https://doi.org/10.2139/ssrn.3016449). IVX-QR with GARCH errors; extends the planned `ivx_qr()`.
+5. Lee, Shi & Gao (2022) *On LASSO for predictive regression*, JoE 229. [SD](https://doi.org/10.1016/j.jeconom.2021.02.002). Many-predictor selection with IVX.
+
+Non-IVX competitors (same spirit as the package README to-dos):
+
+6. Amihud, Hurvich & Wang (2009) *Multiple-predictor regressions: hypothesis testing*, RFS 22. [OUP](https://doi.org/10.1093/rfs/hhn056). Multivariate augmented-regression (ARM); pairs with Elliott (2011).
+7. Liu, Yang, Cai & Peng (2019) *A unified test for predictability of asset returns regardless of properties of predicting variables*, JoE 208. [SD](https://doi.org/10.1016/j.jeconom.2018.09.009). WEL test; same machinery as `ivx_ar`.
+8. Harvey, Leybourne & Taylor (2021) *Simple tests for stock return predictability with good size and power properties*, JoE 224. [SD](https://doi.org/10.1016/j.jeconom.2021.01.004). Cheap OLS-based tests.
+9. Chen, Deo & Yi (2013) *Uniform inference in predictive regression models*, JBES 31. [T&F](https://doi.org/10.1080/07350015.2013.818008). Restricted-likelihood test; pairs with Jansson & Moreira (2006).
+
+Structural instability:
+
+10. Georgiev, Harvey, Leybourne & Taylor (2018) *Testing for parameter instability in predictive regression models*, JoE 204. [SD](https://doi.org/10.1016/j.jeconom.2018.01.005). Pairs with the episodic / sup-Wald items.
 
 ## Suggested extensions (ranked by value / effort)
 

@@ -1,0 +1,1397 @@
+                                                Journal of Econometrics 164 (2011) 79­91
+
+                                         Contents lists available at ScienceDirect
+
+                                    Journal of Econometrics
+
+                               journal homepage: www.elsevier.com/locate/jeconom
+
+A control function approach for testing the usefulness of trending variables in
+forecast models and linear regression
+
+Graham Elliott 
+
+Department of Economics, University of California, San Diego, 9500 Gilman Drive, LA JOLLA, CA, 92093-0508, USA
+
+article info                   abstract
+
+Article history:               Many predictors employed in forecasting macroeconomic and finance variables display a great deal of
+Available online 8 March 2011  persistence. Tests for determining the usefulness of these predictors are typically oversized, overstating
+                               their importance. Similarly, hypothesis tests on cointegrating vectors will typically be oversized if there
+JEL classification:            is not an exact unit root. This paper uses a control variable approach where adding stationary covariates
+C12                            with certain properties to the model can result in asymptotic normal inference for prediction regressions
+C22                            and cointegration vector estimates in the presence of possibly non-unit root trending covariates. The
+C53                            properties required for this result are derived and discussed.
+
+Keywords:                                                                                                                                   Published by Elsevier B.V.
+Near unit root
+Cointegration
+Prediction regressions
+
+1. Introduction                                                        limit theory for sequences of models where the largest root for
+                                                                       the predictive regression remains in the neighborhood of one --
+    A common problem in constructing forecasting regressions is        to approximate distributions. The tests then differ in the precise
+understanding the sampling uncertainty of the coefficients in the      statistic to be computed and how they handle the unknown root.
+prediction regression when the predictors appear to be persistent.     One approach has been to use Bonferroni or related methods
+Forecasters care about this sampling uncertainty because it is often   (Cavanagh et al., 1995; Lewellen, 2004; Campbell and Yogo, 2006).
+unclear whether or not the predictors are useful for forecasting.      Alternatively Moreira and Jansson (2006) condition on a sufficient
+Given the near unit root behavior of the predictors, standard          statistic for the root to remove the dependence in their test. None
+asymptotic normal distributions have been shown to be very poor        of these methods dominates each other theoretically or in practice.
+approximations to the sampling distributions of the coefficients in    The precise nature of the problem and these methods are reviewed
+the prediction regression. Such approximations lead to oversized       in Section 2 of this paper.
+tests and are hence potentially misleading as guides as to whether
+or not the variables actually have any predictive usefulness.              The methods we have so far have some limitations. First, for
+                                                                       each of these methods extending the methods beyond the bivariate
+    The classic example in the forecasting literature is the predic-   regression is extremely challenging, and no results exist in the lit-
+tion of stock market returns with the dividend price ratio--the div-   erature for more than a single predictor in the regression. This is in
+idend price ratio appears to have a root on or near the unit circle.   part because the methods themselves are somewhat cumbersome
+For this regression the problem extends to other popular predic-       to apply.
+tors such as interest rate differentials and the earnings price ratio
+as well. Similar issues arise with forecasting exchange rates with         This paper suggests a different approach to obtaining tests
+the forward premium, forecasting changes in income or consump-         which control size. In the method presented here additional co-
+tion with interest rate differentials and ratios of macroeconomic      variates are added to the regression. The problems of size distor-
+variables.                                                             tion and inference are shown to depend on a convolution of the
+                                                                       parameters of the trending process and nuisance parameters that
+    A number of approaches have been taken to provide tests for        describe the relationships between the shocks to the forecasting
+inclusion of the predictive variables that control size even when      regression and the shocks to the variables used for forecasting.
+the predictive variable has a unit root or near unit root. The         Judiciously chosen, the covariates have the potential to remove the
+common tool has been to use local to unity asymptotics -- using        dependence of the hypothesis tests on the nuisance parameters de-
+                                                                       scribing the trend, and so provide inference that is robust to lack of
+  Tel.: +858 534 4481; fax: +858 534 7040.                             knowledge over the trending behavior of the data. The method is
+                                                                       discussed in Section 2 in a simplified bivariate case and examined
+     E-mail address: grelliott@ucsd.edu.                               for very general models in Section 3.
+
+0304-4076/$ ­ see front matter. Published by Elsevier B.V.
+doi:10.1016/j.jeconom.2011.02.014
+80  G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+    The method is applicable for a very wide set of problems. First,    ability we require assumptions on both the properties of the
+we allow for the inclusion of a general number of regressors in the     predictor variable and on the errors to the regression to justify any
+prediction regression, hence we are not (as in the methods above)       inferential procedure on the predictiveness or lack thereof of the
+restricted to a single regressor. Second, for the prediction regres-    regressor. Consider the model
+sion the method involves only the running of OLS regressions, and
+hence even for the general case is straightforward to apply. Third,     (1 - L)(y1t - 1) = 1t t = 2, . . . , T
+inference is standard asymptotic (mixed) normal and so hypothe-
+sis tests are also straightforward to apply.                            y2t = 2 + y1t-1 + 2t t = 2, . . . , T                                                        (1)
+
+    We also show, in Section 4, that the method can also be used        where   we   observe      {yt   T     =  {[y1t ,   y2t          T     where  both  y1t  and  y2t
+when examining `cointegrating' regressions where there is uncer-
+tainty over a unit root. Such uncertainty is ubiquitous in the coin-                                   }t =1                     ]     }t =1
+tegration literature, hence the use of unit root and rank pretests.
+With use of additional stationary covariates, we show similar re-       are univariate, 1, 2,  and  are unknown parameters, and 1t
+sults as for the prediction equation problem--asymptotically stan-
+dard (mixed) normal inference can still apply even when the roots       and 2t are unknown residual terms. Define the parameter space
+are not exactly on the unit circle.
+                                                                        for  as P. Define E[it jt ] = ij for i, j = 1, 2. The correlation
+    The suggested method, as in the case in instrumental variables,
+requires finding additional data with particular properties. Such       between 1t and 2t is  = 12/(1122)1/2. In addition, we must
+data are referred to as orthogonalizing covariates. In Section 5
+we go into more detail regarding these properties. We suggest           initialize the processes, set the initial value of 1t =  such that
+how such variables can be found in practice. We also show, in           T -1/2       p
+Theorem 5, that the use of such covariates that satisfy these                           0.  Some      of  these  restrictions          are    made   for   expository
+properties have at minimum the same power (and generally                        
+better power) as would be obtained if we knew the size of the
+largest root of the predictor variable. Since all of the methods        purposes in this review--in the next section y2t can be multivariate,
+discussed in Section 2 cannot have better power than the case
+of the root known, this leads directly to the implication that          the specification of the deterministic terms is more general, and we
+none of the current methods can have better power against any
+alternative than the method suggested here when we indeed have          also allow serial correlation in (1 - L)y1t .
+orthogonalizing covariates.
+                                                                        This regression is typically run to test the notion of unpre-
+    Monte Carlo results are presented in Section 6 to examine
+both size and power properties of the suggested method. We              dictability of y2t ­ the typical null hypothesis derived from eco-
+also examine the implications of Theorem 5 for the relationship
+between these methods and the popular Campbell and Yogo (2006)          nomic theory ­ so we assume that 2t is uncorrelated. Regressions
+procedure in terms of power.
+                                                                        of this form appear as noted above in the prediction of stock prices
+    Proofs of the results are contained in an Appendix.
+                                                                        by such covariates as the dividend price ratio, earnings price ra-
+2. The testing problem and conditioning on stationary covari-
+ates                                                                    tio and interest rates. Fama and French (1988) for example reject
+                                                                        the hypothesis that the dividend price ratio cannot predict returns.
+    This paper examines two models which have been treated              Similar issues arise in testing term structure models of the inter-
+rather differently in the literature but for which common methods
+apply. The first regression is where a relatively non-trending          est rate, where the lagged interest rate spread is used to predict
+variable is regressed on lagged trending variables for purposes
+of prediction. The second is a cointegrating regression where we        interest rates. Fama (1975) uses interest rates to predict inflation.
+are uncertain that there are unit roots in the data. In this case
+the `cointegrating' vector is a trending variable being predicted by    Hall (1978) examines the predictability of changes in consumption
+contemporaneous trending variables. These problems are similar
+in the sense that it is not the behavior of the left-hand side          with lagged income and stock prices. Large literatures reexamining
+variable (which differs here in properties) but the terms on the
+right-hand side that dominate the theoretical properties of the         these findings has followed these seminal papers.
+estimators and tests. In this sense we are able to generate a solution      In each of these cases, the regressor is typically a persistent or
+to both problems from a similar idea, as detailed in following
+sections. The differences lie mostly in the auxiliary assumptions       trending variable in the sense that there is clearly a low frequency
+of the model, and the perceived reasonable coefficients on the
+trending covariates. The remaining difference is that in terms of       component to the data. Unit root or near unit root behavior affects
+constructing methods that deal with uncertainty over the trending
+process, many papers have appeared that examine the prediction          the sampling distribution of least squares estimators for  and also
+regression whereas only a few have examined the cointegrating           hypothesis tests based on this estimate. We can estimate  by OLS,
+regression. We focus on the predictive regression in this review
+section.                                                                yielding
+
+    The simplest predictive regression test would be to examine if a                         T
+variable measured today predicts the outcome we are interested in
+seeing in the next period. For example there is a large literature on                y1mt-12t
+forecasting stock returns using the log of the dividend price ratio     ^ -  = t=2
+in the previous period as a predictor. For inference on predictive
+                                                                                              T
+
+                                                                                     (ym1t -1 )2
+
+                                                                                         t =2
+
+                                                                        where   ytm  =     yt  -  (T  -   1)-1   T         yt .
+
+                                                                                                                     t =2
+                                                                        Projecting 2t onto 1t yields 2t = (12/11)1t + 2.1t where
+
+                                                                        E[1t 2.1t ] = 0 by construction and the variance of 2.1t is 2.1 =
+                                                                        22 - 122/11. Hence the above expression can be rewritten as
+
+                                                                                        T                                        T
+                                                                                      ym1t-11t (12/11)  y1mt-12.1t
+
+                                                                        ^ -  = t=2                                      t =2                   .
+
+                                                                                                                    +
+                                                                                               T                                    T
+                                                                                                (y1mt -1 )2                       (y1mt -1 )2
+
+                                                                                               t =2                              t =2
+
+                                                                                                                    T
+                                                                                                                     ym1t-12.1t
+
+                                                                                =    (^    -    )(12 /11 )       +  t =2                                             (2)
+                                                                                                                       T
+                                                                                                                     (ym1t -1 )2
+
+                                                                                                                    t =2
+
+                                                                        where ^ is the least squares estimator for  using data on y1t .
+
+                                                                            A number of authors have pointed out issues with inference
+
+                                                                        over  in regressions that take this form. Examining the pre-
+
+                                                                        dictability of changes in consumption using lagged income as a
+
+                                                                        predictor, Mankiw and Shapiro (1986) showed in Monte Carlo
+
+                                                                        experiments that hypothesis tests on  did not control size
+
+                                                                        when standard critical values were employed. Stambaugh (1999)
+
+                                                                        showed a similar result for prediction of returns with the dividend
+                         G. Elliott / Journal of Econometrics 164 (2011) 79­91                                                81
+
+price ratio, using one term expansions of the OLS estimator to at-                                   3
+
+tempt to explain the problems with inference.                                                        2.8
+
+   Since y1t-1 and 2.1t are orthogonal by construction, it is                                        2.6
+apparent from Eq. (2) that the bias arises from the first term, (^ -
+)12/11, which is nonzero when both (a) there is persistence,                        95th percentile  2.4
+so ^ is a biased estimator for , and (b) when there is simultaneity,
+so 12 = 0.                                                                                           2.2
+
+    Such problems have in many cases been characterized as a                                         2
+
+`small sample' problem. The idea is that as the sample size in-                                      1.8  0  5    10      20
+                                                                                                     -5               15
+creases, ^ is consistent for  and the problem disappears asymptot-
+                                                                                                                
+ically. Such a result requires restricting the parameter space P away
+                                                                                    Fig. 1. Curves show 95th percentile of (3) as a function of  for  = -0.95 (solid
+from the unit circle, for example in Amihud and Hurvich (2004)                      line),  = -0.75 (long dashes) and  = -0.5 (short dashes).
+
+bias approximations for (^ - ) are based on Edgeworth expan-                        2 and even near 3 that would lead one to reject the hypothesis of
+                                                                                    no predictability are actually consistent with the null hypothesis of
+sions that require this restriction. Whilst authors differ on how se-               no predictability. This translates to tests that are greatly oversized.
+
+riously to take the possibility of a unit root in the regressor (the                The distortion is smaller the larger is  (so y1t is less persistent),
+
+failure to reject a unit root does not of course imply the presence of              where the first term in (3) becomes closer to a standard normal
+
+a unit root), roots close to one are often consistent with the data. So             distribution (Phillips, 1987). For smaller values for  the extent of
+                                                                                    the oversize of the test statistic becomes smaller, when  is close to
+when the uncertainty includes a unit root, that there will always be
+                                                                                    zero there is little problem, with critical values close to their usual
+some region of the parameter space of  near one for which prob-                     values.
+
+lems of size control occur regardless of the sample size.                              Fortunately, since  is consistently estimable even without
+                                                                                    knowledge of , in applications we are able to gauge the extent of
+    To account for the possibility of unit roots and near unit roots,               the problem. The consistency of standard estimates for  follows
+                                                                                    directly from  being consistently estimable in regression since
+we model the region near one using the local to unity methods of
+                                                                                    the parameters converge at a fast enough rate so that estimation
+Phillips (1987) where1  = 1 -  /T . These methods are known to                      error is negligible asymptotically (this is of course why we are
+                                                                                    able to estimate the variance covariance matrix to normalize t-
+provide much better asymptotic approximations for sample size                       statistics in typical regression problems). Many of the methods
+
+and  pairs such that  is in the range of 40 to a small positive                     discussed below are derived for known  and work in practice by
+
+number (including the unit root process smoothly with models                        replacing this value with a consistent estimate. The discussion for
+                                                                                    the remainder of this section will assume this parameter is known.
+near the unit root). In this approach we define the Brownian
+                                                                                        A number of approaches have been suggested to overcome
+motion W1(s) as the suitably scaled limit of the partial sum of the                 this size distortion problem. An elegant approach is to condition
+shocks to y1t and M¯ (s) is a demeaned Ornstein­Uhlenbeck process
+driven by W1(s) (these are defined more precisely in Section 3).                    on the sufficient statistic for  and construct a test for the null
+Under such asymptotics it is well known that T (^ - ) converges
+to a nonstandard distribution (a function of M¯ (s)). Hence the                     hypothesis based on the conditional likelihood. This approach is
+                                                                                    detailed in Moreira and Jansson (2006), who provide tests for the
+bias remains asymptotically. Indeed, as shown in Elliott and Stock                  bivariate model case. The method involves a numerical integration
+                                                                                    technique to construct p-values for the test. A limitation of
+(1994) for this model                                                               this approach is that it becomes very difficult to extend the
+                                                                                    method beyond the bivariate model. Stambaugh (1999) suggested
+t^ =0  ^DF + (1 - 2)1/2  (3)                                                        a Bayesian approach, which avoids the requirement that the root
+                                                                                    be defined to a single number. Bootstrap approaches that involve
+where ^DF has a nonstandard asymptotic distribution and  is a
+standard (mixed) normal random variable. When  = 1 ( =                              estimating  in order to regenerate bootstrap samples of the data
+0), ^DF is the usual Dickey and Fuller (1979) distribution for the t                {yt}, though common in the applied literature, result in bootstrap
+statistic testing for a unit root in y1t . For  > 0 this distribution
+                                                                                    distributions that differ from the sampling distribution for the
+remains nonstandard with similar features to the distribution                       statistics of interest (see Basawa et al., 1991) and hence do not
+                                                                                    control size asymptotically and thus do not solve the problem.
+when  = 1.
+                                                                                        An alternative approach that does control size reasonably well,
+    This distributional approximation explains clearly the Monte                    and as such have been more often employed in the applied
+                                                                                    literature, is to examine the distribution of (3) for all `reasonable'
+Carlo findings and suggests problems with standard inference in
+                                                                                    values for  and use the most conservative ones. Cavanagh et al.
+predictive regressions of this sort. First, as is well known, when
+                                                                                    (1995) suggested such a test based on Bonferroni and Scheffe
+ = 1 the distribution for ^DF has a long left tail. Hence when  < 0                 methods which incorporate sample information on likely values
+
+this corresponds to size distortions using standard critical values                 for . Such a procedure results in a test that controls size but
+
+in the right tail of t^ =0 --when  is truly zero and the regressor
+has no predictive power the regression is likely to find ^ > 0
+
+and statistically significant with a frequency greater than size. The
+
+larger in absolute value is the correlation the more likely we are to
+
+reject.
+
+    The effects can be seen in Fig. 1. The figure shows the upper
+
+95th percentiles of the distribution in (3) for  = -0.95, -0.75
+and -0.5 respectively as a function of  . These percentiles would
+be the correct critical values for a one sided 5% test for  = 0. The
+
+problem of rejecting for t statistics greater than 1.645 for a 5% test
+
+-- those used when using a normal approximation -- can be seen
+
+from the figure. When  is sufficiently close to 1 and the sample
+size such that  = T ( - 1) is sufficiently close to zero then for
+ of the sizes often seen in application t statistics of greater than
+
+ 1 In the asymptotic theory we employ triangular asymptotics, so  is T , we
+
+follow the econometric literature and ignore the subscript to enhance readability.
+82                                       G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+results in biased tests. Essentially the critical values may be too     a linear combination of a nonstandard term and a mixed normal
+                                                                        term, namely
+conservative for many values of  and hence for a particular
+(, ) pair numerical size is much less than nominal size. This           t^ =0  ~^DF + (1 - ~2)1/2        (6)
+
+results in a biased test since there are local alternatives for         where ~ is the correlation between ~1t and ~2t where ~it , i = 1, 2
+which the test rejects less often than nominal size. Power is also      is the remainder of a projection of it on zt . Hence the inclusion
+affected, although these methods have reasonable power for many
+alternatives.                                                           of zt in the regression changes the weights on the standard and
+                                                                        nonstandard pieces.
+    We can rotate the system so that the model is
+                                                                            Thus for any zt this simply results in yet another mixture
+(1 - L)(y1t - 1) = 1t
+                                                                        distribution which in aggregate is nonstandard. For |~| < || the
+y2t = 2 + y1t-1 + (1 - L)y1t + 2.1t
+                                                                        effect of the nonstandard piece and hence the possibility of size
+where  = 12/11 and 2.1t is by construction orthogonal to 1t .           distortions from using the normal are smaller. However it may be
+                                                                        possible to find variables zt -- the orthogonalizing covariates -- for
+In this regression the orthogonality of the residuals means that
+the history of y1t is uncorrelated with the regression residuals.       which ~ = 0 even though  does not. In this case the weight on
+The infeasible SUR problem thus rotates the model so that the
+regression to be run is                                                 the nonstandard part of the distribution is zero and the t statistic
+                                                                        has a mixed normal distribution with mean zero and variance
+y2t = 2 + y1t-1 + (1 - L)y1t-1 + 2.1t .  (4)                            unity. Hence standard inference with the usual critical values from
+                                                                        the normal table is appropriate asymptotically. In Section 3 these
+In this regression we have that E[2.1t |y1t ] = 0 and hence the         points will be made precise in the general model.
+bias has been removed. The t statistic testing hypotheses on 
+                                                                            Similar problems in inference arise in the cointegrating model
+now have an asymptotic mixed normal distribution regardless of          when variables do not have an exact unit root. Elliott (1998) exam-
+                                                                        ines this problem for estimators of the cointegrating vectors that
+. Thus standard critical values from the normal distribution apply      are efficient when the roots are exactly on the unit circle. The sizes
+                                                                        of the distortions can be even larger for the near cointegrating case
+asymptotically.                                                         than that for the predictive case. However a correct orthogonaliza-
+                                                                        tion can remove the effect. This result is shown for general models
+    This is of course infeasible since constructing the additional      in Section 4.
+
+regressor requires that we know  in order to construct the quasi-       3. Standard inference for predictive regressions with near unit
+differenced regressor (1 - L)y1t-1. Campbell and Yogo (2006)            roots
+utilize this regression with  known to obtain confidence intervals
+                                                                        The general predictive model is
+on ^ given . They then use a Bonferroni procedure which employs
+                                                                        (1 - L)(y1t - 1dt ) = u1t        (7)
+a DF-GLS test for a unit root (Elliott et al., 1996) and the largest
+                                                                        y2t = 2dt + y1t-1 + 2t
+bounds from each of the values for  in the confidence interval
+
+on  to construct confidence intervals for ^ robust to the lack of
+knowledge over .
+
+   Plugging in an estimator ^ to construct the quasi difference re-
+sults in a correctly centered t-statistic on  having the asymptotic
+
+distribution
+
+                                                                        zt = 3dt + u3t
+t^OLS=0  (1 - 2)1/2 ^DF +                (5)
+                                                                        where the observed data {y1t , y2t , zt } are such that y1t is kx1, y2t
+which is again nonstandard when there is simultaneity.                  is univariate and zt is px1, dt is a vector of deterministic terms,
+    The infeasible SUR result, which results in standard inference      A(L)u1t = 1t and B(L)u3t = 3t where B(L) has order q, t =
+                                                                        (1 t , 2t , 3 t ) where E[t t ] =  . It will be useful to partition
+on , does give some insight into the problem. Standard inference         into blocks ij, i, j = 1, 2, 3 which correspond to each of the
+                                                                        three elements of t (so E[ij] = ij). The unknown parameters
+would result if we could include the orthogonalizing variable           are (1, 2, 3, , ,  , ) and the parameters of the finite lag
+                                                                        polynomials A(L) and B(L).
+(1 - L)y1t for the regression, however estimates of  are not
+                                                                            The model is intended to capture the problem of forecasting a
+sufficiently precise, even asymptotically. Similar results will obtain
+                                                                        univariate outcome of interest y2t with a kx1 set of predictive re-
+for any estimator for  that converges at rate T .                       gressors y1t-1. These predictive regressors are trending regressors
+                                                                        in the sense that the autoregressive coefficient that corresponds to
+    However this possibility of obtaining standard inference could
+still be useful if we had a proxy for the orthogonalizing variable      their largest roots, here factored out into , are close to one in the
+
+(1 - L)y1t for the regression. In this paper we take a different        statistical sense of these roots being difficult to distinguish from ei-
+
+approach to the problem, one more aligned with solutions that           ther on the unit circle or just outside. We restrict  to be a kxk ma-
+arise from the economics behind the problem. Consider instead a         trix which is diagonal2 with diagonal elements i for i = 1, . . . , k.
+stationary variable zt that is contemporaneously correlated with
+                                                                            In order to obtain asymptotic approximations for sampling
+both y2t and (1 - L)y2t . We could run the regression
+                                                                        distributions of the estimators and tests considered here, we make
+y2t = 2 + y1t-1 + 2zt + ~2t
+                                                                        the following additional assumptions on the model.
+where ~2t is the remainder of a projection of 2t on zt . Since
+                                                                        Condition 1. (a) The data {y1tT , y2tT , ztT } are a triangular array and
+the correlation between zt and y2t is contemporaneous then                   = 1 - T -1 where  is a diagonal matrix with diagonal
+                                                                            elements i, i = 1, . . . , k.
+2 nonzero does not contradict theories that imply lack of
+                                                                          2 This restriction ensures that the y1t variables do not have the property that their
+predictability. Typically economic theory suggests many possible        second differences satisfy a Functional Central Limit Theorem (FCLT) with a positive
+factors that are likely to be contemporaneously related to variables
+we are interested in predicting. Although it may be difficult to find   but finite scale term, i.e. they are not I(2) or near I(2) random variables.
+predictors of stock market returns, explanations abound of news
+that contemporaneously affects market prices.
+
+    The addition of stationary covariates to the model affects the
+
+limit distribution for the OLS estimator for  and its attendant t
+
+statistic. The distribution for the t statistic in this case is again
+                                                                            G. Elliott / Journal of Econometrics 164 (2011) 79­91                                           83
+
+(b) E[t |t-1, t-2, . . .] = 0, E[t t |t-1, t-2, . . .] =  and                                      This result extends that of Elliott and Stock (1994) to the case of
+    E[imt |t-1, t-2, . . .] < K < , m > 4 for i = 1, . . . , k+1+p.                            more than a single regressor and also allows for a greater variety of
+(c) A(1)-111A(1)-1 has rank k.                                                                 deterministic terms. The basic point however is the same--when
+
+(d) A(L) and B(L) have all roots outside the unit circle.                                      there is correlation between 1t and 2t so 12 is nonzero then
+     T -1/2          p
+(e)                     0.                                                                     the distribution of any test for the null hypothesis does not have
+                                                                                               the standard distribution and as a consequence there is typically
+                                                                                               a size distortion if standard critical values are used. Rejections of
+(f) d¯t (which is a function of dt ) is such that there exists a diagonal                      the null hypothesis of no predictability may in fact be due to this
+                                                                                               correlation.
+     scaling matrix d,T which is only a function of T such that
+                                                                                                   The regressors zt are available stationary covariates that may
+     d-,T1d¯ t  =  T -1/2d~ t  and      T  -1  T         d~ t  d~ t    1    s()s()d   where    be correlated with the shocks to the prediction equation (if 23
+                                                                                               is nonzero) and may be contemporaneously correlated with the
+     s() is nonstochastic.                         t =1                  0                     shocks to the predictor variables (if the relevant element of 13
+                                                                                               is nonzero).
+     In Condition 1(a) we make formal the use of the local to unity
+                                                                                                   The regression to be run when the zt are included in the regres-
+asymptotic theory, following Phillips (1987). This is standard in                              sion is
+
+this literature. Condition 1(b) ensures that the shocks driving
+
+the system are regular enough to allow asymptotic inference, in
+
+particular      T -1/2  [T ·]     t ,T         1/2W (·) where W () is a (k +
+
+                            t =1
+1 + p)x1 standard Brownian Motion with variance covariance
+
+matrix Ik+1+p. The requirement in Condition 1(c) is that there                                 y2t = ¯ 2 d¯t + y1t-1 + 2 Zt + ~2t                                           (9)
+
+do not exist any linear combinations of y1t such that their partial                            where Zt = (zt, zt-1, . . . , zt-q), 2 = (2 0, 2 1, . . . , 2 q) and we
+sums would satisfy a functional central limit theorem. In the case
+                                                                                               define ~t = (~1 t , ~2t ) as the remainder when we project (1 t , 2t )
+where  = I this condition amounts to assuming that none of the                                 onto 3t . For partitions conformable with (y1 t , y2t , zt ) define the
+
+elements of y1t are cointegrated with each other. The condition in                             matrix
+
+(d) is required to restrict asymptotic inference on the coefficients of                        G = Ik      0     -133-31
+the zt covariates to be asymptotic normal converging at rate T 1/2.                                        1     -23 3-31
+                                                                                                        0
+This condition of course is the standard condition for asymptotic
+
+normal inference when dependence is linear. The initial condition
+
+for y1t is made negligible in (e), which is the standard assumption                            then ~t = Gt and so the population values for 2 i are 233-31Bi
+made in this literature. In particular the entire set of results for                           where Bi is the ith element of B(L).
+
+the predictive regression discussed above make this assumption                                     We consider the Wald statistic testing the same hypothesis as
+                                                                                               in Theorem 1.
+or the more restrictive one that  = 0. Condition 1(f) limits the
+
+types of deterministic terms that are handled by the results below.
+
+The condition allows for a constant, polynomials in time, and many                             Theorem 2. When Condition 1 holds then under the null hypothesis
+
+other types of deterministic terms that do not depend on estimated                             testing  = 0 in the regression (9)
+
+quantities. The key assumption is that s() does not depend on                                                                                                           -1
+
+estimated quantities but is instead known.3                                                                      M¯ dW1~ + (1 - ~~)1/2 M¯ dW~ 2
+
+    Condition 1(a), (b), (d), (e), the first equation in (7) along with                        Wald                                                             M¯ M¯ 
+choosing  1/2 to be lower block diagonal with partitions after
+
+the kth row and column yields the asymptotic approximation                                                                                                    
+
+T -1/2u1[T]  A(1)-1111/2M() where M() is a kx1 standard                                                    ×        M¯ dW1~ + (1 - ~~)1/2 M¯ dW~ 2
+
+Ornstein­Uhlenbeck process which is a continuous function of                                   where ~ = ~ 1-11/2~ 12~ 2-21/2, ~ = E[~t ~t ] defined below and W~ ()
+                                                                                               is a standardized linear combination of W2() and W3().
+W1() where W1() are the first k elements of W (). The choice
+of  1/2 lower block diagonal ensures that M() is independent of                                    This theorem extends the results to the case where stationary
+
+the remaining elements of W ().                                                                variables are included in the regression. Since W~ () is a linear
+                                                                                               function of W2() and W3() then W~ () is independent of M¯ ()
+     The standard approach to examining this problem, since it is                              then  M¯ dW~ 2 is mixed normal. This means that, just as in the
+
+a problem of examining the predictability of y1t is to estimate                                previous result, the distributions are a weighted average between a
+directly the prediction equation without regard to the rest of the                             term that is mixed normal and a nonstandard term. The difference
+                                                                                               lies in the weighting--here the weighting on the nonstandard
+system. The prediction regression is
+                                                                                               component is ~ in place of . The different weighting means that
+y2t = 2 dt + y1t-1 + 2t .                                                                 (8)
+                                                                                               the extent to which the distribution differs from a standard one
+   The null hypothesis of interest is H0 :  = 0 with a two sided                               will differ.
+
+alternative. This can be tested using the usual Wald test.                                         We can consider the impact of adding the additional covariates
+                                                                                               on the nuisance parameters though since
+Theorem 1. When Condition 1 holds then under the null hypothesis
+
+testing  = 0 in the regression (8) the Wald test has the limiting
+
+distribution
+
+                                                                                      -1       ~ 11        ~ 12     11                133-311 3    12     13  3-312 3  
+                                                                                                 ~ 12      ~ 22       1 2             233-311 3    22     23  3-312 3
+Wald               M¯ dW1 + (1 - )1/2 M¯ dW2                                  M¯ M¯                              =                 -                   -                 .  (10)
+                                                                                                                                   -                   -
+
+                                                                                                  The inclusion of the extra stationary variables can result in |~| >
+                                                                                               ||, i.e. even larger size distortions that when zt is omitted, although
+       ×                    M¯ dW1 + (1 - )1/2 M¯ dW2                                          it should be recalled that both ~ and  are consistently estimable
+
+where  = 1-11/2122-21/2 and M¯ () is the remainder of a                                        so this situation can easily be avoided in practice.
+projection of M() on s().
+                                                                                                   But it is also possible that by including zt with the correct prop-
+ 3 An implicit assumption is that the form of s() is the same for both (8) and (9).
+                                                                                               erties that ~ = 0 and standard inference on the OLS coefficients
+The results are easily amended at the cost of additional notation when these differ.
+                                                                                               provides correct inference asymptotically. What is required is that
+
+                                                                                               the control variables zt be `orthogonalizing covariates' and ex-
+
+                                                                                               plain away the correlation between 1t and 2t . Mathematically
+84                                                   G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+this means that 12 = 133323. This makes clear two neces-                variables. The Granger representation theorem shows that when
+
+sary properties that must be satisfied by zt --they are (a) they must    = Ik then cointegration implies that the matrix  is reduced
+be stochastic and (b) both 13 and 23 must be nonzero. The sec-
+ond of these means that zt must covary with both the dependent          rank. This estimator can be shown to be asymptotically equivalent
+variable and the quasi difference of the predictor variables. Even      to the minimum distance estimator for the cointegrating vector
+                                                                        when the restrictions implied by cointegration are imposed on the
+when ~ is nonzero it may be close enough to zero so that size dis-      unrestricted VAR estimates. Further, following Saikkonen (1992)
+                                                                        this estimator can be shown to be asymptotically equivalent to a
+tortions are small.                                                     maximum likelihood estimator for the same normalization of the
+                                                                        cointegrating vector.
+4. Standard inference for cointegrating relationships with near
+unit roots                                                                  We turn to the asymptotic properties of this estimator. Ad-
+                                                                        ditional assumptions on the model are essentially the same as
+    The general near cointegrating model is                             Condition 1, apart from (c) and (d).
+
+(1 - L)(y1t - 1dt ) = u1t                                (11)           Condition 2. (a) The data {y1tT , y2tT , ztT } are a triangular array and
+y2t = 2dt + y1t + u2t                                                        = 1 - T -1 where  is a diagonal matrix with diagonal
+zt = 3dt + u3t
+                                                                            elements i, i = 1, . . . , k.
+where ut = (u1 t , u2 t , u3t ) and A~ (L)ut = t . The observed data    (b) E[t |t-1, t-2, . . .] = 0, E[t t |t-1, t-2, . . .] =  and
+{y1t , y2t , zt } are such that y1t is kx1, y2t is rx1 (so there are r
+potential cointegrating vectors) and zt is px1, dt is a vector of           E[imt |t-1, t-2, . . .] < K < , m > 4 for i = 1, . . . , k+1+p.
+deterministic terms, t = (1 t , 2 t , 3 t ) where E[t t ] =  ,          (c) A~ 11(1)-111A~ 11(1)-1 has rank k where A~ 11(L) is the upper kxk
+and the unknown parameters are (1, 2, 3, , ,  , ) and the
+                                                                             block of A~ (L).
+parameters of the finite (known) lag polynomial A~ (L).
+                                                                        (d) A~ (L) has all roots outside the unit circle.
+    This model can be rotated into the vector autoregressive model           T -1/2
+                                                                        (e)                  p  0.
+
+                                                                                        
+
+                                                                        (f) d¯t (which is a function of dt ) is such that there exists a diagonal
+
+                                                                             scaling matrix d,T which is only a function of T such that
+
+    y1t                                       y1t                            d-,T1d¯ t     T -1/2d~ t       and  T  -1  T         d~ t  d~ t    1     s()s()d  where
+                                       (L)
+    y2t        y1t-1                               -1                                   =                                   t =1                  0
+    zt
+          =      y2t -1  +   d¯ t  +          y2t-1 + t  (12)                s() is nonstochastic.
+
+                                              zt -1
+
+where  is (k + r + p)x(k + r) and d¯t are the relevant deterministic    Theorem 3. For the model in (11) when  = Ik - T -1 and
+
+terms that derive from (11). For deterministic terms that are a         Condition 2 holds then for the estimator defined in (13) then
+
+polynomial of time this is straightforward as d¯t = dt , however                                                                                      -1
+
+if there are known structural breaks then this term can become          T (^ - )  ~ 2.12 -1/2 dW M¯                                           M¯ M¯ 
+
+more complicated. It is assumed throughout that the deterministic                          × 1-11/2 + ~ 1 2~ 1-11                                                      (14)
+
+component is correctly specified in the sense that no terms implied     where  = A(1)-1 A(1)-1, ~ ij = ij - i33-313j, ~ 2.1 =
+                                                                        ~ 22 - ~ 1 2~ 1-11~ 12, M¯ is as defined in the text after Condition 1.
+by the original model have been omitted.
+                                                                            This result extends the results of Saikkonen (1991) to the case
+   In the case where  = Ik and we assume that the elements              where stationary covariates are included in the regression and
+                                                                        used optimally to estimate the cointegrating vector under the
+of y1t themselves do not cointegrate amongst each other, this
+                                                                        assumption that  = Ik. Since the leading rxk block of 2 -1/2 is a
+is a general cointegrating system where if we partition  =              matrix of zeros this means that in the weighted average of  dW M¯ 
+[1 2] where the partition is after the kth column then 2 are the        a zero weight is given to  dW1M¯  (which is a nonstandard piece)
+impact coefficients of the error correction terms (y2t-1 - y1t-1)
+where  is the cointegrating vector. When the zt covariates are          and the remaining pieces are mixed normal. Hence the first term
+                                                                        in (14) has a mixed normal distribution.
+omitted a wide range of asymptotically equivalent methods are
+                                                                           Linear hypotheses on  in the form Rvec() = r can be tested
+available under this assumption for estimation of and inference
+                                                                        using the Wald test
+on the cointegrating vector (cf. Johansen, 1988, 1991; Stock and
+                                                                                                                                                          -1
+Watson, 1993; Saikkonen, 1991, 1992; Phillips and Hansen, 1990).        Wald = T 2(Rvec(^ ) - r) R(M^  (^2^ -1^2)-1)-1R
+
+Hypothesis tests on the cointegrating vector using these methods             × (Rvec(^ ) - r)
+
+is particularly simple since t-statistics can be compared to the        where M^ is the upper kxk block of the inverse of the regressors
+
+usual normal distribution and more general tests can be compared        outer product scaled by T -2. This is the standard form of the Wald
+
+to the  2 distributions.                                                statistic apart from the scaling term (^2^ -1^2)-1 in place of the
+
+    Relaxing the condition that we know a priori that the roots are     variance covariance of the residuals.
+
+exactly on the unit circle (and maintaining the assumption that
+
+we ignore the zt covariates) Elliott (1998) shows that the efficient
+methods for estimating the cointegrating vector have a bias term
+
+and standard inference no longer applies except in the very special
+
+case where the correlation between u1t and u2t is zero at the zero
+frequency.
+
+   For estimating ^ in this regression we consider the estimator
+
+^ = -(^2^ -1^2)-1(^2^ -1^1)                              (13)           Theorem 4. Under the same conditions as Theorem 3 then under the
+
+                                                                        null hypothesis that  is true
+
+where the rows of ^ = [^1^2] are obtained from running each of                                                                                                         
+
+the regressions in (12) equation by equation (as in the usual case      Wald  Rvec~ 21./12                                     -1             1-11/2  +   ~ 1 2~ 1-11    
+                                                                                                              dW M¯       M¯ M¯                                        
+when we estimate a VAR) and ^  = T -1  ^t^t where ^t are the
+                                                                                                                                                                       
+least squares residuals from the OLS regressions (12).
+                                                                                                                      -1                         -1
+    This estimator is an extension of the method proposed by
+                                                                                                            
+Saikkonen (1992) for the case where there are no stationary
+                                                                                        R 1-11/2              M¯ M¯       1-11/2  ~ 2.1 R
+                                   G. Elliott / Journal of Econometrics 164 (2011) 79­91  85
+
+                                                           
+
+xRvec~ 21./12                  -1  1-11/2  +  ~ 1 2~ 1-11                  Unlike the instrumental variables problem, in this problem we
+                dW M¯     M¯ M¯                                        are able to test the assumptions of the model. In terms of mean
+                                                                       reversion of zt , there exist many tests for this null hypothesis
+                                                                       (see Stock, 1994, for a review). Consistent estimators for  or
+                                                                        can be computed using standard methods and hence can
+where W~ () is a rx1 standard Brownian Motion independent of
+M ().                                                                  easily estimate both  and ~ for any application. Consistency
+
+    This result extends the results of Elliott (1998) to hypothesis    follows directly from the asymptotic negligibility of the regression
+testing in the near cointegrating model when stationary variables      estimates in estimating variance covariance matrices. Hence for
+are added to the system. The Wald test has a nonstandard               any application one could avoid situations where adding zt to
+                                                                       the regression makes the problem worse by not employing the
+distribution due to the term ~ 1 2~ 1-11 . When this term is equal
+to zero, then conditional on  M¯ M¯  this distribution is equivalent   methods unless |~| is estimated to be significantly less than the
+to a q2 where the number of degrees of freedom q is equal to the       estimate for ||.
+
+number of restrictions (row rank of R).                                    The effect of introducing zt to the prediction regression need
+                                                                       not be to completely orthogonalize the regression. However as
+    The added stationary covariates zt with be orthogonalizing         Theorem 2 above showed the effective distribution does change.
+
+covariates when ~ 12 = 0, i.e. the condition to be satisfied is that   For situations where |~| is much smaller than ||, size distortions
+12 - 133-312 3 = 0. This is the zero frequency analog of the
+                                                                       though not removed will be made much smaller. In such cases it
+same condition for the predictive regression--indeed because of        may be a large enough difference at the calculated test statistic that
+the serial correlation structure of the model in Section 3 the zero
+frequency variance covariance matrix and the contemporaneous           the rejection becomes clear (since for no  would the critical value
+variance covariance matrix coincide, so the restriction is seen to
+be exactly the same as that for the previous section.                  be so high). Hence rather than solving the inference problem, it
+                                                                       may instead be that the introduction of zt merely increases power.
+    When the control variables zt are orthogonalizing covariates       This too is interesting, especially if it causes the t statistic to change
+                                                                       in such a way that it is now large enough that it is beyond the
+then this result allows standard t tests to be conducted on , even
+when we do not know the value for .                                    critical values for all possible  .
+
+5. Finding and interpreting orthogonalizing regressors                     The use of zt in the prediction regression or the cointegrating
+                                                                       model improves power through a number of channels. Here we
+    In each of the above cases, predictive regressions and the near
+cointegrating regressions, the condition for the orthogonalizing co-   compare two possibilities--that  is known and zt are not em-
+variates is essentially the same. We require that the orthogonaliz-    ployed versus the more realistic situation that  is unknown but
+ing covariates zt be mean reverting and that they explain away the
+                                                                       also we have and use orthogonalizing covariates zt .
+correlation between 1t and 2t . In the cointegrating case this be-
+                                                                       Theorem 5. When there exist zt that satisfy the conditions for being
+comes the zero frequency correlation.                                  orthogonalizing covariates then
+    As with finding instruments in instrumental variables regres-
+                                                                       (a) (Predictive Case) Under the conditions of Theorem 2 then the
+sion, candidate orthogonalizing covariates would generally arise
+from theoretical understanding of the problem from economic the-           OLS estimator for  employing zt as a predictor is asymptotically
+ory and the requirements of the candidate variables from econo-            at least as efficient as the asymptotically efficient estimators for 
+metric theory. Candidate variables would be those we think are             when  is known and the information in zt is not employed.
+contemporaneously correlated with the shocks to both the predic-
+tor variable and to the variable to be predicted. Consider the prob-   (b) (Cointegrating Case) Under the conditions of Theorem 3 then
+lem of predicting stock market returns with the log of the dividend         the estimator (13) is asymptotically at least as efficient as the
+
+price ratio. Here y1t = log(Dividends) - log(Price) and y2t is re-         asymptotically efficient estimators for  when  is known and the
+
+turns, which also depends on the price of the stock. With prices            information in zt is not employed.
+
+appearing in both, it is no surprise that  < 0 and large, indeed  is       In the case of the predictive regression, it is of course not
+often estimated in the range of -0.75 to -0.95. In Table 1 p. 382 of   possible that any of the methods discussed in the review in
+Stambaugh (1999) they are less than -0.89. Candidate orthogonal-
+                                                                       Section 2 that both control size for all  and allow uncertainty
+izing regressors would be variables that are correlated with both
+the dividend price ratio and returns. Consider news variables, for     over this parameter to have better power than a test based on a t-
+example good macroeconomic news. This would likely have the            test in the infeasible SUR regression given the efficiency properties
+effect of raising stock prices and hence returns, at the same time     of the latter regression for this model. Theorem 5 shows that
+lowering the dividend price ratio as prices of the stock rise. Hence   when orthogonalizing covariates are available, then power using
+such a variable would go some way in explaining this negative cor-     orthogonalizing covariates must be at least as good as the efficient
+relation.                                                              infeasible SUR method that ignores the additional covariates. From
+                                                                       this it follows directly that none of the methods presented in
+    Thus candidate variables for zt would come from theoretical
+considerations for any application. There is no requirement of         Section 2 can have better power against any alternative for  than
+understanding causal direction, since it is only the correlation       the method suggested in this paper when zt is such that ~ = 0. A
+that matters for the variable to be potentially useful. Finding such
+candidates should not be particularly difficult, in the sense that     similar point holds in the cointegrating case.
+in economic problems contemporaneous correlations between                  Finally, a comment on interpretation of the regression coeffi-
+variables are more the norm than orthogonality. Having the
+                                                                       cient. Typically in regression we think of a coefficient such as  as
+candidates actually explain all of the correlation so that ~ = 0 is
+                                                                       the effect of y1t holding constant other variables in the regression.
+likely more difficult (as is finding instruments that we are sure are  Thus it might seem that adding the `orthogonalizing' regressor zt
+uncorrelated with error terms) however the results of this paper       to the regression fundamentally alters the effect we are trying to
+show that this is a direction to consider in applied work.             estimate. This in turn implies the correct interpretation of the dif-
+                                                                       ference in results from choosing to include or exclude the covariate
+                                                                       zt may be that the effect that is being estimated is different in each
+                                                                       of the regressions. In the prediction regression, supposing that we
+
+                                                                       knew 2, this means that when zt is excluded we interpret  as the
+
+                                                                       effect of y2t-1 on y1t and when zt is included this coefficient is the
+86                                                      G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+Table 1
+Size properties for one sided test.
+
+Method  Regression (8)                                                     Regression (9)                                          Campbell Yogo
+
+=       -0.95                        -0.75              -0.5               -0.95                -0.75      -0.5                    -0.95          -0.75  -0.5
+
+=1      0.416                        0.289              0.180              0.051                0.051      0.051                   0.066          0.067  0.065
+ = 0.9  0.139                        0.116              0.091              0.053                0.053      0.053                   0.060          0.060  0.058
+ = 0.8  0.105                        0.092              0.079              0.054                0.054      0.054                   0.061          0.059  0.055
+
+Notes: Size is 5% for a one sided upper tail test.
+
+                                          = -0.5                                                                          = -0.75
+               1                                                                                1
+
+               0.8                                                                              0.8
+
+        0.6                                                                                     0.6
+        Power
+                                                                                         Power
+
+               0.4                                                                              0.4
+
+               0.2                                                                              0.2
+
+               0    0                5              10                 15  20                   0    0  5         10               15             20
+
+                                                    Local Alternative                                          Local Alternative
+
+Fig. 2. Local power. The solid line is the method of this paper, long dashes indicate power when  is known, short dashes indicate power for the Campbell and Yogo (2006)
+
+Bonferroni procedure.
+
+effect of y2t-1 on (y2t - 2zt ), a different question. For the coin-               1, dt = 1 (i.e. constants only, this is the leading applied case for this
+                                                                                   regression),  = 0 and A(L) = 1. Values for  and  follow their
+tegration case the same would be true for the effect of y1t on y2t .
+Such an interpretation is however is not correct.                                  paper as well. For the augmented model we add the third equation
+
+    To see this, consider the cointegrating regression results. The                of (7) and set B(L) = 1, |13| = |23| so that ~ = 0.
+                                                                                      We report size results for testing the hypothesis that  = 0
+interpretation of  is that it is the coefficient that allows the
+persistent component in y2t - y1t to be annihilated. Adding a                      versus the alternative that  > 0 with a 5% test in Table 1. The
+
+stationary variable -- one with serial correlation properties that                 first three columns of results give rejection rates for using the least
+are such that roots are far from the unit circle -- cannot possibly
+change this interpretation of the coefficient since it cannot affect               squares method (8) with use of the normal distribution to construct
+this trending behavior in y1t and y2t . A similar argument holds for
+the prediction regression. Consider for the prediction regression                  the critical values for the test. The next three columns of results
+
+what it must mean for  to be nonzero. Under this alternative                       show size results for the method augmented by including zt in (9).
+                                                                                   We also include in the last three columns size for the Campbell
+hypothesis, by virtue of the serial correlation properties of y2t ,
+there must be a highly serially correlated component in y1t . This                 and Yogo (2006) Bonferroni method. In each case we used 100
+can be true even if standard tests for unit roots or stationarity
+do not detect this component.4 Provided that the orthogonalizing                   observations and 10 000 Monte Carlo replications.
+regressor zt does not have such a low frequency component, it will
+not affect the relationship between the low frequency behavior                         It is clear from Table 1 that the use of asymptotic normal critical
+of y2t and any equivalent low frequency behavior or lack thereof
+in y2t .                                                                           values -- the original Stambaugh problem -- results in very large
+
+6. Numerical evaluation of the results                                             size distortions. This was also shown to be true asymptotically in
+
+    We turn to providing a numerical evaluation of the results. All                Fig. 1 in Section 2. Having orthogonalizing covariates allows for
+results will be presented for the predictive model since results are
+qualitatively the same for the cointegrating model however in the                  size to be controlled. This is true for all values of  and . We can
+cointegrating model magnitudes can be larger (see Elliott, 1998),
+hence results presented here are conservative in this respect. For                 compare this to size results for the method of Campbell and Yogo
+the Monte Carlo results we employ the model used in Campbell
+                                                                                   (2006), where the methods are slightly oversized and the extent of
+and Yogo (2006), which is the first two equations of (7) with k =
+                                                                                   the problem depends on both  and , where the degree of oversize
+                                                                                   was increasing in || and larger for  closer to one.
+
+                                                                                      In Fig. 2 we examine power for testing the null of  = 0
+                                                                                   versus the alternative that  > 0 using the method of this paper,
+                                                                                   the infeasible approach of knowing , and the Campbell and Yogo
+
+                                                                                   (2006) method.5 The model is the same as that for Table 1 however
+
+                                                                                   we use 250 observations to ensure that all methods control size.
+
+                                                                                   The alternative is set to  = b/T for b given on the x-axis of the
+
+                                                                                   curves. The Bonferroni method of Campbell and Yogo (2006) does
+
+                                                                                   not require knowledge of , and by construction gives up power for
+
+                                                                                   not knowing this nuisance parameter. Hence we expect that from
+
+  4 Power of stationarity tests against alternatives where the integrated or near    5 Notice that the comparison with the Campbell and Yogo (2006) method
+integrated component is small is low. Similarly, unit root tests over-reject when  involves different levels of information, so is not a fair comparison from this point
+there is a small unit root component mixed in with a large degree of stationary    of view.
+noise.
+                                                  G. Elliott / Journal of Econometrics 164 (2011) 79­91                                                                                     87
+
+the results of Theorem 5 that the augmented regression (9) will                the continuous mapping theorem. For (b) the result follows from
+                                                                               Phillips (1987).
+result in a test that is more powerful than the infeasible known
+                                                                                   The result in (d) is the result behind the familiar block diago-
+ method from ((4)) which in turn will be more powerful than the                nality of the denominator matrix in regression between the inte-
+                                                                               grated and non-integrated pieces. To show the result it is sufficient
+Campbell and Yogo (2006) method. The first panel examines power
+                                                                               to show it for an arbitrary element of the matrix, take the (j, r)th
+for the model where  = 10 and  = -0.5, the second panel
+repeats this exercise for  = -0.75. Similar unreported results                 element where j may equal r. We have
+hold for  = 0 and  = 20. In each of these figures the results we
+                                                                                       T                                        T              t                    
+expect from Theorem 5 are borne out, with power of the method
+                                                                               T -3/2  -                               T -3/2   -           -                       
+suggested in this paper being greater than that of the infeasible                                                                                                   
+                                                                                             yj1t  -1 Xrt        =                    Xrt          jt -s-1      us  
+SUR method which in turn is an upper bound on the  unknown                                                                      
+bivariate methods. Different choices of  for any  can make power
+                                                                                        t=2                                      t=2 s=2                            
+for the orthogonalizing regressor method and the infeasible SUR
+                                                                                                                          -1/2        j     ,  jT  -1           -1    T    T                .
+method closer or further apart.                                                                                                                                                       
+                                                                                                                                                         T          -    -          us
+                                                                                                                                                         
+                                                                                                                       T        max                                             Xt
+
+                                                                                                                                                          t=1 s=1                       
+
+7. Conclusion                                                                  Since   A11(L)    and       B(L)        have  finite   lags        then   T   -1     T         T         Xt  us
+
+    This paper analyzes how control variables that are not persis-                                 Var(T -1/2            t                                              t =1      s=1
+tent can be employed in linear regressions with persistent regres-
+sors to reduce or eliminate size distortions of hypothesis tests for           converges     to                              s=1  Xt ut ).  The    result       follows       then      from
+the coefficients on these variables. In particular interest is focussed
+on inference on the coefficients on the persistent covariates. It is           showing that T -1/2 max{j, jT-1}  0. For j  1 then j > jT-1
+shown that in the context of both predictive regressions (where
+a persistent regressor is employed to forecast a variable that may             and T -1/2pj  0. For j = 1 + T -1j > 0 by rearrangement
+or may not be persistent) and for near cointegrating regressions
+(where we suspect that the trends in each of the variables is an-              T -1/2jT -1   =     T -1/2 -jT -3/2              T -1     js        0 since T -1       T -1          js      
+nihilated by a linear combination but we are unsure if the trend is
+an exact unit root process) that the addition of control variables to                                                               s=0                                   s=0
+the regression may result in standard asymptotic analysis for the
+coefficients on the trending regressors even when we do not know               1    ejd      <  .
+the precise specification of the trend itself. Further, when such or-
+thogonalizing control variables are available, inference is improved             0
+above and beyond that available through ignoring the control vari-
+ables but knowing the exact nature of the trend. Finding candidate                  For (e) first consider any univariate mean zero random vari-
+orthogonalizing covariates -- discussed in Section 5 -- follows from
+economic theory and considering what variables are likely to be                able xt with finite variance E[xt2]. Since maxt=1,...,T d~it is finite by
+correlated with the shocks drive the variables in the regression.
+                                                                               construction      for    all      elements         of  the   vector     d~ t     then  E  [d~ t  xt   2  is  fi-
+
+                                                                                                                                                                                    ]
+
+                                                                               nite  and  T -1        dt   xt         p  0  by  Chebyshev.         We    will       show      that  all     el-
+
+                                                                                                                 
+
+                                                                               ements of Xt satisfy the conditions on xt plus possible a smaller
+                                                                               order term. The first rx1 elements of Xt are u2t-1 = 2 A(L)-1t-1
+                                                                               where 2 = (0k xr , Ir , 0pxr ) which are mean zero since E[t ] = 0.
+                                                                               Since all roots of A(L) are outside the unit circle this also has finite
+
+                                                                               variance and so the result holds directly. For (y1t-1-1dt-1) note
+                                                                               that this is (1-L)(y1t-1 -1 dt-1)+(1-)(y1t-2 -1 dt-2) which
+                                                                               in turn is 1t-1 +T -1/2(T (1-)T -1/2(y1t-2 -1 dt-2)). The second
+                                                                               piece is of a smaller magnitude than the first. Further 1t-1 has fi-
+                                                                               nite variance by Condition 1(a). For (y2t-1-2dt-1) note that this
+                                                                               is equal to (y1t-1 - 1dt-1) + u2t-1 and hence has finite vari-
+                                                                               ance by the immediately preceding two results. For zt - 3dt the
+
+                                                                               result holds by Condition 1(a) directly. For greater lags the results
+
+Acknowledgements                                                               hold for the reasons just given. Hence all elements of T -1  d~t Xt
+
+                                                                               converge to zero as stated.
+
+    The author thanks participants at the Forecasting in Rio                       As just shown in the proof for (e) each element of Xt has
+conference, Stanford, MIT, ANU, The Federal Reserve Board, UBC,
+Boston College, Brown University as well as the referees and editor            bounded variance. Since t is a MDS with four moments then via
+for comments.
+                                                                               any MDS central limit theorem this term has an asymptotic normal
+
+                                                                               distribution and is thus 0p(1).
+
+Appendix                                                                       Proof of Theorem 1. Rewrite (8) so that stochastic terms have
+
+                                       1                                       their deterministic components removed, (throughout define
+
+                                         0                                     yd1t = y1t - 1dt , yd2t = y2t - 2dt and ztd = zt - 3dt ) i.e.
+
+     For all results    refers     to       and   refers to weak convergence.  y2t = ¯ 2 d¯t + y1t-1 + 2t
+                                                                                   = ~ 2 dt + yd1t-1 + 2t
+Lemma 1 (Asymptotic Approximations). For the model in (7) when                     =  Qt + 2t
+Condition 1 holds or (11) when Condition 2 holds then
+
+(a) T -2  y1t-1y1t-1  111/2  M()M()d111/2                                      here Qt   =   [y1dt  -1  ,  d¯ t     and      =    (, ~ 2 ).
+
+                                                                                                                 ]
+
+(b) T -1  y1t-1t  111/2  M()dW () 1/2                                               Define T to be a diagonal scaling matrix T = diag[T -1Ik, dT ]
+
+(c) T -3/2  y1t-1d~t  111/2  M()s()d                                           where dT is defined in Condition 1. The least squares estimator for
+
+(d)  T -3/2    y1t -1 Xt        p  0                                            , denoted ^ , is such that
+
+                           
+
+     T -1  d~t Xt       p                                                                                           T                 -1                     T           
+
+(e)                        0                                                   T (^ -  ) = T-1 - Qt QtT-1                                         T-1 - Qt 2t
+
+(f) T -1/2  Xt t is 0p(1)                                                                                        t =2                                    t =2
+
+where Xt are mean zero terms such that H(L)Xt is stationary with H(L)                                               T                 -1                     T           
+
+having a finite lag length.                                                                  = T-1 - Qt QtT-1                                     T-1 - Qt t 2
+
+Proof. The results in (a) and (c) follow directly from condition                                                 t =2                                    t =2
+
+1 (a) and (b) which yield T -1/2y1[T]  A(1)-1111/2M() and                      where 2 = (0k, 1) where 0j denotes a jx1 vector of zeros.
+88                                                                          G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+    For the denominator                                                                               y2t = ¯ 2 d¯t + yd1t-1 + 2 Ztd + ~2t
+                                                                                                          =  Qt + ~2t
+            T               T -2 - y1dt-1yd1t-1                       T -3/2 - yd1t-1d~ t 
+                                                                        T -1 - d~t d~t                where Qt = [yd1t-1, d¯t , Ztd] and  = (, ¯ 2 , 2 ).
+T-1 - Qt QtT-1 =                                                                                         Define T to be a diagonal scaling matrix T = diag[T -1Ik, dT ,
+
+      t =2                                        ·                                                   T -1/2Ip(q+1)] where rT is defined in Condition 1. The least squares
+                                                                                                      estimator for  , denoted ^ , is such that
+                                                                            
+                                                                      111/2 Ms
+                                   111/2 MM 111/2
+                                                                                    
+
+                                                                                          
+
+                                                sM 111/2                              
+
+                                                                                ss                                                    T                -1                 T       
+
+and for the numerator terms, the term is                                                              T (^ -  ) = T-1 - Qt QtT-1                                  T-1 - Qt ~2t
+
+                                                                                                                                      t =2                                t =2
+
+        T                T -1 - y1d,t-1t 2                                                                                            T                -1                 T           
+                            T -1/2 - d~t t 2
+T-1   -     Qt t 2  =                                        .                                                   = T-1 - Qt QtT-1                                 T-1 - Qt t G2 .
+
+      t =2                                                                                                                            t =2                                t =2
+
+Using the results of Lemma 1 (noting that each of these pieces is                                       Consider the denominator term
+
+0p(1)) and the continuous mapping theorem and some rearrange-                                                     T
+
+ment we have                                                                                          T-1 - Qt QtT-1
+
+                                                                                                              t =2
+
+                                           -1                                                           T -2 - y2t-1y2 t-1                  T -3/2 - y2t-1d~t T -3/2 - y2t-1Zt
+
+T (^ - )  1-11/2                   M¯ M¯             M¯ dW  1/2 2                              (15)                                            T -1 - d~t d~t          T -1 - d~t Zt  
+                                                                                                                                                      ·                               
+                                                                                                        =        ·
+
+                                                                                                                                                                                      
+
+The limit distribution for the numerator is a weighted average of                                                ·                                                     T -1 - Zt Zt
+
+ M¯ dW1 which has a nonstandard distribution and  M¯ dW2 which                                                                                                   
+                                                                                                          212/2 MM212/2                     212/2 Ms
+is asymptotically mixed normal. The weights follow from the ele-                                                                                               0
+
+ments of 2 1/2 and are 121-11/2 and 11./22 respectively.                                                                                                          
+   The Wald test testing the null hypothesis that  = 0 against
+                                                                                                                                                                  
+ = 0 is given by                                                                                                 sM 212/2
+                                                                                                                                                   ss          0
+                                                                                                                                                                  
+
+                                                                                                                 0                                 0           Z
+
+Wald   =    T 2^ 2-21(^  -  0 )                   - Qt QtT-1-1 S1 -1 (^                 -  0)         where z = E[Zt Zt].
+                                        
+                                                                                                          For the numerator terms, the term is
+                                     S1 T-1
+
+                                                                                                                                           -1  -            t     2  
+
+            ^ 2-21[T (^                           -              T-1  -1      -1                           T                            T          y2,t -1     G
+                         - 0)] S1        T-1
+       =                                             Qt      Qt             S1      [T (^   -  0)]    T-1 - Qt t G2                      T -1/2 - d~t t G2           
+                                                                                                                         =                                           
+                                                                                                                                                                       .
+
+                                                                                                        t =2                                                         
+
+where S1    =  (Ik, 0kx dim(d¯t )) and ^ 22                  =   T  -1  T         (y2t  -   ^ Qt )2,                                     T -1/2 - Zt t G2
+
+                                                                            t =2
+
+i.e. the sum of squared residuals of the regression (8) divided by                                    Using the results of Lemma 1 (noting that each of these pieces is
+
+the sample size. Consistency of the OLS estimates gives                                               0p(1)) and the continuous mapping theorem and some rearrange-
+
+                         T                                                                            ment we have
+
+^ 22 = T -1 - 22t + op(1)                                                                                                              -1 
+
+                    t =2                                                                              T (^ - )  1-11/2                      M¯ M¯           M¯ dW  1/2 G2.
+
+which  yields  T  -1     T         22t       p  22.
+
+                             t =2       
+
+    Hence, from (15) and results for T-1  Qt QtT-1-1 given                                              The weights on dW are given by  1/2 G2, which are
+
+above, it follows from the continuous mapping theorem and some                                                           ~ 1-11/2           
+                                                                                                                   ~ 12
+algebra that                                                                                          2G 1/2      ~ 21./12 
+
+                                                                                                              =
+
+                                                             -1                                                                    0
+
+Wald  2-212  1/2            M¯ dW                    M¯ M¯              M¯ dW   1/2 2
+
+                                                                                                      by judicious choice of  1/2 (i.e. the Choleski decomposition of the
+                                                                                                      variance covariance matrix with the ordering (3t , 1t , 2t )) where
+=           M¯ dW1 1-11/2122-21/2 + 21./122-21/2 M¯ dW2                                               ~ 2.1 = ~ 22 - ~ 12~ 1-11~ 12 and ~ as defined in (10).
+
+                  -1                                                                                      The numerator of the limit distribution has two components,
+
+    × M¯ M¯                 M¯ dW1 1-11/2122-21/2 + 21./122-21/2 M¯ dW2                               i.e. we can write
+
+                                                                            -1                                                                                                  
+
+                                                                                                        M¯ dW  1/2 G2 = M¯ dW1 ~ 1-11/2 ~ 12 + ~ 2.1 M¯ dW~ 2
+
+=           M¯ dW1 + (1 - )1/2 M¯ dW2                               M¯ M¯ 
+
+                                                                                                      where the first term has a nonstandard distribution and the second
+                                                                                                      is mixed normal. Hence we have as before
+    ×       M¯ dW1 + (1 - )1/2 M¯ dW2
+
+where                                                                                                                                                          -1
+
+2.1 = 22 - 1 21-1112 = 221 - 212/21 21-1112212/2                                                      T (^ - )  A(1)-11-11/2                           M¯ M¯ 
+      = 22(1 - )1/2
+                                                                                                                      
+so the result is as stated in the text.
+                                                                                                                                   
+Proof of Theorem 2. Rewrite (9) so that stochastic terms have
+their deterministic components removed, i.e.                                                                     ×                    M¯ dW1 1-11/2 (12 - 133-312 3)
+
+                                                                                                                                                    
+                                                                                                                                        
+                                                                                                                 + ~ 212/2(1 - ~~)1/2 M¯ dW~ 2
+                                                                     G. Elliott / Journal of Econometrics 164 (2011) 79­91                                                     89
+
+conditional on  M¯ M¯ -1.                                                                          Defining A~ (1) =  A~ i where A~ i are the matrices of coefficients in
+   The Wald test testing hypotheses  for 0 is                                                      A~ (L) and the summation is over all the lags (including the zero lag)
+
+                                                            -1                                     and rearranging we can write this as
+                                  -
+          ^ 2-21(R^                                   -1  R
+
+Wald  =               -  r )     R             Qt Qt                 (R^    -  r)                   y1t 
+                                                                                                       y2t =  1yd1t-1 + 2(yd2t-1) - yd1t-1
+      =   ^ 2-21[T (^  -  0)]                       - Qt QtT-1-1                 -1                                                                                            (16)
+                                                                                                       zt                                                                      (17)
+                                                                               R
+                                      R T-1
+
+          × [T (^ - 0)]                                                                                                                yd1t -1 
+                                                                                                                 + dt +  (L)           y2dt-1 + t
+
+where R = (R , 0, 0) and r = 0 where the partitions of R are con-                                                                      ztd
+
+formable  with    and    ^ 22    =     T -1    T         (y2t  -  ^ Qt )2,  i.e.  the  sum     of  where  1 = PA~ (1)1( - Ik) and 2 = -PA~ (1)2 and we
+                                                                                                   define 1 = (Ik, 0k xr , 0pxr ) and 2 = (0kxr , Ir , 0p xr ) are selector
+                                                   t =2
+                                                                                                   matrices. This regression is equivalent to the regression (12) apart
+squared residuals of the regression (9) divided by the sample size.
+                                                                                                   from rearranging the deterministic components so each of the
+By  analogous   results  to   those    in      Theorem    1    ^ 22  =  T -1   T         ~22t  +
+                                                                                                   regressors has this term subtracted out and we have rotated the
+                                                                                   t =2
+op(1) and application of Chebyshev using assumption (fourth mo-                                    term
+
+ments)  yields  T -1   T         ~22t       p  22  -     2 33-312 3         =  ~ 22.
+
+                           t =2        
+
+   Hence, using the asymptotic results for T (^ - 0) and T-1                                         y1t-1       =     1 y1t -1  + 2y2t-1
+
+ Qt QtT-1-1 given above, it follows from the continuous map-                                           y2t -1
+
+ping theorem and some algebra that
+
+                                                                  -1                                             = (1 + 2)y1t-1 + 2(y2t-1 - y1t-1)
+
+Wald  ~ 2-212 G 1/2                    M¯ dW              M¯ M¯                                                  =  1y1t-1 + 2(y2t-1 - y1t-1)
+
+                                                                                                   where 1 is (k + r + p)xk, 2 is (k + r + p)xr and  1 = 1 + 2.
+
+          ×          M¯ dW   1/2 G2                                                                    The regression is in the Sims et al. (1990) format that allows
+
+                                                                                                   limit results to be obtained. Define the matrix
+
+                                                                                       -1
+
+      =         M¯ dW1 ~ + (1 - ~~)1/2 M¯ dW~ 2                                M¯ M¯                     (y2t-1 - 2dt-1) - (y1t-1 - 1dt-1)
+
+                                                                                                                       (y1t-1 - 1dt-1)                     
+
+                                                                                                                       (y2t-1 - 2dt-1)                     
+                                                                                                   Xt =                  zt-1 - 3dt-1                      
+          ×          M¯ dW1 ~ + (1 - ~~)1/2 M¯ dW~ 2                                                                                                       
+                                                                                                         
+
+                                                                                                                                  ...                      
+
+as stated in the text.                                                                             where the . . . are the remaining lags of each of the detrended
+
+    For the distribution to have an asymptotic mixed normal dis-                                   changes in y1t , y2t and zt . Define Qt = [y1dt-1, dt , Xt] and
+                                                                                                   collect the coefficients of the regression into  , the regression can
+tribution we require the weight on  M¯ M¯ -1  M¯ dW1 to be zero
+which occurs only if 12 - 233-3113 = 0. Under the restriction                                      be written
+1 2 - 233-311 3 = 0
+
+                                         -1                                                         y1t 
+
+T (^ - )  1-11/2                 M¯ M¯                   M¯ dW  1/2 G2                                 y2t =  Qt + t.
+
+                                                                                                       zt
+
+                                               -1                                                  Define the diagonal scaling matrix T partitioned conformably
+                                                                                                   with the rows of Qt and equal to [T -1Ik, rT , T -1/2Ig ] where g is
+                                                                                                   the number of rows in Xt . Then
+
+           aN 0, ~ 22                  M¯ M¯              .
+
+    When zt satisfies the conditions for being an orthogonalizing                                  T (^  -  )    =             - Qt QtT-1-1                -
+                                                                                                                     T-1                           T-1         Qt t
+regressor, i.e. 12 - 233-3113 = 0 holds, then conditional on
+ M¯ M¯  this is a k2 random variable.                                                                                          -              -1           - Qt t P
+                                                                                                                     T-1              Qt T-1       T-1
+                                                                                                                 =                Qt
+
+Proof of Theorem 3. Define the matrix
+
+     Ik 0 0                                                                                        where the summations are over available observations once (the
+P =  Ir 0 .                                                                                        finite number of) lags have been accounted for. Consider the
+                                                                                                   denominator term
+         0 0 Ip
+                                                                                                   T-1 - Qt QtT-1
+
+The model (11) can be written                                                                              -2  -                  T -3/2 - y1t-1d~t        -3/2  -          
+                                                                                                                                    T -1 - d~t d~t
+                                                                                                       T          y1t -1 y1t -1                         T           y1t -1 Xt
+                                                                                                                                           ·
+             (1 - L)y1dt                                                                             =              ·                                      T -1 - d~t Xt  
+PA~ (L)P-1P  yd2t - yd1t  = Pt = t.                                                                                                                                       
+
+                        ztd                                                                                         ·                                      T -1 - Xt Xt
+On rearrangement this yields
+                                                                                                                                                                       
+
+                                                                                                         111/2 M()M()d111/2 111/2 Ms()d 0
+
+                                                                                                                                                                       
+
+                                                                                                                                                                       
+                                                                                                         
+                                                                                                                 s()M ()d111/2                    s()s()d 0
+                                                                                                                                                                       
+
+                              (yd1t ) + (Ik - )(yd1t-1)                                                                     0                        0              K
+
+PA~ (L)P-1 (y2dt ) + (yd2t-1) - (y1dt-1) + (I - )(y1dt-1)                                          where K is a (matrix) constant. The result for the (1, 1) and (1, 2)
+                                               ztd                                                 elements follows from Lemma 1(a) and (c) respectively. The result
+                                                                                                   in the (2, 2) element of the matrix is Condition 1(e). The result in
+= Pt = t.
+90                                                                             G. Elliott / Journal of Econometrics 164 (2011) 79­91
+
+(3, 3) follows from the stationarity of Xt and in the (2, 3) element                                           ~ 2-.11 so ~ 21./122-1/2  dW M¯   M¯ M¯ -1 is free of nuisance
+from Lemma 1(e).
+                                                                                                               parameters.
+    For the numerator
+                                                                                                               Proof of Theorem 4. For Wald tests of hypotheses of the form
+                                       -1  -            t         
+                                                                                                               Rvec() = r the test statistic is
+                                    T           y1t -1       P  
+
+          T
+
+T-1    -     Qt t P s2                T -1/2  -     d~t t P         .                                                                                       (^ 2^ -1^ 2)-1)-1R-1
+                                                                                                                                                    R(M^
+                              =                                                                                Wald =  T  2(Rvec(^ )          r )
+                                                                                                                                      -                   
+                                                                  
+       t =2
+                                      T -1/2 - Xt t P 
+                                                                                                                       × (Rvec(^ ) - r)
+
+For the first of these terms T -1  y1t-1t P   111/2  MdW  1/2                                                                                                                  -1
+P from Lemma 1(b). Similarly for the second term T -1/2  d~t t
+P   s()dW ()d 1/2 P. Finally, we have from Lemma 1(f)                                                                                                          
+that T -1/2  Xt t P is Op(1). By the asymptotic block diagonality
+                                                                                                                  Rvec ~ 2.12-1/2 dW M¯                                M¯ M¯ 
+of the denominator and the boundedness of the third term of the
+                                                                                                                                                      
+numerator, along with algebra as above we have
+                                                                                                                       × 1-11/2 + ~ 1 2~ 1-11                
+
+                                                                                                                                                            ·
+
+                                                                                                                                                           -1                   -1
+
+                                                                                                                                              
+
+                                                      -1                                                               × R 1-11/2                  M¯ M¯       1-11/2  ~ 2.1 R
+
+T  (^     -       1)          1-11/2          M¯ M¯               M¯ dW  1/2 P .
+       1
+
+The convergence of T -1  Xt Xt to the constant K and the                                                               
+boundedness of T -1/2  Xt t P means that the coefficients on                                                                                     
+
+                                                                                                                       · Rvec ~ 2.12 -1/2 dW M¯ 
+
+Xt  are      all  consistently        estimated,      hence       we      have    that      ^ 2       p  2  .                         -1                               
+
+                                                                                                                          
+
+Since all coefficients converge to their true values then ^  =                                                         ×    M¯ M¯             1-11/2 + ~ 1 2~ 1-11
+
+T  -1        ^t^t          p               P P where ^t are the least squares
+
+                                  =
+
+residuals from the regression (12).                                                                            where M^ is the upper left kxk block of T-1  Qt QtT-1. This
+
+    Define the (k + r)x(k + r) matrix ~ where                                                                  distribution has a center that depends on the nuisance parameters
+
+~   =     11      -   133-311 3               12      -  133-312 3                .                            of the model. When zt are orthogonalizing covariates ~ 12 = 0 and
+            1 2   -   233-311 3               22      -  233-312 3
+                                                                                                               this collapses to the distribution
+
+Notice that this is the inverse of the upper (k + r)x(k + r) block of                                                                                                          -1          
+ -1 .
+                                                                                                                                                               
+   Recall 2 = PA~ (1)2 then
+                                                                                                               Wald  Rvec ~ 2.12-1/2 dW M¯                             M¯ M¯       1-11/2
+
+                                                                                                                                              -1                       -1
+
+(^2^ -1^2)  p(2A~ (1)P(P P)-1PA~ (1)2)                                                                                     
+                = (2 A~ (1)-1A~ (1)2)
+                = (2 -12)                                                                                      · R(1-11/2             M¯ M¯        1-11/2  ~ 2.1)R
+                = ~ 2-.11
+                                                                                                                                                                       -1          
+where ~ 2.1 = ~ 22 - ~ 1 2~ 1-11~ 12.
+                                                                                                                                                           
+    From the definition of the suggested estimator (13) then
+                                                                                                               · Rvec ~ 2.12-1/2 dW M¯                         M¯ M¯       1-11/2    .
+
+                                                                                                               Conditional on  M¯ M¯  this distribution is equivalent to a q2 where
+T ^ -  = -(^2^ -1^2)-1(^2^ -1T (^1 + ^2))
+                                                                                                               the number of degrees of freedom q is equal to the number of
+                  =   -(^2^ -1^2)-1(^2^ -1T                            (^      -        ))
+                                                                            1        1                         restrictions (row rank of R).
+
+                      - (^2^ -1^2)-1                            -1                                                Finally, 2-1/2 W () is rx1 with variance covariance matrix
+                                                                                                               2 -1/2 -1/22 = 2 -12 = ~ 2-.11 so is equivalent to
+                                                        ^ 2  ^         T                                       ~ 2-.11/2 W~ () where W~ () is a standard rx1 Brownian Motion. This
+                                                                            1
+                                                                                                               allows the simplified notation
+
+                                                                               -1                                                                                      -1          
+                                                                                                                                        
+                                                              
+
+                   ~ 2.12 -1/2 dW M¯                                   M¯ M¯                                   Wald  Rvec ~ 21./12 dW~ M¯                      M¯ M¯       1-11/2
+
+                      × 1-11/2 + ~ 1 2~ 1-11                                                                                                          -1                       -1
+
+                                                                                                                                      
+
+where        (2       -1      2  )-1  2       -1  T                       -~ 2.12-11                                   · R(1-11/2             M¯ M¯         1-11/2  ~ 2.1)R
+                                                         1
+                                                                  =                                      =
+
+-~ 1 2~ 1-11 .                                                                                                                                                         -1          
+                                                                                                                                        
+                                                                                                                                                           
+
+    The stochastic part of this result has a mixed normal distribu-                                                    · Rvec ~ 21./12 dW~ M¯                  M¯ M¯       1-11/2    .
+
+tion. The weights 2 -1/2 on  dW M¯  are
+
+                                              0                                
+
+ -1/22       =                             ~ 2-.11                                                             Proof of Theorem 5. We will prove the result for the cointegrat-
+                    -3-.211/2 (23                                                                              ing case, the result for the predictive case is identical replacing 
+                                           - 1 31-111 2)~ 2-.11
+                                                                                                               with . Asymptotically efficient estimators for  in the absence of
+where 3-.211 = 3-31(I + [1 3, 2 3]~ -1[1 3, 2 3]3-31) and so
+there is a zero weight on  dW1M¯  which is the element with                                                    zt are such that T (vec(^ - )) are asymptotically mixed normal
+                                                                                                               with variance covariance matrix 2.1  111/2  M¯ M¯ 111/2 -1. It
+a nonstandard distribution. It follows directly that the variance
+                                                                                                               follows directly from Theorem 4 that when  is unknown how-
+covariance matrix of this sum of mixed normals is 2 -12 =
+                                                                                                               ever we do have orthogonalizing covariates then T (vec(^ - ))
+G. Elliott / Journal of Econometrics 164 (2011) 79­91                                     91
+
+are asymptotically mixed normal with variance covariance matrix                           Elliott, G., Rothenberg, T., Stock, J., 1996. Efficient tests for an autoregressive unit
+                                                                                               root. Econometrica 64, 813­836.
+~ 22  111/2  M¯ M¯ 111/2 -1 where we have used the restriction
+                                                                                          Elliott, G., Stock, J., 1994. Inference in models with nearly integrated regressors.
+that ~ 12 = 0 for zt that satisfy the conditions for being orthogonal-                         Econometric Theory 10, 672­700.
+
+izing covariates. Hence the latter estimator is asymptotically more                       Fama, E., 1975. Short-term interest rates as predictors of inflation. American
+                                                                                               Economic Review 65, 269­282.
+efficient if 2.1 - ~ 22 is positive definite. We have
+                                                                                          Fama, E., French, K., 1988. Dividend yield and expected stock returns. Journal of
+2.1 - ~ 22 = (22 - 1 21-1112) - (22 - 233-312 3)                                               Financial Economics 22, 3­25.
+              = 233-312 3 - 1 21-1112
+              = 233-31(33 - 1 31-1113)3-312 3                                             Hall, R., 1978. Stochastic implications of the life cycle-permanent income
+                                                                                               hypothesis: theory and evidence. Journal of Political Economy 86, 971­987.
+where the last line follows as for zt to be an orthogonalizing
+                                                                                          Johansen, S., 1988. Statistical analysis of cointegrating models. Journal of Economic
+covariate 12 = 133-312 3. Now 33 - 1 31-1113 is the                                            Dynamics and Control 12, 231­254.
+
+variance covariance matrix of a zero frequency projection of zt on                        Johansen, S., 1991. Estimation and hypothesis testing of cointegration vectors in
+u1t and is hence positive definite, 3-31 is positive definite, and so                          Gaussian vector autoregressive models. Econometrica 59, 1551­1580.
+this quadratic is positive semi definite and the result holds.
+                                                                                          Lewellen, J., 2004. Predicting returns with financial ratios. Journal of Financial
+References                                                                                     Economics 74, 209­235.
+
+Amihud, Y., Hurvich, C., 2004. Predictive regression: a reduced bias estimation           Mankiw, N., Shapiro, M., 1986. Do we reject too often: small sample properties of
+     method. Journal of Financial and Quantitative Analysis 39, 813­841.                       tests of rational expectations models. Economics Letters 20, 139­145.
+
+Basawa, I., Makllik, A., McCormick, W., Reeves, J., Taylor, R., 1991. Bootstrapping un-   Moreira, M., Jansson, M., 2006. Optimal inference in regression models with nearly
+     stable first-order autoregressive processes. Annals of Statistics 19, 1098­1101.          integrated regressors. Econometrica 74, 681­714.
+
+Campbell, J., Yogo, M., 2006. Efficient tests of stock return predictability. Journal of  Phillips, P., 1987. Towards a unified asymptotic theory for autoregression.
+     Financial Economics 81, 27­60.                                                            Biometrika 74, 535­547.
+
+Cavanagh, C., Elliott, G., Stock, J., 1995. Inference in models with nearly integrated    Phillips, P., Hansen, B., 1990. Statistical inference in instrumental variables
+     regressors. Econometric Theory 11, 1131­1147.                                             regression with I(1) processes. Review of Economic Studies 57, 99­125.
+
+Dickey, D., Fuller, W., 1979. Distribution of the estimators for autoregressive time      Saikkonen, P., 1991. Asymptotically efficient estimation in cointegrating systems.
+     series with a unit root. Journal of the American Statistical Association 74,              Econometric Theory 7, 1­21.
+     427­431.
+                                                                                          Saikkonen, P., 1992. Estimation and testing of cointegrating systems by autoregres-
+Elliott, G., 1998. The robustness of cointegration methods when regressors almost              sive approximation. Econometric Theory 8, 1­27.
+     have unit roots. Econometrica 66, 149­158.
+                                                                                          Sims, C., Stock, J., Watson, M., 1990. Inference in linear time series models with some
+                                                                                               unit roots. Econometrica 58, 113­144.
+
+                                                                                          Stambaugh, R., 1999. Predictive regressions. Journal of Financial Economics 54,
+                                                                                               375­421.
+
+                                                                                          Stock, J., 1994. Unit roots, structural breaks and trends. In: Engle, R., McFad-
+                                                                                               den, D. (Eds.), Handbook of Econometrics, vol. 4. North Holland, New York,
+                                                                                               pp. 2740­2841.
+
+                                                                                          Stock, J., Watson, M., 1993. A simple estimator of cointegrating vectors in higher
+                                                                                               order integrated systems. Econometrica 58, 1035­1056.
+
