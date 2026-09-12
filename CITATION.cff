@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "ivx: Robust Econometric Inference"
+version: 1.2.0
+date-released: 2026-09-12
+license: GPL-3.0
+url: "https://CRAN.R-project.org/package=ivx"
+repository-code: "https://github.com/kvasilopoulos/ivx"
+authors:
+  - family-names: Vasilopoulos
+    given-names: Kostas
+    email: k.vasilopoulo@gmail.com
+  - family-names: Pavlidis
+    given-names: Efthymios
+    email: e.pavlidis@lancaster.ac.uk
+abstract: >-
+  Drawing statistical inference on the coefficients of a short- or long-horizon
+  predictive regression with persistent regressors by using the IVX method of
+  Magdalinos and Phillips (2009) and Kostakis, Magdalinos and Stamatogiannis (2015).
+references:
+  - type: article
+    title: "Limit Theory for Cointegrated Systems with Moderately Integrated and Moderately Explosive Regressors"
+    authors:
+      - family-names: Magdalinos
+        given-names: Tassos
+      - family-names: Phillips
+        given-names: Peter C. B.
+    journal: Econometric Theory
+    volume: 25
+    issue: 2
+    year: 2009
+    doi: 10.1017/S0266466608090154
+  - type: article
+    title: "Robust Econometric Inference for Stock Return Predictability"
+    authors:
+      - family-names: Kostakis
+        given-names: Alexandros
+      - family-names: Magdalinos
+        given-names: Tassos
+      - family-names: Stamatogiannis
+        given-names: Michalis P.
+    journal: The Review of Financial Studies
+    volume: 28
+    issue: 5
+    year: 2015
+    doi: 10.1093/rfs/hhu139
