@@ -11,7 +11,8 @@ ivx_boot(
   type = c("rwb", "frwb"),
   ar_max = 5,
   dist = c("rademacher", "normal"),
-  seed = NULL
+  seed = NULL,
+  cores = 1L
 )
 
 \method{print}{ivx_boot}(x, digits = max(3L, getOption("digits") - 3L), ...)
@@ -29,7 +30,12 @@ regressors by the RWB scheme; the order is selected by BIC (Remark 24).}
 
 \item{dist}{distribution of the wild multipliers.}
 
-\item{seed}{optional integer passed to \code{\link[=set.seed]{set.seed()}}.}
+\item{seed}{optional integer seed. With \code{cores > 1} the L'Ecuyer-CMRG
+streams of the \pkg{parallel} package are used, so results are reproducible
+for a given \code{seed} and \code{cores} but differ from the serial run.}
+
+\item{cores}{number of CPU cores. Uses forking on Unix and a PSOCK cluster on
+Windows (the package must be installed for the workers to load it).}
 
 \item{x}{an object of class "ivx_boot".}
 

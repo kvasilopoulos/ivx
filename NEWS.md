@@ -13,7 +13,9 @@
   position must use column names (`"Wald Ind"`, `"Pr(> chi)"`) instead.
 * New `ivx_boot()` implementing the residual wild bootstrap and fixed regressor
   wild bootstrap of Demetrescu et al. (2023), returning bootstrap p-values for
-  the joint and individual Wald statistics and one-sided t-tests.
+  the joint and individual Wald statistics and one-sided t-tests. Supports
+  `cores > 1` via the \pkg{parallel} package; the regressor recursion of the
+  residual wild bootstrap runs in C++.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

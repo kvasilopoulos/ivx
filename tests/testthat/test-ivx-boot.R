@@ -26,3 +26,13 @@ test_that("bootstrap rejects unsupported objects", {
   expect_error(ivx_boot(ivx_ar(Ret ~ DP, kms, ar = 1), B = 9), "ivx_ar")
   expect_error(ivx_boot(ivx(Ret ~ DP, kms, weights = rep(1, nrow(kms))), B = 9), "weighted")
 })
+
+test_that("parallel bootstrap matches serial layout and is reproducible", {
+  skip_on_cran()
+  # PSOCK workers need an installed ivx; skip when running from a dev checkout only
+  b1 <- tryCatch(ivx_boot(mod, B = 20, seed = 7, cores = 2),
+                 error = function(e) skip("parallel workers could not load ivx"))
+  b2 <- ivx_boot(mod, B = 20, seed = 7, cores = 2)
+  expect_equal(dim(b1$boot$tstat), c(20, 2))
+  expect_equal(b1$boot, b2$boot)
+})

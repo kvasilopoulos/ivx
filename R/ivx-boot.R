@@ -15,7 +15,11 @@
 #' @param ar_max maximum lag order of the (vector) autoregression fitted to the
 #' regressors by the RWB scheme; the order is selected by BIC (Remark 24).
 #' @param dist distribution of the wild multipliers.
-#' @param seed optional integer passed to [set.seed()].
+#' @param seed optional integer seed. With `cores > 1` the L'Ecuyer-CMRG
+#' streams of the \pkg{parallel} package are used, so results are reproducible
+#' for a given `seed` and `cores` but differ from the serial run.
+#' @param cores number of CPU cores. Uses forking on Unix and a PSOCK cluster on
+#' Windows (the package must be installed for the workers to load it).
 #'
 #' @return an object of class "ivx_boot": a list with the observed statistics,
 #' the bootstrap distributions (`boot`), and bootstrap p-values (`p.value`).
@@ -31,26 +35,48 @@
 #' @examples
 #' mod <- ivx(Ret ~ DP + TBL, data = kms)
 #' ivx_boot(mod, B = 199, seed = 1)
-ivx_boot <- function(object, B = 999, type = c("rwb", "frwb"), ar_max = 5,
-                     dist = c("rademacher", "normal"), seed = NULL) {
+ivx_boot <- function(
+  object,
+  B = 999,
+  type = c("rwb", "frwb"),
+  ar_max = 5,
+  dist = c("rademacher", "normal"),
+  seed = NULL,
+  cores = 1L
+) {
   type <- match.arg(type)
   dist <- match.arg(dist)
   if (!inherits(object, "ivx") || inherits(object, "ivx_ar")) {
-    stop("`object` must be of class 'ivx' (ivx_ar is not supported)", call. = FALSE)
+    stop(
+      "`object` must be of class 'ivx' (ivx_ar is not supported)",
+      call. = FALSE
+    )
   }
   if (!is.null(object$weights)) {
     stop("bootstrap is not available for weighted fits", call. = FALSE)
   }
-  if (!is.null(seed)) set.seed(seed)
+  if (!is.null(seed) && cores == 1L) {
+    set.seed(seed)
+  }
 
   x <- model.matrix(object)
   y <- model.response(model.frame(object), "numeric")
-  if (!is.null(object$offset)) y <- y - object$offset
+  if (!is.null(object$offset)) {
+    y <- y - object$offset
+  }
   n <- NROW(x)
   l <- NCOL(x)
   tun <- object$tuning
   fit <- function(y, x) {
-    ivx_fit_cpp(y, x, object$horizon, tun$beta, tun$cz, tun$bandwidth, object$robust)
+    ivx_fit_cpp(
+      y,
+      x,
+      object$horizon,
+      tun$beta,
+      tun$cz,
+      tun$bandwidth,
+      object$robust
+    )
   }
 
   # Step 1: predictive regression residuals, t = 2, ..., n
@@ -70,19 +96,23 @@ ivx_boot <- function(object, B = 999, type = c("rwb", "frwb"), ar_max = 5,
     function(m) rnorm(m)
   }
 
-  boot_joint <- numeric(B)
-  boot_ind <- matrix(NA_real_, B, l)
-  boot_t <- matrix(NA_real_, B, l)
-  for (b in seq_len(B)) {
-    r <- draw(n - 1)
-    # Steps 3-4: impose the null, y* = u*; rebuild x* (RWB) or keep it fixed (FRWB)
-    y_b <- c(0, r * u_hat)
-    x_b <- if (type == "rwb") var_sim(rbind(0, r * v_hat), va$A) else x
-    z <- fit(y_b, matrix(x_b, ncol = l))
-    boot_joint[b] <- drop(z$wivx)
-    boot_ind[b, ] <- drop(z$wivxind)
-    boot_t[b, ] <- drop(z$zinvxind)
+  # one chunk of replications; returns B_k x (1 + 2 l) matrix of statistics
+  run_chunk <- function(nb) {
+    out <- matrix(NA_real_, nb, 1 + 2 * l)
+    for (b in seq_len(nb)) {
+      r <- draw(n - 1)
+      # Steps 3-4: impose the null, y* = u*; rebuild x* (RWB) or keep it fixed (FRWB)
+      y_b <- c(0, r * u_hat)
+      x_b <- if (type == "rwb") var_sim_cpp(rbind(0, r * v_hat), va$A) else x
+      z <- fit(y_b, x_b)
+      out[b, ] <- c(z$wivx, z$wivxind, z$zinvxind)
+    }
+    out
   }
+  stats <- if (cores > 1L) boot_parallel(run_chunk, B, cores, seed) else run_chunk(B)
+  boot_joint <- stats[, 1]
+  boot_ind <- stats[, 1 + seq_len(l), drop = FALSE]
+  boot_t <- stats[, 1 + l + seq_len(l), drop = FALSE]
   colnames(boot_ind) <- colnames(boot_t) <- object$cnames
 
   # Step 6: bootstrap p-values
@@ -96,7 +126,9 @@ ivx_boot <- function(object, B = 999, type = c("rwb", "frwb"), ar_max = 5,
   structure(
     list(
       call = object$call,
-      type = type, B = B, dist = dist,
+      type = type,
+      B = B,
+      dist = dist,
       coefficients = object$coefficients,
       tstat = object$tstat,
       Wald_Ind = object$Wald_Ind,
@@ -119,8 +151,13 @@ ivx_boot <- function(object, B = 999, type = c("rwb", "frwb"), ar_max = 5,
 #' @export
 print.ivx_boot <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   cat("\nCall:\n", paste(deparse(x$call), collapse = "\n"), "\n\n", sep = "")
-  cat(switch(x$type, rwb = "Residual", frwb = "Fixed regressor"),
-      " wild bootstrap, B = ", x$B, "\n\n", sep = "")
+  cat(
+    switch(x$type, rwb = "Residual", frwb = "Fixed regressor"),
+    " wild bootstrap, B = ",
+    x$B,
+    "\n\n",
+    sep = ""
+  )
   tab <- cbind(
     Estimate = x$coefficients,
     "t value" = x$tstat,
@@ -130,11 +167,24 @@ print.ivx_boot <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
     "Pr(t > 0)" = x$p.value$tstat[, "greater"]
   )
   cat("Coefficients (bootstrap p-values):\n")
-  printCoefmat(tab, digits = digits, cs.ind = 1, tst.ind = 2:3, P.values = TRUE,
-               has.Pvalue = TRUE, signif.stars = FALSE, ...)
-  cat("\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),
-      ", bootstrap p-value ", format.pval(x$p.value$Wald_Joint, digits = digits),
-      "\n\n", sep = "")
+  printCoefmat(
+    tab,
+    digits = digits,
+    cs.ind = 1,
+    tst.ind = 2:3,
+    P.values = TRUE,
+    has.Pvalue = TRUE,
+    signif.stars = FALSE,
+    ...
+  )
+  cat(
+    "\nJoint Wald statistic: ",
+    formatC(x$Wald_Joint, digits = digits),
+    ", bootstrap p-value ",
+    format.pval(x$p.value$Wald_Joint, digits = digits),
+    "\n\n",
+    sep = ""
+  )
   invisible(x)
 }
 
@@ -145,24 +195,37 @@ var_ols <- function(x, max_lag) {
   e <- embed(x, max_lag + 1)
   m <- nrow(e)
   bic <- sapply(seq_len(max_lag), function(q) {
-    res <- lm.fit(cbind(1, e[, l + seq_len(q * l), drop = FALSE]), e[, seq_len(l)])$residuals
+    res <- lm.fit(
+      cbind(1, e[, l + seq_len(q * l), drop = FALSE]),
+      e[, seq_len(l)]
+    )$residuals
     log(det(crossprod(res) / m)) + (1 + q * l) * l * log(m) / m
   })
   q <- which.min(bic)
   e <- embed(x, q + 1)
   fit <- lm.fit(cbind(1, e[, -seq_len(l), drop = FALSE]), e[, seq_len(l)])
   coef <- as.matrix(fit$coefficients)
-  A <- lapply(seq_len(q), function(j) t(coef[1 + (j - 1) * l + seq_len(l), , drop = FALSE]))
+  A <- lapply(seq_len(q), function(j) {
+    t(coef[1 + (j - 1) * l + seq_len(l), , drop = FALSE])
+  })
   list(q = q, A = A, resid = as.matrix(fit$residuals))
 }
 
-# x_t = sum_j A_j x_{t-j} + v_t with zero initial conditions (Algorithm 1, Step 4)
-var_sim <- function(v, A) {
-  n <- nrow(v)
-  q <- length(A)
-  x <- v
-  for (t in 2:n) {
-    for (j in seq_len(min(q, t - 1))) x[t, ] <- x[t, ] + A[[j]] %*% x[t - j, ]
+# run `run_chunk` over B replications split across `cores` workers
+boot_parallel <- function(run_chunk, B, cores, seed) {
+  chunks <- tabulate(cut(seq_len(B), cores, labels = FALSE), cores)
+  if (.Platform$OS.type == "windows") {
+    cl <- parallel::makePSOCKcluster(cores)
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+    parallel::clusterEvalQ(cl, loadNamespace("ivx"))
+    if (!is.null(seed)) parallel::clusterSetRNGStream(cl, seed)
+    res <- parallel::parLapply(cl, chunks, run_chunk)
+  } else {
+    if (!is.null(seed)) {
+      RNGkind("L'Ecuyer-CMRG")
+      set.seed(seed)
+    }
+    res <- parallel::mclapply(chunks, run_chunk, mc.cores = cores, mc.set.seed = TRUE)
   }
-  x
+  do.call(rbind, res)
 }
