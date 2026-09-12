@@ -37,6 +37,9 @@ regressors and instruments fixed and only resamples the response."><meta propert
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../articles/index.html">Articles</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="../news/index.html">News</a>
 </li>
@@ -102,8 +105,8 @@ for strongly persistent regressors) or <code>"frwb"</code> (fixed regressor wild
 
 
 <dt id="arg-ar-max">ar_max<a class="anchor" aria-label="anchor" href="#arg-ar-max"></a></dt>
-<dd><p>maximum AR order (selected by AIC) for the regressor
-autoregression used by the RWB scheme.</p></dd>
+<dd><p>maximum lag order of the (vector) autoregression fitted to the
+regressors by the RWB scheme; the order is selected by BIC (Remark 24).</p></dd>
 
 
 <dt id="arg-dist">dist<a class="anchor" aria-label="anchor" href="#arg-dist"></a></dt>
@@ -152,10 +155,10 @@ Journal of Econometrics, 237(2), 105271.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients (bootstrap p-values):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Estimate t value Wald Ind Pr(&gt; chi) Pr(t &lt; 0) Pr(t &gt; 0)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DP   0.006145   1.349    1.819    0.3568   0.69347     0.307</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TBL -0.080717  -1.399    1.957    0.2161   0.07035     0.930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DP   0.006145   1.349    1.819    0.3668    0.6935     0.307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TBL -0.080717  -1.399    1.957    0.2060    0.0804     0.920</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Joint Wald statistic: 3.644, bootstrap p-value 0.3065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Joint Wald statistic: 3.644, bootstrap p-value 0.3266</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
