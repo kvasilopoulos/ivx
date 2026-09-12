@@ -19,6 +19,9 @@
 * New `ivx_ra()` / `ivx_ra_fit()`: the residual-augmented (bias-reduced) IVX
   estimator of Demetrescu & Rodrigues (2022) with its heteroskedasticity-robust
   standard errors; returns an `ivx` object so `summary()`, `vcov()` etc. apply.
+* New `ivx_qr()` / `ivx_qr_fit()`: the IVX-QR quantile predictability test of
+  Lee (2016, Proposition 3.2) via \pkg{quantreg} (in Suggests); returns the
+  estimated QR endogeneity `rho_tau` for the paper's tuning rule.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

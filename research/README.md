@@ -66,15 +66,8 @@ Structural instability:
 
 ## Suggested extensions (ranked by value / effort)
 
-1. **Expose IVX tuning** — `beta = 0.95`, `cz = 1`, NW bandwidth as arguments of `ivx()`/`ivx_fit()`
-   (Hosseinkouchack & Demetrescu 2021; Lee 2016 uses beta = 0.95, cz = 5 for QR).
-2. **Eicker-White covariance** — `vcov = c("iid", "hc")`: replace `sigma^2 * Z'Z` by `sum z z' u^2`
-   (DGRT 2023, Remarks 8-9). Also report IVX t-ratios so one-sided tests are possible.
-3. **Wild bootstrap p-values** — `ivx_boot(model, B, type = c("rwb", "frwb"))` following DGRT 2023
-   Algorithms 4-5. Reuses `ivx_fit_cpp` in a loop and `auto_ar()` for the AR(p+1) on x (RWB).
-4. **RA-IVX** — `ivx_ra()` implementing Demetrescu & Rodrigues (2022) eqs (11)-(12).
-5. **IVX-QR** — `ivx_qr(formula, tau)` following Lee (2016) §3.3 (QR of y on z̃ via `quantreg::rq`,
-   self-normalised chi-square). `quantreg` in Suggests.
+Items already implemented are removed from this list and recorded in `NEWS.md`.
+
 6. **Episodic / subsample tests** — `ivx_episodic()` sup/ave IVX t-stats over windows with FRWB
    p-values (DGRT 2022; DGRT 2023 §3.2; Katsouris 2023 sup-Wald). Builds on (3).
 7. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.

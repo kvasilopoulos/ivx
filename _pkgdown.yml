@@ -17,6 +17,7 @@ reference:
       - ivx
       - ivx_ar
       - ivx_ra
+      - ivx_qr
       - ivx_boot
 
   - title: Fitter Functions
@@ -25,6 +26,7 @@ reference:
       - ivx_wfit
       - ivx_ar_fit
       - ivx_ra_fit
+      - ivx_qr_fit
 
   - title: Serial Corelation Test
     contents:

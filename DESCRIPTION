@@ -31,7 +31,8 @@ Suggests:
     testthat (>= 2.1.1),
     lmtest,
     knitr,
-    rmarkdown
+    rmarkdown,
+    quantreg
 Enhances: 
     texreg
 VignetteBuilder: knitr
