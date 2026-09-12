@@ -46,26 +46,13 @@ ivx_boot <- function(
 ) {
   type <- match.arg(type)
   dist <- match.arg(dist)
-  if (!inherits(object, "ivx") || inherits(object, "ivx_ar")) {
-    stop(
-      "`object` must be of class 'ivx' (ivx_ar is not supported)",
-      call. = FALSE
-    )
-  }
-  if (!is.null(object$weights)) {
-    stop("bootstrap is not available for weighted fits", call. = FALSE)
-  }
   if (!is.null(seed) && cores == 1L) {
     set.seed(seed)
   }
-
-  x <- model.matrix(object)
-  y <- model.response(model.frame(object), "numeric")
-  if (!is.null(object$offset)) {
-    y <- y - object$offset
-  }
-  n <- NROW(x)
-  l <- NCOL(x)
+  bs <- boot_setup(object, type, ar_max, dist)
+  x <- bs$x
+  n <- bs$n
+  l <- bs$l
   tun <- object$tuning
   fit <- function(y, x) {
     ivx_fit_cpp(
@@ -79,32 +66,12 @@ ivx_boot <- function(
     )
   }
 
-  # Step 1: predictive regression residuals, t = 2, ..., n
-  u_hat <- object$ols$residuals
-
-  # Step 2 (RWB): VAR(q) on the regressors (Remark 22), residuals aligned with
-  # u_hat (t = 2, ..., n), zero for t <= q
-  if (type == "rwb") {
-    va <- var_ols(x, ar_max)
-    v_hat <- matrix(0, n - 1, l)
-    v_hat[va$q:(n - 1), ] <- va$resid
-  }
-
-  draw <- if (dist == "rademacher") {
-    function(m) sample(c(-1, 1), m, replace = TRUE)
-  } else {
-    function(m) rnorm(m)
-  }
-
   # one chunk of replications; returns B_k x (1 + 2 l) matrix of statistics
   run_chunk <- function(nb) {
     out <- matrix(NA_real_, nb, 1 + 2 * l)
     for (b in seq_len(nb)) {
-      r <- draw(n - 1)
-      # Steps 3-4: impose the null, y* = u*; rebuild x* (RWB) or keep it fixed (FRWB)
-      y_b <- c(0, r * u_hat)
-      x_b <- if (type == "rwb") var_sim_cpp(rbind(0, r * v_hat), va$A) else x
-      z <- fit(y_b, x_b)
+      d <- boot_sample(bs)
+      z <- fit(d$y, d$x)
       out[b, ] <- c(z$wivx, z$wivxind, z$zinvxind)
     }
     out
@@ -236,4 +203,43 @@ boot_parallel <- function(run_chunk, B, cores, seed) {
     res <- parallel::mclapply(chunks, run_chunk, mc.cores = cores, mc.set.seed = TRUE)
   }
   do.call(rbind, res)
+}
+
+# Steps 1-2 of Algorithms 1-2 (Demetrescu et al. 2023): data, predictive-regression
+# residuals and, for the RWB, the VAR fit and its residuals aligned with t = 2..n
+boot_setup <- function(object, type, ar_max, dist) {
+  if (!inherits(object, "ivx") || inherits(object, c("ivx_ar", "ivx_ra", "ivx_qr"))) {
+    stop("`object` must be a plain 'ivx' fit", call. = FALSE)
+  }
+  if (!is.null(object$weights)) {
+    stop("bootstrap is not available for weighted fits", call. = FALSE)
+  }
+  x <- model.matrix(object)
+  y <- model.response(model.frame(object), "numeric")
+  if (!is.null(object$offset)) y <- y - object$offset
+  n <- NROW(x)
+  l <- NCOL(x)
+  bs <- list(x = x, y = y, n = n, l = l, type = type, u_hat = object$ols$residuals)
+  if (type == "rwb") {
+    va <- var_ols(x, ar_max)
+    v_hat <- matrix(0, n - 1, l)
+    v_hat[va$q:(n - 1), ] <- va$resid
+    bs$A <- va$A
+    bs$v_hat <- v_hat
+  }
+  bs$draw <- if (dist == "rademacher") {
+    function(m) sample(c(-1, 1), m, replace = TRUE)
+  } else {
+    function(m) rnorm(m)
+  }
+  bs
+}
+
+# Steps 3-4: impose the null, y* = u*; rebuild x* (RWB) or keep it fixed (FRWB)
+boot_sample <- function(bs) {
+  r <- bs$draw(bs$n - 1)
+  list(
+    y = c(0, r * bs$u_hat),
+    x = if (bs$type == "rwb") var_sim_cpp(rbind(0, r * bs$v_hat), bs$A) else bs$x
+  )
 }

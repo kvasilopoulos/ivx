@@ -22,6 +22,9 @@
 * New `ivx_qr()` / `ivx_qr_fit()`: the IVX-QR quantile predictability test of
   Lee (2016, Proposition 3.2) via \pkg{quantreg} (in Suggests); returns the
   estimated QR endogeneity `rho_tau` for the paper's tuning rule.
+* New `ivx_episodic()`: subsample (rolling, forward and backward recursive)
+  IVX tests for pockets of predictability with sup/inf functionals and wild
+  bootstrap p-values (Demetrescu et al. 2022, 2023 Section 3.2).
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

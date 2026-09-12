@@ -19,6 +19,7 @@ reference:
       - ivx_ra
       - ivx_qr
       - ivx_boot
+      - ivx_episodic
 
   - title: Fitter Functions
     contents:

@@ -23,7 +23,7 @@ test_that("bootstrap is reproducible with seed and works at long horizon", {
 })
 
 test_that("bootstrap rejects unsupported objects", {
-  expect_error(ivx_boot(ivx_ar(Ret ~ DP, kms, ar = 1), B = 9), "ivx_ar")
+  expect_error(ivx_boot(ivx_ar(Ret ~ DP, kms, ar = 1), B = 9), "plain")
   expect_error(ivx_boot(ivx(Ret ~ DP, kms, weights = rep(1, nrow(kms))), B = 9), "weighted")
 })
 

@@ -68,8 +68,6 @@ Structural instability:
 
 Items already implemented are removed from this list and recorded in `NEWS.md`.
 
-6. **Episodic / subsample tests** — `ivx_episodic()` sup/ave IVX t-stats over windows with FRWB
-   p-values (DGRT 2022; DGRT 2023 §3.2; Katsouris 2023 sup-Wald). Builds on (3).
 7. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.
 8. **Long-horizon audit** — verify `horizon > 1` against KMS (2023) and Phillips & Lee (2013).
 9. **Systems IVX** — lift `stop("multivariate model is not available")` (Magdalinos 2022).
