@@ -80,7 +80,8 @@ regressors and instruments fixed and only resamples the response.</p>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rwb"</span>, <span class="st">"frwb"</span><span class="op">)</span>,</span>
 <span>  ar_max <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  dist <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rademacher"</span>, <span class="st">"normal"</span><span class="op">)</span>,</span>
-<span>  seed <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cores <span class="op">=</span> <span class="fl">1L</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'ivx_boot'</span></span>
@@ -114,7 +115,14 @@ regressors by the RWB scheme; the order is selected by BIC (Remark 24).</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>optional integer passed to <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code>.</p></dd>
+<dd><p>optional integer seed. With <code>cores &gt; 1</code> the L'Ecuyer-CMRG
+streams of the <span class="pkg">parallel</span> package are used, so results are reproducible
+for a given <code>seed</code> and <code>cores</code> but differ from the serial run.</p></dd>
+
+
+<dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
+<dd><p>number of CPU cores. Uses forking on Unix and a PSOCK cluster on
+Windows (the package must be installed for the workers to load it).</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>

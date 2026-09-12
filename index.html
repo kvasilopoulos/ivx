@@ -104,8 +104,7 @@
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kvasilopoulos/ivx" class="external-link">ivx</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'magrittr' was built under R version 4.3.3</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></code></pre></div>
 <p>This is a basic example, lets load the data first:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Monthly data from Kostakis et al (2014)</span></span>
@@ -126,8 +125,8 @@
 <span><span class="co">#&gt; ivx(formula = Ret ~ DP, data = kms, horizon = 1)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;    Estimate Wald Ind Pr(&gt; chi)</span></span>
-<span><span class="co">#&gt; DP 0.006489    2.031     0.154</span></span>
+<span><span class="co">#&gt;    Estimate Std. Error t value Wald Ind Pr(&gt; chi)</span></span>
+<span><span class="co">#&gt; DP 0.006489   0.004553   1.425    2.031     0.154</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Joint Wald statistic:  2.031 on 1 DF, p-value 0.1541</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.002844,   Adjusted R-squared:  0.001877</span></span>
@@ -139,8 +138,8 @@
 <span><span class="co">#&gt; ivx(formula = Ret ~ DP, data = kms, horizon = 4)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;    Estimate Wald Ind Pr(&gt; chi)</span></span>
-<span><span class="co">#&gt; DP 0.006931    2.271     0.132</span></span>
+<span><span class="co">#&gt;    Estimate Std. Error t value Wald Ind Pr(&gt; chi)</span></span>
+<span><span class="co">#&gt; DP 0.006931   0.004599   1.507    2.271     0.132</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Joint Wald statistic:  2.271 on 1 DF, p-value 0.1318</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.01167,    Adjusted R-squared:  0.01358</span></span></code></pre></div>
@@ -157,9 +156,9 @@
 <span><span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 1)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;      Estimate Wald Ind Pr(&gt; chi)</span></span>
-<span><span class="co">#&gt; DP   0.006145    1.819     0.177</span></span>
-<span><span class="co">#&gt; TBL -0.080717    1.957     0.162</span></span>
+<span><span class="co">#&gt;      Estimate Std. Error t value Wald Ind Pr(&gt; chi)</span></span>
+<span><span class="co">#&gt; DP   0.006145   0.004557   1.349    1.819     0.177</span></span>
+<span><span class="co">#&gt; TBL -0.080717   0.057701  -1.399    1.957     0.162</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Joint Wald statistic:  3.644 on 2 DF, p-value 0.1617</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.004968,   Adjusted R-squared:  0.003036</span></span>
@@ -171,17 +170,53 @@
 <span><span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, horizon = 4)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;      Estimate Wald Ind Pr(&gt; chi)</span></span>
-<span><span class="co">#&gt; DP   0.006579    2.045     0.153</span></span>
-<span><span class="co">#&gt; TBL -0.073549    1.595     0.207</span></span>
+<span><span class="co">#&gt;      Estimate Std. Error t value Wald Ind Pr(&gt; chi)</span></span>
+<span><span class="co">#&gt; DP   0.006579   0.004601   1.430    2.045     0.153</span></span>
+<span><span class="co">#&gt; TBL -0.073549   0.058238  -1.263    1.595     0.207</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Joint Wald statistic:  3.527 on 2 DF, p-value 0.1715</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.018,  Adjusted R-squared:  0.01895</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="robust-inference-demetrescu-et-al-2023">Robust inference (Demetrescu et al., 2023)<a class="anchor" aria-label="anchor" href="#robust-inference-demetrescu-et-al-2023"></a>
+</h2>
+<p>Eicker-White standard errors, the IVX tuning parameters and wild-bootstrap p-values (residual or fixed-regressor wild bootstrap):</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, robust = TRUE, horizon = 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;      Estimate Std. Error t value Wald Ind Pr(&gt; chi)</span></span>
+<span><span class="co">#&gt; DP   0.006145   0.004792   1.282    1.644     0.200</span></span>
+<span><span class="co">#&gt; TBL -0.080717   0.057250  -1.410    1.988     0.159</span></span>
+<span><span class="co">#&gt; (Eicker-White standard errors)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Joint Wald statistic:  2.893 on 2 DF, p-value 0.2354</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.004968,   Adjusted R-squared:  0.003036</span></span>
+<span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, beta <span class="op">=</span> <span class="fl">0.9</span>, cz <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/ivx_boot.html">ivx_boot</a></span><span class="op">(</span><span class="va">mod</span>, B <span class="op">=</span> <span class="fl">999</span>, type <span class="op">=</span> <span class="st">"rwb"</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, beta = 0.9, cz = 5, </span></span>
+<span><span class="co">#&gt;     horizon = 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual wild bootstrap, B = 999</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients (bootstrap p-values):</span></span>
+<span><span class="co">#&gt;     Estimate t value Wald Ind Pr(&gt; chi) Pr(t &lt; 0) Pr(t &gt; 0)</span></span>
+<span><span class="co">#&gt; DP   0.00502   0.925    0.855    0.5415   0.60761     0.392</span></span>
+<span><span class="co">#&gt; TBL -0.12896  -1.581    2.498    0.1652   0.08308     0.917</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Joint Wald statistic: 2.807, bootstrap p-value 0.4114</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="yang-et-al-2020-ivx-ar-methodology">Yang et al. (2020) IVX-AR methodology<a class="anchor" aria-label="anchor" href="#yang-et-al-2020-ivx-ar-methodology"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ivx_ar.html">ivx_ar</a></span><span class="op">(</span><span class="va">hpi</span> <span class="op">~</span> <span class="va">cpi</span>, data <span class="op">=</span> <span class="va">ylpc</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -191,8 +226,8 @@
 <span><span class="co">#&gt; Auto () with AR terms q = 4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;       Estimate Wald Ind Pr(&gt; chi)  </span></span>
-<span><span class="co">#&gt; cpi -0.0001775    4.326    0.0375 *</span></span>
+<span><span class="co">#&gt;       Estimate Std. Error t value Wald Ind Pr(&gt; chi)  </span></span>
+<span><span class="co">#&gt; cpi -1.775e-04  8.532e-05  -2.080    4.326    0.0375 *</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -201,7 +236,8 @@
 <span><span class="co">#&gt; Wald AR statistic: 132.3 on 4 DF, p-value &lt; 2.2e-16</span></span></code></pre></div>
 <!--
 #### To-do
-&#10;* The Bonferroni method
+
+* The Bonferroni method
   - Cavanagh et al (1995)
   - Campbell and Yogo (2006)
 * A conditional likelihood approach

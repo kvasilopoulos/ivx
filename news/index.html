@@ -65,12 +65,12 @@
 <code><a href="../reference/ivx.html">ivx()</a></code> gains <code>robust = TRUE</code> for Eicker-White (heteroskedasticity-robust) IVX standard errors (Demetrescu, Georgiev, Rodrigues &amp; Taylor, 2023).</li>
 <li>
 <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> coefficient tables now report <code>Std. Error</code> and <code>t value</code> next to the individual Wald statistics; the fitted object stores <code>se</code> and <code>tstat</code>. Breaking: the table gains two columns, so code indexing <code>coef(summary(x))</code> by position must use column names (<code>"Wald Ind"</code>, <code>"Pr(&gt; chi)"</code>) instead.</li>
-<li>New <code><a href="../reference/ivx_boot.html">ivx_boot()</a></code> implementing the residual wild bootstrap and fixed regressor wild bootstrap of Demetrescu et al. (2023), returning bootstrap p-values for the joint and individual Wald statistics and one-sided t-tests.</li>
+<li>New <code><a href="../reference/ivx_boot.html">ivx_boot()</a></code> implementing the residual wild bootstrap and fixed regressor wild bootstrap of Demetrescu et al. (2023), returning bootstrap p-values for the joint and individual Wald statistics and one-sided t-tests. Supports <code>cores &gt; 1</code> via the  package; the regressor recursion of the residual wild bootstrap runs in C++.</li>
 <li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
 <li>
 <code><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract()</a></code> (texreg) now reports IVX standard errors instead of Wald statistics in the <code>se</code> slot.</li>
 <li>
-<code><a href="../reference/ivx_ar.html">ivx_ar()</a></code> does not yet accept <code>beta</code>, <code>cz</code>, <code>bandwidth</code> or <code>robust</code>; it uses the defaults of <code><a href="../reference/ivx.html">ivx()</a></code>.</li>
+<code><a href="../reference/ivx_ar.html">ivx_ar()</a></code> and <code><a href="../reference/ivx_ar_fit.html">ivx_ar_fit()</a></code> accept the same <code>beta</code>, <code>cz</code>, <code>bandwidth</code> and <code>robust</code> arguments as <code><a href="../reference/ivx.html">ivx()</a></code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.1" id="ivx-111">ivx 1.1.1<small>2025-09-20</small><a class="anchor" aria-label="anchor" href="#ivx-111"></a></h2>
