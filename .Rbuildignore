@@ -18,3 +18,4 @@
 ^CRAN-SUBMISSION$
 ^research$
 ^\.playwright-mcp$
+^CITATION\.cff$
