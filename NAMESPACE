@@ -22,6 +22,7 @@ S3method(print,ac_test)
 S3method(print,ac_test_)
 S3method(print,ivx)
 S3method(print,ivx_ar)
+S3method(print,ivx_boot)
 S3method(print,summary.ivx)
 S3method(print,summary.ivx_ar)
 S3method(summary,ivx)
@@ -39,44 +40,45 @@ export(extract.ivx_ar)
 export(ivx)
 export(ivx_ar)
 export(ivx_ar_fit)
+export(ivx_boot)
 export(ivx_fit)
 importFrom(Rcpp,evalCpp)
-importFrom(methods,className)
-importFrom(methods,setGeneric)
-importFrom(methods,setMethod)
-importFrom(stats,.getXlevels)
-importFrom(stats,AIC)
-importFrom(stats,BIC)
-importFrom(stats,Box.test)
-importFrom(stats,add.scope)
-importFrom(stats,arima)
-importFrom(stats,case.names)
-importFrom(stats,coef)
-importFrom(stats,coefficients)
-importFrom(stats,cor)
-importFrom(stats,deviance)
-importFrom(stats,drop.scope)
-importFrom(stats,embed)
-importFrom(stats,formula)
-importFrom(stats,frequency)
-importFrom(stats,is.empty.model)
-importFrom(stats,lm)
-importFrom(stats,model.frame)
-importFrom(stats,model.matrix)
-importFrom(stats,model.offset)
-importFrom(stats,model.response)
-importFrom(stats,model.weights)
-importFrom(stats,pchisq)
-importFrom(stats,pf)
-importFrom(stats,printCoefmat)
-importFrom(stats,pt)
-importFrom(stats,qchisq)
-importFrom(stats,qnorm)
-importFrom(stats,residuals)
-importFrom(stats,symnum)
-importFrom(stats,terms)
-importFrom(stats,update.formula)
-importFrom(stats,var)
-importFrom(stats,weighted.residuals)
-importFrom(stats,weights)
+importFrom(methods,
+  className,
+  setGeneric,
+  setMethod
+)
+importFrom(stats,
+  .getXlevels,
+  AIC,
+  BIC,
+  Box.test,
+  add.scope,
+  ar.ols,
+  arima,
+  case.names,
+  coef,
+  coefficients,
+  cor,
+  deviance,
+  drop.scope,
+  embed,
+  filter,
+  formula,
+  frequency,
+  lm,
+  model.frame,
+  model.matrix,
+  model.response,
+  pf,
+  printCoefmat,
+  pt,
+  qchisq,
+  rnorm,
+  terms,
+  update.formula,
+  var,
+  weighted.residuals,
+  weights
+)
 useDynLib(ivx, .registration = TRUE)
