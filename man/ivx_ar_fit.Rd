@@ -13,6 +13,10 @@ ivx_ar_fit(
   ar_max = 5,
   ar_ic = "bic",
   ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02),
+  beta = 0.95,
+  cz = 1,
+  bandwidth = NULL,
+  robust = FALSE,
   ...
 )
 }
@@ -38,6 +42,17 @@ ar order by using the information criteria. \code{ar = 0} reduces to simple \cod
 \item{ar_ic}{Information criterion to be used in model selection.}
 
 \item{ar_grid}{The ar grid sequence of which to iterate.}
+
+\item{beta, cz}{tuning parameters of the IVX instrument
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+(\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
+
+\item{bandwidth}{Newey-West bandwidth for the long-run covariance estimate.
+The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
+
+\item{robust}{logical. If \code{TRUE} the Eicker-White (heteroskedasticity-robust)
+form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
+available for \code{horizon = 1}.}
 
 \item{...}{Further arguments passed to the function which is fitting the best AR model.
 If \code{ar = "auto"} then the internal function \code{auto_ar} is used, if \code{ar = "forecast"} then

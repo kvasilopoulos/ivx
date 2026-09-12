@@ -58,3 +58,12 @@ test_that("ac-test", {
 })
 
 
+
+test_that("ivx_ar passes tuning and robust through to ivx_fit", {
+  m  <- ivx_ar(hpi ~ log(res) + cpi, ylpc, ar = 1)
+  m2 <- ivx_ar(hpi ~ log(res) + cpi, ylpc, ar = 1, beta = 0.9, cz = 5, robust = TRUE)
+  expect_equal(m$tuning$beta, 0.95)
+  expect_equal(m2$tuning[c("beta", "cz")], list(beta = 0.9, cz = 5))
+  expect_true(m2$robust)
+  expect_false(isTRUE(all.equal(coef(m), coef(m2))))
+})

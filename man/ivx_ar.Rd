@@ -19,6 +19,10 @@ ivx_ar(
   model = TRUE,
   x = FALSE,
   y = FALSE,
+  beta = 0.95,
+  cz = 1,
+  bandwidth = NULL,
+  robust = FALSE,
   ...
 )
 
@@ -66,6 +70,17 @@ than one are specified their sum is used. See \link[stats:model.extract]{model.o
 \item{x}{an object of class "ivx_ar", usually, a result of a call to ivx_ar.}
 
 \item{y}{logical. If \code{TRUE} the response of the fit is returned.}
+
+\item{beta, cz}{tuning parameters of the IVX instrument
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+(\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
+
+\item{bandwidth}{Newey-West bandwidth for the long-run covariance estimate.
+The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
+
+\item{robust}{logical. If \code{TRUE} the Eicker-White (heteroskedasticity-robust)
+form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
+available for \code{horizon = 1}.}
 
 \item{...}{additional arguments to be passed to the low level regression fitting
 functions (see \link[stats:lm]{lm}).}

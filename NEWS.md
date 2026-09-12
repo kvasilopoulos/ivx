@@ -19,8 +19,8 @@
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.
-* `ivx_ar()` does not yet accept `beta`, `cz`, `bandwidth` or `robust`; it uses the
-  defaults of `ivx()`.
+* `ivx_ar()` and `ivx_ar_fit()` accept the same `beta`, `cz`, `bandwidth` and
+  `robust` arguments as `ivx()`.
 
 # ivx 1.1.1
 

@@ -28,7 +28,7 @@
 ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", "aicc"),
                    ar_max = 5, ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02),
                    na.action, contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
-                   ...) {
+                   beta = 0.95, cz = 1, bandwidth = NULL, robust = FALSE, ...) {
   ret.x <- x
   ret.y <- y
   cl <- match.call()
@@ -72,7 +72,8 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
   x <- model.matrix(mt, mf, contrasts)
   z <- ivx_ar_fit(y, x,
     horizon = horizon, ar = ar, ar_max = ar_max, ar_ic = ar_ic,
-    ar_grid = ar_grid, offset = offset, ...
+    ar_grid = ar_grid, offset = offset, beta = beta, cz = cz,
+    bandwidth = bandwidth, robust = robust, ...
   )
   class(z) <- if (ar == 0) "ivx" else c("ivx_ar", "ivx")
   z$na.action <- attr(mf, "na.action")
@@ -116,8 +117,12 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
 #' ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY), ar = 1)
 #'
 ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5, ar_ic = "bic",
-                       ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02), ...) {
-  mdl_ivx <- ivx_fit(y, x, horizon = horizon)
+                       ar_grid = function(x) seq(x - 0.3, x + 0.3, by = 0.02),
+                       beta = 0.95, cz = 1, bandwidth = NULL, robust = FALSE, ...) {
+  fit <- function(y, x) {
+    ivx_fit(y, x, horizon = horizon, beta = beta, cz = cz, bandwidth = bandwidth, robust = robust)
+  }
+  mdl_ivx <- fit(y, x)
   if (ar == "auto") {
     mdl_ar <- auto_ar(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
   } else if (ar == "forecast") {
@@ -151,7 +156,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
   for (i in 1:ngrid) {
     y_adj <- tilt(y, grid_seq[i, ], q)
     x_adj <- tilt(x, grid_seq[i, ], q)
-    res_ivx[[i]] <- ivx::ivx_fit(y_adj, x_adj, horizon = horizon)
+    res_ivx[[i]] <- fit(y_adj, x_adj)
     eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
   }
