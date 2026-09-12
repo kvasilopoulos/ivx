@@ -46,6 +46,11 @@
 #' @param robust logical. If `TRUE` the Eicker-White (heteroskedasticity-robust)
 #' form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
 #' available for `horizon = 1`.
+#' @param lag_y logical. If `TRUE` the regression is augmented with the lagged
+#' dependent variable (column `y_lag`), instrumented by itself, as in
+#' Demetrescu (2014): this can raise the local power of the IVX test when the
+#' predictors are highly persistent and endogenous, at no cost otherwise. The
+#' joint Wald statistic still tests only the predictors. Only for `horizon = 1`.
 #'
 #' @return an object of class "ivx".
 #'
@@ -61,6 +66,8 @@
 #' @references Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2023).
 #' Taking stock of long-horizon predictability tests: Are factor returns
 #' predictable? Journal of Econometrics, 237(2), 105380.
+#' @references Demetrescu, M. (2014). Enhancing the local power of IVX-based
+#' tests in predictive regressions. Economics Letters, 124(2), 269-273.
 #'
 #' @aliases ivx
 #'
@@ -82,10 +89,13 @@
 #' wt <- runif(nrow(kms))
 #' ivx(Ret ~ LTY, data = kms, weights = wt)
 #'
+#' # lag-augmented IVX (Demetrescu, 2014)
+#' ivx(Ret ~ DP, data = kms, lag_y = TRUE)
+#'
 ivx <- function(formula, data, horizon, na.action, weights,
                 contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
                 beta = 0.95, cz = 1, bandwidth = NULL, robust = FALSE,
-                ...) {
+                lag_y = FALSE, ...) {
   ret.x <- x
   ret.y <- y
   cl <- match.call()
@@ -148,10 +158,10 @@ ivx <- function(formula, data, horizon, na.action, weights,
     x <- model.matrix(mt, mf, contrasts)
     z <- if (is.null(w)) {
       ivx_fit(y, x, horizon = horizon, offset = offset, beta = beta, cz = cz,
-              bandwidth = bandwidth, robust = robust, ...)
+              bandwidth = bandwidth, robust = robust, lag_y = lag_y, ...)
     }else  {
       ivx_wfit(y, x, w, horizon = horizon, offset = offset, beta = beta, cz = cz,
-               bandwidth = bandwidth, robust = robust, ...)
+               bandwidth = bandwidth, robust = robust, lag_y = lag_y, ...)
     }
   }
   class(z) <- "ivx"
@@ -187,7 +197,7 @@ ivx <- function(formula, data, horizon, na.action, weights,
 #' @examples
 #' ivx_fit(monthly$Ret, as.matrix(monthly$LTY))
 ivx_fit <- function(y, x, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
-                    bandwidth = NULL, robust = FALSE, ...) {
+                    bandwidth = NULL, robust = FALSE, lag_y = FALSE, ...) {
   n <- NROW(x)
   p <- NCOL(x)
 
@@ -211,12 +221,23 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
 
   chkDots(...)
 
-  z <- ivx_fit_cpp(y, x, horizon, beta, cz, bandwidth %||% -1L, robust)
-  ivx_out(z, x, horizon, beta, cz, robust)
+  x <- lag_y_augment(x, y, lag_y)
+  z <- ivx_fit_cpp(y, x, horizon, beta, cz, bandwidth %||% -1L, robust, as.integer(lag_y))
+  ivx_out(z, x, horizon, beta, cz, robust, lag_y)
+}
+
+# append y as the last regressor: ivx_fit_cpp lags the regressors, so the
+# column enters the regression as y_{t-1} (Demetrescu, 2014)
+lag_y_augment <- function(x, y, lag_y) {
+  if (!lag_y) return(x)
+  asgn <- attr(x, "assign")
+  x <- cbind(x, y_lag = y)
+  attr(x, "assign") <- c(asgn, max(asgn, 0L) + 1L)
+  x
 }
 
 # common post-processing of the C++ output for ivx_fit and ivx_wfit
-ivx_out <- function(z, x, horizon, beta, cz, robust) {
+ivx_out <- function(z, x, horizon, beta, cz, robust, lag_y = FALSE) {
   p <- NCOL(x)
 
   cnames <- colnames(x)
@@ -273,6 +294,7 @@ ivx_out <- function(z, x, horizon, beta, cz, robust) {
     delta = z$delta,
     vcov = z$varcov,
     robust = robust,
+    lag_y = lag_y,
     tuning = list(beta = beta, cz = cz, bandwidth = z$bandwidth),
     ols = lols,
     initial = linitial
@@ -282,7 +304,7 @@ ivx_out <- function(z, x, horizon, beta, cz, robust) {
 
 #' @rdname ivx_fit
 ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
-                     bandwidth = NULL, robust = FALSE, ...) {
+                     bandwidth = NULL, robust = FALSE, lag_y = FALSE, ...) {
   n <- nrow(x)
   ny <- NCOL(x)
   if (is.null(n)) {
@@ -339,8 +361,10 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
     ))
   }
   wts <- sqrt(w)
-  z <- ivx_fit_cpp(y * wts, x * wts, horizon, beta, cz, bandwidth %||% -1L, robust)
-  out <- ivx_out(z, x, horizon, beta, cz, robust)
+  x <- lag_y_augment(x, y, lag_y)
+  z <- ivx_fit_cpp(y * wts, x * wts, horizon, beta, cz, bandwidth %||% -1L, robust,
+                   as.integer(lag_y))
+  out <- ivx_out(z, x, horizon, beta, cz, robust, lag_y)
 
   out$residuals <- out$residuals / wts[-(1:horizon)]
   out$fitted <- y[-(1:horizon)] - out$residuals

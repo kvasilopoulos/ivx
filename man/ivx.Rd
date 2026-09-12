@@ -20,6 +20,7 @@ ivx(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 
@@ -78,6 +79,12 @@ The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
 form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
 available for \code{horizon = 1}.}
 
+\item{lag_y}{logical. If \code{TRUE} the regression is augmented with the lagged
+dependent variable (column \code{y_lag}), instrumented by itself, as in
+Demetrescu (2014): this can raise the local power of the IVX test when the
+predictors are highly persistent and endogenous, at no cost otherwise. The
+joint Wald statistic still tests only the predictors. Only for \code{horizon = 1}.}
+
 \item{...}{additional arguments to be passed to the low level regression fitting
 functions (see \link[stats:lm]{lm}).}
 
@@ -106,6 +113,9 @@ ivx(Ret ~ LTY + TBL, data = kms, horizon = 4)
 wt <- runif(nrow(kms))
 ivx(Ret ~ LTY, data = kms, weights = wt)
 
+# lag-augmented IVX (Demetrescu, 2014)
+ivx(Ret ~ DP, data = kms, lag_y = TRUE)
+
 }
 \references{
 Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated
@@ -123,4 +133,7 @@ Journal of Econometrics, 237(2), 105271.
 Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2023).
 Taking stock of long-horizon predictability tests: Are factor returns
 predictable? Journal of Econometrics, 237(2), 105380.
+
+Demetrescu, M. (2014). Enhancing the local power of IVX-based
+tests in predictive regressions. Economics Letters, 124(2), 269-273.
 }

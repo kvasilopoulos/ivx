@@ -14,6 +14,7 @@ ivx_fit(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 
@@ -27,6 +28,7 @@ ivx_wfit(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 }
@@ -57,6 +59,12 @@ The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
 \item{robust}{logical. If \code{TRUE} the Eicker-White (heteroskedasticity-robust)
 form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
 available for \code{horizon = 1}.}
+
+\item{lag_y}{logical. If \code{TRUE} the regression is augmented with the lagged
+dependent variable (column \code{y_lag}), instrumented by itself, as in
+Demetrescu (2014): this can raise the local power of the IVX test when the
+predictors are highly persistent and endogenous, at no cost otherwise. The
+joint Wald statistic still tests only the predictors. Only for \code{horizon = 1}.}
 
 \item{...}{currently disregarded.}
 

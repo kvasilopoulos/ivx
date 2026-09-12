@@ -148,3 +148,29 @@ test_that("weighted fit honours horizon", {
   w <- ivx(Ret ~ DP + TBL, kms, weights = rep(1, nrow(kms)), horizon = 4)
   expect_equal(coef(w), coef(ivx(Ret ~ DP + TBL, kms, horizon = 4)))
 })
+
+test_that("lag_y augments with the self-instrumented lagged response (Demetrescu 2014)", {
+  m0 <- ivx(Ret ~ DP + TBL, data = kms)
+  m1 <- ivx(Ret ~ DP + TBL, data = kms, lag_y = TRUE)
+  expect_equal(names(coef(m1)), c("DP", "TBL", "y_lag"))
+  expect_equal(m1$df, 2)
+  expect_true(isTRUE(m1$lag_y))
+  # joint Wald excludes y_lag: equals coef' V^-1 coef on the predictor block
+  b <- coef(m1)[1:2]; V <- vcov(m1)[1:2, 1:2]
+  expect_equal(m1$Wald_Joint, drop(crossprod(b, solve(V, b))))
+  expect_equal(dim(coef(summary(m1))), c(3, 5))
+
+  # IV algebra written out: Z = [z, demeaned y_{t-1}], X = [x, y_{t-1}], all demeaned
+  y <- kms$Ret; X <- as.matrix(kms[, c("DP", "TBL")]); n <- length(y)
+  rho <- 1 - 1 / (n - 1)^0.95
+  z <- rbind(0, apply(diff(X), 2, function(v) stats::filter(v, rho, "recursive")))[-(n - 1), ]
+  Z <- cbind(z, scale(y[-n], scale = FALSE))
+  Xd <- scale(cbind(X[-n, ], y[-n]), scale = FALSE)
+  b <- solve(crossprod(Z, Xd), crossprod(Z, y[-1] - mean(y[-1])))
+  expect_equal(unname(coef(m1)), unname(drop(b)), tolerance = 1e-4)
+
+  expect_error(ivx(Ret ~ DP, data = kms, lag_y = TRUE, horizon = 2), "horizon = 1")
+  expect_error(ivx_boot(m1, B = 5), "lag_y")
+  w <- ivx(Ret ~ DP, data = kms, weights = rep(1, nrow(kms)), lag_y = TRUE)
+  expect_equal(coef(w), coef(ivx(Ret ~ DP, data = kms, lag_y = TRUE)))
+})

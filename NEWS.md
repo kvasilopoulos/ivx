@@ -7,6 +7,10 @@
   values) and the Newey-West bandwidth.
 * `ivx()` gains `robust = TRUE` for Eicker-White (heteroskedasticity-robust) IVX
   standard errors (Demetrescu, Georgiev, Rodrigues & Taylor, 2023).
+* `ivx()` and `ivx_fit()` gain `lag_y = TRUE`: the lag-augmented IVX regression
+  of Demetrescu (2014), which adds the lagged dependent variable (instrumented
+  by itself) to raise local power under strong persistence and endogeneity.
+  The joint Wald statistic tests the predictors only.
 * `summary()` coefficient tables now report `Std. Error` and `t value` next to the
   individual Wald statistics; the fitted object stores `se` and `tstat`.
   Breaking: the table gains two columns, so code indexing `coef(summary(x))` by

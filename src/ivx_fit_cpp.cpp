@@ -13,12 +13,16 @@ static arma::mat roll_sum(const arma::mat & A, int K) {
   return out;
 }
 
+// self: number of trailing columns of X instrumented by their own (demeaned)
+// lag instead of the IVX instrument, e.g. a lagged dependent variable
+// (Demetrescu, 2014); they are excluded from the joint Wald statistic.
 // [[Rcpp::export]]
 List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1,
                  double beta = 0.95, double cz = 1, int bandwidth = -1,
-                 bool robust = false) {
+                 bool robust = false, int self = 0) {
 
   if (robust && K != 1) stop("robust = TRUE is only available for horizon = 1");
+  if (self > 0 && K != 1) stop("lag_y = TRUE is only available for horizon = 1");
 
   const int nr = X.n_rows;
   const arma::mat xlag = X.rows(0, nr-2);
@@ -71,6 +75,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1,
 
   int n = nn - K + 1;
   arma::mat zz = join_vert(zeros<mat>(1, l), z.rows(0, nn-2)); // lagged instrument
+  // self-instrumented columns: demeaned regressor, so its mean term in M vanishes
+  for (int j = l - self; j < l; ++j) zz.col(j) = xlag.col(j) - mean(xlag.col(j));
   arma::mat Z = zz.rows(0, n-1);
 
   arma::mat ZK = roll_sum(zz, K);
@@ -102,7 +108,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1,
   arma::mat M = ZZ - n*meanzK.t()*meanzK*FM;
   arma::mat Q = XZinv.t()*M*XZinv;
 
-  arma::mat wivx = Aivx*pinv(Q)*Aivx.t();
+  const int lj = l - self;  // joint Wald on the IVX-instrumented columns only
+  arma::mat wivx = Aivx.cols(0, lj-1)*pinv(Q.submat(0, 0, lj-1, lj-1))*Aivx.cols(0, lj-1).t();
   arma::mat wivxind_z = Aivx/sqrt(diagvec(Q).t());
   arma::mat wivxind = square(wivxind_z.t());
 
@@ -142,7 +149,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1,
     _("rank") = rank(Xt),
     _("horizons") = K,
     _("df.residuals") = nn - l,
-    _("df") = l,
+    _("df") = lj,
     _("delta") = corrmat,
     _("Rn") = Rn,
     _("Rz") = arma::vec(l, fill::value(rz)),

@@ -214,6 +214,9 @@ boot_setup <- function(object, type, ar_max, dist) {
   if (!is.null(object$weights)) {
     stop("bootstrap is not available for weighted fits", call. = FALSE)
   }
+  if (isTRUE(object$lag_y)) {
+    stop("bootstrap is not available for lag-augmented fits (`lag_y = TRUE`)", call. = FALSE)
+  }
   x <- model.matrix(object)
   y <- model.response(model.frame(object), "numeric")
   if (!is.null(object$offset)) y <- y - object$offset
