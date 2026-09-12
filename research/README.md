@@ -69,3 +69,6 @@ Structural instability:
 Items already implemented are removed from this list and recorded in `NEWS.md`.
 
 7. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.
+   Deferred: unpublished, and Algorithm 1 (sample-split weights, bias term with its own
+   tuning, variance-enlargement correction, LM residuals) needs the authors' code or the
+   typeset equations to implement faithfully; not worth shipping from the text extraction.
