@@ -25,6 +25,9 @@
 * New `ivx_episodic()`: subsample (rolling, forward and backward recursive)
   IVX tests for pockets of predictability with sup/inf functionals and wild
   bootstrap p-values (Demetrescu et al. 2022, 2023 Section 3.2).
+* Documented that the long-horizon statistic (`horizon > 1`) is the modified
+  IVX-Wald of Kostakis, Magdalinos & Stamatogiannis (2023), eqs (15)/(23),
+  after auditing the implementation against the paper.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

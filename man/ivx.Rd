@@ -35,7 +35,11 @@ the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
 
 \item{horizon}{is the horizon (default horizon = 1 corresponds to a
-short-horizon regression).}
+short-horizon regression). For \code{horizon > 1} the estimator and modified
+Wald statistic are those of Kostakis et al. (2023), eqs (15) and (23):
+K-period sums of the response and of the lagged predictors, a single-lag
+instrument in the signal matrix and the K-period sum of the instrument in
+the covariance.}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
@@ -115,4 +119,8 @@ Financial Studies, 28(5), 1506-1553.
 Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R.
 (2023). Extensions to IVX methods of inference for return predictability.
 Journal of Econometrics, 237(2), 105271.
+
+Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2023).
+Taking stock of long-horizon predictability tests: Are factor returns
+predictable? Journal of Econometrics, 237(2), 105380.
 }
