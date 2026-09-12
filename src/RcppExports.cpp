@@ -28,6 +28,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ivx_sys_fit_cpp
+List ivx_sys_fit_cpp(const arma::mat& Y, const arma::mat& X, int K, double beta, double cz, int bandwidth);
+RcppExport SEXP _ivx_ivx_sys_fit_cpp(SEXP YSEXP, SEXP XSEXP, SEXP KSEXP, SEXP betaSEXP, SEXP czSEXP, SEXP bandwidthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type cz(czSEXP);
+    Rcpp::traits::input_parameter< int >::type bandwidth(bandwidthSEXP);
+    rcpp_result_gen = Rcpp::wrap(ivx_sys_fit_cpp(Y, X, K, beta, cz, bandwidth));
+    return rcpp_result_gen;
+END_RCPP
+}
 // sub_ivx_cpp
 arma::mat sub_ivx_cpp(const arma::vec& y, const arma::mat& x, const arma::mat& z, const arma::uvec& start, const arma::uvec& end, bool robust);
 RcppExport SEXP _ivx_sub_ivx_cpp(SEXP ySEXP, SEXP xSEXP, SEXP zSEXP, SEXP startSEXP, SEXP endSEXP, SEXP robustSEXP) {
@@ -59,6 +75,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ivx_ivx_fit_cpp", (DL_FUNC) &_ivx_ivx_fit_cpp, 7},
+    {"_ivx_ivx_sys_fit_cpp", (DL_FUNC) &_ivx_ivx_sys_fit_cpp, 6},
     {"_ivx_sub_ivx_cpp", (DL_FUNC) &_ivx_sub_ivx_cpp, 6},
     {"_ivx_var_sim_cpp", (DL_FUNC) &_ivx_var_sim_cpp, 2},
     {NULL, NULL, 0}

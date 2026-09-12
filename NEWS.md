@@ -28,6 +28,10 @@
 * Documented that the long-horizon statistic (`horizon > 1`) is the modified
   IVX-Wald of Kostakis, Magdalinos & Stamatogiannis (2023), eqs (15)/(23),
   after auditing the implementation against the paper.
+* New `ivx_sys()` / `ivx_sys_fit()`: systems of predictive regressions with a
+  matrix response (`cbind(y1, y2) ~ x`), short and long horizon, with the
+  Kronecker-form IVX-Wald covariance of Kostakis et al. (2023); reports joint,
+  per-equation and individual Wald statistics.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

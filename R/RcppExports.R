@@ -5,6 +5,10 @@ ivx_fit_cpp <- function(y, X, K = 1L, beta = 0.95, cz = 1, bandwidth = -1L, robu
     .Call(`_ivx_ivx_fit_cpp`, y, X, K, beta, cz, bandwidth, robust)
 }
 
+ivx_sys_fit_cpp <- function(Y, X, K = 1L, beta = 0.95, cz = 1, bandwidth = -1L) {
+    .Call(`_ivx_ivx_sys_fit_cpp`, Y, X, K, beta, cz, bandwidth)
+}
+
 sub_ivx_cpp <- function(y, x, z, start, end, robust) {
     .Call(`_ivx_sub_ivx_cpp`, y, x, z, start, end, robust)
 }
