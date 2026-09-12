@@ -49,10 +49,11 @@ See `replication/` for per-article replication scripts, data and results.
 | `liu-yang-cai-peng-2019-unified-test` | journal | Liu, Yang, Cai & Peng (2019) *A unified test for predictability of asset returns regardless of properties of predicting variables*, JoE 208 141-159. [SD](https://doi.org/10.1016/j.jeconom.2018.09.009) | WEL test; same machinery as `ivx_ar`. |
 | `harvey-leybourne-taylor-2021-simple-tests` | journal | Harvey, Leybourne & Taylor (2021) *Simple tests for stock return predictability with good size and power properties*, JoE 224 198-214. [SD](https://doi.org/10.1016/j.jeconom.2021.01.004) | Cheap OLS-based tests. |
 | `chen-deo-yi-2013-uniform-inference` | journal | Chen, Deo & Yi (2013) *Uniform inference in predictive regression models*, JBES 31(4) 525-533. [T&F](https://doi.org/10.1080/07350015.2013.818008) | Restricted-likelihood test; pairs with Jansson & Moreira (2006). |
+| `georgiev-harvey-leybourne-taylor-2018-parameter-instability` | journal | Georgiev, Harvey, Leybourne & Taylor (2018) *Testing for parameter instability in predictive regression models*, JoE 204(1) 101-118. [SD](https://doi.org/10.1016/j.jeconom.2018.01.005) | Pairs with the episodic / sup-Wald items. |
 
 ## Candidates not yet collected
 
-- Georgiev, Harvey, Leybourne & Taylor (2018) *Testing for parameter instability in predictive regression models*, JoE 204. [SD](https://doi.org/10.1016/j.jeconom.2018.01.005). Pairs with the episodic / sup-Wald items.
+None — all listed papers are in `pdf/`.
 
 ## Suggested extensions (ranked by value / effort)
 
