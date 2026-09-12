@@ -29,6 +29,9 @@
 * New `ivx_qr()` / `ivx_qr_fit()`: the IVX-QR quantile predictability test of
   Lee (2016, Proposition 3.2) via \pkg{quantreg} (in Suggests); returns the
   estimated QR endogeneity `rho_tau` for the paper's tuning rule.
+* New `ivx_qr_boot()`: moving block bootstrap percentile intervals and
+  p-values for IVX-QR (Fan & Lee, 2019), robust to conditional
+  heteroskedasticity and to the sparsity estimate.
 * New `ivx_episodic()`: subsample (rolling, forward and backward recursive)
   IVX tests for pockets of predictability with sup/inf functionals and wild
   bootstrap p-values (Demetrescu et al. 2022, 2023 Section 3.2).

@@ -32,6 +32,7 @@ reference:
     desc: Wild bootstrap p-values and tests for pockets of predictability (Demetrescu et al. 2022, 2023).
     contents:
       - ivx_boot
+      - ivx_qr_boot
       - ivx_episodic
 
   - title: Fitter functions

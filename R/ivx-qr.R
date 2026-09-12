@@ -145,8 +145,97 @@ ivx_qr_fit <- function(y, x, tau = 0.5, beta = 0.95, cz = 5, ...) {
     vcov = V,
     robust = FALSE,
     tuning = list(beta = beta, cz = cz, bandwidth = NA),
+    data = list(y = yt, Z = zl),
     rq = fit
   )
+}
+
+#' Moving Block Bootstrap for IVX-QR
+#'
+#' Percentile confidence intervals and p-values for the IVX-QR coefficients
+#' from the moving block bootstrap (MBB) of Fan and Lee (2019, Section 5).
+#' Blocks of the pairs \eqn{(y_t, 	ilde z_{t-1})} are resampled and the
+#' quantile regression of Lee (2016) is refitted on each bootstrap sample. This
+#' avoids estimating the sparsity and the nuisance parameters that appear under
+#' conditional heteroskedasticity, which is where the asymptotic IVX-QR test is
+#' most distorted, especially in the tails.
+#'
+#' @param object an object of class "ivx_qr".
+#' @param B number of bootstrap replications.
+#' @param block block length; the default is \eqn{\lceil n^{1/4} \rceil} as in
+#' the paper.
+#' @param level confidence level of the percentile intervals.
+#' @param seed optional integer seed.
+#'
+#' @return an object of class "ivx_qr_boot": a list with the estimates, the
+#' percentile intervals `ci`, two-sided percentile p-values `p.value` for
+#' \eqn{H_0: eta_j = 0}, and the bootstrap draws `boot`.
+#'
+#' @references Fan, R., & Lee, J. H. (2019). Predictive quantile regressions
+#' under persistence and conditional heteroskedasticity. Journal of
+#' Econometrics, 213(1), 261-280.
+#'
+#' @export
+#' @examples
+#' if (requireNamespace("quantreg", quietly = TRUE)) {
+#'   m <- ivx_qr(Ret ~ DP, data = kms, tau = 0.1)
+#'   ivx_qr_boot(m, B = 199, seed = 1)
+#' }
+ivx_qr_boot <- function(object, B = 999, block = NULL, level = 0.95, seed = NULL) {
+  if (!inherits(object, "ivx_qr")) stop("`object` must be an 'ivx_qr' fit", call. = FALSE)
+  y <- object$data$y
+  Z <- object$data$Z
+  n <- length(y)
+  b <- if (is.null(block)) ceiling(n^(1 / 4)) else as.integer(block)
+  if (b < 1 || b > n) stop("`block` must be between 1 and the sample size", call. = FALSE)
+  m <- ceiling(n / b)
+  q <- n - b + 1
+  if (!is.null(seed)) set.seed(seed)
+  starts <- matrix(sample.int(q, m * B, replace = TRUE), B, m)
+  offs <- seq_len(b) - 1L
+  boot <- t(apply(starts, 1, function(st) {
+    idx <- as.vector(outer(offs, st, "+"))            # m blocks of length b
+    quantreg::rq.fit(cbind(1, Z[idx, , drop = FALSE]), y[idx], tau = object$tau)$coefficients[-1]
+  }))
+  boot <- matrix(boot, B, NCOL(Z), dimnames = list(NULL, object$cnames))
+  a <- (1 - level) / 2
+  ci <- t(apply(boot, 2, stats::quantile, probs = c(a, 1 - a)))
+  # two-sided percentile p-value: smallest level at which 0 leaves the interval
+  pv <- 2 * pmin(colMeans(boot <= 0), colMeans(boot >= 0))
+  structure(
+    list(
+      call = object$call, tau = object$tau, B = B, block = b, level = level,
+      coefficients = object$coefficients, ci = ci, p.value = pmin(pv, 1), boot = boot
+    ),
+    class = "ivx_qr_boot"
+  )
+}
+
+#' @rdname ivx_qr_boot
+#' @param x an object of class "ivx_qr_boot".
+#' @param digits minimal number of significant digits.
+#' @param ... unused.
+#' @export
+print.ivx_qr_boot <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
+  cat("
+Call:
+", paste(deparse(x$call), collapse = "
+"), "
+
+", sep = "")
+  cat("IVX-QR at tau = ", x$tau, ", moving block bootstrap, B = ", x$B,
+      ", block length ", x$block, "
+
+", sep = "")
+  tab <- cbind(Estimate = x$coefficients, x$ci, "Pr(|b| > 0)" = x$p.value)
+  colnames(tab)[2:3] <- paste0(100 * c((1 - x$level) / 2, 1 - (1 - x$level) / 2), "%")
+  cat("Coefficients (percentile intervals and p-values):
+")
+  printCoefmat(tab, digits = digits, cs.ind = 1:3, tst.ind = integer(),
+               P.values = TRUE, has.Pvalue = TRUE, signif.stars = FALSE)
+  cat("
+")
+  invisible(x)
 }
 
 #' @rdname ivx_qr
