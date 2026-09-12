@@ -24,8 +24,8 @@ ivx_boot(
 \item{type}{bootstrap scheme: \code{"rwb"} (residual wild bootstrap, recommended
 for strongly persistent regressors) or \code{"frwb"} (fixed regressor wild bootstrap).}
 
-\item{ar_max}{maximum AR order (selected by AIC) for the regressor
-autoregression used by the RWB scheme.}
+\item{ar_max}{maximum lag order of the (vector) autoregression fitted to the
+regressors by the RWB scheme; the order is selected by BIC (Remark 24).}
 
 \item{dist}{distribution of the wild multipliers.}
 
