@@ -15,3 +15,6 @@
 ^docs$
 ^pkgdown$
 ^_pkgdown\.yml$
+^CRAN-SUBMISSION$
+^research$
+^\.playwright-mcp$

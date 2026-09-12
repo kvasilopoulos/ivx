@@ -1,0 +1,2179 @@
+arXiv:2311.08218v6 [econ.EM] 21 Apr 2024  Estimating Conditional Value-at-Risk with Nonstationary
+                                                        Quantile Predictive Regression Models
+
+                                                                                 Christis Katsouris
+                                                                             University of Southampton
+
+                                                                              & University of Helsinki
+
+                                                                                     Working paper
+
+                                                                                     April 23, 2024
+
+                                                                                                        Abstract
+                                                      This paper develops an asymptotic distribution theory for an endogenous instrumentation
+                                                  approach in quantile predictive regressions when both generated covariates and persistent pre-
+                                                  dictors are used. The generated covariates are obtained from an auxiliary quantile predictive
+                                                  regression model and the statistical problem of interest is the robust estimation and inference
+                                                  of the parameters that correspond to the primary quantile predictive regression in which this
+                                                  generated covariate is added to the set of nonstationary regressors. We find that the proposed
+                                                  doubly IVX corrected estimator is robust to the abstract degree of persistence regardless of
+                                                  the presence of generated regressor obtained from the first stage procedure. The asymptotic
+                                                  properties of the two-stage IVX estimator such as mixed Gaussianity are established while
+                                                  the asymptotic covariance matrix is adjusted to account for the first-step estimation error.
+
+                                                      Keywords: risk measures; generated regressors; quantile regression; persistence.
+
+                                                      JEL Classification: C12, C22
+
+                                              Article history: First draft 24 April 2022. Second draft 29 August 2023. Previously titled: "A Doubly IVX
+                                          Corrected Estimator for Quantile Predictive Regressions with Nonstationary and Generated Regressors".
+
+                                              Dr. Christis Katsouris is currently a Postdoctoral Researcher at the Faculty of Social Sciences, University of
+                                          Helsinki, P.O. Box 17, Arkadiankatu 7 Helsinki, FI-00014 Finland. E-mail: christis.katsouris@helsinki.fi
+
+                                                                                                        i
+1 Introduction
+
+Risk monitoring of financial time series as well as portfolio performance measures when obtaining
+optimal portfolios can lead to inaccurate results in the case of non-Gaussian (asymmetric) return
+distributions. Thus, in order to better measure downside risk in a non-Gaussian setting usually
+the risk measures of Value-at-Risk and Expected-Shortfall are used to quantify uncertainty (see,
+Lin and Taamouti (2023)). Moreover, estimating risk measures such as the Conditional-Value-at-
+Risk, (CoVaR), entails a generated regressor problem, which occurs when an explanatory variable
+is constructed using structural econometric methods. We propose an estimation method in nonsta-
+tionary time series regression models with generated covariates, which has not seen much attention
+in the literature so far and thus requires the development of our own asymptotic theory.
+
+Inferential procedures based on generated regressors are studied in linear and conditional quantile
+models as in Chen et al. (2021) (see, Pagan (1984), Doran and Griffiths (1983), Hoffman (1987),
+Oxley and McAleer (1993), Dufour and Jasiak (2001) and Chen et al. (2023)), although in the
+case of risk measures such as VaR and CoVaR a conditional quantile specification is required.
+The conventional approach for estimating these risk measures is to employ stationary quantile
+regressions (as in Adrian and Brunnermeier (2016) and Härdle et al. (2016)). Several studies in the
+literature consider the estimation of risk measures using stationary time series environments either
+with parametric (e.g., see He et al. (2020)) or semiparametric approaches (e.g., see, Wang and Zhao
+(2016)). In this study, we extend the econometric specifications for the joint estimation of the pair
+(VaR, CoVaR) as discussed in the study of Katsouris (2023b) (see also Katsouris (2021, 2023a)),
+to the case of nonstationary quantile predictive regression models (see, Lee (2016)), which implies
+using a local-to-unity parametrization for modelling the unknown form of persistence.
+
+Specifically, Katsouris (2023b) considers the statistical estimation for covariance-type matrices
+with tail forecasts using node-specific quantile predictive regressions, extending the framework of
+Katsouris (2021) who discusses identification and estimation issues of conditional quantile risk
+measures. However, both of these studies operate under the assumption of time series stationarity,
+thereby relying on OLS-based estimators (see, Patton et al. (2019)). Thus, a suitable estimation
+approach under the presence of both a generated covariates and persistent regressors, for the joint
+estimation of the risk measure pair of (VaR, CoVaR), remains an open problem. Several studies in
+the literature develop estimation and inference methods in nonstationary predictive regressionss
+robust to the unknown form of persistence, with a notable approach being the IVX filtration of
+Phillips and Magdalinos (2009). Motivated by the aforementioned issues, our research objective is
+to study the large-sample theory of a doubly IVX corrected estimator in nonstationary quantile
+predictive regression for the purpose of estimating risk measures. To the best of our knowledge,
+our approach that incorporates the time series properties of regressors (nonstationarity) when
+estimating risk measures in a low dimensional setting (small number of regressors relative to the
+sample size), is a novel contribution to the literature.
+
+                                                              1
+As a result, when developing robust estimation and inference methods in econometric environments
+with generated regressors, it is crucial to obtain analytical and computational feasible expressions
+for the asymptotic variance of these potentially semiparametric estimators. In particular, Rilstone
+(1996) investigates the aspect of generated covariate in a nonparameteric stationary time series
+environment. Moreover, Hahn and Ridder (2013) study the asymptotic distribution of three-step
+estimators of a finite-dimensional parameter vector where the second step consists of one or more
+nonparametric regressions on a regressor that is estimated in the first step. Specifically, the au-
+thors using the path-derivative method of Newey (1994), derive the contribution of the first-step
+estimator to the influence function is used to investigate the dual role that the first-step estima-
+tor plays in the second-step nonparametric regression. Moreover, Bhattacharya (2020) consider
+the aspects of estimation and inference in stationary quantile regression models with generated
+covariates. Recently, Ghosh and Tan (2022) develop a framework for semiparametric estimation
+where a doubly robust estimating function for a low-dimensional parameter is available, depending
+on two working models. Therefore, our framework proposes a computationally tractable two-step
+algorithm and an asymptotic theory analysis for the doubly IVX corrected estimator (which is
+found to robustify inference to the unknown form of persistence1), when estimating risk measures
+under the assumption of statistical elicitability (see, Fissler and Ziegel (2016)).
+
+Our practical two stage estimation procedure permits to obtain estimates for the forecasts of the
+pair (VaR, CoVaR) based on the econometric specifications of Adrian and Brunnermeier (2016)
+(see also Härdle et al. (2016)), but under the assumption of time series nonstationarity using the
+local-to-unity parametrization to capture nearly nonstationary regressors as in Lee (2016) and
+Fan and Lee (2019). During the first-stage procedure using the nonstationary quantile predictive
+regression model (QPR) and the local-to-unity parametrized regressors, we obtain quantile de-
+pendent model estimates that correspond to the one-period ahead forecasted VaR risk measure.
+During the second stage estimation procedure, the generated regressor that corresponds to the
+VaR is employed as an additional covariate to a different QPR model which is employed to obtain
+the one-period ahead forecasted CoVaR risk measure. Furthermore, because of the well-known
+endogeneity problem (see, Cai and Wang (2014)) that appears due to the correlation between
+the two innovation sequences of the predictive regression and the autoregressive equation, pa-
+rameter estimation is achieved using the IVX filtration (see, Phillips and Magdalinos (2009) and
+Kostakis et al. (2015)), which is robust to the unknown persistence properties of regressors. In
+particular, the IVX estimation approach is implemented to both stages of the procedure, thereby
+ensuring identification and joint estimation of the risk measures of VaR and CoVaR2.
+
+    1The unknown form of persistence in time series data is modelled via the the local-to-unity parametrization
+introduced by the seminal study of Phillips (1987a,b) who established a unified framework for unit root and nearly
+integrated processes in time series regression models.
+
+    2Although statistical comparisons between the assumption of stationary regressors against regressors generated
+via a LUR parametrization can be constructed more formally using goodness-of-fit testing (e.g., see Chan and Zhang
+(2013)); we leave these considerations for future research. On the other hand, more recently Hoga (2023) propose
+a framework for the estimation risk in extreme systemic risk forecasts for stationary time series data.
+
+                                                              2
+We focus on the IVX estimators in each estimation stage, since it is well-known to be robust to
+the abstract degree of persistence (e.g., see Lee (2016)). As a result, the doubly corrected IVX
+estimator (which is the IVX estimator obtained from the second step estimation procedure), is the
+main parameter of interest in terms of statistical inference and asymptotic theory. Specifically, we
+establish the asymptotic properties of the doubly corrected IVX estimator which verify the mixed
+Gaussianity property of the limiting distribution regardless of the degree of persistence in both
+estimation stages. Moreover, we consider a suitable correction to the expression of the asymptotic
+variance-covariance matrix in the second estimation step, which is adjusted in order to account for
+the first-step estimation error that produces the generated regressor under nonstationarity.
+
+Regarding the statistical properties of parameters obtained from the first-stage procedure those are
+employed for the VaR risk measure forecast and in practice parameter consistency is not violated
+(see, Adrian and Brunnermeier (2016)) regardless of the LUR parametrization. In addition, the
+particular generated regressor that corresponds to fitted values of a stationary regressand can
+be treated as the stationary component of the vector of regressors used during the second stage
+procedure (CoVaR). However, the generated regressors are included in the QPR model of the second
+estimation step with some sampling error, which introduces additional noise into the asymptotic
+variance-covariance matrix of the model coefficients. Therefore, the sampling error from the first
+stage contaminates the second stage estimation procedure (see, Chen et al. (2021)). Furthermore,
+during the second-stage (CoVaR estimation), model estimates are obtained using the IVX estimator
+in which case the generated regressor is exogenously determined, this implies that it can only be
+assumed to be stationary (although is modelled as the same lag as the regressand). As a result,
+the usual way of calculating the QR variance-covariance matrix fails to account for the additional
+source of error and an adjustment is required. To sum-up, the generated regressor is a proxy of
+the estimated CoVaR when the nonstationary properties of regressors are included, which implies
+that this proxy is treated as a nonstochastic stationary regressor in a quantile predictive regression
+model with nonstationary regressors. Thus, accounting for the presence of generated regressor
+bias, inference is robustify against both the abstract degree of persistence that these nonstationary
+regressors exhibit as well as to the presence of any generated regressor bias.
+
+Recall  that,  the  conditional  quantile  function  F -1      xt-1, y(i)t   is the VaR(j)t () conditional on
+                                                       y(j)t
+
+xt-1 and y(i)t, where F (·) is the conditional distribution function and F -1(·) is the conditional
+
+quantile function of the underline distribution. Then, by conditioning on y(i)t = VaR(i)t (), we ob-
+
+tain the CoVaR(j,i)t () defined as (see, Adrian and Brunnermeier (2016) and Härdle et al. (2016))
+
+               CoVaR(j,i)t () := inf              P y(j)t xt-1, y(i)t = VaR(i)t ()         (1.1)
+                                     VaR(j )t ()                                           (1.2)
+
+Equivalently, it holds that
+
+                    CoVaR(j,i)t  ()    F -1        xt-1, y(i)t = VaR(i)t ()  ,    (0, 1).
+                                         y(j)t
+
+                                                     3
+Thus, we focus on estimating systemic risk measures conditioned on time series nonstationar-
+ity (persistent data) using the LUR parametrization. The nonstationary quantile regression
+specifications are employed for forecasting the pair (VaR, CoVaR), based on the definitions of
+Adrian and Brunnermeier (2016) and the statistical elicitability property of these risk measures
+(see, Patton et al. (2019), Frongillo and Kash (2021) and Fissler and Ziegel (2016)). Although,
+the loss function which characterizes M-estimators allows to obtain model estimates, thereby di-
+rectly affecting the robustness of forecasts, we do not consider the estimation risk in systemic risk
+forecasts (see, Dimitriadis et al. (2022), Xu et al. (2022), Hoga (2023) and Katsouris (2023b)).
+
+1.1 Main contributions
+
+ (i). Our first main contribution to the literature is to introduce dynamic co-quantile predictive
+       regression models with nonstationary regressors (CoQR - LUR). Our generalized class of
+       estimators is employed to jointly estimate the vector (VaR, CoVaR) by incorporating the
+       persistence properties of regressors. Our proposed general class of models nests both the
+       predictive co-quantile regressions in the spirit of Adrian and Brunnermeier (2016) as well as
+       the quantile predictive regressions with persistence covariates in the spirit of Lee (2016).
+
+(ii). Our second main contribution is to propose an estimator for the model parameters and derive
+       its large sample properties. The main technical difficulty to overcome in developing related
+       asymptotic theory, is that the joint estimation of the risk measures of (VaR, CoVaR) fails
+       to be elicitable, such that no real-valued scoring function exists that is uniquely minimized
+       by the true values of these risk measures (see, Dimitriadis and Hoga (2022)). This pitfall
+       suggests the implementation of a two-step M-estimator (see, also Martins-Filho et al. (2018),
+       Patton et al. (2019) and Fang et al. (2023)). Our proposed estimation approach extends to
+       nonstationary data which is more general than current estimation methods.
+
+(iii). We focus on showing consistency and Asymptotic Mixed Gaussianity of the proposed doubly
+       IVX robust estimator and propose a valid inference procedure based on consistent estimation
+       of the asymptotic variance-covariance matrix. Our asymptotic theory analysis includes the
+       use of the standard local-to-unity asymptotics found in relevant studies (see, Lee (2016) and
+       Cai et al. (2023)), but also considers the adjustment for the variance-covariance matrix to
+       account for the estimation uncertainty of standard errors during the first stage procedure3.
+
+The use of endogenously generated instruments (IVX filter4) is employed for the purpose of filtering
+out the unknown form of persistence in the regressors of each quantile predictive regression used
+in the two-stage estimation procedure.
+
+    3It is worth pointing out that formal testing methods for determining the joint statistical significance of these
+nearly integrated regressors as predictors for systemic risk is a novel aspect in the literature to the best of our
+knowledge when nonstationary predictive regressions include a generated covariate.
+
+    4The ideal IV has to meet two requirements: it is correlated with the endogenous regressor via an explainable
+and validated relationship (relevance relationship), yet uncorrelated with the structural error (exclusion restriction).
+
+                                                              4
+Regarding identification issues of the risk measure pair (VaR, CoVaR) are discussed in several studies
+such as Adrian and Brunnermeier (2016), Härdle et al. (2016), Patton et al. (2019). Moreover,
+Fissler and Hoga (2023) mention that although there is no real-valued scoring function associated
+with risk measure pairs and propose to consider a R2-valued scoring function in the closely related
+context of forecast evaluation. Nevertheless, our estimation method does not rely on the score
+function estimation approach, thereby the statistical elicitability property of the risk measure pair
+facilitates econometric estimation. We also avoid using copula correction methods (see, Yang et al.
+(2022) among others), since within the setting of nonstationary predictive regression models, the
+IVX filtration of Phillips and Magdalinos (2009) has been found to be robust to abstract degree
+of persistence. In addition to the proposed two-stage algorithm for the joint estimation of the risk
+measure pair, as well as asymptotic theory analysis of estimators and their covariance matrices,
+our framework allows to study statistical inference issues which we leave for future research5.
+
+We propose a practical two-stage estimation procedure6 for estimating the model parameters of the
+quantile predictive regression with nonstationary regressors. Then, the second step employs the
+generated regressors in the form of fitted values, along with a different set of nonstationary regres-
+sors to a quantile predictive regression model. As a result, the doubly IVX corrected estimator, is
+the IVX-based estimator corresponding to the second step estimation procedure and is the main
+parameter of interest in terms of statistical inference and limit theory. Since the generated regres-
+sor is assumed to be estimated using a different functional form as well as nonstationary regressors,
+then any dependence structure between the generated regressors is captured by the variance co-
+variance matrix of the second-step estimation procedure. Within our econometric environment the
+proposed two-stage (semiparametric) estimation method, depends on possibly nonstationary re-
+gressors, therefore relevant parameter restrictions on 1 and 2 (see, also Katsouris (2021, 2023b)),
+which correspond to the "working" models, are necessary to ensure robust statistical inference.
+
+    5The related statistical inference aspects we refer to here is the subvector inference problem which is commonly
+examined in the linear instrumental variables regression model. In that case, our objective is to develop a powerful
+test such as the asymptotic null rejection probability is controlled uniformly over a parameter space. The inference
+problem consists of making inference on the coefficients of structural models, but in the context of systemic risk
+modelling. Such statistical problems usually give attention to aspects such as developing robust methods in the
+presence of weak instruments or powerful subvector testing in IV regressions under conditional heteroscedasticity;
+we give attention on the simultaneous modelling of risk measures which involve the use of a generated covariate.
+Therefore, drawing inference on individual coefficients of the parameter vector of the structural equation for esti-
+mating the CoVaR risk measure, motivates us to propose a subvector testing approach which is based on marginal
+conditional regression estimation and testing with nonstationary regressors (see, Hsiao (1997) and De Jong (2001)).
+
+    6We study a broad class of semiparametric problems, where a doubly robust estimating function h(U ; , 1, 2),
+where   (0, 1) for the parameter of interest  is available as follows. Consider two working models denoted
+with g1(xt-1; 1) and g2|1(xt-1; 2) for unknown functions y1t = g1(xt-1) and y2t = g2(xt-1). Furthermore, the
+estimating function (in our case it represents the tail estimates for the CoVaR risk measure), h(.; .) is unbiased
+
+such that E h U ; , 1, 2 = 0, when  is set to the true value , and either 1 or 2, but not necessarily both,
+
+is set to the true value 1 or 2 defined respectively such that g1(xt-1)  g1(xt-1) or g2(xt-1)  g2(xt-1) if model
+g1(xt-1; 1) or g2(xt-1; 2) is correctly specified. In general, doubly robust estimation using the estimating function
+h(U ; , 1, 2) consists of two stages: some estimators ^1, ^2 are first defined, and then ^ is defined by solving
+the estimating equation E~ h U ; , ^1, ^2 = 0, where E~[·] denotes a sample average.
+
+                                                              5
+For notational convenience consider the following two functional forms:
+
+                               g1(xt-1)  g1 xt-1; 1 = (1) 1 (xt-1) ,                            (1.3)
+                               g2(xt-1)  g2 xt-1; 2 = (2) 2(xt-1) ,                             (1.4)
+
+where (xt-1) is p × 1 vector of known functions such as (xt-1) = 1, xt-1 , and 1 and 2
+are vectors of unknown coefficients, which correspond to joint estimation as the two models in
+Adrian and Brunnermeier (2016). Under time series nonstationarity, the two parameter vectors
+are estimated via the IVX filtration of Phillips and Magdalinos (2009). Our implementation is,
+
+however, a plug-in estimation approach and a novel methodology to existing approaches discussed
+
+in the literature. Therefore, we consider the asymptotic theory analysis for ^ 1, ^ 2 and  ^ 1, ^ 2 ,
+
+where 1 and 2 are fixed-dimensional as the sample size n grows. In particular, we assume that
+
+^ 1 is consistent for 1 when the first working model is correctly specified, and ^ 2 is consistent for
+
+     if  the  second  working  model  is  correctly  specified  (absence  of  functional  form  misspecification).
+  2
+
+Assume the existence of any two pair of random variables {y1t, y2t} and a set of predictors xt.
+Another way of viewing our econometric environment is to consider the example of two-countries
+(or firms across two countries) where we have a balanced set of p nonstationary macroeconomic
+variables for both economies (or firms), respectively. In particular, let x1t be the (p × 1) vector
+of domestic variables and x2t be the (p × 1) vector of the same variables for the foreign country
+where each of these possible nonstationary processes have the following LUR parametrizations
+
+                               x1t = R1nx1t-1 + u1t, R1n =      Ip        -   C 1p  .           (1.5)
+                                                                               n                (1.6)
+
+                               x2t = R2nx2t-1 + u2t, R2n =      Ip        -   C 2p  .
+                                                                               n
+
+Moreover, additionally to these nonstationary regressors that are equation-specific, a generated
+covariate is employed as proxy for the risk measure of VaR that represents a quantile risk event
+of the macroeconomic conditions of the foreign economy when predicting the current time con-
+ditions of the home economy. Our estimation approach combines both the IVX estimator of
+Phillips and Magdalinos (2009) (to filter out persistence present in the nonstationary regressors x1t
+and x2t), as well as inspired by the residual augmentation approach of Demetrescu and Rodrigues
+(2020) we self-instrument the proxy variable (generated covariate) under time series nonstation-
+arity (see, also Demetrescu (2014) and Breitung and Demetrescu (2015)). As a result, when
+developing the asymptotic theory of the (long-run) quantile-dependent parameter we use a self-
+instrumentation approach for the generated regressors that correspond to the systemic risk proxy of
+each economy (as the joint estimation approach of Adrian and Brunnermeier (2016) and Härdle et al.
+(2016)).
+
+                                                     6
+Estimation of the CoVaR risk measure is conditioned on the estimated VaR, and relies on a quantile
+predictive regression, with both nearly integrated regressors and a generated regressor (proxy for
+estimated VaR under nonstationarity). Therefore, in the presence of this additional covariate,
+there are more regressors than available instruments. To overcome this issue, Demetrescu (2014)
+propose a framework for inference in an augmented predictive regression. In that case, the author
+propose to instrument that additional covariate with the same process itself. We follow a similar
+approach in our setting although with major necessary modifications.
+
+1.2 Estimation Algorithm
+
+Our proposed two-stage estimation procedure is summarized as below:
+
+Step 1. (Estimation of VaR under time series nonstationarity). Let 1() be the parameter vector of
+           interest (without IVX filtration yet). Then, the QR-estimator is (see, Lee (2016))
+
+                                                           n                   (1.7)
+
+                          1() = arg min  y1t - x1 t-11 .
+                                             Rp i=1
+
+where the check function is defined as (u) := u  - 1 {u  0} and xt are LUR regressors.
+
+During this step in practice we replace the QR-estimator with the QR-IVX estimator from
+Lee (2016) due to the presence of nonstationary regressors. Then, the estimated one-period
+ahead risk measure of VaR is obtained, denoted by y^1VtaR. In the case of N cross-sectional
+units all these generated covariates (under time series nontationarity), shall be computed7.
+
+Step 2. (Estimation of CoVaR under time series nonstationarity). Compute the unknown parameter
+           vector 2() from the following QR model
+
+2() = arg min n  y2t - x~2 t-12 ,  x~ 2t-1 = x2t-1                   y1VtaR .  (1.8)
+                 2Rp+1 i=1
+
+where 2 corresponds to the parameter vector of the nonstationary regressors of the second-
+stage as well as the unknown parameter that correspond to the fitted-values of the VaR8 that
+
+have been estimated during the first-stage estimation procedure.
+
+Recall that the conditional quantile can be consistently estimated based on the quantile-dependent
+model parameter 2() such that Q(|x2t-1, y1VtaR) = x~2t-12() (see, Koenker and Bassett (1978)).
+
+In a similar spirit the corresponding IVX estimators are obtained.
+
+    7Note that the main idea of modelling systemic risk based in this approach is proposed by Katsouris (2021)
+and Katsouris (2023b) which is also related to various studies in the literature of financial connectedness (see,
+Billio et al. (2012), Diebold and Yilmaz (2012) and Diebold and Yilmaz (2014) among others.
+
+    8In the framework of Härdle et al. (2016), this coefficient corresponds to the unknown model parameter ^j|i in
+their expression (6). See also expressions (7) and (8) of Härdle et al. (2016) that correspond to the econometric
+specifications used to obtain the estimates of the risk measure pair under the assumption of stationary regressors.
+
+                          7
+Therefore, one uses the estimates of j, denoted by j, in the first step, to obtain the gener-
+ated regressor xt. Our aim is to demonstrate that our proposed methodology achieve rate and
+model double robustness simultaneously, provided that the parameter  satisfies certain regularity
+conditions. In the current study the doubly IVX corrected estimation approach corresponds to
+conditional quantile specification forms for nonstationary data.
+
+The remained of this paper is organized as follows. In Section 2, we introduce the econometric
+model and the main assumptions of our framework. In Section 3 we present our proposed doubly
+corrected estimation method in the case of conditional mean functional forms while in Section 4
+discusses the conditional quantile case which corresponds to the estimation of the risk measures
+under time series nonstationarity. We conclude in Section 5.
+
+Throughout the paper, for any vector a, we denote with a 1 = j |aj| and with a 2 = j |aj|2.
+For any real arbitrary matrix A, its Frobenius norm is defined by A = trace(AA). The
+
+spectral norm of A is denoted by A 2, such that, A 2 = 1(AA), is maximum column
+
+sum norm is A 1 = A 1 = max1jn                   m    |Aij |  and  its  maximum  row    sum  norm  is  A =
+                                                 i=1
+                                                 P                                                  D
+A  = max1in  m    |Aij        |.  The  operator       denotes  convergence  in   probability,  and     denotes
+             i=1
+
+convergence in distribution.
+
+2 Econometric Model and Assumptions
+
+2.1 Main Assumptions
+
+Consider the linear predictive regression model formulated as below
+
+                                  yt = µ + xt-1 + ut, 1  t  n                                          (2.1)
+                                  xt = Rnxt-1 + vt                                                     (2.2)
+
+where xt  Rp is a p-dimensional vector and Rn =               Ip   -    Cp  with  = 1.
+                                                                        n
+
+We begin by discussing the predictive regression with a conditional mean functional form, but for
+
+the purpose of estimating the risk measures pair (VaR, CoVaR) a conditional quantile specification
+
+form is necessary. The asymptotic behaviour of estimators under moderate deviations from unity
+
+(e.g., on the explosive side) is beyond the scope of our study (e.g., see, Phillips and Magdalinos
+
+(2007), Buchmann and Chan (2007)). Several studies consider estimation methods for unified in-
+
+ference in predictive regression models such as Magdalinos (2020) and Magdalinos and Petrova
+
+(2022). Furthermore, our estimation method differs in several ways to various respectful school of
+
+thoughts and approaches presented in the literature such as the two-step estimator of Francq and Zakoïan
+
+(2015) (see also Beutner et al. (2024) and Francq and Zakoian (2023)); the research perspective
+
+we follow for the development of our econometric environment is concisely explained in Section 1
+
+(see, Adrian and Brunnermeier (2016) and Härdle et al. (2016)).
+
+                                                      8
+Assumption 1. Let t = (ut, et ) be an Rp+1-valued martingale difference sequence with respect
+to the filtration Ft =  t, t-1, ... with E tt | Ft-1 =  > 0. Let vt be an Rp-valued
+
+stationary linear process such that
+
+                with   
+
+vt = F jet-j ,             F j < ,
+
+          j=0         j=0
+
+                                                                                                                             
+
+where F j is a sequence of constant matrices such that I0 = Ip, F j has full rank.
+
+                                                                                                                            j=0
+
+Borrowing from the literature in the case when uv = 0 (which is the case we consider), the
+exact OLS bias of ^ is computed from the predictive regression model, E ^ -  = E [^ - ]
+where ^ is the OLS estimate of  and  := uv/v2 is the slope coefficient of in a regression of ut
+on vt. Furthermore, since ^ is known to be downward biased in small-samples, and (ut, vt) are
+typically strongly negatively contemporaneously correlated, the autoregressive OLS bias feeds into
+the small-sample distribution of ^ causing over-rejections of the null hypothesis of no predictability,
+
+H0 :  = 0. Moreover, notice even with the use of a possible finite-sample-bias correction on the
+OLS estimate, this reduces the noncentrality of the limiting distribution of the OLS t-statistic,
+
+but the distribution remains nonstandard in the near-integrated case.
+
+Remark 1. Assumption 1 imposes a condition of a martingale difference sequence (regressor
+predeterminedness) for the innovation term ut and allows to impose further assumptions regarding
+the modelling of conditional heteroscedasticity via volatility processes such as ARCH/GARCH
+(see, Phillips and Magdalinos (2009)). A Garch process is a typical example of a strong mixing
+process with exponential tails (see, Meitz and Saikkonen (2023)).
+
+Under Assumption 1 a functional central limit theorem holds (Phillips and Solo (1992))
+
+xnr     J c(r)  :=   r                                                                  (2.3)
+   n
+                      e(r-s)C dW (s),
+
+                    0
+
+which satisfies the following stochastic differential equation
+
+dJ c(r) = cJ c(r)dr + dW (r), r  (0, 1).
+
+Relevant notation can be found in several studies in the literature such as Dickey and Fuller (1981),
+Jansson and Moreira (2006), Mikusheva (2012) and Demetrescu and Rodrigues (2020) among oth-
+ers. Furthermore, to avoid confusion regarding the properties of estimators based on a conditional
+mean functional form vis-a-vis a conditional quantile functional form, we include the relevant as-
+sumptions in this section. A similar approach of comparing estimation approaches across these two
+different modelling methods is presented by Liu and Phillips (2023), although in our framework
+this is might be practical given the gap in the literature on the relevant econometric issues we aim
+to tackle. The identification of the risk measures is based on definitions (1.1)-(1.2).
+
+                9
+Assumption 2. The distribution function of innovations ut, F (u) admits a continuous density
+function f (u) away from zero on the domain U := {u : 0 < F (u) < 1}.
+
+Assumption 3. Let P (Yt < y|Xt = x) , y  R, x  Rp be the conditional distribution function,
+denoted by F (·) which is absolutely continuous with respect to Lebesgue measure on R with
+continuous density functions fi(·)  f (·|xi), where for each i = 1, 2, ... fi(·) is uniformly bounded
+away from zero and infinity.
+
+Then, the conditional quantile function of yt denoted with Qyt (|Ft-1), replaces the conditional
+mean function of the predictive regression which implies the following model specification
+
+       Qyt  (|Ft-1)  :=  F -1        ()     ()  +    ()xt-1.            (2.4)
+                           yt |xt-1
+
+such that Fyt|xt-1() := P yt  Qyt (|Ft-1) Ft-1  , where   (0, 1) is some quantile level
+in the compact set (0, 1). Therefore, in order to define the innovation structure that corresponds
+
+to the quantile predictive regression, we employ the piecewise derivative of the loss function such
+that (u) =  - 1 {u < 0} . Consequently, this implies that ut() := ut - Fu-1() where Fu-1( )
+denotes the unconditional -quantile of the error term ut. Then, the corresponding invariance
+principle for the nonstationary quantile predictive regression model is formulated as below
+
+                                                                      
+1 nr  ut()   B (r)(1×n)  BM (1 - )
+n t=1       vt            B v (r)(p×n)                 v         v      (2.5)
+                                                               vv
+
+Assumption 4. Under Assumption 2 and 3, then the following conditions for the innovation
+sequence hold (see, Katsouris (2023c)):
+
+(i) The sequence of stationary conditional probability distribution functions (pdf) denoted with
+       fut(),t-1(.) evaluated at zero with a non-degenerate mean function such that fut()(0) :=
+
+     E fut(),t-1(0) > 0 satisfies a FCLT given as below
+
+       1 nr     fut(),t-1(0) - E     fut(),t-1(0)       Bfut() (r).     (2.6)
+         n t=1
+
+(ii) For each t and   (0, 1), fut(),t-1(.) is uniformly bounded away from zero with a corre-
+       sponding conditional distribution function Ft(.) which is absolutely continuous with respect
+       to Lebesgue measure on R (see, Goh and Knight (2009) and Lee (2016)).
+
+where the following probability bound holds uniformly (see for example Kulperger et al. (2005))
+
+          sup     1  nr   [fut,t-1(0)    -  fu (0)]  = op(1).
+                n1-  t=1
+         0r1
+
+                          10
+2.2 IVX filtration
+
+A solution to the endogeneity problem discussed above, which provides robust statistical infer-
+ence, is the IVX filtration proposed by Phillips and Magdalinos (2009). The IVX instrumenta-
+tion ensures instrument relevance while controlling for the abstract degree of persistence (see,
+Kostakis et al. (2015)) and is constructed as below
+
+                                  t-1                    1       -  cz    , cz > 0 and z  (0, 1).                      (2.7)
+                                                                    nz
+                        zt := zj xt-j , z =
+
+                                  j=0
+
+The IVX filtration for xt, is chosen so that zt corresponds to a mildly integrated process when
+
+the predictor xt is nearly integrated. Therefore, the IVX estimator of  is found to have a slower
+
+convergence   rate   than   the  conventional        OLS         estimator  under  near  integration,      such  that  n 1+z
+                                                                                                                              2
+
+(see, also Katsouris (2023a) and Duffy and Kasparis (2021)). The asymptotic theory of the IVX
+
+estimator can be found to be mixed Gaussian irrespectively of the degree of endogeneity implied
+
+by , leading to standard inference in t and Wald tests. Moreover, it can be proved that under
+
+low persistence, the IVX estimator is asymptotically equivalent to the OLS procedure. Our main
+
+focus in this paper is the estimation of the risk measures of VaR and CoVaR using nearly integrated
+
+regressors, which is a novel aspect in the literature as conventional estimation approaches mainly
+
+consider that macroeconomic variables are stationary. Specifically, we start by considering the
+
+estimation of the VaR with a nearly integrated regressor. A vast literature has previously proposed
+
+robust methodologies for estimating the parameter of interest using the OLS approach and found
+
+evidence of significant size distortions when the model includes high persistence regressors.
+
+Example 1. To obtain the IVX estimator for the linear predictive regression we employ the
+
+demeaned variates denoted with ytµ = xµt-1 + vtµ, where the sample moments are estimated as
+
+y¯t =  yt  -    1  n    yt  (e.g., see Demetrescu and Rodrigues (2020) ). The IVX estimator9 is
+              n-1  t=1
+
+                                    ivx =         n                   -1    n
+
+                                                     x¯ t-1 z                 ytzt-1 .                                 (2.8)
+                                                                 t-1
+
+                                              t=1                           t=1
+
+Denote with ols the OLS estimator and define the OLS residuals utols = y¯t - olsx¯t-1 and the
+
+residual   variance  estimator   u2   =    1      n      u2t  .  Moreover, the IVX-Wald statistic under the null
+                                         n-1      t=1
+
+hypothesis is W = ivxV -1ivx, where a feasible estimator for the covariance matrix is given by
+
+                     V ivx =     n                   -1         n                  n                -1
+
+                                      x¯ t-1zt-1         u2 zt-1zt-1                    x¯ t-1zt-1      .              (2.9)
+
+                                 t=1                          t=1                  t=1
+
+if our main interest is testing the null hypothesis of no predictability.
+
+    9An alternative estimation approach to IVX which also ensures unified inference in the case of quantile-dependent
+parameters is proposed by Liu et al. (2023). An augmented quantile predictive regression approach is currently work
+in progress by Katsouris (2023d)
+
+                                                                 11
+2.3 Two-Stage Estimation Procedure
+
+Assumption 5. Suppose that Assumptions 1 to 3 hold, then based on the conditional quantile
+functional form of the nonstationary quantile predictive regression, all quantile-dependent param-
+eters are assumed to be constant for any fixed quantile level   T = (0, 1).
+
+2.3.1 First-Stage Procedure
+
+During the first stage of our procedure we obtain a consistent estimator of the parameter vector.
+We focus on the IVX estimator which is found to be robust to the abstract degree of persistence
+(nearly integrated regressors). The econometric model is the linear predictive regression as below
+
+y1,t = 01() + 11()x1,t-1 + u1t(), for t = 1, ..., n                 (2.10)
+x1,t = R1,nx1,t-1 + v1,t                                            (2.11)
+
+Denote with () = (01(), 1 1()) and the corresponding IVX estimator with ivx(). The
+asymptotic behaviour of the IVX estimator that corresponds to the linear predictive regression
+model under abstract degree of regressors persistence is studied by Kostakis et al. (2015) while the
+asymptotic properties of the IVX estimator for the quantile predictive regression model is studied
+by Lee (2016). Since when estimating the risk measure pair (VaR, CoVaR), we use the conditional
+quantile distribution, i.e., to capture the effect of xt-1 on the conditional quantile of yt; however
+with the additional assumption of possibly nonstationary regressors (see, also Koenker and Xiao
+(2004) and Xiao (2009)), then estimation relies on the nonstationary quantile predictive regression.
+
+2.3.2 Second-Stage Procedure
+
+During the second stage of our procedure we consider a consistent estimator of the parameter
+vector for the set of regressors which includes the nonstationary regressors as well as the generated
+regressor from the first stage procedure. More precisely, the generated regressor in our study
+corresponds to the fitted values of the predictive regression model based on the IVX estimator
+obtained in the first stage procedure.
+
+y2,t = 02() + 12()x2,t-1 + ()y1,t ivx() + u2t(), for t = 1, ..., n  (2.12)
+                                                                    (2.13)
+x2,t = R2,nx2,t-1 + v2,t, Rjn =  Ip  -  Cjp  ,  = 1.
+                                        n
+
+where Cjp = diag {cj1, ..., cjp} and j  {1, 2}. Define with () = 02(), 1 2(), ()  the
+parameter vector of the second stage procedure and the corresponding IVX estimator with ivx().
+
+Specifically, we observe that this extended parameter vector includes both the nearly integrated
+regressors as well as the generated regressor from the first stage estimation step.
+
+                                        12
+In this case, we need to develop the asymptotic distribution theory for both the OLS and IVX
+estimators when the generated regressor is included in the set of regressors in the second stage
+predictive regression model that corresponds to the econometric specification of the CoVaR risk
+measure. A modified IVX estimator is necessary to be developed in order to account for the
+presence of the particular effect in the setting of the quantile predictive regression models. The
+nuisance coefficient of persistence is defined such that ci > 0 and is either  = 1, which corresponds
+to near unit root regressors or   (0, 1) that corresponds to mildly integrated regressors.
+
+Therefore, the focus of this paper is the implementation of the above econometric environment
+and the development of the corresponding asymptotic theory in the case of the quantile predictive
+regression model. Consider the piecewise derivative of the loss function which is defined as below
+ (u) =  - 1 (u < 0). Then the innovation sequence of the quantile predictive regression model,
+ut() = ut - Fu-1(), and Fu-1() is the unconditional -quantile of ut, where   (0, 1) is a fixed
+quantile (see, Lee (2016), Fan and Lee (2019) and Katsouris (2022)). Thus, the ivx estimator is
+obtained from the first stage procedure using the IVX filter10 for the model coefficients based on
+the nonstationary regressors which implies that the generated regressor is defined as
+
+                                       y1,t ivx() = x1 ,t-1ivx()                                 (2.14)
+
+Then, to conduct inference we need to obtain a consistent estimator for the covariance matrix of
+
+~  ivx  using  the  usual  "sandwich"  formula  given  below  (see,  Demetrescu  and  Rodrigues  (2020)).
+   2
+
+3 Doubly Corrected Estimation Method: Conditional Mean Case
+
+3.1 Residual Augmented IVX Estimation Example
+
+We begin our asymptotic theory analysis by considering the framework for the residual augmented
+IVX estimation methodology previously examined in the literature (see, Demetrescu and Rodrigues
+(2020)). The IVX instrumentation provides a methodology such that the asymptotic distribution
+of the IVX-Wald based test statistic converges to a nuisance-parameter free distribution. Consider
+the feasible predictive regression defined with the following form
+
+                           ytµ = xtµ-1 + v^t + t, t i.i.d and t = 1, ..., n.                     (3.1)
+
+where ytµ and xtµ-1 denote the demeaned variates, following the notation employed in several studies
+in the literature. Moreover, v^t represents a generated covariate which in our study corresponds to
+the estimated VaR under nonstationarity.
+
+  10The reason that we apply the IVX instrumentation procedure only to the estimate from the first stage quantile
+predictive regression model rather to the corresponding generated covariate is to ensure that those fitted values can
+preserve their definition as the estimated Value-at-Risk but in our case adjusted based on the presence of persistent
+predictors and corrected accordingly using the IVX methodology.
+
+                                                       13
+Remark 2. The parameter of interest for inference purposes is the slope coefficient of the quantile
+predictive regression with the augmented regressor. The IVX estimator of , has a slower conver-
+gence rate than the conventional OLS estimator under near integration, but for low persistence it
+is asymptotically equivalent to the OLS estimator. However, the IVX estimator is mixed Gaussian
+in the limit regardless of the degree of endogeneity which implies standard inference based on the
+Wald test. Furthermore, we conjecture that the generated regressor since it is stationary it will not
+affect the convergence of the IVX estimator to its asymptotic limit, given the lower convergence
+rate of IVX compared to the OLS estimator. Roughly speaking our two-stage estimation procedure
+has some similarities with the residual-based augmentation of Demetrescu and Rodrigues (2020).
+Nevertheless the objective of our asymptotic theory analysis is to demonstrate that in finite and
+large samples such good properties hold under the presence of the generated covariate.
+
+3.2 Generated Regressor in Nonstationary Linear Predictive Regression
+
+Recall that the above expressions correspond to the model estimates of linear predictive regression
+model with conditional mean functional form, while the risk measures require to use the quantile
+predictive regression framework. In any case, to keep track of our derivations we begin our analysis
+using the linear predictive regression model and the framework of residual-based augmentation of
+Demetrescu and Rodrigues (2020), but we replace the regressor v^t with the generated dependent
+variable, y¯1,t, which is used as a proxy for VaR under time series nonstationarity
+
+In compact form we have that
+
+y¯2,t = Xt-1 + t, t i.i.d and t = 1, ..., n.                           (3.2)
+
+where Xt-1 = x¯2t-1 y¯1,t and  =   . Moreover, define with Zt-1 = z2t-1 y¯1,t where zt-1
+is the IVX instrument for x2t-1 and the generated regressor is self-instrumented.
+
+The generated covariate y¯1,t corresponds to the estimated VaR under nonstationarity. In practise,
+these nonstationary predictors can be different than the nonstationary predictors corresponding to
+the regressand y2,t due to the proposed dependence structure. However, for simplicity we can also
+consider the case in which we use the same nonstationary regressors for both predictive regression
+models. In this section, we obtain derivations for the linear predictive regression model. However,
+when estimating the risk measures of VaR and CoVaR, the nonstationary quantile predictive regres-
+sion models are used which implies that all parameters are quantile-dependent for a fixed quantile
+  (0, 1). Therefore, we are interested for the consistent estimation of the 2 estimator (e.g., via
+IVX) as well as constructing hypothesis testing for: (i) only  parameter (e.g., no predictability),
+(ii) only  parameter (e.g., no presence of generated regressor) and (iii) linear restrictions on all
+the parameters of the predictive regression model that includes both nonstationary regressors and
+the generated regressor (e.g., univariate generated regressor).
+
+14
+The covariance estimator for ~ i2vx is expressed as below
+
+Cov ~ i2vx  :=  Bn-1  Vn      B    -1          Bn :=        n
+                                   n
+                                         ,                    x¯ t-1zt-1
+
+                                                            t=1                                          
+
+                n                                      1     n                     1   n                 -1   n
+                                                       n    t=1                    n  t=1
+Mn :=                zt-1  z       ~2t  +                        zt-1x¯ t-1                x¯ t-1x¯ t-1              t       x¯ t-1x¯ t-1
+                              t-1                                                                                       t
+
+                t=1                                                                                           t=1
+
+                      1   n                    -1   1   n
+                      n  t=1                        n  t=1
+            ×                 x¯ t-1x¯ t-1                     x¯ t-1 z       .
+                                                                         t-1
+
+Therefore, the just-identified model for the combined IVX estimator of  is given by
+
+                                        ^ =    n                    -1 n           Zt-1y¯2,t .
+                                                       t-1
+                                                    Z       X  t-1                                                           (3.3)
+
+                                               t=1                            t=1
+
+Furthermore, notice that the nonstationary regressors xt-1 and the generated regressor are orthog-
+onal since the generated regressor can be considered as exogenous variable to the particular model,
+then we can compute the generated regressor augmented estimator and test statistic in two steps.
+Notice the constructed test statistic refers to the IVX estimator. Therefore, we focus on deriving
+the asymptotic distribution for the IVX estimator under the presence of the generated regressor
+in the quantile predictive regression model. The estimation procedure is implemented into two-
+stages, and our asymptotic theory analysis demonstrates that although the limit converges into a
+nonstandard distribution the particular limit is nuisance-parameter free.
+
+Remark 3. The key point in this estimation step, is that the variance-covariance needs to be
+adjusted to account for the first-step estimation error. In other words, when estimating the VaR
+using the quantile predictive regression of the first stage, the forecast at the current time period
+t, is estimated with some additional source of error. For this reason, an adjustement is necessary.
+Consider the estimated coefficient of the quantile predictive regression model of the first stage as
+
+                                        Q y2t|xt-1, y1t = Xt-1,   (0, 1).                                                    (3.4)
+
+The estimation step needs to account for two sources of errors, that is, the usaul estimation error
+in obtaining a consistent estimator that corresponds to the IVX instrumentation of the nearly
+integrated regressors, and the second source of error is the sampling error in generating the forecast
+for the VaR from the first stage of the process. More specifically, this implies that using a Bahadur
+representation of the QR-IVX estimator we need to determine the precise stochastic order of the
+remainder term when the generated regressor is included in the conditional quantile specification
+of the model. Although when the parameter vector from the first stage is obtained via the IVX
+filtration, it has the usual convergence rate that the IVX estimator has, an estimation error carries
+in the second-stage estimation procedure, which requires us to consider a suitable correction to
+the overall variance due to the presence of the generated regressor.
+
+                                                             15
+Moreover, we expect that the stochastic equicontinuity property to still hold regardless of the
+plug-in estimation approach and the presence of time series nonstationarity.
+
+3.2.1 Estimation Procedure in Nonstationary Linear Predictive Regression Case
+
+Step 1. OLS-regress y¯2,t on the generated regressor y¯1,t and obtain the OLS estimator below
+
+                                                     n  y¯12,t  -1  n
+
+ols =                                                                 y¯1,ty¯2,t .             (3.5)
+
+                                                   t=1              t=1
+
+and compute the residual such that t = y¯2,t-olsy¯1,t. Here we assume that the elements of the
+dependent vector are not serially correlated, which implies that y1t and y2t are uncorrelated.
+This simplifies the development of the asymptotic theory, despite the presence of endogeneity
+and highly persistent regressors.
+
+Step 2. IVX-regress y¯2,t on x¯t-1, leading to
+
+2ivx =                                          n                   -1   n
+
+                                                     x¯ t-1zt-1            y~tzt-1 .           (3.6)
+
+                                                t=1                      t=1
+
+Recall the linear predictive regression model (for node 1) is given by y1,t = 1xt-1 + u1,t and
+xt = Rxt-1 + v1,t. Then we estimate the following model
+
+y¯2,t = 2 x¯ t-1 + y¯1,t + u2,t                                                                (3.7)
+
+Moreover, by OLS-regressing y¯2,t on y¯1,t such that y¯2,t = y¯1,t + t, where t is a disturbance term,
+we construct the transformed dependent variable y~2,t given by the following expression
+
+y~2,t := y¯2,t - olsy¯1,t                                                                      (3.8)
+
+· In the second stage of the estimation procedure, we need to re-estimate the quantile kernel
+   function when the generated regressor is included in the design matrix, especially when
+   constructing the Wald test under the null hypothesis of no systemic risk in the network.
+   To obtain a measure of the performance of the testing procedure, we need to compare the
+   standard estimation procedure without the variance-covariance matrix correction against the
+   estimation procedure that includes the adjustment, in both cases under the null hypothesis.
+   Then, under the alternative hypothesis of deviations, that is, existence of non-zero systemic
+   risk effect in the network (see, Katsouris (2021, 2023b)), then the larger this distance is,
+   under the adjustement then the larger the power function of the test would be when all
+   the individual quantile predictive regression models of the system correspond to a non-zero
+   coefficient of node-specific systemic risk.
+
+                                                        16
+· When the nonstationary regressors for the two nodes are the same then second-order effects
+   can contribute to the covariance of the estimator (estimation bias). However, due to the
+   proposed dependence structure (see, Katsouris (2021, 2023b)), these possibly nonstationary
+   regressors are assumed to be different across the system-specific equations. Moreover, the
+   generated covariate, denoted by, y1,t, corresponds to the risk measure estimate of VaR, which
+   can have a direct impact on the convergence rate for consistent estimation of the model
+   parameter , during the second-stage estimation procedure. In summary, we need to control
+   for two effects, that is, a bias effect on the estimate of  and a variance effect. The bias
+   effect will disappear when xt-1 and the regressors used to estimate y1,t are uncorrelated.
+   The variance effect appears due to the choice of the generated regressors. Standard OLS
+   estimation methods do not correct for the particular variance effect. However, the variance
+   effect does not influence the inference methodology for the estimator ^2, in which case our
+   asymptotic theory analysis shall investigate that a consistent estimator is obtained regardless
+   of the presence of nonstationarity. Thus, we use the generated covariate, y1,t, from the first-
+   stage estimation procedure as an additional regressor to the nonstationary regressors that
+   correspond to node 2, for estimating the risk measure of CoVaR.
+
+Therefore, the IVX estimator during the second-stage estimation procedure (CoVaR) is obtained
+by the following expression:
+
+~ i2vx =  n                     -1    n
+
+               x¯ 2,t-1z2 ,t-1             y~2,tz  
+                                                   2,t-1
+
+          t=1                         t=1
+
+          n    x¯ 2,t-1z2,t-1   -1 n       2x¯ 2,t-1 + y1,t + u2,t - olsy1,t z2 ,t-1
+
+=
+
+          t=1                         t=1
+
+                                n                      -1     n               n                              -1  n
+
+= 2 - ols -                           x¯ 2,t-1z2,t-1            y1,tz2,t-1 +                x¯ 2,t-1z2 ,t-1        u2,tz2 ,t-1 .
+
+                                t=1                           t=1             t=1                                t=1
+
+By rearranging we obtain that
+
+~ 2ivx - 2 = - ols -                  n                       -1 n                          n                    -1 n
+
+                                           x¯ 2,t-1z2 ,t-1                 y1,tz2,t-1 +          x¯ 2,t-1z2,t-1            u2,tz         .
+                                                                                                                                  2,t-1
+
+                                      t=1                             t=1                   t=1                       t=1
+
+The first term of the above expression is simplified as below
+
+                                   n                      -1   n i1vxx¯ 1,t-1z2 ,t-1         i1vx.
+
+                                      x¯ 2,t-1z2 ,t-1         t=1                                                          (3.9)
+
+                                t=1
+
+which holds when we have identical nonstationary regressors such that x¯1,t-1  x¯2,t-1. Then,
+
+               ~ i2vx - 2                                     ivx      n                    -1   n
+                                                              1
+                                =-    ols -            ×           +        x¯ 2,t-1z2,t-1         u2,tz2,t-1 .            (3.10)
+
+                                                                       t=1                       t=1
+
+                                                                   17
+Remark 4. Notice that when xt-1 and y1,t are not correlated, then ols is a consistent estimator
+of . However, in the case we employ the same nonstationary predictors to estimate the value of
+y1,t then these two quantities are correlated which requires to consider the stochastic dominance
+of terms due to the presence of different effects. Nevertheless, the network dependence structure
+proposed by Katsouris (2021, 2023b) ensures identification and consistent estimation of model
+coefficients which are important for inference purposes.
+
+Recall that i1vx corresponds to the IVX estimator of the quantile predictive regression model for
+the VaR risk measure. From Lemma B4 of Kostakis et al. (2015) it holds that
+
+                                                1        n                          0, u22 × V cz       .                                 (3.11)
+                                              n 1+z
+                                                            z2,t-1u2,t  N
+                                                     2
+                                                        t=1
+
+Therefore, by incorporating the convergence rate we have that
+
+n 1+z     ~ i2vx - 2        = n 1+z            - ols × i1vx +                   1   n                      -1          1        n
+       2                                 2                                    n1+z                                   n 1+z
+                                                                                         x¯ 2,t-1z                                 z2,t-1u2,t       .
+                                                                                                    2,t-1                   2
+                                                                                                                               t=1
+                                                                                    t=1
+
+Thus, for the LUR regressor case we have that the second term of expression (3.12) converges to
+
+  1       n                        -1           1        n                                   1
+n1+z                                          n 1+z
+               x¯ 2,t-1  z                                  z2,t-1u2,t      -       uu +    0 J µc dJc         C     -1   ×  N  0, u22 × V Cz          .
+                            2,t-1                    2                                                               z
+                                                        t=1
+          t=1
+
+To see this, from the Appendix of KMS expression (27) gives that
+
+                                     1          n                                                   -1
+                                   n1+z                                                             z
+                                                   x¯ 2,t-1z             =    uu + V C C     C          +  op(1).                         (3.12)
+                                                              2,t-1
+
+                                              t=1
+
+where the stochastic covariance matrices are defined as below
+
+                            VC =                erC uuerC dr             and    V Cz = 0    erCz uuerCz dr.                               (3.13)
+                                           0
+
+Notice that by Kostakis et al. (2015) we have that uu =                                   uu +              1  J  µ  dJc     since we consider
+                                                                                                           0      c
+
+local unit root regressors. Therefore, similar to Theorem A (i) of KMS it holds that
+
+  1            n                       -1         1         n                                                        
+n1+z                                            n 1+z
+                  x¯ 2,t-1  z                                  z2,t-1u2,t        MN      0, u22 ×          -1            CzV    Cz  C  z  -1
+                               2,t-1                   2                                                      u2u2                           u2 u2
+                                                           t=1
+             t=1
+
+which is a mixed Gaussian random variate since the covariance matrix is a function of the OU
+process. Next we investigate the asymptotic behaviour of the first term of expression (3.12):
+
+                                                        A  :=  n 1+z      - ols     × 1ivx.                                               (3.14)
+                                                                      2
+
+                                                                            18
+Specifically, assuming that node 1 and 2 have a set of nonstationary regressors that are generated
+from non-identical stochastic processes (i.e., not identical regressors), then it follows that
+
+      n                        -1  n
+
+A=         x¯ 2,t-1z2 ,t-1              x¯ 1,t-1  z            × i1vx
+   =                                                 2,t-1
+                                                                  
+      t=1                          t=1                                                                                                 
+                                                               × 1 +
+      n                        -1  n                                               n                           -1   n
+
+           x¯ 2,t-1z2 ,t-1              x¯ 1,t-1  z                                     x¯ 1,t-1  z                    u¯1,tz1,t-1  .
+                                                     2,t-1                                           1,t-1
+                                                                                                                   t=1
+      t=1                          t=1                                             t=1
+
+Regarding the asymptotic behaviour of the first term of the expression we have that the IVX
+estimator from the quantile predictive regression that corresponds to the VaR risk measure is
+
+           i1vx =           n                     -1        n
+
+                               x¯ 1,t-1z1,t-1                  y1,tz               ,      y¯1,t = 1 x¯ 1,t-1 + u¯1,t
+                                                                         1,t-1
+
+                        t=1                              t=1
+
+                                   n                        -1     n
+
+                     = 1 +              x¯ 1,t-1z1 ,t-1              u¯1,tz1 ,t-1 .
+
+                                   t=1                          t=1
+
+Moreover, the number of nonstationary regressors for both econometric specifications is the same
+although these two sets of regressors possibly have different nuisance parameters of persistence.
+The limiting distributions for their IVX estimators have the same dimensions such that
+
+           n 1+z     1ivx - 1                1           n                            -1      1        n
+                  2                        n1+z                                             n 1+z
+                                        =                      x¯ 1,t-1  z                                u¯1,tz1 ,t-1
+                                                                            1,t-1                  2
+                                                                                                      t=1
+                                                      t=1
+
+                                         MN           0, u21 ×           -1             CzV       C      -1        .
+                                                                            u1u1                            u1 u1
+                                                                                             Cz       z
+
+Rearranging the above expressions, we obtain the following limit result
+
+n 1+z      ~  ivx    -  2      - 1      =   - ols              × MN         0, u21 ×         -1             CzV          C     -1
+       2      2                                                                                 u1 u1                              u1u1
+                                                                                                                   Cz       z
+
+                                           + MN             0, u22 ×        -1              CzV          C     -1        .               (3.15)
+                                                                               u2u2                               u2 u2
+                                                                                                     Cz     z
+
+In this paper we are not proposing any novel solution to the endogeneity issue in quantile pre-
+dictive regressions models. We employ a well-investigated method in the literature that tackles
+the endogeneity problem, meaning it produces weak convergence results into standard asymptotic
+distributions (see, Lee (2016), Fan and Lee (2019)). Alternative approaches that tackle the endo-
+geneity problem and produce uniform valid inference regardless of the unknown persistence prop-
+erties are proposed in the frameworks of Cai et al. (2023) and Liu et al. (2023). In contrast, our
+study provides a general framework and establish the asymptotic properties for quantile predictive
+regression models with a generated regressor, which is particularly useful when jointly estimating
+the risk measure pair of (VaR, CoVaR) under the presence of time series nonstationarity.
+
+                                                               19
+In fact, regardless of the estimation method employed to robustify the quantile-based model param-
+eters to the unknown persistence, when estimating the CoVaR as per (Adrian and Brunnermeier,
+2016) and Härdle et al. (2016), under time series nonstationarity (LUR parametrization), similar
+econometric issues need to be tackled to ensure relevant statistical properties still hold.
+
+3.2.2 Asymptotic Properties of Stage-2 Estimator
+
+Next, consider for a moment the limiting distribution of ols -  where y¯2,t = y1,t+t. Therefore,
+
+                                                            n           -1     n              , where y1,t := 1ivxx1,t-1 which
+
+the OLS estimator of  is given by ols =                          y12,t           y¯2,ty1,t
+
+implies that it can be expressed as below                t=1                   t=1
+
+                               n           -1 n     y¯2,t1ivxx1,t-1 =          n              -1 n   y¯2,tx1,t-1 1ivx.
+
+                 ols =              y12,t                                           y12,t                                           (3.16)
+
+                               t=1             t=1                             t=1            t=1
+
+However, y¯2,t = 2x¯2,t-1 + y1,t + u2,t which implies that
+
+                   n           -1   n
+
+     ols =              y12,t           2 x¯ 2,t-1 + y1,t + u2,t x1 ,t-1 i1vx
+          =
+                   t=1              t=1
+
+                   n                -1              n                               n                     n
+
+                        y1,ty1 ,t          × 2        x¯ 2,t-1x1 ,t-1 +               y1,tx1 ,t-1            u2,tx1,t-1      i1vx
+
+                   t=1                              t=1                           t=1                    t=1
+
+where
+
+       n                -1          n 1ivxx1,t-1x1 ,t-1i1vx      -1            1ivx -1        n                     -1   1ivx -1
+
+            y1,ty1 ,t          =                                    =                                x1,t-1x1 ,t-1
+
+       t=1                          t=1                                                       t=1
+
+Therefore, we obtain that
+
+            n           -1           n                           n             -1           n                           n           -1   n
+
+ols =            y12,t      2           x¯ 2,t-1x1,t-1   i1vx +         y12,t                  y1,tx1 ,t-1  1ivx +           y12,t          u2,tx1 ,t-1
+
+            t=1                     t=1                          t=1                       t=1                          t=1             t=1
+
+Notice that the second term above becomes:
+
+n           -1           n 1ivxx1,t-1x1,t-11ivx                   n 1ivxx1,t-1x1,t-11ivx -1                  n 1ivxx1,t-1x1 ,t-11ivx
+
+     y12,t              t=1                              =       t=1                                        t=1                             =
+
+t=1
+
+Thus, we have that
+
+                               n           -1       n                   1ivx +             n         -1     n
+
+       ols -  =                     y12,t      2      x¯ 2,t-1x1,t-1                          y12,t           u2,tx1,t-1 i1vx.
+
+                               t=1                  t=1                                t=1               t=1
+
+                                                                 20
+Furthermore, since the nonstationary regressors of node 1 are not correlated with the nonstationary
+
+regressors of node 2, then the term plim                                n     u2,tx1 ,t-1     = 0, which implies that
+                                                                     n  t=1
+
+                n           -1       n
+
+ols -  =             y12,t        2       x¯ 2,t-1x1,t-1 × i1vx
+
+                t=1                  t=1                                                                                                            
+
+                n           -1                                                                     n                     -1 n
+
+          =          y12,t        2 E x2,t-1x1,t-1 × 1 +                                                 x¯ 1,t-1z1,t-1                   u¯1,tz1,t-1 
+
+                t=1                                                                           t=1                                    t=1
+
+                n           -1                                                             n                -1
+
+          =          y12,t        2 E x2,t-1x1 ,t-1 1 +                                       y12,t             2 E x2,t-1x1,t-1
+
+                t=1                                                     -1 n          t=1 
+
+                               n
+
+                   ×              x¯ 1,t-1z1,t-1                              u¯1,tz1,t-1  + op(1).
+
+                            t=1                                         t=1
+
+Since the term  n    y12,t  is always positive then we assume that plim                                                  n         y12,t  -1 = K where K
+                t=1                                                                                     n                t=1
+
+is some positive constant. Therefore, putting all related expressions together we obtain
+
+n 1+z     ~ 2ivx - 2 - 1 = K2 E x2,t-1x1 ,t-1 1 + K2 E x2,t-1x1,t-1
+       2
+
+                                  × MN    0, u21 ×                      -1            CzV         C         -1
+                                                                           u1u1                                u1 u1
+                                                                                              Cz         z
+
+                                  × MN    0, u21 ×                      -1            CzV         C         -1
+                                                                           u1u1                                u1 u1
+                                                                                              Cz         z
+
+                            + MN        0, u22 ×                        -1          CzV           C      -1
+                                                                           u2u2                             u2u2
+                                                                                              Cz      z
+
+                            = K2 E x2,t-1x1,t-1                                   1 × MN                 0, u21 ×        -1            CzV      C      -1
+                            + K2 E x2,t-1x1,t-1                                                                             u1u1                          u1 u1
+                                                                                                                                            Cz      z
+
+                                                                                                                                                                 2
+
+                                                                                  ×   MN              0, u21 ×           -1          CzV  Cz  C  z  -1
+                                                                                                                             u1u1                      u1u1
+
+                            + MN        0, u22 ×                        -1          CzV           C      -1           .
+                                                                           u2u2                             u2u2
+                                                                                              Cz      z
+
+The second term above corresponds to a squared mixed Gaussian distribution which gives a form of
+a 2 distribution. Thus, the limiting distribution of (4.1) is a linear combination of a 2 distribution
+and a mixed Gaussian distribution, which is a Generalized 2 distribution. Thus the yt inherits
+
+the properties of xt, through a cointegrating relation, especially our goal is to have a stationary
+innovation sequence such that ut  I(0). Under the assumption of a consistent estimator for ^ols
+then we have convergence in probability to zero such that ^ols -  p 0. Thus, the first term
+
+of the expression asymptotically tends to zero (negligible) which implies that the second term
+
+converges into a mixed Gaussian distribution.
+
+                                                                              21
+4 Doubly Corrected Estimation Method: Conditional Quantile Case
+
+4.1 Estimation based on a Doubly IVX Corrected Procedure
+
+     In this section we consider the double corrected conditional quantile estimation methodology which
+     is the main focus of our research study. The derivations presented in the previous sections were
+     useful to shed light on some challenges we have to overcome to develop a robust framework in the
+     proposed setting of quantile predictive regression models. In terms of estimation approach we focus
+     on the QR estimators under nonstationarity which are adjusted using the IVX filtration. During
+     the first stage of the estimation procedure in the same spirit as several studies in the literature
+     related to the joint estimation of the risk measures of (VaR, CoVaR) (see, Adrian and Brunnermeier
+     (2016), Härdle et al. (2016) and Patton et al. (2019) among others), the VaR is estimated given a
+     fixed quantile   (0, 1) level but using information on the nonstationary properties of regressors
+     as given by the quantile predictive regression system below
+
+Stage 1:
+
+yt(1) = 1( ) + 1( )x(t-1)1 + u(t1)( ), for t = 1, ..., n                    (4.1)
+x(t1) = R(n1)x(t-1)1 + v(t1)                                                (4.2)
+
+             such that 1( )+( )x(t-1)1 is the  -conditional quantile of yt given xt-1, where the unknown
+             parameters (1( ), 1( )) are estimated using the QR objective function.
+
+Stage 2:
+
+yt(2) = 2( ) + 2( )x(t-2)1 + ( )y1,t ^i1vx() + u(t2)( ), for t = 1, ..., n  (4.3)
+x(t2) = R(n2)x(t-2)1 + v(t2)                                                (4.4)
+
+       where the parameter of interest corresponds to the estimator invx = 2( ), 2 ( ), ( ) .
+
+Remark 5. Similar to the remark found in Wang and Zhao (2016), we point out that it is up
+to the practitioner to determine the specific model and parameter estimation method, which are
+the starting point to carry out any subsequent CoVaR estimation and inference. In our study,
+we use the nonstationary quantile predictive regression when obtaining an estimate for CoVaR.
+Thus, our approach gives a n1+-consistent estimator for the unknown coefficient of systemic
+risk based on the IVX filter. The particular optimization function corresponds to the second-stage
+procedure which gives the model estimates to construct the one-period ahead forecasted CoVaR risk
+measure. However, our approach differs from the estimation method of Adrian and Brunnermeier
+(2016) and Härdle et al. (2016) since nonstationary time series data are modelled via the LUR
+parametrization and thus we employ the QR-IVX estimator proposed by Lee (2016) but with the
+additional generated regressor from the first-stage procedure.
+
+22
+Next, we focus on the required preliminary theory for establishing the consistency and asymptotic
+mixed Gaussianity of the doubly IVX corrected estimator ivx(). Before proceeding with our
+asymptotic theory analysis, it is worth mentioning some related studies on the aspect of generated
+regressor in quantile regressions. In particular, in comparison to the framework of Bhattacharya
+(2020) (see, also Chen et al. (2021)), our generated covariate represents a proxy for VaR under time
+series nonstationarity. During the second-stage procedure this risk proxy is augmented within a
+nonstationary quantile predictive regression along with other nonstationary regressors. In addition,
+to ensure robustness to the abstract degree of persistence we employ the IVX estimator rather than
+the OLS estimator thereby avoiding the necessity to use the control function approach as a method
+for correcting size distortions under the null hypothesis of no predictability due to the presence
+of the nuisance parameter of persistence. Moreover, similar to the illustrative case of the doubly
+corrected estimation for the conditional mean case we present results for bivariate systems of
+quantile predictive regression models.
+
+Our econometric environment can be extended to the multivariate case. In that case, we can
+develop asymptotic theory and estimation techniques for inference under two large-sample regimes
+such that (a) with increasing time sample size, n  , and fixed network dimension, denoted by
+m, and (b) with m   and nm  , where the temporal size depends on m. In other words,
+the case in which both indices tend to infinity has certain challenges when deriving the asymptotic
+properties or such complex tail dependent processes. To the best of our knowledge our study
+tackles the problem of general asymptotic inference with increasing dimension network time series
+models under nonstationarity which is a novel aspect to the literature. Suitable Bahadur-based
+representations for establishing asymptotic theory results are considered in several studies (see,
+Portnoy (2012) and Wang and Zhao (2016)). Within our setting we have the additional complexity
+that the quantile-based estimators in each stage has to be robustify against the unknown persistence
+properties that appear due to the LUR parametrization of regressors (e.g., see Lee (2016)).
+
+In relation to technical conditions, the notion of stochastic equicontinuity can be employed in
+nonstationary time series environments. These conditions are not uncommon in the cointe-
+grating regression literature such as the restricted cointegrated regression model of Saikkonen
+(1995) and the constrained least squares estimator proposed by Nagaraj and Fuller (1991) (see,
+Moon and Schorfheide (2002)). Furthermore, as pointed out by Saikkonen (1995), the classical
+stochastic equicontinuity conditions can be too strong in cointegrated regression models. In par-
+ticular, due to the stationarity of the generated regressor we shall assume that the parameter space
+in the nonstationary quantile predictive regression model in the second-stage procedure corresponds
+to a short-run parameter while the coefficient of the nonstationary regressors corresponds to the
+long-run parameters of the model. This can be done by partitioning  = (1, 2) and considering
+a standardization matrix such that
+
+Nn(1, ) = 1  1 : D1n (1 - 1) <  ,  (4.5)
+
+23
+where D1n is (k1 × k1) nonstochastic diagonal matrix whose diagonal elements are positive and
+increasing functions of n. Moreover, these SE conditions are considered to be sufficient conditions
+
+for establishing the weak convergence of such estimators while necessary conditions imply the
+
+inverse information matrix has eigenvalues bounded away from zero in probability. Therefore, in
+
+the case of integrated and cointegrated variables, Saikkonen (1995) show that the standardized
+                       2Q¯n(0)
+Hessian  matrix  D-n1           D-n1  converges  weakly  and  due  to  the  strict  exogeneity  assumption,
+
+the weak limit is block diagonal between the parameters 1,  and . The next step would be to
+
+show that the standardized Hessian satisfies an appropriate stochastic equicontinuity condition,
+
+that along with a suitable consistency result, makes it possible to obtain the limiting distribution.
+
+Roughly speaking, OLS-based residuals from the first-stage procedure depend on the nuisance
+
+parameter of persistence thus stochastic equicontinuity arguments need to be extended to a suitable
+
+probability space that accounts for dynamic misspecification (see, Kasparis and Phillips (2012)).
+
+Proposition 1. Suppose that the parameter vector of interest is given by the optimization function
+
+                 () :=      ^(), ^ x(), ^ y^()   arg min           n                            (4.6)
+
+                                                                      yt - X t
+                                                          t=1
+
+where Xt = 1, xt-1, y^t . Assume that the matrix D0 exists and is positive definite, then as
+N, T   for any quantile level   (0, 1), the following limit results holds
+
+         ^ (·) - 0(·)  d D1NT (·)-1GN   (i - xi0(·))          + op(1)  GN (·)  (T ),            (4.7)
+  N
+
+where G(·) is a zero mean Gaussian process with covariance kernel E G(1)G(2) such that
+T := [1, 2]. Recall that the weak convergence result holds because the stochastic process is
+asymptotically tight, and, therefore, converge weakly in L, where L denotes the set of all
+
+uniformly bounded real functions on  equipped with the uniform norm.
+
+A special case to the weak convergence result given by expression (4.7) is to consider the weak
+convergence of the quantile regression process ^ (·), where for any fixed quantile level   (0, 1) it
+
+holds that as (N, T )  ,
+
+                            ^ () - 0()  d N          0, (1 - )D1D0-1D1      .
+                         N
+
+Define with G() is a zero mean Gaussian process with covariance kernel
+
+                       E G()G() = ()-1()S(, )()-1()D-0 1.                                       (4.8)
+
+                                                 24
+Remark 6. Recall that a key condition for estimating the quantile-dependent cointegrating vector
+is that there exists a zero correlation between regressors and errors (see, Xiao (2009)). Moreover,
+cases where estimators are derived under the assumption large N, T asymptotics include the frame-
+works of Zhu et al. (2019), Chen (2022) and Feng et al. (2024) among others. Nevertheless, the
+above derivations provide a good example on the possible system representation we can employ
+in the case we consider the generated regressors that correspond to the estimated VaR (under
+time series nonstationarity) across the cross-section. The above example which corresponds to the
+ARDL process as in the study of Cho et al. (2015) is presented also by Katsouris (2023a).
+
+Example 2 (see, Cho et al. (2015)). Consider the ARDL process denoted by
+
+                                           p                  q
+
+                   Yt =  + j Yt-j + j Xt-j + Ut,
+
+                                          j=1                 j=0
+
+where Xt  Rk is a k-dimensional integrated process of stationary and ergodic processes. More-
+over, let the  -quantile of Yt conditional on the -algebra Ft-1 denoted by Qyt( |Ft-1) be
+
+                                                     p                        q
+
+              Qyt( |Ft-1) = ( ) + j( )Yt-j + j ( )Xt-j
+
+                                                     j=1                    j=0
+
+We consider that Yt is represented as a quantile autoregressive distributed lag (QARDL) process
+
+                                               p                       q
+
+Qyt ( |Ft-1) = ( ) + j( )Yt-j + j ( )Xt-j + Ut( )                                                                    (4.9)
+
+                                              j=1                   j=0
+
+where Ut( ) = Yt - Qyt( |Ft-1). We reformulate the above expression so that it can capture the
+long-run relationship between Yt and Xt using the following long-run quantile process
+
+                               Yt      =  µ(      )  +  X     (  )  +  Rt( )                                         (4.10)
+                                                           t
+
+We explain below the steps and the coefficients to obtain the above reformulation.
+
+Step 1. We decompose the term  q    j ( )Xt-j              Xt ( )      +         q-1  Z       ()  which     implies  that
+                               j=0                                               j=0     t-j
+
+                                    p                                       q-1
+
+              Yt = ( ) +               j( )Yt-j + Xt ( ) +                          Z        ()  +Ut  (  )
+                                                                                        t-j
+
+                               j=1                                          j=0
+
+                                                                       q         (  )X  t-j
+                                                                       j=0    j
+
+where ( ) :=  q    j( ),       ( )     :=  -         q        i( )  and     Zt      =   X t .
+              j=0                                    i=j+1
+
+                                                        25
+Step 2. Suppose that
+
+                      p                                  q-1
+
+Yt = ( ) +                 j( )Yt-j + Xt( ) +                  Z        ()    +Ut( )        µ( )  +  Xt (    )  +  Rt( )
+                                                                   t-j
+
+                      j=1                                j=0
+
+                                                    q    j  (  )X  t-j
+                                                    j=0
+
+where it holds that
+
+                           ( ) :=  ( )  ,                          µ( ) :=  ( )                                    (4.11)
+                                                        p                                       p
+                                      1 - j( )                               1 - j( )
+                                                      j=1                                     j=1
+
+and the remainder term can be written such that
+
+                                                                         
+                                                       t-j
+                           Rt( ) :=                 Z       j  (   )  +       j( )Ut-j( )
+
+                                           j=0                           j=0
+
+where each j( ) corresponds to the "upper" unbounded sum of some positive sequence of co-
+
+efficients ( ) such that j( )                          (       )   where   the  set  of  coefficients     0( ), 1( ), ...
+                                           =j+1
+
+and 0( ), 1( ), ... which implies that
+
+                                                                   -1
+
+                                                 p
+
+                           j( )Lj  1 - j( )Lj ,
+
+                      j=0                  j=1         q                                                
+
+                                                                                         q
+
+                                    (1  -  L)-1             j=0    j( )Lj       -       j=0  j( )         .
+
+                          j( )Lj                         1  -      p                 1  -    p       )
+
+                      j=0                                            j( )Lj                    j (
+
+                                                               j=1                          j=1
+
+Our main interest lie in developing the estimation theory for the long-run parameter ( )
+which is a function of ( ) and j := 1( ), ..., p( ) .
+
+In a similar spirit as in the illustrative example above in which the an invertible representation of
+the ARDL exists, we consider that our proposed econometric specification which corresponds to
+an augmented quantile predictive regression model with generated regressors, could be modified
+accordingly using equivalent type of representations. We leave some derivations for a future study.
+On the other hand, we should emphasize again that the generated covariates we consider in our
+setting are allows to be possibly related to different observable variables in different functional
+forms. Nevertheless, these GR equations can be estimated separately (i.e., estimation of the main
+diagonal of the risk matrix in Katsouris (2021)), and thus any dependence between the GRs can
+be captured by the variance covariance matrix (this separation of the proxy risk measures of VaR
+is also reflected in the novel two-step estimation approach proposed by Katsouris (2021)).
+
+                                                         26
+4.2 Misspecification Analysis of VaR-CoVaR risk matrix
+
+In order to obtain some further insights in the implications of the theoretical aspects discussed in
+this paper, we briefly discuss the extension of the framework proposed by Katsouris (2023b) into
+the econometric environment of this study. Suppose that yit is generated by the true adjacency
+matrix A (e.g., consider the novel VaR - CoVaR risk matrix proposed by Katsouris (2021) as the
+network adjacency matrix). Related studies from the literature of network regression estimation
+and inference include Zhu et al. (2017), Zhu et al. (2019) and Zhu and Pan (2020) among others).
+
+Roughly speaking, the consistency result for the population counterpart of the risk matrix might
+not be held when the adjacency matrix A is misspecified to be A = aij . Denote with W  to be
+the row-normalized A and Xit to be the matrix of model regressors. Then, the estimator is
+
+             ^ () = arg min N               T         yit  -  X          ()  .                    (4.12)
+                                                                 (i)t-1
+                                               
+                                i=1 t=1
+
+Define with
+
+                            1  NT           (i)t-1 X  
+                           NT                         (i)t-1
+             D0         =               X                     ,                                   (4.13)
+                                                                                                  (4.14)
+                               i=1 t=1
+
+             D1() =         1   NT          X          ()        X  (i)t-1X           .
+                           NT                  (i)t-1                        (i)t-1
+                                       fit
+
+                               i=1 t=1
+
+Remark 7. Notice that for the VaR-CoVaR risk matrix, misspecification has a different interpre-
+tation than for the usual binary or weighted adjacency matrix for a graph. The reason is that
+our risk matrix is constructed based on tail forecasts using a regression-based methodology that
+incorporates the persistence properties of the regressors (see, Katsouris (2021, 2023b)).
+
+The conditions associated with the misspecified coefficients are listed below:
+
+Assumption 6. (Eigenvalue-Bound) Suppose that D1() p D1() as min {N, T }   for any
+  (0, 1), where D1()  RN×N is a positive definite matrix. Then, there exists positive constants,
+0 < c1 < c2 <  such that c1  min (D1())  max (D1())  c2 for any fixed   (0, 1).
+
+Assumption 7. (Monotonicity) It is assumed that X(i)t-1() such that 1  i  N and
+1  t  T is a monotone increasing function with respect to   (0, 1).
+
+Corollary 1. Define with d (W , W ) = wij - wij to be the total amount of misspecification
+
+                                                                                i,t
+
+of W . Then, we have that
+
+             ^ () - ()         1   {D1()}-1      NT              
+                              NT                                 (i)t-1
+                        =  -                                  X            (E it)  +  RN T  () ,  (4.15)
+
+                                                 i=1 t=1
+
+with sup RNT () = op (N T )-1/2 .
+
+                                            27
+Denote with
+
+E(i)t() :=   y(i)t     -  X          ()       and  Sin ()        :=  1   n        E (i)t ()  X (i)t-1.
+                             (i)t-1                                  n  t=1
+
+Moreover, assuming that the amount of misspecification has a bounded convergence rate such
+that d (W , W ) = op N/T , then we have that ^ () - () = op N/T . Consequently,
+it can be shown that when the misspecification amount is under control, that is, d (W , W ) =
+Op N/T , the resulting estimator is still NT -consistent.
+
+Proof. We divide the proof into two parts. In the first part of the proof, we show the representation
+given by expression (4.15) while in the second part we show the consistency result for ^ (). Denote
+with  () = ^ () - (). Then, we have that
+
+                          yit - X (i)t-1^ ()       =   E  it  -  X            ()  .                     (4.16)
+                                                                    (i)t-1
+
+where Eit = yit - X(i)t-1(). Then, the minimization of (4.16) is equivalent to minimizing for
+a fixed   (0, 1) such that
+
+             ZNo T (, ) = (N T )-1   NT        Vit - (N T )-1/2 Xi(t-1) -  (Vit) .
+
+                                                                                                        (4.17)
+
+                                     i=1 t=1
+
+A process WNT () is said to be tight if and only if for any  > 0 there exists a compact set E with
+
+                                     sup P WNT ()  E > 1 - .                                            (4.18)
+
+                                     E
+
+Proof. We define with
+
+                          1(D)  =    -1            2 (Vit2 ) - 1 (Vit1 )                                (4.19)
+                                          NT
+                                              i,t
+
+for any interval D = (1, 2]. Therefore, to show the tightness property, we adopt Theorem
+15.6 from Billingsley (1968) and prove a sufficient Chentsov-Billingsley type of inequality (see,
+Bickel and Wichura (1971)) as follows.
+
+Lemma 1. For any two intervals D1 = (1, 2] and D2 = (2, 3] we have that
+
+                          E 1(D1) 2 1(D2) 2  C(3 - 1),                                                  (4.20)
+
+where C is a finite positive constant (see, Appendix of Zhu et al. (2019)).
+
+                                                   28
+Moreover, we denote with it (, ) :=  (Vit) -  (Vit) for two quantile levels,  and . Then,
+since E [it (, ) |Ft-1] = 0, using the Cauchy's inequality we can derive an appropriate bound
+
+                                                         2                                    2
+
+                  E  Xi(t-1)it (1, 2)  Xi(t-1)it (2, 3)  
+
+                         i,t                                        i,t
+
+                                                                        4                              4
+
+                             E  Xi(t-1)it (1, 2)                             E  Xi(t-1)it (3, 4) .
+
+                                    i,t                                        i,t
+
+Therefore, it holds that
+
+E    X            -1)i1  t1  (,  )         X             -1)i2  t2  (,  )    Xi3(t3-1)i3t3 (, )  Xi4(t4-1)i4t4 (, )
+           i1(t1                                 i2 (t2
+
+is non-zero only if (a) i1 = i2, t1 = t2 and i3 = i4 = i1, t3 = t4 = t1 or (b) i1 = i2 = i3 = i4 and
+
+t1 = t2 = t3 = t4. Then, it can be shown that
+
+                                                         4
+
+   (N T )-2 E  Xi(t-1)it (1, 2)  =
+
+                    i,t
+
+                                                                        2                                            
+                                                                                                                     
+                                 Xi(t-1)   2 i2t (1, 2)                  + (N T )-2           Xi(t-1)  4 i4t (1, 2)
+     (N T )-2  E                                                                           E                         .
+                         i,t
+                                                                                      i,t
+
+Notice that we have that E Xit 2 = Op(1) and E Xit 4 = Op(1). Moreover, it can be easily
+verified that E [i2t (1, 2)]  1 -2 and E [i4t (1, 2)]  1 -2. By combining the aforementioned
+results together we obtain
+
+                  E 1(D1) 2 1(D2) 2  C(2 - 1)(3 - 2)  C |3 - 1| ,                                                    (4.21)
+
+for some positive constant C. We can then conclude that the stochastic quantity 1() converge
+weakly to a (q + 1)-dimensional Brownian Bridge.
+
+                                                                         29
+5 Conclusion
+
+We study estimation and inference for nonstationary quantile predictive regression models when
+a generated covariate is required for the purposed of estimating pairs of risk measures under
+time series nontationarity. In We discuss the main estimation steps of the proposed modeling
+methodology and provide an asymptotic theory analysis for the associated quantile-dependent
+model estimators under regressors nonstationarity which is captured via the LUR parametrization.
+We propose a two-stage estimation procedure, where the generated regressor that corresponds to
+the one-step ahead prediction of VaR based on persistent data is generated in the first stage of
+the estimation procedure. In the second-stage of the estimation procedure the two-stage estimator
+is employed to construct the one-step ahead prediction of CoVaR based on the estimated VaR
+and another set of persistent data not necessarily identical to the first-stage estimation procedure.
+We investigate the asymptotic properties of the two-stage estimator based on quantile predictive
+regression models. Moreover, we show that accounting for the presence of generated regressors
+when obtaining forecasts of the pair (VaR, CoVaR), based on the proposed two-stage estimation
+procedure, results in improved statistical testing after adjusting the variance-covariance matrix to
+account for the estimation error in the first-stage estimation procedure.
+In a further study we consider the econometric identification and estimation of a novel SUR
+representation that corresponds to the system-specific quantile predictive regressions as proposed
+by Katsouris (2021, 2023a,b). Specifically, modelling tail interdependencies in a network using
+the SUR representation provides efficiency gains and permits to implement relevant statistical
+inference methods especially when regressors are assumed to be generated from a LUR process.
+
+Conflicts of interest The author declares that there are no known conflicts of interest.
+
+Data availability No data was used for the research described in this article.
+
+Acknowledgements This article is based on the first chapter of my doctoral thesis which was
+submitted to the University of Southampton (see, Katsouris (2021), Katsouris (2023b), Katsouris
+(2023a)). I wish to thank Professor Dr. Jose Olmo, Professor Dr. Tassos Magdalinos and Dr.
+Jayeeta Bhattacharya from the Department of Economics, University of Southampton for helpful
+conversations and comments that significantly improve this paper as well as Professor Dr. Markku
+Lanne and Professor Dr. Mika Meitz from the Faculty of Social Sciences, University of Helsinki. I
+also sincerely thank Dr. Ji Hyung Lee for generously sharing the replication code for the IVX-QR
+procedure which has been adapted in this article. Financial support from the Research Council of
+Finland (grant 347986) is gratefully acknowledged. All remaining errors are my own responsibility.
+
+                                                             30
+6 Appendix
+
+6.1 Appendix A: Auxiliary Results
+
+Theorem 1. (see Theorem 2 in Kato (2009)) Suppose fn(x, ) with n  1 are convex in x for each
+
+  and  bounded  in    for  each  x.  Moreover,  let  gn(x, )  =  -xWn() +      1  x  Q()x,  where  {Wn(.)}  is
+                                                                               2
+
+a sequence of bounded stochastic processes and Q() is a d × d non-stochastic symmetric positive
+
+definite matrix for each . Suppose that the maximum eigenvalue of Q() is bounded from above
+
+and the minimum eigenvalue of Q() is bounded away from 0 over   B. If it holds that
+
+                                            sup |fn(x, ) - gn(x, )| p 0,                           (6.1)
+
+                                                                   B
+
+for each x and of for every  > 0, there exists a constant M > 0 such that
+
+                                     lim sup P sup Wn() > M  ,                                     (6.2)
+                                     n
+                                                B
+
+then xn() = {Q()}-1 Wn() + rn(), where supB rn() = op(1).
+
+Proof. Let yn() = {Q()}-1 Wn(), which is the unique minimum point of gn(., ) for each .
+Then, it can be shown that
+
+       gn(x, )      -  gn  (yn(), )  =  1  (x  -  yn())  Qn()    (x  -  yn())     c  x - yn()  ,   (6.3)
+                                        2
+
+for some constant c > 0. Denote with
+
+                           n = sup sup |fn(x, ) - gn(x, )| .                                       (6.4)
+                                       B x: x-yn() 
+
+Therefore, letting rn() = xn() - yn(), we have that P sup rn() >   P (n  (c2)/2).
+                                                                                                                   B
+
+So it suffices to show that n p 0. Let  > 0 be an arbitrary positive constant. Take M > 0 such
+that the following bound holds
+
+                                     lim sup P sup yn() > M  .                                     (6.5)
+                                     n
+                                                B
+
+Define K := {x : x - y  , y  M} = {x : x   + M}. Then, for every  > 0,
+
+       P (n > )  P sup sup fn(x, ) - gn(x, ) >  + P sup yn() > M .                                 (6.6)
+
+                                 B xK                                   B
+
+                                                     31
+Since by Lemma 1, we have that
+
+sup sup  fn(x, ) - gn(x, )      = sup sup        fn(x,  )  +  xWn()   -  1  xQ()x                                      p 0,  (6.7)
+                                                                         2
+B xK                                B xK
+
+We can conclude that lim supP (n > )  . Since  > 0 is arbitrary, then the proof ends.
+                                              n
+
+The theoretical results presented by Kato (2009) are useful when considering equivalent maximiza-
+tion functionals which can be suitably modified when establishing the asymptotic theory of sample
+moments in the case of nonstationary quantile predictive regressions (e.g., see, Cai et al. (2023)).
+
+Denote the conditional CDF of Y given X = x by FY |X(·|x) and its conditional quantile at   (0, 1)
+by Q(|x), such that Q(|x) = FY-|1X(|x) = inf s : FY |X(s|x)   . Suppose that the quantile
+Q(|x) is modelled as a general nonlinear function of x and . We fix x and treat Q(|x) as a
+stochastic process in , where   T = [1, 2] with 0 < 1  2 < 1.
+
+Furthermore, it can be shown that ^() - () = Op(n-1/2) uniformly in   [, 1 - ] for any
+  (0, 1/2). Then, the computational property of regression quantile processes is employed to
+derive the uniform asymptotic representation of n1/2 ^() - () . Notice also that the functional
+class is P-Donsker for any B  Rp
+
+         g(y, x) =  - I(y  x) xj,   B,   [, 1 - ], 1  j  p                                                                   (6.8)
+
+In other words, a key quantity for establishing  asymptotic   theory  and inferential methods is the
+regression-quantile process such that M n()         n n()     - ()       for some   (0, 1) which is
+
+regarded as a stochastic process in the space D[0, 1] d of Rd-valued right-continuous functions
+
+with left-hand limits on [0, 1] (see, Goh and Knight (2009), Kato (2009) and Portnoy (2012)11).
+
+Definition 1. (Weak Uniform Convergence on )[see, (White, 1996, p. 26)] Let (, F , P) be a
+probability space. Then, Qn(·, ) - Q¯n()  0 as n   in probability law uniformly on  if for
+
+any  > 0 and any  > 0 there exists an integer N(, ) <  such that for all n > N(, ) then
+
+         P sup Qn(·, ) - Q¯n() <  > 1 - .                                                                                    (6.9)
+                
+
+Remark 8. If Qn and Q¯n are vector or matrix valued functions then we use identical terminol-
+ogy to mean that uniform convergence holds element by element. Moreover, the assumption of
+
+compactness of  is crucial since it ensures that the supremum of  exists and that the functions
+sup Qn(·, ) - Q¯n() are measurable (see, Saikkonen (1995)).
+
+ 
+
+11To establish the limiting behaviour of such stochastic processes several studies in the literature employ the
+
+Bahadur representation which holds uniformly in  and   (0, 1). Moreover, estimating the parameter  induces
+                                                                                                                     
+some important changes compared to a known 0 and required finding an expansion for n                                   (; ) - (; )  .
+
+                                                 32
+In the remaining of this section, we borrow some relevant results from the framework proposed
+by Bhattacharya (2020) (see Appendix of the paper). Within our framework the auxiliary results
+briefly discussed above can be useful to derive error bounds to establish the order of convergence
+of remainder terms when implementing a Bahadur representation to quantile-based functionals.
+Specifically, Bhattacharya (2020) considers the asymptotic behaviour of the following functional
+
+                                                      -  H-1 (; ) S (; )           .               (6.10)
+          E (; ) = n  (; ) -  (; )
+
+A uniform order for E (; ) relies on a uniform order study for the remainder term which crucially
+depends on the properties of the quantile regression of interest. To do this, one can employ concepts
+of maximal inequality under bracketing conditions as given in the related literature as well as other
+linearization techniques (e.g., see Goh and Knight (2009), Kato (2009) and Brian (2021)).
+
+In particular, it holds that for any   (0, 1)
+
+                                    () - ()        d N   0, V ()    .                              (6.11)
+                     n
+
+Following the derivations in Proposition 1 of Bhattacharya (2020), it yields that
+
+                                                            
+     n  ;  - (; 0) = n (; ) - (; ) + n (; ) - (; 0)
+
+                                                         +  (; 0)        +  Op(1)     
+                   = n (; ) - (; )                                                      n  - 0
+
+                                                         (; 0)           1n    n
+                   = n (; ) - (; )                                            i=1
+                                                                                   (Zi)  +  Op(1)
+
+Therefore, it can be proved that
+
+                                                      (; 0)         1n    n
+  n                                                                      i=1
+      ;   - (; 0)  = H-1            ;   S      ;   +                          (Zi)    +  Op(1).    (6.12)
+
+Lemma 2 (Bhattacharya (2020)). Suppose that regularity conditions hold. Then, the following
+inequalities and unique representations can be derived.
+
+ (i) Q(2)(; , ) is continuous with respect to its three arguments, with                            (6.13)
+                                     Q(2) 1; ,  - Q(2) 0; ,   C 1 - 2
+
+      for all 0 and 1,    and   [0, 1].
+(ii) Q(2)(; , ) is strictly positive for all   B(),   B() and   [0, 1].
+
+                                                            33
+(iii) For    and   [0, 1] has a unique minimizer (; ) which is continuously diffable in 
+
+                                      (; )         =  H(; )-1D(; ),                                          (6.14)
+                                                                                                             (6.15)
+
+                                      (; )         =  H(; )-1E [X()]
+                                         
+
+where H(; ) and D(; ) are defined above.
+
+Consider a uniform order study of the Bahadur error term such that
+
+                                                                -    H-1 (; ) S (; )                         (6.16)
+                                 E (; ) = n  (; ) -  (; )
+
+   sup                           E (; ) = Op  log3/4n     .                                                  (6.17)
+                                               n1/4
+(,)[1 ,2 ]×
+
+Define the following optimization function
+
+                            n    Yt() - Xt()       +    (;   )  -  Yt() - Xt() (; )                          , (6.18)
+                                                n
+Ln (, ; ) =
+
+                          t=1
+
+This implies that a unique minimizer can be established given by the expression below                        (6.19)
+                                 
+                                   n  (; ) -  (; ) = arg min Ln (, ; ) .
+
+                                                                                                           
+
+Relevant studies with the topological convergence as well as existence and uniqueness proofs are
+mentioned in the Appendix of Katsouris (2022) (see, also Kato (2009)). Thus, following the ar-
+gumentation in Bhattacharya (2020) a uniform order for E (; ) relies on a uniform order study
+for the remainder term R , , ;  . To do this, one can employ concepts of maximal inequality
+under bracketing conditions as given in the related literature as well as other linearisation tech-
+niques. There are two techniques commonly used in the literature; the bracketing and set covering
+approach as presented by Bhattacharya (2020) and the partitioning approach presented in several
+studies (see, Brian (2021) and Goh and Knight (2009)). The remainder term can be expressed as
+
+                                                                                               n             (6.20)
+
+   Rn (, , ; ) = Ln (, , ; ) - L0n (, , ; ) = Rt (, , ; )
+
+                                                                                             t=1
+
+Lemma 3 (Bhattacharya (2020)). For real numbers t and t > 0 with t  1, t = t log3/4n /n1/4
+for some t > 0, such that (t + t)1/2 /t  O n1/4/log1/2n , for large n,
+
+E                                sup               R1n , , ;      C  log1/2n  t(t  +  t)1/2.                 (6.21)
+                                                                      n1/4
+   (,,;)B(0,t )×B(0,t)×[1,2]×
+
+                                                      34
+Example 3. In this example, we discuss the econometric framework of Chen et al. (2021), who
+consider quantile regression with generated regressors. Denote with Ft (u|xt), the conditional
+distribution function of the error term with continuous densities ft (u|xt) and a unique conditional
+-th quantile which are uniformly bounded away from 0 and . It holds that
+
+                                             ^ -                         n                                  (6.22)
+                                      n
+                                                        = n-1/2 rt() + op(1)
+
+                                                                       t=1
+
+where rt(·) is a continuous function which satisfies E [rt()] = 0 and Var[rt()] = V and thus the
+
+generated  regressor  has  the      form  1  n      x^ tx^ t   -   1     n    xtxt   =  op(1).
+                                          n  t=1                   n     t=1
+
+Moreover, for any fixed   (0, 1), we have the following results
+
+                                             ^ () - ()                 d N     0, () .                      (6.23)
+                                         n
+
+Under the null hypothesis, it holds that
+
+                                             R^ () - r             d N      0, R()R .                       (6.24)
+                                      n
+
+Then, since we proved that ^ () is a consistent estimator of (), by Slutsky's theorem,
+
+                      WT = T R() - r  R()R -1 R() - r  q2.                                                  (6.25)
+
+Using the mean value expansion theorem we have that
+
+              1   n              =  1   n               1       n    h    (wt,  )    ut  ^ -  + op(1).      (6.26)
+              n                     n                   n      t=1
+                     x^ t ut               xtut +
+
+                 t=1                   t=1
+
+Since we have that E (u|w) = 0 and E h (wt, ) ut = op(1). Furthermore, since ^- = op(1)
+and E (xtut) = 0, it follows that
+
+                                    1   n           =  1        n        +    op(1)  =  op(1).              (6.27)
+                                    n                  n
+                                           x^ t ut                 xtut
+
+                                       t=1                     t=1
+
+Therefore, it can be proved that ^ - 0 = op(1) and the asymptotic normality of the OLS-GR
+estimator can be also established. In particular, we have that
+
+                                          1   n                -1     1n   n
+                n                         n  t=1                          t=1
+                      ^ - 0         =               x^ t x^ t                  x^ t  (xt - x^ t) 0 + ut  ,
+
+                                    = H-1           1n   n     x^ t   (xt - x^t) 0 + ut
+                                                        t=1
+
+where H =  1  n       x^ t x^ t  .
+           n  t=1
+
+                                                                   35
+References
+
+Adrian, T. and Brunnermeier, M. K. (2016). Covar. The American Economic Review, 106(7):1705.
+Beutner, E., Heinemann, A., and Smeekes, S. (2024). A residual bootstrap for conditional value-
+
+  at-risk. Journal of Econometrics, 238(2):105554.
+Bhattacharya, J. (2020). Quantile regression with generated dependent variable and covariates.
+
+  arXiv preprint arXiv:2012.13614.
+Bickel, P. J. and Wichura, M. J. (1971). Convergence criteria for multiparameter stochastic pro-
+
+  cesses and some applications. The Annals of Mathematical Statistics, 42(5):1656­1670.
+Billingsley, P. (1968). Convergence of probability measures. John Wiley & Sons.
+Billio, M., Getmansky, M., Lo, A. W., and Pelizzon, L. (2012). Econometric measures of connect-
+
+  edness and systemic risk in the finance and insurance sectors. Journal of financial economics,
+  104(3):535­559.
+Breitung, J. and Demetrescu, M. (2015). Instrumental variable and variable addition based infer-
+  ence in predictive regressions. Journal of Econometrics, 187(1):358­375.
+Brian, W. (2021). Covering versus partitioning with polish spaces. arXiv preprint
+  arXiv:2101.10088.
+Buchmann, B. and Chan, N. H. (2007). Asymptotic theory of least squares estimators for nearly
+  unstable processes under strong dependence. The Annals of statistics, 35(5):2001­2017.
+Cai, Z., Chen, H., and Liao, X. (2023). A new robust inference for predictive quantile regression.
+  Journal of Econometrics, 234(1):227­250.
+Cai, Z. and Wang, Y. (2014). Testing predictive regression models with nonstationary regressors.
+  Journal of Econometrics, 178:4­14.
+Chan, N. H. and Zhang, R. (2013). Marked empirical processes for non-stationary time series.
+  Bernoulli, 19(5A):2098­2119.
+Chen, L. (2022). Two-step estimation of quantile panel data models with interactive fixed effects.
+  Econometric Theory, pages 1­28.
+Chen, L., Galvao, A. F., and Song, S. (2021). Quantile regression with generated regressors.
+  Econometrics, 9(2):16.
+Chen, W., Hribar, P., and Melessa, S. (2023). Standard error biases when using generated regressors
+  in accounting research. Journal of accounting research, 61(2):531­569.
+Cho, J. S., Kim, T.-h., and Shin, Y. (2015). Quantile cointegration in the autoregressive
+  distributed-lag modeling framework. Journal of econometrics, 188(1):281­300.
+De Jong, R. M. (2001). Nonlinear estimation using estimated cointegrating relations. Journal of
+  econometrics, 101(1):109­122.
+Demetrescu, M. (2014). Enhancing the local power of ivx-based tests in predictive regressions.
+  Economics Letters, 124(2):269­273.
+Demetrescu, M. and Rodrigues, P. M. (2020). Residual-augmented ivx predictive regression. Jour-
+  nal of Econometrics.
+
+                                                             36
+Dickey, D. A. and Fuller, W. A. (1981). Likelihood ratio statistics for autoregressive time series
+  with a unit root. Econometrica: journal of the Econometric Society, pages 1057­1072.
+
+Diebold, F. X. and Yilmaz, K. (2012). Better to give than to receive: Predictive directional
+  measurement of volatility spillovers. International Journal of Forecasting, 28(1):57­66.
+
+Diebold, F. X. and Yilmaz, K. (2014). On the network topology of variance decompositions:
+  Measuring the connectedness of financial firms. Journal of Econometrics, 182(1):119­134.
+
+Dimitriadis, T., Fissler, T., and Ziegel, J. (2022). Characterizing m-estimators. arXiv preprint
+  arXiv:2208.08108.
+
+Dimitriadis, T. and Hoga, Y. (2022). Dynamic co-quantile regression. arXiv preprint
+  arXiv:2206.14275.
+
+Doran, H. E. and Griffiths, W. E. (1983). On the relative efficiency of estimators which include
+  the initial observations in the estimation of seemingly unrelated regressions with first-order
+  autoregressive disturbances. Journal of Econometrics, 23(2):165­191.
+
+Duffy, J. A. and Kasparis, I. (2021). Estimation and inference in the presence of fractional d= 1/2
+  and weakly nonstationary processes. The Annals of Statistics, 49(2):1195­1217.
+
+Dufour, J.-M. and Jasiak, J. (2001). Finite sample limited information inference methods for
+  structural equations and models with generated regressors. International Economic Review,
+  42(3):815­844.
+
+Fan, R. and Lee, J. H. (2019). Predictive quantile regressions under persistence and conditional
+  heteroskedasticity. Journal of Econometrics, 213(1):261­280.
+
+Fang, Z., Li, Q., and Yan, K. X. (2023). A simple nonparametric approach for estimation and
+  inference of conditional quantile functions. Econometric Theory, 39(2):290­320.
+
+Feng, X., Li, W., and Zhu, Q. (2024). Estimation and bootstrapping under spatiotemporal models
+  with unobserved heterogeneity. Journal of Econometrics, 238(1):105559.
+
+Fissler, T. and Hoga, Y. (2023). Backtesting systemic risk forecasts using multi-objective elic-
+  itability. Journal of Business & Economic Statistics, (just-accepted):1­30.
+
+Fissler, T. and Ziegel, J. F. (2016). Higher order elicitability and osbands principle. The Annals
+  of Statistics, 44(4):1680­1707.
+
+Francq, C. and Zakoïan, J.-M. (2015). Risk-parameter estimation in volatility models. Journal of
+  Econometrics, 184(1):158­173.
+
+Francq, C. and Zakoian, J.-M. (2023). Local asymptotic normality of general conditionally het-
+  eroskedastic and score-driven time-series models. Econometric Theory, 39(5):1067­1092.
+
+Frongillo, R. M. and Kash, I. A. (2021). Elicitation complexity of statistical properties. Biometrika,
+  108(4):857­879.
+
+Ghosh, S. and Tan, Z. (2022). Doubly robust semiparametric inference using regularized calibrated
+  estimation with high-dimensional data. Bernoulli, 28(3):1675­1703.
+
+Goh, S. C. and Knight, K. (2009). Nonstandard quantile-regression inference. Econometric Theory,
+  25(5):1415­1432.
+
+Hahn, J. and Ridder, G. (2013). Asymptotic variance of semiparametric estimators with generated
+
+                                                             37
+  regressors. Econometrica, 81(1):315­340.
+Härdle, W. K., Wang, W., and Yu, L. (2016). Tenet: Tail-event driven network risk. Journal of
+
+  Econometrics, 192(2):499­513.
+He, Y., Hou, Y., Peng, L., and Shen, H. (2020). Inference for conditional value-at-risk of a
+
+  predictive regression. The Annals of Statistics, 48(6):3442­3464.
+Hoffman, D. L. (1987). Two-step generalized least squares estimators in multi-equation generated
+
+  regressor models. The Review of Economics and Statistics, pages 336­346.
+Hoga, Y. (2023). The estimation risk in extreme systemic risk forecasts. arXiv preprint
+
+  arXiv:2304.10349.
+Hsiao, C. (1997). Statistical properties of the two-stage least squares estimator under cointegration.
+
+  The Review of Economic Studies, 64(3):385­398.
+Jansson, M. and Moreira, M. J. (2006). Optimal inference in regression models with nearly inte-
+
+  grated regressors. Econometrica, 74(3):681­714.
+Kasparis, I. and Phillips, P. C. (2012). Dynamic misspecification in nonparametric cointegrating
+
+  regression. Journal of Econometrics, 168(2):270­284.
+Kato, K. (2009). Asymptotics for argmin processes: Convexity arguments. Journal of Multivariate
+
+  Analysis, 100(8):1816­1829.
+Katsouris, C. (2021). Optimal portfolio choice and stock centrality for tail risk events. arXiv
+
+  preprint arXiv:2112.12031.
+Katsouris, C. (2022). Asymptotic theory for moderate deviations from the unit boundary in
+
+  quantile autoregressive time series. arXiv preprint arXiv:2204.02073.
+Katsouris, C. (2023a). Quantile time series regression models revisited. arXiv preprint
+
+  arXiv:2308.06617.
+Katsouris, C. (2023b). Statistical estimation for covariance structures with tail estimates using
+
+  nodewise quantile predictive regression models. arXiv preprint arXiv:2305.11282.
+Katsouris, C. (2023c). Structural break detection in quantile predictive regression models with
+
+  persistent covariates. arXiv preprint arXiv:2302.05193.
+Katsouris, C. (2023d). Unified inference for dynamic quantile predictive regression. arXiv preprint
+
+  arXiv:2309.14160.
+Koenker, R. and Bassett, G. (1978). Regression quantiles. Econometrica: journal of the Econo-
+
+  metric Society, pages 33­50.
+Koenker, R. and Xiao, Z. (2004). Unit root quantile autoregression inference. Journal of the
+
+  American statistical association, 99(467):775­787.
+Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2015). Robust econometric inference for
+
+  stock return predictability. The Review of Financial Studies, 28(5):1506­1553.
+Kulperger, R., Yu, H., et al. (2005). High moment partial sum processes of residuals in garch
+
+  models and their applications. The Annals of Statistics, 33(5):2395­2422.
+Lee, J. H. (2016). Predictive quantile regression with persistent covariates: Ivx-qr approach.
+
+  Journal of Econometrics, 192(1):105­118.
+
+                                                             38
+Lin, W. and Taamouti, A. (2023). Portfolio selection under non-gaussianity and systemic risk: A
+  machine learning based forecasting approach. International Journal of Forecasting.
+
+Liu, X., Long, W., Peng, L., and Yang, B. (2023). A unified inference for predictive quantile
+  regression. Journal of the American Statistical Association, pages 1­15.
+
+Liu, Y. and Phillips, P. C. (2023). Robust inference with stochastic local unit root regressors in
+  predictive regressions. Journal of Econometrics, 235(2):563­591.
+
+Magdalinos, T. (2020). Least squares and ivx limit theory in systems of predictive regressions with
+  garch innovations. Econometric Theory.
+
+Magdalinos, T. and Petrova, K. (2022). Uniform and distribution-free inference with general au-
+  toregressive processes. Universitat Pompeu Fabra, Department of Economics and Business.
+
+Martins-Filho, C., Yao, F., and Torero, M. (2018). Nonparametric estimation of conditional value-
+  at-risk and expected shortfall based on extreme value theory. Econometric Theory, 34(1):23­67.
+
+Meitz, M. and Saikkonen, P. (2023). Subgeometrically ergodic autoregressions with autoregressive
+  conditional heteroskedasticity. Econometric Theory (forthcoming).
+
+Mikusheva, A. (2012). One-dimensional inference in autoregressive models with the potential
+  presence of a unit root. Econometrica, 80(1):173­212.
+
+Moon, H. R. and Schorfheide, F. (2002). Minimum distance estimation of nonstationary time series
+  models. Econometric Theory, 18(6):1385­1407.
+
+Nagaraj, N. K. and Fuller, W. A. (1991). Estimation of the parameters of linear time series models
+  subject to nonlinear restrictions. The Annals of Statistics, pages 1143­1154.
+
+Newey, W. K. (1994). The asymptotic variance of semiparametric estimators. Econometrica:
+  Journal of the Econometric Society, pages 1349­1382.
+
+Oxley, L. and McAleer, M. (1993). Econometric issues in macroeconomic models with generated
+  regressors. Journal of Economic Surveys, 7(1):1­40.
+
+Pagan, A. (1984). Econometric issues in the analysis of regressions with generated regressors.
+  International Economic Review, pages 221­247.
+
+Patton, A. J., Ziegel, J. F., and Chen, R. (2019). Dynamic semiparametric models for expected
+  shortfall (and value-at-risk). Journal of Econometrics, 211(2):388­413.
+
+Phillips, P. C. B. (1987a). Time series regression with a unit root. Econometrica: Journal of the
+  Econometric Society, pages 277­301.
+
+Phillips, P. C. B. (1987b). Towards a unified asymptotic theory for autoregression. Biometrika,
+  74(3):535­547.
+
+Phillips, P. C. B. and Magdalinos, T. (2007). Limit theory for moderate deviations from a unit
+  root. Journal of Econometrics, 136(1):115­130.
+
+Phillips, P. C. B. and Magdalinos, T. (2009). Econometric inference in the vicinity of unity.
+  Singapore Management University, CoFie Working Paper, 7.
+
+Phillips, P. C. B. and Solo, V. (1992). Asymptotics for linear processes. The Annals of Statistics,
+  pages 971­1001.
+
+Portnoy, S. (2012). Nearly root-n approximation for regression quantile processes. The Annals of
+
+                                                             39
+  Statistics, 40(4):1714­1736.
+Rilstone, P. (1996). Nonparametric estimation of models with generated regressors. International
+
+  Economic Review, pages 299­313.
+Saikkonen, P. (1995). Problems with the asymptotic theory of maximum likelihood estimation in
+
+  integrated and cointegrated systems. Econometric Theory, 11(5):888­911.
+Wang, C.-S. and Zhao, Z. (2016). Conditional value-at-risk: Semiparametric estimation and infer-
+
+  ence. Journal of Econometrics, 195(1):86­103.
+White, H. (1996). Estimation, inference and specification analysis. Number 22. Cambridge uni-
+
+  versity press.
+Xiao, Z. (2009). Quantile cointegrating regression. Journal of econometrics, 150(2):248­260.
+Xu, W., Hou, Y., and Li, D. (2022). Prediction of extremal expectile based on regression models
+
+  with heteroscedastic extremes. Journal of Business & Economic Statistics, 40(2):522­536.
+Yang, F., Qian, Y., and Xie, H. (2022). Addressing endogeneity using a two-stage copula generated
+
+  regressor approach. Technical report, National Bureau of Economic Research.
+Zhu, X. and Pan, R. (2020). Grouped network vector autoregression. Statistica Sinica, 30(3):1437­
+
+  1462.
+Zhu, X., Pan, R., Li, G., Liu, Y., and Wang, H. (2017). Network vector autoregression. The Annals
+
+  of Statistics, 45(3):1096­1123.
+Zhu, X., Wang, W., Wang, H., and Hardle, W. K. (2019). Network quantile autoregression. Journal
+
+  of econometrics, 212(1):345­358.
+
+                                                             40
+

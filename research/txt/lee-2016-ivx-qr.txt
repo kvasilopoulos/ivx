@@ -1,0 +1,1519 @@
+                                                 Journal of Econometrics 192 (2016) 105­118
+
+                                             Contents lists available at ScienceDirect
+
+                                        Journal of Econometrics
+
+                                   journal homepage: www.elsevier.com/locate/jeconom
+
+Predictive quantile regression with persistent covariates:
+IVX-QR approach
+
+Ji Hyung Lee 
+
+Department of Economics, University of Illinois, 214 David Kinley Hall, 1407 W. Gregory Dr., Urbana, IL 61801, United States
+
+article info                       abstract
+
+Article history:                   This paper develops econometric methods for inference and prediction in quantile regression (QR)
+Received 14 January 2014           allowing for persistent predictors. Conventional QR econometric techniques lose their validity when
+Received in revised form           predictors are highly persistent. I adopt and extend a methodology called IVX filtering (Magdalinos and
+27 November 2014                   Phillips, 2009) that is designed to handle predictor variables with various degrees of persistence. The
+Accepted 27 April 2015             proposed IVX-QR methods correct the distortion arising from persistent multivariate predictors while
+Available online 29 December 2015  preserving discriminatory power. Simulations confirm that IVX-QR methods inherit the robust properties
+                                   of QR. These methods are employed to examine the predictability of US stock returns at various quantile
+JEL classification:                levels.
+C22
+                                                                                                                        © 2015 Elsevier B.V. All rights reserved.
+Keywords:
+IVX filtering
+Local to unity
+Multivariate predictors
+Predictive regression
+Quantile regression
+
+1. Introduction                                                        Stylized facts of financial time series data such as heavy tails and
+                                                                       time varying volatility imply potentially greater predictability at
+    Predictive regression models are extensively used in empirical     quantiles other than the median for financial data. Standard QR
+macroeconomics and finance. A leading example is stock return          econometric techniques, however, are not valid when predictors
+regression where predictability has been a long standing puzzle. A     are highly persistent since predictive QR models share the same
+central econometric issue in these models is severe size distortion    econometric issues as their mean regression counterparts.
+under the null arising from the presence of persistent predictors
+coupled with weak discriminatory power in detecting marginal               This paper addresses these issues by developing new meth-
+levels of predictability. The predictive mean regression literature    ods of inference for predictive QR. The limit theory of ordinary QR
+has explored and developed econometric methods for correcting          with persistent regressors reveals the source of the distortion to be
+this distortion and validating inference. A recent review of this      greater under (i) stronger endogeneity, (ii) higher levels of persis-
+research is given in Phillips and Lee (2013, Section 2).               tence and (iii) more extreme quantiles coupled with heavy tailed-
+                                                                       ness. To develop QR methods for correcting the size distortion and
+    Quantile regression (QR) has emerged as a powerful tool for es-    conducting valid inference, I adopt a recent methodology called
+timating conditional quantiles since Koenker and Basset (1978).        IVX filtering developed in Magdalinos and Phillips (2009). The idea
+The method has attracted much attention in economics in view           of IVX filtering is to generate an instrument of intermediate persis-
+of the importance of the entire response distribution in empir-        tence by filtering a persistent and possibly endogenous regressor.
+ical models. Koenker (2005)'s monograph provides an excellent          The new filtered IV succeeds in correcting size distortion arising
+overview of the field. QR methods are also attractive in predictive    from many different forms of predictor persistence while main-
+regression because they enable practitioners to focus their atten-     taining good discriminatory power in conventional regression set-
+tion on the quantile structure of financial asset return distribution  tings. I extend the IVX filter idea to the QR framework and propose
+and provide forecasts at each quantile. This focus permits signifi-    a new approach to inference which we call IVX-QR.
+cance testing of predictors of individual quantiles of asset returns.
+                                                                           The proposed IVX-QR estimator has an asymptotically mixed
+  Tel.: +1 2173003450; fax: +1 2172446678.                             normal distribution in the presence of multiple persistent pre-
+                                                                       dictors. I develop a computationally attractive testing method
+     E-mail address: jihyung@illinois.edu.                             for quantile predictability to simplify implementation for ap-
+                                                                       plied work. Employing the new methods, I examine the empirical
+http://dx.doi.org/10.1016/j.jeconom.2015.04.003
+0304-4076/© 2015 Elsevier B.V. All rights reserved.
+106  J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+predictability of monthly stock returns in the S&P 500 index at var-      lemmas and more comprehensive numerical results are available
+ious quantile levels. In regressions with commonly used persistent        from an online supplement (Lee, 2014).
+predictors I find several quantile specific significant predictors. In
+particular, over the period of 1927­2005, there is significant evi-       2. Model framework and existing problems
+dence that dividend­payout ratios have predictive power for lower
+quantiles of stock returns, while the book-to-market value ratio          2.1. Model and assumptions
+is shown to predict both lower and upper quantiles of stock re-
+turns during the same period. Notably, predictability appears to be           I first discuss the predictive mean regression model and then
+enhanced by using combinations of persistent predictors. IVX-QR           explain the predictive QR model. The standard predictive mean
+corrections ensure that the quantile predictability results are not       regression model is
+spurious even in the presence of multiple persistent predictors,
+suggesting the possibility of improved forecast models for stock          yt = 0 + 1 xt-1 + u0t with E (u0t |Ft-1) = 0,   (2.1)
+returns. For example, the combination of the T-bill rate and the
+book-to-market ratio are shown to predict almost all stock return         where 1 is a K × 1 vector and Ft is a natural filtration. A vector of
+quantiles considered over the 1927­2005 period. The forecasting
+capability of this combination remains strong even in the post-           predictors xt-1 has the following autoregressive form
+1952 data.
+                                                                          xt = Rnxt-1 + uxt ,                             (2.2)
+    Closely related to this paper are recent studies that have
+investigated inference in QR with financial time series. Xiao                             C
+(2009) developed a limit theory of QR in the presence of unit
+root regressors and developed fully-modified methods based on             Rn = IK + n , for some  > 0,
+Phillips and Hansen (1990). Cenesizoglu and Timmermann (2008)
+introduced the predictive QR framework and found that commonly            where n is the sample size and C = diag (c1, c2, . . . , cK ). The
+used predictor variables affect lower, central and upper quantiles        pair of (, C ) represents persistence in the multiple predictors of
+of stock returns differently. Maynard et al. (2011) examined the
+issue of persistent regressors in predictive QR by extending the          unknown degree. I allow for more general degrees of persistence
+limit theory of Xiao (2009) to a near-integrated regressor case.
+These last two papers can be classified as part of the predictive         in the predictors than in the existing literature. In particular, xt can
+QR literature since they focus on the prediction of stock return          belong to any of the following persistence categories1:
+quantiles from lagged financial variables. Another piece of related
+research is Han et al. (2014) which studies the quantile dependence         (I0) stationary:  = 0 and |1 + ci| < 1, i,
+between stock return and a predictor, wherein the new analysis             (MI) mildly integrated:   (0, 1) and ci  (-, 0), i,
+becomes possible by extending quantilogram theory (Linton and               (I1) local to unity and unit root:  = 1 and ci  (-, ) , i,
+Whang, 2007) to the cross-quantilogram. In the mean predictive            (ME) mildly explosive:   (0, 1) and ci  (0, ), i.
+regression literature, Gonzalo and Pitarakis (2012) and Kostakis
+et al. (2014) are close to this paper, since they have also applied           The exact degrees of persistence in economic time series are
+the IVX methodology to the stock return regression.
+                                                                          always imprecisely determined. Unit root tests do not provide a
+    The new IVX-QR methods developed in this paper contribute
+to the predictive QR literature in several aspects. First, the meth-      firm guidance on discrepancy between I(0), near or exact unit root
+ods are uniformly valid over the extensive range of predictor per-
+sistence from stationary predictors to mildly explosive predictors.       processes. The extensive treatment of parameter space from (I0)
+This coverage conveniently encompasses existing results for unit          to (ME)2 in this paper helps in coping with misspecified order of
+root (Xiao, 2009) and near unit root (Maynard et al., 2011) predic-
+tor cases. The uniform validity of the new methods allows for pos-        integration of the multivariate predictors.
+sible misspecification in predictor persistence. Second, the IVX-QR
+methods validate inference under multiple persistent predictors               For parsimonious characterization of the parameter space the
+while most existing methods control test size with a single persis-
+tent predictor. This feature improves realism in applied work and         (I1) specification above includes both conventional integrated
+provides potentially better forecast models since there are a vari-
+ety of persistent predictors. Third, the new method corrects size         (C = 0) and local to unity (C  (-, ), C = 0) specifications.
+distortion while preserving substantial local power in spite of the
+modest reduction in its convergence rate (see Section 3.1 for the         The innovation structure allows for linear process dependence
+detailed discussion). This advantage is critical in finding marginal      for uxt and imposes a conditionally homoskedastic3 martingale
+levels of predictability in predictive QR with the desired size cor-      difference sequence (mds) condition for u0t following convention
+rection. IVX-QR also maintains the inherent benefits of QR such           in the predictive regression literature:
+as markedly superior performance under thick-tailed errors and
+the capability of testing predictability at various quantile levels. All  u0t  mds (0, 00) , i.e., E (u0t |Ft-1) = 0 and
+these features make the technique well suited to empirical appli-
+cations in macroeconomics and finance.                                    E  u0t  u0t  |Ft       =  00,       t ,         (2.3)
+
+    The paper is organized as follows. Section 2 introduces the                             -1
+model and extends the limit theory of ordinary QR. Section 3
+develops the new IVX-QR methods. Section 4 provides a practical                       
+rule to choose the filtering parameters. This section also reports the
+simulation results based on the suggested rule. Section 5 illustrates            
+the empirical examples and Section 6 concludes. Main proofs are           uxt = Fxjt-j, t  mds (0,  ) ,
+given in the Appendix, while additional discussions, proofs of
+                                                                                     j=0
+
+                                                                             >    0,   E  1    2+   <      ,    >  0,
+
+                                                                                             
+
+                                                                                            
+
+                                                                          Fx0 = IK ,                Fxj    <  ,
+                                                                                                         
+                                                                                                 j
+
+                                                                                            j=0
+
+                                                                                                                   
+
+                                                                          Fx(z) =  Fxjzj and Fx(1) =  Fxj > 0,
+
+                                                                                  j=0                              j=0
+
+                                                                          0x = E u0t ux t  ,                            
+
+                                                                                                         xx =  E uxt uxt-h = Fx(1) Fx(1).
+
+                                                                                                                     h=-
+
+                                                                           1 The different values of 's may be also allowed between (I0), (MI) and (I1)
+
+                                                                          categories, see Lee (2014, Section 1.8).
+                                                                            2 (MI) and (ME) spaces are introduced in Phillips and Magdalinos (2007). In
+
+                                                                          Section 1.7 of Lee (2014), (MI) space is shown to conveniently encompass the
+
+                                                                          stationary long memory processes.
+                                                                            3 Conditional homoskedasticity can be relaxed, see Remark 2.1.
+                                                      J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                                                       107
+
+Under these conditions, the usual functional limit law holds          the expansion of not everywhere differentiable objective functions
+(Phillips and Solo, 1992):                                            after smoothing with the conditional pdf fu0t ,t-1.
+
+1    ns              1   ns  u0j         B0n(s)
+
+                         
+
+           uj  :=            uxj     =:  Bxn(s)                       2.2. Limit theory extension of quantile regression
+
+  n   j=1             n j=1
+
+                    B0(s)            00   0x                              This section extends the existing limit theory of ordinary QR.
+                     Bx(s)            x0  xx                          This extension is of some independent interest and is useful in
+                             =   BM                ,       (2.4)      revealing the source of the problems that arise from persistent
+                                                                      regressors in QR. The ordinary QR estimator has the form:
+where B = B0 , Bx is vector Brownian motion (BM). The local to
+                                                                                            n
+unity limit law for case (I1) also holds (Phillips, 1987):
+
+                                                                      ^ QR                                         yt         Xt -1 
+
+xnr    Jxc (r),                        r                                    =  arg  min                                  -                                                 (2.8)
+                     where Jxc (r) = e(r-s)C dBx(s)
+                                                           (2.5)                          t =1
+                                                      0
+   n
+
+is Ornstein­Uhlenbeck (OU) process.                                   where  (u) = u ( - 1 (u < 0)),   (0, 1) is the asymmetric
+                                                                      QR loss function. The notation Xt-1 = (1, xt-1) includes the
+    I now consider a linear predictive QR model. Given the natural
+                                                                      intercept and the regressor xt-1 whose specification is given in
+filtration Ft =  {uj = (u0j, uxj), j  t}, the predictive QR model
+                                                                      (2.2). I employ different normalizing matrices according to the
+is
+                                                                      regressor persistence:
+
+Qyt ( |Ft-1) = 0, + 1 , xt-1                               (2.6)                 
+
+where Qyt ( |Ft-1) is a conditional quantile of yt such that                        nIK +1                      1+              for (I0),
+Pr yt  Qyt ( |Ft-1) |Ft-1 =   (0, 1) .                                                                            2
+                                                                                                                                for (MI),
+                                                                                                                                for (I1),
+                                                                               diag( n,                                  )      for (ME).
+                                                                      Dn  :=                                 n       IK                                                    (2.9)
+
+   The model (2.6) analyzes other quantile predictability as well              diag    ( n,                  nIK )   )
+                                                                                        
+as the median of yt . This feature is well suited to the analysis              diag    ( n,                  n Rnn
+of financial asset returns, whose distributional predictability will
+                                                                      Using the Convexity Lemma (Pollard, 1991), as in Xiao (2009), I
+be useful for many applications. Another stylized fact of asset       prove the next theorem that encompasses the limit theory for the
+                                                                      unit root case (Theorem 1 in Xiao, 2009), stationary local to unity
+returns, conditional heteroskedasticity, can also be allowed in       case (Proposition 2 in Maynard et al., 2011) and stationary case
+                                                                      (Koenker, 2005). This paper adds to the QR literature by extending
+(2.6). In Section 1.3.3 of Lee (2014), (2.6) is shown to accommodate  that limit theory to the (MI) and (ME) cases.
+
+conditional heteroskedasticity by including a proxy for the
+
+conditional stock variance as one regressor.
+
+   By defining a piecewise derivative of the loss function in the
+
+QR  (u) =  - 1 (u < 0) (see (2.8)), it is easy to show the            Theorem 2.1.
+QR ``induced'' innovation  (u0t )  mds (0,  (1 -  )) where
+u0t = u0t - Fu-01( ) and Fu-01( ) is the unconditional  -quantile                       
+                                                                      Dn ^QR - 
+of u0t . Then the following functional law holds
+
+1    nr        (u0t  )       B (r)                                                         (1                   - )      1                                      for (I0),
+                               Bx (r )                                                0,                        (0)2               0                            for (MI),
+                                                                               N          fu0                             0
+                                                                                                                                   x-x1                         for (I1),
+               uxt                                                                                                                                              for (ME),
+                                                                               
+  n t=1
+                                                                               
+
+                                      (1 -  )     x                                        (1                   - )      1               
+                                      x          xx                                   0,                        (0)2               0
+                         =   BM                         .  (2.7)                          fu0                             0
+                                                                                                                                   Vx-x 1
+                                                                               N
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+
+                                                                                                                                                  -1
+
+This functional law drives the main asymptotics below.                                                       
+                                                                               
+    Some regularity assumptions on the conditional density of u0t                                                                        Jxc (r)
+are imposed.                                                                                                    1
+                                                                               
+                                                                               
+
+                                                                                 fu0   (0)-1                                                      
+                                                                                                                                   
+
+                                                                                                                     Jxc (r)             Jxc (r)Jxc (r)
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+
+Assumption 2.1. (i) The sequence of stationary conditional pdf                 
+
+fu0t ,t-1 (·) evaluated at zero satisfies a FCLT with a non-                         B (1)
+degenerate mean fu0 (0) = E fu0t ,t-1 (0) > 0,                                       
+                                                                                                                         
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+                                                                                          Jxc (r)dB
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+
+                                                                                                                                              
+                                                                               
+                                                                                                (1              - )         1        0
+ 1   nr             (0)  -  fu0  (0)      Bfu0 (r) .                                     0,                     (0)2                 V~x-x 1
+                                                                                               fu0                           0
+      fu0t ,t-1                                                                MN
+                                                                               
+  n  t =1
+
+(ii) For each t and   (0, 1), fu0t ,t-1 is bounded above with         where Vxx     =        erC                xx erC      dr  ,  V~xx  =        e-rC  YC  YC  e-rC  dr  and YC  
+probability one around zero, i.e., fu0t ,t-1 () <  w.p.1 for all
+|| <  for some  > 0.                                                     0,              0                      dr                            0
+
+                                                                      N        0  e-rC  xx e-rC                          .
+
+Remark 2.1. Assumption 2.1-(i) is not restrictive considering that    2.3. Sources of nonstandard distortion and correction methods
+
+an mds (or iid) structure is commonly imposed on u0t (hence               Theorem 2.1 shows that the limit distribution in the (I1) case
+u0t ) in the predictive regression literature. Note that iid u0t      is nonstandard and nonpivotal. To see the source of nonstandard
+                                                                      distortion clearly, I further analyze the limit distribution of the
+(fu0t ,t-1 (0) = fu0 (0) for all t) is subsumed in this assumption,
+where Bfu0 (r) is identically zero in such case (degenerate Brow-     slope coefficient estimator. For simplicity, assume K = 1 and
+nian motion). Time varying conditional pdf fu0t ,t-1 (0) with weak    uxt  mds (0, xx), then it is straightforward to show that
+
+dependence is allowed to include, for example, some empirically       n 1Q,R   -                             fu0   (0)-1         J¯xc dB    ,
+                                                                                  1,                                              J¯xc 2
+relevant conditionally heteroskedastic (but still mds) u0t processes
+(e.g. ARCH/GARCH), see 1.3.3 of Lee (2014). Assumption 2.1-(ii) is a
+
+standard technical condition used in the QR literature, and enables
+108                                                                    J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+where   J¯xc  =  Jxc (r)  -   1    Jxc  (r  )dr  is  the     demeaned  OU process.  Using       |( )| < || can be shown for certain cases. This result indicates
+
+                                0                                                               an inherent robustness of QR under persistence, i.e., less distortion
+the orthogonal decomposition of Brownian motion (Phillips, 1989)                                than mean regression given an identical degree of persistence (c).
+
+dB = dB .x +  xx-x1dBx we have                                                                  In Table A.1 in Lee (2014), various  ( )s are calculated when
+                                                                                                 = -0.95, and the relation | ( )| < || figures. Moreover,
+                                                   J¯xc dB                      J¯xc dBx        the magnitude of | ( )| gets larger (more distortion) as the tail
+                                                    J¯xc 2                      J¯xc 2          gets heavier at the 5% quantile. Meanwhile, | ( )| gets smaller for
+n 1Q,R                     fu0  (0)-1                        .x       x                     .
+              1,                                                       xx                       thicker tails at the median.
+        -                                                        +
+                                                                                                Remark 2.3. The commonly used lower tail dependence measure
+Note that:
+                                                                                                is L = lim0+ L ( ), where
+ J¯xc dB .x                                        J¯xc 2    -1
+  J¯xc 2                                                                                        L ( ) = P u0t < Fu-01( )|uxt < Fu-x1( )
+                                                                 ,                                      =  -1E 1 u0t < Fu-01( ) 1 uxt < Fu-x1( ) .
+                 MN 0,  .x
+                                                                                                Thus, the dependence measure  ( ) in (2.11) is different from
+with  .x            =     Var   B                  =          (1 -  ) - x-x12 x and             both linear dependence () and tail or quantile dependence (L
+                                                                                                or L ( )). The linear dependence () affects the distortion of
+                                            .x                                                  nonstationary mean regression, while  ( ) contributes to the
+
+ x = Cov ( (u0t ) , uxt ). Now assume a researcher uses                                         distortion in nonstationary QR. If we consider a quantile­quantile
+                                                                                                predictability (Han et al., 2014) or a extreme quantile version of it
+the ordinary QR standard error s.e(1Q,R ) =  (1 -  )f^u0 (0)-1
+ n      (xtµ-1)2   -1/2                     xtµ-1                                               (Davis and Mikosch, 2009), L ( ) or L will play the contributing
+{ t=1                      ,  where                =      xt-1 - T -1  xt-1. Then with
+                  }                                                                             role for the distortion. The quantile­quantile predictability under
+                                                                                                the presence of persistent predictors will be an interesting topic for
+the standardized notation ¯Ixc , Wx = x-x1/2 J¯xc , Bx, the t-ratio                             future research, wherein we would need to define a proper version
+                                                                                                of quantile for nonstationary processes.
+becomes:
+                                                                                                    To correct the nonstandard distortion in (2.10), we may
+              1Q,R   -                                                                          consider two approaches. The first is to construct a confidence
+                          1,                                                                    interval (CI) for c, such as Stock's CI (Stock, 1991), and correct the
+
+t1,     =        s.e(1Q,R )                                                                     distortion through an induced CI for 1, . This type of Bonferroni
+
+                 -      2 x           1/2          N(0, 1)                                      methods are frequently used in predictive mean regression
+        1           xx (1 -        )                                                            (e.g. Cavanagh et al., 1995; Campbell and Yogo, 2006). For a
+                                                                                                single local to unity (I1) predictor, Campbell and Yogo (2006)
+                     x                       ¯Ixc dWx                               (2.10)      successfully correct the distortion, but lose their validity when
+                                                                                                predictor persistence belongs to (MI) or (I0) spaces. Cavanagh et al.
+        +               -   ))1/2           ¯Ixc 21/2                                           (1995) still provide conservative size control but may become
+          (xx (1                                                                                overly conservative for (MI) to (I0) regressors -- see Phillips
+                                                                                                (2014). However, the Bonferroni methods based on a uniformly
+         1 -  ( )21/2 Z                                          +  ( ) LUR(c)                  valid CI for c (e.g. Mikusheva, 2007), rather than Stock's CI, will
+                                                                                                provide validity over (MI) or (I0) spaces. I provide the simulation
+                                                                                                comparison of IVX-QR to this modified Bonferroni correction
+                                                                                                as well as the original Campbell­Yogo method (Fig. 3). For
+        standard inference                                       nonstandard distortion         multivariate nonstationary predictors (multiple ci's), Bonferroni
+                                                                                                methods are somewhat difficult to use. In predictive QR, Maynard
+where Z and LUR(c) stand for a standard normal distribution and                                 et al. (2011) employed the Bonferroni correction idea. The second
+                                                                                                approach to correct for nonstandard distortion, which this paper
+the local unit root t-statistics, respectively, and                                             follows, is to use the IVX filtering technique (Magdalinos and
+                                                                                                Phillips, 2009). Methods based on the IVX filtering technique are
+ ( ) = -corr (1 (u0t < 0) uxt ) = corr(u0t , uxt ) := .                                         discussed in the next section.
+
+Remark 2.2. As the analytical expression (2.10) shows, the
+
+nonstandard distortion becomes greater with (i) smaller |c| and
+(ii) larger | ( )|. Condition (i) is well known from the mean
+
+predictive regression literature where the distortion from the
+
+highly left-skewed feature of LUR(c) with small |c| has been
+
+studied. Condition (ii) is a special feature of nonstationary QR,
+see Xiao (2009) for strict unit root regressors and Maynard et al.
+(2011) for a local-to-unity regressor with an explanation of the
+nonstandard feature from this distortion. Note that
+
+ ( )  =       -E [1 (u0t < 0) uxt ]
+                {xx (1 -  )}1/2
+
+              -E  1 u0t       < Fu-01( )           uxt  
+                  {xx         (1 -  )}1/2
+      =                                                   ,                         (2.11)
+
+so the explicit source of distortion from persistence and nonlinear                             3. IVX-QR methods
+
+dependence is provided by this analysis. For exposition, assuming                                   It is convenient to transform the model (2.6) to remove the
+                                                                                                intercept term:
+multivariate normal or t distributions for (u0t , uxt ) gives (see 1.1 of
+
+Lee, 2014),
+
+                      Fu-01( )     yfu0     (y)    
+                  -
+                      -                          dy
+
+ ( ) =                                                                                          yt = 1 , xt-1 + u0t           (3.1)
+                       (1 -  ) xx
+
+      =             (1         ) xx         -E     u0|u0     <   Fu-01( )           (2.12)      where yt := yt - ^0Q,R ( ) = yt - 0, + Op(n-1/2) is the zero-
+                          -
+                                                                                                intercept QR dependent variable. This is analogous to the demean-
+where we clearly see the QR endogeneity  ( ) is a composite effect
+                                                                                                ing process in the predictive mean regression in preparation for
+of linear dependence () and the truncated mean of regression
+                                                                                                tests of the slope coefficient. Section 1.4 of Lee (2014) explains the
+errors  (-     Fu-01( )   yfu0  (y)     dy).    Another      interesting  property  is    that
+                                                                                                validity of the dequantiling procedure and a possible inference on
+               -
+                                                                                                0, .
+                                                    J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                                        109
+
+3.1. IVX filtering                                                       automatic adjustment applies to several persistent predictors si-
+                                                                         multaneously, thereby accommodating multivariate persistent re-
+    This section reviews a new filtering method, IVX filtering           gressors. When xt belongs to (ME), the IVX estimation becomes
+(Magdalinos and Phillips, 2009). The idea can be explained by            equivalent to OLS for the mean regression case (Phillips and Lee,
+comparing it to commonly used filtering methods. For simplicity,         forthcoming). The same principle works for QR, delivering uni-
+first assume xt belongs to (I1). Filtering persistent data xt to         formly valid inference in QR over (I0)­(ME) predictors (Proposi-
+                                                                         tions 3.1 and 3.2).
+generate z~t can be described as
+
+z~t = F z~t-1 + xt                                                       3.2. IVX-QR estimation and limit theory
+
+with a filtering coefficient F and first difference operator .               I propose new IVX-QR methods that are based on the use of IVX
+                                                                         filtered instruments. Since the rate of convergence of IVX-QR will
+   When F = 0K then z~t = xt and we simply take the first                differ according to predictor persistence, I unify notation for the
+                                                                         data with the following embedded normalizations:
+difference to remove the persistence in xt . First differencing is the
+most common technique employed by applied researchers, and it            Z~t-1,n := D~ -n 1z~t-1 and Xt-1,n := D~ n-1xt-1,                                   (3.3)
+leads to the (I0) limit theory in Theorem 2.1. Thus, the standard
+normal (or chi square) inference is achieved. The drawback to            where, using notation    = min (, ) ,
+first differencing is the substantial loss of statistical power in
+detecting predictability of xt-1 on yt . Taking the first difference                nIK                    for (I0),
+of a regression equation makes both xt-1 and yt much noisier                                               for (MI) and (I1),
+and finding the relationship between two noisy processes is              D~ n  =     1+()                  for (ME).
+statistically challenging. In terms of convergence rate, the first
+difference reduces the n-rate (for the (I1) case) to the n1/2-rate (for               n 2 IK
+the (I0) case), thereby seriously diminishing local power. At the
+cost of this substantial loss, the first difference technique corrects              n()Rnn
+the nonstandard distortion in (2.10).
+                                                                         The unified normalizing matrix becomes one of these three
+   When F = IK then z~t = xt so we use level data without any            specifications according to predictor persistence and the relation
+
+filtering. The statistical power is preserved in this way, since it is   between  and  (through   ). This notation is convenient for
+easy to detect if a persistent xt-1 has non-negligible explanatory
+power on noisy yt . This is clear from the n-rate of convergence         presenting the IVX-QR limit theory (Theorems 3.1 and 3.2) but
+of (I1) limit theory (maximum rate efficiency) in Theorem 2.1.           depends on the unknown localizing coefficient matrix C and the
+However, inference suffers from the size distortion in (2.10).
+                                                                         unknown rate parameter . Thus Theorems 3.1 and 3.2 are not
+   The main idea of IVX filtering is to filter xt to generate z~t with
+                                                                         directly applicable for practical work. However, self normalized
+(MI) persistence -- intermediate between first differencing and the      versions of the statistics (Propositions 3.1 and 3.2) have a chi-
+                                                                         square limit theory free of these unknown parameters, providing a
+use of levels data. In particular, we choose F = Rnz as follows:         basis for the actual inference.
+
+z~t = Rnz z~t-1 + xt ,  Rnz  =  IK  +  Cz  ,                    (3.2)        I also unify the different asymptotic moment matrices for the
+                                       n                                 (MI) and (I1) cases:
+
+                                                                                     
+
+where   (0, 1) , Cz = cz IK , cz < 0 and z~0 = 0.                                   Vzxz =                 erCz xxerCz dr ,    when   (0,   1) ,
+                                                                                                                               when   (0, )
+The parameters   (0, 1) and cz < 0 are specified by the                  Vcxz :=                   0                                                         (3.4)
+
+researcher. One practical suggestion is given in Section 4.1. As is                              
+
+clear from the construction, Rnz is between 0K and IK but closer to                 Vxx =                  erC xxerC dr ,
+IK especially for large n. This construction is designed to preserve
+local power as much as possible while achieving the desirable size                               0
+
+correction. The z~t essentially belongs to an (MI) process so the limit  and
+theory of the (MI) case in Theorem 2.1 is obtained by using z~t as
+                                                                                                                               if  = 1,                      (3.5)
+instruments. The IVX filtering exploits advantages both from using
+                                                                                  -Cz-1 xx + dJxc Jxc ,                        if   (, 1) ,
+level (power) and the first difference (size correction) of persistent   cxz := V-cCxzz-=1 {Vxxxx + CVxx} ,                    if   (0, ) .
+data. It leads to the intermediate signal strength n(1+)/2. At the
+                                                                         From the conditional moment restriction E[                         - 1 yt      1 ,  xt    
+cost of the slight reduction in convergence rate compared to the
+                                                                                                                                                                 -1
+level data, the filtering achieves the desired size correction. The
+                                                                         |Ft-1] = 0, a natural procedure of estimating 1, using IVX
+simulation in Section 4 shows that this cost may not be substantial.
+                                                                         filtering is to minimize the L2-distance of the sum of the empirical
+To summarize
+                                                                         moment conditions that use IVX z~t-1 from information set Ft-1.
+
+Comparisons of level, first differenced and IVX-filtered data:           Definition 3.1 (IVX-QR Estimation). The IVX-QR estimator ^1, for
+                                                                         1, is defined as
+                                level first            IVX
+                                                    filtering
+                                       difference                                                          n                   n                 
+                                                       Yes                                                              (1)                 (1)
+Discriminatory power            Yes           No                         ^ 1IV,XQR  =  arg  inf  1                  mt                  mt         ,         (3.6)
+Size correction                                        Yes                                       2            t =1                t =1
+Rate of convergence             No            Yes   n(1+)/2                                 1
+
+                                n             n1/2                       where mt (1) = z~t-1  - 1 yt  1 xt-1 = z~t-1 (u0t (1)).
+
+    Assume now that xt falls into one of three specifications: (I0),           The minimization (3.6) leads to the following approximate FOC:
+(MI) and (I1). When xt belongs to (I1), the IVX filtering reduces
+the persistence to (MI) as described above. If xt belongs to (MI)        n                                                              
+or (I0), the filtering maintains the original persistence. This is
+                                                                                        -1                 yt  ^ 1IV,XQR xt-1               = op(1).         (3.7)
+how we achieve uniform validity over the range of (I0)­(I1). This            Z~t -1,n
+
+                                                                         t =1
+110                                                                J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+The asymptotic theory of ^1IV,XQR follows from this condition. The                               Theorem 3.2. Under H0 : 1, = 0,
+
+next theorem gives the limit theory of the IVX-QR estimator under                                D~ n ^1IV,XQR - 1, 
+various degrees of predictor persistence.
+
+Theorem 3.1 (IVX-QR Limit Theory).                                                                                                          
+
+D~ n ^ 1IV,XQR - 1,                                                                              N                   0,   (1  - )   x-x1                  for (I0),
+                                                                                                                              (0)2
+                                                                                                                         fu0                              for (MI) and (I1), .
+                                                                                                 
+                                                                                                                                                          for (ME).
+
+                                                                                                 
+
+                                                                                                                                            
+                                                                                                     
+                                                                                                                          (1  - )
+                                                                                                                              (0)2
+          N         0,   (1  - )   x-x1                            for (I0),                     N                   0,  fu0        Vc-xz1
+                             (0)2                                  for (MI) and (I1),
+                        fu0                                        for (ME).                         
+                                                                                                     
+          
+                                                                                                 
+
+                                                                                                                                                  
+                                                                                                 
+                                                                                                                            (1  - )    -1
+                                                                                                 MN                             (0)2   V~xx
+                      0,   (1   - )   c-xz1  Vcxz  c-xz1                                                             0,    fu0
+                                (0)2
+      MN                  fu0
+
+         
+         
+
+          
+
+                                                   
+          
+                      0,   (1   - )    -1                                                            The above limit theory also holds under local alternatives of
+                                (0)2   V~xx
+          MN              fu0                                                                    the form H0 : 1, = n- b1, with some  > 0. We achieve
+          
+                                                                                                 asymptotic normality of the null test statistics simply by replacing
+    Unlike Theorem 2.1, the limit theory is (mixed) normal for
+all cases, and the limit variances are easily estimated. The self-                               the regressor xt-1 with z~t-1. The final pivotal test statistics can
+normalized estimator given in the following theorem provides a
+convenient tool for unified inference across the (I0), (MI), (I1) and                            be obtained by a similar self-normalization as given in the next
+(ME) cases.
+                                                                                                 theorem.
+
+                                                                                                 Proposition 3.2. Under H0 : 1, = 0,
+
+Proposition 3.1 (Self-normalized IVX-QR). For (I0), (MI), (I1)                                                2  (1  -     ))-1(^1IV,XQR  -   1,  )   
+and (ME) predictors,                                                                                                                                   Z~ Z~
+                                                                                                 fu 0 (0) (
+
+             2           ))-1(^ 1IV,XQR     1,     )  X PZ~  X                                   × (^1IV,XQR - 1, )   2 (K )
+
+fu 0 (0) ( (1       -                    -                                                       for (I0), (MI), (I1) and (ME) predictors.
+
+     × (^1IV,XQR - 1, )   2 (K ) ,                                                               Since QR algorithms are available in standard statistical
+
+where X PZ X        =          -1             =       n           xt-1z~t-1   n           z~t-1  software, Proposition 3.2 provides a uniform inference tool that
+                          X Z~ Z~ Z~ Z~ X
+                                                            t =2                    t =2         involves easy computation. If we want to test the predictability of
+
+z~t-1-1   n             xt-1z~t-1  and     fu 0 (0)   is  any  consistent     estimator   for    a specific subgroup among our predictors, say H0 : 11, = 12, =
+
+                t =2                                                                                                                                             I2,            
+
+fu0 (0).4                                                                                        0, then the     following      test  statistics  with    H   =       02×(K  -2)  can be
+
+   Using Proposition 3.1, we can test the linear hypothesis H0 :                                 employed
+1, = 10, for any given 10, . More generally, consider a set of r
+linear hypotheses H0 : H1, = h with a known r × K matrix                                                      2            ))-1(H  ^1IV,XQR){H            -1      -1
+                                                                                                                                                  Z~
+H and a known vector h . In this case the null test statistics are                               fu 0 (0) (      (1  -                                Z~      H  }
+formed as follows with the corresponding chi-square limit theory
+                                                                                                 × (H^1IV,XQR)   2 (2) .
+
+             2  (1  -     ))-1(H^ 1IV,XQR  -  h    ){H    X   PZ~  X -1  H     -1
+
+fu 0 (0) (                                                                    }
+
+     × (H^1IV,XQR - h )   2 (r) .                                                                4. On the choice of IVX-QR filtering parameters and simulation
+
+3.3. Ivx-qr inference: testing quantile predictability                                              In this section, I discuss the proper choice of parameters (Cz , )
+
+    Theorem 3.1 and Proposition 3.1 allow for testing of a                                       used in the IVX construction. Theorems 3.1 and 3.2 show that, for
+
+general linear hypothesis with multiple persistent predictors. The                               a given Cz , a larger IVX persistence () leads to more local power
+                                                                                                 while a smaller  may achieve better size corrections. I suggest a
+procedure (3.6) may be computationally demanding since the
+                                                                                                 practical choice rule and provide confirmatory simulation evidence
+optimization of a nonconvex objective requires grid search with                                  obtained by IVX-QR tests based on this rule.
+
+several local optima. Considering that the usual hypothesis of                                   4.1. A practical rule
+
+interest in predictive regression is the null of H0 : 1, = 0, I                                      The idea uses the analytical formula (2.10) where the QR t-ratio
+
+propose an alternative testing procedure that is computationally                                 is shown as t1,  (1 -  ( )2)1/2Z +  ( ) LUR(c) with LUR(c) =
+                                                                                                 ( ¯Ixc 2)-1/2  ¯Ixc dWx. The distributional properties of LUR(c) are
+attractive. Recall the DGP we impose is yt = 1 , xt-1 + u0t .
+Based on the fact that xt-1 and z~t-1 are ``close'' to each other, we                            well understood. It is easy to simulate the distribution for a given c.
+use ordinary QR on z~t-1 to test H0 : 1, = 0. Specifically, consider
+                                                                                                 The idea of IVX-QR filtering is to reduce the regressor persistence
+the simple QR regression procedure
+                                                                                                 (|c|) in order to remove the nonstandard distortion arising from
+                          n
+                                                                                                  ( ) LUR(c), which is a composite effect of QR endogeneity and
+^1IV,XQR                          yt        1z~t-1 .
+                                                                                                 nonstationary distortion:
+          =  arg    min                  -
+
+                          t =1
+
+We then have the following asymptotics of null test statistics:                                            ( ) × LUR(c) .
+                                                                                                               
+
+                                                                                                 QR endogeneity nonstationary distortion
+
+  4 The kernel density estimation with standard normal kernel functions and                      The essential AR(1) parameter of the IVX-filtered regressor
+Silverman's rule for the bandwidth choices are used in the simulation and empirical
+results below.                                                                                   (in a bivariate setting) is Rnz              =   1   +   cz  =  1    +  c(,n)    where
+                                                                                                                                                          n                 n
+                                                      J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                  111
+
+c (, n) = n1-cz . Thus, for any   (0, 1), the induced local-                    4.2. Simulation
+to-unity parameter c (, n)  - as n   , thereby letting
+
+LUR(c (, n))  Z  N(0, 1) (Phillips, 1987). The standard                             I conduct simulations to examine the numerical performances
+                                                                                of IVX-QR inference methods based on the practical rule suggested
+normal limit theory for t1, will therefore hold for any   (0, 1)                in Section 4.1. Using the common simulation designs, I confirm the
+
+as n  . For a given finite n, the filtering parameter choice can                validity of the suggested choice of (Cz , ) and the reliable IVX-QR
+
+be  interpreted  as  showing  how  to  choose         n1-  cz    large  enough  performances.
+                                                                                    The following DGP is imposed:
+
+to deliver the standard normal limit theory of t1, . If  is small
+enough, c (, n) = n1-cz will be close enough to -, however,
+
+smaller  results in a loss of local power. For a given cz and n, we             yt = 0, + 1 , xt-1 + u0t, ,                                  (4.1)
+                                                                                xt = µx + Rxt-1 + uxt .
+want to increase  < 1 up a threshold value where the distortion
+                                                                                where µx = 0, R = IK + n-1C and
+from  ( ) LUR(c) is still acceptable.
+
+    I suggest a practical rule to choose   (0, 1) with a normalized
+
+cz = -5. In a local to unity regressor setting, it is possible to               ut = (u0t ux t )  iid Fu 0(K +1)×1, (K +1)×(K +1) .          (4.2)
+find a numerical value of c (, n) = c that controls the size
+
+distortion after imposing an acceptable Type I error bound. For                     The IVX is constructed as (3.2) using the practical rule of choice:
+
+example, Campbell and Yogo (2006) suggested 7.5%, for a nominal                  is picked up from the look-up Table A.3 based on ^ ( ) ,where Cz
+                                                                                is normalized to -5IK . The procedure is automatically built-in to
+5% level. More conservative bounds can be employed according
+                                                                                the Matlab simulation codes. The tests use Proposition 3.2.
+to the purpose of the researchers. By simulating t1, with various
+
+choices of c (, n) and  ( ), we could plot the asymptotic size of
+
+nominal  t-test as a function of c (, n) and  ( ):
+
+AsySIZE (c (, n) ,  ( ) ; )                                                     4.2.1. Median/Mean tests with a single persistent predictor
+  = Pr (1 -  ( )2)1/2Z +  ( ) LUR(c) > Z/2 .
+                                                                                   I begin with a single (K = 1) persistent regressor. Although
+
+                                                                                IVX-QR methods allow testing for predictability at various quantile
+
+For 5% level tests, I report the values of c (, n) and  ( ) providing           levels, I focus on the median to compare its performance to that of
+
+the desirable level of tail approximations (empirical size smaller              existing mean predictability tests. In particular, the IVX-QR median
+
+than 7.5%). They are tabulated in Table A.3 in the supplement                   test is compared to the methods of Campbell and Yogo (2006,
+
+(Lee, 2014). Using the table we could pick the proper c (, n) and               CY-Q) and a modified version of CY-Q test (Modified CY-Q). The
+equating c (, n) = n1- (cz ). The corresponding  is therefore
+obtained by  = 1 - (log(-c (, n)) - log(5)) / log n.                            invalidity of the original CY-Q test for I(0)-MI regressors has been
+
+   Among the two distortion components  ( ) and LUR(c), we                      recently reported and a modification based on a uniformly valid
+
+only use data information contained in the estimated QR endo-                   CI (e.g. Mikusheva, 2007) was suggested in the literature (Phillips,
+
+geneity ^ ( ). The estimation is straightforward by the regres-                 2014). I include both versions of CY-Q tests in the following
+
+sion residuals. The reliable performances are reported in Table                 simulation.
+
+A.2 (Section 1.1 of Lee, 2014). The choice based on ^ ( ) is thus                 To investigate empirical size and power performances, I
+quantile-dependent, and it allows us to pick the correct  from data
+                                                                                generate a sequence of local alternatives with H1n   :  1n   =  b
+information. We do not use any estimation of c but rather directly                                                                              n
+                                                                                in (4.1) for integer values b  0 ( = 0.5 is suppressed) and
+impose an acceptable value of c (, n) = c to the IVX filtering
+                                                                                observe the performances of the IVX-QR, CY-Q and modified CY-
+mechanism. Not using any estimated c (which is not consistently
+                                                                                Q tests. Note that the b = 0 case provides size performances (H0 :
+estimable) is a key idea to avoid the invalidity issues with I(0)-MI            1, = 0), while b > 0 illustrates power results (H1 : 1, > 0).
+
+predictors, raised in the recent literature (e.g. Mikusheva, 2007;              Considering that much applied work uses the intercept term in
+
+Phillips, 2014).                                                                the stock return regression (non-zero excess mean/median return),
+
+    In sum, given the data:                                                     IVX-QR with dequantiling, as in (3.1), is compared to the CY-Q and
+
+                                                                                modified CY-Q tests with demeaning. For the distribution Fu in
+                                                                                (4.2), I employ normal and t-distributions, with the correlation
+
+                                                                                matrix
+
+1. Obtain ^ ( ) by estimating -corr (1 (u0t < 0) , uxt ) using the                =  1           ,            = -0.95.
+                                                                                       
+    regression residuals.                                                                    1
+
+2. Find a suggested c (, n) from Table A.3 and get  = 1 -                       This value of  reflects the realistic error correlation in predictive
+   (log(-c (, n)) - log(5)) / log n.
+                                                                                regressions, such as dividend­price ratio, and has been frequently
+3. Using the  and cz = -5, perform the IVX-QR estimation and                    employed in the predictive regression literature.
+
+    tests.                                                                         Figs. 1­3 illustrate the results. For I(1) (R = 0.98) predictors
+
+   In multiple predictor scenarios, we could use  = min(1, . . . ,              with normal errors, the CY-Q and modified CY-Q tests perform
+K ) to provide safe size control, where each k is chosen by the                 better than IVX-QR, which is expected. The test performance
+
+above rule from the corresponding regressor xk. The performances                rankings with MI and I(0) (R = 0.9 and 0.84) with normal errors
+are investigated in the next section.
+                                                                                are mixed. For heavy-tailed scenarios (t(3)­t(1)), IVX-QR shows
+   The Matlab codes containing the built-in computation of ^ ( )                the best performance across all scenarios. Note that the invalidity
+                                                                                of the original CY-Q for I(0) case (test size shrinking to zero)
+and the automatic IVX-QR correction based on the corresponding                  appears in Fig. 3, again confirming the results in Phillips (2014)
+                                                                                and Jansson and Moreira (2006, Table I). The modified CY-Q shows
+ are used in the simulation and empirical applications below. The               the validity in all cases. The power loss of the modified CY-Q
+                                                                                relative to the original CY-Q may be due to a particular Bonferroni
+codes are available from the author's web page.5                                correction employed here. The original CY-Q numerically found the
+
+5 https://sites.google.com/site/jihyung412/research.                            combination of 1 (size for R) and 2 (size for  conditional on R)
+
+                                                                                to maximize efficiency. The same efficiency maximization for the
+112                          J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+     1           n=250, C= ­5, Normal                                                                          n=250, C= ­5, t(3)
+                                                                               1
+
+     0.8                                                                       0.8
+
+     0.6                                                                       0.6
+
+     0.4                                                IVX ­ QR               0.4                                                  IVX ­ QR
+     0.2                                                Modified CY ­ Q        0.2                                                  Modified CY ­ Q
+                                                        CY ­ Q                                                                      CY ­ Q
+       0                                                Nominal Size             0                                                  Nominal Size
+         0                                                                         0
+                 0.01  0.02                             0.03             0.04         0.01  0.02                                        0.03  0.04
+
+                                    n=250, C= ­5, t(2)                         1            n=250, C= ­5, t(1)
+     1
+
+     0.8                                                                       0.8
+
+     0.6                                                                       0.6
+     0.4
+     0.2                                                IVX ­ QR               0.4                                                  IVX ­ QR
+                                                        Modified CY ­ Q        0.2                                                  Modified CY ­ Q
+       0                                                CY ­ Q                                                                      CY ­ Q
+         0                                              Nominal Size             0                                                  Nominal Size
+                                                                                   0
+                 0.01  0.02                             0.03             0.04         0.01  0.02                                        0.03  0.04
+
+                       Fig. 1. c = -5(n = 250; R = 0.98) with normal, t(3), t(2) and t(1) innovations.
+
+                                         n=250, C= ­25, Normal                                                 n=250, C= ­25, t(3)
+            1                                                                       1
+
+          0.8                                                                  0.8
+
+          0.6                                                                  0.6
+
+          0.4                                           IVX ­ QR               0.4                      IVX ­ QR
+          0.2                                           Modified CY ­ Q        0.2                      Modified CY ­ Q
+                                                        CY ­ Q                                          CY ­ Q
+            00                                          Nominal Size             00                     Nominal Size
+
+                 0.02  0.04                             0.06             0.08         0.02  0.04                                    0.06      0.08
+
+            1          n=250, C= ­25, t(2)                                                                         n=250, C= ­25, t(1)
+          0.8                                                                       1
+          0.6
+          0.4                                                                  0.8
+          0.2
+                                                                               0.6
+            0
+              0                                         IVX ­ QR               0.4                      IVX ­ QR
+                                                        Modified CY ­ Q        0.2                      Modified CY ­ Q
+                                                        CY ­ Q                                          CY ­ Q
+                                                        Nominal Size             00                     Nominal Size
+
+                 0.02  0.04                                     0.06     0.08         0.02  0.04                                    0.06      0.08
+
+                       Fig. 2. c = -25(n = 250; R = 0.9) with normal t(3), t(2) and t(1) innovations.
+
+modified CY-Q is possible but is beyond the scope of this paper. We            4.2.2. Size properties of prediction tests on various quantiles
+however expect the same ranking patterns will hold by comparing
+                                                                                   Few studies have considered predicting other quantile levels
+the best performances of two CY-Q's (CY-Q when R = 0.98 and 0.9,               of financial returns, such as the tail or shoulder (for exceptions,
+Modified CY-Q when R = 0.84) to IVX-QR's.                                      see Maynard et al., 2011; Cenesizoglu and Timmermann, 2008).
+                                                                               This paper develops a valid method to test various quantile
+    In summary, IVX-QR testing with a single persistent predictor is           predictability of asset returns in the presence of multiple persistent
+competitive, especially when we have heavy-tailed errors. All three            predictors. In this section, I focus on large sample performance
+tests perform well in terms of size and power except for the original
+CY-Q test in cases of stationary predictors. The IVX-QR test can               (n = 700) to guarantee accurate density estimation at the tails,
+easily employ multiple persistent predictors. In addition, the IVX-
+QR test can analyze the predictability of other quantiles in addition          e.g., the 5% quantile. Imprecise density estimation at tail quantiles
+to the median, providing greater applicability for prediction tests.           with finite sample size is a common problem in QR. Large sample
+Size properties of IVX-QR prediction tests on various quantiles are            sizes are often available in financial applications.
+analyzed in the next section.
+                                                                                   The simulation environment used to test the size properties
+                                                                               of various quantile predictions is similar to that of the earlier
+
+                                                                               section. Dequantiling in (3.1) and the practical rule for (Cz , ) based
+                                                           J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                          113
+
+                      1            n=250, C= ­40, Normal                                                  n=250, C= ­40, t(3)                          0.95
+                    0.8                                                        1                                                                       14.5
+                    0.6                                                                                                                                11.5
+                    0.4                                                        0.8                                                                     10.6
+                    0.2
+                                                                               0.6                                                                      9.5
+                      0                                                                                                                                 8.2
+                        0    0.02  0.04       0.06            IVX ­ QR         0.4               0.02  0.04       0.06          IVX ­ QR               17.6
+                                                              Modified CY ­ Q  0.2                                              Modified CY ­ Q        15.0
+                     1                                        CY ­ Q                                                            CY ­ Q                 12.9
+                   0.8                                        Nominal Size       0                                              Nominal Size           13.5
+                   0.6                                                             0                                                                    9.3
+                   0.4                                     0.08 0.1 0.12                                                     0.08 0.1 0.12             16.2
+                   0.2                                                                                                                                 15.7
+                                   n=250, C= ­40, t(2)                                                      n=250, C= ­40, t(1)                        13.7
+                     0                                                                   1                                                             13.9
+                       0                                                                                                                                8.6
+                                                                               0.8
+
+                                                                               0.6
+
+                             0.02  0.04       0.06            IVX ­ QR         0.4               0.02  0.04       0.06          IVX ­ QR
+                                                              Modified CY ­ Q  0.2                                              Modified CY ­ Q
+                                                              CY ­ Q                                                            CY ­ Q
+                                                              Nominal Size       0                                              Nominal Size
+                                                                                   0
+                                                           0.08 0.1 0.12                                                     0.08 0.1 0.12
+
+                                   Fig. 3. c = -40(n = 250; R = 0.84) with normal t(3), t(2) and t(1) innovations.
+
+Table 1
+
+Size performances (%) of ordinary QR (n = 700, S = 1000).
+
+=            0.05            0.1   0.2                     0.3   0.4           0.5                     0.6              0.7      0.8             0.9
+
+Normally distributed errors
+
+c=0          14.5            13.5  15.0                    15.5  16.3          17.8                    17.0             16.3     16.0            13.1
+
+c = -2       10.6            10.0  11.0                    12.5  12.9          11.9                    11.9             11.4     9.8             9.6
+
+c = -5       8.7             8.1         8.3               8.4   7.7                        9.4        8.9              9.8      7.5             11.0
+
+c = -7       9.7             9.2         7.4               6.3   7.4                        6.2        6.2              7.1      7.4             7.8
+
+c = -70      6.7             6.1         6.0               4.2   5.2                        3.8        4.2              4.6      4.6             5.6
+
+t(3) errors
+
+c=0          18.1            17.0  13.5                    12.5  12.3          11.5                    11.9             12.9     14.4            17.1
+
+c = -2       14.4            13.3  11.1                    8.5   8.5                        9.1        9.2              11.2     11.3            13.3
+
+c = -5       11.8            11.5        8.1               9.1   6.6                        8.1        7.4              6.5      8.4             11.4
+
+c = -7       12.5            8.1   10.1                    7.5   5.5                        7.1        5.8              6.9      6.4             9.4
+
+c = -70      10.0            8.9         5.4               4.8   5.5                        3.6        4.2              4.7      6.5             7.8
+
+t(2) errors
+
+c=0          20.3            16.1  11.3                    11.1  9.1                        8.5        8.5              10.4     12.3            14.2
+
+c = -2       15.8            12.4  10.7                    8.3   8.6                        5.8        6.7              8.1      11.8            12.0
+
+c = -5       13.0            9.0         6.7               6.2   5.4                        5.4        4.7              6.5      8.4             12.9
+
+c = -7       12.2            10.7        7.8               5.6   4.1                        3.9        5.8              5.3      7.9             10.7
+
+c = -70      7.2             7.1         6.8               4.5   4.6                        3.4        3.7              5.3      7.0             8.3
+
+on the estimated  ( ) are used for all IVX-QR simulations. The                 technique in the presence of persistent predictors, reassuring the
+persistence parameter ci is selected from {0, -2, -5, -7, -70}.                findings of Xiao (2009) and Maynard et al. (2011).
+This set represents a set of persistent predictors including R = 0.9
+(MI) through R = 1 (unit root). Normal and t-distributions are used                The size performances of the IVX-QR methods are reported
+                                                                               in Table 2. The size corrections are remarkable, confirming the
+for Fu and the number of replications is 1000. All null test statistics        validity of IVX-QR methods at various quantiles. A few tail cases
+                                                                               with pure unit root regressors show mild over-rejections, but the
+use the same hypothesis: H0 : 1, = 0 with a nominal size of 5%.                distortions are substantially smaller than those of the ordinary QR.
+                                                                               These mild over-rejections increase with heavier tails (t(3) and t(2)
+The size performances exceeding 10% are shown in bold, which can               errors) as expected. The simulation results indicate that the IVX-QR
+be considered as severe size distortions.
+                                                                               correction methods with the choice rule of (Cz , ) from Section 4.1
+    I first investigate the size properties of ordinary QR methods.
+Table 1 summarizes the size properties of ordinary QR t-statistics             control test sizes well across most quantiles.
+                                                                                   I now consider the predictive QR scenario with multiple
+in (2.10) with a single persistent predictor when  = -0.95. The
+                                                                               persistent predictors (K = 2). This scenario has rarely been
+nonstandard distortion increases with more persistent predictors
+(smaller c). As Remark 2.2 suggests, the tail structure of Fu                  explored but is relevant in empirical practice (e.g., book-to-market
+significantly affects the magnitude of the size distortion. For a t-           ratio and Treasury bill rate). To avoid lengthy documentation, I
+distribution with heavier tails (smaller degrees of freedom), more             borrow a calibration technique for the innovation structure. In the
+severe size distortion arises at the tail than at the median, while            empirical section, specification with two predictors of book-to-
+the tendency does not impact normally distributed errors (thin                 market ratio and Treasury bill rate is shown to predict stock returns
+tails). The overall results indicate the invalidity of the ordinary QR         at various quantile levels. To support the empirical finding, the
+114                                                        J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+Table 2
+
+Size performances (%) of IVX-QR (n = 700, S = 1000).
+
+=                0.05        0.1           0.2             0.3       0.4       0.5       0.6                      0.7   0.8   0.9   0.95
+
+Normally distributed errors
+
+c=0              8.3            8.5        9.4             8.7       6.0       6.6       8.6                      9.9   8.8   7.9   10.3
+
+c = -2           7.9            6.1        5.0             5.5       4.6       4.1       4.5                      5.3   5.8   6.0   7.7
+
+c = -5           6.4            5.4        4.6             4.9       4.8       2.7       4.7                      5.3   4.7   5.4   7.0
+
+c = -7           6.6            7.1        4.7             5.9       4.3       3.9       4.0                      4.5   4.6   4.8   6.2
+
+c = -70          5.1            5.7        4.3             3.5       3.4       3.0       3.4                      5.1   4.6   5.1   7.2
+
+t(3) errors
+
+c=0              11.1        12.8          9.1             7.8       7.5       6.8       6.1                      7.7   7.6   10.1  11.8
+
+c = -2           9.3            8.1        6.3             5.2       4.9       4.1       5.4                      5.8   5.5   7.8   8.0
+
+c = -5           5.8            7.5        5.9             5.2       4.0       3.7       4.2                      3.9   5.9   7.4   7.6
+
+c = -7           8.5            6.5        5.0             4.5       3.9       4.3       3.9                      4.3   5.3   5.5   7.8
+
+c = -70          7.1            8.0        5.7             3.6       4.2       3.4       4.6                      5.0   5.2   5.9   7.0
+
+t(2) errors
+
+c=0              13.9        10.8          8.0             7.8       6.1       5.7       7.5                      8.9   9.9   7.8   10.3
+
+c = -2           8.8            7.2        7.1             4.6       4.8       4.8       3.9                      4.7   8.6   8.6   6.4
+
+c = -5           7.8            6.6        6.8             5.3       4.8       4.2       4.9                      5.0   7.4   7.7   7.5
+
+c = -7           8.0            7.4        6.3             4.6       3.3       3.8       4.1                      4.2   7.1   7.7   8.6
+
+c = -70          5.1            7.1        6.2             4.4       4.0       3.6       3.3                      5.2   7.0   6.6   6.7
+
+Table 3
+
+Size performances (%) of ordinary QR (n = 700, S = 1000).
+
+=                      0.05       0.1      0.2             0.3       0.4       0.5       0.6                      0.7   0.8   0.9   0.95
+
+Normally distributed errors
+
+c1 = 0, c2 = -2        13.9       11.8     12.8            13.0      12.6      12.6      13.0                     10.7  12.4  11.1  13.7
+
+c1 = 0, c2 = -5        14.0       12.2     12.3            12.0           9.8  10.4      13.1                     14.6  11.0  12.7  12.3
+
+c = 0, c2 = -7         13.2       13.4                9.8       9.7  13.0      11.1      12.9                     11.0  10.1  12.6  12.6
+
+t(3) errors
+
+c1 = 0, c2 = -2        20.4       17.8     13.6                 8.9       8.9       8.7  10.0                     10.6  11.8  13.5  19.8
+
+c1 = 0, c2 = -5        23.9       14.6     11.5            10.1           8.2       8.6  9.1                      10.1  12.6  19.6  17.5
+
+c = 0, c2 = -7         18.4       15.9     10.6                 9.2       8.3       8.4  7.4                      11.4  10.9  14.4  19.3
+
+Table 4
+
+Size performances (%) of IVX-QR (n = 700, S = 1000).
+
+=                      0.05          0.1              0.2       0.3       0.4       0.5  0.6                      0.7   0.8   0.9   0.95
+
+Normally distributed errors
+
+c1 = 0, c2 = -2        12.9          11.0             9.9       9.6       8.1       7.6  7.8                      8.0   9.7   9.0   12.6
+
+c1 = 0, c2 = -5        12.9          10.1             8.4       7.8       7.1       6.1  7.9                      7.8   7.8   10.4  11.4
+
+c = 0, c2 = -7         13.3          11.3             9.1       7.7       7.0       6.6  8.3                      9.4   7.8   10.2  10.4
+
+t(3) errors
+
+c1 = 0, c2 = -2        18.7          11.8             8.8       9.4       6.4       4.4  6.3                      8.5   9.1   11.9  15.9
+
+c1 = 0, c2 = -5        18.6          11.7             9.7       5.6       7.8       4.5  6.6                      8.2   9.0   10.6  14.4
+
+c = 0, c2 = -7         14.7          14.1             9.6       8.0       5.7       3.7  6.2                      9.5   9.8   10.1  17.4
+
+estimated correlation of the predictive QR application is used:                extremal QR limit theory (e.g., Chernozhukov, 2005; Chernozhukov
+                                                                               and Fernandez-Val, 2011). I leave this for future research.
+      1 -0.78 -0.17
+                                                                                   In summary, IVX-QR methods based on the practical rule
+ = -0.78 1                   0.21 .
+                                                                               of choice of (Cz , ) demonstrate reliable size performances for
+     -0.17 0.21              1
+                                                                               most relevant specifications with single and multiple persistent
+For bivariate predictor persistence, c1 is set to 0 and c2 is selected         predictors, except for a few extreme cases. More comprehensive
+                                                                               simulation results are available from the online supplement (Lee,
+from {-2, -5, -7}.                                                             2014). The practical benefits of IVX-QR inference will be illustrated
+                                                                               through empirical examples in the next section.
+    Table 3 shows the size properties of ordinary QR test statistics.
+The size distortion is large when there are multiple persistent                5. Quantile predictability of stock returns
+predictors, which corroborates the benefits of the IVX-QR method's
+validating inference under multiple manifestations of predictor                    It is often standard practice to test stock return predictability
+persistence. Table 4 shows acceptable size results of the IVX-QR               using various economic and financial state variables as predictors.
+tests at various quantile levels. The size correction works well               There is considerable disagreement in the empirical literature as
+for most quantiles except a few tail cases. The results at inner               to the predictability of stock returns when using a predictive mean
+quantiles from 0.2 to 0.8 are satisfactory. The IVX-QR corrections             regression framework (e.g., Campbell and Thompson, 2008; Goyal
+                                                                               and Welch, 2008). In this section, I show empirical results of
+for multiple persistent predictors at  = 0.05 or 0.1 require                   stock return quantile prediction tests using IVX-QR. Excess stock
+                                                                               returns are measured by the difference between the S&P 500 index
+further investigation. Even though there are some improved size
+
+controls over the ordinary QR (e.g., from 17.8% to 11.8% at  = 0.1
+
+with t(3) errors), the tail case performances suggest a need for
+new methods to handle extremal quantiles under persistence. One
+potential solution could be the use of a recent development in
+                                       J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                                                              115
+
+Table 5                                                                                                                                                                0.95
+p-values (%) of quantile prediction tests (1927:01­2005:12). Univariate regressions with each of the eight predictors: d/p, d/e, b/m, tbl, dfy, e/p, ntis, tms.         0.0*
+                                                                                                                                                                        0.0*
+=     0.05        0.1   0.2            0.3   0.4                                  0.5   0.6       0.7   0.8        0.9                                                  0.8*
+
+d/p   0.3*        0.0*  0.2*           12.6  75.1                                 61.1  15.9      0.4*  6.4                                                      5.0   14.0
+                                                                                                                                                                        0.0*
+d/e   0.0*        0.0*  0.0*           0.0*  1.6*                                 38.4  53.6      9.9   2.9*                                                     0.0*
+                                                                                                                                                                       25.4
+b/m   0.1*        0.0*  0.1*           0.5*  51.5                                 79.7  12.8      0.1*  2.6*                                                     0.7*  96.6
+
+tbl   59.8        68.6  5.7            0.7*  0.4*                                 1.2*  0.7*      9.8   1.8*                                                     0.1*   0.0*
+
+dfy   0.0*        0.0*  0.0*           0.0*  3.2*                                 75.2  2.6*      0.0*  0.0*                                                     0.0*
+
+e/p   91.7        90.2  57.4           76.1  80.3                                 82.4  97.6      53.7  0.4*       27.9
+
+ntis  5.3         0.3*  0.3*           27.2  19.0                                 82.9  74.2      58.5  83.7       93.3
+
+tms   16.8        5.8   22.1           61.3  23.6                                 36.1  24.4      70.6  17.7                                                     0.0*
+
+including dividends and the one month Treasury bill rate. I focus on              choose significant predictors at other quantiles where at least two
+eight persistent predictors: dividend­price (d/p), dividend­payout                consecutive predictability evidences are detected (d/e, b/m, tbl, and
+ratio (d/e), book to market (b/m) ratios, T-bill rate (tbl), default yield        dfy in this instance). Second, I classify the chosen predictors into
+spread (dfy), net equity expansion (ntis), earnings­price (e/p), term             three groups-Group L, Group M and Group B which are explained
+spread (tms) and various combinations of the above variables. The                 below.
+full sample period is January 1927­December 2005. These data
+sets are standard and have been extensively used in the predictive                Group L :          Group M :           Group B :
+regression literature. Cenesizoglu and Timmermann (2008) and                      lower quantile  middle quantile     lower & upper
+Maynard et al. (2011) recently used the same data set in a QR                     predictors                       quantile predictors
+framework.6 Following Cenesizoglu and Timmermann (2008), I                        d/e                predictors
+classify the predictors into three categories.                                                             tbl          b/m and dfy
+
+Valuation ratios       Bond yield      Corporate finance                              Finally, I select one predictor from each group to produce a
+                       measures              variables                            bivariate predictor and choose predictor combinations exhibiting
+dividend­price       three-month                                                  little evidence of comovement between the predictors. Evidence
+ratio (d/p)         T-bill rate (tbl)  dividend­payout                            of comovement between predictors does not completely reduce
+earnings­price    term spread (tms)         ratio (d/e)                           the appeal of the combinations; however, we may prefer less-
+ratio (e/p)                                 net equity                            comoving systems for better forecast models.8
+book-to-market    default yield (dfy)
+ratio (b/m)                             expansion (ntis)                              I employ two diagnostic tests to observe evidence of comove-
+                                                                                  ment between persistent predictors: (i) the correlation of xt-1, and
+    I employ the IVX-QR methods to illustrate the benefits of                     (ii) the cointegration tests between xt-1. The two measures will
+these new methods. In particular, I first investigate the quantile                provide evidence of comovement between all (I0) and (ME) pre-
+predictability of stock returns using individual predictors and then              dictors (see Section 3.2 of Lee, 2014). I find little evidence of co-
+analyze the improved predictive ability of possible combinations                  movement between (bm, tbl) and (d/e, tbl).
+of predictors.
+                                                                                      The above selection scheme is used primarily for illustrative
+    The null test statistics in Proposition 3.2 is used with the choice           purposes, and I do not rule out the possibility of significant
+                                                                                  results from other combinations.9 However, it is partly justifiable.
+rule of filtering parameters (, Cz ) from Section 4.7 Table 5 reports             For example, both dfy and tbl are bond yield measures that
+                                                                                  likely co-move, while bm is a valuation ratio that may have
+the univariate regression results, where p-values (%) are rounded                 different patterns. If we choose between (dfy, tbl) and (bm, tbl),
+to one decimal place for exposition. The results shown in bold                    the above rationale recommends (bm, tbl) because they share
+imply the rejection of the null hypothesis of no predictability at                fewer common characteristics. Diagnostic tests indicate evidence
+the 5% level.                                                                     of larger comovement between (dfy, tbl) than that between (bm,
+                                                                                  tbl). Therefore I focus on two combinations; (bm, tbl) and (d/e, tbl).
+    The result is roughly consistent with the results of Maynard
+et al. (2011) and Cenesizoglu and Timmermann (2008). I find                           From Table 6, I confirm that the two combinations, (bm, tbl) and
+significant lower quantile predictive ability for the d/e and middle              (d/e, tbl) are jointly significant at various quantiles with stronger
+quantile predictive power for the tbl. Evidence of both lower                     evidence than that of univariate regressions. Many existing studies
+and upper quantile predictability from b/m and dfy are provided.                  only considered a single persistent predictor. The results below
+Overall, I find little evidence of predictability at the median except            illustrate the possibility of better forecast models with multiple
+tbl. The results confirm the weak predictability at the mean/median               persistent predictors that are not subject to spurious forecasts. We
+of stock returns, the stronger forecasting capability at quantiles                can proceed with more than two predictor models in a similar way.
+away from the median and several quantile specific predictors.
+                                                                                      I run the prediction tests to significant predictors from Table 6
+    For multivariate regression applications, I use selective predic-             for post-1952 data. Many papers have reported that the stock
+tor combinations for illustrative purposes. The selection scheme                  return predictability becomes much weaker from January 1952
+is as follows: First, I ignore the predictability evidence from the               to December 2005 (see Campbell and Yogo, 2006; Kostakis
+univariate regression results at the first and last two quantiles                 et al., 2014). Papers have often argued that the disappearance of
+                                                                                  predictability was likely due to structural changes or improved
+( = 0.05, 0.1, 0.9 and 0.95), where the size control is not guar-                 market efficiency. Table 7 shows weaker predictability evidence,
+                                                                                  but some differences to mean predictive regressions still exist.
+anteed for a few extreme cases from the simulation evidences. I
+
+  6 I thank Yini Wang for providing the data set. For detailed constructions and    8 Phillips (1995) provided robust inference methods in cointegrating mean re-
+
+economic foundations of the data set, see Goyal and Welch (2008). Note that       gression models with possibly comoving persistent regressors (FM-VAR regres-
+
+Maynard et al. (2011) and Cenesizoglu and Timmermann (2008) also considered       sions). Introducing the robust feature into the current framework (allowing singular
+                                                                                  xx in (2.7)) will be left for future research.
+stationary predictors other than the eight persistent predictors I used.
+                                                                                    9 Results for other combinations are readily available upon request.
+ 7 The automatic choice of s mostly lies between (0.53, 0.97). Similar results
+with a more conservative choice ( = 0.5) are available from Lee (2014, Table
+
+A.10­13).
+116                                    J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+Table 6
+p-values (%) of quantile prediction tests (1927:01­2005:12). Multivariate regressions with two predictors: (b/m, tbl) and (d/e, tbl).
+
+=         0.05             0.1   0.2   0.3   0.4                          0.5   0.6           0.7                                      0.8       0.9    0.95
+
+b/m, tbl  0.1*             0.0*  0.1*  2.3*  19.5                         4.7*  1.5*          0.0*                                     0.1*      0.0*   0.8*
+
+d/e, tbl  0.0*             0.0*  0.0*  0.0*       0.0*                    5.5   3.8*          14.1                                     0.0*      0.0*   0.0*
+
+Table 7
+p-values (%) of quantile prediction tests (1952:01­2005:12). Univariate regressions with each of the eight predictors: d/p, d/e, b/m, tbl, dfy.
+
+=         0.05        0.1        0.2   0.3   0.4                          0.5   0.6           0.7                                      0.8       0.9    0.95
+
+d/p       73.5        71.6       5.2   29.6  8.0                          84.6  1.4*          0.1*                                     16.6      75.1   16.1
+                                                                                                                                                  0.2*  85.8
+d/e       9.2         2.5*       4.8*  2.0*  0.1*                         2.4*  80.2          6.6                                      10.8             19.0
+                                                                                                                                                 20.6   19.3
+b/m       0.1*        97.6       8.7   34.3  10.3                         53.5  69.2          12.2                                     32.0       8.7
+                                                                                                                                                  0.2*   0.1*
+tbl       6.7         0.3*       0.0*  0.0*  0.1*                         0.2*  0.7*          20.0                                     23.6
+
+dfy       24.7        88.0       58.4  45.4  58.3                         6.9   2.3*          1.8*                                     0.5*
+
+Table 8
+p-values (%) of quantile prediction tests (1952:01­2005:12). Multivariate regressions with two predictors: (b/m, tbl) and (d/e, tbl).
+
+=         0.05             0.1   0.2   0.3   0.4                          0.5   0.6           0.7                                      0.8       0.9    0.95
+
+b/m, tbl        0.0*       1.3*  3.5*  0.0*  0.6*                         2.9*  0.7*          1.4*                                     0.7*      0.1*   6.1
+                                                                                                                                                        6.6
+d/e, tbl  20.5             1.1*  0.0*  0.0*  0.0*                         0.0*  1.0*          1.0*                                     39.4      0.0*
+
+For example, Campbell and Yogo (2006) reported the predictive                 In the empirical application of these methods, the tests
+ability of the tbl during this sub-period, while Kostakis et al. (2014)   confirm that commonly used persistent predictors have significant
+concluded that the predictability from the variable disappears. I         in-sample forecasting capability at specific quantiles, mostly away
+find significant results from tbl at lower to middle quantiles while      from the median. The IVX-QR methods allow the investigator to
+little evidence at upper quantiles.                                       cope with quantile specific predictability of stock returns without
+                                                                          exposing the outcomes to spurious effects from multiple persistent
+    I proceed to the tests with two predictors to confirm the earlier     predictor. The enhanced predictive ability from combinations
+results on (bm, tbl) and (d/e, tbl). From Table 8, we see empirical       of persistent predictors suggests there is scope for further
+support for stock return forecast models for post-1952 periods,           improvement in time series forecasting applications.
+using (bm, tbl) and (d/e, tbl). It turns out that the combination of one
+valuation ratio (b/m) and a macro variable (tbl), or the latter with          Several directions of future research are of interest. One is out-
+a corporate finance variable (d/e), provide a potentially improved        of-sample forecasting based on the IVX-QR methods. Explicit use
+forecast model for stock returns. IVX-QR corrections ensure that          of IVX-QR forecasts in portfolio decision making and risk analysis
+the predictability results are not spurious.                              can be also studied. IVX-QR inference at extreme quantiles requires
+                                                                          further theoretical investigations.
+    To summarize the empirical findings, I show that commonly
+used persistent predictors have greater predictive capability at          Acknowledgments
+some specific quantiles of stock returns, where the predictability
+from a given predictor tends to locate at lower or upper quantiles of         This paper is the part of my Ph.D dissertation at Yale University.
+stock returns but mostly disappears at the median. A partial answer       I am deeply indebted to my advisor Peter Phillips for his support
+to the empirical debate of stock return mean/median predictability        and guidance. I am also grateful to Donald Andrews, Timothy
+may be provided. The significant predictors for specific quantiles        Armstrong, Xiaohong Chen, Timothy Christensen, Yuichi Kitamura,
+of stock returns can play important roles in risk management              Roger Koenker, Tassos Magdalinos, Nour Meddahi, Taisuke Otsu,
+and portfolio decision applications. I also find that by employing        Byoung Gun Park, Woong Yong Park, Steve Portnoy, Minkee Song
+some combination of persistent variables as predictors, forecasting       and seminar participants at Yale, Washington, Exeter, Albany,
+capability at most quantiles can be substantially enhanced relative       Maryland, NUS, Toulouse and UIUC. I also thank two anonymous
+to a model with a single predictor. The predictive performance            referees, associate editor and coeditor for constructive suggestions
+of a specific combination, such as T-bill rate (tbl) and book-            which improved this paper. All remaining errors are mine.
+to-market ratio (b/m), remains high even during the post-1952
+period. The improved in-sample quantile forecast results are not          Appendix
+spurious because the IVX-QR methods control the size distortion.
+This finding is new in the literature, suggesting the potential for           The main proofs are given in this Appendix, while the proofs for
+improved stock return forecast models.                                    lemmas are collected in Lee (2014).
+
+6. Conclusion                                                             A.1. Proofs for Section 2.2
+
+    This paper develops a new theory of inference for quantile                The following lemma provides the asymptotics of the processes
+regression (QR). I propose methods of robust inference which
+involve the use of QR with filtered instruments that lead to a            driving the limit theory of ^QR.
+new procedure called IVX-QR. These new methods accommodate
+multiple persistent predictors and they have uniform validity
+under various degrees of persistence. Both properties offer great
+advantages for empirical research in predictive regression.
+                                                                           J.H. Lee / Journal of Econometrics 192 (2016) 105­118                                                       117
+
+Lemma A.1.      1.     Gx ,n  :=   Dn-1    n         Xt-1 (u0t )                 Gx , where                To prove Theorem 3.1, I introduce a version of empirical process.
+
+                                               t =1                                                    Let   RK and
+
+                          (1         )  1       0                       for (I0),                                                 n
+                  0,                            xx                      for (MI),
+           N                  -          0                              for (I1),                      Gn  ()       n-(1+)/2                        u0t       xt -1 
+                                                                        for (ME),                                                     z~t-1
+                                                                                                                 =                                       -
+
+           
+
+                                                                                                                                  t =1
+
+                          (1  -      )  1       0                                                                   - Et-1  u0t - xt-1 .
+                  0,
+           N                             0      Vxx
+           
+           
+
+           
+
+    Gx =  B (1)                                                                                        I focus (MI) and (I1) cases here and assume 0 <  < min(, 1)
+                                                                                                       for documentation purpose; the case of   (0, ) will be
+
+                    Jxc (r)dB                                                                          analogous with n-(1+)/2 hence omitted. (I0) case is again standard,
+           
+           
+           
+           
+
+                                                                                                       so omitted. Proof for (ME) predictors will be discussed below
+
+           
+
+                                           1        0     
+                    0,
+                              (1  -     )   0       V~xx      ,                                        (Lemma A.4).
+           MN                                                                                              The stronger normalizer n-(1+)/2 (than n-1/2) stabilizes the
+
+    with Vxx    =             erC  xx   erC  dr  ,  V~xx  =              e-rC   YC  YC  e-rC  dr  and  stronger signal strength of z~t-1 and xt-1, and the conditional
+                                                                                                       expectation Et-1 [·] (rather than unconditional expectation) avoids
+                         0                                            0
+              0,                                                                                       the nonstationarity problem. Thus, the stochastic equicontinuity
+    YC     N              e-rC    xx    e-rC  dr     .
+                    0
+
+2.  Mx ,n  :=   D-n 1  n          fu0t ,t-1(0)Xt-1Xt-1D-n 1                 Mx , where                 proof of Bickel (1975) with iid regressors can be modified
+
+                           t =1                                                                        accordingly. In fact, z~t-1 and  satisfy condition G and C1 of Bickel
+
+                       (0)  1         0                                         for (I0),              (1975) respectively, hence the analogy of Lemma 4.1 of Bickel
+              fu0                    xx                                         for (MI),
+                             0                                                  for (I1),              (1975) holds.
+                                                                                for (ME),
+              
+
+              
+
+                       (0)  1        0                                                                 Lemma A.3. For a generic constant C > 0,
+                                                                                                       sup Gn () - Gn (0) :   n(1+)/2C  = op(1).
+                             0       Vxx
+              fu0
+              
+
+              
+
+              
+
+                                                                        
+    Mx =
+                              1                      Jxc (r)                                           Proof of Theorem 3.1. 1. Since I have confirmed the uniform
+
+              fu0      (0)                                                                             approximation Lemma A.3, the standard result for the extremum
+                              
+                                                                                                       estimation with non-smooth criterion function (e.g. Pakes and
+                                                                                                       Pollard, 1989) holds with a stronger normalization n-(1+)/2.
+                                   Jxc (r)           Jxc      )Jxc       
+                                                          (r        (r  )                              Hence, we can show (^1IV,XQR - 1, ) = Op(n-(1+)/2). Let ^1, =
+                                                                                                       ^ 1IV,XQR within this proof.
+              
+                                                                                                          Let ^ = (^1, - 1, ), then from (3.7)
+              
+
+              
+
+              
+
+              
+
+                       (0)  1        0
+                                     V~xx
+              fu0            0
+
+    and convergence in probability holds for (I0) and (MI) cases.
+
+Proof of Theorem 2.1. As in Xiao (2009, Proof of Theorem 1),                                                                      n                                                
+we can linearize (2.8) in terms of an arbitrary centered quantity                                                                              (u0t                    1, )xt-1)
+                                                                                                       op(1)   =    n-(1+)/2                             -  (^ 1,  -
+D-n 1(^ - ) using Knight's identity (Knight, 1989). Note that (2.8)                                                                   z~t-1
+
+is a convex minimization. Using the convexity lemma (Pollard,                                                                     t =1
+1991) we can take the distributional limit of the linearized (2.8)
+first, and then minimize to get:                                                                                                  n
+
+                                                                                                               =    n-(1+)/2                        u0t  -  ^  xt    
+                                                                                                                                      z~t-1
+                                                                                                                                                                   -1
+
+                                                                                                                                  t =1
+
+D-n 1(^ QR -  ) = (Mx ,n)-1Gx ,n + op(1).                                                                           - Et-1  u0t - ^ xt-1 -  (u0t )
+
+The results of Theorem 2.1 now follow from Lemma A.1.                                                               + Et-1 ( (u0t ))}
+
+                                                                                                                                        n
+
+                                                                                                                    + n-(1+)/2                           u0t       -  ^ xt-1
+                                                                                                                                         z~t -1 Et -1
+A.2. Proofs of IVX-QR asymptotics: Sections 3.2 and 3.3
+                                                                                                                                      t =1
+
+    When xt-1 belongs to (I0) or (ME), the limit theory for IVX-QR                                                                           n
+
+estimator ^1IV,XQR is identical to that of the ordinary QR estimator                                                + n-(1+)/2  z~t-1 { (u0t )}
+
+^1, in Theorem 2.1. In general, z~t-1 reduces the persistence of xt-1                                                                 t =1
+when xt-1 is more persistent than z~t-1 ( < ), except (ME) case. If
+xt-1 is less persistent than z~t-1 ( > ) then original persistence of                                                             n
+
+xt-1 is maintained, hence the ordinary QR limit theory is achieved.                                            =    n-(1+)/2                           u0t  -      ^ xt-1
+When xt-1 is (ME), the remainder term of IVX dominates the                                                                            z~t -1 Et -1
+asymptotics, see PL for the mean regression framework. I confirm
+                                                                                                                                  t =1
+the same results in QR here.
+                                                                                                                                             n
+    The following lemma provides probability and distributional
+                                                                                                                    + n-(1+)/2  z~t-1 { (u0t )} + op(1).
+limit of processes driving the asymptotic behavior of IVX-QR
+                                                                                                                                      t =1
+estimators for (I0), (MI) and (I1) cases.
+                                                                                                       With notation of embedded normalizers,
+
+                                                                                                                    n
+                                                                                                                  
+                                                                                                       op(1) =            Z~t-1,n (u0t )
+
+                                                                                                                    t =1
+
+Lemma A.2. 1. G ,n                :=       n         Z~t-1,n            (u0t )       G                                                                                                 (A.1)
+                                                                                                              + Z~t-1,nEt-1  u0t - ^ xt-1 ,
+                                               t =1
+    N (0,  (1 -  )xx)
+                                     for (I0),                                                         and Et-1  u0t - ^ xt-1 can be expanded around  = 0
+                                                                                                       (1 = 1 ( )), hence
+    N (0,  (1 -  )Vcxz ) for (MI) and (I1),
+
+2.  M ,n   :=  n          fu0t   ,t -1  (0)  Z~t -1,n Z~t-1,n
+
+                   t =1
+
+       p M          fu0 (0) xx,                  for (I0),                                                                                                                        
+                    fu0 (0) Vcxz .         for (MI) and (I1),
+                                                                                                       Et -1        u0t      ^    xt           Et -1     u0t            xt        
+                                                                                                                                                                                  
+                                                                                                                          -           -1    =                  -            -1
+
+3.  M ,n   :=   n         fu0t ,t-1     (0)  Z~t -1,n Xt-1,n                                                                                                                       =0
+
+                    t =1                                                                                          Et-1       u0t             xt-1 | =0^
+                                                                                                                               
+     M              fu0 (0) xx,                   for (I0),                                                                             -                          op(^ )
+                 fu0 (0) cxz ,              for (MI) and (I1).
+                                                                                                              +                                                +
+118                                                                    J.H. Lee / Journal of Econometrics 192 (2016) 105­118
+
+where                                                                                                References
+
+Et-1       u0t    -            xt      =       - Et-1 1 u0t            <     xt-1                    Bickel, P.J, 1975. One-step Huber estimates in the linear model. J. Amer. Statist.
+                                                                                                          Assoc. 70 (350), 428­434.
+                                   -1
+                                                                                                     Campbell, J., Thompson, S., 2008. Predicting excess stock returns out of sample: can
+                                                   xt-1                                                   anything beat the historical average? Rev. Financ. Stud. 21 (4), 1509­1531.
+
+                                       =-                        fu0t ,t-1(s)ds                      Campbell, J., Yogo, M., 2006. Efficient tests of stock return predictability. J. Financ.
+                                                                                                          Econ. 81 (1), 27­60.
+                                                 -
+                                                                                                     Cavanagh, C., Elliott, G., Stock, J., 1995. Inference in models with nearly integrated
+hence                                                                                                     regressors. Econometric Theory 11 (05), 1131­1147.
+
+ Et-1        u0t       -           xt            -xt -1fu0t ,t-1(0),                                 Cenesizoglu, T., Timmermann, A., 2008. Is the distribution of stock returns
+                                                                                                          predictable? Unpublished Manuscript, HEC Montreal and UCSD.
+                                       -1
+                                                                                                     Chernozhukov, V., 2005. Extremal quantile regression. Ann. Statist. 33, 806­839.
+                                           =                                                         Chernozhukov, V., Fernandez-Val, I., 2011. Inference for extremal conditional
+
+                                            =0                                                            quantile models, with an application to market and birthweight risks. Rev.
+                                                                                                          Econom. Stud. 78 (2), 559­589.
+thus                                                                                                 Davis, R.A., Mikosch, T., 2009. The extremogram: a correlogram for extreme events.
+                                                                                                          Bernoulli 15 (4), 977­1009.
+Et -1      u0t    -    ^       xt      =     -xt-1fu0t ,t-1(0)^        +      op(1).                 Gonzalo, J., Pitarakis, J.Y., 2012. Regime-specific predictability in predictive
+                                                                                                          regressions. J. Bus. Econom. Statist. 30 (2), 229­241.
+                                   -1                                                                Goyal, A., Welch, I., 2008. A comprehensive look at the empirical performance of
+                                                                                                          equity premium prediction. Rev. Financ. Stud. 21 (4), 1455­1508.
+Putting it back to (A.1),                                                                            Han, H., Linton, O., Oka, T., Whang, Y.J., 2014. The cross-quantilogram: measuring
+                                                                                                          quantile dependence and testing directional predictability between time series.
+                       n                                                                                  Available at SSRN 2338468.
+                                                                             ^ 1,      1, ,          Jansson, M., Moreira, M., 2006. Optimal inference in regression models with nearly
+op(1)  =   G ,n   +  fu0t ,t-1(0)Z~t-1,nXt-1,nn(1+)/2                               -                     integrated regressors. Econometrica 74 (3), 681­714.
+                                                                                                     Knight, K., 1989. Limit theory for autoregressive-parameter estimates in an infinite-
+                       t =1                                                                               variance random walk. Canad. J. Statist. 17, 261­278.
+                                                                                                     Koenker, R., 2005. Econometric Society Monographs: Quantile Regression. Cam-
+therefore,                                                                                                bridge Press.
+                                                                                                     Koenker, R., Basset, G., 1978. Regression quantiles. Econometrica 46, 33­49.
+n(1+)/2           -                =   M ,n-1      G ,n          +  op(1),                           Kostakis, A., Magdalinos, T., Stamatogiannis, M.P., 2014. Robust econometric
+            ^ 1,       1,                                                                                 inference for stock return predictability. Rev. Financ. Stud. hhu139.
+                                                                                                     Lee, J.H., 2014. Online Supplement to ``Predictive Quantile Regression with
+and the results of Theorem 3.1 for (MI)­(I1) cases follow from                                            Persistent Covariates: IVX-QR Approach''.
+Lemma A.2.                                                                                                Available at https://sites.google.com/site/jihyung412/research.
+                                                                                                     Linton, O., Whang, Y.J., 2007. The quantilogram: With an application to evaluating
+Lemma A.4. If          xt -1       belongs   to  (ME),           then  n-()R-n n    n         z~t-1       directional predictability. J. Econometrics 141 (1), 250­282.
+                                                                                                     Magdalinos, T., Phillips, P.C.B, 2009. Econometric inference in the vicinity of unity.
+                                                                                        t =1              CoFie Working Paper (7), Singapore Management University.
+                                                                                                     Maynard, A., Shimotsu, K., Wang, Y., 2011. Inference in predictive quantile
+ (u0t )  CCz × N 0,  (1 -  )V~xx , and                                                                    regressions. Unpublished Manuscript.
+                                                                                                     Mikusheva, A., 2007. Uniform inference in autoregressive models. Econometrica 75
+  1                                                                                                       (5), 1411­1452.
+                                                                                                     Pakes, A., Pollard, D., 1989. Simulation and the asymptotics of optimization
+   n+()                                                                                                   estimators. Econometrica 57 (5), 1027­1057.
+            n          fu0t    ,t  -1  (0) R-n nz~t-1xt -1R-n n      fu0 (0) V~xx × CCz ,            Phillips, P.C.B., 1987. Towards a unified asymptotic theory for autoregression.
+                                                                                                          Biometrika 74, 535­547.
+                 t =1                                                                                Phillips, P.C.B., 1989. Partially identified econometric models. Econometric Theory
+                                                                                                          5 (2), 181­240.
+        1   n          fu0t ,t-1 (0) Rn-nz~t-1z~t-1Rn-n                                              Phillips, P.C.B., 2014. On confidence intervals for autoregressive roots and
+   n+()                                                                                                   predictive regression. Econometrica 82 (3), 1177­1195.
+                 t =1                                                                                Phillips, P.C.B., 1995. Fully modified least squares and vector autoregression.
+                                                                                                          Econometrica 63 (5), 1023­1078.
+where                                                                                                Phillips, P.C.B., Hansen, B., 1990. Statistical inference in instrumental variables
+                                                                                                          regression with I(1) processes. Rev. Econom. Stud. 57 (1), 99.
+                 -Cz-1,                if  <                                                         Phillips, P.C.B, Lee, J.H., 2013. Predictive regression under various degrees of
+                                                                                                          persistence and robust long-horizon regression. J. Econometrics 177, 250­264.
+                                                                                                     Phillips, P.C.B, Lee, J.H., 2014. Robust econometric inference with mixed integrated
+Cz :=             C -1,                if  <  .                                                           and mildly explosive regressors. J. Econometrics forthcoming.
+                                       if  =                                                         Phillips, P.C.B., Magdalinos, T., 2007. Limit theory for moderate deviations from a
+           (C - Cz )-1 ,                                                                                  unit root. J. Econometrics 136, 115­130.
+                                                                                                     Phillips, P.C.B., Solo, V., 1992. Asymptotics for linear processes. Ann. Statist.
+Proof. The result directly follows from the proof of Lemma                                                971­1001.
+                                                                                                     Pollard, D., 1991. Asymptotics for least absolute deviation regression estimators.
+2.4 in Phillips and Lee (forthcoming), by replacing u0t with                                              Econometric Theory 7 (2), 186­199.
+                                                                                                     Stock, J., 1991. Confidence intervals for the largest autoregressive root in US
+ (u0t ). Thus, the result in Theorem 3.1 for (ME) case follows                                            macroeconomic time series. J. Monet. Econ. 28 (3), 435­459.
+                                                                                                     Xiao, Z., 2009. Quantile cointegrating regression. J. Econometrics 150, 248­260.
+similarly.
+
+Proof of Theorem 3.2. Note that
+
+yt - 1z~t-1 = yt - (1 - 1, )z~t-1 - 1 , z~t-1
+               = u0t - (1 - 1, )z~t-1 + 1 , (xt-1 - z~t-1)
+               = u0t - (1 - 1, )z~t-1
+
+where u0t = u0t + 1 , (xt-1 - z~t-1). Following the proof of
+
+Theorem 2.1, it is straightforward to show that
+
+n(1+())/2(^1IV,XQR - 1, ) = (M ,n)-1G ,n + op(1),
+
+where G ,n   =    n            Z~t-1,n       u0t   , and it is         clear  that  G,n  =    G ,n
+
+                      t =1
+under H0 : 1, = 0, leading to
+
+n  1+()    (^1IV,XQR   -  1,       )   = (M ,n)-1G ,n + op(1)
+        2                               N 0,  (1 -  )fu0 (0)-2 Vc-xz1 .
+

@@ -1,0 +1,2563 @@
+Econometric Theory, 38, 2022, 875­912.
+doi:10.1017/S0266466621000086
+
+   LEAST SQUARES AND IVX LIMIT
+THEORY IN SYSTEMS OF PREDICTIVE
+
+      REGRESSIONS WITH GARCH
+                INNOVATIONS
+
+                           TASSOS MAGDALINOS
+
+                             University of Southampton
+
+    The paper examines the effect of conditional heteroskedasticity on least squares
+    inference in stochastic regression models of unknown integration order and proposes
+    an inference procedure that is robust to models within the (near) I(0)­(near) I(1)
+    range with GARCH innovations. We show that a regressor signal of exact order
+    Op (nn) for arbitrary n   is sufficient to eliminate stationary GARCH effects
+    from the limit distributions of least squares based estimators and self-normalized
+    test statistics. The above order dominates the Op (n) signal of stationary regressors
+    but may be dominated by the Op n2 signal of I(1) regressors, thereby showing that
+    least squares invariance to GARCH effects is not an exclusively I(1) phenomenon
+    but extends to processes with persistence degree arbitrarily close to stationarity.
+    The theory validates standard inference for self normalized test statistics based on
+    the ordinary least squares estimator when n   and n/n  0 and the IVX
+    estimator (Phillips and Magdalinos (2009a), Econometric Inference in the Vicinity
+    of Unity. Working paper, Singapore Management University; Kostakis, Magdalinos,
+    and Stamatogiannis, 2015a, Review of Financial Studies 28(5), 1506­1553.) when
+    n   and the innovation sequence of the system is a covariance stationary
+    vec-GARCH process. An adjusted version of the IVX­Wald test is shown to also
+    accommodate GARCH effects in purely stationary regressors, thereby extending the
+    procedure's validity over the entire (near) I(0)­(near) I(1) range of regressors under
+    conditional heteroskedasticity in the innovations. It is hoped that the wide range of
+    applicability of this adjusted IVX­Wald test, established in Theorem 4.4, presents
+    an advantage for the procedure's suitability as a tool for applied research.
+
+    This paper is dedicated to Peter Phillips with gratitude for his mentorship, friendship
+    and generosity over the years.
+
+1. INTRODUCTION
+
+The effect of conditional heteroskedasticity in autoregressive and stochastic regres-
+sion models has been a topic of intense research activity since the introduction
+
+I would like to thank Don Andrews, Stelios Arvanitis, Ioannis Kasparis, Katerina Petrova, and two anony-
+mous referees for valuable suggestions and comments. Financial support by the British Academy is gratefully
+acknowledged. Address correspondence to Tassos Magdalinos, University of Southampton, Southampton, UK;
+e-mail: A.Magdalinos@soto.ac.uk.
+
+© The Author(s), 2021. Published by Cambridge University Press.  875
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+               876 TASSOS MAGDALINOS
+
+              of ARCH and GARCH processes by Engle (1982) and Bollersev (1986). Limit
+              theory for stationary autoregressive moving average (ARMA) time series with
+              conditionally heteroskedastic innovations has been developed by Weiss (1986) and
+              Pantula (1989) in the case of ARCH innovations and Ling and McAleer (2003)
+              in the case of vector-valued processes with GARCH innovations. Early work
+              on least squares estimation of non stationary autoregressions with ARCH(1) and
+              GARCH(1,1) innovations can be found in Pantula (1989) and Ling and Li (1997a).
+              Asymptotic theory for quasi maximum likelihood estimation has been developed
+              for both stationary and nonstationary times series with GARCH innovations: see
+              Ling and Li (1997b), Ling and Li (1998), Ling and McAleer (2003) and refer-
+              ences therein. More recently, Andrews and Guggenberger (2012) and Andrews
+              and Guggenberger (2014) have established asymptotic theory for the ordinary
+              least squares (OLS) and (feasible) GLS estimator of autoregressive models with
+              conditionally heteroskedastic errors as well as a conditional-heteroskedasticity-
+              robust confidence interval for the parameter of an AR(1) process.
+
+                 The literature on least squares estimation of autoregressive processes with
+              conditionally heteroskedastic innovations reports that the presence of GARCH
+              effects in the limit distributions of the OLS estimator and the associated t- and
+              Wald-test statistics depends on the stationarity properties of the autoregressive
+              process. In the case of stationary autoregressions, both the convergence rate and the
+              limit distribution of the OLS estimator are affected: the standard n-consistency
+              rate requires finite fourth moments (a condition that imposes restrictions on the
+              GARCH coefficients) and, even when the n rate is achieved, the asymptotic
+              variance of the OLS estimator depends on the GARCH parameters in a way
+              that invalidates standard t- and Wald-hypothesis tests. The situation is different
+              for models with nonstationary time series, where GARCH innovations make no
+              contribution to the limit distribution of the OLS estimator and the usual Dickey­
+              Fuller type t and Wald tests are asymptotically valid (Phillips, 1987b). This
+              asymptotic invariance continues to apply in models with near-integrated time series
+              with local to unity roots of the form n = 1 + c/n, where n is the sample size
+              (Phillips, 1987a; Chan and Wei, 1987) and their vector-valued extensions with
+              autoregressive matrix of the form Rn = I + C/n (Phillips, 1988).
+
+                 This I(0)­I(1) dichotomy has a signal-to-noise ratio interpretation: a near-
+              I(1) regressor has sufficient signal, of order Op n2 , to asymptotically eliminate
+              stationary GARCH effects; such elimination cannot be achieved by the weaker
+              Op (n) signal of a stationary regressor, resulting in the contribution of GARCH
+              effects to the least squares limit distribution. This insight raises the issue of the
+              existence of a minimal order of regression signal required to eliminate GARCH
+              effects, leading naturally to the investigation of intermediate regression signals
+              arising from near stationary time series. The class of near stationary time series,
+              introduced by Phillips and Magdalinos, 2007a, 2007b (Phillips and Magdalinos,
+              2007a & Phillips and Magdalinos, 2007b) in the case of scalar autoregressions
+              and Magdalinos and Phillips (2009), henceforth MP (2009), in the case of vector
+              autoregressions and systems of regression equations, has intermediate I(0)­I(1)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+                              LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 877
+
+              persistence rate driven by an autoregressive root of the form n = 1 + c/kn, where
+              c < 0, kn   and kn/n  0. The signal generated by such processes is of order
+              Op (nkn) and may approach the stationary Op (n) signal for sequences kn diverging
+              to  at sufficiently slow rate.
+
+                 The present work develops a limit theory for near-stationary predictive regres-
+              sion systems with covariance stationary GARCH innovations. We show that,
+              for arbitrary kn  , GARCH effects are eliminated from the limit distri-
+              bution of the least squares estimator, thereby establishing that any regressor
+              signal strictly dominating the Op (n) signal of stationary processes is sufficient
+              to asymptotically eliminate GARCH effects. The OLS estimator has an iden-
+              tical Gaussian limit distribution to that established by MP (2009) under con-
+              ditionally homoskedastic innovations and the usual Wald statistic (without het-
+              eroskedasticity correction) for testing restrictions on the regression coefficient
+              matrix has a standard chi-squared limit distribution. Subsequent to the result
+              of Andrews and Guggenberger (2012) for a (scalar) AR(1) process, the current
+              paper provides the first instance of standard Gaussian and chi-squared asymptotics
+              applying respectively to the OLS estimator and the Wald statistic in a vector
+              autoregression or predictive regression model with conditionally heteroskedastic
+              innovations.
+
+                 The development of least squares limit theory for the case of near stationary
+              regressors is the key step toward extending the validity of the IVX endogenous
+              instrumentation procedure, introduced by Phillips and Magdalinos (2009a) and
+              further developed by Kostakis et al. (2015a) (henceforth PM (2009a) and KMS
+              (2015a)) to accommodate the presence of conditional heteroskedasticity in the
+              innovations. In the current predictive regression context, KMS (2015a) show that
+              the IVX procedure is robust to different types of persistence, including purely
+              stationary, near stationary and near integrated time series regressors. In the current
+              paper, the method is shown to be robust to GARCH effects near stationary and
+              near integrated systems. In predictive regression with purely stationary regressors,
+              KMS (2015a) show that the IVX and OLS procedures are asymptotically equiva-
+              lent; as a result, the IVX estimator inherits the usual GARCH effects present in the
+              asymptotic variance of the least squares estimator. A White (1980) type correction
+              is shown to make the IVX procedure operational for all persistence regimes in
+              the I(0)­I(1) range under conditional heteroskedasticity. The adjusted IVX­Wald
+              test, presented in Theorem 4.4, is the paper's main methodological contribution,
+              accommodating a sufficiently general class of models to provide a tool for applied
+              research.
+
+                 The paper is organized as follows. Section 2 outlines a general modeling
+              framework for a system of predictive regressions with unknown persistence
+              properties and conditionally heteroskedastic innovations of a covariance stationary
+              vec-GARCH type. Section 3 develops a limit theory for the OLS estimator in the
+              near stationary case and shows that GARCH effects are asymptotically eliminated
+              and do not affect least squares based estimation and hypothesis testing procedures.
+              Section 4 develops a limit theory for the IVX estimator and the associated Wald
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+878 TASSOS MAGDALINOS
+
+statistic for systems of predictive regressions of arbitrary integration order and
+GARCH innovations. Section 5 provides some further discussion and concluding
+remarks and Section 6 includes all proofs.
+
+2. PREDICTIVE REGRESSION AND VECTOR AUTOREGRESSION
+   WITH GARCH INNOVATIONS
+
+We consider a first-order vector autoregression
+
+xt = Rnxt-1 + ut, t  {1,...,n}                                              (1)
+
+with conditionally heteroskedastic innovations ut and autoregressive matrix Rn that
+induces persistence characteristics ranging from stability to unit root nonstation-
+arity and includes intermediate integration regimes, as specified by Assumption P
+below. The VAR process in (1) may be regarded as the statistical model of interest
+or as a data generating mechanism for a predictive regression
+
+yt =  + Axt-1 + t,                                                          (2)
+
+where A is an m × r coefficient matrix. In the former case, a multivariate GARCH
+parametrization will be imposed on the innovations in (1) and inference will
+be conducted on the autoregressive matrix in (6). In the predictive regression
+case, the coefficient matrix A in (2) is the parameter of interest and a GARCH
+parametrization will be assumed for the innovations of (2), while no parametric
+specification of the conditional heteroskedasticity of the innovations of the VAR
+process in (1) will be required. For clarity of exposition, we provide the form of the
+vec-GARCH parametric specification for a generic sequence (t), ahead of stating
+the assumptions on the innovations ut and t of (1) and (2).
+
+   Assumption G. Let (Ft)tZ be a filtration and (t)tZ be an Ft-adapted sequence
+of i.i.d. random vectors with E (1) = 0 and E 11 = I. Let (t)tZ be a sequence
+
+admitting the following covariance stationary vec-GARCH (p,q) representation:
+
+                                q                p
+
+t = Ht1/2t, vech (Ht) =  + Aivech t-it-i + Bkvech (Ht-k)                    (3)
+
+                                i=1              k=1
+
+with E 1 4 < , where  is a constant vector, Ai,Bk are positive semidefinite
+                                                                q           p
+matrices for all i,k, and the spectral radius of the matrix  =  i=1  Ai  +  k=1  Bk
+
+satisfies  ( ) < 1.
+
+   Assumption G accounts for conditionally heteroskedastic innovations of a very
+general parametric form: the vec-GARCH process is the most general multivariate
+GARCH specification (see Chapter 11 of Francq and Zakoian (2010)). The positive
+semidefinite condition on the matrices Ai,Bk of (3) and the condition on the spectral
+radius of their sum are related to the standard Boussama (2006) conditions for the
+existence of a stationary ergodic solution of the vec-GARCH process; see Theorem
+11.5 of Francq and Zakoian (2010). The independence of the sequence (t)tZ and
+the adaptation property of the GARCH recursion equation in (3) imply that (t,Ft)
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+          LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 879
+
+is a martingale difference sequence satisfying
+
+EFt-1 tt = Ht.                                                                                  (4)
+
+The most restrictive condition of Assumption G is the requirement of finite fourth
+moments, which has well-documented implications on GARCH parametrization.
+
+   The stochastic properties of the innovation sequences ( t) and (ut) are summa-
+rized by the following assumption.
+
+Assumption M.
+
+(i) Let the statistical model be given by the predictive regression system (1)­(2)
+
+    with vt = ut, t a strictly stationary process satisfying Ev1v1 = vv > 0. The
+    sequence t in (2) satisfies Assumption G with t = t and t given by (3). The
+
+    sequence ut in (1) is a linear process
+
+                           
+
+     ut = Fjet-j                j Fj 2 < ,                                                      (5)
+
+          j=0              j=0
+
+     where (et)tZ is a strictly stationary and ergodic Ft -martingale difference
+     sequence satisfying E e1 4 < , Fj j0 is a sequence of constant matrices
+                                
+     such that F (1) =          j=0  Fj  has  full  rank  and  F0  =  Ir .
+
+(ii) Let the statistical model be given by the VAR process (1). The sequence ut in
+
+     (1) satisfies Assumption G with ut = t and t given by (3).
+
+Assumption M provides two separate sets of assumptions according to the
+
+statistical model under consideration: when the latter is given by the VAR(1)
+
+process in (1), the sequence of innovations (ut) is assumed to be a vec-GARCH
+process of the form (3) of Assumption G. On the other hand, when considering a
+
+predictive regression system (1)­(2) as the statistical model, a parametric GARCH
+
+specification is imposed only the innovation sequence ( t) of the model equation
+
+(2); the innovation sequence (ut) may exhibit conditional heteroskedasticity as a
+result of the potential conditional heteroskedasticity of the sequence (et) in (5),
+
+but there is no need to model this parametrically. The stationarity and ergodicity
+
+assumption of (et) ensures the validity of a strong law of large numbers for
+     n
+n-1  t=1  et  et  and  is  satisfied     when  (et)  is   a  stationary     GARCH  process  of  the
+
+form (3). We denote the autocovariance matrix of ut by u (j) = E u1u1-j and the
+
+associated long run covariance uu =                            u (j) > 0, the positive definiteness
+                                                     j=-
+
+of uu ensured by Assumption M.
+
+The persistence properties of the vector autoregression xt are characterized
+
+through assumptions on an adjusted version of the autoregressive matrix Rn,
+that generalizes the parametrization employed by MP (2009) and PM (2009a),1
+
+introduced by Magdalinos and Phillips (2020), henceforth referred to as MP
+
+1The original parametrization of the autoregressive matrix in MP (2009), PM (2009a), and KMS (2015a) took the
+form Rn = Ir + C/n with C a diagonal matrix and   0. The current parametrizaton in Assumption P employs the
+more general parametrization of Magdalinos and Phillips (2020).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+880 TASSOS MAGDALINOS
+
+(2020), to systems with conditionally homoskedastic innovations. We distinguish
+between three classes of regressor processes, presented below.
+
+Assumption P. The autoregressive matrix Rn in (1) satisfies
+
+Cn := n (Rn - Ir)  C as n                                                      (6)
+
+for some r ×r matrix C satisfying C <  and some sequence (n)nN of positive
+numbers. The regressor xt in (1) belongs to one of the following classes:
+
+ (i) Near-nonstationary and nonstationary regressors, if (6) holds with n/n 
+       (0,].
+
+(ii) Near-stationary regressors, if (6) holds with n/n  0, n   and C a
+     negative stable2 matrix.
+
+(iii) Stationary regressors, if (6) holds with n = 1 and R = Ir + C has spectral
+
+     radius  (R) < 1.
+
+The process xt in (1) is initialized at x0 = op n1/2 with (n)nN satisfying (6)
+under Assumptions P(i)­(ii) and x0 = Op (1) under Assumption P(iii).
+
+   Observe that (6) implies that the localizing coefficient matrix Cn of Rn is allowed
+to depend on the sample size n. In the near nonstationary regressor case P(i), quite
+
+general localizing coefficient matrices Cn are permitted with the sole condition
+ C <  that the limit matrix in (6) is bounded; the exact I(1) case is included
+in P(i) when C = 0. The negative stability requirement of Assumption P(ii) on
+
+the limiting matrix C in (6) implies restrictions on the sequences (Cn) and (Rn)
+that give rise to regressors with near-stationary characteristics; see the discussion
+
+following Assumption N and Lemma 2.1 of MP (2020). Moreover, the negative-
+stability property of C is a necessary and sufficient condition for the matrix
+
+          
+
+Vxx =       erC uuerC dr                                                       (7)
+
+       0
+
+to be well defined (and positive definite since uu > 0). Since Vxx is the probability
+                                           n
+limit of the sample moment matrix n-1n-1   t=1  xt-1xt-1  (Lemma  2.2(ii)  of  MP
+
+(2020) for the conditionally homoskedastic case and Lemma 3.2(ii) below), the
+
+requirement of Assumption P(ii) in the definition of a near-stationary process
+seems minimal. Assumption P(iii) covers the usual stable root regressor case.
+
+Assumption P allows for an initial condition x0 (n) that takes the form of a random
+process (e.g., a linear process of past innovations (ut)t0) provided that the order of
+magnitude of x0 (n) is dominated by that of xn (strictly under P(i)-(ii) and weakly
+under P(iii)), a restriction that rules out distant and infinite past initializations (see
+
+Andrews and Guggenberger (2008) and Phillips and Magdalinos (2009b)) that
+
+contribute to least squares limit theory.
+
+                    2A square matrix is negative stable if all its eigenvalues have negative real part.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+             LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 881
+
+Denoting the demeaned regression matrices in the system (1)­(2) by Y =
+
+y ,...,y     , X = x0,...,xn-1   ,    where   y   =  yt  -  y¯n,  xt  =  xt  -  x¯n-1,  y¯n  =  n-1     n    yt
+1         n                                                                                             t=1
+                                               t
+
+and x¯n-1 = n-1      n    xt-1,  the  OLS     estimator     of    A   in  (2)   is   given,     as  in  KMS
+                     t=1
+
+(2015a), by
+
+A^ n = Y X X X -1 .                                                                                      (8)
+
+The effect of GARCH innovations on the asymptotic theory of the least squares
+
+estimator of A is known to differ according to the persistence class of the regressor
+                                                        
+xt in (1). For stationary processes in class (iii), n vec                 A^ n - A      is asymptotically
+
+zero mean Gaussian with nonstandard asymptotic variance that depends on the
+
+GARCH parameters and the fourth moment of the innovations. As a result, the
+
+usual self-normalized hypothesis tests will be invalid and a White (1980) type of
+
+correction is necessary to obtain correctly sized t and Wald tests. The situation is
+
+very different for the near-I(1) processes of class (i), where the nonstandard limit
+
+distributions of n vec A^ n - A in the unit root and local to unity cases (Phillips
+
+1987, Phillips 1988; Chan and Wei, 1987) are invariant to the presence of GARCH
+
+effects and the associated Dickey­Fuller type t and Wald tests remain valid without
+
+corrections for conditional heteroskedasticity. This dichotomy has a signal-to-
+
+noise ratio interpretation: stationary GARCH effects in the noise of the system
+
+(1)­(2) are asymptotically eliminated by the strong signal                      n    xt-1xt-1   =    Op  n2
+                                                                                t=1
+
+of a near-integrated process in class (i). On the other hand, the weaker Op (n) signal
+
+of a stationary process in class (iii) is not sufficient to eliminate GARCH effects
+
+from the noise. Given the vast discrepancy in the order of magnitude of the above
+
+signals, a natural question is the existence of a "minimal" order of magnitude for
+
+the signal of xt to asymptotically eliminate GARCH effects. An affirmative answer
+requires the development of a limit distribution theory for the OLS estimator in the
+
+intermediate case of near-stationary regressors of class P(ii), undertaken in the next
+
+section.
+
+3. LEAST SQUARES LIMIT THEORY FOR NEAR-STATIONARY
+   SYSTEMS WITH GARCH INNOVATIONS
+
+We develop a limit theory for the centered and scaled least squares regression
+estimate
+
+      A^ n - A  =         1n                      1n                         -1                 n
+  nn                                  t xt-1                 xt-1xt-1                           n        (9)
+                       nn t=1                     nn                            + Op
+                                                         t=1
+
+for regressors xt belonging to the class P(ii) of near stationary processes. The
+asymptotically negligible term above arises from estimating the intercept in (2)
+and employing the demeaned series for yt and xt-1 for the construction of the
+OLS estimator A^ n; in the case of stationary and near stationary regressors this
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+882 TASSOS MAGDALINOS
+
+demeaning is eliminated asymptotically.3 Our approach follows MP (2009) in the
+
+sense that we derive a law of large numbers and a martingale central limit theorem,
+
+respectively, for the denominator and numerator of the matrix quotient (9) and use
+
+this to extract the limit theory. The main technical issue is to obtain the probability
+
+limit of the quadratic variation of the martingale transform in the numerator of (9)
+
+when t is a vec-GARCH process defined in (3). An approximation to this quadratic
+variation is achieved by reducing the problem to the existence of a stable solution to
+
+a stochastic recurrence relation involving products of innovations and covariates.
+
+Stability of the solution permits standard martingale approximation arguments that
+
+resolve the asymptotics in (9). The above analysis, summarized in Lemma 3.3, is
+
+the main technical contribution of the paper.
+
+To fix ideas, we establish some notation for the recursive equations that we
+
+employ in the development of the asymptotic theory (see part (ii) of Lemma 3.3).
+
+Given the matrices A1,...,Aq,B1,...,Bp in (3), define
+      
+ Ai + Bi, if i  p  q
+
+i=        Ai,          if p < i  q                                               (10)
+          Bi,          if q < i  p
+
+i = Ir2  i, n,i = Rin  Rni  i                                                    (11)
+
+and consider the stochastic difference equations:
+
+          
+
+Y (j) = lY (j - l) + v (j)                                                       (12)
+
+          l=1
+
+          
+
+Yn (j) =            n,lYn (j - l) + vn (j)                                       (13)
+
+          l=1
+
+for j  1 and  := q  p, with v (j) and vn (j) denoting generic innovations (to be
+specified by (24) and (25) below). The companion matrix associated with (13) is
+
+given by
+
+                       n,2 ...  n,  -1          
+
+                  n,1                       n,
+Mn, =                                            ,
+               I       0 ...        0       0                                    (14)
+                       I ...        ...     ...
+               0       ... ...
+               ...                  0       0
+
+               0 ... 0 I                    0
+
+where all identity matrices are of order r2m (m + 1) /2 × r2m (m + 1) /2. The
+
+companion matrix associated with (12), denoted by M , has the same form as
+the matrix in (14) with n,i replaced by i for all i  {1,...,}. It is relatively
+
+3See the proof of Theorem 3.4 in the Appendix for details and the proof of (9).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+            LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 883
+
+straightforward to show from first principles that Assumption G on the GARCH
+process ensures the stability of the solution of (12) and (13).
+
+   LEMMA 3.1. Under Assumption G, the spectral radius and norm of the
+companion matrices Mn, and M defined in (14) satisfy:
+
+(i)  (M ) < 1 and               Mj    <  and
+                         j=0
+
+(ii) limn  Mn, < 1 and supn1                           Mnj ,  < .
+                                                j=0
+
+We start by listing some properties of near-stationary processes generated by
+
+potentially conditionally heteroskedastic martingale difference innovations (et)
+
+that have finite fourth order moments. Some results are direct generalizations of
+
+the conditionally homoskedastic case of MP (2009). In particular, we show that
+
+the sample moment matrix n-1n-1            n    xt xt  has  the              same  probability    limit  as  in
+                                           t=1
+
+the case of a near-stationary regressor generated by a conditionally homoskedastic
+
+martingale difference (et).
+
+LEMMA 3.2. Denote by x0t =               t    Rtn-juj  the  regressor              in  (1)  with  x0  =  0  and
+                                         j=1
+
+define the process
+
+       t-1
+
+n,t = Rnj F (1) et-j.                                                                                       (15)
+
+       j=0
+
+Under Assumptions4 M and P(ii), the following hold:
+
+(i) max1tn E      n-1/2x0t      4                                            n-1/2n,t    4
+
+                                 = O (1) and max1tn E                                     = O (1).
+
+(ii) Both n-1n-1    n    xt-1xt-1     and  n-1n-1      n      n,t-1n,t-1               converge   in  proba-
+                    t=1                                t=1
+
+    bility to the matrix Vxx in (7).       n
+(iii) (nn)-1/2      n                      t=1
+                    t=1  (xt-1    t)  -         n,t-1  t                     = op (1) .
+
+   Lemma 3.2 shows that stationary GARCH effects are eliminated from the
+first order asymptotics of the denominator of the matrix quotient (9), for a near
+stationary regressor xt of arbitrary order. The asymptotic development of near-
+stationary regression theory so far was based on unconditional moment bounds
+and truncation and did not employ any properties of the GARCH specification (3).
+Obtaining the limit distribution of the martingale transform in the numerator of the
+matrix quotient (9), asymptotically equivalent to
+
+    =  1n         n,t-1  t
+Nn                                                                                                          (16)
+         nn
+             t=1
+
+4Under Assumption M(ii), ut = et = t, so C (1) = I in the definition of n,t
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+884 TASSOS MAGDALINOS
+
+in view of Lemma 3.2(iii), is more challenging. We show that the predictable
+quadratic variation of Nn
+
+N  n=   1   n   n,t-1n,t-1  EFt-1 tt    =1 n          n,t-1n,t-1  Ht      (17)
+       nn  t=1                             nn t=1
+
+with Ht defined in (3), can be approximated by
+
+Vn =   1   n   n,t-1n,t-1      ,       = E11                              (18)
+      nn  t=1
+
+with approximation error expressed in terms of the solutions of the stochastic
+recurrence relations (12) and (13) arising from (3), and that the stability of these
+solutions implies the asymptotic negligibility of the approximation error. The
+approximation of N n by Vn and the characterization of the approximation error in
+terms of bounds that depend on the solutions of the stochastic difference equations
+(12) and (13), summarized by the next result, is the main technical contribution of
+the paper.
+
+LEMMA 3.3. Consider the vector-valued processes
+
+t (j) = vec etet - ee  vech Ht+j                                          (19)
+
+Sn,t (j) = Rjnn,t-1  Rnj F (1) et  vech Ht+j                              (20)
+
+with Ht defined in (3) and
+
+wt = vech tt - Ht .                                                       (21)
+
+(i) Under Assumptions M and P(ii), N n and Vn in (17) and (18) satisfy
+
+      N n - Vn  b (n + sn) + op (1)                                       (22)
+
+   as n  , where
+
+           1 n-1  Rn  2(j-1)  n-j                  1  n-1 n-j             (23)
+   n = nn j=1                 t=1  t (j) , sn = nn
+                                                              Sn,t (j)
+
+                                                      j=1 t=2
+
+     and b  (0,) is a constant independent of n.
+(ii) For each j  1 and fixed t,n: t (j) satisfies (12) with innovations v (j)  vt (j)
+
+     given by
+
+                                   q
+
+   vt (j) = vec etet - ee   + (I  Al) vec etet - ee  wt+j-l               (24)
+
+                                   l=1
+
+   and Sn,t (j) satisfies (13) with innovations vn (j)  n,t (j) given by
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 885
+
+n,t (j) = Rnj n,t-1  Rnj F (1) et  
+
+              q
+
++ (I  Ai) Rjnn,t-1  Rnj F (1) et  wt+j-i .                                         (25)
+
+              i=1
+
+(iii) Under Assumptions M and P(ii), the bounding sequences in (22) satisfy n p
+     0 and sn p 0.
+
+By Lemma 3.3, the processes in (19) and (20) can be expressed as the companion
+
+form solutions of the stochastic recurrence relations (12) and (13), see (59) and (60)
+
+in the Appendix. The leading terms of these solutions consist of "moving averages"
+
+of the martingale difference sequences (24) and (25) weighted by powers of the
+
+companion matrices M and Mn, , respectively. The stability property of the latter
+allows to employ standard martingale arguments to demonstrate that the bounding
+
+sequences n and sn in (22) are asymptotically negligible.
+   The above lemma implies that the predictable quadratic variation of the mar-
+
+tingale transform in (16) with t following the vec-GARCH process (3) can
+be approximated by its counterpart when t is conditionally homoskedastic.
+Combined with a Lindeberg condition established in the Appendix, a standard
+
+martingale central limit theorem applies to the numerator of the matrix quotient
+(9), and shows that the asymptotic variance of the OLS estimator A^ n is invariant to
+
+GARCH effects. The asymptotic distribution of the associated Wald statistic
+
+Wn = HvecA^ n - h H X X -1  ^  H -1 Hvec A^ n - h                                  (26)
+
+for testing linear restrictions on the coefficient matrix
+
+H0 : Hvec (A) = h,                                                                 (27)
+
+where H is a known q × mr matrix with rank q and h is a known vector, follows
+directly from that of A^ n. Since the t sequence is uncorrelated, ^  in (26) is a
+simple parametric estimator ^  = n-1  n
+                                      t=1   ^t  ^t  based  on  the  residuals  of  (2):
+
+^t = yt - y¯n - A^ n (xt-1 - x¯n-1). These results are summarized below.
+
+   THEOREM 3.4. Consider the system of predictive regressions (1), (2), and (6)
+
+under Assumption P(ii) with t and ut satisfying Assumption M(i). The following
+limits apply as n  :
+
+(i) (nn)-1/2  n     (xt-1    t)  N (0,Vxx       )
+(ii) nn vec   t=1
+
+              A^ n - A  N 0,Vx-x1 
+
+(iii) Wn   2 (q), under (27)
+
+where q is the rank of H in (27), Vxx is defined in (7) and = E 1 1.
+
+   Analogous results apply to the OLS estimator R^ n when the statistical model is
+given by the vector autoregressive process in (1), and ut are martingale difference
+innovations that satisfy the vec-GARCH recursion (3), as specified by Assumption
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+886 TASSOS MAGDALINOS
+
+M(ii). The associated Wald statistic for testing H0 : HR vec (Rn) = hR, where HR
+is a known q × r2 matrix with rank q and hR is a known vector, is given by
+
+WnR = HRvecR^ n - hR HR X X -1  ^ uu HR -1 HRvecR^ n - hR ,                                         (28)
+
+where ^ uu = n-1       n    u^ t u^ t  is  based  on  the  (1)  residuals  u^ t  =  xt  -  Rnxt-1.
+                       t=1
+
+   THEOREM 3.5. Consider the vector autoregression (1) and (6) under Assump-
+tion P(ii) with ut satisfying Assumption M(ii). The following limits apply as n 
+:
+
+(i) (nn)-1/2      n    (xt-1           ut)    N   (0, Vxx       uu)
+                  t=1
+
+(ii) nn vec   R^ n - Rn  N 0,Vx-x1  uu
+
+(iii) WnR   2 (q),
+
+where q is the rank of HR and Vxx is defined in (7).
+
+Remark 3.6.
+
+(i) Theorems 3.4 and 3.5 provide a full characterization of the effect of GARCH
+
+    innovations in stochastic regression models by considering regressors with a
+    signal that is intermediate to the Op n2 signal of I(1) processes and the Op (n)
+    signal of I(0) processes. We show that a regression signal of order
+
+n
+
+     xt-1xt-1 = Op (nn),                                                                            (29)
+
+t=1
+
+     where n   at arbitrary rate is sufficient to asymptotically eliminate
+     stationary GARCH effects from the distribution of the least squares estimator
+     and the associated self-normalized test statistics. The implication is that the
+     elimination of GARCH effects from least squares regression asymptotics is
+     not an exclusively I(1) phenomenon: it occurs when the regressors exhibit per-
+     sistence of any degree, including near-stationary regressors that are arbitrarily
+     close to stationarity.
+(ii) The result has an intuitive signal to noise interpretation: the Op (n) signal
+     in stationary regression is not sufficiently strong to asymptotically remove
+     the effects of conditional heteroskedasticity in the noise; this only becomes
+     possible when the regression signal is strengthened to (29), while the order of
+     the conditionally heteroskedastic innovations remains I(0).
+(iii) Andrews and Guggenberger (2012), herafter AG (2012), establish OLS and
+     GLS limit theory in an AR(1) process with a root that admits an equivalent
+     parametrization to (6) for scalar Rn and C. Their results include a univariate
+     version of Theorem 3.5 obtained under a strong mixing assumption instead
+     of a GARCH parametrization as in the current paper. While avoiding a
+     parametric specification of the conditional heteroskedasticity, AG (2012)
+     impose stronger moment conditions on the innovation sequence ut than
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+             LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 887
+
+     our Assumptions G, M(ii): Assumption INNOV(iii) of AG (2012) requires
+     E u1  <  with (at least)  > 6 with further moment conditions imposed
+     for the GARCH(1,1) example of equation (5) of that paper. In short, the OLS
+     limit distribution result of AG (2012) coincides with a univariate version of
+     Theorem 3.5 above and is derived by weak dependence arguments without
+     imposing a GARCH parametrization on ut at the expense of assuming higher
+     order moments on ut. On the other hand, the current paper makes use of the
+     GARCH parametrization for the asymptotic development based on the recur-
+     sive techniques of Lemmata 3.1 and 3.3 and requires four finite moments.
+     In this sense, the OLS asymptotic results of AG (2012) and Theorem 3.5
+     above are complementary. It is worth noting the weak dependence properties
+     of vector-valued conditionally heteroskedastic processes are not as well
+     developed as in the scalar case: to our knowledge, there are no available results
+     on the mixing properties of vec-GARCH models, with geometric ergodicity
+     established by Boussama, Fuchs and Stelzer (2011) for the less general class
+     of BEKK­GARCH models.
+
+4. IVX LIMIT THEORY WITH GARCH INNOVATIONS
+
+Having characterized the asymptotic behavior of the least squares estimator in near
+stationary systems with conditionally heteroskedastic innovations, we turn to the
+issue of conducting inference in the predictive regression system (1)­(2) when the
+order of regressor persistence is unknown. A robust methodology that produces
+standard inference for testing restrictions on the matrix A of coefficients in (2)
+across all persistence regimes P(i)­(iii) based on an endogenous instrumentation
+procedure, termed IVX, has been proposed by PM (2009a) and further developed
+in the current predictive regression context by KMS (2015a). In this paper, we
+investigate the extent to which the above procedure is valid under conditionally
+heteroskedastic innovations. The main result of the section is Theorem 4.4 which
+establishes a testing procedure that is valid over the entire range of persistence
+regimes P(i)­(iii).
+
+   To fix ideas, instruments are constructed by differencing the regressor xt and a
+new process
+
+z~t = Rnzz~t-1 + xt, z~0 = 0                                   (30)
+
+is generated according to an artificial autoregressive matrix
+
+Rnz  =  Ir  +  Cz ,  n1/2 + nz  0                              (31)
+               nz    nz n
+
+with specified persistence degree nz, where Cz is a negative stable matrix. The
+matrix A of coefficients in (2) is then estimated by a standard instrumental variable
+estimator that employs the instruments in (30):
+
+A~ IVX = Y Z~  X Z~  -1                                        (32)
+
+                        .
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+888 TASSOS MAGDALINOS
+
+   The asymptotic development of the previous section is the key to the determi-
+nation of the asymptotic properties of the above IVX estimator under GARCH
+effects. The asymptotic behavior of the numerator of the matrix quotient in (32) is
+driven by the martingale transform
+
+N~ n  =         1       n   (z~t-1  t)                                                           (33)
+                       t=1
+
+           n (nz  nz)
+
+with instrument process z~t behaving asymptotically like a near stationary process
+of the type P(ii): when nz n (shorthand notation for nz/n  0) in which
+case the instruments are less persistent than the regressors, z~t-1 can be replaced
+asymptotically in (33) by zt-1, where
+
+zt = Rnzzt-1 + ut                                                                                (34)
+
+a nz-near-stationary process satisfying Assumption P(ii); when n nz, employ-
+ing more persistent instruments than the regressor in (1) leads to z~t behaving
+asymptotically as the regressor xt, a necessarily near-stationary process by the
+choice of nz in (31), in which case N~ n in (33) is asymptotically equivalent to Nn
+in (16):
+
+N~ n  -     1    n                = op (1) if nz/n  0,
+                                  = op (1) if n/nz  0,
+                    (zt-1  t)
+           nnz
+                t=1
+
+N~ n  -    1     n
+         
+                    (xt-1  t)
+           nn
+                t=1
+
+see Lemma 3.2 MP (2020). In both cases, Lemma 3.3 above applies to the
+
+predictable quadratic variation N~ n of the martingale transform in (33): denoting
+
+the moment matrices of zt-1 and xt-1 by Vz(zn) = n-1n-z1                  n    zt-1zt-1  and  Vx(xn)  =
+                                                                          t=1
+n-1n-1   n
+         t=1    xt-1xt-1  Lemma      3.3  yields
+
+N~ n - Vz(zn)          p    0 if  nz  0   and             N~ n - Vx(xn)        p    0 if  n      0
+                                  n                                                       nz
+
+with Lemma 3.2(ii) applying to Vx(xn) and Vz(zn). Moreover, the asymptotic approx-
+imation of n-1 (nz  nz)-1            n
+                                     t=1  z~t-1z~t-1  by  Vz(zn)  when  nz/n        0  and   by  Vx(xn)
+
+when n/nz  0 (Lemma 3.1(iv) of MP (2020)) as well as the limit distribution of
+n-1 (nz  nz)-1       n
+                     t=1  xt-1z~t-1  (Lemma  3.1(iii)     of      MP  (2020))  are  derived  through
+
+arguments that do not depend on the conditional homoskedasticity assumption
+
+maintained by MP (2020),5 and hence remain valid under the current conditionally
+
+heteroskedastic framework of Assumption G. We conclude that the limit distri-
+bution of N~ n in (33) can be derived directly from Theorem 3.5(i) and the limit
+
+5The proof of Lemma 3.2(ii) in the Appendix shows that Proposition A2 of MP (2020) continues to hold under
+Assumptions G and M, so parts (ii)­(iv) of Lemma 3.1 of MP (2020) continue to hold in the current context.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+             LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 889
+
+distribution of the remaining IVX sample moments can be deduced by Lemma 3.1
+(iii) and (iv) of MP (2020).
+
+   Having characterized the asymptotic behavior of IVX sample moments, the
+asymptotic distribution of the normalized and centred IVX estimator follows as in
+PM (2009a) and MP (2020): we collect the results across the different persistence
+regimes of Assumption P in Theorem 4.1 below. Corresponding to the matrix Vxx
+in (7), we define the matrices
+
+                                                  
+
+Vzz =        erCz uuerCz dr and Vxz =               erCVxxerCz dr                                (35)
+
+       0                                       0
+
+and, under Assumption P(iii), we denote a strictly stationary ergodic version of xt
+by
+
+       
+
+xt = Rjut-j.                                                                                     (36)
+
+j=0
+
+Finally, we denote by Bu an r-variate Brownian motion with covariance matrix
+                      t
+uu, by JC (t) =       0   eC(t-s)dBu  (s)  an  Ornstein­Uhlenbeck          process  and  by  JC  (t)  =
+
+JC (t) -  1  JC  (t)  dt  the  demeaned    version  of    JC .
+          0
+
+   THEOREM 4.1. Consider the model (1)­(6) with instruments z~t defined by (30)
+and (31). The following limit theory as n   applies for the estimator A~ IVX in
+(32) under Assumptions P and M(i).
+
+(i) Under Assumptions P(i)­(ii),
+
+       n (n  nz)vec A~ n - A  MN 0,                       -1    Vz~z~  -1     ,
+                                                          C            C
+
+where C and Vz~z~ take the following form: under Assumption P(i),
+
+                               1                       1
+       C = - xx + JC (s) dBx (s) + JC (s) JC (s) dsC Cz-1
+                          0                         0
+
+and Vz~z~ = Vzz; under Assumption P(ii): C = CVxx Cz-1 and Vz~z~ = Vzz when
+nz/n  0; C = Vz~z~ = Vxx when n/nz  0; C = -CVxz and
+
+                
+
+Vz~z~ =           eszCz CVxzCz + CzVxzC esCz ds
+
+             0
+
+when n/nz  z > 0, where the matrices Vxx, Vzz, and Vxz are defined in (7)
+
+and (35),
+                                    
+(ii) Under Assumption P(iii), n vec               A~ IVX - A     N (0,V0), where
+
+V0 = Ex1x1 -1  Im E x1x1  22 Ex1x1 -1  Im                                                        (37)
+
+and xt is defined in (36).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+890 TASSOS MAGDALINOS
+
+COROLLARY 4.2. Under Assumption M(i), the IVX­Wald statistic
+
+W~ n = HvecA~ IVX - h H X PZ~ X -1  ^  H -1 HvecA~ IVX - h                                    (38)
+
+for testing the hypothesis (27) has a  2 (q) asymptotic distribution when the
+regressor in (1)­(6) satisfies Assumptions P(i)­(ii).
+
+   The only class of predictor variables not covered by Corollary 4.2 is that of
+purely stationary autoregressions P(iii) with conditionally heteroskedastic innova-
+
+tions. This is by no means surprising since, in the above case, the IVX­Wald test
+
+statistic is asymptotically equivalent to a standard OLS­Wald statistic which is
+known to have a nonstandard limit distribution under conditionally heteroskedastic
+
+innovations. When xt is a stationary process and the innovation sequence t in (2)
+                                                                              n
+is conditionally heteroskedastic, the asymptotic variance of n-1/2            t=1   (xt-1     t  )
+
+is given by  = E xt-1xt-1  tt and does not factorize to E xt-1xt-1  
+
+as in the case when t are conditionally homoskedastic; consequently, the matrix
+n X X -1  ^  is no longer a consistent estimator of the asymptotic variance of
+
+the (asymptotically equivalent) OLS and IVX estimators, so both the OLS and
+
+IVX based Wald statistics will fail to be asymptotically  2 (q). The standard limit
+
+distribution can be recovered by introducing a White (1980) type of correction
+
+in the Wald statistic, which requires consistent estimation of n when xt is a
+stationary process. In order to preserve the robustness of the IVX procedure to
+the persistence properties of xt, we employ the estimator
+
+        n
+
+^ n =        z~t-1z~t-1  ^t^t ,                                                               (39)
+
+        t=1
+
+where z~t are the IVX instruments in (30) and ^t are the OLS residuals from (2).
+The corrected IVX­Wald statistic takes the form
+
+W^ n = HvecA~ IVX - h HQ^ nH -1 HvecA~ IVX - h ,                                              (40)
+
+Q^ n =     Z~ X  -1      ^ n     X Z~  -1      .                                              (41)
+
+                     Im                    Im
+
+The next results characterize the asymptotic behavior of ^ n in (39) and confirm the
+validity of the White-type correction for all persistence regimes of Assumption P.
+
+LEMMA 4.3. Denote by x0t =             t    Rtn-juj  the  regressor  in  (1)  with  x0  =  0  and
+                                       j=1
+by z~0t the IVX instrument in (30) generated by x0t. Under Assumptions P and M(i),
+
+the following hold as n  :
+
+(i) max1tn E (n  nz)-1/2 z~0t 4 = O (1) .
+
+(ii) n-1 (n  nz)-1 ^ n p , where: = Vzz   when nz/n  0; = Vxx 
+
+        when n/nz  0 and n  ; = E x1x1  22 under Assumption
+     P(iii) with xt, Vxx and Vzz defined in (36), (7) and (35).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+                              LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 891
+
+                 THEOREM 4.4. Under Assumptions M(i) and P, the corrected IVX­Wald
+              statistic W^ n in (40) has a  2 (q) asymptotic distribution under (27).
+
+                 Remark 4.5.
+
+               (i) Theorem 4.1 and its corollary show that the limit distribution of the stan-
+                   dard IVX­Wald statistic W~ n is invariant to the presence of conditional het-
+                   eroskedasticity in the innovations for all regressors that exhibit some degree
+                   of persistence in that n  . GARCH effects are present in the limit distri-
+                   bution only in the case P(iii) where the regressor xt is a stable autoregressive
+                   process (and n = 1). These results are a direct consequence of the asymptotic
+                   development in Section 3 and the fact that any degree of persistence n 
+                    is sufficient to eliminate GARCH effects in near stationary systems of
+                   regression equations: intuitively, an IVX instrument z~t behaves asymptoti-
+                   cally as a near-stationary process (zt if nz n and xt if   n nz),
+                   the martingale transform N~ n in (33) will behave asymptotically as its near
+                   stationary counterpart (16), and will thus have sufficient signal to eliminate
+                   GARCH effects from the limit distribution. For the same reason, the limit
+                   distribution of the standard IVX-Wald test is distorted by the presence of
+                   GARCH innovations when n = 1 since z~t behaves like the stationary process
+                   xt.
+
+              (ii) Theorem 4.4 shows that a simple adjustment to the IVX Wald test statistic
+                   extends the validity of the IVX approach in the presence of GARCH inno-
+                   vations across the whole range of data generating mechanisms considered
+                   in classes P(i)­(iii). These classes define regressors with diverse stochastic
+                   properties, ranging from pure stationarity to unit root nonstationarity and
+                   include the intermediate local to unity and near stationary persistence regimes.
+                   The adjustment differs from a standard conditional heteroskedasticity cor-
+                   rection in that E xt-1xt-1  tt is estimated in (39) by using the IVX
+                   instruments instead of the regressors, in order to ensure the robustness of the
+                   corrected IVX­Wald statistic in (40) to regressors with degree of persistence
+                   n dominating the instrument rate nz. The robustness of the corrected IVX­
+                   Wald test statistic W^ n in (40) to conditional heteroskedasticity under all
+                   persistence regimes makes it practically relevant and suitable for general
+                   application.
+
+              (iii) KMS (2015a) have proposed a finite sample correction to the IVX­Wald
+                   test statistic W~ n in (38) that exhibits better finite sample properties while
+                   being asymptotically equivalent to W~ n. The conditional heteroskedasticity
+                   adjustment employed to W~ n can also be employed to the IVX­Wald test
+                   statistic of KMS (2015a), leading to the adjusted version having a  2 (q) limit
+                   distribution for models covering the entire range of Assumption P. Extensive
+                   Monte Carlo experiments in KMS (2015a) suggest that choosing Rnz = nzIr
+                   with nz = 1 - 1/n0.95 in (31) gives rise to an IVX-Wald test statistic with very
+                   good finite sample size and power properties.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+892 TASSOS MAGDALINOS
+
+(iv) A version of Theorems 4.1 and 4.4 were stated under more restrictive
+
+assumptions in KMS (2015a) but no theory was provided. The current
+
+paper establishes the theory of IVX estimation and inference in predictive
+
+regression systems with conditionally heteroskedastic innovations under the
+
+more general vector autoregressive framework of Assumption P (see footnote
+
+1 above) and less restrictive assumptions on the innovations compared to
+
+those imposed by KMS (2015a): while the GARCH parametric specification
+
+for t is common to both papers, KMS (2015a) imposes an additional weak
+
+dependence condition (equation (8) of that paper) and the stricter condition
+
+j=1  j  Fj  <  of Phillips and Solo (1992) on the linear process for ut
+
+compared to the summability requirement (5) of the current paper.
+
+5. DISCUSSION
+
+The paper provides a complete characterization of the asymptotic properties of
+least squares regression methods in the presence of conditional heteroskedasticity
+in the innovations that take the form of a covariance stationary vec-GARCH pro-
+cess. Existing results on stochastic regression with conditionally heteroskedastic
+innovations lead to different conclusions depending on the integration properties
+of the regressors. Least squares limit theory with I(1) processes is invariant to
+the presence of conditional heteroskedasticity and the usual Dickey­Fuller type
+of limit distributions apply. On the other hand, GARCH effects appear in the
+first order asymptotics of the OLS estimator and the associated self-normalized
+statistics generated by I(0) regressors. Approached as a signal-to-noise ratio
+problem, a natural question that arises is the degree of regression signal required
+in order to asymptotically eliminate conditional heteroskedasticity from the noise.
+The paper provides a simple and intuitive answer: any signal that dominates the
+Op (n) signal of a stationary regressor is sufficient. Consequently, GARCH effects
+appear in least squares limit theory only in the case of stationary regressors: for
+near-stationary and local to unity regressors, the OLS estimator has the same limit
+distribution that applies under conditionally homoskedastic innovations, given in
+MP (2009) and Phillips (1988) respectively. A similar result has been established
+by Andrews and Guggenberger (2012) for a scalar AR(1) process using weak
+dependence techniques rather than a GARCH parametrization.
+
+   The asymptotic invariance of least squares methods to GARCH effects in
+the innovations in the case of regressors that are not exactly I(0) carries over
+to the IVX procedure of PM (2009a) and KMS (2015a), where the IVX­Wald
+test statistic is shown to have a standard chi-squared limit distribution. The
+advantage of this method is that, unlike least squares, the limit distribution is
+robust to regressor persistence. To accommodate I(0) regressors in the presence
+of conditional heteroskedasticity in the innovations, we introduce a White-type
+correction based on the endogenously generated IVX instruments rather than the
+regressor in order to preserve the method's robustness property. This adjusted
+IVX­Wald test statistic is shown to have a standard chi-squared limit distribution
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+              LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 893
+
+under all persistence regimes and stationary GARCH innovations, validating the
+IVX procedure under conditional heteroskedasticity.
+
+6. TECHNICAL APPENDIX AND PROOFS
+
+                                                              and M F = trM M 1/2 the
+We denote by M = max  :    M M
+
+spectral and Frobenius matrix norms and by  (A) and  (A) the spectrum and
+
+the spectral radius of a square matrix A.
+
+   Proof of Lemma 3.1. It is sufficient to show that all nonzero eigenvalues of M
+lie inside the open unit disk {z  C : |z| < 1}. Suppose that   C {0} is an arbitrary
+
+eigenvalue of M . Letting
+
+              1                    1
+G () = Is -  1 - · · · -  ,
+
+with s = r2m (m + 1) /2, and using the standard formula for the determinant of a
+partitioned matrix (e.g., 5.30 of Abadir and Magnus (2005)) and induction on 
+we obtain
+
+det (M - Is) = (-)s det G () .                                                          (42)
+
+The identity (42) implies that any nonzero eigenvalue  of M satisfies
+
+det G () = 0.                                                                           (43)
+
+Denoting by MH the conjugate transpose of a square complex matrix M, the
+Hermitian part of G () is given by
+
+H [G  ()]  =  1  G () + GH ()
+              2
+
+           =1    2Is -          1  +  1  1 -···-     1  +     1           
+              2                       ¯                       ¯ 
+
+           =1    2Is  -      2  Re ()        2 Re 2        -  ·  ·  ·  -  2  Re (  )
+              2                 ||2      1 - ||4                             ||2
+                                                        2                             
+
+                                             Re j
+
+           = Im -            i+          1-  ||2j    j.                                 (44)
+
+                        i=1        j=1
+
+The conditions i  0 and  ( ) < 1 of Assumption G imply that the matrix Im -
+
+i=1   i = Im -   is positive definite: min (Im -           ) = 1 - max ( ) > 0. Moreover,
+
+for arbitrary   C with  = 0 and j  N,
+
+||  1  ||2j  ||j = j  Re j                                 Re j
+                                                    1 - ||2j  0,
+
+which implies that the second sum on the right of (44) is a positive semidefinite
+
+matrix. Since Im -                 i > 0, (44) implies that H [G ()] is a positive definite
+                      i=1
+matrix for all   C satisfying ||  1. Positivity of H [G ()] implies the
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+894 TASSOS MAGDALINOS
+
+nonsingularity of G (), so (43) is violated when ||  1. We conclude that M
+cannot have an eigenvalue with ||  1, so  (M ) < 1.
+
+   To show the second assertion, Householder's theorem (Lemma 5.6.10 in Horn
+and Johnson, 2013) ensures that for any  > 0 there exists n0 ()  N and a matrix
+norm · n0() such that M n0()   (M ) + . By equivalence of norms in finite
+dimensional spaces, for each  > 0 there exists a constant c ()  (0,) such that
+
+Mj         c ()  Mj   n0()  c ()   M            j         c ()  [  (M  )  +  ]j
+                                                n0 ( )
+
+for each j  N. Since  (M ) < 1, we may choose   (0,1 -  (M )), which implies
+that  :=  (M ) +   (0,1) and
+
+        Mj   c ()           j   =   c ()     < .
+j=0                j=0             1 - 
+
+This shows part (i). For part (ii), Mn,  M as n   so, by continuity of the
+eigenvalues of a matrix as a function of the matrix elements,  Mn,   (M )
+and Mn,  M as n  . Since  (M ) < 1, convergence of  Mn,
+
+implies that limn  Mn, < 1. Also, since                                   Mj     < ,    Mn,  
+                                                                     j=0
+
+M and dominated convergence yield mn :=                              Mnj ,              Mj  < .
+                                                                j=0              j=0
+
+Convergence of (mn) implies that supn1mn < , completing the proof of the
+
+lemma.
+
+   Proof of Lemma 3.2. We employ a corollary of the Rosenthal and Minkowski
+inequalities for a martingale difference sequence Yj satisfying E Yj p < :
+
+            p                             p/2
+
+     n                   n
+
+E Yj  Cp  E Yj p 2/p for p > 2,                                                              (45)
+
+     j=1              j=1
+
+where Cp > 0 is a constant depending on p only, see Lemma 2.5.2 in Giraitis
+et al. (2012). Letting I,Jt,i  N  {0}, the Minkowski inequality followed by the
+inequality (45) with p = 4 imply that
+
+                            4
+
+            RjnFiet-j-i
+
+iI jJt,i                    L4
+
+                    RjnFiet-j-i      4                          RjnFiet-j-i      41/44
+                                                        
+               jJt,i                      =             E  jJt,i
+                                   L4
+        iI                                        iI
+
+                                                1/21/2    4
+                                                          
+ c                       E      RjnFiet-j-i  4
+
+            iI jJt,i
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+              LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 895
+
+for a uniform constant c > 0, giving
+
+                                                                         Rnj 21/24 .
+                                                                
+                          4                                 Fi 
+
+             RjnFiet-j-i  cE e1 4                                                                 (46)
+
+   iI jJt,i               L4                         iI           jJt,i
+
+For part (i), (46) yields for each t  {1,...,n}
+
+             4         t-1               4                t-1                  4
+
+E  x0t        =  1         Rjnut-j           =1                   RjnFiet-j-i
+   n1/2
+                 n2    j=0               L4      n2      i=0 j=0               L4
+
+                                                 2                4
+                              4 n-1
+                 cE e1                   Rjn 2                Fi .
+                    n2         
+                                                         i=0
+                                    j=0
+
+Since the last bound is independent of t and                      n-1    Rnj  2
+                                                                  j=0
+                                                                               = O (n), part (i) for x0t
+
+follows. A simpler version of the above argument applies to E                      n-1/2n,t-1     4
+
+                                                                                                   since
+
+(45) with p = 4 applies directly to the sum defined by n,t-1.
+
+   For part (ii), we start by noting that Proposition A2 of Magdalinos and
+
+Phillips (2020) continues to hold in the current conditional heteroskedastic setup
+
+with the following modification to the proof: when a second moment bound is
+
+employed, we replace the role of conditional homoskedasticity in the computation
+
+of products of second moments by an L2 Cauchy­Schwarz inequality followed
+
+by the inequality (46) when necessary; the resulting bounds depend on fourth
+
+moments (instead of second moments) of (et) but the orders of magnitude of
+
+the resulting L2-bounds remain the same. Specifically, referring to the proof
+
+of Proposition A2 of MP (2020): the bounds for max0mn                                  ~  (m)  -  (m)
+                                                                                          1n      1n L1
+
+in (39) and for max0mn                      (m)  L1  are    the  same    with  e1 L2 max1tn x0t L2
+                                            3n
+
+replaced by e1 L4 max1tn x0t L4 ; the bounds for max0mn S2(mn) L1 and
+
+max0mn        S3(mn )    in equations (42) and (43) are the same with              e1     2   replaced     by
+                                                                                          L2
+                       L1
+
+c1/4  e1  2   where    c  is  the  constant      in  (46);  the  bound   for  max0mn      (m)  -  S1(mn )
+          L4                                                                              2n
+                                                                                                           L1
+is the same. Having established the validity of Proposition A2 of MP (2020)
+
+uwn-nidt1henr-n1-t1hetn=nta1=sx1steu-tm1extpt -ti1oLn1s poVffoxxltlhofewroimcnugrtrbheyenttahrpegaumpmeeera,nntneo-rgf1oLdeintcm=1tmhxeat-o12rue.2mxt o ifnsMptePadx(xo2f0a2tnh0de)
+
+law of large numbers employed in MP (2020). For the last claim of part (ii),
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+896 TASSOS MAGDALINOS
+
+note that
+
+              m                                       n,t              n
+                                                        n              n
+max     n-1 n,t-1et                     e1  L4  max             =O                                  (47)
+
+1mn           t=1                                tn          L4
+
+                            L2
+
+by part (i) of the lemma. Since n,t satisfies the recursion n,t = Rnn,t-1 + F (1) et,
+we know that
+
+           n                            
+
+n-1n-1        n,t-1n,t-1 p                  erCGerC dr,
+
+         t=1                       0
+
+where, since n-1         nt=u1u,n,0t-1eertCGeprC0  by (47),  G=   Ren n-1       n    F  (1)  et et  F  (1)
+= uu. Since G =                                    dr = Vxx  and  the proof of  t=1
+
+                                                                                part (ii) is complete.
+
+   For part (iii), xt-1 = x0t-1 + Rtn-1x0, so since x0 = op n1/2 , we may write
+
+   n    Rtn-1x0    t           x0       n    Rtn-1    t      = op (n) and
+   t=1                                  t=1
+
+  1      n                   1      n                             n .                               (48)
+                                                                  n
+            xt-1  t =                  x0t-1  t + op
+  nn                         nn
+        t=1                        t=1
+
+Writing out x0t-1 and letting (mn)nN  N be a sequence satisfying mn 
+,mn/n  0, we obtain
+
+         t-2                   t-2 
+
+x0t-1 =       Rnj ut-j-1 =         Rjn      Fiet-j-i-1
+
+         j=0                   j=0 i=0
+
+         mn t+i-2                                  t-2
+
+   =               Rjn-iFiet-j-1 +                     RjnFiet-j-i-1
+
+         i=0 j=i                        i>mn j=0             
+
+         t-2                                t-2                            mn t+i-2
+
+   = Rjn                 Fi et-j-1 - Rnj                     Fi et-j-1 +              RjnFiet-j-1
+
+         j=0       i=0                      j=0       i>mn                 i=0 j=t-1
+
+              mn i-1                      mn t+i-2                                    t-2
+
+         -             RjnFiet-j-1 +                Rjn Rn-i - Ir Fiet-j-1 +               Rnj Fiet-j-i-1
+
+              i=0 j=0                   i=0 j=i                                 i>mn j=0
+
+   = n,t-1 - n(1,t)-1 + n(2,t)-1 - n(3,t)-1 + n(4,t)-1 + n(5,t)-1                                   (49)
+
+in order of appearance. Noting that n(k,t)-1  t is an Ft-martingale difference
+sequence, we will show that
+
+E    1         n               2            k  {1,...,5}                                            (50)
+   
+                  n(k,t)-1  t    0,
+     nn
+              t=1
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+          LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 897
+
+and the result will follow from (48) and (49). For n(5,t) and n(1,t), the Cauchy­
+Schwarz inequality followed by (46) give
+
+E    1     n             2         n        n(5,t) 2 t 2
+   
+              n(5,t)  t   =1          E
+     nn                       nn t=1
+          t=1
+
+                            1      E  1               n   E n(5,t) 4 1/2
+                               nn           4 1/2
+
+                                                     t=1               2
+
+                              cE   1 4 E    e1 4 1/2               Fi     1  n-2  Rnj  2
+                                                                          n  j=0
+                                                             i>mn
+
+                                              2
+
+                            = O (1)  Fi   0
+
+                                             i>mn
+
+since mn  . The same bound as above applies to the left side of (50) with
+k = 1. For n(2,t)-1 and n(3,t)-1, a similar argument based on (46) and using the fact
+that Rjn < 1 gives
+
+     1     n             2
+   
+E             n(2,t)  t
+     nn
+          t=1
+
+   1      E  1            n   E n(2,t) 4 1/2
+      nn        4 1/2
+
+                         t=1                              Rnj 21/22
+
+       cE e1 4 E 1 4 1/2 n  mn           Fi   
+             nn                               t+i-2
+                              t=1 i=0         
+
+                                                 j=t-1
+
+    cE e1 4 E 1 4 1/2                       2 mn            2
+                 n
+                              sup Fl               i1/2
+
+                              l0              i=0
+
+    O mn  0
+           n
+
+from the choice of (mn)nN. The same bound as above applies to the (50) with
+k = 3. Finally, applying (46) with Fi replaced by Rn-i - Ir Fi gives
+
+     1     n             2
+   
+E             n(4,t)  t
+     nn
+          t=1
+
+1      E  1            n    E n(4,t) 4 1/2
+   nn        4 1/2
+
+                      t=1
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+898 TASSOS MAGDALINOS
+
+       cE   e1 4 E    1     4  1/2 1 n-2    Rnj 2     mn                       2
+                                  n j=0
+                                                           R-n i - Ir  Fi
+
+                                                      i=0              = o (1)
+
+                                     2 mn             2
+
+     O (1)     max       R-n i - Ir            Fi
+
+              0imn                        i=0
+
+                                                   2      mn 2
+                                                          n
+     O (1) Rn -2mn           max     Ir - Rni         =O
+
+                            0imn
+
+from the choice of (mn)nN, where the last order of magnitude is obtained since
+ Rn -2mn  1 when mn/n  0 and max0imn Ir - Rni = O (mn/n) by Lemma
+2.1(ii) of MP (2020). This shows (50) and completes the proof.
+
+    Proof of Lemma 3.3. By definition of the process nt-1, we can write
+
+                   1     n
+                 n1+
+M   n - Vn  =                  nt-1nt-1  (Ht -        )
+
+                      t=1
+
+            = An + Bn + Bn,                                                            (51)
+
+where                                                     
+
+            n  t-1                                                      
+                                                      Rjn-1  (Ht -
+An =    1                   Rjn-1F (1) et-jet-jF (1)                    )              (52)
+       nn          
+            t=1      j=1
+
+                                                                                  
+            n  t-2 t-1                                         
+        1                       Rjn-1F (1) et-jet-iF (1)  Rin-1  (Ht -            ) .
+Bn =   nn                                                                              (53)
+
+            t=1      j=1 i=j+1
+
+We first expand the term in (52) by adding and subtracting ee from as follows:
+
+An  =   1   n-1  Rjn-1F (1)  I       n-j  etet  Ht+j -                 F (1) Rjn-1  I
+       nn   j=1                      t=1
+
+    = 1 n-1      Rjn-1F (1)  I       n-j    etet - ee  Ht+j    F (1) Rjn-1  I
+       nn j=1                        t=1
+
+       - 1 n-1    Rnn-j-1F (1)  I               j                F (1) Rnn-j-1  I
+          nn j=1
+                                                    etet - ee
+
+                                               t=1
+
+           1  n-1                    n
+          nn
+       +          Rjn-1     uRjn-1          (Ht -     )
+
+              j=1                    t=j+1
+
+    = A1n - A2n + A3n
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+           LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 899
+
+in order of appearance. It is easy to show that A2n and A3n are oa.s. (1): since
+
+1n    etet -    ee  a.s. 0 and      1     n         ) a.s. 0                                    (54)
+n                                   n
+                                             (Ht -
+
+t=1                                      t=1
+
+by the ergodic theorem on (Ht) and (et), we can write
+
+                         1    n                1 n-2
+                         n                     n j=0
+A3n           u max                (Ht -    )            Rjn 2 a.s. 0
+
+                  1jn       t=j+1
+
+by (54) since     n-1    Rjn  2
+                  j=0
+                               = O (n). The same argument works for A2n:
+
+A2n                 F (1) 2 max 1 j           etet - ee  1 n-2           Rjn  2 a.s. 0.
+                             1jn n                       n j=0
+                                       t=1
+
+We conclude that An - A1n = oa.s. (1) and
+
+vec (A1n)  =   1    n-1  Rjn-1  Rjn-1                               n-j  etet -         ee  Ht+j .
+              nn    j=1
+                                          (F (1)  F (1)) vec
+
+                                                                    t=1
+
+For any matrices K  Rr×r,L  Rm×m, the vectors vec (K  L) and vec (K) 
+vec (L) consist of the same elements KijLkl : 1  i,j  r,1  k,l  m but appear
+in different order in the two vectors. Therefore, there exists an m2r2 × m2r2
+permutation matrix such that vec (K  L) = [vec (K)  vec (L)] . Using this
+and the identity vec (K) = Dm vech (K) for a symmetric m × m matrix K, where
+Dm denotes the m2 × m (m + 1) /2 duplication matrix (Chapter 11 of Abadir and
+
+Magnus, 2005), we can write
+
+vec (A1n) =     Ir2  Dm        1 n-1      Rjn-1  Rjn-1                             n-j  t (j),  (55)
+                              nn j=1
+                                                         (F (1)  F (1))
+
+                                                                                   t=1
+
+with t (j) = vec etet - ee  vech Ht+j as in Lemma 3.5. Since                                    = 1 and
+
+Dm = 2 for a permutation matrix , (55) yields the asymptotic bound for (52):
+
+                                 1  n-1   Rjn-1 2   n-j
+           2                                        t=1
+vec (An)            F (1) 2      nn j=1                  t (j) + oa.s. (1) .                    (56)
+
+The term in (53) can be written as:
+
+Bn =   1    n   t-2 t-1       Rjn-1F (1) et-jet-iF (1) Rin-1  (Ht -           )
+      nn   t=1  j=1 i=j+1
+
+= 1 n-2 n-j t-1               Rjn-1F (1) etet-iF (1) Rin+j-1  Ht+j - 
+   nn j=1 t=2 i=1
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+900 TASSOS MAGDALINOS
+
+                                                                                   
+          n-2  n-j                     t-1                                       
+=    1    j=1  t=2  Rjn-1F (1) et                             Rjn  Ht+j -
+    nn                                     Rin-1F (1) et-i
+
+                                       i=1
+
+= 1 n-2 n-j         Rjn-1F (1) etn,t-1Rnj  Ht+j - 
+   nn j=1 t=2
+
+by definition of the process n,t. Employing the same argument for the vectorization
+of a Kronecker product, we deduce that
+
+vec (Bn)
+
+=    1 n-2 n-j      vec    Rjn-1F (1) etn,t-1Rnj   vec        Ht+j -  
+    nn j=1 t=2
+
+=         Ir  Rn-1  Dm      1 n-2 n-j       Rnj n,t-1  Rnj F (1) et  vech Ht+j  + op (1)
+                           nn j=1 t=2
+
+=         Ir  R-n 1  Dm     1  n-2  n-j   Sn,t (j) + op (1),
+                           nn  j=1  t=2
+
+where Sn,t (j) is defined in (20) and the term involving  is op (1) because
+
+ 1  n-2   n-j  Rjnn,t-1   RjnF (1) et
+nn  j=1   t=2
+
+                                       L1
+
+    F (1)      n-2  Rjn 2  1 n-j   n,t-1  et = O              n
+     n         j=1                                            n
+                           n  t=2             L2
+
+by (47). The last expression for vec (Bn) yields
+
+vec (Bn)  b 1       n-2 n-j                                                          (57)
+              nn
+                            Sn,t (j) + op (1)
+
+                    j=1 t=2
+
+for some uniform bounding constant b > 0. Combining (51), (56), and (57) shows
+(22) and part (i).
+
+   Next, we show that t (j) and Sn,t (j) satisfy (12) with innovations given by (24)
+and (25) respectively. For Sn,t (j), applying (3) to vech Ht+j yields
+
+Sn,t (j) = Rjnn,t-1  Rnj F (1) et  vech Ht+j
+
+                                       q                         p
+
+    = Rnj n,t-1  RjnF (1) et                Aivech Ht+j-i + Bkvech Ht+j-k
+
+                                       i=1                    k=1
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+          LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 901
+
+                                       q
+
+          + Rjnn,t-1  RjnF (1) et           Aivech t+j-it+j-i - Ht+j-i
+
+                                       i=1
+
+          + Rnj n,t-1  RjnF (1) et  
+
+          
+
+       =       Rin  Rin  i Rjn-in,t-1  Rjn-iF (1) et  vech Ht+j-i       + n,t (j)
+                                                                                 (58)
+          i=1
+
+          
+
+       =       Rin  Rni  i Sn,t (j - i) + n,t (j),
+
+          i=1
+
+where
+
+                                         q
+
+n,t (j) = Rnj n,t-1  Rnj F (1) et   +       Ir2  Ai Rnj n,t-1  Rnj F (1) et  wt+j-i
+
+                                       i=1
+
+and wt+j-i = vech t+j-it+j-i - Ht+j-i . Since the above expression for n,t (j)
+
+coincides with (25) and n,i = Rni  Rin  i by (11), (58) shows part (ii) for Sn,t (j).
+Applying (3) to vech Ht+j in
+
+  t (j) = vec etet - ee  vech Ht+j
+
+and proceeding as in (58) shows part (ii) for t (j).
+   For part (iii), the processes in (19) and (20) have companion form solutions
+
+                    j
+
+~ t (j) = Mj ~ t (0) + Mj-l~t (l), j  1                                 (59)
+
+                    l=1
+
+                         j
+
+S~n,t (j) = Mnj, S~n,t (0) + Mnj-,l~n,t (l), j  1                       (60)
+
+                         l=1
+
+for the "stacked" processes
+
+~ t (j) = t (j) , t (j - 1) ,..., t (j -  + 1)                          (61)
+
+S~n,t (j) = Sn,t (j) ,Sn,t (j - 1) ,...,Sn,t (j -  + 1)                 (62)
+
+and
+
+~t (j) = vt (j) ,0,...,0 , ~n,t (j) = n,t (j) ,0,...,0 .                (63)
+
+By (61), (63) and the definition of the Euclidian vector norm,
+
+n-j            n-j                  n-j                  n-j
+
+       t (j)        ~ t (j) and           v~t (l) = vt (l) .
+
+t=1            t=1                  t=1                  t=1
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+902 TASSOS MAGDALINOS
+
+We can therefore apply the companion form solution (59) to the first term of the
+bound (22) of Lemma 3.3(i) to obtain
+
+n  =     1  n-1  Rjn-1 2              n-j   t (j)   1 n-1              Rjn-1 2  n-j
+        nn  j=1                       t=1             nn j=1
+                                                                                    ~ t (j)
+
+                                                                                t=1
+
+   1             Mj     1n              ~ t (0)    + 1 n-1                           j  Mj-l  n-j
+      n j=1             n                             nn j=1
+                                                                       Rjn-1 2                    vt (l)
+                           t=1
+                                                                                   l=1        t=1
+
+   = 1n + 2n                                                                                              (64)
+
+in order of appearance. The first term of (64) satisfies E 1n = O n-1 because
+
+        Mj   <  by Lemma 3.1 and
+   j=1
+
+                               -1                       1/2 -1         t (-i)   max E et 2 Ht-i
+
+E ~ t (0) = E                           t (-i) 2  E                                        i<
+
+                              i=0                                 i=0
+
+              max E e1 4 E Ht-i 2 1/2   E e1 4 E 1 4 1/2
+
+                    i<
+
+by the Jensen inequality for conditional expectations. For the second term of (64),
+letting
+
+t (k) = vec etet - ee  wt+k                                                                               (65)
+
+and using the expression in (24) we can write
+
+          n-1                  q            Ai    j   Mj-l             n-j
+2n  nn j=1                                       l=1
+                 Rjn-1 2                                                   t (l - i)
+
+                             i=1                                       t=1
+
+                        1          j                                          1 n-1
+                        n                                   l=1               n j=1
+        +  max                          vec etet -    ee               Ml               Rnn-j-1 2
+
+                    jn             t=1
+
+   = q           Ai     n-2             Ml   n-1                 n-j
+      nn i=1            l=0
+                                                   Rjn-1 2           t (j - l - i) + oa.s. (1)
+
+                                            j=l+1                t=1
+
+    q            Ai     n-2             Ml  n-1    Rjn-1 2    n-j
+      nn i=1            l=0                 j=1
+                                                                  t (j - i) + oa.s. (1)
+
+                                                              t=1
+
+where the term on the second line is oa.s. (1) by the ergodic theorem. The remaining
+term is Op n-1 when j  i because, in this case, it is bounded in L1 norm by
+
+b            n                              2b max          n
+
+      max E             t (l - i)                              E       et  2    wt+l-i
+
+nn 1l,iq t=1                                    nn 1l,iq t=1
+
+                                            4b     E  e1  4E           1 4 1/2 ,
+                                              n
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+            LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 903
+
+where b =               Mj         q        Ai   M-l     is a finite constant and E w1 2 
+                 j=1               i,l=1
+
+4E 1 4 by the Jensen inequality for conditional expectations. We conclude that
+
+2n          n-1                 q  Ai       j-i  Mj-i-l    1 n-j           + op (1)
+        n   j=1                             l=1            n t (l)
+                  Rjn-1 2                                  t=1
+
+                              i=1
+
+so the condition
+
+        1 n-j                  0.                                                       (66)
+ max             t (l)
+1j,ln n
+           t=1          L1
+
+is sufficient to show that 2n p 0. The definition of t (l) in (65) implies that
+
+~ t (l) = t (l) 1 et 4  Ln
+
+is an Ft+l-martingale difference sequence for each l  1, where the truncating
+
+sequence (Ln)nN is chosen to satisfy Ln   and Ln/n  0. By the Lyapounov
+inequality and the martingale difference property of ~ t (l),
+
+   n-j                        n-j                     n-j               1/2
+
+1                   1              ~ t (l)       1         E ~ t (l) 2
+n       ~ t (l)        n                        =
+                                                   n
+   t=1           L1           t=1           L2        t=1
+
+                   b Ln1/2         n-j                1/2  2bLn1/2      E  1  4 1/2  0
+                        n                                        n
+                                       E wt+l 2
+
+                                   t=1
+
+uniformly in j,l. We conclude that
+
+ max    1 n-j
+        n t (l)
+1j,ln       t=1
+
+                          L1
+
+       max  1    n-j      t (l) 1         et 4 > Ln + o (1)
+
+                     E                      ee 1 et 4 > Ln wt+l + o (1)
+     1j,ln n t=1                          e1 4 > Ln E w1 2 1/2 + o (1)
+
+       max  1    n-j          et 2 +
+
+     1j,ln n         E
+
+                 t=1
+
+    E e1 4 + ee 4 1
+
+   = o (1)
+
+since E w1 2  4E 1 4, E e1 4 <  and Ln  , the last inequality following
+by the Cauchy­Schwarz inequality. This proves (66) and n p 0.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+904 TASSOS MAGDALINOS
+
+   We turn to the second term of the bound (22) of Lemma 3.3(i), to prove that
+sn p 0. Using the solution (60) and the same argument leading to (64), we obtain
+
+sn     1       n-1 n-j
+      nn
+                       S~n,t (j)
+
+               j=1 t=2
+
+     1 n-1        Mnj ,     n      S~n,t (0)   +1     n-1 n-j j
+       nn j=1              t=2                    nn
+                                                                   Mnj-,l~n,t (l)
+
+                                                      j=1 t=2 l=1
+
+    = s1n + s2n.
+
+Since supn1                Mnj ,    <  by Lemma 3.1,
+                      j=1
+
+E    s1n       1               S~n,t (0)                      1           et  n,t-1         Ht-i
+           b max E                         b max max E
+
+              n tn                             tn 0i-1 n
+
+                1     H1   L2   e1  L4    max  n,t-1     =O           1
+               n1/2                            n1/2                  n1/2
+                                           tn         L4
+
+by Lemma 3.2(i). For s2n, some care is required to use the norm equivalence
+between ~n,t (l) and n,t (l): standard manipulations yield
+
+           1   n-2 n-j j-1                     =1               n-3           n-2 n-j
+          nn                                      nn
+s2n  =                      Mnl, ~n,t (j - l)                        Mnl ,               ~n,t (j - l)
+
+               j=1 t=2 l=0                                      l=0           j=l+1 t=2
+
+         n-3   Mnl ,   1       n-l-2 n-l-j                n-3   Mnl ,      1     n-l-2 n-l-j
+                      nn                                                  nn
+                                           ~n,t (j)   =                                      n,t (j) .
+
+         l=0                    j=1 t=2                    l=0                    j=1 t=2
+
+Substituting the expression for n,t (j) in (25) we obtain
+
+          n-3  Mnl ,   q       Ai    1    n-l-2 n-l-j
+                      i=1           nn
+s2n                                                   Rnj n,t-1  RjnF (1) et  wt+j-i
+
+          l=0                              j=1 t=2
+
+                           n-3            1 n-l-2               1  n-l-j
+                                          n j=1                 n
+        +      F (1)               Mnl ,              Rjn  2              n,t-1    et    .
+
+                           l=0                                       t=2
+
+The last term on the right converges to 0 in L1 by (47). For the first term,
+partitioning the third sum into j  i and j > i we obtain that s2n  s3n + s4n + op (1)
+where
+
+          n-3  Mnl ,   q       Ai    1    n-l-2 n-l-j
+                      i=1           nn
+s3n =                                                 Rjnn,t-1  Rnj F (1) et  wt+j-i
+
+          l=0                             j=i+1 t=2
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+           LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 905
+
+and, using the Cauchy­Schwarz inequality twice,
+
+                n-3             q               1 q n-l-j
+
+Es4n  F (1)              Mnl ,             Ai   nn j=1          E     n,t-1       et  wt+j-i
+
+                l=0             i=1                         t=2
+
+                n-3              q                      n,t                                       1
+                                i=1                     n                                        n1/2
+       q F (1)           Mnl ,             Ai   max                   e1 L4    w1 L2 = O               .
+
+                l=0                              tn               L4
+
+It remains to show that s3n p 0. The inner double sum in the expression for s3n
+can be written as
+
+n-l-2 n-l-j
+
+            Rjnn,t-1  Rnj F (1) et  wt+j-i
+
+j=i+1 t=2
+
+      n-l-i-2 n-l-j-i                                                                 n-l-i
+
+=                      Rjn+in,t-1  Rjn+iF (1) et  wt+j = Rin  Rin                            n,t-1  wt,
+
+        j=1 t=2                                                                       t=3
+
+where n,t-1 =    t-2     Rjnn,  t-j-1      RjnF    (1)  et-j  is  a  Ft-1-martingale      array  satisfying
+                 j=1
+
+                                           t-2
+
+max E   n,t-1  2=        F (1) 2 max            Rnj 4 E           n,t-j-1 2 et-j 2
+
+ tn                                    tn  j=1
+
+                                n-2
+
+                 F (1) 2                   Rjn  4  e1   2   max       n,t  2   =  O   n2   .           (67)
+                                                        L4                 L4
+                                                             tn
+                                j=1
+
+In the above notation, Lemma 3.1(ii) implies that, for some uniform constant B,
+s3n satisfies
+
+           1             n-l-i
+
+Es3n    B  nn  max    E      n,t-1  wt
+
+                 i,l     t=3
+
+       B 1 max E         n-l-i                               Ln}
+           nn i,l
+                              n,t-1  wt1 { Ht
+
+                          t=3
+
+        + B 1 max E      n-l-i                                > Ln}
+            nn i,l
+                              n,t-1  wt1 { Ht
+
+                          t=3
+
+      = B ( 1n + 2n) .
+
+Note that the sequence n,t-1  wt is an Ft -martingale difference sequence with
+
+wt = vech tt - Ht = vechHt1/2 tt - Im Ht1/2
+   = D+m Ht1/2  Ht1/2 vec tt - Im ,
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+906 TASSOS MAGDALINOS
+
+where D+m is the Moore­Penrose inverse of the duplication matrix Dm, sat-
+isfying Dm+ = 1 (e.g., 11.30 in Abadir and Magnus, 2005). Since Ht is
+Ft-1-measurable, the martingale difference property is preserved for 1{ Ht
+
+ Ln}n,t-1  wt giving
+
+                     n-l-i                                 1/2
+
+1n       1    max           E n,t-1 2 wt 2 1 { Ht  Ln}
+        nn    i,l
+                      t=3
+
+                     n-l-i                                 1/2
+
+        b     max           E n,t-1 2 Ht 2 1 { Ht  Ln}
+              i,l
+                      t=3
+       nn
+
+     bLn                           2    1/2         Ln
+         nn                                         n1/2
+                 max E      n,t-1            =O
+
+                  tn
+
+by (67), where b = 2E 1 4 + 1 1/2. Taking Ln   with Ln/n1/2  0 we
+can write
+
+2n       1     n       n,t-1      wt 1 { Ht > Ln}
+        nn
+                  E
+
+              t=3
+
+    2         n        n,t-1      Ht 1 { Ht > Ln}
+
+                 E
+        nn t=3
+
+    2 n E               n,t-1 2 E Ht 2 1 { Ht > Ln} 1/2
+       nn t=3
+
+       2                       2   1/2                              1/2
+    
+            max E      n,t-1            E    H1 2 1 { H1 > Ln}
+       n
+             tn
+
+    = O (1) E H1 2 1 { H1 > Ln} 1/2 = o (1)
+
+by (67) and integrability of H1 2. This completes the proof of sn p 0.
+
+Proof of Theorem 3.4. The Lindeberg condition Ln () =                    n    E  n2t 1{|nt
+                                                                         t=2
+> }) p 0 for all  > 0 with nt = n-1/2n-1/2 t nt-1 is established as
+follows: by truncating t 2 using a sequence (Ln)nN satisfying Ln   and
+Ln/ n  0
+
+           1  n         nt-1 2                  nt-1 2
+           n              n                       n
+Ln  ()  =          E               t 2 1                  t 2 > n2
+
+              t=2
+
+         Ln n E             nt-1   2    nt-1     2     n2
+            n                                       >
+                            n       1        n      Ln
+                  t=2
+
+           +1 n E           nt-1 2      t 2 1    t 2 > Ln
+              n               n
+
+                   t=2
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+         LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 907
+
+     max      nt    2   Ln   max  P     nt-1   2 n2         +E  1 4 1          1 4 > Ln
+              n1/2  L4                           >
+         tn                   tn           n            Ln
+
+     O (1)    Ln2   1  max E      nt 2         + o (1)  0
+              n     2             n1/2
+                        tn
+
+from the choice of (Ln)nN, since maxtn nt/n1/2 2 = O (1) by Lemma 3.2(i)
+
+                                                                                           L4
+
+and (t) is a strictly stationary sequence satisfying E 1 4 < , where the second
+
+inequality follows by the Cauchy­Schwarz inequality and the third inequality
+
+follows by the Markov inequality.
+
+Part (i) is now an immediate consequence of established results. By Lemma
+
+3.2(iii), the martingale transform Nn in (16) and (nn)-1/2      n     xt-1      t     have   the
+                                                                t=1
+
+same limit distribution. By Lemma 3.3 (i) and (iii), the predictable quadratic varia-
+
+tion of Nn in (17) has the same the limit distribution as n-1n-1          n    n,t-1  n,t-1  
+                                                                          t=1
+
+, so that
+
+         1n
+N  n=             n,t-1n,t-1       + op (1) p Vxx           ,
+       nn
+              t=1
+
+where the last convergence in probability follows by Lemma 3.2(ii). Having
+
+verified the Lindeberg condition, we may apply a standard martingale central limit
+
+theorem, e.g., Corollary 3.1 of Hall and Heyde (1980), to establish the asymptotic
+
+distribution of part (i). Part (ii) follows immediately from part (i), Lemma 3.2(ii)
+
+and (9). For  completeness,  we provide a      proof of (9): Letting  xt  =    xt  -  x¯n-1  and
+t = t - ¯n,   the fact that                       nn implies that
+                             n    xt-1  =  Op
+                             t=1
+
+ 1  n         n         1                       n
+nn                         n                    n
+         xtxt - xtxt              x¯n-1 2 = Op
+
+    t=1       t=1
+
+and (nn)-1/2  n     xt-1t    -    n     xt-1t  = (nn)-1/2   nx¯n-1¯n             
+              t=1                 t=1                                     = Op n/n .
+
+Combining the two remainder terms proves (9). Note that the same orders of
+
+magnitude apply for the purely stationary case, by putting n = 1. Part (iii) follows
+immediately by part (ii), (9), and n-1n-1 X X - X X = op (1).
+
+   Proof of Lemma 4.3. We first note that the effect of the initial condition
+x0 satisfying Assumption IC is asymptotically negligible for OLS/IVX sample
+moments as shown in MP (2020) via arguments that do not depend on the
+conditional homoskedasticity assumption maintained in that paper. We therefore
+proceed with setting x0 = 0 without loss of generality. For part (i), we employ the
+decompositions
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+908 TASSOS MAGDALINOS
+
+z~0t  =  x0t  +     Cz  n(t2),  n  0,                                                                          (68)
+                    nz          nz
+
+z~0t  =  zt  +  1    n(t1),  nz  0,                                                                            (69)
+                n            n
+
+see equations (17) and (19) of MP (2020) with x0 = 0, where
+
+             t-1                                      t-1
+
+n(t1) =             Rtn-z 1-jCnx0j,      n(t2) =           Rtn-z 1-jx0j
+
+             j=1                                      j=1
+
+and x0t =           t-1    Rjnuxt-j  is  the  regressor      xt   in  (1)   with  zero  initialization  x0  =  0.  We
+                    j=0
+
+first establish the bound
+
+              n(t1)     4                n(t2)    4          n2n4z
+
+max E                        max E                 =O                    .                                     (70)
+
+1tn                          1tn
+
+The Minkowski inequality gives
+
+                           t-1                        4                                  4
+                                                              t-1
+E     n(t1)   4                Rtn-z 1-jCnx0j                         E     Rtn-z 1-jCnx0j 4 1/4
+                                                      
+               =E
+
+                           j=1                               j=1
+
+                                                                            4
+
+                                                             n
+
+                 Cn 4 max E x0j 4                                     Rjnz  = O n2n4z
+
+                                  1tn                        j=1
+
+uniformly in t  n. The above argument with Cn replaced by Ir yields the same
+
+bound applies to E              n(t2)    4
+
+                                          . Employing the decomposition (68) with x0 = 0 we
+
+obtain
+
+max E         z~0t  4  8 max E           x0t     4 + 8 Cz       4            n(t2)  4    n2
+                                                        n4z
+1tn                          1tn                                  max E              =O
+
+                                                                  1tn
+
+by Lemma 3.2(i) and (70). Employing the decomposition (69) with x0 = 0 we
+obtain
+
+              z~0t  4  8 max E                4  +    8               n(t1)  4
+                                                      n4
+max E                        1tn         zt                max E
+
+1tn                                                        1tn
+
+                     = O n2z + O                 n4z      = O n2z
+                                                 n2
+
+when nz/n  0 by (70) and Lemma 3.2(i) (since zt is nz-near stationary). This
+proves part (i).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+                   LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 909
+
+     For part (ii), denoting xt-1 = xt-1 - x¯n-1 and t = t - ¯n, using the identity
+
+^ t  =   y   -  A^ nxt-1    =    t  -  A^ n - A    xt-1
+
+          t
+
+and the fact that the OLS estimator satisfies A^ n - A = Op (nn)-1/2 we obtain
+that
+
+n    (n  1   nz    )  ^ n  =       1           n     z~0t-1z~0t-1  tt              + op (1)                          (71)
+                              n (n  nz)       t=1
+
+provided that both
+
+                1             1           n
+
+r1n  =                n (n  nz)               z~0t-1z~0t-1  x0t-1t
+             nn
+                                       t=1
+
+r2n  =      1           1            n       z~0t-1z~0t-1  x0t-1x0t-1
+           nn      n (n  nz)        t=1
+
+are op (1). First note that,
+
+                      1          n            4              n                  4
+                      n4 E
+E    x¯0n    4                       x0t           1           x0t L4               max E x0t 4
+                                               
+                                t=1                       t=1                          1tn
+                                                   n4
+
+by the Minkowski inequality, so we may write
+
+max E           x0t   4  max E ( x0t          +    x¯0n   )4  16 max E               x0t  4.
+
+1tn                         1tn                                        1tn
+
+For r1n, the Cauchy­Schwarz inequality gives
+
+E    r1n             1        n  1     max E         z~0t-1 2 x0t-1             t
+                                  nz
+                                        tn
+                     nn
+
+                     1           1                                              1/2                       4     1/4
+                                  nz
+                                             1 L4  max E        z~0t-1  4               max E   x0t-1
+                     nn
+                              n                     tn                                   tn
+
+                                    11                                             1/2                          1/4
+
+             4        1                              max E           z~0t-1  4           max E     x0t-1     4
+                                   nn
+                            L4            n   nz      tn                                  tn
+
+             =O              1      n  1  nz  (n     nz)             =O            1
+                                                               n                     n
+
+                             nn
+
+by part (i) and Lemma 3.2(i). Similarly,
+
+E    r2n            1      n  1        max E       z~0t-1 2 x0t-1 2
+                   nn          nz
+                                        tn
+
+             1 1                                                1/2                       4   1/2            1
+                nn n  nz                                                                                     n
+                                       max E       z~t-1  4          max E         xt-1            =O           .
+
+                                        tn                            tn
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+910 TASSOS MAGDALINOS
+
+Returning to (71), we can write
+
+n  (n   1  nz  )  ^ n  =        1          n   z~0t-1z~0t-1  tt    + Op      1
+                                          t=1                                  n
+                          n (n  nz)
+                          
+                          1          n                                   nz        nz
+                             nnz     t=1    zt-1zt-1  tt     + Op        n    ,    n   0
+                              1
+                       =             n    xt-1xt-1  tt       + Op        n         n   0    (72)
+                                     t=1                                 nz        nz
+                             nn                                               ,
+
+from which the result when n   follows by Lemma 3.3, since zt is a nz-near
+
+stationary process. For n = 1, letting xt in (36) be a strictly stationary version of
+                                                   t-1
+the stable autoregression xt = Rtx0 +              j=0  Rjut-j  ,
+
+1n                           xt-1    t    2 1      x0    n   Rt    xt-1      t 2
+n t=1 xt-1 - xt-1                              n        t=1
+
+                                               +1 n                              
+                                                  n
+                                                        Rt       xt-1    t 2       Rj  u-j
+
+                                                   t=1                        j=0
+
+                                                     1
+                                            = Op n
+
+and then the second part of (72) gives
+
+1          1   n
+n          n
+   ^ n  =              xt-1xt-1  tt + op (1) p E x1x1  22
+
+               t=1
+
+by the ergodic theorem.
+   It remains to show (72). For the nz/n  0 part, the decomposition (69) implies
+
+that
+
+1n  =      1         n    zt-1 n(t1-) 1 t 2 = op (1)
+        nnzn        t=1   n(t1-) 1 2 t 2 = op (1)
+
+2n  =      1         n
+        nnzn2       t=1
+
+are sufficient for (72). Using the Cauchy­Schwarz inequality we obtain
+
+E1n           1   2          zt      max    n(t1)     =O         nz
+                                                                 n
+                  L4 max         L4   tn           L4
+           nzn tn
+
+by (70) and Lemma 3.2(i), and, similarly,
+
+E2n        1      2      1   max     n(t1)  2           nz
+                  L4   nzn2                             n
+                              tn               =O
+
+                                            L4
+
+which proves (72) when nz/n  0. When n/nz  0, the same argument can
+be applied to the decomposition (68).
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+          LEAST SQUARES AND IVX LIMIT THEORY UNDER GARCH 911
+
+   Proof of Theorem 4.4. Under Assumptions P(i)­(ii), n  , Lemma 4.3
+shows that
+
+n  (n  1  nz)  ^ n  =       1           n   z~t-1z~t-1     + op (1)
+                       n (n  nz)       t=1
+
+which implies that
+
+n (n  nz) Q^ n - X PZ~ X -1   = op (1)
+
+and hence that W^ n - W~ n = op (1) under the null hypothesis (27). Corollary 4.2
+then gives W^ n   2 (q).
+
+   When n = 1, Lemma B2 of KMS (2015b) implies that n-1 X Z~ - X X =
+op (1) . Combined with Lemma 4.3, this yields
+
+nQ^ n =   1            -1      1  ^ n       1           -1      + op (I) p V0,
+           XX                  n             XX
+                           Im                               Im
+          n                                 n
+
+where the matrix V0 is defined in (37). We can then write W^ n = wnwn + op (1)
+where, under (27),
+
+wn =      HnQ^ nH   -1/2               A~ IVX - A        N 0,Iq
+
+                          Hvec n
+
+by Theorem 4.1(ii).
+
+REFERENCES
+
+Abadir, K.M. & J.R. Magnus (2005) Matrix Algebra. Econometric Exercises, vol.1. Cambridge
+   University Press.
+
+Andrews, D.W.K. & P. Guggenberger (2008) Asymptotics for stationary very nearly unit root
+   processes. Journal of Time Series Analysis 29(1), 203­212.
+
+Andrews, D.W.K. & P. Guggenberger (2012) Asymptotics for LS, GLS, and feasible GLS statistics in
+   an AR(1) model with conditional heteroskedasticity. Journal of Econometrics 169(2), 196­210.
+
+Andrews, D.W.K. & P. Guggenberger (2014) A conditional-heteroskedasticity-robust confidence
+   interval for the autoregressive parameter. Review of Economics and Statistics 96(2), 376­381.
+
+Bollersev, T. (1986) Generalized autoregressive conditional heteroscedasticity. Journal of Economet-
+   rics 31, 307­327.
+
+Boussama, F. (2006) Ergodicité des chaînes de Markov à valeurs dans une variété algébrique:
+   application aux modèles GARCH multivariés. Comptes Rendus de l' Academie des Sciences Paris
+   343, 275­278.
+
+Boussama, F., F. Fuchs, & R. Stelzer (2011) Stationarity and geometric ergodicity of BEKK multivari-
+   ate GARCH models. Stochastic Processes and Applications 121, 2331­2360.
+
+Chan, N.H. & C.Z. Wei (1987) Asymptotic inference for nearly nonstationary AR(1) processes. Annals
+   of Statistics 15, 1050­1063.
+
+Engle, R.F. (1982) Autoregressive conditional heteroscedasticity with estimates of the variance of the
+   United Kingdom inflation. Econometrica 50, 987­1008.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+               912 TASSOS MAGDALINOS
+
+                 Francq, C. & J.-M. Zakoian (2010) GARCH Models: Structure, Statistical Inference and Financial
+                    Applications. Wiley.
+
+                 Giraitis, L., H.L. Koul & D. Surgailis (2012) Large Sample Theory for Long Memory Processes.
+                    Imperial College Press.
+
+                 Hall, P. & C.C. Heyde (1980) Martingale Limit Theory and its Application. Academic Press.
+                 Horn, R.A. & C.R. Johnson (2013) Matrix Analysis. Cambridge University Press.
+                 Kostakis, A., T. Magdalinos, & M.P. Stamatogiannis (2015a) Robust econometric inference for stock
+
+                    return predictability. Review of Financial Studies 28 (5), 1506­1553.
+                 Kostakis, A., T. Magdalinos, & M.P. Stamatogiannis (2015b). Online Appendix to: Robust Economet-
+
+                    ric Inference for Stock Return Predictability.
+                 Ling, S. & W.K. Li (1997a) Estimating and testing for unit root processes with GARCH(1,1) errors.
+
+                    Technical report, Department of Statistics, University of Hong Kong.
+                 Ling, S. & W.K. Li (1997b) On fractionally integrated autoregressive moving average time series
+
+                    models with conditional heteroskedasticity. Journal of the American Statistical Association 92,
+                    1184­1194.
+                 Ling, S. & M. McAleer (2003) Asymptotic theory for a vector ARMA-GARCH model. Econometric
+                    Theory 19, 280­310.
+                 Magdalinos, T. & P.C.B. Phillips (2009) Limit theory for cointegrated systems with moderately
+                    integrated and moderately explosive regressors. Econometric Theory 25, 482­526.
+                 Magdalinos, T. & P.C.B. Phillips (2020) Econometric Inference in Matrix Vicinities of Unity and
+                    Stationarity. Working paper.
+                 Pantula, S.G. (1989) Estimation of autoregressive models with ARCH errors. Sankhya B 50, 119­138.
+                 Phillips, P.C.B. (1987a) Towards a unified asymptotic theory for autoregression. Biometrika 74, 535­
+                    547.
+                 Phillips, P.C.B. (1987b) Time series regression with a unit root. Econometrica 55, 277­302.
+                 Phillips, P.C.B. (1988) Regression theory for near-integrated time series. Econometrica 56, 1021­1044.
+                 Phillips, P.C.B. & T. Magdalinos (2007a) Limit theory for moderate deviations from a unit root. Journal
+                    of Econometrics 136, 115­130.
+                 Phillips, P.C.B. & T. Magdalinos (2007b) Limit theory for moderate deviations from a unit root
+                    under weak dependence. In G.D.A. Phillips and E. Tzavalis (Eds.), The Refinement of Econometric
+                    Estimation and Test Procedures: Finite Sample and Asymptotic Analysis. Cambridge University
+                    Press, 123­162.
+                 Phillips, P.C.B. & T. Magdalinos (2009a) Econometric Inference in the Vicinity of Unity. Working
+                    paper, Singapore Management University.
+                 Phillips, P.C.B. & T. Magdalinos (2009b) Unit root and cointegrating limit theory when the initializa-
+                    tion is in the infinite past. Econometric Theory 25, 1682­1715.
+                 Phillips, P.C.B. & V. Solo (1992) Asymptotics for linear processes. Annals of Statistics 20, 971­1001.
+                 Weiss, A.A. (1986) Asymptotic theory for ARCH models: estimation and testing. Econometric Theory
+                    2, 107­131.
+                 White, H. (1980) A Heteroskedasticity-consistent covariance matrix estimator and a direct test for
+                    heteroskedasticity. Econometrica 48, 817­838.
+
+Downloaded from https://www.cambridge.org/core. Lancaster University Library, on 12 Sep 2026 at 11:01:45, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466621000086
+

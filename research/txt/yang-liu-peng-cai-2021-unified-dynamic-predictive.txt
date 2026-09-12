@@ -1,0 +1,1446 @@
+      Journal of Business & Economic Statistics
+
+           ISSN: 0735-0015 (Print) 1537-2707 (Online) Journal homepage: www.tandfonline.com/journals/ubes20
+
+Unified Tests for a Dynamic Predictive Regression
+
+Bingduo Yang, Xiaohui Liu, Liang Peng & Zongwu Cai
+
+To cite this article: Bingduo Yang, Xiaohui Liu, Liang Peng & Zongwu Cai (2021) Unified Tests
+for a Dynamic Predictive Regression, Journal of Business & Economic Statistics, 39:3, 684-699,
+DOI: 10.1080/07350015.2020.1714632
+To link to this article: https://doi.org/10.1080/07350015.2020.1714632
+
+           Published online: 18 Feb 2020.
+           Submit your article to this journal
+           Article views: 852
+           View related articles
+           View Crossmark data
+           Citing articles: 5 View citing articles
+
+                                 Full Terms & Conditions of access and use can be found at
+                   https://www.tandfonline.com/action/journalInformation?journalCode=ubes20
+JOURNAL OF BUSINESS & ECONOMIC STATISTICS
+2021, VOL. 39, NO. 3, 684­699
+https://doi.org/10.1080/07350015.2020.1714632
+
+Unified Tests for a Dynamic Predictive Regression
+
+Bingduo Yanga, Xiaohui Liub, Liang Pengc, and Zongwu Caid
+
+aLingnan (University) College, Sun Yat-sen University, Guangzhou, Guangdong, China; bSchool of Statistics, Jiangxi University of Finance and Economics,
+Nanchang, Jiangxi, China; cDepartment of Risk Management and Insurance, Georgia State University, Atlanta, GA; dDepartment of Economics, University
+of Kansas, Lawrence, KS
+
+ABSTRACT                                                                                                          ARTICLE HISTORY
+                                                                                                                  Received September 2018
+Testing for predictability of asset returns has been a long history in economics and finance. Recently, based     Accepted January 2020
+on a simple predictive regression, Kostakis, Magdalinos, and Stamatogiannis derived a Wald type test based
+on the context of the extended instrumental variable (IVX) methodology for testing predictability of stock        KEYWORDS
+returns, and Demetrescu showed that the local power of the standard IVX-based test could be improved              Autoregressive errors;
+for some range of alternative hypotheses and the tuning parameter when a lagged predicted variable                Empirical likelihood; IVX test
+is added to the predictive regression on purpose, which poses an important question on whether the                procedure; Predictive
+predictive model should include a lagged predicted variable. This article proposes novel robust procedures        regression; Weighted score
+for testing both the existence of a lagged predicted variable and the predictability of asset returns regardless
+of regressors being stationary or nearly integrated or unit root and the AR model for regressors with or
+without an intercept. A simulation study confirms the good finite sample performance of the proposed
+tests before illustrating their practical usefulness in analyzing real financial datasets.
+
+1. Introduction                                                       and Yogo (2006) and Demetrescu and Rodrigues (2016) pointed
+                                                                      out that the usual asymptotic approximation of the t-test statis-
+The introduction to the 2013 Nobel for Economic Sciences              tic by employing the (standard) normal distribution performs
+states:                                                               particularly bad when regressors are persistent with the largest
+                                                                      autoregressive roots of the typical regressor candidate being usu-
+   There is no way to predict whether the prices of stocks and        ally smaller than one but close to one. Instead, one may prefer
+   bonds will go up or down over the next few days or weeks. But      the nearly integrated asymptotics as an alternative framework
+   it is quite possible to foresee the broad course of the prices of  for statistical inference. However, in the context of nearly inte-
+   these assets over longer time periods, such as the next three      grated regressors, as addressed by Demetrescu and Rodrigues
+   to five years....                                                  (2016), the limiting distribution of the slope parameter esti-
+                                                                      mator is not centered at zero, and this bias depends on the
+Testing for predictability of asset returns has been a long his-      mean reversion parameter of the nearly integrated regressor.
+tory and is of importance in economics and finance, and such          Although nearly integrated asymptotics approximates the finite
+a test is often built on a simple linear structural regression        sample behavior of the t-statistic for no predictability consid-
+model between a predicted variable and some regressors; see,          erably better when regressors are persistent, the exact degree
+for example, the excellent survey articles by Campbell (2008)         of persistence of a given regressor, and thus the correct critical
+and Phillips (2015). Typically, predicted variables employed          value for a predictability test, is unknown in practice. To over-
+in the literature are low frequency data, such as the annual,         come these difficulties, several alternative (robust) approaches
+quarterly, and monthly CRSP value-weighted index in Campbell          have been proposed in the literature to test predictability with-
+and Yogo (2006), and the monthly S&P 500 excess returns in            out characterizing the stochastic properties of regressors (i.e.,
+Cai and Wang (2014) and Kostakis, Magdalinos, and Stamato-            whether they are stationary or nearly integrated or unit root);
+giannis (2015). Some commonly employed regressors (financial          see, for instance, Cavanagh, Elliott, and Stock (1995), Campbell
+predictors or predicting variables) are dividend payout ratio,        and Yogo (2006), Jansson and Moreira (2006), Phillips and Lee
+long-term yield, dividend yield, dividend-price yield, T-bill rate,   (2013), Cai and Wang (2014), Breitung and Demetrescu (2015),
+earnings-price ratio, book-to-market value ratio, default yield       Kostakis, Magdalinos, and Stamatogiannis (2015), Demetrescu
+spread, net equity expansion, and term spread; see Kostakis,          and Rodrigues (2016), and references therein.
+Magdalinos, and Stamatogiannis (2015) for a detailed descrip-
+tion of these variables.                                                 To better appreciate the proposed study in this article, we
+                                                                      start with summarizing existing results and methods for the
+   Since empirical studies suggest that those regressors may be       following simple predictive regression model:
+persistent, such as near unit root (nearly integrated) or unit root
+(integrated), classical tests for predictability built upon a linear          Yt =  + Xt-1 + Ut, Xt =  + Xt-1 + Vt. (1)
+regression model are no longer valid. For example, Campbell
+
+CONTACT Xiaohui Liu csuliuxh912@gmail.com School of Statistics, Jiangxi University of Finance and Economics, Nanchang, Jiangxi 330013, China.
+© 2020 American Statistical Association
+                                                                      JOURNAL OF BUSINESS & ECONOMIC STATISTICS  685
+
+   Due to the dependence between Ut and Vt, researchers have            (0.9, 0.95).1 As Kostakis, Magdalinos, and Stamatogiannis
+found that the least squares estimator for  based on the first        (2015) assumed zero intercept in modeling regressors, that
+equation in (1) is biased in finite samples when the regres-          is, no  in the second equation of (1), and it is known that
+sor {Xt} is nearly integrated (see Stambaugh 1999), and some          the divergent rate of a nearly integrated regressor depends on
+bias-corrected inferences have been proposed in the literature        whether a nonzero intercept exists in the AR model for the
+such as the linear projection method in Amihud and Hurvich            regressor, we conjecture that the IVX method fails to unify the
+(2004) and Chen and Deo (2009). A comprehensive summary               cases of zero and nonzero intercept  , which is confirmed by our
+of research for the model (1) can be found in Phillips and Lee        simulation study presented in Section 3.1. In summary, the IVX
+(2013). Using the linear projection of Ut onto Vt as Ut =             method in Kostakis, Magdalinos, and Stamatogiannis (2015)
+0Vt + t, Cai and Wang (2014) derived the asymptotic dis-              has difficulty in choosing tuning parameters, sacrifices the test
+tribution of an estimator for  when Xt is nearly integrated,          power in the nonstationary case, and fails to unify the cases of
+which depends on whether  is zero or nonzero. Also, the               zero and nonzero intercept.
+asymptotic nonnormal distribution depends on the degree of
+persistence, which cannot be estimated consistently, if Xt is            To improve the local power of the IVX based tests, Deme-
+nearly integrated. When (Ut, Vt)T has a bivariate normal distri-      trescu (2014) proposed adding the lagged predicted variable
+bution with AT denoting the transpose of the matrix or vector         into the model on purpose and found that IVX based tests
+of A throughout, Campbell and Yogo (2006) proposed a Bon-             should have a better power for some range of alternative
+ferroni Q-test, based on the infeasible uniform most powerful         hypotheses and the tuning parameter in the IVX method.
+test, and showed that this new test is more powerful than the         Specifically, Demetrescu (2014) considered the following
+Bonferroni t-test of Cavanagh, Elliott, and Stock (1995) in the       dynamic model with  = 0, but the restriction is not imposed in
+sense of Pitman efficiency. Implementing this Bonferroni Q-test       estimating parameters (termed as variable addition approach):
+is nontrivial at all as it requires additional estimators and tables
+in an unpublished technic report written by them. Under the            Yt =  +  Yt-1 + Xt-1 + Ut, Xt =  + Xt-1 + Vt; (2)
+normality assumption, Chen, Deo, and Yi (2013) proposed a
+weighted least squares approximated likelihood inference with         see Demetrescu (2014) and Breitung and Demetrescu (2015) for
+a limit depending on whether regressors are stationary or nearly      more details on this model and the variable addition approach.
+integrated or unit root. Without the normality assumption, Zhu,       Hence, an interesting question is whether the lagged variables
+Cai, and Peng (2014) proposed a robust empirical likelihood           are econometrically needed in real applications, that is, how to
+inference for  with a chi-squared limit regardless of {Xt} being      test the existence of a lagged predicted variable in a predictive
+stationary or nearly integrated or unit root and Choi, Jacewitz,      regression, which has not been formally addressed in predictive
+and Park (2016) proposed a unified test based on a so-called          regressions when regressors may be nearly integrated. This arti-
+Cauchy estimation regardless of {Xt} being nearly integrated or       cle addresses this issue by proposing novel testing procedures for
+unit root. Without using the information on the persistence level     the existence of the lagged predicted variables (H0 :  = 0) and
+of the predicting variable, the key idea in Zhu, Cai, and Peng        the predictability (H0 :  = 0). The proposed tests are robust as
+(2014) is to employ the property that |Xt| p  as t                    they work uniformly regardless of regressors being stationary
+when {Xt} is either nearly integrated or unit root. Therefore,        or nearly integrated or unit root and the AR model for the
+the unified method in Zhu, Cai, and Peng (2014) is robust             regressors with or without intercept. Therefore, the proposed
+concerning the stochastic properties of the predicting variable.      study in this article assumes  is unknown and tests for either
+                                                                      H0 :  = 0 or H0 :  = 0 without requiring  = 0,
+   On the other hand, it is known in the econometrics literature      while Demetrescu (2014) assumed  = 0 and only tested for
+that an extended instrumental variable (dubbed as IVX) based          H0 :  = 0.
+inference is attractive in handling the dependence between
+Ut and Vt, and avoiding a nonstandard asymptotic limit; see              Although many tests for predictability have been proposed
+Phillips and Magdalinos (2007) for details. In particular, the        in the literature, conclusions on predictability are unfortunately
+IVX estimation approach proposed by Magdalinos and Phillips           quite contradictory for different datasets, data periods, and
+(2009) is popular in predictive regressions because the relevant      methods. For example, Kostakis, Magdalinos, and Stamatogian-
+test statistic has the same limiting distribution in both stationary  nis (2015) reported significant predictability for dividend yield,
+and nonstationary cases. The key idea behind this method is to        dividend-price ratio, T-bill rate, earnings-price ratio, book-to-
+construct less persistent instrumental variables (IV) to achieve      market value ratio, default yield spread, net equity expansion for
+a unified normal limit. As illustrated by Kostakis, Magdalinos,       the period 01/1927­12/1994, which is in line with the findings
+and Stamatogiannis (2015), the IVX methodology offers a               in Campbell and Yogo (2006), and reported predictability only
+good balance between size control and power loss, and the             for term spread for the period 01/1952­12/2008 while the
+power depends on some tuning parameters in constructing the           method in Campbell and Yogo (2006) showed predictability
+IVX instruments with a sacrifice on the rate of convergence           for dividend payout ratio, dividend yield, T-bill rate, and term
+for the nonstationary case; see the parameters Cz < 0 and             spread; see Table 6 in Kostakis, Magdalinos, and Stamatogiannis
+  (0, 1) defined in (4) and the rates of convergence in               (2015). Implementing these tests assumes that Ut's in (1) are
+Kostakis, Magdalinos, and Stamatogiannis (2015). Based on             uncorrelated errors, but this assumption has not been examined
+some Monte Carlo simulation studies, Kostakis, Magdalinos,            in both Campbell and Yogo (2006) and Kostakis, Magdalinos,
+and Stamatogiannis (2015) recommended taking Cz = -I and              and Stamatogiannis (2015). After plotting the autocorrelation
+
+                                                                      1Note that the  in Kostakis, Magdalinos, and Stamatogiannis (2015) is differ-
+                                                                        ent from the  in models (1) and (2).
+686      B. YANG ET AL.
+
+function (ACF) of U^ t = Yt - ^ - ^Xt-1 from the model                distributed (iid) random vectors with zero means and finite
+(1) with ^ and ^ being the least squares estimators and Yt
+being the CRSP value-weighted excess return for the periods           variances. Of our interest is to test H0 : 0 = 0 and H0 : 0 = 0
+01/1927­12/1994, 01/1952­12/2015, and 01/1982­12/2015,                regardless of {Xt} being stationary (i.e., |0| < 1) or nearly
+respectively, it is clear that the assumption of uncorrelated Ut's    integrated (i.e., 0 = 1 - /n with  = 0) or unit root (i.e.,
+is doubtful for the period 01/1927­12/1994, may be fine for           0 = 1). Throughout, we use 0, 0, 0, 0, 0 to denote the
+the period 01/1952­12/2015, and is quite reasonable for the
+period 01/1982­12/2015. That is, conclusions on predictability        corresponding true values of parameters.
+in the literature for the period from 01/1927 to 12/1994 may
+be misleading due to the violation of the model assumption of         2.1. Model With a Known Intercept
+uncorrelated errors. On the other hand, after plotting the ACF of
+U^ t = Yt -^ -^Xt-1 for Yt being the S&P 500 excess returns, we       To better appreciate the methodology, we first consider the case
+conclude that the assumption of uncorrelated Ut's does not hold       by assuming that  = 0 is known, which has an independent
+for either of the three periods above. However, the ACF plots of      interest too. When the capital asset pricing model is applicable,
+U^ t = Yt - ^ - ^ Yt-1 - ^Xt-1 from (2) with Yt being either          it is common to assume  = 0. The literature of mutual funds
+S&P 500 excess returns or CRSP value-weighted excess returns          shows that around 80% of U.S. actively managed mutual funds
+suggest that the assumption of uncorrelated Ut's is reasonable        have zero  in factor models; see, for example, Jensen (1968),
+for the period 01/1982­12/2015, which will be our focused time        Kosowski et al. (2006), and Fama and French (2010).
+window in Section 3. To save space, we do not include these
+ACF plots in the article, which are available upon request.              In this case, to find the least squares estimator for ( , )T
+                                                                      based on the first equation in (3), one shall solve the following
+   The main contribution of this article is to propose novel          score equations
+procedures for testing H0 : 0 = 0 and H0 : 0 = 0
+without characterizing the stochastic properties of the regressor        n
+under model (2). Specifically, we investigate the possibility of
+applying the idea of the robust empirical likelihood inference in           (Yt - 0 -  Yt-1 - Xt-1) Yt-1 = 0 and
+Zhu, Cai, and Peng (2014). Readers are referred to Owen (2001)
+for an overview of the empirical likelihood method, which               t=1
+has been proved to be quite effective in interval estimations                n
+and hypothesis tests. The developed new methodologies and
+theoretical results in this article are different from existing ones           (Yt - 0 -  Yt-1 - Xt-1) Xt-1 = 0,
+in several folds. First, the method is different from that in Zhu,
+Cai, and Peng (2014) as we have to deal with the lagged pre-               t=1
+dicted variable carefully, and the developed power analysis is not
+addressed in Zhu, Cai, and Peng (2014). Second, the proposed          which are equivalent to
+unified inference has a faster rate of convergence than the IVX
+methods in Demetrescu (2014) and Kostakis, Magdalinos, and              n
+Stamatogiannis (2015) in the nonstationary case. Finally, the         
+new methods work well for all cases, while the IVX tests in these         (Yt - 0 -  Yt-1 - Xt-1) (Yt-1 - Xt-1) = 0,
+two articles are severely undersized in testing H0 :  = 0,              t=1
+especially when the intercept in modeling predicting variables          n                                                       (4)
+is nonzero; see the simulation study in Section 3.1.                  
+                                                                          (Yt - 0 -  Yt-1 - Xt-1) Xt-1 = 0.
+   The rest of this article is organized as follows. Section 2          t=1
+presents the methodologies and the main asymptotic results. A
+simulation study and real data analysis are given in Section 3.       The reason to use Yt-1 - Xt-1 instead of Yt-1 is that {Yt-1 -
+Some concluding remarks are depicted in Section 4. All proofs         Xt-1} becomes stationary when {Xt} is a unit root process. To
+are relegated to the Appendix.                                        make an inference about  and , one may directly apply the
+
+                                                                      empirical likelihood method based on estimating equations in
+
+                                                                      Qin and Lawless (1994) to (4), but it is easy to show that this
+
+                                                                      does not lead to a chi-squared limit in case of nearly integrated
+                                                                      {Xt}, that is, the Wilks theorem2 does not hold; see Zhu, Cai,
+                                                                      and Peng (2014) for details. To fix this issue, following the idea
+
+                                                                      in Zhu, Cai, and Peng (2014), we replace the second equation in
+
+                                                                      (4) by the following weighted score equation
+
+                                                                       n
+
+                                                                         (Yt - 0 -  Yt-1 - Xt-1) Xt-1/ 1 + Xt2-1 = 0. (5)
+
+                                                                      t=1
+
+                                                                      The purpose of adding weight into (5) is to ensure that
+
+2. Methodologies and Main Asymptotic Results                             n                                  Xt-1     2
+                                                                                                            1+Xt2-1
+We consider the following general dynamic predictive regres-               (Yt - 0 - 0Yt-1 - 0Xt-1)                    d  2(1)
+sion model
+                                                                        t=1
+
+                                                                         n      -  0  -  0Yt-1  -  0Xt-1)2   Xt2-1
+                                                                                                            1+Xt2-1
+     Yt =  +  Yt-1 + Xt-1 + Ut, Xt =  + Xt-1                               (Yt
+
+                                                                        t=1
+
+                                                                      as n   by noting that |Xt-1|/ 1 + Xt2-1 p 1 as t  
+                                                                      when {Xt} is a nearly integrated or unit root process.
+         + jVt-j, 1  t  n,                                      (3)
+
+         j=0
+
+where {       jVt-j}     is  a  strictly  stationary  sequence  and   2 The Wilks theorem says that the asymptotic limit is independent of the true
+         j=0                                                            parameters; see Bickel and Doksum (2001) for details.
+
+{(Ut, Vt)T} is a sequence of independent and identically
+                                                                                     JOURNAL OF BUSINESS & ECONOMIC STATISTICS                                                            687
+
+   To describe the proposed empirical likelihood tests, we         and Yao (2010) for nonparametric regression models. Here, to
+introduce the following notation. For t = 1, 2, . . . , n, define  unify the cases of stationary, nearly integrated and unit root, one
+Zt1( , ) = (Yt - 0 -  Yt-1 - Xt-1)(Yt-1 - Xt-1) and                can follow the idea in Li, Li, and Peng (2017) to take the model
+                                                                   structure of {Ut} into account by employing either empirical
+Zt2( , ) = (Yt - 0 -  Yt-1 - Xt-1) Xt-1/ 1 + Xt2-1.                likelihood method or jackknife empirical likelihood method in
+Based on {Zt( , )}nt=1 with Zt( , ) = (Zt1( , ), Zt2( , ))T,       Jing, Yuan, and Zhou (2009).
+the empirical likelihood function for  and  is given by
+
+     n                                           n                    The following theorems analyze the test power of the above
+                                                                   empirical likelihood test separately for the cases of {Xt} being
+L( , ) = sup (npt) : p1  0, . . . , pn  0, pt = 1,                 stationary, nonstationary with zero intercept, and nonstationary
+                                                                   with nonzero intercept.
+     t=1                       t=1
+
+n
+
+     ptZt( , ) = 0 .                                               Theorem 2. Suppose model (3) holds with |0| < 1 and
+                                                                   E{|Ut|2+ + |Vt|2+} <  for some  > 0, and  = 0 is
+t=1                                                                known. Further, assume |0| <1 independent of n.
+
+Then, it follows from the Lagrange multiplier technique that          (i) Under Ha : 0 = d1/ n for some d1  R and 0 =
+                                                                   d2/ n for some d2  R, we have
+                                 n
+                                                                        -2 log L(0, 0) = (W1 + D1)T        -1
+-2 log L( , ) = 2 log{1 + TZt( , )},                                                                       1
+
+                               t=1
+
+where  = ( , ) satisfies the following equation                                                                                        (W  1  +  D1)     +                        op(1),
+
+      n       Zt( , )                                              which has a noncentral chi-squared limit with two degrees of
+     t=1  1 + TZt( , )                                                                                                                           -1
+                        =  0.                                      freedom and noncentrality parameter DT1                                       1   D1  > 0 when
+
+                                                                   d12 + d22 > 0, where W1  N(0, 1),
+
+If we are interested in testing H0 : 0 = 0, then we consider the                =    d1{E(U12) + 02} + d2E{X1(U1 + 0)}
+profile empirical likelihood function LP1( ) = max L( , ).                 D1   =                                                      dE2(EE((U(11++1X1X++X12120X1X2)1X2)12 1))     ,
+On the other hand, if the interest is in testing H0 : 0 = 0,                       E(U12d)1E(EE((((U0U+1112U++)11+X+)01X2X)11X2)102)+
+then one considers the profile empirical likelihood function                 1                                                                                                    .
+LP2() = max L( , ). The following theorem shows that the
+Wilks theorem holds for the above proposed empirical likeli-
+
+hood method.
+
+Theorem 1. Suppose model (3) holds with |0| < 1 and                                                   
+E{|Ut|2+ + |Vt|2+} <  for some  > 0, and  = 0                         (ii) Under Ha : 0 = d1/ n for some d1  R and 0 is a
+is known. Further assume either (i) |0| < 1 independent            nonzero constant, we have
+of n (stationary case), or (ii) 0 = 1 - /n for some  =
+0 (nearly integrated case), or (iii) 0 = 1 (unit root case).            -2 log LP1(0) = (W2 + D2)T 2-1(W2 + D2) + op(1),
+Then, as n  , -2 log LP1(0) d  2(1) under H0 :
+0 = 0, -2 log LP2(0) d  2(1) under H0 : 0 = 0, and                 which has a noncentral chi-squared limit with one degree of
+-2 log L(0, 0) d  2(2) under H0 : 0 = 0 & 0 = 0.                                                                                                 -1
+                                                                   freedom and noncentrality parameter DT2                                       2   D2  > 0 when
+
+                                                                   d1 = 0, where W2  N(0, 2),
+
+   Based on the above theorem, a robust empirical likelihood       D2 =     d1E{(0 + 0X1 + U2)(0 + U2 + 0X1 - 0X2)}                                                                          ,
+test for testing H0 : 0 = 0 or H0 : 0 = 0 or H0 :                                                          +0X1+U2
+0 = 0 & 0 = 0 at level  is to reject H0 if -2 log LP1(0) >                                 d1  E(      (0                              )X2    )
+12,1- or -2 log LP2(0) > 12,1- or -2 log L(0, 0) > 22,1- ,                                                      1+X22
+respectively, where 12,1- and 22,1- denote the (1 -  )th
+quantile of a chi-squared limit with one degree of freedom and       2  =  E(U12)                                                                                                          
+                                                                                                                                                                                          )
+with two degrees of freedom, respectively. The proposed robust        E(0 + U2     +  0X1  -   0X2)2       E(                          (0 +U2 +0 X1 -0 X2                            )X2   
+tests above do not need a prior on whether {Xt} is stationary or                                                                             E( 1+1X+X12 X12 22)
+nearly integrated or unit root, and whether 0 = 0 or 0 = 0.                 (0  +U2  +0X1-0    X2 )X2                                                                                        .
+Finally, note that the above method is different from Zhu, Cai,
+                                                                        E(              1+X22          )
+and Peng (2014) because of the term  Yt-1. Moreover, this extra
+term complicates the power analysis given below, which is not                                          
+                                                                      (iii) Under Ha : 0 = d2/ n for some d2  R and 0 is a
+provided in Zhu, Cai, and Peng (2014).                             nonzero constant, we have
+
+Remark 1. When {Ut} follows an autoregressive model rather              -2 log LP2(0) = (W3 + D3)T 3-1(W3 + D3) + op(1),
+than independent random variables, the above theorem does
+not hold. Instead one should take the error structure into         which has a noncentral chi-squared limit with one degree of
+account like the studies in Xiao et al. (2003) and Liu, Chen,                                                                                    -1
+                                                                   freedom and noncentrality parameter DT3                                       3   D3  > 0 when
+688      B. YANG ET AL.
+
+d2 D=330==, wEtEh l{i(emUre112X+)Wt-Xt l1t2i3-m1d(21EN-{E0EX(0{0(t,-1++X11EX+(X123t(-112X)d1-1,)t2-jt-2=0-0E10110((+1+-0t-01X+0112-Xtj+=-tj1=2j-U11)11j)0t}jt0-=t--1111-.-j0UjtU-j1)j)-}2jU,j)}       Theorem 4. Suppose model (3) holds with |0| < 1 and
+                                                                                                                                                                                                      E{|Ut|2+ + |Vt|2+} <  for some  > 0, and  = 0 is
+
+                                                                                                                                                                                                      known. Further assume 0 = 1 - /n for some   R and
+
+                                                                                                                                                                                                      0 = 0.                                 
+
+                                                                                                                                                                                                         (i) Under Ha : 0 = d1/ n for some d1  R and 0 =
+                                                                                                                                                                                                      d2/n3/2 for some d2  R, we have
+
+                                                                                                                                                                                                            -2 log L(0, 0) = (W¯ 1 + D¯ 1)T ¯ 1-1(W¯ 1 + D¯ 1) + op(1),
+
+                                                                                                                                                                                                      which has a noncentral chi-squared limit with two degrees of
+                                                                                                                                                                                                                                                      D¯ 1    ¯ 1-1D¯ 1
+                                                                                                                                                                                                      freedom and noncentral parameter                                      >      0  when            d12   +
+                                                                                                                                                                                                      d22 > 0, where W¯ 1  N(0, ¯ 1),
+
+Theorem 3. Suppose model (3) holds with |0| < 1 and                                                                                                                                                            D¯ 1 =    d1{E(U12) + 02} + d200                     1  1-e-s          ds          ,
+E{|Ut|2+ + |Vt|2+} <  for some  > 0, and  = 0 is                                                                                                                                                                                                                    0     
+                                                                                                                                                                                                                                                              1     1-e-s
+known. Further assume 0 = 1 - /n for some   R and                                                                                                                                                                           d10sgn(0) + d2|0|                 0                 ds
+
+0 = 0.                                                                                                                                                                                                         ¯ 1 = E(U12)       E(U12) + 02         0          ,
+                                                                                                                                                                                                                                       0              1
+     (i) Under Ha : 0 = d1/ n for some d1  R and 0 = d2/n
+
+for some d2  R, we have
+
+     -2 log L(0, 0) = (W~ 1 + D~ 1)T ~ 1-1(W~ 1 + D~ 1) + op(1),                                                                                                                                      and sgn(x) denotes the sign function.
+                                                                                                                                                                                                         (ii) Under Ha : 0 = d1/n3/2 for some d1  R and 0 is a
+where W~ 1  N(0, ~ 1),
+                                                                                                                                                                                                      nonzero constant, we have
+                    d1{E(U12) +       02} + d20              1
+         D~ 1 =             d10                             0   JV,  (s)  ds          ,                                                                                                                                                                             ¯    -1  S¯ 2  S¯ 2T    ¯     -1
+                                                                ds                                                                                                                                                                                                       2                        2
+                                      + d2     1    JV,    (s)                                                                                                                                              -2  log  LP1(0)  =    (W¯ 2  +   D¯ 2)T{  ¯   -1     -                                    }
+                                               0                                                                                                                                                                                                          2              S¯2T ¯ 2-1S¯2
+
+         ~ 1 = E(U12)         E(U12) + 02           0      ,                                                                                                                                                                      (W¯ 2 + D¯ 2) + op(1),
+                                   0                1
+
+JV, (r) =        r  e-(r-s)      dWV  (s),     and      WV (s)       =     limn                                                                                                                  1    which has a central chi-squared limit with one degree of
+                 0                                                                                                                                                                                 n
+                                                                                                                                                                                                      freedom even when d1 = 0, where S¯2 = - 0(0 -
+[ns]          jVt-j     for   s    [0,    1].
+t=1      j=0                                                                                                                                                                                                      |0| T  1   1-e-s  ds, W¯ 2                        ¯ 2), D¯ 2        -S¯ 2 d1 0 ,
+     (ii) Under Ha : 0 = d1/n for some d1  R and 0 is a                                                                                                                                               00),               0                            N(0,                         =
+
+nonzero constant, we have                                                                                                                                                                                                    E(0 + U1 - 00 - 0                                        V1-j)2
+                                                                                                                                                                                                                                                                         j=0
+     -2 log LP1(0) = (W~ 2 + D~ 2)T                 ~  -1       ~  -1  S~ 2 S~ T2  ~  -1                                                                                                                    ¯ 2 = E(U12)                                                           j
+                                                       2           2                  2
+                                                           -                                                                                                                                                                                 (0 - 00)sgn(0)
+                                                                   S~2T ~ 2-1S~2
+                                                                                                                                                                                                                  (0 - 00)sgn(0)
+                        (W~ 2 + D~ 2) + op(1),                                                                                                                                                                               1                  .
+
+where S~2 = -(0, 1)T, W~ 2  N(0, ~ 2),                                                                                                                                                                   (iii) Under Ha : 0 = d2/n3/2 for some d2  R and 0 is a
+                                                                                                                                                                                                      nonzero constant, we have
+                                 1
+
+     D~ 2 = -S~2d10 JV, (s) ds, and ~ 2
+
+                           0                                                                                                                                                                                                                                        ¯    -1  S¯ 3  S¯ 3T    ¯     -1
+                                                                                                                                                                                                                                                                         3                        3
+         = E(U12) E(U1 - 0                          jV1-j)2        +   02          0      .                                                                                                                 -2  log  LP2(0)  =    (W¯ 3  +   D¯ 3)T{  ¯   -1     -                                    }
+                                               j=0                                 1                                                                                                                                                                      3
+                                                                                                                                                                                                                                                                         S¯T3 ¯ 3-1S¯3
+                                               0
+
+(iii) Under Ha : 0 = d2/n for some d2  R and 0 is a nonzero                                                                                                                                                                       (W¯ 3 + D¯ 3) + op(1),
+
+constant, we have
+
+     -2 log LP2(0) = (W~ 3 + D~ 3)T                 ~  -1       ~  -1  S~ 3 S~ 3T  ~  -1                                                                                                              which has a noncentral chi-squared limit with one degree of
+                                                       3           3                  3
+                                                           -                                                                                                                                          freedom     and  noncentral  parameter          D¯ 3{   ¯  3-1-    ¯  3-1 S¯ 3 S¯ T3  ¯  -1    }D¯ 3  >
+                                                                   S~T3 ~ 3-1S~3                                                                                                                                                                                                               3
+                                                                                                                                                                                                                                                                            S¯ 3T  ¯  -1    S¯ 3
+                                                                                                                                                                                                                                                                                      3
+                                                                                                                                                                                                      0 when d2 = 0, where
+                        (W~ 3 + D~ 3) + op(1),
+                                                                                                                                                                                                                                                                                                      T
+where                                                                                                                                                                                                                          t
+                              t                                                          T                                                                                                            S¯ 3  =  -   lim            0t-jUj)2      +     (   0         )2,      0sgn(0)                        ,
+                                                                                                                                                                                                                         E(                            1  - 0                 1 - 0
+S~ 3  =  -   lim        E(       0t-jUj)2      +    (   0       )2,        0                                                                                                                     ,                   t
+                                                     1  - 0              1 - 0                                                                                                                                               j=1
+               t            j=1
+                                                                                                                                                                                                               W¯ 3  N(0, ¯ 3),
+        W~ 3  N(0, ~ 3),
+                                                                                                                                                                                                      D¯ 3 =    d20     0      1  1-e-s  ds
+                                                                                                                                                                                                                       1-0     0                   ,
+                0       1                                                                                                                                                                                                   1  1-e-s
+D~ 3 =   d2             0  JV,   (s)  ds  , and ~ 3                                                                                                                                                               d2|0|     0            ds
+              d1-2 001
+                        JV, (s) ds                                                                                                                                                                    ¯  3  =  E(U12)  lim
+
+                                                                                                                                                                                                                       t
+
+      =  E(U12)  lim       E(      t      0t-jUj)2      +  (     0   )2             0        .                                                                                                                  E(     t-1  0t-1-jUj)2 +        (   0     )2         0   sgn(0              )     .
+                                   j=1                          1-0                1-0                                                                                                                                 j=1                         1-0              1-0
+                 t                               0                                                                                                                                                                           0
+                                               1-0                                  1                                                                                                                                       1-0   sgn(0      )                              1
+                                                                             JOURNAL OF BUSINESS & ECONOMIC STATISTICS                     689
+
+Remark 2. Theorems 3(ii) and 4(ii) show that testing for H0 :           where
+0 = 0 is more powerful than that for H0 : 0 = 0 when {Xt}
+is a nearly integrated or unit root process. The reason is that D~ 2          Z~ t1( , ) = (Y~ t -  Y~ t-1 - X~ t-1)(Y~ t-1 - X~ t-1),
+and D¯ 2 become a multiplier of S~2 and S¯2, respectively, in these           Z~ t2( , ) = (Y~ t -  Y~ t-1 - X~ t-1) X~ t-1/ 1 + X~ t2-1.
+two cases.
+                                                                        Then, based on {Z~ t( , )}tm=1, the empirical likelihood function
+Remark 3. When the predictive regression has a d-dimensional            for  and  is defined as
+
+predictor Xt = (Xt,1, . . . , Xt,d)T and the number of nonsta-               m                  m
+
+tionary variables is less than or equal to one, we can develop a        L~ ( , ) = sup (mpt) : p1  0, . . . , pm  0, pt = 1,
+
+similar empirical likelihood test by using weights {  Xt-1,i     }di=1       t=1                t=1
+                                                      1+Xt2-1,i
+                                                                        m
+in the corresponding score equations. However, this is not true
+                                                                             ptZ~ t( , ) = 0 .
+when the predictive regression has a d-dimensional predictor
+                                                                        t=1
+with more than one nonstationary variable or has more than
+
+one lagged predicted variable as some score equations become            If we are interested in testing H0 : 0 = 0, then we consider the
+                                                                        profile empirical likelihood function L~ P1( ) = max L~ ( , ).
+asymptotically equivalent.                                              On the other hand, if the interest is in testing H0 : 0 = 0,
+                                                                        then one considers the profile empirical likelihood function
+2.2. Model With an Unknown Intercept                                    L~ P2() = max L~ ( , ). The following theorem shows that the
+                                                                        Wilks theorem holds for this empirical likelihood test.
+Next, we consider the case that  in the model (3) is unknown.
+
+Again, our interest is to test H0 : 0 = 0 and H0 : 0 = 0                Theorem 5. Suppose model (3) holds with |0| < 1 and
+without knowing whether {Xt} is stationary or nearly integrated         E{|Ut|2+ + |Vt|2+} <  for some  > 0. Further assume
+                                                                        either (i) |0| < 1 independent of n, or (ii) 0 = 1 - /n for
+or unit root.                                                           some  = 0, or (iii) 0 = 1. Then, as n  , -2 log L~ P1(0) d
+                                                                         2(1) under H0 : 0 = 0, -2 log L~ P2(0) d  2(1) under
+As before, one may apply the empirical likelihood method to             H0 : 0 = 0, and -2 log L~ (0, 0) d  2(2) under H0 : 0 =
+                                                                        0 & 0 = 0.
+the following weighted score equations:
+
+  tn=1{Yt -  -  Yt-1 - Xt-1} = 0
+  nt=1{Yt -  -  Yt-1 - Xt-1}{Yt-1 - Xt-1} = 0
+
+  tn=1{Yt -  -  Yt-1 - Xt-1}             Xt-1 = 0.                         Again, based on the above theorem, a robust empirical like-
+                                                                        lihood test for H0 : 0 = 0 or H0 : 0 = 0 or H0 :
+                                         1+Xt2-1                        0 = 0 & 0 = 0 under model (3) is to reject H0 at level 
+                                                                        whenever -2 log L~ P1(0) > 12,1- or -2 log L~ P2(0) > 12,1-
+                                                                 (6)    or -2 log L~ (0, 0) > 22,1- , respectively. These tests are robust
+                                                                        without knowing whether {Xt} is stationary or nearly integrated
+However, this does not work by noting that the joint normalized         or unit root and has a zero or nonzero intercept. Similar power
+
+limit of the first and third equations in (6) is degenerate in the      analyses like Theorems 2­4 can be done, and we skip this
+
+near unit root and unit root cases.                                     theoretical analysis.
+
+To unify all cases including zero or nonzero intercept  , we
+
+follow the idea in Zhu, Cai, and Peng (2014) by splitting the
+
+data into two parts and using the difference with a big lag to
+
+get rid of the intercept first to keep the differences of regressor
+
+as a nonstationary process. This is important as inference with         Remark 4. It is known that the IVX tests in Demetrescu (2014)
+                                                                        and Kostakis, Magdalinos, and Stamatogiannis (2015) employed
+nonstationarity has a faster rate of convergence than that in the       a less persistent instrumental variable to achieve a unified nor-
+                                                                        mal limit so that the rate of convergence is slower than the
+stationary case. Again, the study is more involved than that in         standard rate in the nonstationary case with  = 0. That is, the
+                                                                        IVX tests for H0 :  = 0 are less powerful than the proposed
+Zhu, Cai, and Peng (2014) as the extra term  Yt-1 may be                unified empirical likelihood tests, which have the standard rate
+stationary or nonstationary. More specifically, put m = [n/2]           given in Theorem 4(iii). Moreover, these IVX tests do not work
+with [·] denoting the ceiling function, and define X~ t = Xt+m -        for the nonstationary case with  = 0.
+Xt, Y~ t = Yt+m - Yt, U~ t = Ut+m - Ut and V~ t = Vt+m - Vt for
+t = 1, . . . , m. Then, the model (3) implies the following model
+
+               Y~ t =  Y~ t-1 + X~ t-1 + U~ t
+
+without an intercept, which is the same as the model (3) with           3. Finite Sample Analysis
+known  = 0. Clearly, if {Ut} is independent, then is {U~ t}.
+Furthermore, |X~ t| p  and |X~ t|/ 1 + X~ t2 p 1 as t                   3.1. Monte Carlo Simulation Study
+when {Xt} is nearly integrated or unit root. As discussed before,
+this property is the key to ensure that the Wilks theorem holds         In this subsection, we investigate the performance of the pro-
+for the proposed empirical likelihood test.                             posed robust tests in terms of size and power. Note that all
+                                                                        simulations are implemented in the statistical software R.
+   Therefore, similar to the model with known intercept in (3),
+we define                                                                  Consider model (3) with  = 0,  = 0 or 0.2, 0 = 1,
+                                                                        j = 0 for j  1, and  = 0.2 or 0.95 or 1. We generate
+                Z~t( , ) = (Z~ t1( , ), Z~ t2( , ))T,                   10,000 random samples with sample size n = 200 or 400 or 1000
+690  B. YANG ET AL.
+
+Table 1. Empirical sizes for testing the null hypothesis H0 :  = 0.
+
+                      =0                                                       = 0.2                               = 0.5
+
+     EL  EL1              KMS  Demes                                 EL  EL1            KMS  Demes   EL      EL1     KMS     Demes
+
+                                                                         Panel 1:  = 0       0.0491
+                                                                                             0.0443
+0.2  0.0557 0.0556 0.0370 0.0471      0.0545                                   n = 200       0.0449  0.0579  0.0586  0.0408  0.0363
+                                      0.0562                             0.0595 0.0388               0.0555  0.0595  0.0343  0.0276
+0.95 0.0588 0.0585 0.0314 0.0508      0.0537                             0.0572 0.0346       0.0474  0.0567  0.0585  0.0310  0.0250
+                                                                         0.0582 0.0311       0.0415
+1    0.0533 0.0562 0.0298 0.0537      0.0532                                                 0.0419
+                                      0.0503
+0.2  0.0547 0.0553 0.0379 0.0502      0.0492                                   n = 400       0.0485  0.0515  0.0524  0.0350  0.0310
+                                                                         0.0551 0.0382       0.0511  0.0532  0.0600  0.0359  0.0284
+0.95 0.0516 0.0480 0.0327 0.0476      0.0469                             0.0524 0.0342       0.0404  0.0526  0.0530  0.0314  0.0241
+                                      0.0503                             0.0577 0.0293
+1    0.0515 0.0563 0.0301 0.0522      0.0536                                                 0.0488
+                                                                                             0.0446
+0.2  0.0522 0.0509 0.0463 0.0507                                              n = 1000       0.0218  0.0510  0.0537  0.0527  0.0330
+                                                                         0.0469 0.0545               0.0521  0.0506  0.0513  0.0310
+0.95 0.0532 0.0534 0.0499 0.0472                                         0.0534 0.0463       0.0505  0.0486  0.0528  0.0218  0.0264
+                                                                         0.0546 0.0207       0.0395
+1    0.0488 0.0553 0.0251 0.0483                                                             0.0137
+
+                                                                         Panel 2:  = 0.2     0.0450
+                                                                                             0.0465
+0.2  0.0545 0.0556 0.0380 0.0504      0.0524                                   n = 200       0.0000  0.0581  0.0586  0.0377  0.0328
+                                      0.0575                             0.0595 0.0394               0.0552  0.0597  0.0381  0.0300
+0.95 0.0591 0.0585 0.0326 0.0446      0.0543                             0.0572 0.0329               0.0517  0.0653  0.0096  0.0080
+                                                                         0.0556 0.0088
+1    0.0506 0.0580 0.0097 0.0251      0.0492
+                                      0.0492
+0.2  0.0559 0.0553 0.0386 0.0487      0.0480                                   n = 400               0.0499  0.0524  0.0401  0.0325
+                                                                         0.0551 0.0389               0.0543  0.0600  0.0353  0.0262
+0.95 0.0486 0.0480 0.0326 0.0433      0.0500                             0.0524 0.0323               0.0545  0.0549  0.0019  0.0024
+                                      0.0513                             0.0549 0.0034
+1    0.0524 0.0516 0.0025 0.0190      0.0486
+
+0.2  0.0513 0.0509 0.0372 0.0510                                              n = 1000               0.0521  0.0537  0.0363  0.0331
+                                                                         0.0469 0.0403               0.0499  0.0506  0.0317  0.0342
+0.95 0.0546 0.0534 0.0364 0.0519                                         0.0534 0.0325               0.0523  0.0528  0.0001  0.0001
+                                                                         0.0514 0.0000
+1    0.0476 0.0513 0.0004 0.0019
+
+NOTE: This table documents the empirical sizes for testing the null hypothesis H0 :  = 0 versus the alternative H1 :  = 0 in Equation (3) under the 5% nominal size.
+  EL and EL1, respectively, represent the rejection rate for the Wald statistic calculated by the models with known  in Section 2.1 and unknown  in Section 2.2. KMS
+
+  and Demes, respectively, denote the rejection rate for the Wald statistic calculated by the models in Kostakis, Magdalinos, and Stamatogiannis (2015) and Demetrescu
+  (2014). Panel 1 refers to the case that  = 0, while Panel 2 refers to the case that  = 0.2. For each panel, the rejection rate is calculated through 10,000 repetitions with
+    {0, 0.2, 0.5} and n  {200, 400, 1000}.
+
+from model (3) with the above settings and (Ut, Vt)T having a                 the IVX method in Demetrescu (2014) because it is unavail-
+bivariate Gaussian copula C(F1(Ut), F2(Vt); ) with correlation                able as  = 0 is assumed in the model. Once again, these
+                                                                              results suggest that the IVX test fails to unify the zero and
+   = -0.5 and marginal distributions being t(5) and t(4). We                  nonzero  .
+compute the empirical sizes and powers of the proposed tests for
+H0 :  = 0 and H0 :  = 0 at 5% level based on Theorem 1 (i.e.,                    We also compute the empirical powers for testing H0 :  = 0
+ is assumed to be known) and Theorem 5 (i.e.,  is unknown)                    and H0 :  = 0. To save space, we only report results for testing
+by employing the R package "emplik."                                          H0 :  = 0 when  = 0 and sample size n = 200. Note
+                                                                              that the IVX test is severely undersized when  = 0. Figure 1
+   Results in Table 1 show that the size of the proposed test for             shows that the proposed empirical likelihood test with known 
+H0 :  = 0 with known  is slightly more accurate than that                     is much more powerful than the IVX tests in Demetrescu (2014)
+with unknown  because the latter splits the data into two parts               and Kostakis, Magdalinos, and Stamatogiannis (2015) when the
+and hence reduces the effective sample size in the inference, but             predicting variable Xt is a unit root, which confirms that the
+both have a quite accurate size for a larger n. In contrast, when             IVX tests sacrifice the rate of convergence for achieving a unified
+Xt has zero intercept, the IVX test in Kostakis, Magdalinos, and              normal limit in the nonstationary case. The proposed empirical
+Stamatogiannis (2015) tends to be undersized for all  and that                likelihood test with unknown  is less powerful, but when  is
+in Demetrescu (2014) is undersized clearly for  = 0.5. Both                   close to zero, it has better local power than the IVX tests in the
+become severely undersized when the predicting variable Xt is a               unit root case. Theoretically, the proposed test with unknown 
+unit root with a nonzero drift, that is,  = 1 and  = 0.2. These               should be more powerful than the IVX tests in the nonstationary
+observations suggest that these IVX tests are not able to unify               case, but the technique of splitting data does impact the finite
+zero and nonzero intercept in modeling predicting variables,                  sample performance.
+while the proposed empirical likelihood tests do unify all cases,
+including zero or nonzero intercept  .                                           In conclusion, the proposed robust methods for testing H0 :
+                                                                               = 0 and H0 :  = 0 provide an accurate size for all
+   Results in Table 2 show that the size of the proposed tests                cases, while the IVX tests in Demetrescu (2014) and Kostakis,
+for H0 :  = 0 is accurate whenever  is known or unknown.                      Magdalinos, and Stamatogiannis (2015) fail to unify zero and
+In contrast, the IVX test in Kostakis, Magdalinos, and Stam-                  nonzero  . The IVX method for testing H0 :  = 0 in Kostakis,
+atogiannis (2015) is severely undersized when  is nonzero and                 Magdalinos, and Stamatogiannis (2015) is severely undersized
+generally is less accurate than the proposed empirical likelihood             for all considered cases and that in Demetrescu (2014) suffers a
+tests when  = 0. We do not report the empirical sizes by
+                                                                                             JOURNAL OF BUSINESS & ECONOMIC STATISTICS     691
+
+Table 2. Empirical sizes for testing the null hypothesis H0 :  = 0.
+
+                        =0                                                      = 0.2                         = 0.5
+
+         EL  EL1             KMS       Demes                         EL  EL1            KMS  Demes  EL  EL1  KMS                        Demes
+
+                                                                         Panel 1:  = 0
+
+                                                                               n = 200
+
+0.2      0.0598 0.0647 0.0339             ­           0.0620 0.0654 0.0346                   ­      0.0576 0.0647 0.0367                ­
+
+0.95 0.0670 0.0658 0.0358                 ­           0.0603 0.0673 0.0424                   ­      0.0596 0.0633 0.0447                ­
+
+1        0.0599 0.0658 0.0338             ­           0.0604 0.0661 0.0461                   ­      0.0598 0.0613 0.0437                ­
+
+                                                                               n = 400
+
+0.2      0.0585 0.0568 0.0380             ­           0.0537 0.0593 0.0362                   ­      0.0594 0.0578 0.0349                ­
+
+0.95 0.0559 0.0557 0.0318                 ­           0.0567 0.0559 0.0420                   ­      0.0532 0.0591 0.0470                ­
+
+1        0.0538 0.0568 0.0299             ­           0.0570 0.0559 0.0437                   ­      0.0575 0.0605 0.0387                ­
+
+                                                                               n = 1000
+
+0.2      0.0551 0.0462 0.0528             ­           0.0525 0.0542 0.0500                   ­      0.0483 0.0552 0.0519                ­
+
+0.95 0.0470 0.0510 0.0506                 ­           0.0502 0.0505 0.0550                   ­      0.0546 0.0517 0.0515                ­
+
+1        0.0530 0.0493 0.0519             ­           0.0540 0.0504 0.0506                   ­      0.0563 0.0554 0.0430                ­
+
+                                                                         Panel 2:  = 0.2
+
+                                                                               n = 200
+
+0.2      0.0596 0.0647 0.0338             ­           0.0609 0.0654 0.0389                   ­      0.0573 0.0647 0.0358                ­
+
+0.95 0.0673 0.0658 0.0360                 ­           0.0621 0.0673 0.0396                   ­      0.0591 0.0633 0.0438                ­
+
+1        0.0603 0.0648 0.0273             ­           0.0600 0.0666 0.0442                   ­      0.0621 0.0620 0.0411                ­
+
+                                                                               n = 400
+
+0.2      0.0581 0.0598 0.0382             ­           0.0532 0.0620 0.0362                   ­      0.0579 0.0554 0.0369                ­
+
+0.95 0.0560 0.0554 0.0356                 ­           0.0556 0.0594 0.0433                   ­      0.0536 0.0587 0.0414                ­
+
+1        0.0544 0.0555 0.0258             ­           0.0561 0.0630 0.0405                   ­      0.0563 0.0575 0.0366                ­
+
+                                                                               n = 1000
+
+0.2      0.0545 0.0516 0.0354             ­           0.0521 0.0526 0.0338                   ­      0.0505 0.0508 0.0332                ­
+
+0.95 0.0485 0.0517 0.0372                 ­           0.0506 0.0514 0.0390                   ­      0.0522 0.0491 0.0423                ­
+
+1        0.0534 0.0517 0.0287             ­           0.0538 0.0509 0.0363                   ­      0.0557 0.0528 0.0373                ­
+
+This table documents the empirical sizes for testing the null hypothesis H0 :  = 0 versus the alternative H1 :  = 0 in Equation (3) under the 5% nominal size. EL and
+  EL1, respectively, represent the rejection rate for the Wald statistic calculated by the models with known  in Section 2.1 and unknown  in Section 2.2. KMS and Demes,
+
+  respectively, denote the rejection rate for the Wald statistic calculated by the models in Kostakis, Magdalinos, and Stamatogiannis (2015) and Demetrescu (2014). Panel 1
+  refers to the case that  = 0, while Panel 2 refers to the case that  = 0.2. For each panel, the rejection rate is calculated through 10,000 repetitions with   {0, 0.2, 0.5}
+  and n  {200, 400, 1000}.
+
+serious size distortion when  is larger or {Xt} is nonstationary.              findings are summarized as follows by comparing the obtained
+The proposed test with known  is most powerful in the non-                     p-values with the significance level of 10%.
+stationary case. The technique of splitting data for the proposed
+test with unknown  does impact the finite sample performance,                  · When the predicted variable is the CRSP value-weighted
+although theoretically, it is better than the IVX method in the                   excess return, the null hypothesis H0 : 0 = 0 cannot be
+nonstationary case.                                                               rejected for all considered regressors and the predictability
+                                                                                  (i.e., 0 = 0) exists for dividend yield, dividend price ratio,
+3.2. Real Data Analyses                                                           and earnings price ratio whenever  is treated as a known or
+                                                                                  an unknown parameter.
+This subsection demonstrates the practical usefulness of the
+                                                                               · When the predicted variable is the S&P 500 excess return, the
+proposed tests by applying them to test the predictability of                     null hypothesis H0 : 0 = 0 is rejected for all cases whenever
+                                                                                   is known or unknown, and the predictability (i.e., 0 =
+stock returns in the U.S. market regardless of the financial                      0) exists for long-term yield, dividend yield, dividend price
+                                                                                  ratio, and earnings price ratio when  is known, but there
+variable (regressor) being stationary or nearly integrated or unit                exists no predictability for all regressors when  is unknown.
+
+root.                                                                             As argued in Section 1, the existing literature on testing
+                                                                               predictability often ignores checking uncorrelated errors, while
+     We revisit the data analysis in Kostakis, Magdalinos, and                 the employed tests for predictability heavily rely on this assump-
+                                                                               tion. For example, under the assumption of uncorrelated errors,
+Stamatogiannis (2015) and Cai and Wang (2014) by focusing                      Demetrescu (2014) examined the IVX-based test by adding one
+                                                                               period lagged predicted variable into the model on purpose,
+on the period 01/1982­12/2015 for one of the two predicted                     and found out that this improves the local power of the IVX-
+                                                                               based test when the tuning parameter  in the IVX-test is less
+variables, the CRSP value-weighted excess returns and the S&P                  than 1/3. After checking the reasonable assumption of uncor-
+                                                                               related errors for the considered period, our proposed robust
+500 excess returns, and one of the ten financial predictors as                 tests do not reject H0 : 0 = 0 for the predicted variable
+
+mentioned in Section 1. These predictors are confirmed to be
+
+highly persistent by Kostakis, Magdalinos, and Stamatogiannis
+
+(2015).
+
+     In Table 3, we report the p-values of the proposed robust
+
+empirical likelihood tests for testing H0 : 0 = 0 and H0 :
+0 = 0. When we say a known  in the model (3), it means
+
+ is set to be the least squares estimator, that is,  minimizes the
+                        n
+least squares distance  t=1  {Yt  -    -     Yt-1  -   Xt-1 }2 .         Some
+692  B. YANG ET AL.
+
+     1.00                                                                        1.00
+
+     0.75                                                                        0.75
+
+     0.50                                                                        0.50
+
+                                                     =0.2,  =0                                                                                       =0.2,  =0.2
+
+     0.25                                                 EL                     0.25                                                                     EL
+
+                                                          EL1                                                                                             EL1
+
+                                                          KMS                                                                                             KMS
+
+                                                          KMS_Demes                                                                                       KMS_Demes
+
+     0.00                                                                        0.00
+
+           0.0       0.1        0.2          0.3          0.4        0.5                                       0.0   0.1        0.2          0.3          0.4        0.5
+
+     1.00                                                                        1.00
+
+     0.75                                                                        0.75
+
+     0.50                                                                                                0.50                                      =0.95, =0.2
+
+     0.25                                          =0.95,  =0                                                                                                   EL
+                                                                                                                                                                EL1
+     0.00                                                 EL                     0.25                                                                           KMS
+              0.000                                                                                                                                             KMS_Demes
+                                                          EL1
+     1.00
+                                                          KMS
+
+                                                          KMS_Demes
+
+                     0.025      0.050        0.075        0.100           0.125  0.00                                0.025      0.050        0.075        0.100           0.125
+                                                                                          0.000
+
+                                                                                 1.00
+
+     0.75                                                                        0.75
+
+     0.50                                                                        0.50
+
+                                                   =1, =0                                                                                          =1, =0.2
+
+     0.25                                           EL                           0.25                                                               EL
+
+                                                    EL1                                                                                             EL1
+
+                                                    KMS                                                                                             KMS
+
+                                                    KMS_Demes                                                                                       KMS_Demes
+
+     0.00                                                                        0.00
+
+           0.00           0.02         0.04         0.06             0.08                                      0.00       0.02         0.04         0.06             0.08
+
+Figure 1. Empiricalpowers for testing H0 :  = 0 when  = 0. Rejection rates for the proposed empirical likelihood tests and the IVX tests at level 5% are plotted against
+ = 0.3  (j - 1)/ 200, 0.68  (j - 1)/200, (j - 1)/200, j  {0, 1, . . . , 25} with respect to  = 0.2, 0.95, 1, respectively. The solid curve and dashed curve, respectively,
+represent the proposed empirical likelihood tests with known  and unknown , the dotted-dash curve and dotted curve, respectively, represent the IVX test in Kostakis,
+Magdalinos, and Stamatogiannis (2015) and Demetrescu (2014). The six panels correspond to the cases when   {0.2, 0.95, 1} and   {0, 0.2}. For each panel, the
+rejection rates are calculated through 10,000 repetitions with sample size n = 200.
+                                                                                                        JOURNAL OF BUSINESS & ECONOMIC STATISTICS                693
+
+Table 3. Testing results for dynamic predictive regression.
+
+                                                             Model with known                                                   Model with unknown 
+
+Regressor                   H0 : 0 = 0                                          H0 : 0 = 0                        H0 : 0 = 0                            H0 : 0 = 0
+
+                            Panel 1: Predicted variable: the CRSP value-weighted excess return
+
+Dividend payout ratio       0.505                                               0.500                                0.288                                0.748
+Long-term yield             0.509                                               0.992                                0.356                                0.114
+Dividend yield              0.604                                               0.000                                0.418                                0.066
+Dividend-price ratio        0.498                                               0.000                                0.331                                0.065
+T-bill rate                 0.503                                               0.922                                0.354                                0.124
+Earnings-price ratio        0.503                                               0.000                                0.295                                0.041
+Book-to-market value ratio  0.494                                               0.010                                0.328                                0.053
+Default yield spread        0.513                                               0.723                                0.280                                0.548
+Net equity expansion        0.489                                               0.781                                0.278                                0.914
+Term spread                 0.511                                               0.740                                0.276                                0.929
+
+                            Panel 2: Predicted variable: the S&P500 value-weighted excess return
+
+Dividend payout ratio       0.000                                               0.465                                0.000                                0.843
+Long-term yield             0.000                                               0.082                                0.000                                0.316
+Dividend yield              0.000                                               0.000                                0.000                                0.124
+Dividend-price ratio        0.000                                               0.000                                0.000                                0.267
+T-bill rate                 0.000                                               0.248                                0.000                                0.334
+Earnings-price ratio        0.000                                               0.001                                0.000                                0.227
+Book-to-market value ratio  0.000                                               0.382                                0.000                                0.209
+Default yield spread        0.000                                               0.309                                0.000                                0.506
+Net equity expansion        0.000                                               0.807                                0.000                                0.843
+Term spread                 0.000                                               0.763                                0.000                                0.885
+
+p-values are reported for testing the null hypothesis H0 : 0 = 0 and H0 : 0 = 0 with known and unknown  under model (3).
+
+CRSP value-weighted excess return, which means the method                       tests. The Wilks theorem is proved for the proposed empiri-
+in Demetrescu (2014) by assuming no serial correlation and                      cal likelihood tests regardless of regressors being stationary or
+adding a lagged predicted variable to improve the test power                    nearly integrated or unit root and zero or nonzero intercept in
+for the less persistent case is valid for this predicted variable.              modeling predictors. Hence, the proposed new tests are easy
+However, our proposed robust tests reject H0 : 0 = 0 for                        to implement without any ad hoc method such as a bootstrap
+the predicted variable S&P 500 excess return, which means the                   method for obtaining critical values.
+method in Demetrescu (2014) for improving the test power of
+IVX-based tests is invalid for this predicted variable. Unlike the                 The Monte Carlo simulation study shows that the proposed
+results in Campbell and Yogo (2006) and Kostakis, Magdali-                      tests give accurate size and are powerful while the IVX tests for
+nos, and Stamatogiannis (2015) for the period after 01/1952,                    H0 :  = 0 in Demetrescu (2014) and Kostakis, Magdalinos,
+where the assumption of uncorrelated errors may be reason-                      and Stamatogiannis (2015) are severely undersized, and the IVX
+able, our tests clearly reject predictability for the term spread.              test for H0 :  = 0 in Kostakis, Magdalinos, and Stamatogiannis
+The predictability for dividend yield and no predictability for                 (2015) suffers a serious size distortion when the predicting vari-
+default yield spread are consistent with that in Campbell and                   able has a nonzero intercept. The proposed robust procedure
+Yogo (2006) for the period 1/1952­12/2008. In comparison with                   for testing H0 : 0 = 0 can be employed to check whether
+findings in Cai and Wang (2014) and Kostakis, Magdalinos, and                   the method in Demetrescu (2014) is applicable as  = 0 is
+Stamatogiannis (2015), the proposed robust tests clearly indicate               imposed in the model. The empirical analysis shows that adding
+that it is necessary to include a lagged predicted variable into                a lagged predicted variable for the S&P 500 excess return is
+the predictive regression for the predicted variable S&P 500                    necessary while there is no need to add the lag for the CRSP
+excess return. Furthermore, we implement the method in Zhu,                     value-weighted excess return.
+Cai, and Peng (2014) for testing the predictability under the
+predictive regression without the lag and find that all predictors              Appendix: Proofs of Theorems
+for significant at the level 1% except the long-term yield for the
+CRSP value-weighted excess return with p-value 0.137. That is,                  Before proving theorems, we need some lemmas.
+it is important to study the proposed model.
+                                                                                Lemma 1. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +
+4. Conclusions                                                                  |Vt|2+} <  for some  > 0, and  = 0 is known. Further, assume
+
+Without characterizing the stochastic properties of regressors,                 |0| < 1 independent of n.                                               
+this article proposes new unified empirical likelihood tests based              (i) If 0 = d1/ n for some d1  R and 0 = d2/ n for some
+on weighted score equations in a predictive regression to test
+both the existence of the lagged variables and the predictability               d2  R, then
+and reexamines the empirical evidence on the predictability
+of stock returns of Kostakis, Magdalinos, and Stamatogiannis                    1     n                                 {E(U12)  +  02}  +     d2E{X1(0   +  U1)}
+(2015) and Cai and Wang (2014) using the proposed new robust                      n  t=1                            d1
+                                                                                                                                                        X12 )    
+                                                                                            Zt (0,  0)  =  W1  +        d1  E(  (0 +U1 )X1  )  +  d2E(
+                                                                                                                                    1+X12               1+X12
+
+                                                                                                           + op(1),                                            (A.1)
+694       B. YANG ET AL.
+
+                                                 EE(((U012+)U+1 )X012 )                E(  (0  +U1  )X1           Proof. (i) Since
+                                                                                                           )
+      n                                                     1+X12                               1+X12      
+1    t=1  Zt (0,  0)ZTt (0,   0)   =  E(U12)                                                                                          0t                    t-1                        t
+n                                                                                          E(   X12                             1  -  0   + 0tY0
+                                                                                               1+X12    )         Yt    =  0    1  -                    +       0t-1-j0Xj         +       0t-jUj,          (A.4)
+
+                                                                                                                                                            j=0                       j=1
+
+                                      + op(1) := 1 + op(1),                                                (A.2)  we have Yt - 0 - Ut = op(1) as t  , which is used to show that
+
+                       and       max     ||Zt    (0,  0)||             =  op  (n1/2),                      (A.3)                 n
+                                                                                                                                t=1
+                                1tn                                                                                      1
+                                                                                                                           n
+where W1  N(0, 1).                                                                                                                   Zt1(0,  0)
+    (ii) If 0 = d1/ n for some d1  R and 0 is a nonzero constant,
+                                                                                                                                 n                          n                          n
+then                                                                                                                    = 1                      +   d1                      +    d2
+                                                                                                                             n      Ut Yt-1          n         Yt-1Yt-1           n       Xt-1Yt-1
+     1     n   Zt (0,  0)    =    W2
+       n                                                                                                                        t=1                        t=1                        t=1
+          t=1                                                                                                                                        (d1/n)t-1
+                                                                                                                        = 1      n   Ut  {0  1   -   - d1/ n         +    (  d1   )t-1Y0
+                                                                                                                             n  t=3               1                            n
+      +           d1E{(0 + 0X1 + U2)(0 + U2 + 0X1 - 0X2)}                                                  
+                                                     +0 X1 +U2                )X2
+                                         d1  E(  (0       1+X22                    )
+
+      + op(1),                                                                                                               +  t-2     d1   )t-2-j     d2    Xj
+                                                                                                                                          n               n
+                                                                                                                                    (
+
+                                                                                                                                j=0
+
+                       1   n   Zt(0, 0)ZTt (0, 0)                                                                        +   t-2    d1    )t-1-jUj      +   Ut-1}    +  d1{E(U12)     +   02}
+                       n  t=1                                                                                                         n
+                                                                                                                                 (
+                                  E(0 + U2 + 0X1
+                                                                                                                             j=1
+
+                                                                          -       0X2)2                                      + d2E{X1(0 + U1)} + op(1)
+
+                  = E(U12)  E( (0+U2+0X1-0X2)X2 )                                                                       = 1      n   Ut (0   +     Ut-1)    +     d1{E(U12)  +  02}
+                                                           1+X22                                                             n  t=3
+                                                                           
+                          E(   (0  +U2   +0      X1 -0  X2 )X2            )                                                  + d2E{X1(0 + U1)} + op(1)
+
+                                             1+X22                         + op(1)
+
+                                         E(   X12    )                                                            and
+                                             1+X12
+                                                                                                                                         n
+                  := 2 + op(1),                                                                                                    1    t=1  Zt2(0,     0)
+                                                                                                                                     n
+                  and           max      ||Zt (0,    0)||              =  op(n1/2),
+                                                                                                                                         n                           + d1 n Yt-1Xt-1
+                               1tn                                                                                                 1    t=1             Xt-1
+                                                                                                                                     n
+where W2  N(0, 2).                                                                                                              =            Ut      1 + Xt2-1 n t=1 1 + Xt2-1
+    (iii) If 0 = d2/ n for some d2  R and 0 is a nonzero constant,
+                                                                                                                                      + d2 n             Xt2-1
+then                                                                                                                                      n t=1         1 + Xt2-1
+
+          1nt=n 1dZ2 tE({X0t,-01) (=1d-W20E03(++1Xt+ l12iXjtm=-12 11)  0t-1-jUj                                                 = 1 n           UtXt-1 + d1E( (0 + U1)X1 )
+                                                                                   )}                                                n t=1      1 + Xt2-1                    1 + X12
+
+                                                                                           +  op  (1),                                + d2E( X12 ) + op(1),
+                                                                                                                                                 1 + X12
+                   n
+               1  t=1     Zt (0 ,  0)ZtT (0,     0)     =                                                         which imply (A.1). Similarly, we can prove (A.2) and (A.3).
+               n
+                                                                                                                  (ii) By noting that Yt - 0 - 0Xt-1 - Ut = op(1) as t  ,
+
+                  lim                                                                                             results can be shown in a way similar to the proof of (i).
+               t
+               E{         E(   0      +        t-1   0t-1-jUj                 )2                                  (iii)  By  noting that     Yt    -     0        -  t    0t-jUj      =   op(1)  as   t    ,
+                              1-0              j=1                                                                                                      1-0          j=1
+
+                          Xt-1         0                t-1            0t-1-j                                     results follow from similar arguments in proving (i).
+                          1+Xt2-1     1-0               j=1
+                                   (           +                                  Uj)}
+
+                                                                                                                  Lemma 2. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +
+                                                                       0t-1-j                                     |Vt|2+} <  for some  > 0, and  = 0 is known. Further,
+                  E{      Xt-1        (   0    +        t-1                        Uj  )}                         assume 0 = 1 - /n for some   R and 0 = 0. Put Zt ( , ) =
+                          1+Xt2-1        1-0            j=1                              
+                                                X12                                          ×                                     Xn-1
+                                           E(  1+X12    )                                                         (Zt1( , ),                Zt2      ,    ))T  .
+                                                                                                                                   1+Xn2-1       (      
+
+                  E(U12) + op(1)                                                                                  (i) If 0 = d1/ n for some d1  R and 0 = d2/n for some d2  R,
+
+               := 3 + op(1),                                                                                      then
+
+                                                                                                                  1      n   Zt (0,  0)  =   W~ 1  +      d1  {E(U12) +  02} +    d20        1  JV ,  (s)  ds
+                                                                                                                    n   t=1                                        d10   + d2                0
+                                                                          op(n1/2                                                                                                 1
+                  and           max      ||Zt    (0,    0)||           =               ),                                                                                         0   JV  ,  (s) ds
+
+                               1tn
+
+where W3  N(0, 3).                                                                                                                          + op(1),                                                       (A.5)
+                                                                                                                   JOURNAL OF BUSINESS & ECONOMIC STATISTICS                             695
+
+1      n   Zt (0,  0)ZtT   (0,  0)  =  E(U12)          E(U12) + 02           0    + op(1)     and
+n     t=1                                                   0                1
+                                                                                                           1       n
+                                       := ~ 1 + op(1),                               (A.6)                   n    t=1  Zt2(0,   0)
+
+                   and       max       ||Zt (0,  0)||     =   op(n1/2),              (A.7)              = 1        n   Ut       Xt-1     + d1 n Yt-1Xt-1
+                                                                                                             n    t=1
+                            1tn                                                                                               1 + Xt2-1 n t=1 1 + Xt2-1
+
+where W~ 1  N(0, ~ 1).                                                                                              d2      n        Xt2-1
+    (ii) If 0 = d1/n for some d1  R and 0 is a nonzero constant,                                                   n3/2    t=1      1 + Xt2-1
+
+then                                                                                                          +
+
+1      n   Zt(0,   0)   =   W~ 2    +      d100        0101JVJV,,(s()s)dsds  + op(1), (A.8)                        n            Xt-1 + d10 n
+  n   t=1                                   d10                                                                   t=1
+                                                                                                        = 1                                                              Xt-1
+           1n       Zt(0,   0)ZtT          (0, 0)                                                            n         Ut     1 + Xt2-1             n t=1               1 + Xt2-1
+           n t=1    E(U1    - 0
+      =                                         jV1-j)2        +   02        0    + op(1)                               n
+           E(U12)                          j=0                               1                                         t=1
+                                                                                                                   d1                 Xt-1
+      := ~ 2 + op(1),                      0                                                                  +    n        Ut       1 + Xt2-1
+
+                                                                                     (A.9)                              n        Xt2-1 + op(1).
+                                                                                                                       t=1      1 + Xt2-1
+                   and       max     ||Zt(0,    0)||       =   op(n1/2),             (A.10)                +   d2                                                                     (A.16)
+                                                                                                              n3/2
+                            1tn
+
+where W~ 2  N(0, ~ 2).                                                                        Put S0 = 0 and St =               t    Uj  for  t  =  1,  .  .  .  ,  n.  Then
+    (iii) If 0 = d2/n for some d2  R and 0 is a nonzero constant,                                                               j=1
+
+then
+
+1      n   Zt(0,   0)   =   W~ 3  +    d2   0          1   JV  ,  (s)  ds    + op(1), (A.11)         1        n    Ut      Xt-1
+  n   t=1                                  1-0         0                                               n      t=1          1+Xt2-1
+                                                    1
+                                           d2       0  JV  ,  (s)  ds
+
+           1   n                                                                              =      1        nt=1(St - St-1)        Xt-1                                             (A.17)
+           n  t=1                                                                                      n                             1+Xt2-1
+                   Zt(0,    0)ZtT (0,
+                                           0)                                                 =      1          Xn-1       +    1     n          {  Xt-1 -              Xt }.
+                                                                                                       n        1+Xn2-1           n   t=1
+                                                                                                          Sn                               St       1+Xt2-1             1+Xt2
+
+      =    E(U12)   lim     E(       t     0t-jUj)2        +   (   0   )2        0
+                                     j=1                          1-0           1-0
+                   t                              0                                           It follows from Taylor expansion that
+                                                1-0                               1
+
+           + op(1)                                                                                    Xt-1 -            Xt           = (1 + t2)-3/2(Xt-1                - Xt),        (A.18)
+                                                                                                     1 + Xt2-1         1 + Xt2
+      := ~ 3 + op(1),                                                                (A.12)
+
+                   and       max     ||Zt(0      ,  0)||   =   op  (n1/2),           (A.13)   where t lies between Xt-1 and Xt. By (A.14), we have |Xt-1|/ta p ,
+                                                                                              |Xt|/ta p  and |Xt-1 - Xt|/ta p 0 for any a  (0, 1/2) as t  ,
+                            1tn                                                               which imply that
+
+where W~ 3  N(0, ~ 3).
+
+Proof. (i) It follows from Phillips (1987) that                                                    |t|/ta p  for any a  (0, 1/2) as t  . (A.19)
+
+           1    X[nr]  D    JV ,  (r)      in the space            D[0, 1],          (A.14)
+             n
+                                                                                              It follows from (A.18) and (A.19) that
+where D[0, 1] is the collection of real-valued functions on [0, 1] which
+
+are right continuous with left limits; see Billingsley (1999). By (A.4) and                          1      n           Xt-1 -              Xt-2 ) = op(1).
+                                                                                                       n   t=1         1 + Xt2-1           1 + Xt2-2
+(A.14), we have Yt - 0 - Ut = op(1) as t  . Hence,                                                              St (                                                                  (A.20)
+
+                 1      n   Zt1(0,     0)
+                   n   t=1
+                                                                                              By (A.17) and (A.20), we have
+
+              = 1       n              +   d1     n                                           1       n   Ut     Xt-1 =               Xn-1          1          n    Ut  +     op(1).  (A.21)
+                   n                       n                                                    n    t=1        1 + Xt2-1            1 + Xn2-1        n       t=1
+                           Ut Yt-1                   Yt-1Yt-1
+
+                       t=1                       t=1
+
+                   +     d2      n     Xt-1Yt-1                                               Similarly, we have
+                        n3/2    t=1
+
+              =  1      n   Ut (0      +   Ut-1)    +  d1{E(U12)       +     02}                     1       n        Xt-1 =          Xn-1       + op(1)
+                   n   t=1                                                                           n       t=1                      1+Xn2-1
+                                                                                                                      1+Xt2-1
+
+                                      1                                                               1         n      Xt2-1 =           Xn-1 1               n         Xt-1  +  op(1).
+                                                                                                     n3/2       t=1                      1+Xn2-1 n            t=1       n1/2
+                   + d2E(Y1) JV, (s) ds + op(1)                                                                        1+Xt2-1
+
+                                     0                                                                                                                                                (A.22)
+
+                 1      n                              d1{E(U12)             02}              Hence, (A.5) follows from (A.14), (A.15), (A.16), (A.21), and (A.22).
+                   n   t=1
+              =             Ut (0      +   Ut-1)    +                  +                      (ii) It follows from (A.4) and (A.14) that
+
+                                 1                                                   (A.15)   1    Y[nr]  =   0    X[nr]   +  op(1)   D  0JV, (r)                in the space         D[0, 1].
+                                                                                                n               n
+                   + d20 JV, (s) ds + op(1)
+                                                                                                                                                                                      (A.23)
+                                0
+696          B. YANG ET AL.
+
+Hence,                                                                                    (i) If 0  =                                           R and 0     =     d2/n3/2     for some
+                                                                                                            d1/ n for some d1
+
+                       n                                                                  d2  R, then
+                      t=1
+                 1         Zt1(0,   0)                                                    1     n                                d1{E(U12) + 02} + d200                   1 1-e-s      ds
+                   n                                                                        n  t=1
+                                                                                                    Zt (0,  0)  =  W¯ 1    +                                              10-e-ss
+                                                                                                                                     d10sgn(0) + d2|0|                1            ds
+                 1     n                                                                                                                                              0
+                   n  t=1
+             =             Ut (Yt-1     -  0Xt-1)                                                                  + op(1),                                                        (A.24)
+
+                     +   d1      n                     -  0Xt-1)                               1     n                                                E(U12) + 02
+                        n3/2                                                                   n    t=1                                                    0
+                                    Yt-1(Yt-1                                                            Zt (0,    0)ZtT (0,  0)     =  E(U12)                            0
+                                                                                                                                                                          1
+                                t=1
+
+             =   1     n   Ut (0    +   Ut-1     -     0       jVt-1-j)                                                                 + op(1) := ¯ 1 + op(1),                    (A.25)
+                   n  t=1                                 j=0
+
+                                       1                                                                        and        max       ||Zt (0,  0)||   =  op(n1/2),                 (A.26)
+
+                     + d100 JV, (s) ds + op(1)                                                                            1tn
+
+                                     0
+
+     and
+
+   1     n   Zt2(0,  0)                                                                   where W¯ 1  N(0, ¯ 1).
+     n  t=1                                                                                   (ii) If 0 = d1/n3/2 for some d1  R and 0 is a nonzero constant,
+
+                                                                                          then
+
+= 1      n   Ut   Xt-1           +   d1     n                 Xt-1                        1     n   Zt (0,      0)     =   W¯ 2  +      d100(0 - 00)                1    1-e-s     ds
+     n  t=1      1 + Xt2-1          n3/2                     1 + Xt2-1                      n  t=1                                                                  0       
+                                               Yt-1                                                                                                            1-e-s
+                                                                                                                                                d10|0|      1             ds
+                                           t=1                                                                                                              0
+
+=     Xn-1       1       n       +  d10       n         Xt2-1 + op(1)                                                     + op(1),                                                 (A.27)
+     1 + Xn2-1     n                n3/2     t=1       1 + Xt2-1
+                            Ut
+
+                        t=1
+
+=     Xn-1       1       n   Ut  +       Xn-1 d10                  1                                1     n     Zt (0,  0)ZTt (0,       0)
+     1 + Xn2-1     n    t=1             1 + Xn2-1                                                   n    t=1
+                                                                     JV, (s) ds + op(1),
+
+                                                                  0
+
+                                                                                                    = E(U12)          E(0 + U1 - 00 - 0                          jV1-j)2
+                                                                                                                                                            j=0
+which imply (A.8). Similarly, we can prove (A.9) and (A.10).
+                                                                                                                                     (0 - 00)sgn(0)
+                                     0              t     0t-jUj
+     (iii) By noting that Yt    -   1-0    -        j=1            =  op(1)  as  t    ,             (0 - 00)sgn(0)                      + op(1)
+                                                                                                               1
+we have
+
+     1     n                     1       n                    d2    n                               := ¯ 2 + op(1),                                                                (A.28)
+       n                           n                         n3/2
+              Zt1(0, 0)      =              Ut Yt-1       +            Xt-1Yt-1
+
+          t=1                           t=1                        t=1
+
+                             =   1       n   Ut        0       +  t-1                                       and          max     ||Zt (0,    0)||     =  op(n1/2),                 (A.29)
+                                   n    t=1            - 0
+                                                 (                    0t-1-jUj)                                         1tn
+
+                                                    1             j=1
+
+                                 +  d2  1  0            1                                 where W¯ 2  N(0, ¯ 2).
+                                           - 0                                                (iii) If 0 = d2/n3/2 for some d2  R and 0 is a nonzero constant,
+                                                          JV, (s) ds + op(1)
+                                                                                          then
+                                                       0
+
+and                                                                                       1     n                                       d2  0    0       1  1-e-s     ds
+                                                                                            n  t=1                                              1-0      0      s
+           n                           n                                                            Zt (0 ,        0)  =   W¯ 3  +                       1-e-s            + op(1),
+     1                           1                   Xt-1                                                                               d2|0|         1          ds             (A.30)
+       n      Zt2(0, 0)      =     n      Ut        1 + Xt2-1                                                                                         0
+
+          t=1                         t=1
+
+                                +    d2     n        Xt2-1                                             1     n     Zt (0 ,  0)ZTt (0,       0)
+                                    n3/2   t=1      1 + Xt2-1                                          n    t=1
+
+                                     Xn-1           1      n                                        =    E(U12     )   lim       E(     t-1  0t-1-jUj)2 +        (   0    )2
+                                    1 + Xn2-1         n   t=1                                                                           j=1                         1-0
+                             =                                 Ut                                                     t                          0
+                                                                                                                                                1-0   sgn(0)
+
+                                        Xn-1                  1                                      0      sgn(0       )     + op(1)
+                                                                                                    1-0
+                                                       d2 JV, (s) ds + op(1),
+                                +                                                                               1
+
+                                      1 + Xn2-1 0                                                   := ¯ 3 + op(1),                                                                (A.31)
+
+which imply (A.11). Similarly, we can prove (A.12) and (A.13).
+
+Lemma 3. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +                                                and          max     ||Zt   (0,     0)||  =  op(n1/2  ),               (A.32)
+|Vt|2+} <  for some  > 0, and  = 0 is known. Further, assume
+0 = 1 - /n for some   R and 0 = 0.                                                                                      1tn
+
+                                                                                          where W¯ 3  N(0, ¯ 3).
+                                                                                                                               JOURNAL OF BUSINESS & ECONOMIC STATISTICS                          697
+
+Proof.  (i)  By  noting  that  X[ns]/n     p  0  1-e-s        for s  [0, 1] and Yt -                    Proof. Using Lemma 2, this lemma follows from the arguments in the
+                                                                                                        proof of Lemma 1 of Qin and Lawless (1994).
+0 - Ut = op(1) as t  , results follow from the same arguments in
+
+proving Lemma 2(i).                                                                                     Lemma 6. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +
+                                                                                                        |Vt|2+} <  for some  > 0, and  = 0 is known. Further, assume
+(ii)    By   noting   that  Y[ns]/n    =   0X[ns]/n + op(1)           p   0  0      1-e-s
+                                                                                       
+for s  [0, 1], results follow from the same arguments in proving
+                                                                                                        0 = 1 - /n for some   R and 0 = 0.
+Lemma 2(ii).                                           0t-jUj                                               (i) Put ¯ = n, ¯0 = 0n, Z¯ t( , ¯) = Zt( , ) and L¯ ( , ¯) =
+
+(iii) By noting that Yt        -     0     -    t                  =  op(1)  as  t    ,                 L( , ). Under H0 : 0 = 0, with probability tending to one, L¯ (0, ¯)
+                                    1-0         j=1                                                     attains its maximum value at some point ¯ in the interior of the ball
+
+results follow from the same arguments in proving Lemma 2(iii).
+
+Lemma 4. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +                                            |¯  -  ¯¯0|(¯  n-1/0 for some            ¯ 0   (2, 2 +      ) as n            ,    and ¯ and
+|Vt|2+} <  for some  > 0, and  = 0 is known. Further, assume                                            ¯   =          ) satisfy Q¯ 1n(¯,             ) = 0 and     Q¯ 2n(¯     , ¯   )=   0, where
+0| < 1 independent of n.
+                                                                                                                  Q¯ 1n(¯, ¯ )  :=  1     n         Z¯ t(0, ¯)   ¯)     ,  and
+    (i) Under H0 : 0 = 0, with probability tending to one, L(0, )                                                                   n    t=1      + ¯ T Z¯ t(0,
+attains its maximum value at some point  in the interior of the ball                                                                           1
+| - 0|  n-1/0 for some 0  (2, 2 + ) as n  , and  and
+ = () satisfy Q1n(, ) = 0 and Q2n(, ) = 0, where                                                                  Q¯ 2n(¯, ¯ )  =   1     n             1                  Z¯ t(0, ¯)     T
+                                                                                                                                    n    t=1      + ¯ T Z¯ t(0, ¯)             ¯
+                                                                                                                                                                                            ¯ .
+
+                                                                                                                                              1
+
+        Q1n(, )       :=    1   n       Zt(0, )               and                                           (ii) Under H0 : 0 = 0, with probability tending to one, L( , 0)
+                            n  t=1  1 + T Zt(0, )                                                       attains its maximum value at some point   in the interior of the ball
+                                                                                                        | - 0|  n-1/0 for some 0  (2, 2 + ) as n  , and   and
+        Q2n(, )       =     1   n            1                Zt(0, )     T                              = ( ) satisfy Q¯ 3n( , ) = 0 and Q¯ 4n( , ) = 0, where
+                            n  t=1     + T Zt(0, )
+                                    1                                       .                                                             n
+                                                                                                                                         t=1
+    (ii) Under H0 : 0 = 0, with probability tending to one, L( , 0)                                               Q¯ 3n( , )    :=  1          1    Zt( ,    0)  ,  0)  ,  and
+attains its maximum value at some point   in the interior of the ball                                                               n             + T Zt     (
+| - 0|  n-1/0 for some 0  (2, 2 + ) as n  , and   and
+ = ( ) satisfy Q3n( , ) = 0 and Q4n( , ) = 0, where                                                               Q¯ 4n( , )    =   1     n              1                 Zt( , 0)       T
+                                                                                                                                    n    t=1          T Zt( , 0)
+                                                                                                                                              1  +                                          .
+
+        Q3n( , )      :=    1   n   1    Zt( ,  0)  ,  0)  ,  and                                       Proof. Using Lemma 3, this lemma follows from the arguments in the
+                            n  t=1     + T Zt   (                                                       proof of Lemma 1 of Qin and Lawless (1994).
+
+        Q4n( , )      =     1   n             1               Zt( , 0)    T                             Proof of Theorem 1. Case A1: Assume 0 = 1 - /n, 0 = 0 and H0 :
+                            n  t=1         T Zt( , 0)                                                   0 = 0 & 0 = 0. Then it follows from Lemma 2(i) with d1 = d2 =
+                                    1  +                                    .                           0 and standard arguments in empirical likelihood method (see Owen
+
+Proof. Using Lemma 1, this lemma follows from the arguments in the                                      (2001)) that
+proof of Lemma 1 of Qin and Lawless (1994).
+                                                                                                            -2                 =  W~  T  ~  1-1W~ 1   +             d       2(2)           n  .
+                                                                                                                log  L(0,  0)         1                  op(1)                      as
+
+Lemma 5. Suppose model (3) holds with |0| < 1 and E{|Ut|2+ +                                                Case A2: Assume 0 = 1 - /n, 0 = 0 and H0 : 0 = 0. Using
+|Vt|2+} <  for some  > 0, and  = 0 is known. Further, assume                                            notations in Lemma 5(i), it follows from (A.14) that
+
+0 = 1 - /n for        ,so¯nm), e=¯0L=(R,a0)n.dUnn,0dZ¯e=tr(H0.,0¯:)=0 =Zt0,(w,ith)pdreofbinaebdiliitny            1 n Z¯ t1(0, ¯0)
+    (i) Put ¯ = 
+
+Lemma 2 and L¯(
+tending to one, L¯(0, ¯) attains its maximum value at some point ¯ in                                             n t=1 ¯
+                                           |  n-1/0 for
+the interior of the ball |¯ -          ¯0   ¯ (¯) satisfy     some 0        (2, 2 + )                          =  -  1   n     Xt-1   (Yt-1      -    0Xt-1)     -  1       n   Ut  Xt-1
+as n  , and ¯ and ¯                    =                      Q~ 1n(¯,    ¯ ) = 0 and                                n  t=1       n                                 n      t=1         n
+Q~ 2n(¯, ¯ ) = 0, where
+
+        Q~ 1n(¯, ¯ )  :=    1   n       Z¯ t(0, ¯)            and                                              =  -  1   n     Xt-1   {0    +    Ut-1    -   0          jVt-1-j}        +  op(1)
+                            n  t=1  1 + ¯ T Z¯ t(0, ¯)                                                               n  t=1       n                              j=0
+
+        Q~ 2n(¯, ¯ )  =   1     n           1                 Z¯ t(0, ¯)  T                                                   1
+                          n    t=1  1 + ¯ T Z¯ t(0, ¯)             ¯
+                                                                            ¯ .                                = - 0 JV, (s) ds + op(1)
+
+                                                                                                                            0
+
+    (ii) Under H0 : 0 = 0, with probability tending to one, L( , 0)                                     and
+attains its maximum value at some point   in the interior of the ball
+| - 0|  n-1/0 for some 0  (2, 2 + ) as n  , and   and                                                        1   n   Z¯ t2(0, ¯0)      =    -      Xn-1 1 n Xt-1                       Xt-1
+ = ( ) satisfy Q~ 3n( , ) = 0 and Q~ 4n( , ) = 0, where                                                      n  t=1        ¯                      1 + Xn2-1 n t=1 n                   1 + Xt2-1
+
+        Q~ 3n( , )    :=    1   n        Zt ( , 0)         ,  and                                                           1
+                            n  t=1     + T Zt (
+                                                                                                                  = - JV, (s) ds + op(1),
+
+                                                                                                                           0
+
+                                    1               ,  0)                                               which imply that
+
+        Q~ 4n( , )    =   1     n            1                Zt ( , 0)   T                             Q~ 1n(¯0, 0)       =    -0     0101JVJV,,(s()s)dsds  + op(1) =: S~2 + op(1). (A.33)
+                          n    t=1     + T Zt( , 0)                                                           ¯                  -
+                                    1                                       .
+698            B. YANG ET AL.
+
+By Lemma 2(ii) with d1 = 0, we can show that                                                                                   where I2×2 denotes the 2 × 2 identity matrix. Since the matrix I2×2 -
+                                                                                                                                  -1/2                   -1/2
+         Q~ 1n(¯0,0)                                                                                                           ~  2      S~ 2  S~ T2  ~  2         is idempotent and
+               ¯
+                            =      -     ~2   + op(1),                                                                              S~ T2  ~   -1     S~ 2
+                                                                                                                                               2
+
+        Q~ 1n(¯0, 0) = Op(n-1/2),                                 Q~ 1n(¯0,0)        =   Op(1),                      (A.34)                                     ~  -1/2   S~ 2  S~ T2     ~  -1/2                                      ~  -1/2      S~ 2  S~ T2  ~  -1/2
+                                                                       ¯                                                                                           2                         2                                            2                         2
+         Q~ 2n(¯0,0)                          Q~ 2n(¯0,0)                                                                      rank(I2×2 -                                                             )   =     2   -    trace(                                          )
+               ¯            =      0,               ¯                 =  S~ 2  + op(1)         =    Op(1),                                                               S~2T ~ 2-1S~2                                                        S~T2 ~ 2-1S~2
+
+where    ~  2¯ is)  defined in Lemma 2(ii). By (A.33) and (A.34),                                                expanding        =        -   trace( S~2T            ~  -1/2   ~      2-1/2 S~ 2          =
+Q~ 1n(¯  ,          and Q~ 2n(¯, ¯ ) around (¯0, 0)T yields                                                                                                              2
+                                                                                                                                     2                                   S~T2 ~ 2-1S~2                 )         1,
+
+0    =   Q~ 1n(¯0, 0)         +        Q~ 1n(¯0      ,  0)     (¯        -  ¯0)    +        Q~ 1n(¯0    ,  0)    ¯             it follows from Lemma 2(ii) with d1 = 0 that -2 log LP1(0) d  2(1)
+                                           ¯                                                   ¯ T                             as n  .
+
+         + op(||¯ || + |¯ - ¯0|)                                                                                                   Case A3: Assume 0 = 1 - /n, 0 = 0 and H0 : 0 = 0. Like the
+                                                                                                                               proof for Case A2, it follows from Lemmas 2(iii) with d2 = 0 and 5(ii)
+     = Q~ 1n(¯0, 0) + S~2(¯ - ¯0) - ~ 2¯  + op(||¯ || + |¯ - ¯0|)                                                              that
+
+and                                                                                                                                  -2 log LP2(0) = ( ~ 3-1/2W~ 3)T {I2×2 -                                                    ~  3-1/2 S~ 3 S~ 3T  ~ -1/2         }
+
+                                              Q~ 2n(¯0,                                          Q~ 2n(¯0,                                                                                                                             S~ 3T  ~  -1    3
+                                                  ¯                                                 ¯ T                                                                                                                                          3
+                                                               0)                                                0)                                                                                                                                  S~ 3
+
+     0   =     Q~ 2n(¯0, 0)         +                                 (¯     -     ¯0)   +                           ¯                                                    × ( ~ 3-1/2W~ 3) + op(1),
+
+            + op(||¯ || + |¯ - ¯0|)                                                                                            where ~ 3 and W~ 3 are defined in Lemma 2(iii), and
+
+         = S~2T ¯  + op(||¯ || + |¯ - ¯0|),                                                                                          S~ 3      =                   Q~ 3n(0,            0)
+                                                                                                                                                                        
+which imply that                                                                                                                                      nlim
+
+                          n(¯                                                      nQ~ 1n                                                                                     t                                                                                  T
+
+     S~ 2T  ~  -1   S~ 2                  -   ¯0)    =      -S~ 2T       ~  -1                  (¯0,   0)  +     op(1)                         =      -      lim         E(            0t-jUj)2                  +  (     0        )2,          0                   .
+               2                                                            2                                                                                                                                             - 0                 1 - 0
+                                                                                                                                                              t             j=1                                        1
+
+and
+
+n¯  = ~ 2-1nQ~ 1n(¯0, 0) + ~ 2-1S~2n(¯ - ¯0) + op(1)                                                                           Since the matrix I2×2 -                          ~      3-1/2 S~ 3 S~ T3    ~ -1/2      is idempotent with rank one,
+
+                                                                                                                                                                                             S~ 3T  ~  -1    3
+                                                                                                                                                                                                       3   S~ 3
+                                       ~  -1   S~ 2 S~ 2T      ~  -1     }nQ~ 1n(¯0,
+               =  {  ~   -1      -        2                       2                                 +                          it follows from Lemma 2(iii) with d2 = 0 that -2 log LP2(0) d  2(1)
+                         2                  S~2T ~ 2-1S~2                                       0)      op    (1)
+
+                                       ~  -1   S~ 2  S~ 2T  ~  -1                                                              as n  .
+                                          2                    2
+               =  {  ~   -1      -                                    }nQ~ 1n        (¯0,      0)   +  op  (1),      (A.35)       Therefore, it follows from Cases A1­A3 that Theorem 1 holds for
+                         2
+                                            S~2T ~ 2-1S~2                                                                      the case of 0 = 1-/n and 0 = 0. Similarly, we can show Theorem 1
+                                                                                                                               holds for the case of |0| < 1 by using Lemmas 1 and 4, and for the case
+where S~2 = -(0, 1)T . It follows from (A.35) and Taylor expansion                                                             of 0 = 1 - /n and 0 = 0 by using Lemmas 3 and 6.
+that
+
+     - 2 log LP1(0)                                                                                                            Proofs of Theorems 2­5. They can be shown in the same way as the
+                                                                                                                               proof of Theorem 1 by using Lemmas 1­6. For computing the non-
+= - 2 log L¯(0, ¯)                                                                                                             central parameters in Theorems 3(ii) and 4(ii), we use the facts that
+
+         n                                      n
+=2 ¯ T Z¯ t(0, ¯) - ¯ T Z¯ t(0, ¯)Z¯ tT (0, ¯)¯ 
+                                                                                                                                  D~ 2T               -1           ~  -1  S~ 2  S~ T2  ~  -1
+     t=1                                       t=1                                                                                             ~      2     -         2                   2            D~ 2
+                                                                                                                                                                         S~T2 ~ 2-1S~2
+         + op(1)
+
+                                                            Q~ 1n(¯0        ,  0)                                                                               1                            2                   -1        ~  2-1 S~ 2 S~ T2     ~  -1
+                                                                ¯                                                                                                                                                2                                  2
+=2n¯ T         Q~ 1n  (¯0     ,  0)   +     2n¯ T                                  (¯     -    ¯0)                                = d1202                          JV, (s) ds S~T2                         ~           -                  -1                     S~2 = 0
+                                                                                                                                                                                                                                S~ T2  ~  2   S~ 2
+                                                                                                                                                            0
+
+      - n¯ T ~ 2¯  + op(1)                                                                                                     and
+=2n¯ T {nQ~ 1n(¯0, 0) + S~2n(¯ - ¯0)} - n¯ T ~ 2¯ 
+                                                                                                                                                         D¯ 2T        ¯  -1            ¯  2-1 S¯ 2 S¯ T2   ¯     -1       D¯ 2
+                                                                                                                                                                         2   -                                   2
+      + op(1)                                                                                                                                                                             S¯2T ¯ 2-1S¯2
+=2n¯ T ~ 2n¯  - n¯ T ~ 2¯  + op(1)
+                                                                                                                                                            = d1202S¯T2         ¯         -1           ¯   2-1 S¯ 2 S¯ T2  ¯  -1          S¯2 = 0.
+                                                                                                                                                                                          2         -                         2
+                                                        ~   2-1 S~ 2 S~ 2T     ~  -1                                                                                                                       S¯2T ¯ 2-1S¯2
+={nQ~ 1n(¯0,              0)}T        {  ~  -1  -                                 2   }  ~  2{   ~  -1
+                                            2                            -1                         2
+                                                               S~ T2  ~  2   S~ 2
+
+         -     ~  -1  S~ 2  S~ T2  ~  -1    }{nQ~ 1n              (¯0,   0)}      +
+                  2                   2
+                  S~2T ~ 2-1S~2                                                      op(1)
+
+=(   ~   -1/2     W~      )T  {I2×2         -   ~    2-1/2 S~ 2 S~ 2T    ~     -1/2   }(    ~  -1/2    W~        +             Acknowledgments
+         2                                                                     2               2
+                      2                                     S~T2 ~ 2-1S~2                                  2  )      op  (1),  We thank the editor, Professor Jianqing Fan, an associate editor, and
+                                                                                                                               one reviewer for their insightful and constructive comments that greatly
+                                                                                                                     (A.36)    improve the overall presentation.
+                                                                              JOURNAL OF BUSINESS & ECONOMIC STATISTICS  699
+
+Funding                                                                       Demetrescu, M., and Rodrigues, P. M. M. (2016), "Residual-Augmented
+                                                                                 IVX Predictive Regression," Working Paper, Economics and Research
+Yang's research was partly supported by Humanity and Social Science Youth        Department, Banco de Portugal. [684]
+Foundation of Ministry of Education of China (19C10421028), NSF of
+China (71401066), and the Major Program of the National Social Science        Fama, E. F., and French, K. R. (2010), "Luck Versus Skill in the Cross-
+Foundation of China (17ZDA073). Liu's research was partly supported by           Section of Mutual Fund Returns," Journal of Finance, 65, 1915­1947.
+NSF of China (11971208, 11601197), China Postdoctoral Science Foun-              [686]
+dation funded project (2016M600511, 2017T100475), and NSF of Jiangxi
+Province (2018ACB21002, 20171ACB21030). Peng's research was partly            Jansson, M., and Moreira, M. J. (2006), "Optimal Inference in Regression
+supported by the Simons Foundation. Cai's research was partly supported          Models With Nearly Integrated Regressors," Econometrica, 74, 681­714.
+by NSF of China (71631004, key project).                                         [684]
+
+References                                                                    Jensen, M. C. (1968), "The Performance of Mutual Funds in the Period
+                                                                                 1945­1964," Journal of Finance, 23, 389­416. [686]
+Amihud, Y., and Hurvich, C. M. (2004), "Predictive Regressions: A
+   Reduced-Bias Estimation Method," Journal of Financial and Quantitative     Jing, B. Y., Yuan, J., and Zhou, W. (2009), "Jackknife Empirical Likelihood,"
+   Analysis, 39, 813­841. [685]                                                  Journal of American Statistical Association, 104, 1224­1232. [687]
+
+Bickel, P., and Doksum, K. A. (2001), Mathematical Statistics I (2nd ed.),    Kosowski, R., Timmermann, A., Wermers, R. and White, H. (2006), "Can
+   Upper Saddle River, NJ: Prentice Hall. [686]                                  Mutual Fund "Stars" Really Pick Stocks? New Evidence From a Bootstrap
+                                                                                 Analysis," Journal of Finance, 61, 2551­2595. [686]
+Billingsley, P. (1999), Convergence of Probability Measures (2nd ed.), New
+   York: Wiley. [695]                                                         Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2015), "Robust
+                                                                                 Econometric Inference for Stock Return Predictability," Review of Finan-
+Breitung, J., and Demetrescu, M. (2015), "Instrumental Variable and Vari-        cial Studies, 28, 1506­1553. [684,685,686,689,690,691,692,693]
+   able Addition Based Inference in Predictive Regressions," Journal of
+   Econometrics, 187, 358­375. [684,685]                                      Li, C., Li, D., and Peng, L. (2017), "Uniform Test for Predictive Regression
+                                                                                 With AR Errors," Journal of Business and Economic Statistics, 35, 29­39.
+Cai, Z., and Wang, Y. (2014), "Testing Predictive Regression Models              [687]
+   With Nonstationary Regressors," Journal of Econometrics, 178, 4­14.
+   [684,685,691,693]                                                          Liu, J. M., Chen, R., and Yao, Q. (2010), "Nonparametric Transfer Function
+                                                                                 Models," Journal of Econometrics, 157, 151­164. [687]
+Campbell, J. Y. (2008), "Viewpoint: Estimating the Equity Premium," Cana-
+   dian Journal of Economics/Revue canadienne d'économique, 41, 1­21.         Magdalinos, T., and Phillips, P. C. B. (2009), "Limit Theory for Cointegrated
+   [684]                                                                         Systems With Moderately Integrated and Moderately Explosive Regres-
+                                                                                 sors," Econometric Theory, 25, 482­526. [685]
+Campbell, J. Y., and Yogo, M. (2006), "Efficient Tests of Stock
+   Return Predictability," Journal of Financial Economics, 81, 27­60.         Owen, A. (2001), Empirical Likelihood, New York: Chapman and Hall.
+   [684,685,693]                                                                 [686,697]
+
+Cavanagh, C. L., Elliott, G., and Stock, J. H. (1995), "Inference in Models   Phillips, P. C. B. (1987), "Towards a Unified Asymptotic Theory for Autore-
+   With Nearly Integrated Regressors," Econometric Theory, 11, 1131­1147.        gression," Biometrika, 74, 535­547. [695]
+   [684,685]                                                                           (2015), "Pitfalls and Possibilities in Predictive Regression," Journal
+                                                                                 of Financial Econometrics, 13, 521­555. [684]
+Chen, W. W., and Deo, R. S. (2009), "Bias Reduction and Likelihood-
+   Based Almost Exactly Sized Hypothesis Testing in Predictive Regres-        Phillips, P. C. B., and Lee, J. H. (2013), "Predictive Regression Under Various
+   sions Using the Restricted Likelihood," Econometric Theory, 25, 1143­         Degrees of Persistence and Robust Long-Horizon Regression," Journal of
+   1179. [685]                                                                   Econometrics, 177, 250­264. [684,685]
+
+Chen, W. W., Deo, R. S., and Yi, Y. (2013), "Uniform Inference in Predictive  Phillips, P. C. B., and Magdalinos, T. (2007), "Limit Theory for Moderate
+   Regression Models," Journal of Business and Economic Statistics, 31, 525­     Deviations From a Unit Root," Journal of Econometrics, 136, 115­130.
+   533. [685]                                                                    [685]
+
+Choi, Y., Jacewitz, S., and Park, J. Y. (2016), "A Reexamination of           Qin, J., and Lawless, J. (1994), "Empirical Likelihood and General Estimat-
+   Stock Return Predictability," Journal of Econometrics, 192, 168­189.          ing Functions," Annals of Statistics, 22, 300­325. [686,697]
+   [685]
+                                                                              Stambaugh, R. F. (1999), "Predictive Regressions," Journal of Financial
+Demetrescu, M. (2014), "Enhancing the Local Power of IVX Based                   Economics, 54, 375­421. [685]
+   Tests in Predictive Regressions," Economics Letters, 124, 269­273.
+   [685,686,689,690,691,692,693]                                              Xiao, Z., Linton, O. B., Carroll, R. J., and Mammen, E. (2003), "More
+                                                                                 Efficient Local Polynomial Estimation in Nonparametric Regression
+                                                                                 With Autocorrelated Errors," Journal of American Statistical Association,
+                                                                                 98, 980­992. [687]
+
+                                                                              Zhu, F., Cai, Z., and Peng, L. (2014), "Predictive Regressions for
+                                                                                 Macroeconomic Data," Annals of Applied Statistics, 8, 577­594.
+                                                                                 [685,686,687,689,693]
+

@@ -1,0 +1,3013 @@
+arXiv:2307.14463v1 [econ.EM] 26 Jul 2023  BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+                                                               WITH PREDICTIVE REGRESSION MODELS
+
+                                                                                      BY CHRISTIS KATSOURIS
+
+                                                        University of Southampton and University of Exeter
+
+                                                  We establish the asymptotic validity of the bootstrap-based IVX estimator proposed by
+                                             Phillips and Magdalinos (2009) for the predictive regression model parameter based on a
+                                             local-to-unity specification of the autoregressive coefficient which covers both nearly non-
+                                             stationary and nearly stationary processes. A mixed Gaussian limit distribution is obtained
+                                             for the bootstrap-based IVX estimator. The statistical validity of the theoretical results are
+                                             illustrated by Monte Carlo experiments for various statistical inference problems.
+
+                                          1. Introduction.
+
+                                          Consider the first-order autoregressive process {Xt}+t=1 , defined by the following recursive process
+
+                                          (1.1)                  Xt = nXt-1 + t, X0 = 0,
+
+                                          where {t} are independent N (0, 1) random sequences. The least squares estimator ^n of , based
+                                          on a sample of n observations {X1, ..., Xn} is given by the following expression
+
+                                                                 ^n =    n         -1 n
+
+                                          (1.2)                             Xt2-1             Xt-1Xt .
+
+                                                                       t=1               t=1
+
+                                          A well known asymptotic result is that ^n is a consistent estimator for n for all values of
+                                          n  (-, +). Specifically, the asymptotic distribution of ^n depends on restrictions imposed
+                                          on the admissible parameter space of . In particular, in the stable case, which implies that the
+                                          parameter space of  takes values within the unit circle, that is, || < 1, various seminal studies
+                                          such as Mann and Wald (1943) and Anderson (1959) among others, have shown that
+
+                                          (1.3)                  ^n - n     d N    0, 1 - 2   as n  .
+                                                              n
+
+                                          When the true parameter lies on the boundary of the parameter space, such that || = 1, it has
+                                          been shown by White (1958) and Phillips (1987b) that the following limiting distribution holds
+
+                                                 n ^n - n d         1  W (r)2ds  -1      1
+
+                                          (1.4)                  0                    0   W (r)dW (r)   as n  ,
+
+                                              Article history: November 2020, February 2022, July 2023. MSC2020 classifications: 62F05, 62F12, 62M10.
+                                          Keywords: nonstationary autoregression, IVX filtration, bootstrap asymptotics, mixed gaussian distribution.
+
+                                              Lecturer in Economics, Department of Economics, University of Exeter Business School, Exeter EX4 4PU,
+                                          United Kingdom. E-mail Address: c.katsouris@exeter.ac.uk.
+
+                                                                                   1
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+where W (r) for some 0  r  1 is a standard Wiener process within the probability space
+(, P, Ft). On the other hand, when the true parameter of the autoregressive process given by
+expression (1.1) is outside the unit circle (explosive parameter region), such that || > 1, it has
+been shown by White (1958) and Anderson (1959) that the following asymptotic result holds
+
+(1.5)       ^n - n  d Cauchy  0, 2 - 1  as n  .
+         n
+
+The particular limiting distribution discontinuity with respect to the parameter space of the
+autoregressive model of order one has been extensively discussed in the literature (see, Bercu
+(2001), Jeganathan (1991), Phillips and Magdalinos (2007), Proïa (2020), Benke and Pap (2021)).
+Without loss of generality, considering for each n  N, the statistical experiment En corresponding
+to the observations {X0, ..., Xn}, then the sequence (En)nN is locally asymptotically normal
+(LAN ) when || < 1, it is locally asymptotically Brownian functional (LABF ) when || = 1,
+and it is locally asymptotically mixed normal (LAMN ) when || > 1 (see, Le Cam (1986),
+Le Cam and Yang (2000) and Phillips (1989)). Thus, statistical inference procedures can crucially
+depend on the true value of the population parameter n in certain regions of the parameter space.
+
+Motivated by these observations various studies have focus on the development of estimation and
+inference methodologies for nonstationary time series models (see, Rao (1978), Dickey and Fuller
+(1979), Chan and Wei (1987, 1988), Phillips (1987a,b, 1988a,b), Phillips and Perron (1988), Abadir
+(1993), Larsson (1995), Buchmann et al. (2007) and Phillips and Magdalinos (2007) and Horváth and Kokoszk
+(2003)). Specifically, the class of nearly nonstationary time series models as proposed by the
+seminal studies of Phillips (1987a,b) who developed asymptotics for near-integrated time series
+provide a unified approach to inference. In practise, expressing the autoregressive coefficient
+with the local-unit-root specification, such that, n = 1 + c/n , where n the sample size and
+c denotes the nuisance parameter of persistence, allows to encompass such moderate deviations
+from the unit boundary (e.g., unit root, near-integrated or explosive, see Stoykov (2019)). Our
+main research interest is to investigate the finite and large sample properties of bootstrap-based
+estimators and test statistics (e.g., Moreno and Romo (2012)) for predictive regression models
+when regressors are generated as nonstationary autoregressive processes.
+
+Predictive regression models are commonly used for modelling macroeconomic data which exhibit
+high persistence (see, Zhu et al. (2014)). Furthermore, the nonstandard nature of the inference
+problem in predictive regressions has been previously discussed in the literature such as by the
+studies of Phillips and Hansen (1990), Cavanagh et al. (1995) and Jansson and Moreira (2006),
+with the main challenge being the robustness of inference methodologies to the nuisance parameter
+of persistence (see, Astill et al. (2023))). A unified framework for robust estimation and inference
+regardless of the abstract degree of persistence has been proposed by Phillips and Magdalinos
+(2009) and Kostakis et al. (2015) (see, also Chen et al. (2013), Breitung and Demetrescu (2015),
+Li et al. (2017); Liu et al. (2019), Yang et al. (2021) and Jayetileke et al. (2021)). We argue that
+the implementation of resampling methodologies for nonstationary time series models provides a
+way for conducting inference, when non-pivotal quantities are involved, which can ensure accu-
+rate asymptotic approximations (see more recently Demetrescu et al. (2022)). Thus, establishing
+the asymptotic validity (in the spirit of Cavaliere and Georgiev (2020)) of these bootstrapped
+approximations is crucial in other testing problems as well such as when considering structural
+break (see, Georgiev et al. (2018), Katsouris (2022, 2023a,b) and Fei (2023)).
+
+                    2
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+A commonly used resampling methodology used to study the distributional properties of a statistic
+of interest is based on the well known Efron's bootstrap method as in Efron and Tibshirani
+(1986). Various studies consider the asymptotic validity of the bootstrap-based estimator in (1.1).
+More specifically, the validity of explosive autoregressive processes is studied by Basawa et al.
+(1989, 1991) while in general asymptotics for the bootstrap in stationary models is predominately
+concerned with independent observations (see, Freedman et al. (1984, 1981)). Although it has
+been initially documented in the literature that the bootstrap cannot work for dependent processes
+(see, Bose (1988)) it was anticipated that it would work if the dependence is taken care of while
+resampling (see, Politis and Romano (1994) and Paparoditis and Politis (2003, 2005)). Therefore,
+the dependence structure of innovations found in predictive regression models has to be correctly
+implemented when considering a bootstrap procedure.
+
+Our framework considers that the dependence structure is preserved due to the joint Gaussianity
+
+assumption imposed on the error sequences of the predictive regression model along with the
+
+nonstationary autoregressive process. In particular, motivated by the limit theory of cointegrating
+
+regressions the bootstrap implementation is adjusted to capture the dependence induced by the
+
+linear process representation of the innovation sequence (see, Li and Maddala (1997), Li and Xiao
+
+(2001), Psaradakis (2001b), Psaradakis (2001a) and Inoue and Kilian (2002)). Furthermore, the
+
+optimization method employed can affect the limiting distribution of related test statistics. The
+main quantity of interest is the risk of the normalized error, such that, rn ^n -  of an estimator
+
+^n with a suitable slow varying rate function rn where rn   as n  . The exact form of the
+
+panr-ticcuolnasrisrtaetnecyfuinscotniolny  depends on   the properties of the estimator under consideration; such as
+                                           ensured for  the OLS estimator while a different rate of convergence holds
+
+for the IVX estimator. Consequently, deriving probability bounds for the specific risk quantity
+
+using the Berry-Essen approach, as well as for its bootstrapped counterpart, in order to assess
+
+the efficiency of finite-sample approximations depend on the chosen estimation methodology1.
+
+In general, by the classical CLT, the distribution of a pivotal quantity
+
+(1.6)                                                          
+                                                        Qn = n µn - µ /sn
+
+tends weakly to N (0, 1). Let Fn be the empirical distribution of X1, ..., Xn, putting mass 1/n on
+each Xt. When one considers the bootstrap resampling, the n data points X1, ..., Xn are treated
+as a population, with distribution function Fn and mean µn, while µn is considered as an estimator
+of µn. In practise, the idea is that the behaviour of the quantity Qn mimics that of Qn. Thus,
+the distribution of Qn could be computed from the data and used to approximate the unknown
+sampling distribution of Qn (see, Præstgaard and Wellner (1993)).
+
+This paper develops limit theory for the asymptotic validity of the bootstrapped based IVX esti-
+mator in predictive regression models that satisfies the regularity conditions of valid instrumental
+based estimators such as relevance and orthogonality while preserving the robust properties to the
+nuisance parameter of persistence. To the best of our knowledge this is a novel implementation
+and further establishes the robust properties of the IVX estimator for bootstrap-based inference.
+
+    1Related statistical theory is discussed in the books of Tanaka (2017) and Hamilton (2020) as well as in the
+studies of Hall and Heyde (2014) and Billingsley (2013). Moreover, Bickel and Freedman (1981) presents some
+asymptotic theory aspects for the bootstrap while Mykland (1992) proposes relevant asymptotic expansions.
+
+                                                        3
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+1.1. Preliminary Theory.
+
+Concurrent with our work, and independently, Georgiev et al. (2021) also develop asymptotic
+results for the bootstrap test based on the IVX estimator who focus on predictability tests based
+on the sub-sample approach. Another key point here is that a comparison of the asymptotic be-
+haviour of various bootstrapping procedures especially for the case of predictive regression models
+with regressors of abstract degree of persistence will be essential to obtain insights regarding the
+accuracy of bootstrap approximations. Notice that the IVX estimator is a consistent estimator of
+the predictive regression model coefficient although it has a different convergence rate in compar-
+ison to the OLS estimator. Therefore, the bootstrap which is well known to deliver asymptotic
+refinements over first-order asymptotic approximations as well as bias corrections can be applied
+to solve the asymptotic bias problem (see Cavaliere et al. (2022) for the counterargument). On
+the other hand, any additional bias term that appears in the asymptotic expansion reduces the
+precision of the test.
+
+Consider the partial-sum process below:
+
+(1.7)                              Wn(t)  =  1n  nt
+
+                                                     Zin,
+
+                                                 i=1
+
+then it holds that
+
+                             nt/n                   t
+(1.8)   Xn(t) = Xn(0) +            b Xn(s) ds + a Xn(s-) dWn(s) + error.
+                          0                      0
+
+where W is the standard Brownian motion.
+
+Moreover this convergence suggests that Xn should converge to a solution of the limiting stochastic
+differential equation. Thus, a key step in the application of the stochastic differential equation
+approach is to show that the sequence of stochastic integrals in the approximating equation
+converges to the corresponding stochastic integral in the limit2. Let D be the space of cadlag
+functions f : [0, 1]  R equipped with the Skorokhod topology. As a measurable structure on
+D we consider the corresponding Borel -algebra B(D). We write Xn d X whenever Xn, X
+are random variables taking values in D, B(D) such that Xn converges weakly to X in D as
+
+n  , that is, limnE f (Xn)  E f (X) for all bounded continuous functions f : D  R.
+
+We have that
+
+(1.9)                        1     n.     d  J,  as n  .
+                             an
+                                       k
+
+                                   k=1
+
+Therefore, it holds that
+
+(1.10)                       P J(t) = 0 t  [0, 1] = 0.
+
+    2A specific example is the case in which one considers the random weighted bootstrap. In this case it is more
+interesting to study the Marcinkiewicz-Zygmund strong law for randomly weighted sums of dependent random
+variables under dependent random designs.
+
+                                                             4
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+We define the Ornstein-Uhlenbeck process Jc = Jc(t) t[0,1] driven by J by setting the following
+stochastic expression
+
+(1.11)                                                        t
+
+                           Jc(t) = J(t) - c e-c(t-s)J(s)ds, t  [0, 1], c  R.
+                                                            0
+
+The usefulness of the bootstrap resampling method is exactly to provide a way to ensure uniform
+size that is robust to the presence of effects (such as conditional heteroscedasticity) that can affect
+sufficient control of the type of errors when conducting hypothesis testing. Moreover, exact calcu-
+lation of the critical value of the test statistic is approximated based on Monte Carlo simulations.
+Due to the computational burden of the bootstrap procedure we use relative small sample sizes.
+However, by taking a sufficiently large number of Monte Carlo samples the approximation error
+can be made arbitrary small thus ensuring that the bootstrap approximation will work well given
+regularity conditions hold that we discuss in more details below.
+
+Consider a test statistic Tn of a parameter estimator such that Tn = (n) ^n - 0 . Let Tn denote
+the bootstrap version of Tn such that Tn = (n) ^n - 0 . Let F^n(u) := P (Tn  u) , u  R
+denote the distribution function conditional on the original pair of data.The bootstrap p - value
+is defined as below:
+
+(1.12)                                  p^n := P (Tn  Tn) = F^n(Tn)
+
+First-order asymptotic validity of p^n requires that p^n converges in distribution to a standard
+uniform distribution such that p^n d Unif[0, 1].
+
+Minimax Optimality A complementary aim of this paper is to show that the sufficient con-
+ditions for the error bounds are indeed necessary in some applications. Let us define a test ,
+which is a Borel measurable map,  : Xn : {0, 1}. Then, for a class of null distributions P0, we
+denote the set of all level  tests by
+
+(1.13)                     n, :=  : sup PP(n) ( = 1)   .
+                                                   P P0
+
+We focus on the minimax framework to evaluate the performance of test statistics and model
+
+estimators which enables us to study the fundamental limits of hypothesis testing while ensuring
+
+a (strong) uniform guarantee over a large class of (null and alternative) distributions. The notion
+
+of minimax performance is widely used to quantify the difficulty of a statistical problem. More
+
+specifically, in the hypothesis testing literature, it is also common to study the performance of
+
+tests  against  fixed  or  directional  alternatives  such  as  cases  in  which  n  =  0 +       for  some
+                                                                                               n
+
+ > 0. For example, the problem of severe empirical size distortions when  is large it has
+
+been also documented in the case of structural break tests in dynamic econometric models (see,
+
+Kuan and Chen (1994)). Therefore, this implies that we are likely to obtain false rejection of
+
+constant coefficients in dynamic models when variables have high persistence and endogeneity.
+
+                                                      5
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+1.2. Outline of the paper.
+
+The rest of the paper is organized as follows. In Section 2, we introduce the predictive regression
+model and model assumptions. We motivate the implementation of the IV based estimator
+which is robust to the nuisance parameters of persistence. In Section 3, we prove the asymptotic
+validity of the bootstrap IVX estimator and verify that we obtain an identical limit distribution
+as in the standard case. Section 4, provides a Monte Carlo Simulation study. In particular, the
+asymptotic properties of the different bootstrap proposals under the null and under the alternative
+are investigated and their relative power performance is analyzed. Section 5, concludes.
+
+1.3. Notation.
+
+Throughout the paper, all limits are taken as n  , where n is the sample size. Then, the
+symbol "  " is used to denote the weak convergence of the associated probability measures
+as n   (as defined in Billingsley (2013)) which implies convergence of sequences of random
+vectors of continuous càdlàg functions on D ([0, 1]) equipped with the Skorokhod topology. The
+symbol d denotes convergence in distribution and p denotes convergence in probability within a
+suitable probability space (, Ft, P). Finally, O(an) denotes the rate of convergence of estimators,
+such that if n = O(an), implies that, n/an is bounded. Also we denote with P, E and Var the
+probability measure, expected value and variance operators induced by the bootstrap resampling
+procedure conditional on the time series observations of the original sample.
+
+2. The model, main assumptions and estimators.
+
+In this section we introduce the model under consideration in this paper, the main modelling
+assumptions as well as two different estimation methodologies proposed in the literature.
+
+2.1. Predictive regression model.
+
+Consider the predictive regression model given by
+
+(2.1)                           Yt = nXt-1 + ut, t  {1, ..., n} ,
+(2.2)                           Xt = nXt-1 + vt, with X0 = 0.
+
+Then, the regressor Xt of the predictive regression model is assumed to be generated via the
+following process
+
+(2.3)  Xt = nXt-1 + vt,         X0 = 0,  n =       1  +  c  ,      t  {1, ..., n} ,
+                                                         n
+
+where n  R is the (model) parameter of interest while the autoregressive coefficient n  R is
+                             c
+defined such that n =  1  +  n  with c  (-, +) and   (0, 1].
+
+                                         6
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Notice that vt is assumed to be a zero mean, stationary and ergodic process with finite autoco-
+
+variances given by ~ := E (vtvt-j) and 2 =                     ~  is  finite  and  nonzero.  Furthermore, the
+                                                          j=-
+
+nuisance coefficients c and  are considered as tuning parameters which determine the degree of
+
+persistence for the regressors and therefore without loss of generality the particular novel feature
+
+proposed by Phillips (1987a,b) provides a tractable way to consider the nature of possible nonsta-
+
+tioary regressors when estimating predictive regressions. In terms of distributional assumptions,
+
+we assume that the predictive regression model is generated from a bivariate Gaussian distribu-
+
+tion, such that et = (ut, vt) i.i.d N 0,  with t  {1, ..., n}. Further related theoretical results
+which apply to the innovation sequence of the system can be found in Phillips and Solo (1992).
+
+Assumption 1. Let {t}tZ be a sequence of i.i.d continuous random variables with E (1) = 0
+and E (12) = 1, and with a characteristic function ( ). Then, the regressor Xt of the predictive
+regression model is assumed to be generated via the following process
+
+(2.4)  Xt = nXt-1 + vt,                 X0 = 0,        n =     1  +   c  ,    t  {1, ..., n} ,
+                                                                      n
+
+with  = 1, where  is a real constant such that c  (-, 0) and vt =                       cj t-j ,  with       cj  =  0
+                                                                                   j=0                  j=0
+                                        j 1+ |cj |
+and the summability condition     j=0               <     holds   for  some     >  0.
+
+Assumption 2. (i) Let {ut, Ft}t1, where Ft is a sequence of increasing -fields which is inde-
+pendent of j, j > t, forms a martingale difference sequence satisfying E u2t |Ft-1  2 > 0, as
+
+t   and sup E |ut|4 Ft-1 < .
+                       t1
+
+(ii) Xt is adapted to Ft, and there exists a correlated Brownian motion                 W, V      such that the
+following joint weakly convergence holds
+
+                                  [nr]              [nr]  
+                                  j=1               j=1
+(2.5)                      1            j-1,  1           uj      W (r), V (r)
+                               n                n
+
+on DR2 ([0, 1])2 as n  .
+
+Define the partial sum process Vn(r) and Un(r) as below
+
+(2.6)                     Vn(r), Un(r)  = 1 nr            vt, ut ,       r  [0, 1].
+                                             n t=1
+
+Remark 1. Assumption 1 and 2 provide necessary conditions for the development of the asymp-
+totic theory (similarly in Wang and Phillips (2012)) for the corresponding bootstrap IV based
+estimator we are aiming to examine its statistical validity. In terms of the estimation procedure
+for the parameter of the predictive regression model we consider both the least squares estimation
+as well as the endogenous instrumentation method proposed by Phillips and Magdalinos (2009).
+
+                                                       7
+              BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+2.2. Main Results
+
+We are interested to examine the asymptotic behaviour for the ^n estimator, in the case of
+both least square estimation as well as the two-step endogenous instrumental variable estimation
+approach followed for constructing the IVX filtration. To derive the asymptotic distribution of
+both estimators we consider the Ornstein-Uhlenbeck (OU) process
+
+(2.7)                              r                      with 0  r  1 and c  (0, +).
+
+                Jc(r) = e(r-s)cdW (s),
+                                 0
+
+which satisfies the stochastic differential equation dJc(r) = cJc(r)dr +dW (r). Then, the following
+
+asymptotic results hold, based on the local to unity limit law proposed by Phillips (1987a,b) such
+
+that   X[nr]    Jc(r),  where  Jc(r)  is  the   OU  process    defined  in  expression  (2.7).
+           n
+
+(2.8)                   n1 n      [nr]  Xt       r                     with 0  s  r,
+(2.9)                             t=1
+                                                  Jc(s)ds,
+
+                                                0
+
+                               1  [nr]           r
+                               n
+                                      Xtut        Jc(s)dW (s), with 0  s  r.
+
+                                  t=1           0
+
+Remark 2. The convergence of the sample moments to their stochastic integral counterparts are
+proved in the seminal study of Phillips (1988a) who also derived invariance principles for the
+multivariate model. In our study we consider the corresponding univariate limit results since we
+consider the univariate predictive regression model with persistent regressors. Furthermore, we
+consider the bootstrap invariance principle to obtain the weak convergence of the sample moments
+for the bootstrapped-based test statistics.
+
+The ordinary least squares estimate of n denoted with ^onls is given by
+
+                                                n              -1   n
+
+(2.10)                                ^ nols =       Xt2-1             Xt-1Yt
+
+                                                t=1                t=1
+
+                        ^onls -       = Op( 1n ) then it converges in distribution which implies
+Therefore, since n
+
+                                                       n           -1            n
+
+                        n ^ nols -          = n-2 Xt2-1                 n-1 Xt-1ut
+
+                                                       t=1                     t=1
+
+                                                    1              -1     1
+                                             0 Jc2(s)ds
+(2.11)                                                                     Jc(s)dW (s)
+
+                                                                        0
+
+Remark 3. The limit distribution given by (2.11) shows that the existence of the nuisance pa-
+rameter c in the underline stochastic process, when the parameter n is obtained based on the
+least squares estimation weakly convergence to a nonstandard limit. On the other hand this is not
+the case for the corresponding IVX estimator as we demonstrate in the next section.
+
+                                                            8
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+2.3. IVX estimator
+
+In this section we discuss the main methodology employed for the estimating the nonstationary
+time series model. Specifically, the IVX instrumentation proposed by Phillips and Magdalinos
+(2009) provides important advantages rather than using the conventional differencing approach
+prior to fitting the model. Although employing the difference operator is a common approach
+for ensuring covariance stationarity in time series observations due to the fact that it can remove
+trends and seasonality it can also contribute to loss of information such as the long-memory
+properties3 of these observations which are eliminated when differencing is applied. Therefore,
+the IVX estimator in contrast to its OLS counterpart is found to be robust to the persistence
+properties of the regressors as captured by the autoregressive specification without altering the
+persistence properties of regressors. The particular estimation approach can accommodate both
+nearly nonstationary and nearly stationary processes, that is, generalizing this way the integration
+order of regressors for the predictive regression.
+
+Consider the instrumental variable Ztn which is based on the IVX methodology of Phillips and Magdalinos
+(2009). Then, the IVX instrumental variable is constructed
+
+                    t-1        cz     j
+                               nz
+(2.12)  Ztn =            1  +             Xt-j - Xt-j-1 ,    where cz  (-, 0), z  (0, 1).
+
+                    j=0
+
+Denote with ^nivx the corresponding IVX based estimator for the parameter of the predictive
+regression given by the system of equations in expressions (2.1) and (2.2). Then, standard IV
+
+estimation arguments provide an expression for the IVX estimator
+
+                                          n              -1   n
+
+(2.13)                         ^ nivx =        Zt-1Xt-1          Zt-1Yt
+
+                                          t=1                t=1
+
+Thus, we consider the limit distribution of the random variable n as defined below
+
+               n 1+z                             1    n            -1      1        n
+                      2                        n1+x                      n 1+x
+(2.14)  n  :=            ^ invx - n                      Zt-1Xt-1                      Zt-1ut
+                                                                                2
+                                                     t=1                           t=1
+
+Lemma 1. Under Assumption 1 and 2, the following invariance principle holds
+
+(2.15)     [nr]                    -  1                    r           with r  [0, 1].
+                                      cz
+               Zt-1Xt-1                   rx2x + Jc(s)dJc(s) ,
+                                                          0
+           t=1
+
+Remark 4. Related weakly convergence arguments which can be employed for the proof of Lemma
+1 can be found in Phillips and Magdalinos (2009). The proof of the particular result consists of
+a key limit result for deriving the asymptotic distribution of the bootstrap based IVX estimator
+which is the main goal of this paper.
+
+    3In particular, Kasparis et al. (2015) consider how the interplay of the long-memory properties of innovations
+and the persistence properties of regressors in a nonparametric predictive regression affect the limiting distributions
+of test statistics and corresponding model estimators.
+
+                                                             9
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+A simple implementation of the limit given by Lemma 1 after appropriate normalization shows
+that the following nuisance-free limiting distribution holds
+
+(2.16)  n := n(1+z)/2 ^invx - n    MN 0, ~
+
+where  follows a mixed Gaussian distribution. The mixed Gaussian property of the n random
+variate, is instrumental in developing inference procedures robust to abstract degree of persistence
+(see, Phillips and Lee (2013, 2016)).
+
+Therefore, it remains to determine the components of the stochastic covariance matrix ~ . More
+
+precisely, to determine the covariance matrix of the random variable , we consider the martingale
+                                                 .
+                                     t-1 t 1n t
+difference sequence nt :=      Z u , v 1                 Then the martingale conditional variance of
+
+                           n(1+z )/2
+nt has the following structure
+
+                                       1       n         u2u        1       n             
+                                     n1+z                vu
+         n                      =                 Zt2-1       n1+      z       Zt-1  uv 
+                                                                        2
+            E ntn t|Fnt-1                     t=1                          t=1
+
+(2.17)  t=1
+
+                                     1n                                    v2v
+                                                  Zt-1
+                                     n1+  z
+                                           2  t=1
+
+Remark 5. Note that as shown by Phillips and Magdalinos (2007) n-(1+z/2)             n    zt-1  =  op(1),
+                                                                                     t=1
+
+which implies that the martingale conditional covariance (2.17) has off-diagonal elements which
+
+converge in probability to zero. Furthermore, note that without loss of generality, we operate un-
+
+der the assumption that x = 1 and c  (-, 0). Relaxing the parameter space of these two
+quantities allows to consider regressors generated from general nonstationary autoregressive pro-
+
+cesses, covering both near nonstationary and near stationary processes. Nevertheless, the robust
+
+property of the IVX estimator implies that regardless of the persistence properties of regressors
+
+asymptotically converges to a pivotal mixed Gaussian distribution. Therefore, the particular large
+
+sample property result to conventional statistical inference when considering Wald type statistics
+
+after suitable normalization (see, Phillips and Lee (2013, 2016)).
+
+Notice that it has been shown that when the residual process ut is correlated with the regressor
+xt, the limiting distribution of the t-ratio is no longer normal (see, Phillips and Durlauf (1986)).
+As a remedy to the particular bias, the fully modified regression proposed by Phillips and Hansen
+(1990) as an alternative way of constructing the test statistic as we present later. Overall a key
+component of our framework is that it establishes the invariance principle which concerns the weak
+convergence (within the Shorokhod topology) of the bootstrap partial sum process to Brownian
+motion. Then, based on the continuous mapping theorem, it can be used to obtain asymptotic
+distributions of various bootstrapped statistics without making parametric assumptions on the
+underlying model. In particular this approach is build upon the strong approximation and the
+Beveridge-Nelson representation of linear processes. The invariance principles for the i.i.d innova-
+tion and the bootstrapped counterpart are first developed using the strong approximation of the
+partial sum process by the standard Brownian motion, and subsequently the invariance principles
+for the general linear process with i.i.d innovations and the corresponding bootstrapped process
+are established by their Beveridge-Nelson representations as in Phillips and Solo (1992).
+
+                                              10
+             BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Let the partial sum process of (t) be defined by
+
+(2.18)                               Wn(t)             =   1  nt
+                                                          n
+                                                                  j .
+
+                                                              j=1
+
+Then, we have that Wn d W in the space of D[0, 1] of cadlag functions, where W is the standard
+Brownian motion. The space D[0, 1] is equipped with the Skorokhod topology.
+
+In particular for the bootstrap, we first obtain           or estimate {t}nt=1 from   the sample of   size n
+and get {^t}nt=1 . then, we resample from the              empirical distribution of  {^t}tn=1, that  is, the
+
+distribution with point probability mass 1/n based on the time series observations of size n, to
+
+get the bootstrap sample {t }tn=1 as the i.i.d samples from the empirical distribution of {^t}tn=1.
+Both (^t) and (t) are dependent upon the sample size n, and we may more precisely denote them
+as triangular arrays (^nt) and (nt).
+
+Furthermore, certain studies have previously suggested the inconsistency of the bootstrap esti-
+mator when the parameter is on the boundary of the parameter space (see, Andrews (2000)).
+However, notice within our setting the particular consideration has a different interpretation as
+such a phenomenon occurs via the local unit root process. In other words, the local-to-unity speci-
+fication provides a natural bound on these type of processes when modelling dependent time series
+and therefore the asymptotic behaviour of estimators based on predictive regression models are
+analytically tractable. Therefore, when considering bootstrapping nonstationary autoregressive
+processes using predictive regression models, in practise we are mainly concern about deriving an
+identical weakly convergence argument similar to the non-bootstrapped conventional limit result.
+
+Our main goal is to develop a consistent bootstrap estimator of the distribution of the stochastic
+                 n 1+z
+quantity  n  :=         2  ^nivx - n , regardless of the persistence properties of the regressors of the
+
+predictive regression model as captured by the autoregressive process with a LUR coefficient.
+
+More precisely, under the assumption that the regressors are generated by the nonstationary
+
+process Xt = nXt-1 + vt with n =                 1  -         in Assumption 1, then we aim to investigate
+                                                       nx
+
+whether   n  and  n  :=    n 1+z     ^ nivx - n  converge to the same distribution limit within a suitable
+                                  2
+
+probability space. To do this, we consider all features of the distribution of n such as the
+
+covariance matrix in (2.17).
+
+3. The Bootstrap and Hypothesis testing.
+
+A commonly used approach to evaluate the limiting distributions in nonstationary time series
+models based on asymptotic approximations relies on finite samples bootstrapped samples. The
+exact type of the bootstrap procedure follwed to replicate the dependence structure of the model
+can affect both the validity of the results as well as the accuracy of those approximations. In this
+section, we study the asymptotic behaviour of the bootstrap based IVX estimator for different
+bootstrap schemes. To do this, we impose additional assumptions for the associated partial sum
+processes. Let D be the space of cadlag functions, f : [0, 1]  R equipped with the Shorokhod
+topology (e.g., see Csörg et al. (2003)).
+
+                                                          11
+              BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Notation Denote with Znt a sequence of bootstrap statistics, then the following modes of
+convergence hold (see related definitions in Goncalves and Kaffo (2015))
+
+· Zt = oP (1) in probability, or Zt P  0 in probability, if for any
+
+       (3.1)   > 0,  > 0 lim P P                 |Zn| >    >     = 0.
+                                       n
+
+· Zt = OP (1) in probability, if for all  > 0 there exists a M <  such that
+
+       (3.2)               lim P P           |Zn| > M  >   = 0.
+
+                           n
+
+· Zn d Z in probability if, conditional on the sample, Zn, weakly converges to Z under
+   P , for all samples contained in a set with probability converging to one. Specifically, we
+   write Zn d Z in probability if and only if E f (Zn)  E (f (Z)) in probability for any
+   bounded and uniformly continuous function f .
+
+Therefore, for the asymptotic validity of the bootstrap algorithm one needs to consider similar
+arguments as when deriving the limiting distribution of nonstationary time series models. In
+particular, Müller (2011) discusses various aspects of asymptotic efficiency with respect of the
+weak convergence of functionals to their brownian motion counterparts.
+
+3.1. Bootstrap Procedure.
+
+Similar investigation in the literature with respect to the bootstrap procedure include the study
+of Davidson and Flachaire (2008) who consider a framework for the Wild bootstrap although
+not in a nonstationary time series regression environment. In this paper we apply the Wild
+bootstrap algorithm using the OLS as well as the IVX residuals. Another example include the
+study of Phillips and Ouliaris (1990) who develop asymptotic theory for residual-based tests of
+cointegration. Next, we describe the estimation procedure for the bootstrap based IVX estimator,
+which can help us shed light on the specific asymptotic expressions and properties we need to
+consider in order to derive its limiting distribution.
+
+Consider again the predictive regression with multiple predictors. Simulate the following DGP
+
+(3.3)         Yt = nXt-1 + ut, t  {1, ..., n} ,
+(3.4)         Xt = nXt-1 + vt, with X0 = 0.
+
+where the parameters of interest are n and n. Denote with ut = (ut, vt) the martingale
+difference sequence vector with variance-covariance matrix given by
+
+(3.5)                       := Var(ut) =         u2    uv
+                                                 vu    vv
+
+where  is a known positive-definite matrix.
+
+                                             12
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Specifically, we are motivated in establishing the asymptotic validity of the bootstrap for the
+IVX estimator since its is employed in statistical problems for which the limiting distribution is
+non-standard such as when testing for structural breaks in predictive regression models and the
+bootstrap is necessary for deriving critical values. While for instance, we focus in the case of
+IVX-based predictability tests, the limit results we derive in this paper can be generalized for
+the supremum IVX-Wald statistic when testing for parameter instability in predictive regression
+models. The first Bootstrap algorithm we consider is described below.
+
+Bootstrap Algorithm
+
+Step 1. Estimation Step
+
+            1.1. Fit the predictive regression to the sample data (Yt, Xt-1) to obtain the OLS residuals
+                  u^t, for t  {1, ..., n}. Obtain the estimate of ^n.
+
+            1.2. Fit by OLS the AR(1) model with the LUR coefficient, to the regressor Xt, to obtain
+                  the OLS residuals v^t, for t  {1, ..., n}. Set v^t = 0. Obtain ^.
+
+In this section, we assume that the autoregressive coefficient is given by n =  1  -       ,  which
+                                                                                        n
+
+allows to examine the limit theory of the estimate of the autoregressive coefficient for moder-
+
+ate deviations from unity. Note that the estimate of n is obtained by ordinary least squares
+estimation which is expressed as
+
+                               n             -1      n
+
+(3.6)                 ^onls =       Xt2-1               XtXt-1
+
+                               t=1                  t=1
+
+Step 2. Generate the bootstrap sample {Yt, Xt, t = 1, ..., n}.
+
+            2.1. Generate the bootstrap innovations wt = (ut , vt) := (et  u^t, et  v^t), where the
+                  symbol  denotes element-wise vector multiplication, such that et for t  {1, ..., n}, is
+                  a scalar sequence independent from the data such that et i.i.d N (0, 1).
+
+            2.2. Generate Xt such that
+
+       (3.7)          Xtb = ^Xtb-1 + utb , for tb  {1, ..., n} ,
+
+             with initial conditions X0 = 0 and b  {1, ..., B}.
+       2.3. Generate the associated bootstrap IVX instrument zt as below
+
+       (3.8)  Z0 = 0  and             tb -1  1   +  z  j          for t  {1, ..., n} ,
+                                                    n
+                           Zt =                         Xtb -j ,
+
+                                      j=0
+
+             where z is the coefficient matrix for the persistence of the bootstrap IVX instruments
+             that contains the same values as the original IVX instruments.
+       2.4. Generate Ytb such that ytb = ^Xtb-1 + utb. Set Y1 = Y1.
+       2.5. Repeat Steps 2.1 to 2.4 B times (e.g., B = 1000).
+
+                                             13
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Remark 6. Notice that the asymptotic validity of the bootstrap IVX estimator is an impor-
+tant property of general interest with applications in various inference problems. For example,
+Katsouris (2022) considers a framework for structural break testing in predictive regression models
+with persistent regressors. In the particular framework the bootstrap validity of the IVX estimator
+is necessary to ensure the consistent estimation of critical values from the bootstrap limiting dis-
+tribution of the corresponding structural break test statistics. Furthermore, Georgiev et al. (2021)
+study the implementation of both the residual wild bootstrap as well as the fixed regressor wild
+bootstrap for the IVX estimator which is useful when constructing predictability tests (e.g., t-tests
+or Wald type statistics) based on the predictive regression model.
+
+Then, for the estimation step one can consider estimating n either via the classical least squares
+estimation, denoted with ^nLS, or via the IVX instrumentation methodology proposed by Phillips and Magdalin
+(2009), denoted with ^nIV X. The least squares estimate of n is
+
+                                            n               -1   n
+
+(3.9)                            ^nLS =          Xt2-1              Xt-1Yt
+
+                                         t=1                    t=1
+
+The corresponding IVX estimate of n is
+
+                                         n                      -1    n
+
+(3.10)                       ^nIV X =          Zt-1Xt-1                  Zt-1Yt
+
+                                         t=1                         t=1
+
+where
+
+(3.11)            t-1  1  -  z   j                              with z  (0, +), z  (0, 1).
+                             nz
+        Zt =                      (Xt-j - Xt-j-1) ,
+
+                  j=0
+
+We use for example, z = 1 and z = 0.95.
+
+From Step1A and Step1B, we       can obtain the residual sequences, u^It V       Xth, ve^tLcSorntr=e1s.poTnodsinimg prleisfyidtuhael
+notation, for the remaining of   this Section, we simply denote with u^t
+
+sequence obtained via the IVX instrumentation procedure and v^t the residual sequence obtained
+
+via Least squares estimation. That is,
+
+(3.12)                                 u^t = Yt - ^nIV X Xt-1
+
+Next, we define the centered residuals for both sequences, such that
+
+(3.13)                                   u~t   =    u^t  -   1   n   u^t
+(3.14)                                                       n  t=1
+
+                                         v~t     =  v^t  -   1   n   v^t
+                                                             n  t=1
+
+Denote with     F~n the empirical distribution   function based on {e~t}nt=1     where e~t   = (u~t, v~t). Thus,
+F~n associates  mass n-1 to each of e~t, t = 1,  ...., n. Now, assuming that     F~n is the  true distribution,
+
+draw a random sample {et , t = 1, ..., n} from F~n. Therefore, conditionally on (X1, ..., Xn-1), the
+random variables {et , t = 1, ..., n} are i.i.d with distribution function F~n.
+
+                                                         14
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Step 2: (Bootstrap Step)
+
+We can now construct the bootstrap sample {Xt, t = 1, ..., n} recursively via the following ex-
+pression
+
+(3.15)                            Xt = ^nXt-1 + vt, t = 1, ..., n,
+
+with X0 = 0, where ^n it has been estimated in Step 1 by Least squares estimation.
+Next, we construct the bootstrap sample {Yt, t = 1, ..., n} recursively via the following expression
+
+(3.16)                            Yt = ^nXt-1 + ut, t = 1, ..., n,
+
+where ^n it has been estimated in Step 1 by the IVX instrumentation methodology.
+
+Next, we re-estimate the model parameter of interest, denoted with ^^n, by applying again the
+IVX instrumentation on the generated sequence of {Yt, Xt}, from Step 1. That is,
+
+                              ^^n =  n                 -1   n
+
+(3.17)                                    Zt-1Xt-1             Zt-1Yt
+
+                                     t=1                   t=1
+
+where
+
+                   t-1        z   j  Xt-j - Xt-j-1
+                              nz
+(3.18)  Zt =            1  -                        ,      with z  (0, +), z  (0, 1).
+
+                   j=0
+
+We use for example, the same values as in Step 1, that is, z = 1 and z = 0.95.
+
+Step 3: (and onwards)
+
+For the remaining bootstrap steps, that is, b = {1, ..., B} we generate a sequence of IVX estimates
+that is IV X = nI1V X , ...., nIBV X .
+
+The main aim of this Section, is to derive the limit distribution of IV X given (X1, ...Xn) and
+to show that it is the same as the original limit distribution of the IVX estimator. Notice that in
+practise the bootstrap procedure should be able to capture the time series dependence structure.
+It is worth mentioning that we need to employ some autoregressive robust covariance matrix
+estimation methodology when applying our proposed bootstrap algorithm to ensure that the
+dependence structure of the nonstationary time series model is preserved which safeguards the
+consistent estimation of the Wald-type statistic (Jansson (2004) and Jansson and Nielsen (2012)).
+
+                                          15
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+3.2. Asymptotic distribution result.
+
+We consider a triangular array of paired random variables such that {Xk,n, Yk,n} with n  1 and
+k  1 satisfying
+
+(3.19)                          Yk,n = nXk-1,n + uk,
+(3.20)                          Xk,n = nXk-1,n + vk, with X0 = 0.
+
+where ek = (uk, vk)  N 0,  . Then, we construct the following triangular array using
+endogenous information generated by the triangular array {Xk,n}n,k1 given by
+
+                     t-1        z   j
+                                nz
+(3.21)  Zk,n =            1  -         Xk-j,n - Xk-j-1,n ,  with z  (0, +), z  (0, 1).
+
+                     j=0
+
+We define the following random sequence
+
+                                        n              2
+
+(3.22)                           Jn :=       Zt-1Xt-1     ^ nivx - n
+
+                                        t=1
+
+where ^invx is the IVX estimator of n. Therefore, the random measure Jn can be shown to have
+a limiting distribution which is given by the following expression
+
+(3.23)                    Jn d J := -z U (.)       x2x +     1
+
+                                                              J(s)dJ(s)
+
+                                                            0
+
+where U (.) is Brownian motion with variance u2uV~ with V~  -x2x 2z, for x > z since
+z  (0, 1). Then, the bootstrap estimator ^nivx of n is obtained from the corresponding
+bootstrap sequence {Yt, Xt} which implies the following random sequence
+
+                                        n              2
+
+(3.24)                           Jn =        Zt-1Xt-1     ^ nivx - n
+
+                                        t=1
+
+where
+
+                   t-1  1 - z    j  Xt-j - Xt-j-1
+                             nz
+(3.25)  Zt =                                       ,      with z  (0, +), z  (0, 1).
+
+                   j=0
+
+Therefore, in practise we need to show that Jn and Jn have the same limit distribution (we define
+this step as Condition 1). To do this, we consider the random measure n that corresponds to the
+paired triangular array (3.19)-(3.20) and the generated instrument is given in expression (3.21).
+Sweeting (1989) proposed a framework for evaluating conditional weak convergence. Specifically,
+when considering the asymptotic validity of the bootstrap algorithm it is necessary to consider the
+conditional weak convergence based on the bootstrapped invariance principles. On the other hand,
+the dependence structure of the predictive regression model remains fixed therefore the invariance
+principles based for the probability space that corresponds to the bootstrapped observations is
+valid due to similar conditions.
+
+                                              16
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Notice also that although the practitioner needs to choose the nuisance parameter of persistence
+for the instrumental variable. In other words, the statistics of interest such as the model estimator
+as well as the Wald test are calculated based on the following expression:
+
+               n                                n                
+                                            2                    
+                  Zk-1,nXk-1,n                     Zk-1,nYk,n
+
+(3.26)  n :=  k=1                               k=1              - n
+                                                n
+
+                                                   Zk-1,nXk-1,n
+
+                                                k=1
+
+Following a similar approach in the literature (to add references), we need to specify an auxiliary
+functional of the form (.) such that
+
+(3.27)        H(., x) = P Jn  x ,
+
+so that we can derive an associated result that shows a probability limit of the form
+
+(3.28)        nlimPn n  x = H(., x)
+
+To do that, we can define for example with
+
+(3.29)        Hn ^invx, x = P Jn  x X1, ..., Xn
+
+which is taken to be a regular conditional probability distribution function.
+
+Remark 7. The above statements imply that to show that the bootstrap approximation is valid,
+then we shall show that along almost all paths of Hn given by expression (3.29) converges in
+distribution to the distribution of J given by expression (3.23) (we define this step as Condition
+2). Therefore, to prove the result we are aiming we can try to prove that a corresponding weakly
+convergence result holds for the quantity Jn.
+
+Notice that in the literature for bootstrap based inference of time series models (see, Basawa et al.
+(1991)) the authors prove that the bootstrap estimator of the autoregressive coefficient in an
+AR(1) model in the explosive case will not have the same limiting distribution as the original
+estimator, within our framework this might not be affecting the result which we are aiming
+to prove. In other words, due to the structure of the predictive regression system, in each
+bootstrap step, to generate the pair {Xt, Yt} we use the residuals ut obtained from the first step
+regression and then construct the observations Yt in the second step regression. Therefore, in
+practise since we are not interested whether or not the bootstrap estimator of the autoregressive
+coefficient (under various nonstationary processes) is valid or not, we can still use the particular
+residual sequences. Therefore, after fitting the predictive regression we can obtain the bootstrap
+IVX estimator conditional on the nonstationary process. More precisely, the statistical validity
+of the bootstrap residuals that correspond to the autoregressive process is proved to hold by
+Paparoditis and Politis (2003) (see, Appendix E.3).
+
+                                            17
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Therefore, we can consider the covariance matrix of the random variable , where
+
+(3.30)  n := n(1+z)/2 ^ nIV X - n   := MN 0, ~ 
+
+Therefore, we consider the martingale difference sequence nt :=      Z u , v 1       1n     .
+                                                                             t-1  t      t
+                                                                 n(1+z )/2
+
+Then the martingale conditional variance has the following structure
+
+                                  1        n         u2u         1       n             
+                                n1+z                 vu
+         n                =                   Zt-21       n1+       z       Zt-1  uv 
+                                                                     2
+            E ntnt|Fnt-1                  t=1                           t=1
+
+(3.31)  t=1
+
+                                   1       n                            vv2
+
+                                n1+   z       Zt-1
+                                       2
+                                          t=1
+
+Remark 8. In this paper, in contrary to some related studies in the literature such as Georgiev et al.
+
+(2018), Cavaliere and Georgiev (2020) and Georgiev et al. (2021) we do not consider the imple-
+
+mentation of the fixed regressor bootstrap. The reason for this is simple, since we study estimators
+for the predictive regression model based on the paired data {Yt, Xt}tn=1, then keeping the regressors
+fixed in each bootstrap iteration asymptotically might not preserve the limiting distribution of the
+
+original pair.
+
+4. Monte Carlo Simulations.
+
+Example 1. We consider the following simple data-generating process (DGP):
+
+(4.1)   yt = 0xt + ut, t = 1, 2, ..., n
+(4.2)
+        xt =              1  -  c     xt-1 + vt,     for some c > 0.
+                                n
+
+where vt  N (0, v2) and ut = ut-1 + t where t  N (0, 2). In practise, when  = 0 then
+ut = t is the i.i.d residual process.
+
+The particular example can demonstrate our asymptotic results presented in this paper. Then the
+performance of our bootstrap procedure can be assessed using total variation distances applied to
+the empirical distribution function and the corresponding empirical distribution function of the
+residual process (see related limit theory in Stroud (1972) and Mykland (1992)). According to
+Horowitz (2003) bootstrap resampling is a method for estimating the distribution of an estimator
+or test statistic by resampling one's data or a model estimated from the data. Under conditions
+that hold in a variety of econometric applications, the bootstrap provides approximations to
+distributions of statistics, coverage probabilities of confidence intervals, and rejection probabilities
+of tests that are more accurate than the approximations of first-order asymptotic distribution
+theory.
+
+                                          18
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+5. Conclusion.
+
+In this paper we contribute to the literature of bootstrap methodologies for nonstationary time
+series models. Specifically, we study the bootstrapping problem of nonstationary autoregressive
+processes with predictive regression models with near unit root (persistent) regressors. These
+are regressors which are near-integrated, that is, close to the unit boundary. We establish the
+asymptotic validity of the bootstrap based estimators and investigate the finite-sample behaviour
+of these bootstrap procedures by Monte Carlo experiments. The related theory to the bootstrap
+aspects of the paper is presented in the Appendix. Moreover, the IVX instruments are con-
+structed based on endogenous information therefore satisfying the relevance condition for valid
+instruments. Therefore, the role of the bootstrap is to mimic the dependence structure in the pre-
+dictive regression model. A discussion regarding the relevance condition of instrumental variables
+can be found in the paper of Hall et al. (1996).
+
+Therefore, one of the applications of our methodology is to employ the bootstrap for nonstan-
+dard and nonpivotal testing problems. Generally a Wald-type statistic is a pivotal function, as
+occurs for instance when testing linear restrictions on the coefficients of linear regressions. On
+the other hand, when testing in the predictive regression model we employ the IVX-Wald test
+which is robust to the nuisance parameter of persistence. We have investigated two estimation
+methodologies when bootstrapping nonstationary autoregressive processes with predictive regres-
+sion models for the purpose of obtaining the bootstrapped distribution of test statistics. On
+the other hand, bootstraps with exchangeable weights are not so wide spread in the economet-
+rics and statistics literature. Thus considering the random weight bootstrap in the context of
+nonstationary autoregressive processes is a novel contribution to the literature.
+
+As future research we aim to investigate the bootstrap validity of the framework that corresponds
+to the uniform inference methodology in predictive regression. In particular, the quasi restricted
+likelihood ratio test (QRLRT) shows to have desirabe properties. More precisely, the restricted
+likelihood has been found to provide a well-behaved likelihood ratio test in the predictive re-
+gression model even when the regressor exhibits almost unit root behaviour. Another interesting
+further research worth mentioning include to consider the bootstrap validity of additional per-
+sistence classes or different functional forms for the predictive regression model as proposed in
+the framework of Duffy and Kasparis (2021). Our proposed bootstrap algorithm can be also
+employed in different settings as well such that within a sequential monitoring framework for
+structural breaks in Garch (p, q) models (see, Berkes et al. (2004)). Furthermore, although in
+this paper we consider the construction of Wald-type statistics based on linear restrictions other
+transformations can be also considered such as non-linear restrictions which are found to have
+better power performance (see also Heimann and Kreiss (1996)).
+
+Acknowledgements I wish to thank Jose Olmo, Tassos Magdalinos and Jean-Yves Pitarakis for
+
+helpful discussions during my PhD studies as well as Stathis Paparoditis and Giuseppe Cavaliere. The
+author of this article acknowledge the use of the IRIDIS High Performance Computing Facility and
+associated support services at the University of Southampton, in the completion of this work. Financial
+support from the VC PhD studentship of the University of Southampton is also gratefully acknowledged.
+
+                                                            19
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+                                          APPENDIX
+
+A. Technical Proofs
+
+(page S.23 in Georgiev et al. (2021))
+We have that
+
+(A.1)    1   nr                  =      1   nr           -  c1    nr          + op(1),
+       n1+z                             an                  a n2
+                 Zt-1Xt-1                       vt-1t-1               t-2t-1
+
+             t=1                            t=2                   t=2
+
+It then follows by near-integration asymptotics that
+
+         1   nr                             2                             
+       n1+z                                 a  0 J dMc + [Mv] - c 0 Jc2(r)
+                 Zt-1Xt-1
+
+             t=1
+
+                                        = 2     
+                                            a
+                                               0 J dMc + [Mv] ,
+
+Notice that it holds that [Mv] = [Jc], that is, the two stochastic processes have the same
+quadratic variation. Furthermore, it holds that
+
+                                                       
+(A.2)        Jc2() - 0 Jc(r)dJc(r) = 0 Jc(r)dJc(r) + [Jc]
+
+which holds by the semi-martingale property of Jc(r). Moreover, notice these stochastic processes
+are monotonically increasing with a continuous quadratic variation function [Mv] () on a compact
+set B(0, 1), then it is sufficient to show that the asserted weakly convergence of the sample
+moments to the corresponding stochastic integrals holds point-wise in probability for   [0, 1].
+
+Consider the proof from Li and Xiao (2001). In particular, we are interested to show the invari-
+ance principles for the partial sums of t and ut . Thus, first we show that
+
+(A.3)                                   1    nr        B(r)
+                                          T
+                                                 t
+
+                                             t=1
+
+Let EDF denote the empirical distribution function d2(., .) be the Mallows metric defined as
+dp(, µ) = inf E ( V - U p)1/p. Thus, we denote with
+
+(A.4)  Snr   :=             1    nr         B(r),    Snr  :=  1    nr       B(r)
+                              T                                 T
+                                     t                                 t
+
+                                 t=1                               t=1
+
+Thus, we need to show that
+
+(A.5)                                     d2(F, F^T )  0
+
+                                               20
+             BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Moreover, we need to establish convergence of finite-dimensional distributions and verify the
+tightness condition. In particular, for the finite-dimensional convergence, it is sufficient to show
+that for any finite k and 0 < r1 < ... < rk < 1, if
+
+(A.6)           Vk = Snr1, Snr2 - Snr1, ...., Snrk - Snrk-1
+
+and
+
+(A.7)           Vk =  Snr1,  Snr2  -  Snr1,  ....,  Snrk   -  S
+                                                                nrk-1 
+
+then d2 (Vk, Vk)  0. Thus, it can be shown that d2 (Vk, Vk)2  d2 FT , F~T 2  0.
+
+For tightness, it suffices to show that there exists a non-decreasing function  such that, for
+almost all sample paths, for 0  r1  r  r2  1,
+
+(A.8)                           P Snr - Snr1
+
+From the paper: Testing for parameter instability in predictive regression models
+
+Remark 9. Notice that considering for example the test statistic Wivx we observe that bootstrap
+invariance principles hold jointly along with stated convergence results. In practise, in terms
+of convergence in topological spaces, we have joint weak convergence of random measures. The
+concept is weaker than weak convergence in probability, although it reduces to the latter when the
+limit distribution is non-random.
+
+B. Smoothing Local-to-moderate unit root theory.
+
+Consider an autoregressive process with local-to-moderate deviations from unit root of the form
+
+n =    1  +  c  , where K converges to infinity with the sample size n and n approaches unity
+             K
+
+from the stationary or the explosive side according to the sign of c (see, Phillips et al. (2010)).
+
+We consider that such a time series process constitutes of m blocks of K observations with total
+sample size n = mK. Then, partitioning the chronological sequence {t = 1, ..., n} by setting
+t = [kj] + k for k  {1, ..., K} and j  {0, ..., m - 1}, it is possible to study the asymptotic
+behaviour of the time series {Xt : t = 1, ..., n} via the asymptotic properties of the time series
+{XKj+k : j = 0, ..., m - 1, k = 1, ..., K}. The latter representation is particularly useful for re-
+vealing the transition from non-stationary to stationary autoregression as the number of blocks
+m increases.
+
+More formally, the process with the above characteristics may be written in the form
+
+(B.1)                 Xt = n,mXt-1 + ut, ut iid 0, 2 ,
+(B.2)
+                n,m =        1  +  c  =   1  +  cm
+                                   K             n
+
+since we have m blocks with K observations in each block, giving us a total of n = mK.
+
+                                      21
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Therefore, under this setting when m = 1, then the usual local to unity model applies, and when
+m  , then the moderate deviation theory of PM and GP holds.
+
+                                                                                                                t
+
+Let W be a standard Brownian motion and Jc(t) = ec(t-s)dW (s) be a corresponding OU
+                                                                                                              0
+
+process. For each m, letting
+
+(B.3)                                                  t  ,
+               W (t) = mW                              m
+
+we observe that W also a standard Brownian motion and we denote by Jc(t) =          t  ec(t-s)dW  (s)  the
+                                                                                    0
+
+associated OU process. Thus, for given m  1, we may derive a limit theory for the least squares
+
+estimate ^n,m of n,m as n   using earlier results from standard local to unity asympotics.
+
+Thus, using the identities above we obtain
+
+(B.4)   1  Jcm(s)dW (s)                         =  1    m
+(B.5)  0                                           m
+                                                          Jc(s)dW (s),
+
+                                                       0
+
+            1  Jcm(s)2ds                        =   1   m
+           0                                       m2
+                                                          Jc(s)2ds.
+
+                                                       0
+
+the results derived in Phillips imply that, for fixed m and n  , the asymptotic distribution of
+the least squares estimator takes the following form
+
+                         1  Jcm(s)dW (s)                        m   Jc(s)dW (s)
+
+(B.6)  n (^n,m - n,m)    0                             =m 0 m        Jc(s)2ds    .
+                             1
+                                                                0
+                             Jcm(s)2ds
+
+                            0
+
+When c < 0, sequential limits with n   followed by m   lead to the normal asymptotic
+theory given in PM and GP:
+
+(B.7)  nm (^n,m - n,m)   1m                      m              for fixed m
+(B.8)                       1
+(B.9)                                              Jc(s)dW (s)
+                            m
+                                                0
+                                                   m
+
+                                                    Jc(s)2ds
+
+                                                 0
+
+               =         1 m                        j
+                           m j=1
+                            1m                         Jc(s)dW (s)
+
+                            m j=1                  j-1
+                                                      j
+
+                                                        Jc(s)2ds
+
+                                                    j-1
+
+                   N                        0,  -  1    N (0, -2c) as m  .
+                                                   2c
+
+                                            -  1
+                                               2c
+
+                                                22
+         BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+C. Bootstrapping Unstable Autoregressive Processes.
+
+C.1. Theoretical Background.
+
+In this section, we present related asymptotic theory examples as preliminary theory to the
+framework proposed in this paper.
+
+Consider the first-order autoregressive process {Xt}, for t = 1, 2, ...,
+
+(C.1)                             Xt = Xt-1 + t, X0 = 0,
+
+where {t} are independent N (0, 1) random variables.
+
+The least squares estimator ^n of , based on a sample of n observations (X1, ..., Xn), is given by
+the following expression
+
+                                        n              -1   n
+
+(C.2)                             ^n =       Xt2-1             XtXt-1
+
+                                        t=1                t=1
+
+Note that the asymptotic validity of the bootstrap estimator corresponding to ^n for the stationary
+case, viz., || < 1, follows from the work of Bose (1988) and the validity for the explosive case,
+viz., || > 1 has recently established by Basawa et al. (1989). Both of these papers consider the
+general case when the distribution of {t} is not necessarily known. The limit distribution of
+^n in the unstable case || = 1 is known to be nonnormal. It is therefore, of special interest to
+consider the bootstrap approximation for the distribution of ^n for the unstable case.
+
+C.2. Invalidity of the bootstrap estimator.
+
+Let n =  n    Xt2-1  1/2  ^n -    , where ^n is defined as above. It is then, well known that when
+ = 1,    t=1
+
+                     d         1  W 2(1) - 1           1  W 2(t)dt  -1/2
+                               2
+(C.3)         n             =                       0                     as n  ,
+
+where W (t) is a standard Wiener process. Then, the corresponding bootstrap sample {Xt} is
+obtained recursively from the following relation
+
+(C.4)                             Xt = ^nXt-1 + t, X0 = 0.
+
+where {t } constitutes a random sample from N (0, 1). Then, the bootstrap estimator ^n of  is
+then defined as in (C.2) with X's replaced by X's.
+
+Let n =  n    Xt-21  1/2  ^n -    denote the bootstrap version of n. It will be shown that n
+         t=1
+and n do not have the same limit distribution, thus invalidating the bootstrap.
+
+                                                    23
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Therefore, we consider a triangular array {Xk,n, k  1, n  1} satisfying
+
+(C.5)           Xk,n = bnXk-1,n + k, X0 = 0,
+
+with independent k  N (0, 1) and where {bn} is a sequence of numbers such that n (bn - 1)  .
+Let
+
+                        1  1 - t + te-2     -1
+
+                     0                         W (t)dW (t)
+
+(C.6)     () =          1 1 - t + te-2 -2 W 2(t)dt 1/2
+
+                     0
+
+where {W (t) : 0  t  1} is a standard Brownian motion and
+
+(C.7)                H(, x) = P (()  x) .
+
+Then, by Theorem 1 of Chan and Wei (1987) we have that
+
+(C.8)              nlimPbn (n  x) = H(, x)
+
+where
+
+                n             1/2      n    Xk,n  Xk-1,n
+                                       k=1
+(C.9)   n =          Xk2-1,n                               -  bn
+                                       n        Xk2-1,n
+                k=1                    k=1
+
+and where Pbn indicates the probability distribution induced by the model in (C.5). Define
+
+(C.10)          Hn ^bn, x = P n  x X1, ..., Xn
+
+which is taken to be a regular conditional probability distribution function. Therefore, we define
+a random measure
+
+(C.11)               n(A) = Hn ^bn, dx .
+                                        A
+
+Since H(, x) given by (D.2) is continuous in  for each fixed x, we have
+
+(C.12)                  (A) = H (, dx)
+                                         A
+
+             1  W 2(1) - 1         1  W 2(t)dt  -1
+             2
+(C.13)    =                   0                         as n  ,
+
+Therefore, if the bootstrap approximation were valid then along almost all paths Hn given by
+(C.10) would converge in distribution to the distribution of  given in (C.3). However, we have
+
+                                   24
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+in fact that
+
+(C.14)                      n  , as n  .
+
+Proof. By almost sure representativeness of convergent laws, it is possible to define ~n, n  1,
+and ~ with ^n = ~n,  =d ~ and
+
+(C.15)                      n ~n - 1 d ~ almost surely as n  .
+
+Recall that,
+
+(C.16)                      n ^n - 1 d  as n  
+
+Therefore, we have that
+
+(C.17)                   Hn ~n, x  H(~, x) almost surely as n  .
+
+Hence for sets of the form
+
+                                  mj
+
+(C.18)                      Aj =                    xij , yij
+
+                                  i=1
+
+representing a disjoint union of intervals, (C.17) implies that
+
+(C.19)        Hn ~n, A1 , ..., Hn ~n, Ak  Hn ~, A1 , ..., Hn ~, Ak
+
+almost surely as n  .
+Since,
+
+(C.20)        n(A1), ...., n(Ak) =d Hn ~n, A1 , ..., Hn ~n, Ak
+
+and           (A1), ...., (Ak) =d Hn ~, A1 , ..., Hn ~, Ak ,
+(C.21)
+
+which implies that (C.14) follows from (C.19).
+
+The above example, demonstrates that the least squares estimate of the autoregressive coefficient
+in the case of the unstable autoregression model ( = 1), induces an invalidity of the bootstrap
+
+procedure. A similar invalidity of the bootstrap procedure occurs when considering the distribu-
+tion of n ^n -  as examined by Chan and Wei (1987). In this paper, we aim to demonstrate
+that in the case of predictive regression model, when we estimate the unknown parameter us-
+
+ing the IVX instrumentation procedure, then the limiting distribution of the original estimate is
+preserved which verifies the validity of the corresponding IVX bootstrap estimate.
+
+                                                25
+          BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+D. Bootstrapping Explosive Autoregressive Processes.
+
+D.1. Preliminary results and the bootstrap estimate.
+
+First, we review some basic limit results for the explosive case as in Bose (1988). We assume that
+|| > 1 and define with
+
+                                   n                                 n
+
+(D.1)                     Un = -(t-1)t and Vn = -(n-t)t
+
+                                   t=1                               t=1
+
+where {t} are i.i.d random variables with E (j) = 0 and Var(j) = 2. Moreover, it can be
+shown that Un and Vn are identically distributed for each n and there exist random variables U
+and V such that
+
+(D.2)                              (Un, Vn) d (U, V ) as n  ,
+
+where U and V are independent and identically distributed. If {t} are normal, U and V are nor-
+mal each with mean 0 and variance (1 - -2)-1. In the general case, U and V can be represented
+by
+
+(D.3)                                             
+
+                                        U =d -(t-1)t =d V,
+
+                                                 t=1
+
+Note that the common characteristic function of U and V is
+
+(D.4)                                                  
+
+                                        ( ) =  -(t-1)
+
+                                                      t=1
+
+where (.) is the characteristic function of t.
+Let ^n denote the least squares estimate of . The following Theorem summarizes the limit
+distribution of ^n for the case || > 1.
+Theorem 1. For ^n defined in the autoregressive model, we have that for || > 1,
+
+(D.5)                              2 - 1 -1 ||n ^n -  d V U,
+
+where U and V are defined in (D.1).
+
+We now describe the corresponding bootstrap estimate. Let ^t = Xt - ^nXt-1 and define ~t =
+                                                           F~n
+^t - n-1  n    ^t,  the  centered  residuals.  Denote  by       the  empirical  distribution  function  based  on
+          t=1
+{~t, t = 1, ..., n}. Thus, F~n associates mass n-1 to each of ~t, t = 1, ...., n. Now, assuming that F~n
+is the true distribution, draw a random sample {t, t = 1, ..., n} from F~n. Therefore, conditionally
+on (X1, ..., Xn), the random variables {t , t = 1, ..., n} are i.i.d with distribution function F~n.
+This pseudo-series allow us to construct the bootstrap sample {Xt, t = 1, ..., n} recursively by
+
+the following expression
+
+(D.6)                              Xt = ^nXt-1 + t, t = 1, ..., n,
+
+                                                       26
+           BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+with X0 = 0. The bootstrap least squares estimate is then given by
+
+                        n                      -1        n
+
+(D.7)           ^n =         Xt-21                          XtXt-1
+
+                        t=1                             t=1
+
+The main aim of this section (see, also Bose (1988)), is to derive the limit distribution of ^n given
+(X1, X2, ...) and to show that it is the same as the limit distribution given in Theorem (1). Before
+
+doing that, we present below a useful lemma for the purpose of proving the aforementioned result.
+
+Lemma 2. For the autoregressive model with Et = 0, Var t = 2 <  and || > 1, we have
+
+(D.8)           1   n   (~t  -  t)             a.s  0,  as n  .
+                n  t=1
+
+Moreover,
+
+(D.9)                   ^n a.s  as n  .
+
+In practise, we denote the empirical distribution of the centred residuals ~t as F~t. Notice that the
+bootstrap innovations {t } are conditionally independent with common distribution F~T .
+
+D.2. Limit distribution of the bootstrap estimate.
+
+We now state the main result of this section.
+
+Theorem 2. Conditionally on (X1, ..., Xn) as n   we have, for || > 1,
+
+(D.10)          ^n2 - 1 -1 |^n|n ^n - ^n d V U
+
+for almost all sample paths (X1, X2, ...), where U and V are defined in (D.1), and ^n, ^n are
+defined, above.
+
+Proof. Define,  n                                       n
+(D.11)          Un = ^-(t-1)t and Vn = ^-(n-t)t
+
+                t=1                                     t=1
+
+The result in the theorem can be deduced analogously to that of Theorem (1) provided we show
+that, conditionally on (X1, ...Xn), (Un, Vn) d (U, V ) for almost all sample paths, where Un, Vn,
+U and V are as defined above. This is due to the fact that the limit distributions of ^n and ^n are
+determined respectively by those of (Un, Vn) and (U, V ). Thus, for the remaining derivations we
+shall show that the conditionally characteristic function of (Un, Vn) given (X1, ...Xn) converges to
+the characteristic function of (U, V ), for almost all sample paths (X1, X2, ...). Let E(.) denote the
+expectation with respect to the distribution F~n (of t ) conditional on (X1, ...Xn). Let Un() =
+E (exp i Un).
+
+                                                            27
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Thus, it is shown that
+
+(D.12)                                          n
+
+                              Un() = E exp i ^n-(t-1)t
+
+                                               t=1
+
+converges a.s to U() for each   R.
+To accomplish this it suffices to show that
+
+                              n        exp i ^n-(t-1)t
+
+(D.13)                   lim sup E                              -1 =0           a.s,
+
+                        m nm t=m
+
+where the convergence in (D.2) is uniform on compact sets in R and it holds that
+
+(D.14)  lim E                 exp i ^n-(t-1)t  - 1            -(t-1)       = 0 a.s.
+
+        n
+
+for each t  1 and uniformly in  in bounded intervals.
+First, note that
+
+                        E exp i ^n-(t-1)t - 1  E | ^n(t-1)t|
+
+(D.15)                                              =   |  ||^n|-(t-1)  1   n   |~j|.
+                                                                        n  j=1
+
+Since by Lemma (2) ^n a.s , || > 1 and (1/n)         n    |~t|  a.s  E|1|  <  ,  it      follows  that      almost  for
+                                                     j=1
+                                                                                                  n
+almost each sample path there exist positive integers C and m such that (1/n)                     j=1  |~j  |    C  and
+
+|^n|   > 1 for all n  m. Thus, for almost each sample path
+
+(D.16)                     E exp i ^n-(t-1)t - 1  | |-(t-1)C
+
+for all n  m, and is established. Next, we have that
+
+                        E exp i ^n-(t-1)t - 1  -(t-1)
+
+                           1   n       i ^n-(t-1)~j  -    1   n       i ^n-(t-1)j
+                           n                              n
+                                  exp                            exp
+
+                              j=1                            j=1
+
+                        +  1   n       i ^n-(t-1)j   -  1     n       i n-(t-1)j
+                           n                            n
+                                  exp                            exp
+
+                              j=1                            j=1
+
+(D.17)                  +  1   n       i n-(t-1)j    -  E    exp i -(t-1)1            .
+                           n
+                                  exp
+
+                              j=1
+
+                                               28
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Therefore, for the first term in (D.17) we obtain,
+
+        1   n                    i ^n-(t-1)~j   -    1   n        i ^n-(t-1)j
+        n                                            n
+               exp                                          exp
+
+           j=1                                          j=1
+
+             1   n               exp  i ^n-(t-1)j         exp i ^n-(t-1) (~j - j) - 1
+             n  j=1
+
+             | | n                    ^n-(t-1)  ~j - j
+             n j=1
+
+             | |^n-2(t-1)                  1/2           n        -       1/2        0  a.s.
+
+                                                 | |        (~j      j )2
+                                                   n
+                                                        j=1
+
+uniformly on  on compact subsets by Lemma 2. Similarly, we obtain that
+
+(D.18)          ^n-(t-1) - -(t-1)                       | |   n   |j |  0      a.s.
+                                                        n    j=1
+
+uniformly in  on compact subsets, which implies that the second term in (D.17) goes to zero
+almost surely.
+
+By the Glivenko-Cantelli theorem and the convergence theorem for characteristic functions, the
+third term in (D.17) goes to 0 a.s. and uniformly for  in a compact set. Hence, (D.14) is
+established, and it follows that
+
+                         n                                   
+        Un ( ) = 1  ^n-(t-1) a.s 1  -(t-1) = U ( ).
+(D.19)
+
+                t=1                                          t=1
+
+Similarly, it can be shown that
+
+        Un,Vn (, s) a.s               1  ^-(t-1)               1 s^-(t-1) = U ( )V (s).
+
+(D.20)
+
+                                 t=1                      t=1
+
+Corollary 1. If {t} are assumed normal, we have, for || > 1, conditionally on (X1, ..., Xn),
+
+                                      n              1/2
+
+(D.21)     Tn = ^n-1                       Xt-21            ^n - ^n d N (0, 1) ,
+
+                                      t=1
+
+for almost all sample paths, where
+
+(D.22)                                            n  Xt - ^nXt-1 2 .
+
+                                      ^n2 =
+
+                                                t=1
+
+                                                        29
+              BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+E. Residual based Block Bootstrap for unit root testing.
+
+E.1. Estimation framework.
+
+Consider the autoregressive model given by
+
+(E.1)                               Xt = nXt-1 + Ut, t = 1, 2, ...
+
+where n = 1 + c/n, c < 0 and the stationary process {Ut} satisfies: E (Ut) = 0, E (|Ut|) < 
+
+for some  > 2, fU (0) > 0 and                 (k)1-2/       <  ,      where  (.)  denotes       the  strong    mixing
+                                         k=1
+
+coefficient of {Ut}. In this Section, we summarize the RBB testing Algorithm as proposed by
+
+Paparoditis and Politis (2003). More specifically, the algorithm is carried out conditionally on
+
+the original data {X1, ...., Xn} and implicitly defines a bootstrap probability mechanism denoted
+by P  that is capable of generating bootstrap pseudo-series of the type {Xt, t = 1, 2, ...}.
+
+E.2. RBB Testing Algorithm.
+
+The RBB procedure could be indeed an interesting application to examine, but we first consider
+the validity of the bootstrap IVX estimate constructed via the simple bootstrap procedure for
+obtaining the residual sequence. Then after establishing this asymptotic equivalence, we could
+examine the implementation of the RBB algorithm for obtaining the IVX bootstrap estimate.
+
+Step 1. First calculate the centered residuals given by
+
+       (E.2)                v^t  =  (Xt  -  ~nXt-1)  -   n  1   1   n   Xj - ~nXj-1
+                                                            -      j=2
+
+       for t = 2, 3, ..., n where ~n = ~n X1, X2, ..., Xn is a consistent estimator of n based on the
+       observations {X1, ..., Xn}.
+
+Step 2. Choose a positive integer b, where b < n and let i0, ..., ik-1 be drawn i.i.d with distribution
+                                                                                  (n-1)
+       uniform on the set {1, 2, ..., n - b}, such that for example, k =             b      .   Then, the procedure
+
+       constructs a bootstrap pseudo-series {X1, ...., Xl} where l = kb + 1, as follows
+
+                                       
+                                       X1
+       (E.3)                Xt      =  µ^ +   Xt-1  +   v^im+s     , for t = 1,
+                                                                   , for t = 2, 3, ..., l,
+
+       where m =  (t-2)  ,  s=   t - mb - 1,  and   µ^  is  a  drift  parameter   that      is  either  equal  to  zero
+                     b
+
+       or represents a consistent estimator of µ.
+
+Step 3. Let ^n be the estimator used to perform the unit root test. Compute the pseudo-statistic
+           which is the test statistic ^l based on the pseudo-data {X1, ...., Xl}.
+
+Taking into account the asymptotic theory of the regression statistic n (^LS - 1) for near inte-
+grated processes, the following theorem about the asymptotic local power behavior of the RBB
+based test can be established.
+
+                                                     30
+          BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Theorem 3. Let
+
+(E.4)                                BRBB,n (n; )  P (J  C - c)
+
+convergence in probability, where C is the  quantile of the distribution of
+
+                                                              1               -1
+
+(E.5)                                W 2(1) - U2 /       2 W 2(r)dr
+                                                              0
+
+where J is a random variable which has the following distribution
+
+                                1                         U2            1         -1
+                                                          2
+(E.6)                            Jc(r)dW (r) +     1  -               0 Jc2(r)dr
+
+                               0
+
+and Jc(r) =  1  e(r-s)c dW  (s)  is  the  OU  process  generated      by   the  stochastic  differential  equation
+             0
+
+dJc(r) = cJc(r)dr + dW (r) with initial condition Jc(0) = 0.
+
+E.3. FCLT for the Bootstrap Partial Sum process.
+
+The asymptotic properties of the RBB testing procedure are based on the stochastic behaviour
+of the standardized partial sum process {Sm (r), 0  r  1}, defined by
+
+(E.7)           Sm (r)   =     1  j-1  vt  ,  for  (j  - 1)        r    j  ,    j = 2, ..., m.
+                               m  t=1                  m                m
+
+and also
+
+(E.8)           Sm (1)   =     1   m   vt  ,  for  (j  - 1)        r    j  ,    j = 2, ..., m.
+                               m  t=1                  m                m
+
+where for example, we define that v1  X1, vt = Xt - ^ - Xt-1, for t = 2, 3, ..., m, and
+
+2 = var m-1/2   m    vj     .
+                j=1
+
+Note that, the partial sum process Sm (r) is considered to be a random element in the function
+space D[0, 1], which represent the space of all real valued functions on the interval [0, 1] that are
+
+right continuous at each point and have finite left limits.
+
+The following theorem, given by Paparoditis and Politis (2003), shows that under a general set
+
+of assumptions on the process {Xt}, and conditionally on the observed series X1, X2, ..., Xn, the
+bootstrap partial sum process defined by (E.7) and (E.8) converges weakly to the standard Wiener
+process on [0, 1]. Moreover, we denote with Tn = Tn (X1, X2, ...., Xn) is a random sequence based
+on the bootstrap sample X1, X2, ...., Xn and G is a random measure, then the we use Tn  G to
+denote the convergence in probability, which means that the distance between the law of Tn and
+the law of G tends to zero in probability for any distance metrizing weak convergence.
+
+                                                      31
+         BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Theorem 4. Let {Xt} be a stochastic process, and assume that the process {vt} defined by vt =
+Xt - Xt-1 satisfies the above regulatory conditions, and let ~n be an estimator of . Moreover,
+if b   such that b n  0 as n  , then
+
+(E.9)                           Sm  W in probability.
+
+Therefore, the above result along with a bootstrap version of the continuous mapping theorem
+enables us to apply the block bootstrap proposal of this paper in order to approximate the null
+distribution of a variety of different test statistics.
+
+Theorem  5.  Assume  that       the process {Xt}  satisfies  the  above  conditions  with    =  0.  If  b    
+but b n  as  n  ,    then       we have that
+
+(E.10)       sup P l ^nLS - 1  x X1, ..., Xn - P0 ^LS - 1  x  0
+
+             xR
+
+in probability, and
+
+(E.11)       sup P l ^c,LnS - 1  x X1, ..., Xn - P0 ^cL,Sn - 1  x  0
+
+             xR
+
+in probability, where P0 denotes the probability measure corresponding to the case where the statis-
+tics ^nLS and ^c,LnS are computed from a stretch of size n from the unit root process obtained by
+integrating {Ut}.
+
+F. Supplementary Limit Theorems.
+
+In this section we explain in more details the implications of having a random limit distribution in
+
+the related theory for bootstrapping. In other words, the theoretical result which we aim to prove
+involves inference based on stochastic limit bootstrap measures4. To begin with, we assume that
+the standard conditional weak convergence result applies, sup Fn(x) - F (x) p 0. Furthermore,
+
+                                                                                                                xR
+
+denote with E the expectation under the probability measure induced by the standard bootstrap.
+
+Theorem 6. Suppose that {Xn,j, Fn,j} is a martingale difference array. Let {Jn(r), r  [0, 1]}
+be a sequence of adapted time scales and {J (r), r  [0, 1]} a continuous, nonrandom function. If
+the following holds,
+
+(F.1)                    J (1)  Xn2,j1 {|Xn,j| > } Fn,j-1    p 0, as     n
+(F.2)                                                        p J (r),    as n  , r  [0, 1],
+          > 0, E                           Jn(r)
+
+                         j=1                 E Xn2,j Fn,j-1
+
+                                             j=1
+
+    4Notice that our approach in this paper is different from examining the conditional versus unconditional validity
+of the bootstrap for predictive regression models.
+
+                                                  32
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Then   Jn(r)
+(F.3)
+            Xn,j d W (J (r)) , as n  , in D[0, 1].
+
+        j=1
+
+A sequence {P, Pn} of probability measures on the metric space (S, d) converges weakly, when
+
+(F.4)  (x)dPn(x)  (x)dP (x), n  ,
+
+holds true for all   Cb(S, R).
+
+Theorem 7. (Continuous Mapping Theorem) Let {X, Xn} be a sequence of random elements
+taking values in some metric space (S, d) equipped with the associated Borel -field. Assume that
+
+(F.5)  Xn  X, as n  ,
+
+If  : S  S, is a mapping into another metric space S with metric d that is almost surely,
+continuous on X()  S, then
+
+(F.6)  (Xn) d (X), as n  ,
+
+Theorem 8. (Joint Weak Convergence)
+
+Let {X, Xn} and {Y, Yn} be two sequences taking values in (S1, d1), respectively, (S2, d2), such
+that some conditions hold. Then,
+
+(F.7)  (Xn, Yn)  (X, Y ),
+
+as n  , provided at least one of the following conditions is satisfied
+
+(i) Y = c  S2 is a constant, that is, non-random.
+(ii) Xn and Yn are independent for all n as well as X and Y are independent.
+
+Recall that we are given a metric space (S, d) such that as D ([0, 1], R) equipped with the Borel
+-field and the associated set P(S) of probability measures. Then, the space P(S) can be
+metrized by the Prohorov metric  and the convergence with respect to the Prohorov metric is
+the weak convergence, that is,
+
+(F.8)  Pn  P if and only if  (Pn, P )  0.
+
+In a metric space convergence can be characterized by a sequence criterion: A sequence converges
+if and only if any subsequence contains a further convergent subsequence. Therefore, the weak
+convergence of a sequence {Pn, P } of probability measures can be characterized in the following
+way:
+
+(F.9)  Pn  P  (Pn, P )  0, as n  
+
+       33
+            BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+if and only if any subsequence {Pnk : k  1} contains a further subsequence Pnk : k  1 such
+that Pnk  P  (Pnk , P )  0, as k  , which is equivalent to Pnk  P , as k  .
+
+Further, in any metric space a subset A is relatively compact, that is, has a compact closure, if
+every subsequence {Pn}  A has a subsequence Pnk : k  1 with Pnk  P  as k  , where
+the limit P  is in the closure of A is relatively compact. Applied to out setting this means: A
+subset A  P(S) of probability measures has compact closure A¯ if and only if every sequence
+{Pn}  A has a subsequence {Pnk} with converges weakly to some P   A¯, such that, Pnk  P 
+as k  .
+
+Here the limit P  may depend on the subsequence. Therefore, the weak convergence Pn  P as
+n  . First, one shows that {Pn} is relatively compact and then one verifies that all possible
+limits are equal to P . A theorem due to Prohorov allows us to relate the compact sets of P(S)
+to the compact sets of S. This is achieved by the concept of tightness. A subset A  P(S) of
+probability measures in P(S) is called tight if for all  > 0 there exists a compact subset K  S
+such that
+
+(F.10)              P (K) > 1 - , for all P  A.
+
+Functional Central Limit Theorems
+
+Theorem 9. (Donsker i.i.d case)
+ Let 1, 2... be a sequence of i.i.d random variables with E (1) = 0 and 2 = E (12) < . Then,
+
+(F.11)              1              T s       B(s),
+                      T
+                                       t
+
+                                   t=1
+
+as T  , where B denotes the standard Brownian motion and  signifies weak convergence in
+the Skorohod space D ([0, 1], R).
+
+Theorem 10. Suppose 1, 2, ... satisfies a weak invariance principle. Then,
+
+(F.12)              ST (u)  =      1    S  (T u)    B(u),
+                                     T
+
+as T  .
+
+Proof. We have that {B(u) : u  0} is equal in distribution to  1    B(T  u)   :  u    0  for each T .
+                                                                 T
+Therefore,
+
+(F.13)      sup |ST (u) - B(u)| =d sup      1     T u  t  -  1    B(T  u)  .
+                                              T   t=1          T
+            u[0,1]                 u[0,1]
+
+                                        34
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Therefore, we can conclude that on a new probability space,
+
+         sup    |ST  (u)  -  B(u)|  =d   sup    1    T u
+                                                  T
+        u[0,1]                          u[0,1]            t - B(T u)
+
+                                                     t=1
+
+                                    = 1 max |S(n) - B(n)| p 0
+                                         T nT
+
+as T  , which implies that ST  B as T  , for the original processes.
+
+Reference: Nuisance-parameter-free changepoint detection in non-stationary series
+
+Proof of Theorem 3 Let {Xt}n=1 be i.i.d random variables. Then, the bootstrap partial sum
+process
+
+(F.14)          Sn(t)     :=  1     Vn  (nt)    =    1    nt
+                                n                      n
+                                                              Yn,k
+
+                                                          k=1
+
+for t  [0, 1] has conditionally on {Yn,k}nk=1 the same distribution as  W (n(t))         for some
+standard Wiener process W and
+                                                                                  t[0,1]
+
+                                         nt                  
+                                         k=1
+(F.15)          n(t)      =  Var   1          Yn,k   {Yn,k}kn .
+                                      n
+
+Then, if n  as n  , we have that n   uniformly in t  [0, 1] almost surely.
+
+F.1. Additional Proofs
+
+Next following the excellent statistical framework of Li and Xiao (2001) we establish the conver-
+gence of finite-dimensional distributions and verify the tightness condition. In particular, for the
+finite-dimensional convergence, it is sufficient to show that for any finite k and 0 < r1 < ... <
+rk < 1, if
+
+(F.16)          Vk = ST r1, ST r2, ..., ST rk-1, ST rk
+
+(F.17)          Vk = ST r1, ST r2, ..., ST rk-1, ST rk
+
+then, it holds that d2 (Vk, Vk)  0. Following the same arguments as in the literature it can be
+shown that
+
+(F.18)               d2 (Vk, Vk)2  d2 FT , FT  0.
+
+                                         35
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Furthermore, for tightness it suffices to show that there exists a non-decreasing function  such
+that, for almost all sample paths, for 0  r1  r  r2  1,
+
+(F.19)  P            ST r - ST r1                     ST r2 - ST r              1  (r2) - (r1)
+                                                                                4
+
+Notice that t are i.i.d draws from {~t}. Then, by Markov's inequality we have that
+
+                                                                                     2              2
+
+P       ST r - ST r1              ST r2 - ST r                       E ST r - ST r1 E ST r2 - ST r
+
+                                                                             2          2
+
+Notice that the above bound in probability holds because
+
+                               1              1/2     1
+
+(F.20)                      0     Bv (r)2 dr       0     Bv(r)dW(r)  N (0, 1).
+
+F.1.1. Unit Root bootstrap tests for AR(1) models
+
+Consider the autoregressive model
+
+(F.21)                             Xt = Xt-1 + ut, X0 = 0,
+
+Then, ^n is the OLS estimator of  based on a sample of n observations (X1, ..., Xn). Although
+the OLS estimator ^n is consistent, its limit distribution is different for the three possible cases:
+stationary, unstable and explosive. In particular, for the unstable case such that  = 1, is is
+known that the risk of the normalized error of the estimator given by
+
+                                              1    n            1/2
+                                              u
+(F.22)                            Kn  :=                 Xt2-1       ^n - 1
+converges weakly to
+                                                   t=1
+
+                               1  W 2(1) - 1          1  W 2(t)dt    -1/2
+                               2
+(F.23)               K  :=                         0                       , as n  
+
+where W (t) is the standard Brownian motion on [0, 1].
+
+Therefore, in the particular paper the authors prove that their resampling algorithm is asymp-
+totically correct under the null hypothesis, H0, in the sense that it converges weakly to the limit
+distribution for almost all samples (X1, ..., Xn).
+
+F.1.2. A bootstrap invariance principle
+
+The study of the asymptotic behaviour of the bootstrap least squares estimate relies on a bootstrap
+invariance principle, that is, a functional central limit theorem for a stochastic process constructed
+from the sequence of partial sums corresponding to the bootstrap resamples.
+
+                                                            36
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Consider the sequence of partial sums
+
+(F.24)                                                        k
+
+                                Sn,0 = 0, Sn,k n,j, k = 1, ..., n, n  N.
+
+                                                            j=1
+
+Then a sequence of continuous-time processes such that {Yn(s) : s  [0, 1], n  N}
+
+· Thus, for the predictive regression model since the parameter of interest is the coefficient 
+   such that H0 :  = 0. Therefore, in other words in the spirit of Jeganthan (1980) we have
+   proved that the nonstandard problem of testing for structural break in predictive regression
+   models at an unknown location, has a limiting distribution with a discontinuity (a critical
+   point) in the case of persistent predictors or more specifically when the exponent rate of
+   persistence equals to one.
+
+Furthermore, we introduce some precise bootstrap terminology on bootstrap convergence that we
+need. Let Y = (Y1, Y2, ..., Yn) be a random sample from a distribution G and let (Y ; G) be the
+statistic of interest. A general goal of bootstrap resampling is to approximate the distribution
+function P (Y ; G)  x of the statistic (Y ; G) by using the distribution function
+
+(F.25)                             P (Y ; G)  x of (Y ; G),
+
+where Y  = (Y1, Y2, ..., Yn) is the bootstrap resample.
+
+Therefore, if (Y ; G) converges weakly to a distribution S(G), it is enough to show that (Y ; G)
+converges weakly to S(G) for almost all samples (Y1, Y2, ) or to establish that the distance between
+the law of (Y ; G) and the law of S(G) tends to zero in probability for any distance metrising
+weak convergence. Therefore, our first lemma establishes the weak convergence of the finite
+dimensional distributions of the processes Yn(s) for almost all samples (X1, ..., Xn).
+
+Lemma 3. Conditionally on (X1, ..., Xn) and for almost all sample paths we have that (X1, X2, ...),
+ Y1(s1), Y2(s2), ..., Yn(sd) converges weakly to W (s1), ..., W (sd) as n  ,  (s1, ..., sd) 
+
+[0, 1]d. Furthermore, the tightness of our sequence of stochastic processes is implemented by the
+following results.
+
+Next, we establish the bootstrap invariance principle.
+
+Proposition 1. Let {n : n  N} be a sequence of residuals. Define with Fn to be the empirical
+
+distribution  of  ^t  :=  t  -  1  n    t,  for  t  =  1, ..., n  and  let  ^n,t  for  t  =  1, ..., n  be  independent
+                                n  j=1
+
+random variables with distribution Fn. Furthermore, define with Yn(s) : s  [0, 1] for n  N.
+Then, Yn converges weakly to W in C[0, 1] almost surely as n  , where W is the standard
+
+one-dimensional Brownian motion on [0, 1].
+
+                                                       37
+             BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+F.1.3. Asymptotic behaviour of the bootstrap statistic
+
+Define the following statistic
+
+                                                1       n            1/2
+                                                n
+(F.26)                                Zn  :=                Xn2,t-1       n - 1 ,
+
+                                                       t=1
+
+to be the bootstrap version of Zn under  = 1. We derive the limiting distribution of Zn in the
+theorem below. In order to prove the particular result we need to employ the following lemma.
+
+Lemma 4. Define with
+
+(F.27)                                rn  =  1   n          i             1
+                                             n              n
+                                                    Yn2           - 0 Yn2(s)ds.
+
+                                                i=1
+
+Then rn converges in probability to 0 as n  , conditionally on (X1, ..., Xn), and for almost all
+sample paths (X1, X2, ...).
+
+Our goal is to show that Zn converges weakly to Z as n   almost surely and so this bootstrap
+resampling approaches properly the correct limiting distribution.
+
+Theorem 11. Under the AR(1) model with  = 1, Zn defined in (2.3) converges weakly to Z as
+n   for almost all sample (X1, X2, ..., ), where Z is defined in (1.2).
+
+Consider the following statistic
+
+                                                1       n            1/2
+                                                sn
+(F.28)                                Tn  :=                Xn2,t-1       n - 1 ,
+where
+(F.29)                                                 t=1
+
+                                          sn2   =   1   n   Xt - nXt-1      2
+                                                    n  t=1
+                                                                             .
+
+In particular, Phillips (1987a) showed that, under H0, n converges in probability to 1, as n  
+and Tn converges weakly to
+
+                                          2(1)      u2         1  W 2(t)dt  -1/2
+                              2u                    2
+(F.30)               T    :=          W         -           0                     , as n  .
+
+with  u2  =  lim  1  n    E  (u2t ).
+                  n  t=1
+             n
+
+                                                            38
+           BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+F.1.4. Bootstrap Inference in Cointegrating Regressions
+
+Consider the following system studied by Psaradakis (2001b)
+
+(F.31)                            yt = xt + ut,
+(F.32)                            xt = xt-1 + vt
+
+where  is d-dimensional parameter vector and t = ut, vt   Rd+1 is a strictly stationary
+and ergodic random process with zero mean, finite covariance matrix, and continuous spectral
+density matrix f(.) which is positive definite at zero. For the above system we are interested in
+conducting inference about  based on the FM-OLS and CCR estimators.
+
+In order to define these estimators we consider the following matrices
+
+(F.33)                                      and  = E utut
+
+                         = E utut+j
+
+                                 j=1
+
+and decompose the long-run covariance matrix  = 2f(0) of the innovation sequence {} as
+
+(F.34)                   =  + , where  =  + 
+
+such that
+
+(F.35)     =        11  21  ,     =       11         12     ,  2 = 12, 22 
+                    21  22                           22
+                                            
+                                            12
+
+Then, the FM-OLS estimator is defined as below
+
+                        ~ =    n    xtxt         n
+
+(F.36)                         t=1                  xty~t - n~ ,
+where we have that
+                                                t=1
+
+(F.37)              y~t = yt - ^ 21^ 2-21xt, xt = xt - xt-1
+(F.38)              ~ = ^12, ^ 22 1, -^ 21^ 2-21   ^12 - ^ 21^ -221^ 22
+
+where ^ and ^ are consistent estimators of  and  respectively. Therefore, testing hypotheses
+
+regarding the individual elements of  are based on fully modified t-type statistics which are
+constructed based on the estimator ~ and the diagonal elements of the covariance matrix given
+
+by
+
+                                                         n     -1
+
+(F.39)                  V~ = ^11 - ^ 21^ -221^ 21           xtxt .
+
+                                                     t=1
+
+Notice that the nonsingularity of  is equivalent to
+
+(F.40)                         11.2 = 11 - 12-22121
+
+                                          39
+         BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Next we consider the canonical cointegrating regression estimator of  proposed by Park (1992),
+defined as below
+
+                         ¯ =               n              -1 n
+
+(F.41)                                          x¯ tx¯ t            x¯t y¯t ,
+
+                                           t=1              t=1
+
+Therefore, in the sequel we take ^ = n-1           n      u^ tu^ t  and  estimate  the  matrices    and    non-
+                                                   t=1
+
+parametrically using Parzen lag window, a plug-in bandwidth estimator, and the least-squares
+
+residuals {u^t}nt=1 prewhitened via a first-order autoregression.
+
+Bootstrap Algorithm Our bootstrap methodology is based on the assumption that {t}
+admits an AR() representation such that
+
+(F.42)                                   
+
+                              t = jt-j + t,
+
+                                        j=1
+
+where {t} is a zero-mean white-noise process and an absolutely summable sequence of matrices
+ j that satisfies the following regularity condition
+
+                                                          
+
+(F.43)                   det Ip - jzj  = 0                          |z|  1.
+
+                                              j=1
+
+The particular condition is an assumption that has been extensively used in the cointegration
+literature and which is satisfied by a large class of random processes, including a causal and
+invertible multivariate ARMA processes. Then, the idea is to approximate the above linear process
+representation of the innovation sequence of the predictive regression model by a finite-order
+autoregressive model for a suitably proxy for ut and use this to generate bootstrap observations
+which is the common practise when implementing residual-based bootstrap schemes.
+
+Consider testing the following hypothesis using the bootstrap procedure
+
+(F.44)                   H0 : i = i,0 versus H1 : i = i,0
+
+Then, the bootstrap procedure is described as below:
+
+Step 1. Calculate the residuals such that
+
+         (F.45)    o  =  uot , xt               yt - oxt, xt                   for t = 1, ..., n
+                   t
+                                                                           ,
+
+         where o denotes the FM-OLS or the CCR estimator of  obtained under the null hypothesis
+         which implies that the i-th element of the parameter vector [o]i  i,0.
+
+Step 2.  For a fixed positive integer p, obtain the estimates ^ 1, ..., ^ p of the coefficient matrices of a
+         (d + 1)-variate AR(p) model for the innovation sequence {to}tn=1. In particular, these may
+
+         be Yule-Walker estimates, least-squares estimates or Burg-type estimates. Furthermore,
+         define with {et}tn=p+1 to be the corresponding residuals.
+
+                                                   40
+             BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Step 3. For a given positive integer r, take a random sample {et}tn=-r+1 from the empirical distri-
+             bution that puts mass (n - p)-1 on each of the centered residuals such that
+
+                                                                n   
+                                                             t=p+1
+         (F.46)                e^¯t  =  e^t   -     n  1  p         et  ,  for t = p + 1, ..., n
+                                                       -
+
+         Then, construct a bootstrap noise series {t}tn=-r+1 via the recursion below
+
+         (F.47)                                     p
+
+                                        t = ^ jt-j + et, t = -r + 1, ..., n,
+
+                                                  j=1
+
+             where t = 0 for t  -r.
+Step 4. Generate bootstrap replicates {xt}tn=1 and {yt}nt=1 by setting
+
+         (F.48)            xt  =  xt-1     +  v     and      yt = oxt + ut,   for t = 1, ..., n
+                                                 t
+
+         where   we  have  partitioned     the   innovation  sequence      t  such  that       =  ut , vt  and set
+                                                                                            t
+         x0 = 0.
+
+Step 5. Estimate  by FM-OLS or CCM using the bootstrap sample {(yt, xt)}nt=1 and compute the
+             value of the associated t-statistic for H0 : i = i,0, say T (i,0).
+
+Step 6.  Repeat steps 3-5 independently B times to obtain sa sample                 Tb(i,0)       B    of  T  (i,0)  values.
+                                                                                                  b=1
+
+Step 7. Approximate the null sampling distribution of T (i,0) by the empirical distribution of
+                     B
+         Tb(i,0)           The bootstrap p-value of the observed realization T^ (i,0) of T (i,0) is given
+                        .
+         by
+                     b=1
+
+         (F.49)                      p  -  value    =  1      B     Tb(i,0)  T^ (i,0)
+                                                       B
+                                                                 1
+
+                                                             b=1
+
+Remark 10. The bootstrap procedure described above uses the residuals obtained under the null
+hypothesis based on the Studentized difference between i,0 and an estimate of i. In particu-
+lar, bootstrap tests based on such a resampling scheme have generally been found to have good
+small-sample size and power properties.Furthermore, for the implementation of the sieve boot-
+strap a necessary step is the selection of an appropriate value for the order p of the approximating
+autoregression for the innovation sequence t.
+
+Remark 11. Notice that we are particularly interested to obtain a good enough autoregressive
+approximation for tests to have the correct empirical Type I error probability. More precisely,
+as it has been shown in the literature, the closure with respect to certain metrics of the class of
+stationary linear processes and AR() processes is fairly large. In particular, this implies that
+the sieve bootstrap is likely to work reasonably well even when the data-generating mechanism
+does not belong to the AR() family.
+
+                                                             41
+           BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+In other words, the empirical distribution of n-1/2Tb(i,0) yields a conservative estimate of the
+empirical distribution of n-1/2T (i,0) as n, B  . Although, we do not consider formal cross-
+validation methods in this paper to evaluate the performance of the bootstrap procedure such
+methodologies are discussed in the paper of Efron (1983). Furthermore, our goal is to investigate
+whether our bootstrap implementation indeed leads to an asymptotically valid test. In particular,
+this can be seen by examining whether the bootstrap consistently estimates the desired quantile.
+
+F.1.5. Unit root and Cointegrating limit theory
+
+Consider the cointegrating system as below
+
+(F.50)     yt = Axt + ut,
+(F.51)     xt = xt-1 + vt
+
+where yt is an m-dimensional vector and xt is K-dimensional such that t = (ut , vt ) is an (m+
+K)-dimensional vector of innovations and A is an (m × K) matrix of cointegrating coefficients.
+
+The mixture process of the limit theory is given by
+
+(F.52)     vec n A^ + - A  MN 0,                        1     +B  +  -1        ,
+                                                                  
+                                                           B             yy.x
+
+                                                     0
+
+where A^+ is the FM regression estimator with a conditional long-run covariance matrix of ut
+given vt expressed as below
+
+(F.53)     yy.x := yy - yx-xx1xy
+
+Then, the FM regression estimator has the explicit form given by
+
+(F.54)     A^ + = Y^ +X - n^ +yx × (XX)-1
+
+where      X = x1, ..., xn , Y^ + = y^1+, ..., y^n+   Rn×m
+(F.55)
+
+such that
+
+(F.56)     y^+t = yt - ^ yx^ x-x1xt, and +yx = yx - yx-xx1xx
+
+where ^ yx^ x-x1 and ^ +yx are consistent estimates of yx^ -xx1 and y+x respectively, which may be
+constructed in the familiar fashion using semiparametric lag kernel methods with residuals from
+
+a preliminary cointegrating least squares regression.
+
+                                            42
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Proof. Setting with uy.xt = uyt - yx-xx1xt and Uy.x = uy.x1, ..., uy .xn  as the corresponding
+data matrix, we have that
+
+(F.57)                          y^  +  =  yt  -  ^ yx^ -xx1xt      =  Axt   +  u0.xt
+                                    t
+
+In terms of asymptotic theory we have that
+
+(F.58)             y+.xn(s) := yn(s) - yxx-x1xn(s)  By.x(s)  BM y.xx
+
+Remark 12. Notice that the unit root limit theory given by expressions (17) and (18) of PM
+(2009) involves the demeaned process Bµ(s) although there is no intercept in the regression. In
+particular, the demeaning effects arises because as shown in expression (16), in the direction of
+the initial condition, the time series is dominated by a component that behaves like a constant.
+
+Therefore, the sample moment matrix is no longer asymptotically singular such that
+
+(F.59)                              1      n                      1
+                                    n2
+                                              xt-1 xt -1         0 Jc(r)Jc(r)
+
+                                          t=1
+
+Related theory regarding the weak convergence to the matrix stochastic integral is presented by
+
+Phillips (1988b). We briefly summarize the main results below. We define the partial sum process
+
+such that St =  t  =1  uj  and  construct     the  following     random     element       of  Dn[0, 1]   such  that
+                j
+
+(F.60)             XT (r) = T -1/2ST r = T -1/2Sj-1,                  with   (j  -    1)      r    j  .
+                                                                                 T                 T
+
+Then as T  , we have that
+
+(F.61)                                           XT (r)  B(r),
+
+where B(r) is vector Brownian motion on Cn[0, 1], with covariance matrix . Therefore, one
+
+major time series application is to the theory of regression for integrated processes. In particular,
+{ut} t=1 is generated by a linear process such as a finite-order stationary and invertible vector
+ARMA model then yt is known as an integrated process of order one. Furthermore, we are often
+interested in the asymptotic behaviour of statistics from linear least-squares regressions with
+
+integrated processes. Then, from the first-order vector autoregression of yt on yt-1 we obtain the
+regression coefficient matrix such that
+
+                                              T               T                -1
+
+(F.62)                              A^ =         ytyt-1            yt-1yt-1        .
+
+                                          t=1                 t=1
+
+                                                          43
+         BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+The asymptotic behaviour of A^ is described by a corresponding functional Brownian motion. To
+be more precise consider standardized deviations of A^ about In such that
+
+(F.63)                    T A^ - In =           1       T            1         T   yt-1yt-1  -1
+                                                T                    T2       t=1
+                                                           utyt-1                               .
+
+                                                       t=1
+
+Therefore, to obtain the asymptotic behaviour of the above statistic we write the sample second
+
+moment    1          T    yt-1yt-1  as a quadratic functional of the random element XT (r), at least up
+         T2          t=1
+
+to a term of op(1). That is,
+
+(F.64)                              1    T   yt-1yt-1  =     1
+                                    T2  t=1
+                                                              XT (r)XT (r)dr + op(1)
+
+                                                            0
+
+Then, by an application of the continuous mapping theorem we can establish that
+
+(F.65)                    1          T   yt-1yt-1          1                     as T  .
+                          T2        t=1
+                                                          0 B(r)B(r)dr,
+
+Therefore, in a similar way the following limit result holds
+
+(F.66)                                       1   T               1 dB(r)B(r)
+                                             T
+                                                    utyt-1      0
+
+                                                t=1
+
+Furthermore, the paper of Phillips (2010)5, examines the asymptotics of the bootstrap implemen-
+tation for integrated time series data. See also the framework presented by Parker et al. (2006).
+Although in this paper we focus on the implementation of our proposed bootstrap algorithm for
+nonstationary autoregressive processes in predictive regressions models, when these are assumed
+to follow local-to-unity processes, the asymptotic validity of the bootstrap predictability tests is
+based on the fact that these employ a partial sum process to generate the bootstrap samples
+under the null, thereby ensuring that the test conforms to a unit root limit distribution.
+
+In particular, Phillips (2010) consider the continuous moving block bootstrap for a unit root
+
+process  such   as   xt   = xt-1+ut where t = 1, ..., n where        ut is    a linear process, to obtain the bootstrap
+sample    xtcb    n       Then, in order to construct a unit         root     testing based on the continuous moving
+                     .
+                t=1
+block bootstrap the limit distribution of the serial correlation coefficients is obtained such that
+
+                                                          1    n   xct b xct-b1
+                                                          n2  t=1
+(F.67)                                          cb     =
+                                                            1    n
+                                                            n2  t=1  xct-b12
+
+    5The particular monograph in the words of the author is: "Dedicated to Phoebus Dhrymes whose advanced
+textbooks in econometrics have trained and educated generations of econometricians and applied researchers".
+
+                                                            44
+        BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+In particular, the denominator can be shown to have the following limit
+
+(F.68)  1    n   xct-b12  d    1
+        n2  t=1
+                                B(r)2dr,
+
+                              0
+
+However, as it has been established by Phillips (2010) although the continuous moving block
+bootstrap proposed by Paparoditis and Politis (2001) is consistent under the null hypothesis that
+the sample data is I(1), which can be used to construct estimates of the finite sample distribution
+of unit root tests that involve semiparametric corrections for serial correlation, the particular
+approach does not produce consistent estimates of the null unit root under the alternative hy-
+pothesis. Therefore, we focus on the bootstrap procedure of Paparoditis and Politis (2003) that
+use residual-based partial summation methods when constructing the bootstrap sample.
+
+        4                     8
+
+The above Figure illustrates the bootstrap-based test and the alternative hypothesis, such that
+H0 :  = 0. The power of the bootstrapped predictability test is determined by the mean and
+the variance of the limiting distribution under the alternative hypothesis. Therefore, if the mean
+of the limit distribution under the alternative hypothesis is sufficiently large, then the bootstrap-
+based test successfully rejects the null hypothesis with high probability.
+
+                          45
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+G. Efficient Tests
+
+Although not based on formal optimality criterion, comparing the various testing methodologies
+from the literature, the procedure of Ng and Perron (2001) has an asymptotic local power function
+that is indistinguishable from the near-effcients tests of Elliott et al. (1996) and superior power
+than the corresponding test based on the OLS demeaning considered in Stock (1994) and Perron
+(1991). One therefore conclude that it is largely the quasi-GLS method of demeaning that brings
+about this power advantage over the standard OLS demeaned unit root tests.
+
+Therefore, rather than focusing on the performance of predictive tests in the strongly dependent
+case that are driven by a formal asymptotic optimality property, we explore whether, and if so
+in what settings, using quasi-GLS demeaning of the persistent predictor can deliver statistical
+tests with good power. Indeed this is the case, as it is shown in Theorem 1 below, under strong
+persistence the limiting distribution of T features a component which is a weighted combination
+of two distributions, the first of which is the local alternative limit distribution of the OLS-
+demeaned Dickey-Fuller statistic and the second is a standard normal. Specifically, the Dickey-
+Fueller component dominates the standard normal component when the degree of endogeneity
+|xy| is large. Where the degree of endogeneity is small the reverse holds and so here we might not
+necessarily expect to see any gains from using a test based on quasi-GLS dmeaning the predictor.
+Thus, an exploration of of the asymptotic local power functions of asymptotically conservative
+implementations - needed to account for the dependence on c and xy under the null - of the tests
+shows that the quasi-GLS demeaning of the persistent predictor can indeed deliver power gains
+relative to T for moderate to large xy in the strongly persistent case.
+
+Furthermore, the authors discuss a t-ratio from a variant of the standard predictive regression
+(using a predictive regression model with a single predictor and a model intercept) where the OLS
+demeaned returns and regressed on the quasi-GLS demeaned lagged predictor. Specifically, in the
+case of strongly persistent predictor, we have proposed a feasible method for obtaining (conserva-
+tive) asymptotic critical values of the test statistics. Moreover, an analysis of the asymptotic local
+power functions of the resulting (asymptotically) conservative tests in the case where the predic-
+tor is strongly persistent showed that these vary considerably with the endogeneity correlation
+parameter. The authors conclude that under the assumption of a common order of persistence, it
+may be possible to generalize their proposed statistical testing approach to accommodate multiple
+predictors. Lastly, the authors mention that investigating this possibility and how well it works
+in practice compared to the other tests mentioned above is beyond the scope of the present paper
+but would constitute an interesting topic for further research.
+
+Semiparametric efficiency has long been an essential issue in the econometric literature, where
+a common situation is to treat the innovation density as the nonparametric component. The
+theory for the standard locally asymptotically normal (LAN) or locally asymptotically mixed
+normal (LAMN) experiment has been well developed. The main idea follows the insight of Stein
+(1956) that the semiparametric efficiency bound is given by the lowest aming all the bounds of
+parametric submodels embedding the unknown true model, and the corresponding submodel is
+then called least-favorable.
+
+                                                            46
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Unfortunately, this so-called least-favorable parametric submodel is not straightforwardly ex-
+tended to some nonstandard limit such as the case of LABF experiments. In particular, the main
+challenge of the proposed framework is that the so-called least-favorable parametric submodel
+approach cannot be easily extended in the case of nonstandard statistical problem such as unit
+root testing and their asymptotic limits such as the locally asymptotically Brownian functional
+experiments. In particular, it is difficult to conduct statistical inference due to the fact that in
+those cases the least favorable submodel is not easily computationally tractable based on the
+conventional score-projecting method.
+The particular challenge arises due to the inability of the conventional statistical theory to be
+directly applicable in this scenario. Specifically, by the Neyman-Pearson lemma, as any invari-
+ant test statistic must be a function of maximal invariant test function, the likelihood ratio of
+the maximal invariant defines the power envelope for all invariant tests. Consequently, the ob-
+tained maximal invariant likelihood ratio of the maximal invariant test statistic defines the power
+envelope for all invariant tests.
+Now in the case of testing methodologies in which the statistical procedure is allowed to employ a
+hybrid approach then it achieves a favourable test performance to the conventional method due to
+the fact that the testing methodology is allowed to change according to the degree of endogeneity,
+which is affecting the applicability of the maximal invariant principle. In other words, even though
+the current approach does not replace the particular statistical principle it manages to mimic
+its asymptotic behaviour thereby providing a good approximation of the true power envelope
+function under the alternative hypothesis. However, even in the novel approach of JM (Ecta,
+2006) the authors mention that the proposed theory even though is developed based on related
+parameter restrictions and optimality criteria the optimality theory applies only in the case when
+the Gaussianity assumption is not violated which in a way is too restrictive since the applicability
+of the theory is based on the underline distributional assumption of the innovation sequence used
+for the data generating mechanism. More recently, the proposed statistical testing approach of
+MP (2022) can accommodate robust inference regardless of the assumption on the distribution of
+the innovation sequence, thereby allowing a distribution-free approach due to the nature of the
+proposed estimator that is robust across the spectrum of stationarity and nonstationarity.
+
+                                                            47
+       BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+H. R Coding Procedures
+
+H.1. Bootstrap for IVX Estimation under structural breaks (indicative)
+
+##################################################
+# Step : Estimate bootstrap sup-Wald IVX statistic
+##################################################
+n <- NROW(Xt)
+y.t.star.matrix <- matrix( 0, nrow = n, ncol = B )
+
+for ( b in 1:B )
+
+{
+
+model1 <- lm( Yt ~ Xlag - 1)
+
+u.hat  <- as.matrix( as.vector( residuals( model1 ) ) )
+
+kappa.t <- as.matrix( rnorm( n, 0 , 1 ) )
+
+u.hat.star <- u.hat * kappa.t
+
+y.t.star.matrix[ ,b] <- as.matrix( u.hat.star )
+
+}
+
+bootstrap.Wald.IVX.matrix <- matrix( 0, nrow = B, ncol = 1 )
+
+output <- foreach ( j = 1:10 , .combine = 'c' ) %do%
+{
+
+y.t <- y.t.star.matrix[ ,j]
+
+estimation.Wald.IVX.function <- estimation_Wald_IVX_function( Yt = y.t, Xt = Xt,
+
+Xlag = Xlag, pi0 = 0.15 )
+
+sup.Wald.IVX.statistic         <- as.numeric( estimation.Wald.IVX.function )
+
+bootstrap.Wald.IVX.matrix[j , 1] <- sup.Wald.IVX.statistic
+
+return( bootstrap.Wald.IVX.matrix )
+
+}# end dopar
+
+bootstrap.IVX.statistic <- as.matrix( sort( bootstrap.Wald.IVX.matrix) )
+
+boot.IVX.statistic      <- bootstrap.IVX.statistic[(0.95*B),1]
+
+sup_Wald_IVX_matrix_bootstrap[i ,1] <- boot.IVX.statistic
+
+if ( sup_Wald_IVX_statistic > boot.IVX.statistic )
+{
+
+   empirical_size <- ( empirical_size + 1 )
+}
+
+                                     48
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+References
+
+Abadir, K. M. (1993). The limiting distribution of the autocorrelation coefficient under a unit root. The Annals
+   of Statistics, pages 1058­1070.
+
+Anderson, T. W. (1959). On asymptotic distributions of estimates of parameters of stochastic difference equations.
+   The Annals of Mathematical Statistics, pages 676­687.
+
+Andrews, D. W. (2000). Inconsistency of the bootstrap when a parameter is on the boundary of the parameter
+   space. Econometrica, pages 399­405.
+
+Astill, S., Harvey, D. I., Leybourne, S. J., and Taylor, A. R. (2023). Bonferroni type tests for return predictability
+   and the initial condition. Journal of Business & Economic Statistics, (just-accepted):1­26.
+
+Basawa, I., Mallik, A., McCormick, W., and Taylor, R. (1989). Bootstrapping explosive autoregressive processes.
+   The Annals of Statistics, pages 1479­1486.
+
+Basawa, I. V., Mallik, A. K., McCormick, W. P., Reeves, J. H., Taylor, R. L., et al. (1991). Bootstrapping unstable
+   first-order autoregressive processes. The annals of Statistics, 19(2):1098­1101.
+
+Benke, J. M. and Pap, G. (2021). Nearly unstable family of stochastic processes given by stochastic differential
+   equations with time delay. Journal of Statistical Planning and Inference, 211:1­11.
+
+Bercu, B. (2001). On large deviations in the gaussian autoregressive process: stable, unstable and explosive cases.
+   Bernoulli, pages 299­316.
+
+Berkes, I., Gombay, E., Horváth, L., and Kokoszka, P. (2004). Sequential change-point detection in garch (p, q)
+   models. Econometric theory, 20(6):1140­1167.
+
+Bickel, P. J. and Freedman, D. A. (1981). Some asymptotic theory for the bootstrap. The annals of statistics,
+   9(6):1196­1217.
+
+Billingsley, P. (2013). Convergence of probability measures. John Wiley & Sons.
+Bose, A. (1988). Edgeworth correction by bootstrap in autoregressions. The Annals of statistics, pages 1709­1722.
+Breitung, J. and Demetrescu, M. (2015). Instrumental variable and variable addition based inference in predictive
+
+   regressions. Journal of Econometrics, 187(1):358­375.
+Buchmann, B., Chan, N. H., et al. (2007). Asymptotic theory of least squares estimators for nearly unstable
+
+   processes under strong dependence. The Annals of statistics, 35(5):2001­2017.
+Cavaliere, G. and Georgiev, I. (2020). Inference under random limit bootstrap measures. Econometrica, 88(6):2547­
+
+   2574.
+Cavaliere, G., Gonçalves, S., and Nielsen, M. Ø. (2022). Bootstrap inference in the presence of bias. arXiv preprint
+
+   arXiv:2208.02028.
+Cavanagh, C. L., Elliott, G., and Stock, J. H. (1995). Inference in models with nearly integrated regressors.
+
+   Econometric theory, 11(5):1131­1147.
+Chan, N. H. and Wei, C.-Z. (1987). Asymptotic inference for nearly nonstationary ar (1) processes. The Annals
+
+   of Statistics, pages 1050­1063.
+Chan, N. H. and Wei, C. Z. (1988). Limiting distributions of least squares estimates of unstable autoregressive
+
+   processes. The Annals of Statistics, pages 367­401.
+Chen, W. W., Deo, R. S., and Yi, Y. (2013). Uniform inference in predictive regression models. Journal of
+
+   Business & Economic Statistics, 31(4):525­533.
+Csörg, M., Szyszkowicz, B., Wu, Q., et al. (2003). Donsker's theorem for self-normalized partial sums processes.
+
+   The Annals of Probability, 31(3):1228­1240.
+Davidson, R. and Flachaire, E. (2008). The wild bootstrap, tamed at last. Journal of Econometrics, 146(1):162­
+
+   169.
+Demetrescu, M., Georgiev, I., Rodrigues, P. M., and Taylor, A. R. (2022). Extensions to ivx methods of inference
+
+   for return predictability. Journal of Econometrics.
+Dickey, D. A. and Fuller, W. A. (1979). Distribution of the estimators for autoregressive time series with a unit
+
+   root. Journal of the American statistical association, 74(366a):427­431.
+Duffy, J. A. and Kasparis, I. (2021). Estimation and inference in the presence of fractional d= 1/2 and weakly
+
+   nonstationary processes. The Annals of Statistics, 49(2):1195­1217.
+Efron, B. (1983). Estimating the error rate of a prediction rule: improvement on cross-validation. Journal of the
+
+   American statistical association, 78(382):316­331.
+
+                                                            49
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Efron, B. and Tibshirani, R. (1986). Bootstrap methods for standard errors, confidence intervals, and other
+   measures of statistical accuracy. Statistical science, pages 54­75.
+
+Elliott, G., Rothenberg, T. J., and Stock, J. (1996). Efficient tests for an autoregressive unit root. Econometrica,
+   64(4):813­36.
+
+Fei, Y. (2023). On ivx-based structural break tests in univariate predictive regressions. Applied Economics Letters,
+   pages 1­11.
+
+Freedman, D. et al. (1984). On bootstrapping two-stage least-squares estimates in stationary linear models. The
+   Annals of Statistics, 12(3):827­842.
+
+Freedman, D. A. et al. (1981). Bootstrapping regression models. The Annals of Statistics, 9(6):1218­1228.
+Georgiev, I., Demetrescu, M., Rodrigues, P. M., and Taylor, A. (2021). Extensions to ivx methods of inference for
+
+   return predictability.
+Georgiev, I., Harvey, D. I., Leybourne, S. J., and Taylor, A. R. (2018). Testing for parameter instability in
+
+   predictive regression models. Journal of Econometrics, 204(1):101­118.
+Goncalves, S. and Kaffo, M. (2015). Bootstrap inference for linear dynamic panel data models with individual
+
+   fixed effects. Journal of Econometrics, 186(2):407­426.
+Hall, A. R., Rudebusch, G. D., and Wilcox, D. W. (1996). Judging instrument relevance in instrumental variables
+
+   estimation. International Economic Review, pages 283­298.
+Hall, P. and Heyde, C. C. (2014). Martingale limit theory and its application. Academic press.
+Hamilton, J. D. (2020). Time series analysis. Princeton university press.
+Heimann, G. and Kreiss, J.-P. (1996). Bootstrapping general first order autoregression. Statistics & probability
+
+   letters, 30(1):87­98.
+Horowitz, J. L. (2003). Bootstrap methods for markov processes. Econometrica, 71(4):1049­1082.
+Horváth, L. and Kokoszka, P. (2003). A bootstrap approximation to a unit root test statistic for heavy-tailed
+
+   observations. Statistics & probability letters, 62(2):163­173.
+Inoue, A. and Kilian, L. (2002). Bootstrapping autoregressive processes with possible unit roots. Econometrica,
+
+   70(1):377­391.
+Jansson, M. (2004). The error in rejection probability of simple autocorrelation robust tests. Econometrica,
+
+   72(3):937­946.
+Jansson, M. and Moreira, M. J. (2006). Optimal inference in regression models with nearly integrated regressors.
+
+   Econometrica, 74(3):681­714.
+Jansson, M. and Nielsen, M. Ø. (2012). Nearly efficient likelihood ratio tests of the unit root hypothesis. Econo-
+
+   metrica, 80(5):2321­2332.
+Jayetileke, H. L., Wang, Y.-G., and Zhu, M. (2021). Predictive regression with p-lags and order-q autoregressive
+
+   predictors. Journal of Empirical Finance, 62:282­293.
+Jeganathan, P. (1991). On the asymptotic behavior of least-squares estimators in ar time series with roots near
+
+   the unit circle. Econometric Theory, 7(3):269­306.
+Kasparis, I., Andreou, E., and Phillips, P. C. B. (2015). Nonparametric predictive regression. Journal of Econo-
+
+   metrics, 185(2):468­494.
+Katsouris, C. (2022). Partial sum processes of residual-based and wald-type break-point statistics in time series
+
+   regression models. arXiv preprint arXiv:2202.00141.
+Katsouris, C. (2023a). Structural break detection in quantile predictive regression models with persistent covari-
+
+   ates. arXiv preprint arXiv:2302.05193.
+Katsouris, C. (2023b). Testing for structural change under nonstationarity. arXiv preprint arXiv:2302.02370.
+Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2015). Robust econometric inference for stock return
+
+   predictability. The Review of Financial Studies, 28(5):1506­1553.
+Kuan, C.-M. and Chen, M.-Y. (1994). Implementing the fluctuation and moving-estimates tests in dynamic
+
+   econometric models. Economics Letters, 44(3):235­239.
+Larsson, R. (1995). The asymptotic distributions of some test statistics in near-integrated ar processes. Econo-
+
+   metric Theory, 11(2):306­330.
+Le Cam, L. (1986). Asymptotic methods in statistical decision theory. Springer Series in Statistics.
+Le Cam, L. and Yang, G. L. (2000). Asymptotics in statistics: some basic concepts. Springer Science & Business
+
+   Media.
+
+                                                            50
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Li, C., Li, D., and Peng, L. (2017). Uniform test for predictive regression with ar errors. Journal of Business &
+   Economic Statistics, 35(1):29­39.
+
+Li, H. and Maddala, G. (1997). Bootstrapping cointegrating regressions. Journal of Econometrics, 80(2):297­318.
+Li, H. and Xiao, Z. (2001). Bootstrapping time series regressions with integrated processes. Journal of Time
+
+   Series Analysis, 22(4):461­480.
+Liu, X., Yang, B., Cai, Z., and Peng, L. (2019). A unified test for predictability of asset returns regardless of
+
+   properties of predicting variables. Journal of Econometrics, 208(1):141­159.
+Mann, H. B. and Wald, A. (1943). On the statistical treatment of linear stochastic difference equations. Econo-
+
+   metrica, Journal of the Econometric Society, pages 173­220.
+Moreno, M. and Romo, J. (2012). Unit root bootstrap tests under infinite variance. Journal of Time Series
+
+   Analysis, 33(1):32­47.
+Müller, U. K. (2011). Efficient tests under a weak convergence assumption. Econometrica, 79(2):395­435.
+Mykland, P. A. (1992). Asymptotic expansions and bootstrapping distributions for dependent variables: a mar-
+
+   tingale approach. The Annals of Statistics, pages 623­654.
+Paparoditis, E. and Politis, D. N. (2001). Unit root testing via the continuous-path block bootstrap.
+Paparoditis, E. and Politis, D. N. (2003). Residual-based block bootstrap for unit root testing. Econometrica,
+
+   71(3):813­855.
+Paparoditis, E. and Politis, D. N. (2005). Bootstrapping unit root tests for autoregressive time series. Journal of
+
+   the American Statistical Association, 100(470):545­553.
+Park, J. Y. (1992). Canonical cointegrating regressions. Econometrica: Journal of the Econometric Society, pages
+
+   119­143.
+Parker, C., Paparoditis, E., and Politis, D. N. (2006). Unit root testing via the stationary bootstrap. Journal of
+
+   Econometrics, 133(2):601­638.
+Perron, P. (1991). A continuous time approximation to the unstable first-order autoregressive process: the case
+
+   without an intercept. Econometrica: Journal of the Econometric Society, pages 211­236.
+Phillips, P. C. B. (1987a). Time series regression with a unit root. Econometrica: Journal of the Econometric
+
+   Society, pages 277­301.
+Phillips, P. C. B. (1987b). Towards a unified asymptotic theory for autoregression. Biometrika, 74(3):535­547.
+Phillips, P. C. B. (1988a). Regression theory for near-integrated time series. Econometrica: Journal of the
+
+   Econometric Society, pages 1021­1043.
+Phillips, P. C. B. (1988b). Weak convergence of sample covariance matrices to stochastic integrals via martingale
+
+   approximations. Econometric Theory, 4(3):528­533.
+Phillips, P. C. B. (1989). Partially identified econometric models. Econometric Theory, 5(2):181­240.
+Phillips, P. C. B. (2010). Bootstrapping integrated data. Journal of Econometrics, 158(2):280­284.
+Phillips, P. C. B. and Durlauf, S. N. (1986). Multiple time series regression with integrated processes. The Review
+
+   of Economic Studies, 53(4):473­495.
+Phillips, P. C. B. and Hansen, B. E. (1990). Statistical inference in instrumental variables regression with i (1)
+
+   processes. The Review of Economic Studies, 57(1):99­125.
+Phillips, P. C. B. and Lee, J. H. (2013). Predictive regression under various degrees of persistence and robust
+
+   long-horizon regression. Journal of Econometrics, 177(2):250­264.
+Phillips, P. C. B. and Lee, J. H. (2016). Robust econometric inference with mixed integrated and mildly explosive
+
+   regressors. Journal of Econometrics, 192(2):433­450.
+Phillips, P. C. B. and Magdalinos, T. (2007). Limit theory for moderate deviations from a unit root. Journal of
+
+   Econometrics, 136(1):115­130.
+Phillips, P. C. B. and Magdalinos, T. (2009). Econometric inference in the vicinity of unity. Singapore Management
+
+   University, CoFie Working Paper, 7.
+Phillips, P. C. B., Magdalinos, T., and Giraitis, L. (2010). Smoothing local-to-moderate unit root theory. Journal
+
+   of Econometrics, 158(2):274­279.
+Phillips, P. C. B. and Ouliaris, S. (1990). Asymptotic properties of residual based tests for cointegration. Econo-
+
+   metrica: Journal of the Econometric Society, pages 165­193.
+Phillips, P. C. B. and Perron, P. (1988). Testing for a unit root in time series regression. Biometrika, 75(2):335­346.
+Phillips, P. C. B. and Solo, V. (1992). Asymptotics for linear processes. The Annals of Statistics, pages 971­1001.
+
+                                                            51
+               BOOTSTRAPPING NONSTATIONARY AUTOREGRESSIVE PROCESSES
+
+Politis, D. N. and Romano, J. P. (1994). The stationary bootstrap. Journal of the American Statistical association,
+   89(428):1303­1313.
+
+Præstgaard, J. and Wellner, J. A. (1993). Exchangeably weighted bootstraps of the general empirical process.
+   The Annals of Probability, pages 2053­2086.
+
+Proïa, F. (2020). Moderate deviations in a class of stable but nearly unstable processes. Journal of Statistical
+   Planning and Inference.
+
+Psaradakis, Z. (2001a). Bootstrap tests for an autoregressive unit root in the presence of weakly dependent errors.
+   Journal of Time Series Analysis, 22(5):577­594.
+
+Psaradakis, Z. (2001b). On bootstrap inference in cointegrating regressions. Economics Letters, 72(1):1­10.
+Rao, M. (1978). Asymptotic distribution of an estimator of the boundary parameter of an unstable process. The
+
+   Annals of Statistics, pages 185­190.
+Stock, J. H. (1994). Unit roots, structural breaks and trends. Handbook of econometrics, 4:2739­2841.
+Stoykov, M. Z. (2019). Least squares bias in time series with moderate deviations from a unit root. Journal of
+
+   Time Series Analysis, 40(1):23­42.
+Stroud, T. W. F. (1972). Fixed alternatives and wald's formulation of the noncentral asymptotic behavior of the
+
+   likelihood ratio statistic. The Annals of Mathematical Statistics, 43(2):447­454.
+Sweeting, T. (1989). On conditional weak convergence. Journal of Theoretical Probability, 2(4):461­474.
+Tanaka, K. (2017). Time series analysis: nonstationary and noninvertible distribution theory, volume 4. John
+
+   Wiley & Sons.
+Wang, Q. and Phillips, P. C. B. (2012). A specification test for nonlinear nonstationary models. The Annals of
+
+   Statistics, 40(2):727­758.
+White, J. S. (1958). The limiting distribution of the serial correlation coefficient in the explosive case. The Annals
+
+   of Mathematical Statistics, pages 1188­1197.
+Yang, B., Liu, X., Peng, L., and Cai, Z. (2021). Unified tests for a dynamic predictive regression. Journal of
+
+   Business & Economic Statistics, 39(3):684­699.
+Zhu, F., Cai, Z., and Peng, L. (2014). Predictive regressions for macroeconomic data. The Annals of Applied
+
+   Statistics, 8(1):577­594.
+
+                                                            52
+

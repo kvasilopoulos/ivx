@@ -1,0 +1,2826 @@
+arXiv:2307.15151v1 [econ.EM] 27 Jul 2023  Predictability Tests Robust against Parameter Instability
+
+                                                                             Christis Katsouris
+
+                                                                    Department of Economics, University of Southampton
+
+                                                                     Job Market Paper I (unedited)
+
+                                                                             January 25, 2021
+
+                                                                                            Abstract
+                                          We consider Wald type statistics designed for joint predictability and structural break test-
+                                          ing based on the instrumentation method of Phillips and Magdalinos (2009). We show
+                                          that under the assumption of nonstationary predictors: (i) the tests based on the OLS
+                                          estimators converge to a nonstandard limiting distribution which depends on the nuisance
+                                          coefficient of persistence; and (ii) the tests based on the IVX estimators can filter out the
+                                          persistence under certain parameter restrictions due to the supremum functional. These
+                                          results contribute to the literature of joint predictability and parameter instability testing
+                                          by providing analytical tractable asymptotic theory when taking into account nonstation-
+                                          ary regressors. We compare the finite-sample size and power performance of the Wald
+                                          tests under both estimators via extensive Monte Carlo experiments. Critical values are
+                                          computed using standard bootstrap inference methodologies. We illustrate the useful-
+                                          ness of the proposed framework to test for predictability under the presence of parameter
+                                          instability by examining the stock market predictability puzzle for the US equity premium.
+
+                                          JEL classification: C12, C22, C26, C32, C53, C58.
+
+                                          Keywords: Stock Return Predictability, Parameter Instability, Predictive Regression, IVX
+                                          filtration, Local-to-unity asymptotic theory, Ornstein-Uhlenbeck process, bootstrap.
+
+                                              PhD Candidate, Department of Economics, University of Southampton - Highfield Campus, UK.
+                                          Email: C.Katsouris@soton.ac.uk. I am grateful to my academic advisors Jean-Yves Pitarakis, Jose Olmo
+                                          and Tassos Magalinos for their guidance, support and continuous encouragement. Moreover, I would like to
+                                          thank session participants of the IX Workshop in Time Series Econometrics at the University of Zaragoza,
+                                          the 2019 Conference of the International Association of Applied Econometrics (IAEE) at the University
+                                          of Cyprus, as well as the participants of the 2018 and 2019 Econometric Workshops at the Department
+                                          of Economics, for helpful conversations. Financial support from the University of Southampton Vice
+                                          Chancellors PhD Scholarship is gratefully acknowledged. The author also acknowledge the use of the IRIDIS
+                                          High Performance Computing Facility, and associated support services at the University of Southampton,
+                                          in the completion of this work. All the usual disclaimers apply.
+
+                                                                                                  i
+1 Introduction
+
+The stock predictability puzzle is an important research theme appeared in the financial
+econometrics literature which has seen growing attention in recent years1. Various studies
+have demonstrated that forecast performance via predictive regressions with macroeco-
+nomic variables as predictors, is countercyclical, that is, there is a co-movement with the
+business cycle. Further studies focused on identifying periods of episodic predictability;
+a terminology adapted to describe the phenomenon of predictors "switching on" during
+certain periods, while appear to have no predictive ability during other periods (e.g., see
+Gonzalo and Pitarakis (2012, 2017), Chinco et al. (2019), Demetrescu et al. (2020)).
+These periods of unstable forecasting ability appear in time series models in the form of
+parameter instability (see, Rossi and Inoue (2012), Inoue et al. (2017), Pitarakis (2017)
+and Georgiev et al. (2018)). Considering this vibrant discussion, we aim to study how the
+degree of persistence affects the asymptotic theory of related to the above aspects. Our
+goal is to tackle the following econometric question: "How does the time series properties
+of predictors affect predictability testing under the presence of parameter instability?"
+
+The predictive regression model operates under the strong assumption of parameter sta-
+bility, which could be violated in certain regions of the sample2. Moreover, the majority
+of the structural break literature propose testing methodologies under the assumption of
+stationary time series. Therefore, the development of a robust joint test against both
+predictability and structural break is an important aspect to tackle. Related issues from
+the predictability literature, include the high persistence of predictors as well as the econo-
+metric implications of testing for structural break given the existence of nonstationary
+regressors as captured via the local-to-unit root specification of the predictive regres-
+sion. In this paper we propose an econometric framework for jointly testing against both
+predictability and structural break. The tests are constructed in a similar manner as the
+Wald type statistics proposed by Gonzalo and Pitarakis (2012) in a threshold predictive
+regression model3. Our contributions are threefold: (i) We propose a test statistic which
+jointly tests against the alternative hypothesis of both predictability and structural break
+and show that the test is robust to the persistence properties of predictors in the model;
+
+    1In empirical finance the predictive regression model provides a suitable testing framework for aspects
+such as conditional asset pricing and investment strategy performance evaluation. An extensive study
+about the latter is presented by Pesaran and Timmermann (1995). The author examines the predictability
+of stock returns from the perspective of optimal portfolio decision. Moreover, the author introduces the
+concept of episodic predictability, arguing that predictability can be explained in accordance to certain
+macroeconomic events. Moreover, related applied macroeconometric applications include the forecast-
+ing of macroeconomic fundamentals as well as the examination of short-horizon vis-a-vis long-horizon
+predictability.
+
+    2A related study to parameter instability in prediction models is presented by Paye and Timmermann
+(2006). In this paper, the authors propose a framework for identifying and estimating multiple breaks.
+
+    3The particular framework and in the subsequent paper of Gonzalo and Pitarakis (2017) the authors
+propose tests which capture the effects of linearity and the presence of a threshold effect in predictive
+regressions with persistent predictors.
+
+                                                       1
+(ii) We show that the test statistic has a nuisance parameter free limiting distribution
+under the assumption of stationary and mildly stationary regressors, while it converges
+to a nonpivotal asymptotic distribution under the assumption of local-to-unit root (LUR)
+or integrated regressors; (iii) We provide an extensive Monte Carlo simulation study
+where we compare the empirical size and power of the sup IVX-Wald test. We also
+present simulations to examine the finite-sample properties of the corresponding sup
+OLS-Wald statistic. Lastly, we employ the proposed testing framework to investigate
+the predictability puzzle based on the equity premium of US stock returns.
+
+Related Literature The ideas in this paper are related to research done in two different
+fields. From finance, it is related to the stock return predictability literature and from
+the econometrics and statistics perspective it is related to the literature of parameter
+instability and structural break testing methodologies. We aim to bridge the gap in the
+literature by proposing a testing framework which incorporates both aspects.
+
+Firstly, we provide a general overview of the predictability literature, starting with the
+implementation of simple t-tests to detect statistical significance in stable relations of
+predictants such as equity index returns, on the lagged time series of predictors. From
+extensive empirical applications, this practise has been proved to cause distorted inference
+due to the presence of high persistent predictors, since nonstandard terms appear in the
+limiting distribution of the t-test. In particular, Stambaugh (1999) observed this finite
+sample bias4 which occurs when the classical least squares estimator is employed for
+statistical inference. Furthermore, Amihud and Hurvich (2004) consider a second-order
+bias-correction and propose a reduced-bias OLS based estimator. Both aforementioned
+methods are considered to provide a post-estimation bias correction in finite samples.
+
+Secondly, the predictability literature was extended to nonstandard inference to account
+for the presence of nonstationary predictors; some of the most notable contributions in-
+clude the Bonferroni-type approach as in Cavanagh et al. (1995) and Campbell and Yogo
+(2006), the conditional likelihood method based on sufficient statistics5 proposed by
+Jansson and Moreira (2006) and the control function method proposed by Elliott (2011).
+The drawback of these testing methodologies is that the asymptotic theory has some
+undesirable properties such as the uncorrectable bias due to the presence of nuisance
+parameter in the limit distribution (see, Phillips and Lee (2013)). Moreover, the particu-
+lar approaches are computational complex especially in multivariate predictive regression
+settings. For instance, Kasparis et al. (2015) propose a set of nonparametric predictive
+tests which allows for nonlinearities and offers robustness to integration order.
+
+    4Notice that the Stambaugh bias correction is based on the studies of Marriott and Pope (1954) and
+Kendall (1954) who proposed suitable bias correction in autocorrelations.
+
+    5The idea of sufficient statistics considers optimal tests invariant under transformation based on the
+curved exponential family. This framework allows to use the conditional restrictions testing problem in the
+presence of nuisance parameters and is particularly appealing in the case of near integrated regressors.
+
+                                                       2
+Thirdly, a novel approach that recently has been attracting much attention is the instru-
+mental variable-based test proposed by Kostakis et al. (2015) (KMS, hereafter), which
+is build upon the theoretical framework developed by Phillips and Magdalinos (2009).
+This methodology, referred to as IVX-Wald test, provides a robust framework for predic-
+tive regression models which is valid for predictors with general persistence properties.
+Specifically, the asymptotic theory shows that the IVX estimator which converges to a
+mixed Gaussian distribution, successfully removes the long-run endogeneity, that appears
+due to the innovation structure of the model, and provides a pivotal statistic robust
+under different degrees of persistence or even regressors of mixed integration (e.g., see
+Phillips and Lee (2016)). Hence, a self-normalized Wald statistic can be constructed
+that converges to a nuisance parameter free 2 limiting distribution. More importantly,
+the IVX filtration implies a direct inference procedure via the various moment approxima-
+tions (e.g., long-run covariance matrices) and can be easily extended to the multivariate
+predictive regression model under certain regulatory conditions.
+
+The aforementioned literature operates under the assumption of parameter constancy6
+which implies a stable predictive relationship over the sample period. However, due to the
+nature of economic conditions, shifting between periods of market tranquillity and periods
+of market exuberance, the phenomenon of episodic predictability7 has been proposed
+to capture these "pockets" of predictability across business cycles (see, Farmer et al.
+(2019)). This implies the existence of time-varying predictability which can be examined
+within an econometric framework which accommodates time-varying parameters. In this
+paper, we approach this aspect by proposing to test for the existence of joint predictability
+and structural break, in the form of a single parameter shift at an unknown break-point.
+Thus, our approach is closer to the framework of Andrews (1993) who proposed Wald-
+type statistics for testing for a single structural break at an unknown break-point.
+
+The presence of structural break in predictive regression models implies variation in pre-
+dictability across time. As a result, standard testing methodologies for break detection,
+such as Andrew's Wald statistics for linear regression models as well as the family of tests
+proposed by Bai and Perron (1998) can no longer be valid for nonstationary8 predictors
+
+    6Note that, the literature of structural change goes back to 1940s and 1950s with the pioneering
+work of Wald on sequential hypothesis testing as well as the seminal work of Page (1954) which proposes
+methodologies for detecting anomalies in control charting, an idea further developed by Chu et al. (1995)
+and Chu et al. (1996) who consider testing for structural break in the sense of contaminated and non-
+contaminated periods in linear regression models. Further seminal studies for structural break tests include
+Chow (1960), Hawkins (1987) and Ploberger and Krämer (1990) among others.
+
+    7Note that, formal econometric methods to test for episodic predictability have been recently proposed
+by Demetrescu et al. (2020), who consider related subsampling techniques.
+
+    8The frameworks proposed by Phillips and Magdalinos (2009) and Magdalinos and Phillips (2009) ex-
+plicitly examine the various forms of nonstationarity attributed due to the structure of the predictive and
+cointegrated system, as captured by specific characteristics of the system. This is a major distinction in the
+literature which previously thought that the presence of nonstationarity in the regressors as a charateristic
+occurring due to the autoregressive specification of the model predictors solely.
+
+                                                       3
+as captured by the autoregressive specification of the predictive regression model. This
+invalidity is demonstrated by the simulation studies of Paye and Timmermann (2006).
+More specifically, the authors show that in the case of highly correlated innovations and
+(unfiltered) persistent predictors, an implementation of a sup-F test and UDMax test can
+cause severe size distortions when testing for structural breaks in time series. Moreover,
+the optimal test of Elliot and Muller has good empirical size performance, but distortions
+appear in the asymptotic properties of the power function of the test.
+
+The literature of structural break tests has recently focused in the construction of suitable
+testing frameworks for predictive regression models. Cai et al. (2015) propose modelling
+smooth structural breaks using an L2- type statistic, in predictive regressions with non-
+stationary predictors. A different approach include the study of Pitarakis (2017) who
+consider a CUSUM-type statistic. Additionally, due to the occurrence of nonstandard
+limiting distributions in standard structural break test implementations, Georgiev et al.
+(2018) and Georgiev et al. (2019) propose the use of a fixed regressor wild bootstrap
+procedure9 to approximate critical values. Another related study to the bootstrapping
+approach of structural break tests is presented by Boldea et al. (2019). However, the
+proposed framework is restricted to the case of exogenous regressors.
+
+Despite the recent developments of the structural break literature for predictive regres-
+sions, these methodologies consider the detection of parameter instability in predictive
+regression models without simultaneously testing whether the tests are robust to the
+presence of predictability around the break-point location. The only existing study that
+jointly tests for the existence of both effects is the paper of Demetrescu et al. (2020),
+who propose to combine testing for predictability using appropriate subsampling tech-
+niques10(see also similar techniques employed by Hansen (2000a)). The authors propose
+to use bootstrap-based inference due to the existence of a non-pivotal limiting distribu-
+tion, which is a robust approach to provide statistical validity of the tests.
+
+Further aspects related to the IV based approach of KMS that we follow in this paper, can
+be also examined within the above parameter instability testing procedures. Recent ap-
+plications include Magdalinos (2020) who consider predictability tests with GARCH-type
+effects (see also, Gungor and Luger (2020) ) as well as Yang et al. (2020) who consider
+a modification of the KMS test that accounts for serial correlation in the error term of
+the linear predictive regression. Moreover, Pang et al. (2020) propose testing method-
+ologies for multiple structural breaks under the presence of nonstationary predictors with
+an application to financial bubble detection. All these features demonstrate additional
+refinements one can consider as future research related to our proposed framework.
+
+    9Notice that the particular fixed regressor wild bootstrap procedure is an extension to the fixed regressor
+bootstrap approach employed by Hansen (2000b) to deal with the appearance of a nonstandard limiting
+distribution due to nonstationary regressors.
+
+   10The subsampling technique is similarly employed by Davidson and Monticini (2010) in the context of
+detecting structural break due to break in cointegration of the relation under investigation.
+
+                                                       4
+Outline The paper is organized as follows. Section 2, presents the predictive regression
+model along with the background assumptions. This Section also includes a review of the
+IVX instrumentation procedure of KMS, which is employed for the construction of the
+proposed test statistic. Section 3, presents the asymptotic theory of the test statistic
+under different degrees of regressors persistence. Section 4 presents an extensive Monte
+Carlo simulation study. Section 5 illustrates an application to the US stock returns which
+provides evidence of the empirical relevance of the proposed tests for jointly testing
+predictability and structural break. Section 6 concludes. All the mathematical proofs and
+related results are included in the Appendix of the paper.
+
+2 Econometric Model and main assumptions
+
+In this section we present the theoretical background within which we operate. We
+denote with (, F , P) a suitable probability space on which all of the random elements
+are defined11. Moreover, throughout the paper, all limits are taken as T  , where
+T is the sample size. The symbol "  " is used to denote the weak convergence of
+the associated probability measures as T  . The symbol d denotes convergence in
+distribution and plim denotes convergence in probability, within the probability space. Let
+{Yt, Xt}Tt=1 denote the corresponding random variables of the underline distributions.
+
+2.1 Predictive Regression Model
+
+Consider the predictive regression model with a possible single structural break
+
+yt = t + t xt-1 + ut             0  t  T,                                         (2.1)
+xt = RT xt-1 + vt,                                                                (2.2)
+
+where yt  R is an one-dimensional vector and xt  Rp×1 is a p-dimensional vector of
+predictors, with an initial condition x0 = Op(1) which we assume that does not affect
+the limit theory. Moreover, the autocorrelation matrix is expressed as below
+
+                 C                                                                (2.3)
+RT = Ip - T x
+
+where C = diag{c1, ..., cp} is a p×p matrix. The degree of persistence in the regressors is
+determined by the unknown persistence coefficients ci 's which are assumed to be positive
+constants and the exponent rate x  R, that is, x < 1, x  (0, 1) or x > 1.
+
+   11Notice that this is an important assumption, since our framework can be extended to Hilbert spaces
+within which we can denote the expectation operator and higher moments as inner products. In that sce-
+nario, structural break has a slightly different interpretation. We leave this as a future research endeavour.
+
+5
+The predictive regression model given by (2.1)-(2.2) accommodates the existence of a
+
+single unknown structural break at location k. Therefore, the model parameters take the
+
+following form which indicate a time-varying parameter vector (i.e., parameter instability)
+
+                                              
+           1,                                 1,
+     t  =  1,        0t k        and  t    =  2,       0t k            (2.4)
+                     k tT                              k t T
+
+where 1  Rp×1 and 2  Rp×1 while for the univariate model 1  R and 2  R.
+
+To develop asymptotic theory suitable for robust inference in the predictive regression
+model under the presence of parameter instability and nonstationarity we impose the
+following assumptions and regulatory conditions as described below.
+Assumption 1. Let et = (ut, vt) be a (p + 1)-dimensional vector. The innovation
+sequence et is a conditionally homoscedastic martingale difference sequence ( m.d.s )
+such that the following two moment conditions hold:
+
+A1. E [et |Ft-1] = 0, where Ft =  (ut, ut-1, ...) is the natural filtration.
+
+A2. E [et et |Ft-1] = ee , where ee  R(p+1)×(p+1) is a positive-definite covariance
+      matrix, which has the following form:
+
+                           ee =  u2   u v     > 0.
+                                 v u  v v
+
+with u2  R, uv  Rp×1 and vv  Rp×p, where p is the number of predictors.
+
+Assumption A1 indicates that the innovation vector is a martingale difference sequence
+while A2 indicates that the innovation sequence is conditionally homoscedastic. Under
+conditions A1 and A2, the following Functional Central Limit Theorem (FCLT ) applies
+
+1    T r     =  1    T r   ut   BM (ee) =     Bu(r )   = e1e/2W (r ),
+  T               T  t =1  vt                 Bv (r )
+         et
+
+     t =1
+
+where e1/e2W (r ) is a (p + 1)-dimensional Brownian motion with covariance matrix ee.
+
+The above error structure provides a realistic interpretation of macroeconomic shocks.
+In other words, the shocks to yt and xt-1, that is, ut and vt respectively, appear to
+be contemporaneously correlated, a commonly used assumption in predictive regression
+models. Related definitions can be found in Phillips and Durlauf (1986), Phillips (1987)
+and Phillips (1988). Moreover, the implementation of a FCLT 12 allows to derive the
+limiting distribution of Wald type statistics for jointly testing predictability and structural
+break within the framework of this paper.
+
+   12A standard FCLT for linear regression models is introduced by Theorem 7.17 in White (2001).
+
+                                 6
+Assumption 2. The innovation to xt is a linear process with the following representation
+
+                                     t i.i.d (0, ee )
+
+vt := (L)t  j t-j ,
+
+                               j =0
+
+where {}j=0 is a sequence of absolute summable constant matrices such that        j
+                                                                            j =0
+
+has full rank and 0 = Ip with (1) = 0, allowing for the presence of serial correlation.
+
+To allow for the detection of possible structural breaks via the predictive regression model
+and avoid the presence of nuisance parameters at the boundary of the parameter space
+we also impose the following assumption.
+
+Assumption 3. Let k = T , where 0 <  < 1. Then, the fraction of structural break
+defined as 0 = k0/T is within the interior of (0, 1) for some fixed 0 parameter13.
+
+Assumption 4. The estimator , is Ft-measurable and [0, 1]-valued. Then, consistent
+estimation of the break-point implies that  some m0 such that  -  = Op (T -m0).
+
+Remark 1. Assumption 2 gives the linear process representation of innovations proposed
+by Phillips and Solo (1992) and can accommodate the case of serial correlation or even
+conditional heteroscedasticity with suitable specifications. Assumption 3 excludes struc-
+tural breaks at the boundaries of the sample. Assumption 4 ensures the existence of a
+consistent estimator of the unknown break-point which imply that lim E |^ - | = 0.
+
+                                                                                                                                 T 
+
+For instance, assuming that we are testing for an unknown break-point, to avoid uniden-
+tified parameters under the null hypothesis the supremum functional is employed for the
+construction of the Wald type statistics we propose in the next section.
+
+When the time-varying parameters t and t are both constant over the full sample, that
+is, 1 = 2 =  and 1 = 2 = , then the regression specification given by (2.1)-(2.2)
+reduces to the standard predictive regression model. In that case, the hypothesis testing
+of interest is finding statistical evidence against the null hypothesis of no predictability14.
+Furthermore, it has been shown in the literature when the ordinary least squares estima-
+tion is employed, then statistical inference is nonstandard due to the fact that the limiting
+distribution of the tests depends on the unknown persistence parameter, ci , and results
+to uncorrectable asymptotic bias. Since in our setup we are interested in detecting a
+single structural break an appropriate bias correction which occurs due to endogeneity
+should take into consideration the presence of these two regimes15.
+
+   13Notice that this mathematical statement does not imply that we consider only known break-points.
+   14For instance, the nonparametric predictive test of Kasparis et al. (2015) is constructed by comparing
+the nonparametric functional form estimator with the parametric counterpart estimator. In our setup, the
+estimation procedure is simpler to that aspect, however it still requires to carefully examine the stochastic
+properties of the Wald type statistics under nonstationarity and the presence of a single structural break.
+   15Notice that the underline regimes of our framework are motivated by the hypothesis of parameter
+instability in the predictive regression model rather than the presence of an independent threshold variable
+which induces the presence of the two regimes, as in Gonzalo and Pitarakis (2012, 2017).
+
+                                                       7
+2.2 Robust Inference with the IVX filtration
+
+To deal with the aforementioned challenges for inference in predictive regression models,
+a robust procedure has been introduced by Phillips and Magdalinos (2009) and extended
+by Kostakis et al. (2015) to detect the presence of predictability via the IVX-Wald test.
+The particular methodology, called IVX filtation, allows for the endogenous formulation
+of instruments based on the information contained in the regressors of the predictive
+regression. As a result, the degree of persistence of the instrumental variable has degree
+of persistence explicitly controlled so that the process is mildly integrated.
+
+Specifically, the IVX filtration considers the first order difference of the corresponding
+autocorrelation regression such as it can be expressed as below
+
+                             C                                                          (2.5)
+                   xt = T x xt-1 + vt, x  (0, 1).
+
+The particular first difference is not an innovation process unless the regressor belongs
+to the persistence class of integrated processes. However, it behaves asymptotically as
+an innovation after linear filtering by a matrix consisting of near-stationary roots16.
+
+Therefore, the procedure requires to choose an artificial coefficient matrix of the form
+
+               RT z =      Ip  -  Cz    , z  (0, 1), cz > 0.                            (2.6)
+                                  T z
+
+where Cz = diag{cz,1, ..., cz,p}, cz > 0 for all i  {1, ..., p}. Then, the instrumental
+regressor matrix zt  RT ×p can be constructed as below
+
+            t                                  Cz
+                                               T z
+zt =           Rtz-j xj ,      Rz =     Ip  -       , z  (0, 1), Cz > 0.                (2.7)
+
+         j =1
+
+To see this, notice that using expression (2.5) we obtain the following decomposition
+
+      t             C                          t                 C      t
+                   T x xj-1 + uj                                T x
+zt =        Rtz-j                       =          Rtz-j uj  +             Rtz-j xj-1.  (2.8)
+
+      j =1                                  j =1                        j =1
+
+which can be written via the following expression
+
+             C                    t                                  t
+zt = zt + T t ,
+                           zt =         Rtz-j vj and t =                Rtz-j xj-1.     (2.9)
+
+                                  j =1                          j =1
+
+Therefore, the IVX filtration proposes to use the constructed zt instruments for the re-
+gressors xt which are considered to behave asymptotically as mildly-integrated processes.
+
+   16Note this assumption is a key idea in the development of the asymptotic theory in cointegrated systems
+for regressors with various types of nonstationarity (see, Phillips and Magdalinos (2009)).
+
+                                        8
+More explicitly, by replacing xt with the instrument zt which has a controllable degree
+of persistence, result to a robust inference procedure which accounts for the effects of
+nonstationarity. Then, the tuning parameters, which are the exponent rate z and the
+diagonal matrix Cz are selected to ensure that zt is mildly integrated; less persistence
+than a unit root or a regressor assumed to be generated via a local-unit-root process.
+
+Thus, the IV based approach, implies that the IVX estimator is expressed as below
+
+                        IV X =         T                          -1 T       yt - y¯T     zt-1,          (2.10)
+                                                                       t =1
+                                          (xt - x¯T -1) zt-1
+
+                                      t =1
+
+where  x¯T -1  =  1     T     xt  -1  and  y¯T  =  1  T     yt ,  are  the   corresponding       sample  means.
+                  T     t =1                       T  t =1
+
+As shown by Theorem A in the Appendix of KMS, the IVX estimator converges to a mixed
+Gaussian17 limiting distribution, which holds regardless of the degree of persistence of
+the regressors in the model. In turn, this property allows to construct a self-normalized
+Wald-type statistic which is shown to converge to a standard 2-distribution.
+
+The classical testing hypothesis implies that, H0 : R = 0 vs H1 : R = 0, where R the
+full rank q × p restriction matrix with rank q. Then, the IVX-Wald statistic can be used
+to test the null hypothesis of no predictability in predictive regression models.
+
+The IVX-Wald statistic is expressed as below
+
+                                           WTIV X = IV XQR-1IV X                                         (2.11)
+
+where QR is a consistent estimator of the asymptotic variance-covariance matrix of IV X
+that accommodates both long-run endogeneity caused by the correlation between the
+error terms of the system, that is, ut and vt, and the finite-sample distortion which
+results from removing the model intercept. The covariance matrix QR, is derived via the
+following fully modified (FM) estimation of the system covariance terms
+
+                                       T               -1              T                  -1
+
+                        QR =              zt -1 xt -1     M                  xt -1 zt -1                 (2.12)
+                                                                                                         (2.13)
+                                      t =1                        t =1                                   (2.14)
+
+                              M = u2        T                 - T z¯T -1z¯T -1F M
+
+                                               zt -1 zt -1
+
+                                           t =1
+
+                        F M = uu - uv uu uv
+
+where  zT -1   =     1  T     z~t-1.  Notice that for the univariate predictive regression then
+                     T  t =1
+
+F M  F2 M and uu  u2, where u2 is a consistent estimator of u2. In that case, we
+
+can use the bias correction of KMS for the univariate model which is given by
+
+   17The mixed Gaussianity property of the IVX estimator is also extensively examined in the papers of
+Phillips and Lee (2013) and Phillips and Lee (2016) under various integration orders.
+
+                                                       9
+    T                                                             uv .
+                                                                uu v v
+M=        zt2-1 - T z¯t2-1 1 - u2v u2,       with   u2v      =          (2.15)
+
+    t =1
+
+A key aspect for the computation of the IVX-Wald statistic is the estimation procedure
+for the matrices uv and uu, which represent the estimated long-run covariance between
+ut and vt and the long-run variance of ut respectively. More specifically, these covariance
+matrices can be constructed using nonparametric kernels with preselected bandwidth
+parameters, such as the Newey-West type estimators (see, KMS for detailed description
+and related studies such as Newey and West (1987) and Andrews (1991)).
+
+Furthermore, it can be proved that under the null hypothesis which imposes a set of linear
+restrictions in the parameter vector , we obtain that WTIV X = 2(q) as T   (see,
+Theorem 1 in KMS). This important limit theory result provides a unified framework for
+robust inference and testing regardless the persistence properties of regressors. A simple
+example is the application of the IVX-Wald test for inferring the individual statistical sig-
+nificance of predictors under abstract degree of persistence. For additional scenarios such
+as predictors of mixed integration order see Phillips and Lee (2013) and Phillips and Lee
+(2016). In these cases the powerful property of the IVX-Wald statistic still holds.
+
+2.3 Comparing OLS against IVX based estimators
+
+In this section, we present some preliminary comparisons between the OLS-Wald and
+the IVX-Wald statistics, under the null hypothesis of no structural break, to motivate
+further our research. These comparisons aim to shed some light on the ability of the OLS
+estimator to detect parameter instability under the assumption of nonstationary predic-
+tors. Furthermore, we examine the performance of the IVX estimator for robustifying
+inference in predictive regression models with persistent18 predictors under the presence
+of parameter instability which has been recently a stylized fact in various economic data.
+
+We consider that the pair {(yt, xt) : 1  t  T } is generated by the following bivariate
+predictive regression system drawn from an i.i.d normally distributed error sequence
+
+                         yt = t xt-1 + ut ,                             (2.16)
+                                                                        (2.17)
+                         xt =  1  -  c  xt-1 + vt,  x0 = 0.
+                                     T
+
+where (ut , vt) i.i.d N    u2 uv     with ci > 0 or ci < 0 where yt  R and xt  R.
+                         u v v2
+
+   18Notice that the assumption of persistent or integrated regressors is commonly used in the time series
+econometrics literature due to the nature of economic and financial variables.
+
+                                        10
+We are particularly interested to design Wald statistics robust to nonstationarity which
+allows to test jointly for the presence of predictability and parameter instability in the
+predictive regression model given by (2.16) and (2.17). To demonstrate that the esti-
+mator of the model parameter can affect the limiting distribution of the test and thus
+statistical inference we consider via a Monte Carlo experiment testing for a structural
+break. Thus, we can apply the sup-Wald statistics using each estimator separately by
+partitioning the sample, estimating the test statistic for each partition and then taking
+the supremum over the generated sequence of test statistics19.
+
+Initially, we consider that the covariance matrix  which captures the dependence between
+the predictive regression and the persistent regressor has a unit variance. Notice that
+in this paper we consider a single structural change as in the seminal paper of Andrews
+(1993). When the break-point location, denoted with  is known, then to construct the
+Wald statistic we estimate model parameters 1() for t = {1, ..., T } and 2() for
+t = {T  + 1, ..., T } based on the observations of the corresponding sub-samples. When
+the break-point location is unknown then we consider the closed interval   [1, 2].
+
+Under the null hypothesis of no structural break, H0 : 1 = 2, which implies parameter
+constancy across the full sample. We report rejection frequencies from 5,000 Monte
+Carlo replications, using the predictive regression model with a fixed parameter  = 0.25.
+For the purpose of comparability we use the critical values that correspond to the NNB
+asymptotic critical values given by Table 1 of Andrews (1993). The empirical size results
+for the sup OLS-Wald statistic are presented on Table 1 and 3, while additional results
+with 10,000 replications can be found on Table ?? and ??.
+
+As we can see from these rejection frequencies, under the assumption of persistent pre-
+dictors (low values of c) when we use the critical values that correspond to the standard
+NBB limiting distribution we obtain size distortions which considerably deteriorate for
+larger correlation values between the error sequences ut and vt. Thus, using the OLS
+estimator especially when modelling nonstationarity can produce biased inference. The
+econometric intuition is clear, constructing structural break statistics based on the OLS
+estimator when the predictor follows a local-to-unit root process causes not correctable
+size distortions of the tests due to the fact that the degree of persistence coefficient ci is
+unknown a prior and cannot be consistently estimated (see, Proposition 1). Furthermore,
+when we implement the sup IVX-Wald statistic as explained in the previous section then
+we will need to carefully examine the stochastic properties of the proposed tests.
+
+Firstly, we briefly examine in this setting the asymptotic theory of the two estimators
+to understand which components of the limiting distribution result into nonstandard
+sampling results especially due to the introduction of parameter instability.
+
+   19Formal assumptions and asymptotic theory regarding the implementation of the sup-Wald test can
+be found in Andrews (1993). In this section, we demonstrate simple comparisons of the finite sample
+performance of the two Wald-type statistics based on the OLS and IVX estimators respectively.
+
+                                                      11
+Notice that the appearance of nonstandard limiting distribution occurs in the case we
+estimate the sup OLS-Wald statistic, since when we estimate the model parameter  by
+OLS its limiting distribution depends on the following two components
+
+T                                          T 
+
+      (xt-1 - x¯T -1) (xt-1 - x¯T -1) and        (xt-1 - x¯T -1) (vt-1 - v¯T ) .  (2.18)
+
+t =1                                       t =1
+
+The first component converges to the integral of a squared demeaned OU process, while
+the second component weakly converges to a stochastic integral of that demeaned OU
+process. Therefore, under the assumption of nonstationary regressors and due to the
+appearance of the corresponding stochastic integral approximations, the second moment
+of the asymptotic distribution of the model estimator have a nonconstant variance and a
+nonstandard limiting distribution. For instance, Georgiev et al. (2018) derive the limiting
+distribution of the sup-Wald test statistic under the local-to-unit-root generating process,
+which results to a non-pivotal asymptotic theory. In order to deal with this problem, the
+authors propose to use the fixed regressor bootstrap which is asymptotically valid even
+under the nonstationarity assumption.
+
+Secondly, in the case we estimate the model parameter using the IVX instrumentation,
+then the following matrix moments appear
+
+      T                                    T 
+
+            zt-1 (xt-1 - x¯T -1) and                   zt-1 (vt-1 - v¯T ) .       (2.19)
+
+      t =1                                       t =1
+
+The asymptotic theory of the above moment matrices is examined extensively by KMS.
+A summary of the main results is presented by Lemma 1 in Appendix A of this paper.
+
+Both OLS and IVX estimators weakly converge to a mixed Gaussian distribution, thus
+to better understand the differences between the OLS and the IVX estimator20 and how
+these manifest in the asymptotic theory of the tests, we examine the stochastic quantity
+
+                            +                                                     (2.20)
+            PcIV X () :=
+                                              JCd JC
+                             1+
+                                           0
+                                             1
+
+                                              JCd JC
+
+                                           0
+
+The Pc () quantity which appears in the limiting distribution of the Wald statistics when
+an IVX estimator is employed, is a random variable. Thus, considering the analytical form
+of this random quantity will require to derive an analytical approximation with stochastic
+terms of higher order, which is a challenging task.
+
+   20The asymptotic distribution of the IVX estimator in the univariate predictive regression model is proved
+to be mixed Gaussian. A proof of this asymptotic result can be found in Phillips and Lee (2016).
+
+                                                      12
+Similarly, the corresponding expression for the OLS estimator is is a function of the
+stochastic quantity
+
+                
+
+PcOLS () :=  0    J2Cd JC
+               1
+                           .  (2.21)
+
+             0    J2Cd JC
+
+To obtain some insights regarding the asymptotic behaviour of the stochastic quantities
+PcIV X () and PcOLS () we use integral approximation simulation techniques with 10,000
+replications for a fixed   [0.15, 0.85]. Specifically, to approximate the underline OU
+process which drives these stochastic quantities we use a 1000-step random walk.
+
+Moreover, to make these heuristic arguments more apparent, we plot the mean and 95%
+confidence intervals of the particular empirical fluctuation processes for values of the
+persistence parameter c  {1, 5, 100}. As we can see from Figure 1, for low persistence
+levels the asymptotic variance of these processes exhibit a linear growth rate for both
+the OLS and the IVX estimators since Pc () has approximate linear increments with
+. In other words, since the predictive regression model does not assume stationarity
+for the persistence properties of regressors then by allowing for breaks if we use the
+OLS based estimator then the accumulation of information as seen by the the second
+moments has a faster convergence rate especially in the case of high persistence. On the
+other hand, when we use the IVX estimator this accumulation of information is smoother
+for different values of  due to the properties of the particular estimator in filtering out
+abstract degrees of persistence, even under time-varying settings.
+
+FIGURE 1.
+
+13
+3 Joint Predictability and Structural Break Testing
+
+We focus on the linear predictive regression model and in particular the univariate case.
+Our proposed testing framework and related asymptotic theory can be extended to the
+multivariate predictive regression with suitable notation modification. Testing for a single
+structural break at an unknown break point location within the full sample requires that
+the multiple predictive regression is expressed as below
+
+yt = (1 + 1 xt-1) 1{t  k } + (2 + 2 xt-1) 1{t > k } + ut                    (3.1)
+
+where k = T  for some   (0, 1), with . denoting the integer part operator.
+
+To derive the asymptotic theory of the tests we employ the local-unit-root specification
+
+proposed by Phillips (1987). Specifically, since the set of regressors are assumed to
+
+be generated via the LUR process xt =  Ip  -  C  xt-1 + vt, we consider the following
+                                              T
+
+p-dimensional Gaussian process
+
+                                       r         r  (0, 1).                 (3.2)
+
+                  Kc (r ) = e(r-s)C d Bv (s),
+
+                                     0
+
+which satisfies the Black-Scholes differential equation dKc (r )  cKrc (r ) + dBv (r ), with
+Kc (r ) = 0, implying also that Kc (r )  v Jc (r ), where Jc (r ) = e(r-s)Cd Wv (s) and
+
+                                                                                                                                0
+
+Kc (r ) the Ornstein-Uhlenbeck, (OU) process,21 which encompasses the unit root case
+
+such that Jc (r )  Bv (r ), for C = 0.
+
+3.1 Classical Least Squares Estimation
+
+In this Section, we derive the asymptotic theory result that corresponds to a standard
+sup-Wald test, based on the OLS estimator, when testing for a single structural break in
+predictive regressions with multiple predictors.
+
+We denote with X1 := 1{t  k} xt1{t  k} , X2 := 1{t > k} xt1{t > k} and define
+X = [X1 X2]  RT ×2(p+1) the corresponding partitioned matrix and R = [Ip+1 - Ip+1]
+with Ip+1 denoting an identity matrix. Moreover, we denote with  := (1, 2), the
+parameter vector, then the predictive regression is y = X + u. Thus, the OLS Wald
+
+statistic for testing the null hypothesis of no structural break, that is, H0 : 1 = 2 against
+H1 : 1 = 2, where j = (j , j ) for j = 1, 2, is given by the following expression
+
+WTOLS ()  =  1    1() - 2()  R (XX)-1 R -1       1() - 2()                  (3.3)
+             ^u2
+
+   21The OU is a stationary Gaussian process with an autocorrelation function that decays exponentially
+over time. Moreover, the continuous time OU diffusion process has a unique solution.
+
+                                       14
+Statistical inference under the null hypothesis of no structural break in the predictive
+regression are conducted using the supremum functional. The sup OLS-Wald statistic is
+
+           WOLS(t) := sup WTOLS(), for t1  t  t2.                     (3.4)
+                                   [1,2]
+
+where 0 < 1 < 1 and 0 < 2 < 1 with 2 = 1 - 1.
+
+Under the null hypothesis the breakpoint k is unidentified and so the supremum func-
+
+tional selects the maximum Wald statistic corresponding to a sequence of Wald statistics
+
+evaluated at values within the interval [1, 2]. Specifically, in order to construct the
+corresponding supremum Wald tests we split the full sample {yj , xj-1}Tj=1 into two sub-
+samples; the first sub-sample corresponds to the time period before time t, {yj , xj-1}tj=1
+and the second sub-sample corresponds to the time period after time t, {yj , xj-1}Tj=t+1.
+Due to the fact that we operate within the Skorokhod topology the sample moments
+
+that correspond to these sub-samples weakly converge to the corresponding asymptotic
+
+result which are based on the D[0, 1] topology. For instance, when deriving the sample
+
+moments we can use the notation t  [t1, t2], where t1 and t2 are the lower and upper
+
+bounds for the possible break-point location.
+
+Theorem 1. If Assumptions 1 and 3 hold and  denotes the unknown break-point, then
+
+the sup OLS-Wald statistic under the null hypothesis H0 : 1 = 2 against H1 : 1 = 2,
+where j = (j , j) with j = 1, 2 based on the predictive regression model (2.1)-(2.2)
+with x = 122 weakly converges to the following limiting distribution
+
+           WOLS()  sup WTOLS()  sup Nc ()Mc ()-1Nc ()                 (3.5)
+
+           [1,2]  [1,2]
+
+where
+
+           Mc ()-1 = Gc () - Gc ()Gc (1)-1Gc ()                       (3.6)
+
+and
+
+                                               -1                   
+
+       Nc () = Gc ()-1Hc () - Gc (1) - Gc () Hc (1) - Hc ()           (3.7)
+
+such that
+
+                                                      
+
+           Gc () := Kc (r )Kc (r )d r and Hc () := Kc (r )d Bu(r )    (3.8)
+
+           0                                       0
+
+with Gc ()  R(p+1)×(p+1) a positive-definite stochastic matrix and Hc ()  R(p+1)×1.
+
+   22Note that this parameter restriction for the exponent rate implies that xt follows a LUR process.
+
+                                                      15
+Theorem 1 provides a novel result in the literature and our first theoretical contribution,
+demonstrating that the sup OLS-Wald statistic as a structural break test on an unknown
+location based on the predictive regression model with persistent predictors, does not
+converge to the NBB result as proposed by Andrews (1993) in linear regressions. Thus,
+we show that the asymptotic theory of the test depends on the nuisance parameter of
+persistence ci . However, when the break-point is known a prior, such as   0, it can
+be easily proved that the limit theory of the OLS-Wald test converges to a NBB even in
+the case of persistent predictors. The proof of Theorem 1 is shown in Appendix C.
+
+3.2 IVX based Estimation
+
+In this section, we examine the IVX-Wald based tests for jointly testing for the presence
+of predictability and parameter instability based on the predictive regression model. The
+null hypothesis remains the same as in the IVX-Wald test, but the alternative hypothesis
+is constructed so that it captures both effects. We examine separately the case of stable
+model intercept and the case of unstable model intercept. The model estimates of the
+two sub-samples are used to construct the proposed test statistics. We denote with
+1IV X (t) and 2IV X (t) the IVX estimates of the two sub-samples; and with Q1 (t) and
+Q2 (t) the corresponding covariance matrices. The sample estimates are given by
+
+            1  t                    -1       1  t
+            t                                t
+1IV X(t) =           z1,j-1x1 ,j-1                    z1,j -1 yj                      (3.9)
+                                                                                     (3.10)
+               j =1                             j =1
+
+              1      T                       -1         1         T
+            T -t                                      T -t
+2IV X(t) =                    z2,j-1x2 ,j-1                           z2,j -1 yj  .
+
+                     j =t +1                                j =t +1
+
+3.2.1 Joint Wald Tests under stable model intercept
+
+We begin our asymptotic theory analysis by considering the case in which the model
+intercept  is assumed to be stable, that is, under the null hypothesis there is no structural
+break in the model intercept. Then, the testing hypothesis of interest is given by
+
+                     H0 : 1 = 2 and 1 = 2                                            (3.11)
+
+For evaluating our hypothesis we use the IVX-Wald test which has the following form23
+
+                                                      -1
+
+WIV X (t) = 1IV X (t) - 2IV X (t) Q1(t) + Q2(t)                   1IV X(t) - 2IV X(t) . (3.12)
+
+   23Note that the covariance matrices are computed based on the long-covariance matrices and corre-
+sponding FM corrections given by KMS, see also Kasparis et al. (2015). These definitions are employed
+since we do not rule out the strong assumption of a weakly covariance dependence in the model.
+
+                                        16
+We denote with WIV X(t)  sup WIV X(t), the corresponding sup IVX-Wald statistic,
+                                                        t [t1 ,t2 ]
+
+since we consider the case of the unknown break-point. The two IVX estimates of  and
+
+their corresponding asymptotic variances are computed, using the data from each sub-
+sample separately. Thus, the WIV X(t) statistic can be thought as a Chow-type statistic
+for detecting break at time t, such that t1  t  t2. Then, due to the unknown nature
+
+of the break-point the sup Wald test is simply a sequence of Chow-type statistics within
+the same probability space. Theorem 2 presents the limiting distribution of WIV X(t),
+under the null hypothesis of no parameter instability in the predictive regression model.
+
+Theorem 2. If Assumptions 1 and 3 hold and  denotes the unknown break-point, then
+the sup IVX-Wald statistic under the null hypothesis (with  known to be stable a priori)
+H0 : 1 = 2 and 1 = 2, based on the predictive regression model (2.1)-(2.2) and no
+restriction on the exponent rate x , has the following asymptotic behaviour
+
+                             WIV X(t)  sup N()M()-1N()                                   (3.13)
+                                                                   [1,2]
+
+with t  [t1, t2]24 and   [1, 2], where
+
+           N() = Bp() - R()Bp(1)                                                         (3.14)
+           M() =  Ip - R() Ip - R()  + (1 - )R()R()                                      (3.15)
+
+such that
+
+                                                  1       -1
+           
+             xx +           Bd B     xx + Bd B                            , if x > 1
+
+                         0                     0
+
+R() = Ipxx +                                      1           -1                         (3.16)
+
+                            JCd JC   xx + JC d JC                         , if x = 1
+
+                         0                     0
+
+                                                                          , if x < 1
+
+where B(.) is a p-dimensional standard Brownian motion, JC() =                    eC(-s)d B(r )  is
+                                                                               0
+                                                                                      1
+an Ornstein-Uhkenbeck (OU) process and we denote with JC() = JC() -                   0  JC  (s  )d  s
+
+and B() = B() -  1  B(s  )d  s  the  demeaned  processes  of  J()         and  B()    respectively.
+                 0
+
+Theorem 2 demonstrates that the supremum functional of the IVX-Wald test weakly
+convergence to a stochastic quadratic functional and does not have the same asymp-
+totic behaviour as the corresponding IVX-Wald statistic which is proved to follow a 2p
+distribution (see, KMS, Phillips and Lee (2013) and Phillips and Lee (2016)).
+
+   24Note that, since we operate within the Skorokhod topology D (0, 1) we can apply standard weakly
+convergence arguments.
+
+                                     17
+An important implication of Theorem 2, which consists our second contribution to the
+limit theory of structural break tests in predictive regression models with nonstationary
+predictors, is that we show that the dependence of the limiting distribution to the un-
+known parameter of persistence takes different forms by restricting further the parameter
+space of the exponent rate. Specifically, Theorem 2 demonstrates that when testing for a
+structural break in predictive regression models, under the assumption that the predictors
+are integrated or nearly integrated, then the limiting distribution of the test, weakly con-
+verge to a nonstandard process, which verifies the corresponding result already mentioned
+by Hansen (2000b)). On the other hand, when the predictors are stationary or mildly
+stationary, then the test statistic weakly converges to the familiar squared tied-down
+Bessel process as proved by Andrews (1993) in the case of linear regression models. The
+latter implies that when we consider separately the special case for which x < 1, which
+covers both the cases of mildly integrated regressors, i.e., x  (0, 1), and stationary
+regressors, i.e., x = 0, then it can be proved that the limiting distribution of the sup
+IVX-Wald test converges to the standard NBB result25. Corollary 1 below is a direct
+implication of Theorem 2 and summarizes this finding.
+
+Corollary 1. Under the assumptions and definitions given by Theorem 2, when x < 1
+then the following asymptotic distribution holds
+
+                    WIV  X (t )      sup  BB  p()BBp()     ,  (3.17)
+                                              (1 - )
+                                   [1,2]
+
+where BBp(.) is a p-dimensional standard Brownian bridge.
+
+Remark 2. The weakly convergence of the sup IVX-Wald test into a normalized squared
+
+Brownian bridge, when the exponent rate is restricted such that x < 1, implies standard
+statistical inference due to the known distribution. One rejects H0 for large values of the
+sup IVX-Wald test based on a significance level  such that 0    1 and thus the
+
+limit distribution can be used to derive associated critical values, denoted with c such
+
+that P WIV X() > c  >0  with   lim P  WIV X() > c  = 1.
+
+                              T 
+
+Our findings presented by Theorem 2 verify the conjuncture of Hansen (2000b) who
+argues that when testing for a structural break based on a sup-functional induces an
+asymptotic non-pivotal distribution under the assumption of nonstationarity. However,
+this seminal study has not examined in details certain forms of nonstationarity which can
+occur and how these are manifested in the limit theory of the tests. In particular, within
+our framework we demonstrate using local-to-unit root asymptotic arguments that the
+nonstandard limiting distribution occurs when xt is properly modelled as a nonstationary
+stochastic process, and specifically the NBB result no longer holds when xt is either a
+nearly integrated or an integrated process.
+
+   25Note that in the case of a known break-point we can easily prove a convergence to a 2p distribution
+which is free of nuisance parameters and so conventional inference methods apply
+
+                                      18
+The proofs of both Theorem 2 and Corollary 1 can be found in Appendix A. Next, we
+focus on designing test statistics for jointly testing against predictability and structural
+break in predictive regression models. We define a joint Wald test based on the IVX
+estimator under the assumption of an unknown break-point as below
+
+Wjoint := sup WTIV X + WIV X (t) , for t1  t  t2.       (3.18)
+                   t [t1 ,t2 ]
+
+where the supremum functional applies only on the second component of the test above.
+Then, the Corollary 2 below gives the related limit theory result.
+
+Corollary 2. (i) If the conditions of Theorem 2 hold, then under the null hypothesis,
+H0 : 1 = 2 and 1 = 2 = 0 and no restriction on the exponent rate x , the large
+sample theory of the test statistic specified by (3.18) has the following form
+
+Wjoint  B(1)B(1) + sup N()M()-1N() ,                    (3.19)
+                                             [1,2]
+
+where B(.), N() and N() are defined in Theorem 2.
+(ii) As a special case, when x < 1, it follows that
+
+Wj o i nt    p2  +    sup     BBp()BBp()             ,  (3.20)
+                                  (1 - )
+                    [1,2   ]
+
+where BBp(.) is a p-dimensional standard Brownian bridge and 2p denotes the 2 ran-
+dom variable with p degrees of freedom. Furthermore, the two stochastic quantities of
+the limiting distribution are assumed to be independent.
+
+Remark 3. Notice that Corollary 2 demonstrates that when x < 1, the large sample
+theory of the test statistic W is pivotal. Therefore, in this special case by having
+a limiting distribution being free of nuisance parameters, asymptotic critical values for
+testing the null hypothesis can be easily obtained. The particular test statistic provides
+a methodology for testing for both predictability and structural break which is robust to
+the persistence properties of regressors after replacing the OLS with an IVX estimator.
+
+The main arguments we use for the proof of Corollary 2 is to consider the joint testing
+hypothesis as a composite hypothesis based on the mutually exclusive parameter space,
+and thus we construct the limit theory of this test based on the joint formulation of
+the two separate testing hypotheses. By employing the asymptotic matrix moments
+based on the IVX instrumentation we prove that the limiting distribution of the joint test
+can be decomposed into two components. These two components are considered to be
+independent random variables and therefore practically we could use the critical values of
+the limiting distributions that corresponds to each of these stochastic quantities.
+
+                    19
+3.2.2 Joint Wald Tests under unstable model intercept
+
+Notice that when a model intercept is included then under the null hypothesis, when
+1 = 2, for example if we are testing whether H0 : 1 = 2, then the particular
+hypothesis would be equivalent to testing the null hypothesis of no structural break.
+However, in the case of an unstable model intercept, that is, 1 = 2, then testing the
+null hypothesis H0 : 1 = 2 can result to a different asymptotic theory due to the break
+in the model intercept. In this section, we consider the case that a potential structural
+break occurs in both the intercept and the slope coefficient  of the predictive regression
+model. The two proposed tests aim to test: (i) the null hypothesis of no break on model
+intercepts while the slope coefficients remain at a fixed level; (ii) the null hypothesis of
+no break on model intercepts while the slope coefficients are both equal to zero.
+
+The proposed test statistic is expressed as below
+
+                                                      -1
+
+WIV X(t) = ~1(t) - ~2(t) 1(t) + 2(t)                            ~1(t) - ~2(t)  (3.21)
+
+where the covariance estimators are computed as below
+
+1 (t )       =  1   u1  (t  )u1  (t  )  +  z¯t Q1 (t )z¯t                      (3.22)
+                t2                                                             (3.23)
+
+2 (t )       =  (T  1   t)2 u2(t)u2(t)             +  z¯T -t Q2(t)z¯T -t
+                    -
+
+Then, the joint Wald test is expressed using the following form
+
+Wjoint := WTIV X + WIV X (t) + WIV X(t) , for t1  t  t2.                       (3.24)
+
+To distinguish between the standard Wald statistics in the case of known break-point
+
+and the Wald type statistics that correspond to the unknown break-point we denote
+
+with WIV X(t) = sup WIV X(t) and Wjoint (t) = sup Wjoint (t). Both of these test
+t [t1 ,t2 ]                                        t [t1 ,t2 ]
+
+statistics require to split the sample into subsamples of window size [t1, t2]  (1, T )
+
+and estimate the joint Wald test based on the observations from each subsample. For
+
+instance, the last two components of the joint test requires to estimate the Wald IVX
+
+for the full sample plus the supremum statistics for the model intercept and the model
+
+slope separately. Notice that the model intercept has different asymptotic properties, in
+
+particular, convergence rate to the true population parameter when the IVX estimator
+
+is used for the slope parameter. Therefore, we use the covariance estimators given by
+
+(3.22) and (3.23) which is constructed based on the residuals from the fitted predictive
+
+regression of each subsample while we add a bias correction based on the covariance
+
+estimator of the slope coefficients since the estimator of the intercept is conditional on
+
+the IVX estimator in the case we switch from the OLS to the IVX estimation procedure.
+
+                                     20
+Proposition 1. Consider the predictive regression model given by expressions (2.1)-(2.2).
+If Assumption 1-4 hold and  is known to be unstable a priori, then under the null
+hypothesis H0 : 1 = 2 and 1 = 2 = , as T   the following limit result holds
+
+WIV          X (t )                  sup     BB1()BB1()         (3.25)
+                                                 (1 - )
+                                   [1,2   ]
+
+where BB1(.) is a one-dimensional standard Brownian bridge.
+
+Remark 4. Notice that Proposition 1 provides an asymptotic result for a composite hy-
+pothesis since we consider jointly testing for a structural break in the model intercept and
+the slope coefficients while we test, that under the null hypothesis the slope coefficient
+has a fixed parameter value . Additionally, we can investigate the limiting distribu-
+tion of the joint Wald test when we assume that under the null hypothesis there is no
+predictability.
+
+Proposition 2. Consider the predictive regression model given by expressions (2.1)-(2.2).
+If Assumption 1-4 hold and  is known to be unstable a priori, then under the null
+hypothesis H0 : 1 = 2 and 1 = 2 = 0, as T   the following limit results hold:
+(i)
+
+Wjoint (t)  B(1)B(1) + sup N()M()-1N()                          (3.26)
+                                                  [1,2]
+
+where N() = BB1(), N()  and M() =            (1 - ) 0 . The terms, N()
+                                                  0 M()
+
+and M() are defined in Theorem 2.
+
+(ii) As a special case, when x  (0, 1), it holds that
+
+Wjoint (t )    p2    +               sup     BBp+1()BBp+1   ()  (3.27)
+                                                    (1 - )
+                                   [1,2]
+
+where BBp+1(.) is a (p + 1)-dimensional standard Brownian bridge, and 2p is a random
+variable following a 2 distribution with p degrees of freedom.
+
+Remark 5. Notice that, Proposition 2 shows that the limiting distribution of the joint
+test for both predictability and structural break, when we consider simultaneously testing
+whether there is a structural break to the model intercept and no predictability using the
+set of regressors of the model, has an asymptotic distribution which takes a different
+form when we consider different values of the parameter space of the exponent rate.
+
+As we have seen by our extensive asymptotic theory analysis provided in this Section, the
+asymptotic distribution of the Joint IVX-Wald tests can be affected by various scenar-
+ios, such as the inclusion of model intercept in the predictive regression as well as the
+parameter space of the exponent rate.
+
+                                                      21
+4 Monte-Carlo Simulation Study
+
+In this section, we present a Monte Carlo simulation study in order to examine the
+finite size properties of the proposed Wald-type statistics in terms of their empirical size
+and power performance, under the null hypothesis of no joint parameter instability and
+predictability. In practise, the degree of persistence in the time series of the regressors
+is unknown. That is, both the coefficient of persistence ci as well as the exponent
+rate x are both unknown parameters to the researcher. Moreover, we have proved
+that the limiting distribution of the Wald-type statistics for detecting structural break in
+predictive regression models depend on these unknown properties of the regressors for
+certain parameter value restrictions on the coefficient of persistence. In particular when
+the exponent rate of persistence has an exponential rate , then for both cases i.e., testing
+for structural break or jointly testing for predictability and structural break we have a
+nonstandard limiting distribution which depends on the corresponding stochastic integrals
+which are functions of the unknown break-point. Now, in the case we known a prior that
+the exponent rate equals to one, which means we are within the realm of near integrated
+or LUR regressors then the tests converge to a standard NBB distribution which is easy
+to tabulate critical values. Nevertheless, in any case in empirical applications critical
+values can be obtained by either simulations or more advanced bootstrap methodologies.
+
+The MC simulation study aims to shed light on the main theoretical results of the paper.
+Therefore, to demonstrate the above theoretical result, under the null hypothesis of
+no structural break, we can generate a DGP with no breaks in the coefficients of the
+predictive regression. Then, constructing the sup-Wald test and using the Andrews'
+critical values we can observe whether size distortions indeed occur in this scenario26.
+Secondly, via Proposition 2 of the paper we propose an alternative approach to overcome
+this problem. In particular, using an IV based sup-Wald test, which is constructed using
+the IVX instrumentation, we prove that the limiting distribution of the statistic indeed
+weakly converges to a NBB, which allow us to use the Andrews' critical values, avoiding
+this way to simulate critical values which can be computational complex. Below, we
+present the DGP, the test statistics as well as the size and power comparisons for the
+proposed tests of our econometric framework.
+
+   26Recall that under the assumption of persistent predictors, we prove via Proposition 1 of the paper that
+when testing for parameter instability in the predictive regression the limiting distribution of the sup-Wald
+statistic no longer follows a normalized squared brownian bridge, (NBB) for an unknown structural break.
+In particular, when contacting inference or assessing the statistical validity of the sup-Wald statistic via a
+MC experiment, using the corresponding critical values of the sup-Wald test proposed by Andrews (1993)
+we can observe that leads to size distortions due to the non-NBB limiting distribution.
+
+                                                      22
+4.1 Experiment Design
+
+We use the following data generating process (DGP) where yt is a scalar and xt is a
+vector of LUR predictors (with the property of being highly persistent).
+
+yt  =  01+-cT11xt-1                + 2xt-1    + ut                               (4.1)
+xt  =        01                               t-1 +                              (4.2)
+                                   0  c2   x         v  t,  x 0 = 0.
+                                      T
+                                   -
+
+with t  {1, ..., T } and T = {100, 250, 500, 1000} for B = 5, 000 replications.
+
+Furthermore, we consider the effect of different localizing coefficients of persistence
+across the predictors. We use ci  {1, 5, 10, 20} for i = 1, 2, which cover various cases
+of LUR regressors, with smaller values implying that we impose the assumption of higher
+persistence and lower values implying that existence of mild persistence in the predictor.
+
+The covariance matrix of the innovations et = (ut, v t)  N 03×1, ee we assume that
+is parametrised with the following structure
+
+                                      uv1     uv2       
+       ee = uu2v1                     v21     v1v2
+                                      v1v2                                       (4.3)
+                 uv2
+                                              v22
+
+Clearly, we can see that the covariance matrix given by expression (4.3) allows to consider
+
+various scenarios regarding the contemporaneous correlation of the regressors and the
+
+dependent variables which has related economic interpretation. We use the following
+
+predetermined covariance matrices
+
+100                                           1                              
+                                                            0.10 -0.29
+ee = 0 1 0 , or ee =  0.10
+                                                              1 -0.03
+
+001                                           -0.29 -0.03 1
+
+Under both the null and the alternative hypothesis, the predictive regression is generated
+using the following econometric specification (using (B.2) and (4.3))
+
+yt = 01 + 11xt-1 1{t  k } + 02 + 12xt-1 1{t > k } + ut                           (4.4)
+
+where k = T  for some   (0, 1).
+
+Additionally under the null hypothesis, of no parameter instability, we simulate the DGP
+
+using the same vector of regression parameters before and after the breakpoint, such
+
+as 1 = 2. Furthermore, under the alternative hypothesis of parameter instability, we
+can generate a sequence of local alternatives by using a different vector of regression
+
+                                      23
+parameters before and after the breakpoint. Note that, since our framework consider a
+single unknown structural break, the DGP is re-constructed for each window [1, 2] in
+order to apply the supremum functional.
+
+4.2 Test statistics
+
+We assess the statistical validity in finite and large samples of the Wald based statistics
+within our proposed framework, that is, the sup Wald-OLS test and the sup-Wald IVX
+test. In particular, we are interested to verify any size distortions under the null hypothesis
+of no structural change, when using the sup Wald-OLS test and we expect to observe
+improvements in the empirical size of the sup Wald-IVX test. Moreover, we examine the
+size and power performance of the two statistics across different degree of persistence as
+well as the rate at which we allow the IVX instrumentation procedure to create a more
+mildly integrated regressor (as given by the parameters cz and   0).
+
+For the large sample properties of the test statistics a standard convergence result apply,
+that is, WT (; )  W(; ) as T  . Furthermore, the testing hypothesis of interest
+is a two-sided type hypothesis which is expressed as below
+
+                     H0 : 1 = 2 vesus H1 : 1 = 2                                    (4.5)
+
+The test statistics are computed via expressions (4.6) and (4.7), while standard regularity
+and invariance principles holds (e.g, uniform convergence for the compact space   
+such that (1, 2)   and   Rq).
+
+4.2.1 Wald-OLS statistic
+
+WTOLS()  =  1             ^1 - ^2  (X1 X1)-1 + (X2 X2)-1 -1                ^1 - ^2  (4.6)
+            ^u2
+
+4.2.2 Wald-IVX statistic
+
+WTIVX()                   =   1    ^  IVX  -  ^2IVX         ^1IVX - ^I2VX           (4.7)
+                              ^u2     1                                             (4.8)
+                                                      Q-R1
+
+where QR is defined as below
+
+QR = (Z1 X1)-1 (Z1 Z1) (X1 Z1)-1 + (Z2 X2)-1 (Z2 Z2) (X2 Z2)-1
+
+                                              24
+In the case of a known break-point we can use the critical values proposed by Andrews
+(1993) with an appopriate significance size such as  = 5% for both test statistics. Since
+we consider an unknown break point, then the sup functional gives the statistic with the
+maximum value after estimating a sequence of statistics over the interval   [1, 1-2],
+and thus critical values need to be used due to the fact that the limiting distribution in
+this case is not a standard 2-distribution. Furthermore, the data that we generate
+from the DGP given by (B.1) and (B.2) only differ over the values of c1 and c2 and are
+the same for different values of the sample size T . Thus, as the sample size increases
+the degree of persistence of the endogenous regressors remain the same one (for both
+predictors). Moreover, the increase in the sample size aims to reflect the properties
+of finite versus large sample asymptotics for the Wald type statistics in testing for a
+single unknown break-point in predictive regression models with persistent regressors.
+Furthermore, in order to control for the existence of empirical size distortions when testing
+for structural break via the Wald-IVX statistic, we use the bias corrected IVX estimators
+as proposed by Phillips and Magdalinos (2009). The particular bias correction, implies
+that we account for an overestimation effect when projecting the instrumental variable
+towards the direction of the dependent variable (due to endogeneity).
+
+The bias corrected IVX estimator has the following form
+
+~IVX = Y Z - T ^ T (h, m) XZ -1                                         (4.9)
+
+where the estimator of  is given by
+
+              1                      m             h     T
+              T                                    +
+^T (h, m)  =                              1  -  m     1      u^t u^t-h  (4.10)
+
+                                     h=0                 t =h+1
+
+The above non-parametric estimator is known as Newey-West type estimator (see,
+Newey and West (1987)) and allows to estimate the bias correction without impos-
+ing additional parametric assumptions. Optimal bandwidth choices can be of the form
+m = T 1/5, where , is a positive constant. The bias correction is applied to both ~1IVX
+and ~2IVX.
+
+4.3 Size Comparison
+
+To conduct a size comparison of the test statistics, we examine the empirical rejection
+rates of the sup-Wald OLS and sup-Wald IVX tests for detecting single structural change
+with persistent predictors, under the null hypothesis of no structural change, that is,
+H0 : 1 = 2 using a significance level  = 5% and compare using different critical
+value approximations. In particular, we repeat the empirical-size experiment using the
+asymptotic critical values from (i) Table 4 of Gonzalo and Pitarakis (2012), (ii) Table
+
+                                                      25
+1 of Andrews (1993)), (iii) the bootstrap generated critical values within the MC step.
+More specifically, to do this, we generate 5,000 datasets from DGP (B.1) and (B.2) for
+various values of 0 and compute the frequency of rejecting the null hypothesis.
+
+Design 1  0 := 0 = 0.25, 1 = 0.50
+
+Design 2  0 := 0 = 1, 1 = 0.8, 2 = 1.2
+
+Table 1 (for sup Wald-OLS) and Table 3 and ?? (for sup Wald-IVX), present the proba-
+bilities of rejection of the two Wald-type statistics at the 5% nominal rate, under the null
+hypothesis (for Design 1). In particular, we consider different values for the exponent
+rate of the IVX parameter, such as   {0.75, 0.95} in order to investigate the varying
+effect of the degree of persistent of the instrumental variable for detecting structural
+change in predictive regressions with persistent regressors, as well as different localizing
+coefficient of persistence, ci  {1, 5, 10, 20}. Comparing the empirical size results for
+Table 1 versus Table 3 and ??, we can see that the sup Wald IVX produces values for the
+empirical size quite close to the nominal size for critical value c = 13.42,  = 0.95 and
+-0.5    0.5. The particular critical value is a closer representation to the -quantile
+from the corresponding limiting distribution.
+
+In Table 1 and Table 3 we present the empirical size under the null hypothesis for the
+model with a single predictor and no-intercept. We can observe that size distortions
+appear for larger values of correlation between the ut and vt and this is more severe for
+high persistence regressors (i.e., low values of the coefficient of persistence). Moreover,
+we also consider the case of explosive regressors, that is, ci < 0. Clearly, the empirical size
+in this scenario has higher values since we use the critical value of Andrews (8.85) which
+is not the corresponding critical value of the asymptotic distribution of the test statistic
+for detecting structural break in the predictive regression model under the assumption
+of explosive regressors. Notice also that in the case we have p > 1 and we use the sup
+OLS-Wald statistic for testing for joint predictability and structural break then the size
+distortions are much higher than in the case of p = 1 and this is due to the nonstandard
+limiting distribution of the test statistic under the assumption of nonstationary regressors.
+
+All main conclusions are in line with similar findings in the literature of predictive regression
+models, such as larger size distortions appear as the correlation between u(t) and v(t)
+increases, and this effect is more apparent in the case of persistent predictors (i.e.,
+lower values of the persistence coefficient c). Moreover, we see that the Sup OLS-Wald
+statistic with the standard asymptotics (Andrews) is clearly immune to persistence when
+there is no correlation between u(t) and v(t). Furthermore, size distortions appear under
+the existence of nonzero correlation between the error sequences ut and vt.
+
+          26
+In other words, when Cov (ut , vt) = 0, then under the assumption of nonstationary
+predictors which is captured via the Local to unit root specification, then the limiting
+distribution no longer follows the standard NBB result of Andrews. In fact in this case it
+depends on the degree of persistence ci .
+We observe that even though the simulated asymptotic values of the sup IVX-Wald test
+for detecting a single structural break in the predictive regression model with no model
+intercept is not quite close to the 8.85 cv that corresponds to the NBB result of Andrews,
+we can verify that the asymptotic result does not depend on the nuisance parameter c.
+Moreover, from the empirical simulations across different values of  we can see that the
+simulated asymptotic critical values are quite close when observing at a specific value
+of c. This is not surprising since the fully modified covariance estimator incorporated in
+the construction of the covariance matrix for the IVX takes into account the dependence
+structure of the regressors by applying a common long-run covariance structure. This
+holds across different values of ci .
+
+4.4 Illustrative Examples
+
+We consider for instance the case of bivariate predictor persistence and examine the finite-
+sample performance of the proposed tests. In this case, we use the c1 = 1 and c2 = 5
+considering this way two predictors with different degree of persistence, however which
+belongs to the same persistence class as defined in KMS. In particular, the quantile results
+we obtain since are based on finite-sample approximations then they have slightly lower
+value of the true asymptotic quantile that corresponds to the asymptotic distribution of
+the test.
+
+                                                      27
+4.5 Power Comparison
+
+To conduct a power comparison we compare the rejection rates under the alternative
+hypothesis of structural change, H1 : 1 = 2. Specifically, under the alternative hypoth-
+esis, we generate data using the predictive regression given by expression (3.1) and then
+find statistical evidence against the null hypothesis by computing the two test statis-
+tics. In particular, comparing the same value of the localizing coefficient across different
+sample sizes, the power function is indeed monotonically increasing.
+
+We consider a sequence of local alternatives of the form  = 0 + b/T and implement
+the power function for breaks in both the model intercept and the coefficients of the
+predictors. We introduce parameter instability via the following:
+
+Design 1              0 := 0 = 1, 1 = 1.6, 2 = 0.6
+
+Design 2              0 := 0 = 2, 1 = 0.8, 2 = 0.4
+
+Table 4 and 5 presents the probabilities of rejection of the two Wald-type statistics at
+the 5% nominal rate, under the alternative hypothesis. The proposed methodology is
+recommended in cases in which the practitioner has some prior information regarding the
+persistent properties of predictors included in the predictive regression. Moreover, for a
+given value of cz (e.g., cz  1), then for a larger exponent rate ( = 0) in the IVX
+instrument can lead to higher power in exprense of lower values for the empirical size,
+while a smaller 0 can achieve better size corrections. The number of predictors can
+be another source of distorted inferences and thus in high dimensional settings further
+corrections might be needed to correct the size and power of the proposed tests.
+
+The Monte Carlo experiments verify that our proposed IV based Wald test provides a
+solution to the problem of possible size and power distortions when testing for parameter
+instability in predictive regressions with persistent predictors. Implementation is therefore
+straightforward via the use of standard statistical tables. In particular, once the magnitude
+of the sup-Wald IVX statistic has been computed in the case of a known break-point it
+then suffices to obtain the relevant critical values from Table 1 in Andrews (1993) (see
+e.g., Pitarakis (2008)).
+
+Remark 6. Note that simulating critical values as the results given by Table 1 of Andrews
+(1993), can be done with other numerical approximation methods. Further studies among
+others include the papers of Estrella (2003) and Anatolyev and Kosenok (2012). More-
+over, Hansen (1997) proposes a methodology to obtain simulated p-values for stability
+tests in linear regression models, which can be used for the empirical size of the Wald-OLS
+statistic in our framework.
+
+                      28
+                     Table 1: Empirical size with nominal level  = 5%.
+
+                                                  sup-Wald OLS
+
+                                                           c=1
+
+  T        -0.9         -0.7          -0.5           -0.3 0                   0.3             0.5       0.7         0.9
+100       0.0804     0.0736          0.0704       0.0672 0.0556             0.0540          0.0512    0.0664      0.0700
+250       0.0968     0.0812          0.0700       0.0628 0.0564             0.0608          0.0696    0.0764      0.0904
+500       0.0924     0.0812          0.0720       0.0644 0.0608             0.0668          0.0744    0.0916      0.1044
+1000      0.1060     0.0824          0.0788       0.0716 0.0684             0.0668          0.0760    0.0860      0.1032
+
+  T        -0.9         -0.7          -0.5               c=5                  0.3             0.5       0.7         0.9
+100       0.0588     0.0564          0.0592          -0.3 0                 0.0480          0.0500    0.0552      0.0560
+250       0.0740     0.0608          0.0596       0.0548 0.0492             0.0504          0.0568    0.0692      0.0744
+500       0.0860     0.0784          0.0696       0.0548 0.0516             0.0572          0.0632    0.0680      0.0848
+1000      0.0908     0.0816          0.0732       0.0648 0.0564             0.0596          0.0620    0.0724      0.0864
+                                                  0.0708 0.0636
+  T        -0.9         -0.7          -0.5                                    0.3             0.5       0.7         0.9
+100       0.0448     0.0524          0.0508              c = 10             0.0448          0.0480    0.0516      0.0492
+250       0.0572     0.0540          0.0528          -0.3 0                 0.0472          0.0548    0.0608      0.0604
+500       0.0788     0.0768          0.0676       0.0488 0.0444             0.0592          0.0592    0.0648      0.0736
+1000      0.0796     0.0768          0.0704       0.0488 0.0472             0.0528          0.0552    0.0652      0.0704
+                                                  0.0604 0.0544
+  T        -0.9         -0.7          -0.5        0.0620 0.0568               0.3             0.5       0.7         0.9
+100       0.0380     0.0416          0.0440                                 0.0416          0.0440    0.0440      0.0388
+250       0.0560     0.0476          0.0480              c = 20             0.0460          0.0496    0.0480      0.0484
+500       0.0620     0.0592          0.0600          -0.3 0                 0.0504          0.0564    0.0596      0.0648
+1000      0.0676     0.0656          0.0608       0.0432 0.0476             0.0520          0.0548    0.0576      0.0572
+                                                  0.0408 0.0436
+                                                  0.0560 0.0512
+                                                  0.0548 0.0496
+
+Table 1 presents finite-sample empirical sizes for the sup Wald-OLS test, with nominal level
+
+ = 5% for B = 5, 000 replications. The predictive regression model under the null hypothesis,
+
+H0  :  1  =  2,  is  given  by,  yt  =  0.25xt-1  +  ut ,  xt  =  (1  -  c  )xt-1  +  vt ,  with  ee  =  1  
+                                                                         T                                     .
+
+                                                                                                            1
+
+                                                           29
+                     Table 2: Empirical size with nominal level  = 5%.
+
+                                                  sup-Wald OLS
+
+                                                     c = -1
+
+  T        -0.9         -0.7          -0.5           -0.3 0                   0.3             0.5       0.7         0.9
+100       0.0692     0.0636          0.0656       0.0600 0.0584             0.0604          0.0584    0.0616      0.0616
+250       0.0724     0.0616          0.0596       0.0660 0.0584             0.0636          0.0640    0.0668      0.0748
+500       0.0804     0.0680          0.0664       0.0604 0.0612             0.0628          0.0720    0.0740      0.0868
+1000      0.0728     0.0636          0.0700       0.0680 0.0636             0.0644          0.0680    0.0764      0.0768
+
+  T        -0.9         -0.7          -0.5              c = -5                0.3             0.5       0.7         0.9
+100       0.0660     0.0672          0.0732          -0.3 0                 0.0732          0.0732    0.0696      0.0656
+250       0.0700     0.0756          0.0804       0.0740 0.0664             0.0820          0.0812    0.0820      0.0816
+500       0.0692     0.0660          0.0752       0.0832 0.0836             0.0856          0.0836    0.0772      0.0764
+1000      0.0804     0.0880          0.0916       0.0784 0.0792             0.0828          0.0864    0.0748      0.0708
+                                                  0.0896 0.0864
+  T        -0.9         -0.7          -0.5                                    0.3             0.5       0.7         0.9
+100       0.1124     0.1084          0.1060            c = -10              0.1056          0.1104    0.1176      0.1160
+250       0.1264     0.1396          0.1384          -0.3 0                 0.1244          0.1276    0.1304      0.1368
+500       0.1220     0.1224          0.1260       0.1072 0.1020             0.1280          0.1288    0.1376      0.1432
+1000      0.1528     0.1468          0.1424       0.1372 0.1244             0.1272          0.1316    0.1384      0.1400
+                                                  0.1260 0.1240
+  T        -0.9         -0.7          -0.5        0.1340 0.1308               0.3             0.5       0.7         0.9
+100       0.1576     0.1500          0.1464                                 0.1532          0.1584    0.1632      0.1704
+250       0.2104     0.2036          0.1988            c = -20              0.1976          0.1956    0.2016      0.1928
+500       0.2144     0.2144          0.2040          -0.3 0                 0.2176          0.2200    0.2224      0.2460
+1000      0.2520     0.2552          0.2368       0.1532 0.1564             0.2320          0.2336    0.2360      0.2528
+                                                  0.2004 0.1908
+                                                  0.2024 0.2040
+                                                  0.2376 0.2284
+
+Table 2 presents finite-sample empirical sizes for the sup Wald-OLS test, with nominal level
+
+ = 5% for B = 5, 000 replications. The predictive regression model under the null hypothesis,
+
+H0  :  1  =  2,  is  given  by,  yt  =  0.25xt-1  +  ut ,  xt  =  (1  -  c  )xt-1  +  vt ,  with  ee  =  1  
+                                                                         T                                     .
+
+                                                                                                            1
+
+                                                           30
+OLD TABLE (to update with the ones after bootstrapping)
+
+                          Table 3: Empirical size with nominal level  = 5%.
+
+                                                sup Wald-IVX statistic
+
+                                         c = 1 (cz = 1,  = 0.75, c = 13.42)
+
+  T     -0.9                 -0.7 -0.5 -0.3                 0        0.3 0.5                 0.7     0.9
+100    0.1672                                                                              0.1106  0.1726
+250    0.1336             0.1070 0.0718 0.0480 0.0368 0.0496 0.0710                        0.0838  0.1354
+500    0.1316                                                                              0.0772  0.1226
+1000   0.1076             0.0878 0.0486 0.0324 0.0232 0.0322 0.0506                        0.0668  0.1044
+                          0.0808 0.0504 0.0306 0.0206 0.0282 0.0462
+  T     -0.9                                                                                 0.7     0.9
+100    0.1134             0.0644 0.0412 0.0264 0.0200 0.0260 0.0398                        0.0850  0.1210
+250    0.0998                                                                              0.0666  0.0986
+500    0.0944                            c = 5 (cz = 1,  = 0.75, c = 13.42)                0.0628  0.0916
+1000   0.0752                                                                              0.0522  0.0768
+                             -0.7 -0.5 -0.3                 0        0.3 0.5
+
+                          0.0804 0.0580 0.0426 0.0350 0.0446 0.0596
+                          0.0662 0.0456 0.0348 0.0248 0.0326 0.0452
+
+                          0.0592 0.0410 0.0250 0.0210 0.0282 0.0448
+                          0.0488 0.0318 0.0236 0.0190 0.0250 0.0364
+
+                                         c = 1 (cz = 1,  = 0.75, c = 12)
+
+  T     -0.9               -0.7          -0.5 -0.3          0        0.3 0.5                 0.7     0.9
+100    0.2386             0.1610                                                           0.1612  0.2482
+250    0.2004             0.1336         0.1108 0.0768 0.0632 0.0814 0.1138                0.1338  0.2042
+500    0.1938             0.1280                                                           0.1232  0.1900
+1000   0.1644             0.1048         0.0816 0.0538 0.0390 0.0558 0.0822                0.1048  0.1664
+
+  T     -0.9               -0.7          0.0828 0.0538 0.0360 0.0536 0.0792                  0.7     0.9
+100    0.1722             0.1234                                                           0.1332  0.1818
+250    0.1588             0.1094         0.0672 0.0448 0.0356 0.0454 0.0686                0.1080  0.1548
+500    0.1476             0.0984                                                           0.1008  0.1422
+1000   0.1190             0.0828         c = 5 (cz = 1,  = 0.75, c = 12)                   0.0898  0.1276
+
+                                         -0.5 -0.3          0        0.3 0.5
+
+                                         0.0936 0.0704 0.0568 0.0752 0.0966
+
+                                         0.0714 0.0548 0.0458 0.0544 0.0766
+
+                                         0.0716 0.0506 0.0366 0.0494 0.0708
+
+                                         0.0578 0.0428 0.0358 0.0456 0.0630
+
+Table 3 presents finite-sample sizes for the sup Wald-IVX test, with nominal size  = 5%.
+
+The predictive regression model under the null hypothesis is given by yt = 0.25 + 0.5xt-1 + ut,
+
+xt  =  (1 -  c1  )xt  -1  +  vt ,  with  ee  =  0.25  uv    ,=  uv   ,  as  given  above.  Furthermore,  for
+             T                                  uv    0.75      u v
+
+the IVX estimation step, we use an IVX persistence parameter   {0.75, 0.95} and the localizing
+
+coefficient is set to cz = 1. The number of replications is B = 5, 000.
+
+                                                      31
+5 Empirical Application
+
+In this section we present an empirical application aiming to shed light on the literature of
+stock return predictability. Identifying periods of predictability has important implications
+in various aspects of finance. Related modern reviews of these aspects are presented by
+Kostakis et al. (2018) and Chinco et al. (2019), among others. However, despite the
+extensive research of the field, the findings are still rather mixed (Kasparis et al., 2015)
+(see, Welch and Goyal (2008) for a full discussion). For instance, aspects such as the
+chosen sample period or the selected predictors can give different conclusions. Addition-
+ally, parameter instability due to certain economic events can also affect the reliability of
+predictability tests. Therefore, it is of paramount importance to develop robust testing
+methodologies for inferring predictability under conditions such as parameter instability or
+the presence of nonstationary regressors. Using the predictive regression model studied
+in this paper27 our primary focus is to examine the robustness of the proposed tests.
+
+5.1 Data Description
+
+We focus on examining the presence of predictability for monthly US stock market excess
+returns over the period 1990-2019 using the set of variables considered in Welch and Goyal
+(2008)28 which capture economic and financial conditions for the US economy.
+
+Predictant The dependent variable is the monthly equity premium (excess return) of
+the US stock market based on the S&P500 index. We construct the excess return as in
+Kasparis et al. (2015), that is, the difference between the total rate of return and the
+risk-free rate for the same sample period. As a proxy of the US stock market return,
+we use the value-weighted S&P500 total stock market return including dividends. The
+risk-free rate is the 3-month T-bill rate obtained from the database of FRED29.
+
+   27Alternative model specifications can be considered; for instance a model which considers expected
+returns in relation to macroeconomic conditions and forecasting uncertainty. A first move towards this
+direction is presented by Atanasov et al. (2020) who examine consumption fluctuations and expected
+returns with respect to the predictability literature. More specifically, the authors indeed find statistical
+evidence of predictability at the one-quarter horizon using the IVX testing approach of KMS.
+
+   28The dataset can be retrieved from Amit Goyal's website at http://www.hec.unil.ch/agoyal/.
+Detailed descriptions of variables can be found in the Online Appendix of Welch and Goyal (2008).
+
+   29Time series of macroeconomic variables, such as the US inflation rate and the T-bill rate can be
+found at https://fred.stlouisfed.org/. Notice also that the proxy of equity premium and the
+other financial variables we consider in this paper, are commonly used in the predictability literature, see
+Gonzalo and Pitarakis (2012), Kasparis et al. (2015),Kostakis et al. (2015) and Kostakis et al. (2018).
+
+                                                      32
+Predictors The predictor variables we consider include: dividend-payout ratio (d/e),
+long-term yield (lty), dividend yield spread (dy), dividend-price-ratio (d/p), T-bill rate
+(tbl), earnings-price-ratio (e/p), book-to-market ratio (b/m), default yield spread (dfs),
+net equity expansion (ntis), term spread (tms) and inflation rate (inf).
+
+5.2 Predictability Tests
+
+To begin with, we apply the simple predictability test on the full sample for the period
+1946-2019 using as predictant the S&P500 Equity Premium. However, in this paper
+we take a slightly different approach than the literature. In particular, we focus on
+the subsample spanning the period 1990Q1 to 2019Q4, and consider monthly sampling
+frequency. Our first goal is to examine the stock return predictability of this subsample,
+that is, to identify the financial variables which are individually statistical significant as
+well as to identify for evidence of joint statistical significance. Furthermore, our second
+goal is to repeat the same exercise using the proposed joint test of predictability and
+parameter instability and compare the results we obtain. The chosen subsample includes
+the period of the 2008 financial crisis, so it is natural to assume that certain predictors
+might exhibit structural break around that economic event. Therefore, this is a suitable
+sample to assess the statistical validity of the proposed methodology for the case of a
+single structural break. Certain limitations of our approach are on sight, however these
+do not invalidate our findings. In particular, we do not consider the existence of multiple
+structural breaks neither we consider sample splitting techniques which can affect the
+power of the tests especially when using an out-of-sample forecasting scheme.
+Firstly, summarizing our findings is Table C1 which presents predictability tests based on
+both the classical least squares estimator and the IVX estimator. Notice that for these set
+of tests we consider the regressors on their original form in order to preserve the degree
+of persistence and have comparability between the two estimators under examination.
+Table C2 presents structural break tests for the regressors. In this case the traditional
+structural break tests are implemented under the assumption of stationary time series,
+by taking the first difference of the regressors before fitting the AR(1) models.
+Secondly, we examine the short-horizon predictability via the proposed joint predictability
+and structural break Wald statistics.
+
+                                                      33
+6 Conclusion
+
+In this paper, we have extensively examined the asymptotic theory of tests for Joint
+predictability and parameter instability under the assumption of nonstationary regressors.
+We compare our results with previous seminal work in the fields of both structural break
+testing in linear regressions as well as predictability testing in predictive regression models.
+We find some interesting results not previously presented in the literature. Firstly, using
+the OLS estimator for the parameters of the predictive regression model we show that
+the limiting distribution of the Wald statistic for testing for a single structural break
+has a nonstandard limiting distribution which depends on the unknown coefficient of
+persistence. Secondly, by employing the IVX estimator proposed in the literature as a
+robust estimator which filters out the abstract degree of persistence in regressors, we
+have proved that the limiting distribution of the Joint tests takes different forms which
+weakly converges to a functional of a Brownian bridge in some instances while converges
+to a nonstandard limiting distribution which depends on the coefficient of persistence
+when regressors are assume to be highly persistent.
+
+Conducting inference, such as structural break testing, on the regression coefficient of
+the predictive regression model with multiple highly persistent regressors can lead to a
+nonstandard limiting distribution. The proposed testing methodology ensures that the
+limiting distribution of the structural break tests is free of any nuisance parameters, such
+as the unknown localizing coefficient of persistence. Moreover, we consider "pure" struc-
+tural change as it is defined by Andrews (1993), in the sense that the entire parameter
+vector is subject to structural change under the alternative hypothesis. The asymptotic
+distribution of the IV based Wald test is found to be given by the supremum of the
+normalized squared Brownian Bridge (NBB). Thus, the exact limiting distribution of the
+IV based Wald test allows to determine critical values similar to the case of the linear
+regression model, without further simulations and additional computational cost. This
+holds in the case of mildly integrated or integrated regressors, while in the case of nonsta-
+tionary regressors further investigation is needed to determine exact critical values since
+the limiting distribution has a dependence on the nuisance coefficient of persistence.
+
+The developed asymptotic theory for the sup-Wald IVX tests under various degrees of
+persistence we consider in this paper, indicate that the asymptotic behaviour of the tests
+when the supremum functional is included, is different from the corresponding limit the-
+ory in the case of only linear restrictions to the parameters of the predictive regression.
+Nevertheless, the robustness of the IVX instrumentation provides a way to determine an
+analytic form of the asymptotic distribution for different levels of persistence, a feature
+often seen in time series data. This feature appears in various empirical finance appli-
+cations in which the available information set for current or future economic conditions
+with many times persistent properties and existence of parameter instability.
+
+                                                      34
+References
+
+Amihud, Y. and Hurvich, C. M. (2004). Predictive regressions: A reduced-bias estimation
+  method. Journal of Financial and Quantitative Analysis, pages 813­841.
+
+Anatolyev, S. and Kosenok, G. (2012). Another numerical method of finding critical
+  values for the andrews stability test. Econometric Theory, pages 239­246.
+
+Andrews, D. W. (1991). Heteroskedasticity and autocorrelation consistent covariance
+  matrix estimation. Econometrica: Journal of the Econometric Society, pages 817­858.
+
+Andrews, D. W. (1993). Tests for parameter instability and structural change with
+  unknown change point. Econometrica: Journal of the Econometric Society, pages
+  821­856.
+
+Atanasov, V., Møller, S. V., and Priestley, R. (2020). Consumption fluctuations and
+  expected returns. The Journal of Finance, 75(3):1677­1713.
+
+Bai, J. and Perron, P. (1998). Estimating and testing linear models with multiple struc-
+  tural changes. Econometrica, pages 47­78.
+
+Bai, J. and Perron, P. (2003). Computation and analysis of multiple structural change
+  models. Journal of applied econometrics, 18(1):1­22.
+
+Boldea, O., Cornea-Madeira, A., and Hall, A. R. (2019). Bootstrapping structural change
+  tests. Journal of Econometrics, 213(2):359­397.
+
+Cai, Z., Wang, Y., and Wang, Y. (2015). Testing instability in a predictive regression
+  model with nonstationary regressors. Econometric Theory, 31(5):953.
+
+Campbell, J. Y. and Yogo, M. (2006). Efficient tests of stock return predictability.
+  Journal of financial economics, 81(1):27­60.
+
+Cavanagh, C. L., Elliott, G., and Stock, J. H. (1995). Inference in models with nearly
+  integrated regressors. Econometric theory, 11(5):1131­1147.
+
+Chinco, A. M., Clark-Joseph, A. D., and Ye, M. (2019). Sparse signals in the cross-
+  section of returns. The Journal of Finance, 74.1(1):449­491.
+
+Chow, G. C. (1960). Tests of equality between sets of coefficients in two linear regres-
+  sions. Econometrica: Journal of the Econometric Society, pages 591­605.
+
+Chu, C.-S. J., Hornik, K., and Kuan, C.-M. (1995). The moving-estimates test for
+  parameter stability. Econometric Theory, 11(4):699­720.
+
+Chu, C.-S. J., Stinchcombe, M., and White, H. (1996). Monitoring structural change.
+  Econometrica: Journal of the Econometric Society, pages 1045­1065.
+
+                                                      35
+Davidson, J. and Monticini, A. (2010). Tests for cointegration with structural breaks
+  based on subsamples. Computational statistics & data analysis, 54(11):2498­2511.
+
+Demetrescu, M., Georgiev, I., Rodrigues, P. M., and Taylor, A. R. (2020). Testing for
+  episodic predictability in stock returns. Journal of Econometrics.
+
+Elliott, G. (2011). A control function approach for testing the usefulness of trending
+  variables in forecast models and linear regression. Journal of econometrics, 164(1):79­
+  91.
+
+Estrella, A. (2003). Critical values and p values of bessel process distributions: computa-
+  tion and application to structural break tests. Econometric Theory, pages 1128­1143.
+
+Farmer, L., Schmidt, L., and Timmermann, A. (2019). Pockets of predictability. Available
+  at SSRN 3152386.
+
+Georgiev, I., Harvey, D. I., Leybourne, S. J., and Taylor, A. R. (2018). Testing for param-
+  eter instability in predictive regression models. Journal of Econometrics, 204(1):101­
+  118.
+
+Georgiev, I., Harvey, D. I., Leybourne, S. J., and Taylor, A. R. (2019). A bootstrap
+  stationarity test for predictive regression invalidity. Journal of Business & Economic
+  Statistics, 37(3):528­541.
+
+Gonzalo, J. and Pitarakis, J.-Y. (2012). Regime-specific predictability in predictive re-
+  gressions. Journal of Business & Economic Statistics, 30(2):229­241.
+
+Gonzalo, J. and Pitarakis, J.-Y. (2017). Inferring the predictability induced by a persistent
+  regressor in a predictive threshold model. Journal of Business & Economic Statistics,
+  35(2):202­217.
+
+Gungor, S. and Luger, R. (2020). Small-sample tests for stock return predictability with
+  possibly non-stationary regressors and garch-type effects. Journal of Econometrics.
+
+Hansen, B. E. (1997). Approximate asymptotic p values for structuras-change tests.
+  Journal of Business & Economic Statistics, 15(1):60­67.
+
+Hansen, B. E. (2000a). Sample splitting and threshold estimation. Econometrica,
+  68(3):575­603.
+
+Hansen, B. E. (2000b). Testing for structural change in conditional models. Journal of
+  Econometrics, 97(1):93­115.
+
+Hawkins, D. (1987). A test for a change point in a parametric model based on a maximal
+  wald-type statistic. Sankhy¯a: The Indian Journal of Statistics, Series A, pages 368­
+  376.
+
+                                                      36
+Inoue, A., Jin, L., and Rossi, B. (2017). Rolling window selection for out-of-sample
+  forecasting with time-varying parameters. Journal of Econometrics, 196(1):55­67.
+
+Jansson, M. and Moreira, M. J. (2006). Optimal inference in regression models with
+  nearly integrated regressors. Econometrica, 74(3):681­714.
+
+Kasparis, I., Andreou, E., and Phillips, P. C. (2015). Nonparametric predictive regression.
+  Journal of Econometrics, 185(2):468­494.
+
+Kendall, M. G. (1954). Note on bias in the estimation of autocorrelation. Biometrika,
+  41(3-4):403­404.
+
+Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2015). Robust econometric
+  inference for stock return predictability. The Review of Financial Studies, 28(5):1506­
+  1553.
+
+Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2018). Taking stock of
+  long-horizon predictability tests: Are factor returns predictable? Available at SSRN
+  3284149.
+
+Magdalinos, T. (2020). Least squares and ivx limit theory in systems of predictive
+  regressions with garch innovations. Econometric Theory (forthcoming).
+
+Magdalinos, T. and Phillips, P. C. (2009). Limit theory for cointegrated systems with
+  moderately integrated and moderately explosive regressors. Econometric Theory,
+  25(2):482­526.
+
+Marriott, F. and Pope, J. (1954). Bias in the estimation of autocorrelations. Biometrika,
+  41(3/4):390­402.
+
+Newey, W. and West, K. (1987). A simple, positive semi-definite, heteroskedasticity and
+  autocorrelation consistent covariance matrix. Econometrica, 55:703­708.
+
+Page, E. S. (1954). Continuous inspection schemes. Biometrika, 41(1/2):100­115.
+
+Pang, T., Du, L., and Chong, T. T.-L. (2020). Estimating multiple breaks in nonsta-
+  tionary autoregressive models. Journal of Econometrics.
+
+Paye, B. S. and Timmermann, A. (2006). Instability of return prediction models. Journal
+  of Empirical Finance, 13(3):274­315.
+
+Pesaran, M. H. and Timmermann, A. (1995). Predictability of stock returns: Robustness
+  and economic significance. The Journal of Finance, 50(4):1201­1228.
+
+Phillips, P. C. (1987). Time series regression with a unit root. Econometrica: Journal
+  of the Econometric Society, pages 277­301.
+
+                                                      37
+Phillips, P. C. (1988). Regression theory for near-integrated time series. Econometrica:
+  Journal of the Econometric Society, pages 1021­1043.
+
+Phillips, P. C. and Durlauf, S. N. (1986). Multiple time series regression with integrated
+  processes. The Review of Economic Studies, 53(4):473­495.
+
+Phillips, P. C. and Lee, J. H. (2013). Predictive regression under various degrees of
+  persistence and robust long-horizon regression. Journal of Econometrics, 177(2):250­
+  264.
+
+Phillips, P. C. and Lee, J. H. (2016). Robust econometric inference with mixed integrated
+  and mildly explosive regressors. Journal of Econometrics, 192(2):433­450.
+
+Phillips, P. C. and Magdalinos, T. (2009). Econometric inference in the vicinity of unity.
+  Singapore Management University, CoFie Working Paper, 7.
+
+Phillips, P. C. and Solo, V. (1992). Asymptotics for linear processes. The Annals of
+  Statistics, pages 971­1001.
+
+Pitarakis, J.-Y. (2008). Comment on: threshold autoregressions with a unit root. Econo-
+  metrica, 76(5):1207­1217.
+
+Pitarakis, J.-Y. (2017). A simple approach for diagnosing instabilities in predictive re-
+  gressions. Oxford Bulletin of Economics and Statistics, 79(5):851­874.
+
+Ploberger, W. and Krämer, W. (1990). The local power of the cusum and cusum of
+  squares tests. Econometric Theory, 6(3):335­347.
+
+Rossi, B. and Inoue, A. (2012). Out-of-sample forecast tests robust to the choice of
+  window size. Journal of Business & Economic Statistics, 30(3):432­453.
+
+Stambaugh, R. F. (1999). Predictive regressions. Journal of Financial Economics,
+  54(3):375­421.
+
+Vasilopoulos, K. and Pavlidis, E. (2019). Package ivx. robust econometric inference. R
+  package version, 1(1).
+
+Welch, I. and Goyal, A. (2008). A comprehensive look at the empirical performance of
+  equity premium prediction. The Review of Financial Studies, 21(4):1455­1508.
+
+White, H. (2001). Asymptotic theory for econometricians. Academic press.
+
+Xu, K.-L. (2020). Testing for multiple-horizon predictability: Direct regression based
+  versus implication based. The Review of Financial Studies, 33(9):4403­4443.
+
+Yang, B., Long, W., Peng, L., and Cai, Z. (2020). Testing the predictability of us housing
+  price index returns based on an ivx-ar model. Journal of the American Statistical
+  Association, pages 1­22.
+
+                                                      38
+A Asymptotic Theory
+
+In this Appendix we present the main mathematical derivations and proofs related to the
+results reported in the main body. We begin by summarizing via Lemma 1 below the limit
+theory results which can be found in Phillips and Magdalinos (2009) and Kostakis et al.
+(2015). We introduce the shorthand notation     min(, ) to denote the minimum
+operator, employed for the stochastic dominance of the convergence rates.
+
+                                                                            
+
+Lemma 1. Let Vxz :=              erC Vxx erCz d r , where Vxx :=              esC xx esC d s, and xx is
+
+                            0                                            0
+the long-run covariance of ut. Then, under the null hypothesis of no structural break in
+
+the predictive regression model, the following asymptotic results hold:
+
+(i) the sample covariance satisfies that
+
+                                     1         T               ut - u¯T   U ()                   (A.1)
+                                 T 1+x z
+                                                    zt-1
+                                            2
+                                               t =1
+
+where U (.) is a Brownian motion with variance u2V, where V is defined as
+
+                                                                            , if x > z
+                                                                            , if x = z
+                                erCz xx erCz d r                            , if 0 < x < z
+              V     =                                                       , if x = 0.          (A.2)
+                            0
+
+                              
+
+                                erCz (CVxz + Cz Vxz C) erCz d r
+
+                            0
+
+                         E0                 e  r  C  d  r
+
+                                 erC xx
+
+                               x0,1x0 ,1
+
+where x0,t =        (Ip  +  C)j  ut -j  is  the   corresponding  stationary   sequence  of  the  regressor
+              j =0
+
+vector xt when x = 0.
+
+(ii) the sample second moment satisfies that
+
+                              1         T                                                        (A.3)
+                         T 1+x z
+                                             zt-1 xt-1 - x¯T -1    ()
+
+                                        t =1
+
+where  () has a different asymptotic convergence result as below, depending on the
+exponent rates x and z of the original regressor and instrumental regressor respectively.
+
+                                                           39
+                                                 
+            ---CCCz-z-11-z 1
+                                  xx      +       Bd B                          , if x > 1
+                                  xx      +                                     , if x = 1
+                                   x x    +    0                                , if x < x < 1
+                                                                                , if x = x
+                                                                                , if 0 < x < x
+                                                                                , if x = 0.
+                                                  JCd JC
+
+                                               0
+
+                                                
+
+                                                  erC xx erC d r C
+
+     ()  =  -E0CxV0e,x1zrxC0,1 xx              0                                                               (A.4)
+
+                                          erC  d   r
+
+where B(.) is a p-dimensional standard Brownian motion, JC() =                                   eC(-s)d B()       is
+                                                                                              0
+                                                                                                        1
+an Ornstein-Uhkenbeck (OU) process and we denote with JC() = JC() -                                     0  JC  (s  )d  s
+
+and B() = B() -  1  B(s     )d    s  the  demeaned              processes  of  J()    and     B()    respectively.
+                 0
+
+(iii) The weakly joint convergence result applies and the asymptotic terms given by ex-
+ pressions in (i) and (ii) are stochastically independent.
+
+Notice that for summarizing the above results we used that
+
+              1             T                                     
+            T 1+z
+                                  zt-1zt-1 plim Vzz :=              erCz xx erCz d r                           (A.5)
+
+                            t =1                                0
+
+Moreover, we have the weakly convergence result from Phillips and Magdalinos (2009):
+
+                            1T
+                                      (zt-1  ut )  N            0, Vzz  uu                                     (A.6)
+                    T 1+z
+                            2     t =1
+
+Expression (A.6) proves a mixed Gaussian limiting distribution. This, shows that the limit
+
+distribution of T -(1+z)/2     T     (zt-1     ut )       is    Gaussian  with  mean      zero   and    covariance
+                               t =1
+
+matrix equal to the probability limit of T -(1+)/2                  T      (zt-1      ut  ),  which   is   equal   to
+                                                                    t =1
+                            
+Vzz  uu, where Vzz :=       0     er  Cz  x x  er  Cz  d  r  .  Specifically, the above Mixed Gaussianity
+
+convergence, is a powerful result within the IVX framework and ensures the robustness of
+
+the methodology and the estimation procedure. The dependence of the covariance matrix
+
+on the degree of persistence of the IVX instrumentation methodology, induces exactly
+
+the Mixed Gaussianity. Similarly, the limit distribution of T -(1+z)/2                        T     xt-1  ut       
+                                                                                              t =1
+                                      
+N  0, Vxx  uu , where Vxx :=          0   erC xx erC d r ,      is  proved      in  Lemma     3.3   of  PM.
+
+                                                       40
+Proof of Theorem 1.
+
+Proof. We denote with xt = (1, xt) and with j = (j, j ) for j = 1, 2 the parameter
+vector which is obtained via the OLS estimator. Then, under the null hypothesis of no
+structural break, H0 : 1 = 2, against H1 : 1 = 2, we obtain the following expressions
+
+                                       T                   -1       T
+
+   1 - 0 =                                xt -1 xt -1 I1t              xt-1ut I1t
+   2 - 0 =
+                                   t =1                            t =1
+
+                                       T                   -1       T
+
+                                          xt -1 xt -1 I2t              xt-1ut I2t
+
+                                   t =1                            t =1
+
+with I1t and I2t the dummy time variables and 0 = (0, 0), the population value of the
+parameter vector . Therefore, we have that
+
+                                       T                   -1      T 
+
+T 1 - 0 =                          1         xt -1 xt -1       1        xt-1ut
+                                   T2                          T
+                                       t =1                        t =1
+                                                          -1
+                                                xt-1xt-1             1   T 
+                                   1         T                       T
+                                   T2                                         xt-1ut
+T  2 - 0                      =  
+
+                                       t=T +1                            t =1
+
+Then, the weakly convergence result for the estimator of 1 follows
+
+                                                               -1    
+
+T 1 - 0                                   Kc(r )Kc (r )d r            Kc (r )d Bu     (A.7)
+
+                                   0                               0
+
+Similarly, for the estimator of 2 we have the following weakly convergence result
+
+                                       1                       -1    1
+
+T 2 - 0                                   Kc(r )Kc (r )d r            Kc (r )d Bu     (A.8)
+
+                                                                   
+
+In order to simplify the expression of the Wald OLS statistic we denote with
+
+                                                                      
+
+Gc () := Kc (r )Kc (r )d r and Hc () := Kc (r )d Bu(r )                               (A.9)
+
+                        0                                          0
+
+which implies that due to the argument  in the expressions for Gc () and Hc ()
+
+                           1                                          1
+
+Gc (1) := Kc (r )Kc (r )d r and Hc (1) := Kc(r )d Bu(r )                              (A.10)
+
+                        0                                          0
+
+Notice that, for example we can deduce that
+
+  1                             1                                
+
+   Kc (r )Kc (r )d r =           Kc (r )Kc (r )d r -              Kc (r )Kc (r )d r := Gc (1) - Gc()
+
+                              0                                0
+
+                                                41
+Thus, the statistical distance component of the sup Wald-OLS statistic is given by
+
+T 1 - 2 = Gc ()-1Hc () - Gc (1) - Gc () -1 Hc (1) - Hc ()                                               (A.11)
+
+Denote with X = [xtI1t xtI2t]  [X1 X2] then the convergence of the covariance matrix
+
+Mc () := R (XX)-1 R =  X1 X1  -1     X2 X2 -1
+                        T2            T2
+                                 +
+
+                                     -1                                           1                            -1
+
+                              Kc (r )Kc (r )d r +                                    Kc (r )Kc (r )d r
+
+                       0                                                        
+
+                                                                            -1
+
+              Gc ()-1 + Gc (1) - Gc ()
+
+Recall that the expression for the Wald statistic is as below
+
+WTOLS ()  =  1         1 - 2  R (XX)-1 R -1                    1 - 2                                    (A.12)
+             u2
+
+Therefore, we can now derive the limiting distribution of the sup OLS-Wald statistic in
+the case of the multiple predictive regression with persistent predictors.
+
+WOLS()  sup Gc ()-1Hc () - Gc (1) - Gc () -1 Hc (1) - Hc () 
+
+                         [1,2]
+
+                                                                                                        -1 -1
+
+                           × Gc ()-1 + Gc (1) - Gc ()
+
+× Gc ()-1Hc () - Gc (1) - Gc () -1 Hc (1) - Hc ()
+
+By applying the related inverse matrix formula to Mc ()-1 we obtain that
+
+                                                                                                          -1 -1
+
+                Sc ()-1  Gc ()-1 + Gc (1) - Gc ()
+
+                                                                                                                               -1
+
+                            = Gc () - Gc () Gc () + Gc (1) - Gc() Gc ()
+                            = Gc () - Gc ()Gc (1)-1Gc ()
+
+Thus, we show that the limiting distribution of the sup OLS-Wald statistic is given by
+
+WOLS()  sup WTOLS()  sup             Nc ()Mc ()-1Nc ()                                                  (A.13)
+
+[1,2]                         [1,2]
+
+with quantities Mc (), Nc (),Gc() and Hc () as defined by Proposition 1.
+
+                              42
+Proof of Theorem 2.
+
+Proof. Let Y denote the vector with all demeaned values of yt and X be the matrix
+collecting all demeaned values of xt-1, that is,
+
+  Y = (y1 - y¯T , y2 - y¯T , ..., yT - y¯T ) and X = (x0 - x¯T -1, x1 - x¯T -1, ..., xT -1 - x¯T -1) .
+
+Similarly, we use U to denote the corresponding demeaned ut vector. Furthermore, for
+any 1  t  T , we define Xt to be a T × p matrix, whose first t rows are the same
+as X while the rest are all zeros. Moreover, let Z = (z0, z1, ...zT -1) collect all the
+IVX instruments, and Zt = (z0, ..., zt, 0, ...., 0) be the corresponding time-t truncated
+matrix. Given these notations, we express the original predictive regression model as
+
+                                 Y = X2 + Xt + U                                      (A.14)
+
+where  := 2 - 1 measures the magnitude of structural break. Moreover, we denote
+with t to the corresponding estimator which captures the break size associated with
+the sample partition at time t. Therefore, given any particular t, testing for structural
+
+break in the parameter vector  is equivalent to testing the null hypothesis t = 0.
+Define with Mxz = Ip - X (ZX)-1 Z, which is idempotent and orthogonal to both X
+and Z and allows to rewrite (A.14) in its canonical form30. Multiplying Mxz on both
+sides of (A.14), we deduce that Mxz Y = Mxz Xtt + Mxz U . Now, using Mxz Zt as the
+instrumental variables for Mxz Xt, we obtain an estimator for the parameter t given by
+
+                     t = (Zt Mxz Xt )-1 Zt Mxz Y                                      (A.15)
+
+Moreover, it holds that t = 2IV X - 1IV X. Thus, the limiting distribution is given by
+
+t - t = (Zt Mxz Xt )-1 Zt Mxz U
+
+                                       -1
+
+= Zt Xt - Zt X (ZX)-1 ZXt                  Zt Uy - Zt Xt (ZX)-1 ZU
+
+T                                T                                             -1 T                        -1
+
+=  zt (xt - x¯T -1) -                  zt (xt - x¯T -1)  T                            zt (xt - x¯T -1)
+
+                                                            zt (xt - x¯T -1)
+
+  t =1                           t =1                    t =1                  t =1
+
+                     T                                    T                                           
+   T 
+                                                             zt (xt - x¯T -1)  -1 T
+×  zt (ut - u¯T ) - zt (xt - x¯T -1)
+                                                         t =1                          zt (ut - u¯T )
+  t =1               t =1
+                                                                                    t =1
+
+   30Notice that the reparametrization of the model to its canonical form allows to shift the coordinates
+which transforms the model to its more general form within the exponential family.
+
+                                                      43
+Applying the asymptotic results given by Lemma 1 we obtain
+
+T 1+x z                                                                          -1
+           2
+              t - t            () - ()(1)-1()                                          U() - ()(1)-1U(1)
+
+Next, we focus on covariance estimators for Q1(t) = (Zt Xt)-1 (Zt Zt) (XtZt)-1 and the
+corresponding one for Q2(t). By ignoring the second-order degree bias correction we
+obtain:
+
+                 T                              -1  T                            T                        -1
+
+Q1(t) =                       zt (xt - x¯T -1)           zt zt                         (xt - x¯T -1) zt       (A.16)
+
+                 t =1                               t =1                         t =1
+
+which implies that
+
+                              T 1+xz Q1(t)  ()-1 u2V ()-1                                                     (A.17)
+
+Similarly,
+
+                                                -1                                                                         -1
+                                                                            T                             (xt - x¯T -1) zt
+                           T                                                                           T
+                              zt (xt - x¯T -1) 
+Q2(t) =                                                                          zt zt 
+
+              t=T +1                                  t=T +1                           t=T +1
+
+                                                                                                              (A.18)
+
+which implies that                                                                                            (A.19)
+       T 1+xz Q2(t)  (1) - () -1 (1 - )u2V (1) - () -1
+
+Combining all the above we obtain the following result for the Wb(t) test statistic
+
+                                                                                 -1
+
+Wb(t) = 2IV X(t) - 1IV X(t) Q1(t) + Q2(t)                                              2IV X(t) - 1IV X (t)
+
+                 T 1+x z                                                                                      -1
+                            2
+              =                2IV X (t) - 1IV X (t)                             × T 1+xz Q1(t) + Q2(t)
+
+              ×  T 1+x z       2IV X (t) - 1IV X (t)                                                          (A.20)
+                            2
+
+which implies the following weakly convergence result
+
+                                                                                                          -1
+
+WIV X(t)  U() - ()(1)-1U(1) () - ()(1)-1()
+
+                                                                                                                                                                               -1
+
+            × ()-1 y2V ()-1 + (1) - () -1 (1 - )y2V (1) - () -1
+
+                                                                         -1                                   (A.21)
+
+            × () - ()(1)-1() U() - ()(1)-1U(1)
+
+                                                      44
+To simplify the notation of expression (A.21), we denote with A = (), C = (1) and
+ = u2V. Then, we have the following equivalent form of the IVX-Wald statistic
+
+                                    -1
+
+WIV X(t)  U() - AC-1U(1) A - AC-1A
+
+                                                                                                -1                                           (A.22)
+
+× A-1A-1 + (1 - ) C - A -1 C - A -1
+
+             -1
+
+× A - AC-1A           U() - AC-1U(1)
+
+which can be written as below
+
+                                                                     
+
+  WIV X(t)  U() - AC-1U(1)
+
+                                                                                                                         
+
+                  ×  A - AC-1A A-1A-1 A - AC-1A
+
+                                                                                                                                                              
+
+                  + (1 - ) A - AC-1A (C - A)-1  (C - A)-1 A - AC-1A
+
+× U() - AC-1U(1)
+
+                                               
+
+= U() - AC-1U(1)
+
+                                                                                                                        -1
+
+×  I - AC-1  I - AC-1  + (1 - ) AC-1  AC-1 
+
+× U() - AC-1U(1) .
+
+                                                                                                                                             (A.23)
+
+Notice that since U(.) is known to be a Brownian motion with variance , the above
+expression can be further simplified as following
+
+                                                                                                                                             (A.24)
+
+WIV X(t)  B() - AC-1B(1)
+
+                                                                                                                                         -1
+
+                ×  I - AC-1 I - AC-1  + (1 - ) AC-1 AC-1 
+
+× B() - AC-1B(1) .
+
+Substituting back to expression (A.24) the notation for A = (), C = (1) and
+ = u2V, we obtain the expression below
+
+                      45
+                                                                                 
+
+WIV X(t)  B() - ()(1)-1B(1)
+
+                                                                                                                                                                                                      -1
+
+                ×  Ip - ()(1)-1 Ip - ()(1)-1  + (1 - ) ()(1)-1 ()(1)-1 
+
+                × B() - ()(1)-1B(1) .                             (A.25)
+where B(.) is a standard Brownian motion.
+
+Using the asymptotic results given by Lemma 1, we simplify expression ()(1)-1 to
+
+                                              1         -1
+
+  xx +                            Bd B     xx + Bd B        , if x > 1
+
+                               0           0
+
+R() := ()(1)-1 = Ipxx +                       1         -1
+
+                                  JC d JC  xx + JCd JC      , if x = 1
+
+                               0           0
+
+                                                            , otherwise.
+                                                                   (A.26)
+
+Therefore, by denoting the Brownian functional above with N() = B()-R()B(1)
+
+and M() =  (Ip - R()) (Ip - R()) + (1 - )R()R() , then we obtain
+
+WIV X(t)  sup N()M()-1N()                                         (A.27)
+                        [1,2]
+
+Proof of Corollary 1 When x < 1, we have that R() = Ip and thus M() =
+ (Ip - Ip) (Ip - Ip) + (1 - )Ip (Ip) = [(1 - )2 + (1 - )2] Ip = (1 - )Ip.
+
+Hence, in this case, the limiting distribution in Theorem 2 will reduce to
+
+WIV X(t)  sup                  B() - B(1)  B() - B(1)   .         (A.28)
+                        [1,2]                (1 - )
+
+Thus, the above proof demonstrates that when we have predictors generated via the LUR
+specification with x < 1 and testing the joint null hypothesis of no structural break and
+no predictability then the limiting distribution of the IVX Wald statistic converges to a
+NBB similar to the result of Andrews (1993) in the case of linear regression models.
+
+                               46
+Proof of Corollary 2. (i). Using the above notations, it's straightforward to obtain that
+under the null hypothesis 1 = 2 = 0, we obtain that
+
+      WTIV X = IV X Q-R1IV X  U(1) (1)-1(1)-1 -1 U(1).                   (A.29)
+
+Combining this result with Theorem 2, we can deduce that
+
+Wjoint = WTIV X + WIV X (t )          (1)-1(1)-1               -1        (1)-1 U (1)       
+                                                          0p×p                             
+                        (1)-1 U (1)
+
+          
+
+      U() - ()(1)-1U(1)                    0p×p           p×p        U() - ()(1)-1U(1)
+
+with
+
+ :=  Ip - ()(1)-1  Ip - ()(1)-1  + (1 - ) Ip - ()(1)-1  Ip - ()(1)-1 
+
+Therefore, we obtain that
+
+Wjoint = WTIV X + WIV X (t )                    (1)-1          -1        (1)-1B(1)         
+                                         (1)-1            0p×p                             
+                        (1)-1B(1)     
+
+          
+
+      B() - ()(1)-1B(1)                    0p×p           p×p        B() - ()(1)-1B(1)
+
+with
+
+ :=  Ip - ()(1)-1 Ip - ()(1)-1  + (1 - ) Ip - ()(1)-1 Ip - ()(1)-1 
+
+which shows that
+
+      Wjoint = WTIV X + WIV X (t )               -1            B(1)  
+                                       Ip  0p×p  
+                              B(1)                                   
+
+                
+
+                  B() - R()B(1) 0p×p       M()            B() - R()B(1)
+
+       B(1)B(1) + N()M()-1N()
+
+Since the first component of the above decomposition is independent of , then by the
+Continuous Mapping Theorem, we conclude that
+
+Wjoint = sup WTIV X + WIV X(t)  B(1)B(1) + sup N()M()-1N() .
+      [1,2]                                      [1,2]
+
+                                       47
+(ii). In case that x < 1, by Corollary 1 it holds that the second component of the
+W test statistic reduces to a functional of a standard Brownian bridge B() - B(1).
+Then, since both B(1) and B() - B(1) are Gaussian processes which implies that
+Cov B(1), B() - B(1) =  -  = 0. Therefore, these two stochastic quantities are
+independent of each other31. Hence, the proof of the statement follows.
+
+Proof of Proposition 1. Under the null hypothesis, H0 : 1 = 2 and 1 = 2 = ,
+there is no break in the model intercept. In this section we consider in more details the
+estimator of the model intercept based on the IVX instrumentation before proving the
+asymptotic distribution given by Proposition 1. In particular, we propose to estimate the
+model intercept using the generated instrument instead of the predictor, we refer to this
+estimate as IV Z and the econometric intuition is explained below.
+
+Based on the IVX estimation procedure, the corresponding IVX estimate for the model
+intercept is given by ^ = y¯T - IV Xx¯T -1. However, we notice that due to the presence
+of the predictors, then the limit theory for the estimate of the model intercept will vary
+with the degree of persistence of predictors. We can see this below
+
+               ^IV X -                         T 1+x z       IV X -                         x  z
+           T                   = T u¯T -                  2                  T x¯ -            2         ,        (A.30)
+                                                                                                  T -1
+
+where  u¯T  =  1  T     ut  .                                      and T 1+x z              -            are both Op(1),
+               T  t =1            Notice that both T u¯T                                 2
+
+while the order of convergence of the last term depends on the persistence level of
+
+predictors. We have the following convergence rates
+
+                                            
+                                            Op    T -1/2
+                               T                  T 1/2+x          , if x = 1
+                                                  T 3/2            , if 0 < x < 1
+                            t=1 xt-1 = OOpp                        , x > 1.                                       (A.31)
+
+                                            x  z
+We  can  observe  that  the       term      T x¯ -2          will  dominate  in             the   limit  in  the  case  that
+                                                  T -1
+
+x > (z + 1) /2 and vanish if the reverse holds. In the case that x = (z + 1) /2,
+
+all three terms appear in the asymptotic distribution which will depend on an unknown
+
+parameter . To simplify the asymptotic theory we need to derive we estimate the model
+
+intercept based on the generated endogenous instrument, that is, IV Z = y¯T -IV Xz¯T -1,
+
+where  z¯T -1  =    1   T         z~j  -1.  The advantage of the IVZ model estimate is that the
+                  T -1  j =2
+
+persistence level of the instrument zt is controlled by the choice of the tuning parameters
+
+z and cz therefore the abstract degree of persistence is filtered out.
+
+   31To validate the asymptotic independence of the two BM functionals, we can apply properties of the
+BM and prove that the covariance of the two terms is zero, which ensures independence.
+
+                                                      48
+Moreover, the particular choice of the estimate for the model intercept works as a power
+enhancement mechanism against nonzero  values, as seen below
+
+                         ^IV Z -  = u¯T - IV X -  z¯T -1 +  (x¯T -1 - z¯T -1) ,                                               (A.32)
+
+The order of the first term is Op T -1/2 . Moreover, we can show that the second term
+is asymptotically dominated by the first term, while the third term does not converge
+unless the parameter space for  is within the neighbourhood of zero. Therefore, power
+against the presence of predictability when a model intercept is included in the model is
+achieved when we control the convergence rate of the third term above.
+
+Next, we show that the second term of (A.32) is asymptotically dominated by the first
+term by expanding further the expression
+
+                                                                                                          T
+             T
+                  IVX -        z¯T -1       T 1+x z       IVX -                 .  T ( ) - 1+   x  z         zt-1 .           (A.33)
+                                                       2                                           2
+
+                                                                                                      t =1
+
+The first term above is Op(1) due to the convergence property of the IVX estimator
+to the mixed Gaussian distribution as established by Phillips and Magdalinos (2009). To
+
+establish the order of the second term we consider the convergence rate of the term
+
+     T     zt-1.  For   instance,    by  Lemma  A2           in  the     Online    Appendix           of  KMS       we  have  that
+     t =1
+
+                                            
+                                            Op            T x 1
+                                                                  2  +z        , if z < z
+
+                                  T
+
+                               t=1 zt-1 = Op                                                                                  (A.34)
+
+                                                          T x    +   z         , if 0 < x < z .
+                                                                     2
+
+Hence, we have that the second term of (A.32) will be Op                                        T x   1+z    +1  . Since x  1 +
+                                                                                                        2
+
+z < 2, this implies that the order of the second term is op(1). Therefore, we prove that
+
+the second term of ^IV Z -  is asymptotically dominated by the first term.
+
+For the third term of (A.32) we aim to show that is asymptotically dominated by
+the first term when  is small enough. Thus, we rewrite with T  (x¯T -1 - z¯T -1) =
+
+  1         T     (xt-1  -  zt-1).   Using the representation formula of the instrument given by
+    T       t =1
+
+expression (23) of Phillips and Magdalinos (2009), we find an equivalent expression, that
+
+is,    1          T     (xt-1  -  zt-1)  =  -  Cz  T      (  1  +z  )    T      t  -1,     where      t -1       =      t     RTt -j  xj  -1  .
+         T        t =1                                       2           t =1                                           j =1
+
+Hence, if we set for simplicity Cz = Ip indicating a common degree of persistence across
+
+the instruments, we then obtain the following probability bound for this expression
+
+                                                                                           T
+                              T  (x¯T -1 - z¯T -1)
+                                                                         T  -(  1  +z  )        t -1
+                                                                                2
+
+                                                                                          t =1
+
+                                                                         T  -(  1  +z  )T     sup     t -1
+                                                                                2
+
+                                                                                           2t T
+
+                                                                 49
+                                       =          T  (  1  -z  )    sup     t -1
+                                                        2
+
+                                                                  2t T
+
+                                                  T  (  1  -z  )  Op     T x      +z
+                                                        2                      2
+
+                                       =     Op            T x      +z   ,
+                                                                 2
+
+Notice that   the  above        result is justified due           to    the  1u+2nxifo,rmthebnoundTof    t-1 , which      is
+shown to be   Op                 by PM. Thus, if  =               op    T-                             (x¯T -1 - z¯T -1)  =
+                   T x      +z
+                         2
+
+op(1) and the third component of ~IV Z -  will also be asymptotically dominated.
+
+Therefore, when  is a non-zero constant, this term will dominate, and this is the reason
+
+we obtain non-zero local power under the alternative hypothesis of predictability.
+
+Proof of Proposition 2.
+
+For the proof of Proposition 2, we have already proved most of the required results.The
+
+only step we need to additionally show is that the test statistics Wa(t) and Wb(t) are
+
+asymptotically independent of each other. Notice that since the test statistic Wa(t)
+
+is driven by  T r   ut      ,   while  the  test  statistic         Wb (t )       is  driven  by  T r   zt-1ut  .  These
+              t =1                                                                                t =1
+
+two partial sums (invariance principles) have a joint weakly convergence to two indepen-
+
+dent Brownian motions, as shown by Proposition A1 in Phillips and Magdalinos (2009).
+
+Hence, the asymptotic independence is guaranteed. Then, convergence of the test statis-
+
+tic W(t) follows by an application of the continuous mapping theorem.
+
+                                                           50
+B Critical Values and Implementation
+
+B.1 Critical Values
+
+The correct use of critical values close to the true asymptotic distribution of the test
+statistic under examination is crucial in Monte Carlo simulations. This allows to correctly
+identify the existence of size distortions. Notice that for deciding whether to accept or
+reject the null hypothesis, one can use already tabulated critical values, only in those
+cases that the asymptotic distribution of the test statistic under consideration has an
+approximate form to Brownian functional (such as NBB). Moreover, we apply bootstrap
+methodologies (such as the fixed regressor bootstrap) to ensure that we obtain robust
+performance of the empirical size and power of the proposed tests.
+
+B.2 Software Implementation
+
+The Monte Carlo simulation study of the paper was implemented via the Statistical Pack-
+age R (Version 3.5.1). More specifically, to validate the code for testing for both pre-
+dictability and structural break, using the supremum Wald type statistics we utilize both
+the Matlab code of KMS as well as the IVX library written by Vasilopoulos and Pavlidis
+(2019) which provide implementations of the IVX instrumentation procedure. Moreover,
+to reduce the execution time we utilize parallel programming techniques as well as re-
+lated R packages for this purpose, such as the Rcpp library and the Rccp Armadillo
+linear algebra library. Then, the critical values and empirical size and power of the tests
+were obtained by simulating the asymptotic distributions based on 10,000 Monte Carlo
+replications using the Iridis4 High Performance Computing Facility of the University of
+Southampton.
+
+                                                      51
+B.3 Bootstrap procedure
+
+For robustness of the procedure we use a bootstrap algorithm in order to obtain cor-
+responding critical values. The Algorithm for the bootstrapped critical values that we
+follow in this paper is proposed by Xu (2020), even though we do not consider the long-
+horizon predictability component of the particular procedure. We also consider the fixed
+regressor bootstrap as described by Georgiev et al. (2018) and also in Hansen (2000b).
+
+Algorithm 1. (to modify) Two-sided 100% Bootstrap Implied Test for H0 : R = r0
+Consider the predictive regression with multiple predictors given by
+
+                         yt = µy + xt-1 + uyt ,                            (B.1)
+                         xt = µx + Rxt-1 + uxt ,                           (B.2)
+
+where R is a k × k dimensional coefficient matrix and the error sequence ut = (uyt, ux t )
+is (k × 1)-dimensional martingale difference sequence with variance-covariance matrix
+
+                         Var(ut) =  =  y2   x y                            (B.3)
+                                       x y  x x
+
+Step 1. Estimation Step
+
+          1.1. Run OLS regressions of (B.1) and (B.2) to obtain the OLS estimates of
+                 the vector of coefficients µ^y , ^, µ^x, R^ and the sequence of residuals u^t =
+                 (u^yt , u^x t ).
+
+          1.2. Compute the Wald statistic WIM.
+
+Step 2. Generate the bootstrap sample {yt, xt, t = 1, ..., n}.
+
+          2.1. Generate ut = e^t et, where et is a random number generated from the standard
+                 normal distribution. Write ut = uyt , uxt .
+
+          2.2. Generate xt such that xt = µ^x +R^bc xt-1 +uxt , where R^bc is the bias-corrected
+                 estimator of R, defined as below
+
+                                                     k                      n
+
+R^bc = R^ + ^ xx         Ik - R -1 + R Ik - R2 -1 +        j Ik - j R -1       x~t-1x~t-1 ,
+
+                                                     j =1                  t =2
+
+      where j s for j = 1, ..., k are k eigenvalues of R. We set x1 = x1.
+2.3. Generate yt such that yt = µ^y + xt- 1^ + uyt . We set y1 = y1.
+2.4. Repeat Steps 2.1 to 2.3 B times (e.g., B = 1000).
+
+                         52
+Step 3. For each bootstrap sample, calculate the bootstrap Wald statistic
+
+                               n               
+WIM = R^h - R^h  Rq  
+                                  xt-1xt- 1  -1
+
+                              t =2              qR R^h - R^h ,
+
+          where ^h, q,  are computed like ^h, q,  except that the bootstrap sample
+          {yt, xt} is replaced by the original sample {yt, xt}.
+
+Step 4. Use the 100(1 - )% quantile WIM (1 - ) of WIM over B bootstrap replications
+          as the critical value, that is, the hypothesis H0 is rejected at the significance level
+           if WIM > WIM (1 - ).
+
+B.4 Structural Break Tests
+
+For the empirical application of the paper, we consider a set of additional structural
+break tests as robustness checks. Moreover, the particular structural break tests can be
+employed to identify the location of the break-point.
+
+53
+C Tables and Figures
+
+C.1 Empirical Results
+
+Table C1: Predictability Tests for the Equity Premium of univariate predictive regressions
+
+Predictor         OLS  t HAC      R2 IVX WIVX supWOLS supWIVX
+
+Panel A:         1946Q1 - 2019Q4
+
+Dividend payout ratio 0.0056 0.3898 0.0003
+
+Long-term yield  -0.0824 -1.5958 0.0032
+
+Dividend yield   0.0150 1.9880 0.0047
+
+Dividend-price-ratio 0.0142 1.8741 0.0042
+
+T-bill rate      -0.1043 -2.1461 0.0060
+
+Earnings-price-ratio 0.0115 1.2885 0.0028
+
+Book-to-market ratio 0.0042 0.6590 0.0006
+
+Default yield spread 0.0150 1.9880 0.0047
+
+Net equity expansion -0.0501 -0.6149 0.0005
+
+Term spread      0.1813 1.6834 0.0035
+
+Inflation rate   -0.9075 -2.6520 0.0096
+
+Panel B:         1990Q1 - 2019Q4
+
+Dividend payout ratio 0.0028 0.1597 0.0001
+
+Long-term yield  -0.0883 -0.8409 0.0017
+
+Dividend yield   0.0354 1.6497 0.0102
+
+Dividend-price-ratio 0.0351 1.6389 0.0101
+
+T-bill rate      -0.0393 -0.3885 0.0005
+
+Earnings-price-ratio 0.0173 0.8403 0.0041
+
+Book-to-market ratio 0.0317 1.0439 0.0041
+
+Default yield spread 0.5275 0.5506 0.0025
+
+Net equity expansion 0.1188 0.9655 0.0037
+
+Term spread      -0.0727 -0.4442 0.0005
+
+Inflation rate   0.2005 0.2831 0.0003
+
+Table C1 presents simple predictability tests of the null hypothesis  = 0 and model estimates based on
+the predictive regression with a single predictor given by yt =  + xt-1 + ut , applied to all individual
+predictors. For the t-tests we consider a t-ratio based on the HAC (Newey-West) covariance estimator.
+For all test statistics, we denote the rejection probabilities under the null hypothesis of no predictability at
+significance levels 1%(), 5%(), and 10%(), respectively.
+
+                              54
+Table C2: Structural Break Tests for predictors
+
+Panel A:               1990Q1 - 2019Q4
+Predictor
+Dividend payout ratio                   R2     BP Seq F-test  Max LR F-test                                      Exp LR F-test
+Long-term yield                                    4.0061       49.4450                                            19.1970
+Dividend yield            0.7477 0.5592            3.4002          2.3062                                            0.3676
+Dividend-price-ratio                               3.5761          7.2497                                            1.4443
+T-bill rate               0.0429 0.0046            3.6305          7.5262                                            1.5400
+Earnings-price-ratio                               2.6279          5.4363                                            0.6033
+Book-to-market ratio      0.0424 0.0001            1.6033       14.6679                                             4.6243
+Default yield spread                               5.5639          3.1215                                            0.1470
+Net equity expansion      0.0511 0.0008            3.1040          7.4651                                           1.9635
+Term spread                                        0.9001          2.5452                                            0.2197
+Inflation rate            0.4734 0.2169            1.6129          2.1243                                            0.2136
+Predictor                                          3.2371          5.1032                                            0.9540
+Dividend payout ratio     0.4385 0.1922
+Long-term yield                                BP Seq F-test  Max LR F-test                                      Exp LR F-test
+Dividend yield            -0.0439 0.0012         26.5211        26.5211                                             7.7360
+Dividend-price-ratio                               1.7122          1.1633                                            0.1840
+T-bill rate               0.4616 0.2131            3.4744          5.0447                                            1.1532
+Earnings-price-ratio                               3.3367          5.0907                                            1.1876
+Book-to-market ratio      0.2440 0.0596            1.3134          2.6698                                            0.4553
+Default yield spread                               0.7989        7.5124                                              2.2289
+Net equity expansion      0.1035 0.0107            2.7760          2.0446                                            0.2170
+Term spread                                        1.6369          3.7191                                            0.7621
+Inflation rate            -0.0979 0.0096           0.8209          1.6173                                            0.1941
+                                                   1.3025          1.7316                                            0.2593
+                       µ                R2         1.6209          2.5489                                            0.4311
+
+                       -0.0001 0.7476 0.5592
+
+                       -0.0002 0.0368 0.0014
+
+                       -0.0007 0.0408 0.0017
+
+                       -0.0007 0.0495 0.0024
+
+                       -0.0001 0.4684 0.2197
+
+                       -0.0003 0.4384 0.1922
+
+                       -0.0006 -0.0447 0.0020
+
+                       0.0000 0.4616 0.2131
+
+                       0.0000 0.2440 0.0596
+
+                       0.0000 0.1034 0.0107
+
+                       0.0000 -0.0979 0.0097
+
+Table C2 presents structural break tests and model estimates based on an AR(1) model applied to all
+individual stationary predictors (based on first differences, i.e., x = xt - xt-1) for Panel A with sampling
+period: 1990Q1 - 2019Q4. The covariance matrix for the AR(1) model is constructed using the HAC
+(Newey-West) estimator. We consider the following structural break tests32 (i) Bai-Perron F-test based
+on the sequential break detection algorithm of Bai and Perron (2003) with  = 0.15; (ii) Maximum LR
+F-statistic with  = 0.15; and (iii) Exp LR F-statistic with  = 0.15. The last two structural break tests
+represent the Andrews unknown breakpoint tests (see, Andrews (1993)). Notice also for the BP statistic
+we assume a common data distribution across the blocks to ensure consistent estimation of the variance.
+For all test statistics, we denote the rejection probabilities under the null hypothesis of no structural break
+at significance levels 1%(), 5%(), and 10%(), respectively.
+
+   32Further details regarding the specification and testing algorithms can be found in the User's Guide of
+Eviews under the section titled "Stability Diagnostics", see https://www.eviews.com/help/
+
+                                                      55
+

@@ -1,0 +1,2752 @@
+Testing for Multiple-Horizon Predictability:                                                                     Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+Direct Regression Based versus Implication
+Based
+
+Ke-Li Xu
+Indiana University Bloomington
+
+    Research in finance and macroeconomics has routinely employed multiple horizons to test
+    asset return predictability. In a simple predictive regression model, we find the popular
+    scaled test can have zero power when the predictor is not sufficiently persistent. A new test
+    based on implication of the short-run model is suggested and is shown to be uniformly more
+    powerful than the scaled test. The new test can accommodate multiple predictors. Compared
+    with various other widely used tests, simulation experiments demonstrate remarkable finite-
+    sample performance. We reexamine the predictive ability of various popular predictors for
+    aggregate equity premium. (JEL C32, C53, C58, G12, G14, G17)
+
+    Received December 12, 2017; editorial decision September 15, 2019 by Editor Lauren
+    Cohen. Authors have furnished an Internet Appendix, which is available on the Oxford
+    University Press Web site next to the link to the final published paper online.
+
+The predictability in asset returns is often examined beyond one forecast
+horizon. Fama and French (1988) and Campbell and Shiller (1988) found
+that accumulated short-run predictability can be the dominant influence on
+longer-run movements in asset prices. Ang and Bekaert (2007), Cochrane
+(2008), Lettau and van Nieuwerburgh (2008), Bansal and Shaliastovich (2013),
+and Rapach, Ringgenberg, and Zhou (2016) are recent studies of return
+predictability in which analyses over multiple horizons (or even at an infinite
+horizon) play a prominent role. Long horizon predictability tests are also useful
+in macroeconomics, for example, to detect predictable components in interest
+rates, inflation, and exchange rates.1
+
+   Strong persistence of many useful predictors is a stylized fact in the return
+predictability literature. Unless the predictor is strictly exogenous, strong
+
+   The author is grateful to the editor and referees for comments and suggestions that greatly improved the
+   paper. The author also thanks Erik Hjalmarsson and Michalis Stamatogiannis for providing MATLAB codes
+   for their tests; Amit Goyal and Dave Rapach for sharing their online data sets; and participants of various
+   seminars and conferences for valuable discussions. Send correspondence to Ke-Li Xu, Department of Economics,
+   Indiana University, Wylie Hall 255, 100 South Woodlawn Avenue, Bloomington, IN 47405-7104. E-mail:
+   kelixu@indiana.edu.
+
+1 See, for example, Mark (1995), Kilian (1999), Gourinchas and Rey (2007), Chen, Rogoff, and Rossi (2010),
+   Colacito and Croce (2011), and Chen and Tsang (2013).
+
+The Review of Financial Studies 33 (2020) 4403­4443
+
+© The Author(s) 2019. Published by Oxford University Press on behalf of The Society for Financial Studies.
+
+All rights reserved. For permissions, please e-mail: journals.permissions@oup.com.
+
+doi:10.1093/rfs/hhz135                               Advance Access publication November 11, 2019
+   The Review of Financial Studies / v 33 n 9 2020                                                                  Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+  persistence can cause large size distortion to standard tests that are typically
+  formed under the assumption of weak dependence. This issue has motivated
+  several recent influential studies in the setting of the standard (or short-run,
+  single-horizon) predictive regression.2 In the multiple-horizon regression, our
+  primary focus in this article, the outcome variable (e.g., multiple-period returns)
+  is the aggregation of the single-horizon outcome. The potential effects of
+  the predictor's persistence on inference are even further amplified because
+  the outcome is overlapping, and thus also dependent. A large amount of
+  empirical results favoring predictability over longer horizons are based on
+  the test using the Newey-West (1987) (or Hansen-Hodrick (1980)) standard
+  error. The Newey-West test can seriously overreject in finite samples due to
+  the interaction between the persistent regressor and serially correlated errors.
+  The standard error proposed by Hodrick (1992), section 1), which uses the
+  moving-average structure of the aggregated error under the null hypothesis (of
+  nonpredictability), performs better in finite samples (Ang and Bekaert 2007).
+  However, the construction relies on weak dependence. Wei and Wright (2013)
+  derive the asymptotic distribution of Hodrick's test (which is a nonstandard
+  distribution) with strongly dependent regressors.
+
+     One approach that accommodates strongly persistent predictors is the scaled
+  test, proposed by Valkanov (2003) and Hjalmarsson (2011). They use the usual
+  t-statistic divided by the square root of the horizon (referred to as the scaled
+  t-statistic) to reflect inflation of the standard error as the horizon increases,
+  and the procedure has gained popularity among practitioners. However, the
+  scale is motivated by strong persistence, and as we demonstrate, it tends to
+  overestimate the standard error if the predictor is just weakly dependent. Using
+  the asymptotics that allow for long horizons and various degrees of persistence,
+  we show that under the null of nonpredictability, the scaled t-statistic of
+  Hjalmarsson (2011) converges to zero if h(1-)  , where h is the forecast
+  horizon and  is the autoregressive slope of the predictor. Consequently, under
+  the alternative, the scaled t-statistic converges to zero if n-1/2h(1-)1/2  ,
+  where n is the sample size. This means that with a weakly dependent predictor,
+  the test has zero power if the horizon increases faster than n1/2.
+
+     The practical implication is that regardless of whether predictability is
+  detected in the first few horizons, the significance (if any) of the scaled test
+  will completely disappear as the horizon increases, if the predictor is not very
+  strongly persistent. This is also the pattern we found in our empirical analysis.
+
+     In this paper, we pursue a different approach to infer about the multiple-
+  horizon predictability slope through the implication of the short-run model.
+  This method does not estimate the multiple-horizon regression directly, and
+
+2 See Stambaugh (1999), Lanne (2002), Amihud and Hurvich (2004), Torous Valkanov, and Yan (2004), Campbell
+   and Yogo (2006), Jansson and Moreira (2006), Amihud et al. (2009), Phillips (2014), Elliott, Muller, and Watson
+   (2015), Kostakis et al. (2015), Choi, Jacewitz, and Park (2016), Lee (2016), Xu (2017), Andersen and Varneskov
+   (2018), Lee, Shi, and Gao (2018), and Xu and Guo (2019), among many others.
+
+  4404
+Testing for Multiple-Horizon Predictability                                                   Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+thus is not subject to issues raised by overlapping observations. The so-called
+"implied estimator" dates back at least to Campbell and Shiller (1988) and
+Hodrick (1992), section 3), and was more recently used by Cochrane (2008)
+and Lettau and van Nieuwerburgh (2008). Under the building block model
+of short-run predictive regression, we derive the asymptotic distribution of
+the implied test under both hypotheses of predictability and nonpredictability.
+The implementation of the test is based on the bias-corrected bootstrap,
+which accounts for persistence of the predictor. We also prove that the test
+is uniformly more powerful than the scaled test. In particular, the implied
+test statistic improves the divergence rate by h(1-) if h(1-)  . The
+power improvement comes from two key elements in the construction of the
+implied test, a more efficient point estimator and an adaptive variance estimator
+under the alternative. The new implied test can easily extend to cover multiple
+predictors.
+
+   In the simulation experiments with empirically relevant designs, we confirm
+that the substantial power improvement of the implied test carries over to finite
+samples, and we provide evidence for its appealing performance over various
+other popular tests.
+
+   Recent work by Phillips and Lee (2013) and Kostakis et al. (2015, section
+5) also propose robust tests, both based on the idea of constructing mildly
+persistent instrumental variables. Importantly, both studies take an indirect
+approach. Phillips and Lee (2013) estimate the backward multiple-horizon
+regression, in which the parameter of interest is different from ours and
+coincides only under nonpredictability. The test of Kostakis, Magdalinos, and
+Stamatogiannis (2015) uses long-horizon returns as the dependent variable but
+the construction is built on a different estimand from ours.
+
+   Our approach thus complements theirs. An important benefit is that we
+focus directly on the multiple-horizon slope (as defined by h in Equation
+(4)) of the predictive regression in which only the outcome is aggregated and
+the predictor remains the same with the usual short-run predictive regression.
+Thus, our approach is able to offer a confidence interval for the parameter
+of dramatic economic meaning, the multiple-horizon slope and, thereby, the
+multiple-horizon expected returns. For example, Rapach, Ringgenberg, and
+Zhou (2016) consider a mean-variance investor who rebalances his/her portfolio
+at the frequency lower than the data frequency (e.g., managing asset allocation
+quarterly (h = 3) or annually (h = 12), given monthly observations). Thus, the
+investor's asset allocation strategy is based on multiple-horizon expected
+returns and variances. Moreover, our test requires no tuning parameter. By
+contrast, as Phillips (2014) notes, the instrumental-variable-based approach
+requires the user's input of a key tuning parameter (which determines how mild
+the persistence of the instrumental variable is), but a satisfactory data-dependent
+selection rule is currently lacking.
+
+   Wei and Wright (2013) also emphasize the importance of focusing on the
+multiple-horizon slope. They propose running the reverse-regression and then
+
+                                                                                        4405
+The Review of Financial Studies / v 33 n 9 2020
+
+recovering the parameter of interest, the multiple-horizon slope, and the limit                                        Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+distribution is obtained through the delta-method. However, their test is valid
+only when the predictor is weakly dependent and thus does not offer a solution
+to robust inference to unknown persistence.
+
+   The implied test we suggest is related to that of Rossi (2007), who also
+proposes drawing inference based on the model-implied identification. Her
+confidence-interval approach relies on a monotonicity assumption, which is
+justified under the asymptotics in which the horizon is a fixed fraction of the
+sample size. Moreover, her analysis focused on local-to-unity specification
+(thus ruling out a weakly dependent predictor) and did not provide asymptotic
+power properties or offer guidance on a practitioner's choice among competing
+procedures.
+
+1. Model and Estimand
+
+Consider the predictive regression
+
+                           yt = y +xt-1 +u0t ,         (1)
+
+where the predictor xt follows
+
+                           xt = x +xt-1 +uxt ,         (2)
+
+with the autoregressive (AR) slope . The error vector ut = (u0t ,uxt )
+
+is a bivariate martingale difference sequence (MDS) with the variance
+
+matrix V ar(ut ) =  =  02  0x                    .3 The (contemporaneous) correlation  =
+                       0x  x2
+
+0xx-10-1 between two errors is often referred to as the endogeneity parameter
+
+and is known to induce nonstandard inference of model (1) if xt is strongly
+
+persistent (Campbell and Yogo 2006).4 We focus on the simple AR(1) model
+
+for the predictor to make the theory transparent.
+
+We are interested in the parameter h, given by
+
+                                                 h-1
+
+                                h = j ,                (3)
+
+                                                 j =0
+
+where h is the forecast horizon. The parameter h coincides with the estimand
+of the horizon-h regression (given by Equation (4)) under models (1) and
+(2), which is popular in empirical finance and macroeconomics. To show
+
+3 We clarify a subtle difference between the data-generating process (DGP) and the (short-run) regressions we
+   actually run, the latter of which are given by Equations (1) and (2). The DGP underlying the theoretical
+   development is (1), together with xt = x +xt , where xt = xt-1 +uxt . As we are primarily interested in regression
+   slopes, we assume without loss of generality that x = 0.
+
+4 See also Cavanagh, Elliott, and Stock (1995), Lanne (2002), and Torous Valkanov, and Yan (2004) for earlier
+   theoretical results.
+
+4406
+Testing for Multiple-Horizon Predictability
+
+this, adding together Equation (1) for the outcomes for the next h periods,
+
+yt ,yt+1,...,yt+h-1, and using sequential substitution to maintain xt-1 as the
+
+regressor, we have
+
+                          h-1
+
+                                yt+j = h +xt-1h +u0t (h),   (4)
+
+                          j =0
+
+where h is as in Equation (3), h = hy, and u0t (h) is the aggregated error
+
+given by
+
+                               h-1               h-2
+
+                    u0t (h) = u0,t+j + I{h2}( j ux,t+j ),   (5)                                                   Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+                               j =0              j =0
+
+with j =  h-2-j     i  .  For  example,      if  h = 3,   u0t (h) = u0t +u0,t+1 +u0,t+2 +[(1+
+          i=0
+
+)uxt +ux,t+1]. The dependent variable in regression (4) is often the (log)
+
+return of an asset held for h periods, and xt-1h is thus interpreted as the
+
+horizon-h expected return. We refer to h as the horizon-h regression slope, or
+
+the long-horizon (LH) regression slope.
+
+   Valid inference of h relies crucially on the persistence of the predictor, that
+is, how close  is to 1. To model the level of persistence, we assume
+
+                                              = 1+cn-r ,    (6)
+
+where n is the sample size and 0  r  1. This specification accommodates
+a wide range of persistence typically modeled in the literature, allowing for
+local-to-unity or strongly persistent (r = 1; Campbell and Yogo 2006, among
+many others), nearly stationary (0 < r < 1; Park 2003b; Phillips and Magdalinos
+2007; Phillips 2014; Kostakis, Magdalinos, and Stamatogiannis 2015), and
+more traditionally, stationary predictors (r = 0). The constant c is such that
+c  R if r = 1, c < 0 if 0 < r < 1, and -2 < c < 0 if r = 0.
+
+   Throughout the paper, we assume the horizon h   but with the rate slower
+than the sample size n, that is,
+
+                                             h-1 +hn-1  0.  (7)
+
+The assumption h   is used often in the literature to model long horizons,
+
+and it is particularly convenient in our setting when analyzing the power
+properties at long horizons (see Sections 2 and 3). The assumption h/n  0
+is motivated by the practical convenience of the asymptotic distribution5 and
+
+the reasonable approximation of the finite-sample distribution (see Section 5).
+Sometimes we write h = chnrh , where ch > 0 and rh denotes the increasing rate
+of h, with 0 < rh < 1. We exclude rh = 1, in which case the first term of the
+error u0t (h) (as in (5)) would behave like a unit root process, and thus the
+
+5 That is, the nonstandard asymptotic distribution of test statistics considered subsequently (Theorems 1 and 3,
+   when r = 1) is the same as for inference of short-run predictability (h = 1). See also the next footnote.
+
+                                                            4407
+The Review of Financial Studies / v 33 n 9 2020                                                                                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+long-horizon regression (4) would be subject to issues of spurious regression
+(Phillips 1986) (e.g., the slope estimator is not consistent).6
+
+   A larger h in general leads to a lower quality of the least squares estimator
+h in the regression (4), denoted by h, because it induces an increase of the
+marginal variance and the overlap of the residual u0t (h).7 For example, if  = 0,
+the convergence rate of h is n[1+r-rh-min(r,rh)]/2 (Theorem A1 in Appendix B);
+rh enters the rate negatively. This rate reduces to the familiar n-rate as in
+the classical time-series regression (i.e., the predictor is stationary and weakly
+dependent r = 0, and the horizon is fixed rh = 0). A similar effect also occurs for
+an alternative estimator of h, shown in Section 3.
+
+   We focus on testing the null hypothesis H0 : h = 0, or equivalently, H0 :  = 0
+(nonpredictability) if there is only one predictor. In empirical finance literature,
+the hypothesis H0 is often examined by running multiple-horizon regressions
+for a set of horizons. The claim of predictive (in)ability of a certain predictor is
+reinforced if results confirm across horizons. One of most influential puzzles in
+the empirical asset pricing literature is that evidence of predictability tends to
+be stronger at a longer horizon for a persistent predictor (Campbell and Shiller
+1988; Fama and French 1988).8
+
+   Throughout the paper, we impose the following assumption on the error
+process ut :
+
+Assumption 1. ut is stationary and ergodic martingale difference sequence
+with E(ut2|us,s  t -1) = . x0 is independent of ut for t  1 and satisfies Ex02 =
+o(n1/2).
+
+Remark 1 (R-square). Under models (1) and (2), we can show that the
+population R2 approaches 1 if rh < r (the not-long-enough horizon is dominated
+by the persistence of the predictor) and approaches 0 if rh > r.9 This explains
+the hump shape of R2 (as a function of the horizon) commonly observed in
+empirical studies for fairly persistent predictors. The horizon at which the R2
+
+6 The case rh = 1 corresponds to the asymptotics (originated in Richardson and Stock 1989; see also Valkanov
+   2003; Rossi 2007, among others) in which h is assumed to increase as a fixed fraction of n. We adopt the
+
+   asymptotics based on (7) mainly for two reasons. First, given the spurious regression issues mentioned, the fixed-
+
+   fraction asymptotics typically delivers tests (e.g., those based on TScaled and TIM below) that are inconsistent
+   under the alternative. Second, the fixed-fraction asymptotics is implementationally less convenient (e.g., for
+
+   Bonferroni-type approach), because the limit distribution needs to be simulated for each h (Valkanov 2003).
+
+7 For the increasing rate of the marginal variance, if  = 0, V ar(u0t (h))  h. If  = 0, the order of V ar(u0t (h))
+   depends on the persistence of xt , ranging from h (when r = 0) to h3 (when r = 1).
+
+8 In contrast with (4), Bandi and Perron (2008) consider a different type of long-horizon regression in which
+
+h    xt  -i  serves  as  the  regressor  in  place  of  xt -1 .  Using  the  market  variance  as  the  predictor,  they  find  that
+i=1
+such a forward­backward regression (with the Newey-West standard error) produces strong evidence for return
+
+predictability as the horizon increases (see also Sizova 2013; Bandi et al. 2019).
+
+9 In fact, the explained variance in regression (4) (the variance of expected returns) is of order nr+2min(rh,r), and
+   the residual variance (the variance of unexpected returns) is of order nh+2min(rh,r). This can be shown by Lemma
+
+   1 (Appendix C, Equations (A2) and (A3)).
+
+4408
+Testing for Multiple-Horizon Predictability
+
+reaches the peak depends on the persistence of the predictor. For a strongly                                           Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+persistent predictor (e.g., the dividend-to-price ratio), the R2 keeps increasing
+until a quite large horizon, while for a weakly dependent predictor, the R2
+may follow a declining shape for almost the entire range of horizons (e.g., the
+corporate-government bond returns spread (DFR), Figure 20d).
+
+Remark 2 (The estimand). Although the asymptotic theory for inference we
+develop below hinges on Assumption 1, h (as defined in (3)) is still the least-
+squares estimand of the multiple-horizon regression (4) under the maintained
+hypothesis in broader circumstance (e.g., allowing for serial correlation in uxt ,
+under the condition r > 0 and a certain fairly weak restriction on the horizon,
+in view of the results in Magdalinos and Phillips (2009, theorem 3.1)).
+
+2. Long-Horizon Regression-Based Test
+
+Data are {xt ,yt : t = 1,..,n+h-1}. The long-horizon (LH) regression-based
+estimator of h in (4) is written as
+
+                                                    -1      n              h-1
+
+                  h =       n                xt2-1                xt -1          yt+j ,
+                            t =2
+
+                                                            t =2           j =0
+
+where xt-1 = xt-1 -(n-1)-1                   n     xt -1 .
+                                             t =2
+
+A popular test of H0 based on the long-horizon regression is the scaled test
+
+(Valkanov 2003; Hjalmarsson 2011). The test is built on the usual t-statistic
+
+scaled by h-1/2,  TScaled(h0) = vS-c1aled(h - h0),
+
+for a generic h0, where vS2caled = h n-1                       n     u20t  (h)   n       xt2-1  -1  and  u0t (h)
+                                                               t =2              t =2
+is the ordinary least squares (OLS) residual from (4).10 The scale h-1/2 was
+
+originally motivated by the belief that the predictor is strongly persistent
+
+(local-to-unity). Remark 6 explains why the scale works for a boarder
+
+class of predictors (as long as the horizon is short relative to the predictor
+
+persistence) and also delineates the cases when the scale fails (inducing variance
+
+overestimation).
+
+   We establish the asymptotic behavior of TScaled(0) in Theorem 1 for the
+full range of persistence levels of the predictor. The results are based on the
+
+asymptotic distribution of h, which is provided in Theorem A1 in Appendix
+B.
+
+To fix notations, let Z  N (0,1) be a standard normal variable and
+
+Bx(s) be a standard Brownian motion process that is independent of Z.
+
+10 We use the scaled t-statistic proposed by Hjalmarsson (2011). The recommended test statistic in Valkanov (2003)
+    uses the scale n-1/2 and has the limit distribution different from that of Hjalmarsson's t-statistic, when the AR
+    root is local to unity. Valkanov's result is based on the asymptotics in which h increases at the same rate as n;
+
+    see discussions after Equation (7).
+
+                                                                                                         4409
+The Review of Financial Studies / v 33 n 9 2020
+
+Denote Jx,c(r) =  r  e(r  -s)c  d  Bx  (s)  and  Jx,c  (r  )  =  Jx,c  (r  )  -  1  Jx,c  (s  )d  s.  Let  2(c)  =
+                  0                                                              0
+( Jx2,c)-1/2 Jx,cdBx and 1(c,) = 2(c)+(1-2)1/2Z.
+
+Theorem 1. Suppose that Assumption 1 holds and  = 0. Under (6) and (7), the                                              Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+following results hold.
+
+   (i) If r = 1, TScaled(0) d 1(c,).
+   (ii) If 0 < rh  r < 1, TScaled(0) d N (0,1).
+   (iii) If 0 < r < rh < 1, n-r/2h1/2TScaled(0) d N (0,2(-c)-1).
+   (iv) If 0 = r < rh < 1, h1/2TScaled(0) d N (0,(1-)-1(3-)).
+
+Remark 3 (Bonferroni correction). Hjalmarsson (2011) established Theorem
+1 (i) for a fixed h. Theorem 1 (i) shows that when the predictor is local-to-unity,
+TScaled(0) has the usual limit distribution as in the short-run predictive regression
+(Cavanagh, Elliott, and Stock 1995; Campbell and Yogo (2006)), when the
+horizon is allowed to grow but with a rate slower than n. Thus, a Bonferroni test
+can be constructed, in the most conservative way, using critical values of 1(c,)
+(where  is a consistent estimator of ), over a preliminary confidence interval
+for the unknown constant c. This forms a standard practice when inferring about
+long-run stock return predictability (Valkanov 2003; Hjalmarsson 2011).11
+
+Remark 4 (Robust scaled t-test). A common way to construct the confidence
+interval of c is to invert a unit root statistic, as suggested in Stock (1991). Phillips
+(2014) shows that such formed confidence interval is not informative (instead,
+it can be infinitely long) when r < 1, especially when r = 0, the traditional
+assumption of stationarity. Phillips thus suggests, with a focus on short-run
+predictability parameter, using instead the uniform confidence interval of
+Mikusheva (2007) that reaches the claimed coverage for all r such that 0  r  1.
+Phillips's proposal extends to the current setting, and the associated Bonferroni
+procedure will be referred to as the robust scaled t-test.
+
+Remark 5 (Potentially zero null rejection rate). As shown in Theorem 1 (i)
+
+and (ii), the robust scaled test provides advertised (but conservative) inference
+(by noting that 1(c,) d N (0,1) as c  -), conditional on the horizon
+increasing with a rate no faster than the rate at which the autoregressive root
+of the predictor approaches unity (i.e., h(1-)  0). If the horizon increases
+faster to exceed this benchmark, TScaled(0) shrinks to zero at the rate n(r-rh)/2,
+as Theorem 1 (iii) and (iv) indicates. When this happens, even with the right
+
+confidence interval of c, the robust scaled test rejects the null at any significance
+level with zero probability asymptotically (i.e., being overly conservative).
+
+11 Hjalmarsson (2011) also proposes the multiple-horizon version of the Q-test (Campbell and Yogo 2006), which
+    corrects for contemporaneous endogeneity. Section 5 examines the test's finite-sample properties. See also Phillips
+    (2014) for a potential pitfall of using the Q-test.
+
+4410
+Testing for Multiple-Horizon Predictability
+
+Remark 6 (Variance overestimation). To understand Theorem 1(ii)-(iv), when
+
+0  r < 1, TScaled(0) uses the variance of xt-1u0t (h), multiplied by h, to
+approximate the long-run variance of xt-1u0t (h), V ar(n-1/2                        n
+                                                                                    t =2  xt   -1  u0t  (h)),
+
+under H0. This is valid when rh  r, because both hV ar(xt-1u0t (h)) and
+V ar(n-1/2  n                                                      h2nr (-2c)-1x202
+            t =2  xt  -1  u0t  (h))  have    the  leading  term                                    (see  the
+
+proof of Theorem A1). However, if rh > r, hV ar(xt-1u0t (h))  h2nr , which
+is of a larger order than V ar(n-1/2              n
+                                                  t =2  xt -1 u0t  (h))    hn2r  ;  that  is,  the  actual
+
+variance is overestimated by the method of scaling. This leads TScaled(0) to
+
+shrink to zero at the rate n(r-rh)/2 when rh > r.                                                                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+   The major cost of a severely undersized test is the potential loss of power. The
+following theorem accounts for the asymptotic properties of TScaled(0) under
+the alternative.
+
+Theorem 2. Suppose that Assumption 1 holds and  = 0. Under (6) and (7), the
+following results hold.
+
+   (i) If r = 1, n-1hTScaled(0) d 31/2( Jx2,c)1/2.
+   (ii) If 0 < rh < r < 1, n-(1+r)/2hTScaled(0) p (3/2)1/2(-c)-1/2.
+   (iii) If rh > r > 0, n-(1+r)/2hTScaled(0) p (-2c)-1/2.
+   (iv) If rh > r = 0, n-1/2hTScaled(0) p [02x-2(1-)2 +2(1-)0x x-2 +
+ 2 ]-1/2 (1 -  2 )-1/2  .
+
+Remark 7 (Power loss). Theorem 2 implies that the power of the test TScaled(0) in
+general decreases with h eventually, though the test may have larger power than
+a short-run test when the range of h covers just a few periods, both outcomes that
+have been documented in the empirical literature.12 For a fixed  = 0, TScaled(0)
+is inconsistent when n(1+r)/2h-1  C, where C  0 is a constant. In other
+words, a long horizon would cause zero power (and therefore inconsistency)
+of the scaled test. The threshold for such a "too long" horizon depends on the
+persistence of the predictor, and it is lower for a less persistent predictor. When
+the predictor is weakly dependent (r = 0), a horizon with the rate n1/2 would
+lead TScaled(0) to have zero power against the predictability hypothesis.
+
+3. Test Based on the Implied Estimator
+
+    In this section, we propose an alternative procedure based on a different
+    estimator of h. The estimator, termed the implied estimator in this paper (h
+    in Equation (8)), uses the implication of the short-run model into the long
+    run, as in (3), and it has been used by several scholars (e.g., Cochrane 2008;
+
+12 Instead of directly assessing the divergence rate of the statistic under the alternative, Campbell (2001) considers
+    a different approach for evaluating the power of the test.
+
+                                                                                                        4411
+The Review of Financial Studies / v 33 n 9 2020
+
+Lettau and van Nieuwerburgh 2008). However, the asymptotic properties under
+a general setup, the efficiency over the LH regression-based estimator, and the
+associated (improved) inference (discussed subsequently) are new.
+
+   We define the implied estimator of h as
+
+                                                 h-1
+
+                                            h = j ,                                         (8)
+
+                                                 j =0
+
+where  and  are OLS estimators in the regressions (1) and (2). To construct                                Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+a test statistic, we further define q = (q1,q2), where
+
+                                      h-1                 h-1
+
+                               q1 = j , q2 = jj-1,                                          (9)
+
+                                      j =0                j =0
+
+and q = (q1,q2), which is obtained by inserting  and  in (9). We denote
+        n
+ = n-1  t =2  ut  ut  ,  where  ut    =  (u0t    ,uxt  )  is the OLS residual in (1) and (2). The
+
+implied t-statistic is defined as
+
+                                      TIM(h0) = vI-M1(h -h0),                               (10)
+
+where vI2M = q           n     xt2-1  -1 q  .    Note     that  TIM(h0)  is  identical  to  TScaled (h0 )
+                         t =2
+
+when h = 1. Theorems 3 and 4 give the asymptotics of TIM(0) under the null
+
+and alternative hypotheses, for h satisfying (7). The results are based on the
+
+asymptotic distribution of h, which is provided in Theorem A2 in Appendix
+B.
+
+Theorem 3. Suppose that Assumption 1 holds and  = 0. Under (6) and (7), the
+following results hold. (i) If r = 1, TIM(0) d 1(c,). (ii) If 0  r < 1, TIM(0) d
+N (0,1).
+
+Theorem 4. Suppose that Assumption 1 holds and  = 0. Under (6) and (7), the
+following results hold.
+
+   (i) If r = 1, n-1hTIM(0) d 2( Jx2,c)1/2.
+   (ii) If 0 < rh < r < 1, n-(1+r)/2hTIM(0) p 21/2(-c)-1/2.
+   (iii) If rh > r > 0, n-(1-r)/2TIM(0) p 2-1/2(-c)1/2.
+   (iv) If rh > r = 0, n-1/2TIM(0) p (1-2)-1/2[02x-2 +2(1-)-10x x-2 +
+(1 -  )-2  2 ]-1/2  .
+
+Remark 8 (The TIM test in action). The implied test is based on the t-statistic
+TIM(0), and critical values can be constructed in two ways. One is based on the
+Bonferroni procedure. In this approach, critical values are obtained as quantiles
+
+of 1(c,) over a uniform Mikusheva-Phillips confidence interval for c, similar
+to the robust scaled test based on TScaled(0) (see Remark 4). Unlike TScaled(0),
+TIM(0) does not vanish for a large h, for all r such that 0  r  1. This generates
+
+4412
+Testing for Multiple-Horizon Predictability                                                                                     Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+significant power improvement of the TIM test over the scaled test (see Remarks
+9 and 10). However, this approach is still conservative because of the Bonferroni
+step. Moreover, the Bonferroni approach is highly computationally demanding
+in the multiple-predictor model (Section 4). The other way of constructing
+critical values for TIM(0) is to use the bootstrap. We consider the bias-corrected
+wild bootstrap (residual-based with the recursive design), and the detailed
+algorithm for implementation is given in Appendix A (Algorithm 1 and Remark
+A1).13 In Section 5.2, we discuss the finite-sample properties of these two
+approaches. We recommend to use the bootstrap implied test. The program
+codes in MATLAB are available as a supplement to the paper.14
+
+Remark 9 (Power improvement of the TIM test). If  = 0, the TIM(0) statistic
+diverges at the rate n(1+r)/2-min(r,rh), while TScaled(0) diverges at the rate
+n(1+r)/2-rh , as indicated by Theorems 2 and 4. The rates, as Figure 1 illustrates,
+are a function of r and rh. When rh > r, TIM(0) diverges with a faster rate
+than TScaled(0), by a margin of nrh-r . When rh < r, TIM(0) diverges as fast as
+TScaled(0), but with a scale constant in the limit approximately 15.5% (i.e.,
+
+  4/3-1) larger than that of TScaled(0).
+
+Remark 10 (Sources of power improvement). The lower power of TScaled(0),
+than that of TIM(0), comes from two sources: a less efficient point estimator
+and inconsistent variance estimation under the alternative. On the one hand,
+if rh < r, h and h are asymptotically equivalent (have the same convergence
+rate and asymptotic distribution; see Theorems A1 and A2, Appendix B), so
+only the second source contributes. For example, the asymptotic variance is
+Avar(h) = (-c)2/2 (if 0 < rh < r < 1), while the variance estimator converges
+to 2(-c)2/3. On the other hand, if rh > r  0, h converges faster than h,
+with the rate n(1-3r)/2 (against almost n(1-2r-rh)/2, the convergence rate of h).
+Thus, both sources contribute to the power disadvantage of TScaled(0), and each
+of them reduces the divergence rate by n(rh-r)/2.15
+
+Remark 11 (VAR approach). The construction of the estimator h and the test
+statistic TIM(h0) is closely related to what is referred to in the literature as
+the vector autoregression (VAR) approach (Hodrick 1992, section 3). Here, we
+drop the lagged return in the system of equations to obtain sharper inference
+
+13 The author is grateful to a referee offering multiple suggestions that lead to the recommended bootstrap test.
+
+14 Interested readers may download the codes, together with data for demonstration, from the author's Web site
+    (sites.google.com/site/xukeli2015/research).
+
+15 This can be shown using the intuition behind the diminishing size result of TScaled(0) when rh > r (Theorem 1(iii)
+and Remark 6). When  = 0, if rh > r, the variance estimator that TScaled(0) uses, that is, hV ar(xt-1u0t (h)) 
+h2n3r , is of a larger order than V ar(n-1/2  n                 (h))  hn4r
+                                              t =2  xt -1 u0t               .  If  TScaled (0)  used  the  variance  estimator
+
+that consistently estimates V ar(n-1/2  n     xt -1 u0t  (h)),  the  divergence    rate  of  TScaled (0)  would  be  improved
+                                        t =2
+by n(rh-r)/2.
+
+                                                                                                                     4413
+The Review of Financial Studies / v 33 n 9 2020
+
+(a)                                              (b)
+
+    Figure 1                                                                                                            Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+    Divergence rates of T Scaled (0) and T I M (0) under the alternative hypothesis
+    In panel a, three triangular-shaped hyperplanes H P1, H P2, and H P3 are shown, where H P1 and H P2 belong
+    to one hyperplane. The divergence rate (i.e., d, if a statistic T diverges at the rate nd ) of TScaled is shown as
+    H P1 H P2, whereas the divergence rate of TIM is shown as H P1 H P3. Panel b is the projection of the 3D
+    plot in panel a onto the (r,rh)-plane with the vertical coordinate zero. TIM is consistent within the entire unit
+    square region, whereas TScaled is inconsistent in the region S0.
+
+   (i.e., assuming market efficiency in the weak form, but not in the semistrong
+   form). This simplification was also used by Cochrane (2008) and Lettau and van
+   Nieuwerburgh (2008) to construct the multiple-horizon parameter estimator.
+
+   Remark 12 (Conditional heteroscedasticity). The results in Theorem 3 are still
+   valid under conditional heteroscedasticity for the persistence level 0 < r  1.
+   The Online Appendix (available at the author's website) provides the proof in
+   such cases by relaxing Assumption 1 so that conditional heteroscedasticity in
+   errors is allowed. To cover the full range of persistence levels considered in this
+   article (including the case r = 0), the researcher needs to modify the TIM(h0)
+   statistic by using White's standard error.16 As in this article, we mainly focus
+   on the comparison with the scaled test, which was originally constructed using
+   the usual standard error (Valkanov 2003; Hjalmarsson 2011), we call for future
+   work to provide such an extension, together with theoretical justification and
+   finite-sample assessment.
+
+16 Changes also need to be made when constructing critical values for TIM. For the Bonferroni method, the
+    conditional-heteroscedasticity-robust confidence interval for c, based on the work of Andrews and Guggenberger
+    (2014), should be used. For the residual-based bootstrap, the wild bootstrap resampling scheme should be used,
+    which we have incorporated in our implementation of the implied test.
+
+   4414
+Testing for Multiple-Horizon Predictability
+
+4. Multiple Predictors
+
+Next, we extend the implied test to multiple predictors xt , which is k ×1. While                                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+a wealth of the empirical literature of return predictability focuses on a single
+predictor, using multiple predictors is a natural way to combine information,
+especially given that many useful predictors have been suggested recently. Ang
+and Bekaert (2007) propose a present-value model that suggests that dividend
+yields and short rates predict excess returns. The model of Ang and Bekaert
+was used in Rapach, Strauss, and Zhou (2013). Santos and Veronesi (2006) and
+Amihud, Hurvich, and Wang (2009) used a two-predictor model with dividend
+yields, together with labor-income-consumption ratios.
+
+   To allow multiple predictors, write the system as
+
+                               yt = y +xt-1 +u0t ,                                                (11)
+
+                               xt = x +xt-1 +uxt ,                                                (12)
+
+where  is the k ×k dimensional vector autoregression (VAR(1)) slope matrix,
+
+and the error ut = (u0t ,uxt )     is        a     (k  +  1)-dimensional02  martingale   difference
+                                                                               0x
+                                                                   = 1×1        1×k. Let 1/2 be
+sequence  with  the  variance      matrix          V   ar(ut ) =       0x       x
+
+                                                                       k×1 k×k
+
+such that =1/2(1/2) , and write -1/2 = (1/2)-1. In this section, we use
+
+the same notations as in the previous sections, and when k = 1, these notations
+
+reduce to those we have seen earlier in this article.
+
+Under models (11) and (12), using the recursive substitution, the horizon-h
+
+predictability parameter (k ×1) can be written as
+
+                                                   h-1
+
+                                             h = ( )j .                                           (13)
+
+                                                   j =0
+
+The long-horizon regression estimator is obtained by running the OLS
+                h-1
+regression of   j =0    yt +j  on  the       vector       xt -1 .  As  an  alternative,  the  implied
+
+estimator is obtained as h =                 h-1       j,  where       is  the  OLS  slope    of  (11),
+                                             j =0
+
+and  is obtained by the OLS VAR(1) regression of (12).
+
+   We are then interested in testing the hypothesis of dR linear restrictions,
+H0 : Rh = R0, where R is a known dR ×k full-rank matrix, R0 is a known dR ×1
+vector, and dR  k. Applications can be testing, over the next h periods, whether
+
+the predictors contained in xt-1 can jointly predict the return, or whether
+
+a particular predictor has predicting power once certain other predictors are
+
+included in the predictive regression.17
+
+17 Note that if dR < k, at a multiple horizon (h > 1), the null hypothesis here is generally not informative about the
+    value of  even it can identify some values in h, unless further assumptions are imposed (like assuming the
+    coefficient matrix  to be diagonal); for example, a zero component of h does not imply any component of  to
+    be zero. See Xu (2019) for further discussions.
+
+                                                                                                  4415
+The Review of Financial Studies / v 33 n 9 2020
+
+   We denote  = ( ,(vec( )) ) , where vec is the vectorization operator. To
+form the Wald statistic through the delta method, we need the following
+notation. By the algebra of vector differentiation18 (Lütkepohl 2005, section
+
+A.13),
+
+      q h =                    h-1     j         ,  h-1             j -1  (  j-1-i )  i  ,     (14)
+                               j =0                 j =0            i=0
+
+            k ×(k +k 2 )
+
+where  is the Kronecker product. Write q= (q1,q2). Let q = (q1,q2), which is                         Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+obtained by inserting  and  in (14).
+
+   The Wald test statistic is defined as
+
+WIM = (Rh -R0) Rq                                   n     xt -1 xt      -1   qR  -1            (15)
+                                                    t =2
+                                                                    -1              (Rh -R0),
+
+where  = n-1  n     ut  ut  ,  with  ut          = (u0t ,uxt )      being the OLS residual in (11)
+              t =2
+
+and (12). When k = 1, the Wald statistic WIM reduces to the square of TIM(h0),
+
+which was introduced in (10). Note that the calculation of WIM only involves
+
+short-run OLS regressions (11) and (12).
+
+As for the univariate predictive regression, the implementation of the Wald
+
+test based on (15) relies on a bootstrap procedure (see Appendix A for details).
+
+5. Empirical Monte Carlos
+
+    5.1 The designs
+    We now evaluate the finite-sample performance via Monte Carlo experiments
+    and compare a few long-horizon predictability tests. We first consider univariate
+    predictive regression, and the pseudo-data are generated according to models
+    (1) and (2). The main results are obtained for four data-generating processes
+    (DGPs), DGPs A, B, C, and D. To maintain the empirical relevance of the
+    designs, for each DGP, we use parameter values (in particular  and ) that are
+    all obtained by fitting the predictive regression using aggregate stock excess
+    returns as the dependent variable and one of the predictors examined in the
+    empirical section that follows (Section 6). These designs are chosen to cover
+    different features of predictors and sampling frequencies of the data.
+
+       More specifically, DGP A mimics the predictive relationship between returns
+    and log dividend-to-price ratios, the most widely used predictor, measured at
+    annual frequencies (n = 92) (Data set I, Section 6). This DGP is characterized
+    by a predictor with strong persistence and strong negative endogeneity. It has
+    an especially small sample size, as is common for annual data. DGPs B, C,
+    and D mimic the predictive relationship using one of three other predictors,
+    the Treasury-bill rate (TBL, quarterly observations, n = 264, Data set II),
+    the short interest index (SII, monthly observations, n = 504, Data set III), or
+
+18 The Online Appendix gives details about deriving Equation (14).
+
+4416
+Testing for Multiple-Horizon Predictability
+
+Table 1
+Parameter values in Monte Carlo designs (DGPs A-D, univariate regression models (1) and (2))
+
+Design  Fitting       n                               0  x  y                                 x
+
+DGP A   DP, annual    92                     0.898 -0.849 0.192 0.211 0.265 -0.355
+
+DGP B TBL, quarterly 264                     0.953 -0.102 0.078 0.009 0.028                   0.002
+
+DGP C   SII, monthly  504                    0.960  0.035 0.045 0.282 0.004 -0.009
+
+DGP D DFR, quarterly 264 -0.047                     0.304 0.078 0.023 0.015                   0.001
+
+the default return spread (DFR, quarterly observations, n = 264, Data set II),                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+respectively; the first two predictors are characterized by strong persistence and
+low endogeneity, and the last one has low persistence. For completeness, Table
+1 lists parameter values for DGPs A-D. The innovations ut are i.i.d. bivariate
+Gaussian.
+
+   When generating pseudo-data, we use the same sample size as that of the
+corresponding data set in the empirical analysis for each DGP, and we examine
+over the same set of horizons, that is, up to h = 5 for DGP A (annual data), up to
+h = 16 for DGPs B and D (quarterly data), and up to h = 48 for DGP C (monthly
+data). The initial value of xt is set as the sample mean of the corresponding data
+series, and the first 500 observations in each realization are removed to reduce
+the initialization effect.
+
+5.2 The tests
+For the univariate predictive regression model, we consider five tests in the
+experiments. All tests are one sided. The first two are long-horizon-regression-
+based t-tests using the Newey-West standard error (with h-1 being the
+truncation point) and the standard error proposed by Hodrick (1992, section 1),
+both of which are popular in empirical studies. Both tests use standard normal
+critical values.
+
+   The next two are the implied t-test TIM(0) and the long-horizon-regression-
+based scaled test, which are the focus of our asymptotic analysis. For the
+scaled test, we implement the test proposed by Hjalmarsson (2011), who uses a
+endogeneity correction and Bonferroni critical values, and we thus refer to it as
+Hjalmarsson's test. Hjalmarsson's test statistic is asymptotically normal, and
+thus should be compared with the one-sided N (0,1) critical value (e.g., 1.645,
+if the test is right-tailed). We also implemented the test based on the t-statistic
+TScaled(0) without the endogeneity correction, using the robust confidence
+interval for c (Remark 4). We find that although it has better size control (in
+particular, under DGP D), but it is overall less powerful than Hjalmarsson's test.
+Nevertheless, the difference is rather small and importantly, most properties of
+the scaled test, which we will discuss below, remain unchanged (Xu 2018).
+
+   For the proposed implied test, we use the bias-corrected bootstrap critical
+values, following Algorithm 1 and Remark A1 in Appendix A. In a working
+paper version (Xu 2018), we also implement the implied test with two other
+methods of obtaining critical values, one based on the Bonferroni procedure,
+
+                                                                                              4417
+The Review of Financial Studies / v 33 n 9 2020
+
+(a)                 =0                           (b)  1        =0.04          (c)                                                                                               =0.08
+        1                                                                            1
+     0.9                  Newey-W es t tes t                                      0.9
+     0.8                                                                          0.8
+     0.7                  Hodric k tes t         0.9                              0.7
+
+                          Hjalmarss on tes t
+
+                          KMS tes t
+
+                          Implied test           0.8
+
+                                                 0.7
+
+0.6                                              0.6                                                                                                                 0.6
+Rejection Rate
+0.5                                                                        Rejection Rate0.5                                                                         0.5
+                                                                                                                                                     Rejection Rate
+0.4                                              0.4                                                                                                                 0.4
+
+0.3                                              0.3                                                                                                                 0.3
+
+0.2                                              0.2                                                                                                                 0.2
+
+0.1                                              0.1                                                                                                                 0.1
+
+0                                                     0                                                                                                              0                         Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+           1  2  3        4                   5          1  2  3        4  5                                                                                              1  2  3        4  5
+
+                 Horizon                                       Horizon                                                                                                          Horizon
+
+Figure 2
+Finite-sample size and power of one-sided tests under DGP A ( = 0.898,  = -0.849, n = 92) against h
+
+using the robust confidence interval for c (Remark 8), and the other based
+on a naive bootstrap procedure (without the bias correction), and find the
+performance of both tests is less competitive with the procedure we recommend
+here.19 The fifth test we consider is the one recently proposed by Kostakis et al.
+(2015, section 5) based on a quite different approach (using the instrumental
+variables regression, instead of OLS regression), which we refer to as the KMS
+test.
+
+   We evaluate the performance of various tests with respect to the null
+hypothesis H0 : h = 0, and the one-sided alternative hypothesis (a left-tailed
+test for DGPs B and C, and a right-tailed test for DGPs A and D, motivated by
+the theory-implied sign of the predictive regression slope). For all the results
+reported in this section, the nominal size is 5%, and the number of replications
+is 5,000. The number of bootstrap replications is 1,000.
+
+5.3 The results
+Figures 2-9 report the main results on finite-sample rejection rates for various
+tests under different DGPs. There are two figures for each DGP. One figure
+plots the null rejection rate against the forecast horizon (e.g., Figure 2), for
+ = 0 (reporting the size) and two other empirically relevant nonzero values of
+ (reporting the power), respectively, in three panels of the figure. The other
+figure plots the null rejection rate against  (e.g., Figure 3), for three horizons
+(horizon one, a moderate horizon and a long horizon) in three panels of the
+figure.
+
+19 In particular, we find that the Bonferroni implied test is less powerful than the bootstrap implied test we implement
+    here, and, nevertheless, it still offers substantial power improvement over the Hjalmarsson's scaled test. The naive
+    bootstrap procedure has some obvious size distortion when the predictor is persistent and strongly (negatively)
+    endogenous.
+
+4418
+Testing for Multiple-Horizon Predictability
+
+(a)                 h=1                                 (b)                  h=2                                                                                                     (c)                   h=5
+
+        1   Rejection Rate                                      1                                                                                                                            1
+      0.9                                                                                Rejection Rate0.9                                                                                0.9
+      0.8                                                                                                                                                              Rejection Rate0.8  0.8
+      0.7                                                    0.7                                                                                                                          0.7
+      0.6                       Newey-W es t tes t           0.6                                                                                                                          0.6                                          Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+      0.5                       Hodric k tes t               0.5                                                                                                                          0.5
+      0.4                       KMS tes t                    0.4                                                                                                                          0.4
+      0.3                       Implied test                 0.3                                                                                                                          0.3
+      0.2                       Hjalmars s on tes t          0.2                                                                                                                          0.2
+      0.1                                                    0.1                                                                                                                          0.1
+              0.05         0.1      0.15                               0.05         0.1      0.15                                                                                                 0.05            0.1      0.15
+        0                                                       0                                                                                                                            0
+          0                                                       0                                                                                                                            0
+
+Figure 3
+Finite-sample size and power of one-sided tests under DGP A ( = 0.898,  = -0.849, n = 92) against 
+
+(a)                        =0                           (b)                      =-0.002           (c)                                                                                                         =-0.005
+
+        1                          Newey-W est tes t             1                                         1
+     0.9                           Hodric k tes t
+     0.8                           Hjalmars s on tes t        0.9                                                                                                                       0.9
+     0.7                           KMS tes t
+     0.6                           Implied test               0.8                                                                                                                       0.8
+     0.5
+     0.4                                                     0.7                                                                                                                        0.7
+     0.3
+     0.2    Rejection Rate                                   0.6                                                                                                                        0.6
+     0.1                                                                                  Rejection Rate
+                                                                                                                                                                        Rejection Rate0.50.5
+        0
+           0                                                 0.4                                                                                                                        0.4
+
+                                                             0.3                                                                                                                        0.3
+
+                                                             0.2                                                                                                                        0.2
+
+                                                             0.1                                                                                                                        0.1
+
+                                                                0                                                                                                                       0
+
+              10    20          30        40                        0  10    20          30  40                                                                                              0    10       20          30  40
+
+                    Horizon                                                  Horizon                                                                                                                       Horizon
+
+Figure 4
+Finite-sample size and power of one-sided tests under DGP B ( = 0.953,  = -0.102, n = 264) against h
+
+(a)                 h=1                                 (b)                  h=4                   (c)                                                                                                     h=16
+
+      1                                                      1                                                                                                                          1
+   0.9
+   0.8                                                  0.9                                                                                                                             0.9
+   0.7
+   0.6                                                  0.8                                                                                                                             0.8
+   0.5
+   0.4                                                  0.7                                                                                                                             0.7
+   0.3
+   0.2   Rejection Rate                                 0.6                                                                                                                             0.6
+   0.1                                                                              Rejection Rate
+                                                                                                                                                                 Rejection Rate0.5      0.5
+      0
+        0                                               0.4                                                                                                                             0.4
+
+                                                        0.3                                                                                                                             0.3
+
+                                Newey-W es t tes t      0.2                                                                                                                             0.2
+
+                                Hodrick tes t
+
+                                Hjalmarss on test       0.1                                                                                                                             0.1
+
+                                KMS test
+
+                                Implied test
+
+                                                             0                                                                                                                          0
+
+              0.2          0.4            0.6                   0      0.2          0.4      0.6                                                                                             0        0.2         0.4      0.6
+
+                        -                                                        -                                                                                                                             -
+
+Figure 5
+Finite-sample size and power of one-sided tests under DGP B ( = 0.953,  = -0.102, n = 264) against (the
+negative of) 
+
+                                                                                                                                                                                                                                 4419
+The Review of Financial Studies / v 33 n 9 2020
+
+(a)                                         =0                           (b)                          =-0.002                    (c)                                                                              =-0.005
+        1                                                                       1                                                       1
+     0.9                                            Newey-W est tes t         0.9
+     0.8                                            Hodric k tes t            0.8                                                                                                       0.9
+     0.7                                            Hjalmars s on tes t
+     0.6                                            KMS tes t                                                                                                                           0.8
+     0.5                                            Implied test
+     0.4
+     0.3                                                                 0.7                                                                                                            0.7
+     0.2
+     0.1    Rejection Rate                                               0.6                                                                                                            0.6
+        0                                                                                Rejection Rate
+           0                                                                                                                                                          Rejection Rate0.5 0.5
+
+                                                                         0.4                                                                                                            0.4
+
+                                                                         0.3                                                                                                            0.3
+
+                                                                         0.2                                                                                                            0.2
+
+                                                                         0.1                                                                                                            0.1                                               Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+                                                                         0                                                                                                              0
+
+                    10        20            30     40                                0  10        20           30     40                                                                     0      10        20        30     40
+
+                              Horizon                                                             Horizon                                                                                                     Horizon
+
+Figure 6
+Finite-sample size and power of one-sided tests under DGP C ( = 0.960,  = 0.035, n = 504) against h
+
+(a)                                    h=1                               (b)                      h=12                           (c)                                                                          h=48
+        1                                                                         1                                                      1
+     0.9            Newey-W es t tes t
+     0.8            Hodric k tes t                                       0.9                                                                                                            0.9
+                    Hjalmars s on tes t
+                    K MS tes t                                           0.8                                                                                                            0.8
+                    Implied test
+
+            0.7                                                          0.7                                                                                                            0.7
+
+            0.6                                                          0.6                                                                                                            0.6
+Rejection Rate
+                                                                              Rejection Rate0.50.5                                                                                      0.5
+                                                                                                                                                            Rejection Rate
+            0.4                                                          0.4                                                                                                            0.4
+
+            0.3                                                          0.3                                                                                                            0.3
+
+            0.2                                                          0.2                                                                                                            0.2
+
+            0.1                                                          0.1                                                                                                            0.1
+
+            0                                                            0                                                                                                                   0
+                                                                             0                                                                                                                   0
+                 0      2         4             6      8                                    2         4            6          8                                                                         2         4         6          8
+
+                                  -                    10 -3                                          -                   10 -3                                                                                   -                10 -3
+
+Figure 7
+Finite-sample size and power of one-sided tests under DGP C ( = 0.960,  = 0.035, n = 504) against (the
+negative of) 
+
+(a) 1                                       =0                           (b) 1                           =0.2                    (c) 1                                                                            =0.5
+
+      0.9                                           Newey-W es t tes t         0.9                                                                                                      0.9
+      0.8                                           Hodric k tes t             0.8
+      0.7                                           Hjalmars s on tes t                                                                                                                 0.8
+      0.6                                           KMS tes t
+      0.5                                           Implied test
+      0.4
+      0.3                                                                0.7                                                                                                            0.7
+      0.2
+      0.1                                                                0.6                                                                                                            0.6
+            Rejection Rate
+        0                                                                                 Rejection Rate0.5                                                                             0.5
+          0                                                                                                                                                             Rejection Rate
+                                                                         0.4                                                                                                            0.4
+
+                                                                         0.3                                                                                                            0.3
+
+                                                                         0.2                                                                                                            0.2
+
+                                                                         0.1                                                                                                            0.1
+
+                                                                         0                                                                                                              0
+
+                           5                10         15                            0         5           10             15                                                                 0             5            10         15
+
+                              Horizon                                                             Horizon                                                                                                     Horizon
+
+Figure 8
+Finite-sample size and power of one-sided tests under DGP D ( = -0.047,  = 0.304, n = 264), against h
+
+4420
+Testing for Multiple-Horizon Predictability
+
+(a) 1                        h=1  (b) 1      h=4                (c) 1                                                                                                            h=16
+
+      0.9  Newey-W es t tes t     0.9                                                                                                                                       0.9
+      0.8  Hodric k tes t
+           Hjalmars s on tes t    0.8                                                                                                                                       0.8
+           KMS tes t
+           Implied test
+
+0.7                               0.7                                                                                                                                       0.7
+
+0.6                               0.6                                                                                                                                       0.6
+Rejection Rate
+0.5                                                                           Rejection Rate0.5                                                                             0.5
+                                                                                                                                                            Rejection Rate
+0.4                               0.4                                                                                                                                       0.4
+
+0.3                               0.3                                                                                                                                       0.3
+
+0.2                               0.2                                                                                                                                       0.2
+
+0.1                               0.1                                                                                                                                       0.1
+
+0                                 0                                                                                                                                         0                              Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+   0 0.1 0.2 0.3 0.4 0.5 0.6         0 0.1 0.2 0.3 0.4 0.5 0.6                                                                                                                  0 0.1 0.2 0.3 0.4 0.5 0.6
+
+Figure 9
+Finite-sample size and power of one-sided tests under DGP D ( = -0.047,  = 0.304, n = 264), against 
+
+5.3.1 Newey-West and Hodrick tests. The Newey-West test works poorly
+under DGP A, which mimics the dynamics of returns and dividend-to-price
+ratios (Figure 2a). The empirical size (null rejection rate) is approximately
+16%-30% for a test with nominal size 5% for horizons one to five, and the
+size distortion grows with the horizon. When h = 1, the Newey-West t-statistic
+reduces to the White t-statistic, and the overrejection is well understood from its
+non-Gaussian limit distribution (with some extension of the results in Campbell
+and Yogo (2006)), because of strong persistence of the predictor interacting
+with strong negative endogeneity. Figure 2a shows that the size distortion even
+worsens as the horizon increases.
+
+   For DGPs B and C, the Newey-West test has a size close to 5% when h = 1,
+since minor endogeneity almost makes the test asymptotically normal, and thus
+approximately valid even with strong persistence. The overrejection starts to
+pick up when the horizon increases, although it is much milder than that under
+DGP A, with the largest size about 15%. For DGP D, the Newey-West test has
+the size close to 5% for all horizons considered since the predictor has low
+persistence.
+
+   Why can the Newey-West test perform poorly over horizons? It is well
+known that the test overrejects seriously when serial correlation in xt-1u0t (h)
+(estimated by xt-1u0t (h)) is strong (Stock and Watson 2011). This exactly
+happens quickly when the horizon increases, as long as the predictor is not
+very weakly dependent (like DGP D). This happens even when xt-1u0t (h)
+is almost serially uncorrelated for h = 1, by construction. Figure 17 in the next
+section plots first-order autocorrelations of xt-1u0t (h) against h for the samples
+in the empirical analysis, which showcases this observation.
+
+   The Hodrick test, a favorite among empiricists (Hodrick 1992; Ang and
+Bekaert 2007; Bakshi, Panayotov, and Skoulakis 2011), coincides with the
+Newey-West test when h = 1. Under DGP A, it has obvious size distortion
+when h = 1, as the Newey-West test, but the size distortion does not increase
+
+                                                                                                                                                                                       4421
+The Review of Financial Studies / v 33 n 9 2020                                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+much over horizons. The empirical size is approximately between 15% and 19%
+over horizons, which still causes concerns when interpreting empirical results
+on the basis of this test. We also find that under this DGP, the distribution of the
+Hodrick test statistic is skewed to the right, so a two-sided test tends to obscure
+the difference and have less size distortion. The Hodrick test works well under
+DGPs B and C (low endogeneity) over horizons, with minor size distortion,
+and works almost perfectly under DGP D (low persistence).
+
+   As a result of lack of size control under the null, the Newey-West test also
+has higher rejection rates under the alternative hypothesis, than other tests
+considered. We include its power curve for completeness.
+
+5.3.2 Hjalmarsson's scaled test. We now discuss three more recent tests.
+Hjalmarsson's scaled test maintains the size control below 5% for all
+horizons under DGPs A-C, but it's obviously conservative, in particular when
+endogeneity is strongly negative (Figure 2a, DGP A) or the horizon is long
+(Figure 6a, DGP C). This is consistent with the findings of the simulation study
+in Hjalmarsson (2011), table 2, p. 828), which mostly focuses on persistent
+predictors.
+
+   Under DGP D, where the persistence of the predictor is low, Hjalmarsson's
+test overrejects with a finite-sample size 8.8% when h = 1. This is probably due
+to the incorrect coverage of the confidence interval for the AR slope based on
+inverting a unit root test, if the underlying process is not persistent, as pointed
+out by Phillips (2014). Strikingly, under this DGP D, the size falls to almost
+zero for any multiple horizon h > 1 (Figure 8a).
+
+   The undersized behavior of the scaled test we observe in most cases causes
+concerns for potential low power, which is confirmed in our analysis. This
+behavior originates from two sources. First, the Bonferroni procedure is
+conservative by nature. Second, more importantly, the scaling factor is too
+large when the predictor is not very persistent, which is a new finding in this
+paper. The effect is most obvious at a long horizon.
+
+   As a result, the scaled test has the lowest power among all tests considered in
+almost all cases (except for DGP D at h = 1, where the test has incorrect size), in
+many cases by a quite large margin. For example, under DGP A, when  = 0.08,
+the power of the scaled test is between 22.2% and 27.8% over all horizons, while
+the implied test proposed in this paper has power between 51.3% and 57.3%
+over horizons (Figure 2c). Under DGPs B and C, while the scaled test has
+similar or only slightly lower power compared with other tests at the first few
+horizons, there is obviously decreasing trend of the power when the horizon
+increases, and the power disadvantage is much enlarged at longer horizons. For
+DGP D, under which the scaled test has the most dismaying performance, the
+power quickly drops to almost zero when the horizon is beyond the first few
+(Figures 8b and 8c). This confirms our prediction in the asymptotic analysis
+(Theorem 2); the test statistic itself converges to zero (thereby passing the
+
+4422
+Testing for Multiple-Horizon Predictability                                                   Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+critical value at any significance level) if the persistence is dominated by the
+horizon.
+
+   We also consider the scaled test with the robust confidence interval for the
+AR slope, suggested by Mikusheva (2007) and Phillips (2014). The modified
+scaled test has a better size control regardless of the persistence level of the
+predictor, but it remains to have low power as Hjalmarsson's test (Xu 2018).
+
+5.3.3 Implied test and KMS test. The KMS test and the implied test perform
+well overall. Under DGP A, both tests have some size distortion (between 8.3%
+and 9% for KMS test, and between 7.2% and 8.5% for the implied test) over
+horizons, probably because of the relatively small sample size. Under other
+DGPs, the two tests have the size close to the nominal level 5% over all horizons
+considered.
+
+   Both KMS and implied tests have substantially higher power than the scaled
+test for all DGPs considered, across almost all multiple horizons. Furthermore,
+the implied test has certain degree of power advantage over the KMS test.
+Under DGP A, the KMS and implied tests have very close power. The power
+gain of the implied test over the KMS test exists noticeably for DGPs B, C,
+and D, in particular, at multiple horizons. For example, under DGP C (Figure
+6), when  = -0.002, the power of the implied test increases from 23.4% to
+27.1% from h = 1 to h = 48 (monthly observations), while the power of the KMS
+test decreases from 22.7% to 10.9%. For a farther alternative  = -0.005, the
+power of the implied test increases from 74.9% to 78.1% over horizons, while
+the power of the KMS test decreases from 72.4% to 32.9%. Under DGP D, the
+power of the KMS is very low and shrinks almost to the empirical size as the
+horizon increases, while the implied test maintains the power around 26% for
+ = 0.2 (Figure 8b) and around 80% for  = 0.5 (Figure 8c).
+
+   We notice that while the power curve against h has a monotonically
+decreasing pattern for the KMS test under all DGPs considered, the power curve
+is relatively stable for the implied test across horizons. Kostakis, Magdalinos,
+and Stamatogiannis (2015, section 5) obtain similar results in their simulations
+regarding the KMS test.
+
+5.3.4 Robustness analysis. We now evaluate the performance of various tests
+if the DGP allows some serial correlation in the error of predictor dynamics
+uxt . We consider four additional DGPs (denoted as DGPs A.ROB-D.ROB),
+similar to DGPs A-D, respectively, except that uxt is allowed to be serially
+correlated, following an AR(1) model. The AR(1) slope of uxt is empirically
+determined, using the data set underlying each of DGPs A-D. These slopes are
+small, taking values -0.056, -0.102, -0.157, and 0.002 for DGPs A.ROB-
+D.ROB, respectively. Other parameters are also empirically determined, and
+they are slightly different from those for DGPs A-D. The Online Appendix
+gives details.
+
+                                                                                        4423
+The Review of Financial Studies / v 33 n 9 2020
+
+   A general finding is that all tests have similar or slightly lower rejection rates  Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+under DGPs A.ROB-D.ROB than they do under DGPs A-D, under null and
+alternative hypotheses. All results regarding finite-sample behavior discussed
+above are qualitatively unchanged. Hjalmarsson's scaled test has substantially
+lower power than other tests considered in almost all cases. Both the implied
+test and KMS test remain to have good size control, and the implied test enjoys
+some power gain over the KMS test.
+
+   The largest error serial correlation occurs for DGP C.ROB. Both implied
+test and KMS test still have accurate size. The error serial correlation reduces
+the power of the implied test, and it does so for other tests as well. Comparing
+with an example of contrast mentioned above, under DGP C.ROB, when  =
+-0.005, the power of the implied test increases from 66.0% to 70.0% from h = 1
+to h = 48 (monthly observations), while the power of the KMS test decreases
+from 64.0% to 25.4%; both tests have lower power than they have under DGP
+C. The performance of all tests under DGP D.ROB and DGP D are almost
+identical since the residual correlation is tiny. The Online Appendix provides the
+graphical results for the size and power of all tests under DGPs A.ROB-D.ROB.
+
+5.4 Two predictors
+
+We now consider the case with two predictors. The DGP follows models (11)
+
+and (12) with parameter values obtained by fitting the annual data on returns
+
+and two predictors DP and TBL we will use in Section 6.2.5. The sample size
+
+is n = 92. The parameter values are
+
+                                                                  -0.0342            
+                                                          0.0361   0.0443   0.0002
+y = 0.2912, =  0.8979  0.1213                    , = -0.0342      -0.0000  -0.0000.
+               0.0004  0.9017
+                                                          0.0002            0.0002
+
+The coefficients in the horizon-h multiple predictive regression are denoted as
+hDP and hTBL for the two predictors, respectively. The tests in our experiments
+are Newey-West test, Hodrick test, KMS test, together with the implied test
+
+we proposed in Section 4 (which is implemented following Algorithm 1 in
+
+Appendix A). We didn't consider the scaled test as Hjalmarsson's test was
+
+proposed only for the univariate regression. The scaled test of this type requires
+
+a confidence region for the AR coefficients, so extending Hjalmarsson's test to
+
+allow for multiple predictors remains to be a major challenge computationally.
+
+   In this subsection, we are interested in three hypotheses regarding joint
+predictability, H0 : hDP = hTBL = 0, and individual predictability, H0 : hDP = 0 and
+H0 : hTBL = 0, against their two-sided alternatives. As before, Figures 10-14
+report all results graphically. To evaluate the finite-sample size of various tests,
+we set  = 0 in (11). Figure 10 reports the results. To evaluate the power,
+we consider nonzero values  = (0.1,-1.5) ×s where s is a scale parameter
+between 0 and 1.2 controlling from the deviation from the null. The power
+of various tests as a function of horizon h, for a particular nonzero value
+ = (0.1,-1.5) , is plotted in Figure 11 for three hypotheses. Figures 12-14
+
+4424
+Testing for Multiple-Horizon Predictability
+
+(a) 0.5         (a) Size (H : DP = TBL =0)                              (b) 0.5                (b) Size (H : DP =0)           (c) 0.5                                                (c) Size (H : TBL =0)
+                                   0h h                                                                           0h                                                                                    0h
+     0.45                                                                     0.45                                                  0.45
+       0.4                                       Newey-West test                0.4                                                  0.4
+                                                 Hodrick test
+                                                 KMS test
+                                                 Implied test
+
+0.35                                                                    0.35                                                                                                0.35
+
+0.3                                                                     0.3                                                                                                  0.3
+Rejection Rate
+                                                                              Rejection Rate0.250.25                                                                        0.25
+                                                                                                                                                            Rejection Rate
+0.2                                                                     0.2                                                                                                  0.2
+
+0.15                                                                    0.15                                                                                                0.15
+
+0.1                                                                     0.1                                                                                                  0.1
+
+0.05                                                                    0.05                                                                                                0.05
+
+          0                                                                        0                                                                                         0                                          Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+             1            2         3              4                 5                   1  2  3                        4  5                                                      1  2  3                     4   5
+
+                                 Horizon                                                       Horizon                                                                                  Horizon
+
+Figure 10
+Finite-sample size of two-sided tests in predictive regression with two predictors
+Panel a shows joint predictability, and panels b and c show individual predictability.
+
+(a)             (a) Power (H 0:     DP  =  TBL  =0)                     (b)                 (b) Power (H 0:  DP  =  0)        (c)                                                    (c) Power (H 0:  TBL  =  0)
+       1                            h      h                                    1                            h                        1                                                               h
+
+0.9                                                                     0.9                                                                                                  0.9
+
+0.8                                                                     0.8                                                                                                  0.8
+
+0.7                                                                     0.7                                                                                                  0.7
+
+0.6                                                                     0.6                                                                                                  0.6
+Rejection Rate
+0.5                                                                           Rejection Rate0.5                                                                              0.5
+                                                                                                                                                             Rejection Rate
+0.4                                                                     0.4                                                                                                  0.4
+
+0.3                                                                     0.3                                                                                                  0.3
+
+0.2             Newey-West test                                         0.2                                                                                                  0.2
+
+                Hodrick test
+
+0.1             KMS test                                                0.1                                                                                                  0.1
+
+                Implied test
+
+0                                                                       0                                                                                                    0
+
+          1     2                3              4                 5                   1     2  3                    4      5                                                      1  2  3                     4   5
+
+                              Horizon                                                          Horizon                                                                                  Horizon
+
+Figure 11
+The power curve (against h) of two-sided test in predictive regression with two predictors, when  =
+(0.1,-1.5)
+Panel a shows joint predictability, and panels b and c show individual predictability.
+
+show the power as a function of the deviation from the null (measured by s)
+for three hypotheses, respectively.
+
+   As from the figures, Newey-West test seriously overrejects and the size
+distortion deteriorates as the horizon increases, the phenomenon we have also
+seen in the univariate regression. The Hodrick test also overrejects, but the size
+distortion remains more stable over horizons. Both KMS test and the implied
+test have reasonable size, with some minor overrejections, probably for the
+small sample size. While the implied test is comparable to, or only slightly
+more powerful than the KMS test at short horizons, the power advantage
+of the implied test appears to be significant at longer horizons. Over three
+hypotheses, the largest power gain of the implied test over KMS is observed for
+H0 : hTBL = 0.
+
+                                                                                                                                                                                                                  4425
+The Review of Financial Studies / v 33 n 9 2020
+
+(a) 1                         h=1          (b) 1      h=2                                   (c) 1                                                                                  h=5
+
+      0.9     Newey-W es t tes t           0.9                                                                                                                             0.9
+      0.8     Hodric k tes t
+              K MS tes t                   0.8                                                                                                                             0.8
+              Implied test
+
+0.7                                        0.7                                                                                                                             0.7
+
+0.6                                        0.6                                                                                                                             0.6
+Rejection Rate
+                                                                             Rejection Rate0.50.5                                                                          0.5
+                                                                                                                                                           Rejection Rate
+0.4                                        0.4                                                                                                                             0.4
+
+0.3                                        0.3                                                                                                                             0.3
+
+0.2                                        0.2                                                                                                                             0.2
+
+0.1                                        0.1                                                                                                                             0.1                              Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+      0                                         0                                                                                                                          0
+
+           0  0.2 0.4 0.6 0.8      1  1.2          0  0.2 0.4 0.6 0.8               1  1.2                                                                                      0  0.2 0.4 0.6 0.8  1  1.2
+
+              Scale                                   Scale                                                                                                                        Scale
+
+Figure 12
+
+The power curve (against the alternative) of two-sided test in predictive regression with two predictors,
+when  = (0.1,-1.5) ×s with s being a scale parameter between [0,1.2] (H0 : hDP = hTBL = 0)
+
+(a) 1                         h=1                                              h=2                                               h=5
+
+     0.9      Newey-W es t tes t           (b) 1                                            (c) 1
+     0.8      Hodric k tes t
+              K MS tes t                         0.9                                              0.9
+              Implied test                       0.8                                              0.8
+
+0.7                                        0.7                                                                                                                            0.7
+
+0.6                                        0.6                                                                                                                            0.6
+Rejection Rate
+0.5                                                                          Rejection Rate0.5                                                                            0.5
+                                                                                                                                                          Rejection Rate
+0.4                                        0.4                                                                                                                            0.4
+
+0.3                                        0.3                                                                                                                            0.3
+
+0.2                                        0.2                                                                                                                            0.2
+
+0.1                                        0.1                                                                                                                            0.1
+
+      0                                    0                                                                                                                               0
+
+          0   0.2 0.4 0.6 0.8      1  1.2       0     0.2 0.4 0.6 0.8               1  1.2                                                                                     0   0.2 0.4 0.6 0.8  1  1.2
+
+              Scale                                   Scale                                                                                                                        Scale
+
+Figure 13
+
+The power curve (against the alternative) of two-sided test in predictive regression with two predictors,
+when  = (0.1,-1.5) ×s with s being a scale parameter between [0,1.2] (H0 : hDP = 0)
+
+6. Empirical Illustration
+
+    We now empirically examine in-sample time-series predictability of excess
+    returns in U.S. stock markets over various horizons using the popular predictors
+    suggested in the literature and employing the proposed implication-based test
+    and other existing tests.
+
+6.1 The data
+We use three data sets, each of which focuses on a particular predictor together
+with other commonly used predictors as competitors. The dependent variable
+is always the value-weighted market excess return. The first data set (Data
+set I) focuses on the predictor log dividend-to-price ratio (DP), using annual,
+
+4426
+Testing for Multiple-Horizon Predictability
+
+(a)                          h=1          (b)  1     h=2                      (c)                                                                                           1       h=5
+       1
+     0.9     Newey-W es t tes t           0.9                                                                                                                               0.9
+     0.8     Hodric k tes t
+             KMS tes t                    0.8                                                                                                                               0.8
+             Implied test
+
+0.7                                       0.7                                                                                                                               0.7
+
+0.6                                       0.6                                                                                                                               0.6
+Rejection Rate
+0.5                                                                           Rejection Rate0.5                                                                             0.5
+                                                                                                                                                            Rejection Rate
+0.4                                       0.4                                                                                                                               0.4
+
+0.3                                       0.3                                                                                                                               0.3
+
+0.2                                       0.2                                                                                                                               0.2
+
+0.1                                       0.1                                                                                                                               0.1                               Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+0                                              0                                                                                                                            0
+
+          0  0.2 0.4 0.6 0.8      1  1.2          0  0.2 0.4 0.6 0.8  1  1.2                                                                                                     0  0.2 0.4 0.6 0.8  1  1.2
+
+             Scale                                   Scale                                                                                                                          Scale
+
+Figure 14
+
+The power curve (against the alternative) of two-sided test in predictive regression with two predictors,
+when  = (0.1,-1.5) ×s with s being a scale parameter between [0,1.2] (H0 : hTBL = 0)
+
+quarterly, and monthly series spanning the years 1926-2017, the longest period
+available for all variables in the updated data set of Welch and Goyal (2008).20
+
+   Data set II focuses on the predictor consumption-wealth ratio (CAY, Lettau
+and Ludvigson 2001), using quarterly series over 1952-2017, the longest period
+available for all variables in the updated data set of Welch and Goyal (2008).
+Other predictors include DP, dividend yield (DY), 3-month Treasury-bill rate
+(TBL), default return spread (DFR, the difference between long-term corporate
+bond and long-term government bond returns), and long-term returns (LTR,
+return on long-term government bonds).
+
+   Data set III focuses on a recently proposed predictor, the short interest index
+(SII, Rapach, Ringgenberg, and Zhou 2016), using monthly series spanning
+the years 1970-2014, the same sample as in Rapach, Ringgenberg, and Zhou
+(2016).21 The rationale behind the choice of the predictor is that "short sellers
+are informed traders who are able to anticipate changes in future aggregate cash
+flows and associated changes in future market returns" (Rapach, Ringgenberg,
+and Zhou 2016, p. 46). The short interest is calculated as the log of the equal-
+weighted mean of short interest (as a percentage of shares outstanding) across
+all publicly listed stocks on U.S. exchanges, and measures total short selling
+in the economy. The series is then detrended to form the short interest index
+(SII). Other predictors in this data set include DFR, LTR, term spread (TMS,
+long-term yield minus the Treasury-bill rate), DP, and DY. The definitions and
+details of these variables in Data sets I-III are available in Welch and Goyal
+(2008) and Rapach, Ringgenberg, and Zhou (2016).
+
+   To preview the empirical results, the analysis of Data sets II and III highlights
+the facts that the proposed implied test can produce meaningfully different
+
+20 Data source: Amit Goyal's Web site (http://www.hec.unil.ch/agoyal/).
+21 Data source: Dave Rapach's Web site (https://sites.google.com/slu.edu/daverapach).
+
+                                                                                                                                                                                                        4427
+The Review of Financial Studies / v 33 n 9 2020
+
+Table 2
+Summary statistics (Data sets I and II)
+
+Variable  Freq.          n               Mean    SD      1% quantile Median 99% quantile
+
+Welch-Goyal sample (1926-2017)
+
+Ex. ret. Monthly 1,104                0.0051     0.0541  -0.1557     0.0094    0.1190
+                                      0.0154     0.1046  -0.3035     0.0303    0.2010
+Ex. ret. Quarterly 368                0.0620     0.1937  -0.5567     0.0903    0.4188
+                                    -3.3688      0.4610  -4.4241   -3.3390   -2.4292
+Ex. ret.  Annual  92                -3.3677      0.4640  -4.4592   -3.3457   -2.3949
+                                    -3.3745      0.4689  -4.4434   -3.3509   -2.3818
+DP        Monthly 1,104
+
+DP        Quarterly 368
+
+DP        Annual  92
+
+Welch-Goyal sample (1952Q1-2017Q4)
+
+Ex. ret. Quarterly 264                   0.0153  0.0784  -0.2459     0.0274    0.1756     Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+                                                 0.0239  -0.0502     0.0014    0.0417
+CAY       Quarterly 264             -0.0000      0.4045  -4.4747   -3.4885   -2.8152
+                                                 0.4052  -4.4796   -3.4746   -2.8023
+DP        Quarterly 264             -3.5407      0.0311              0.0430    0.1473
+                                                 0.0231    0.0002    0.0012    0.0515
+DY        Quarterly 264             -3.5228      0.0528  -0.0758     0.0098    0.2062
+                                                         -0.0934
+TBL       Quarterly 264                  0.0433
+
+DFR       Quarterly 264                  0.0009
+
+LTR       Quarterly 264                  0.0166
+
+results from standard testing procedures, and that the scaled test can suffer
+from loss of power when the serial dependence of the predictor is weak or
+on the boundary of being classified as strongly persistent, as our asymptotic
+analysis suggests.
+
+   Table 2 reports the summary statistics for Data sets I and II. For the third
+data set, our calculations of summary statistics exactly replicate those reported
+by Rapach, Ringgenberg, and Zhou (2016, table 1, p. 50). We assess horizons
+up to h = 5,16,48, for annual, quarterly, and monthly data, respectively.
+
+   For three data sets, Table 3 shows the key parameter estimates that would
+affect the performance of standard inference, in particular, the persistence
+of the predictor  and the endogeneity parameter . The table also gives
+the 95% confidence interval of the AR slope  using the robust method of
+Mikusheva (2007) and Phillips (2014), for each predictor series. It shows that
+persistence is clearly a feature for many predictors. The null hypothesis is
+return nonpredictability, and we use the alternative hypothesis of predictability
+on only one side of zero, for the results concerning univariate regression. This
+consideration is justified by the theory-implied sign of the slope; the slopes
+are negative for the predictors SII and TBL (e.g., more total short selling in
+the economy predicts lower future aggregate returns) and positive for all other
+predictors.
+
+   Figures 16, 19, 21, 23, and 25 report the testing results. For such a graph (e.g.,
+Figure 16a), across forecast horizons, we plot the one-sided p-value for each
+test (except Hjalmarsson's scaled test), which can be read from the left y-axis
+in the graph. For the scaled test, the construction of the test statistic depends
+on the significance level (when constructing the confidence interval for the AR
+slope), so we only plot the value of Hjalmarsson's test statistic (or its negative,
+for TBL and SII) using the significance level 5%, read from the right y-axis in
+the graph. A value larger than 1.645 means a rejection by the scaled test.
+
+4428
+Testing for Multiple-Horizon Predictability
+
+Table 3
+Preliminary data analysis for Data sets I-III
+
+xt -1          Freq.   n                              95% CI                            R2
+
+Data set I: Welch-Goyal sample (1926-2017)                           -0.977
+                                                                     -0.950
+DP             Monthly 1104 0.994                     [0.989,1.004]  -0.849     0.0048  0.17%
+                                                                                0.0192  0.72%
+DP             Quarterly 368                   0.974  [0.956,1.010]  -0.198     0.0602  2.08%
+                                                                     -0.974
+DP (, DGP A)   Annual  92                      0.898  [0.830,1.039]  -0.090     0.4594  1.94%
+                                                                     -0.102     0.0186  0.92%
+Data set II: Welch-Goyal sample (1952Q1-2017Q4)                                 0.0218  1.27%
+                                                                       0.304  -0.3009   1.42%
+CAY            Quarterly 264                   0.971  [0.950,1.016]    0.012    0.4714  1.93%
+                                                                                0.1407  0.90%
+DP             Quarterly 264                   0.977  [0.962,1.013]    0.035
+                                                                       0.231  -0.0050   1.23%
+DY             Quarterly 264                   0.978  [0.964,1.013]    0.112    0.3387  1.22%
+                                                                       0.029    0.1105  0.59%
+TBL (, DGP B) Quarterly 264                    0.953  [0.925,1.010]  -0.989     0.2191  0.54%
+                                                                     -0.051     0.0035  0.12%
+DFR (, DGP D) Quarterly 264 -0.047 [-0.156,0.077]                               0.0040  0.15%                Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+LTR            Quarterly 264 -0.040 [-0.148,0.084]
+
+Data set III: Rapach-Ringgenberg-Zhou sample (1973M01-2014M12)
+
+SII (, DGP C)  Monthly 504                     0.960  [0.941,0.996]
+
+DFR            Monthly 504 -0.047 [-0.128,0.041]
+
+LTR            Monthly 504                     0.048 [-0.034,0.135]
+
+TMS            Monthly 504                     0.949  [0.929,0.985]
+
+DP             Monthly 504                     0.995  [0.991,1.008]
+
+DY             Monthly 504                     0.995  [0.991,1.008]
+
+The outcome is always the value-weighted excess log return, and the predictor is xt-1. The column "95% CI "
+gives the 95% confidence interval of the AR slope  using the robust method of Mikusheva (2007) and Phillips
+
+(2014). Empirical Monte Carlo designs (DGPs A-D) mimic the dynamics of the series marked with ().
+
+   In Figure 17, we also plot the first-order autocorrelations of xt-1u0t (h) for
+all samples. It is well know that the strong dependence in xt-1u0t (h) is the main
+driving force for the overrejections of the Newey-West test (Stock and Watson
+2011). The figure shows that this symptom shows up quickly as the horizon
+increases (except for DFR and LTR in Data sets II and III, which are almost
+serially uncorrelated) even when the autocorrelation is minor at horizon one
+for all samples.
+
+6.2 Empirical results
+6.2.1 Data set I. Figures 15a-15c plot point estimates of the horizon-h slope
+of DP using two methods, one is based on the long-horizon regression and
+the other is based on implication. They are quite close at short horizons, but
+the implied estimates tend to be smaller than LH regression-based estimates at
+longer horizons. For example, for annual data, while they coincide at horizon
+one by construction ( = 0.0602), (h) and (h) estimates are 0.141 and 0.114,
+respectively, at h = 2, and 0.301 and 0.246, respectively, at h = 5. Figure 15d
+shows R2s of long-horizon regressions for the data at three frequencies.
+
+   Figure 16 shows the results for various tests as functions of the horizon.
+The significance of the Newey-West t-test monotonically increases with the
+horizon, and the test is significant at the 5% level at most horizons, except the
+shortest few. This can be due to overrejections, based on our simulation results.
+Echoing prior research, as also shown in the figures here, the increasingly
+larger regression slopes, larger R2s, and more significant coefficient tests
+(based on the Newey-West standard error) over prediction horizons, reflect the
+
+                                                                                        4429
+The Review of Financial Studies / v 33 n 9 2020
+
+(a)                              Coefficient of DP (Annual)                        (b)                            Coefficient of DP (Quarterly)
+
+    0.3         LH Regression Slope                                                       0.3
+   0.25         Implied Estimator
+                                                                                          0.25
+    0.2
+                                                                                          0.2
+
+h  0.15                                                                            h      0.15
+
+   0.1                                                                                    0.1
+
+   0.05                                                                                   0.05
+
+      0                                                                                       0
+             1
+                               2                   3                4           5                0     2          4       6          8        10          12      14                              16
+
+                                          Horizon                                                                                    Horizon
+
+(c)                         Coefficient of DP (Monthly)                            (d)                               R2 (Long-horizon Regression)
+
+    0.3                                                                                   0.12
+
+   0.25                                                                                   0.1
+
+   0.2                                                                                    0.08                                                                                                                                                                 Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+h  0.15                                                                            R2
+
+                                                                                          0.06
+
+   0.1                                                                                    0.04
+
+   0.05                                                                                   0.02                                                                Annual
+                                                                                                                                                              Quarterly
+                                                                                                                                                              Monthly
+
+      0                                                                                       0
+
+         0      5     10          15  20           25      30  35       40  45                   0  5         10     15          20  25       30          35  40      45
+
+                                          Horizon                                                                                    Horizon
+
+Figure 15
+
+Point estimates of h, when the predictor is the dividend-to-price (DP) ratio, using the annual, quarterly,
+and monthly data over 1926-2017
+
+(a)                   DP Annual                        1       (b)          DP Quarterly                  1          (c)                      DP Monthly                 1
+
+                                                       0                                                  0                                                              0
+
+                      Newey-W es t                     -1                                                 -1                                                                                  -1
+                                                                                                          -2
+                      Ho dri c k                                                                          -3             0.4
+                                                                                                                                                                                              -2
+ 0.4                  K MS                                      0.4                                 15
+                                                                                                                         0.3
+ 0.3                                                            0.3
+                                                                                                                                                                                              -3
+ 0.2                                                            0.2                                                      0.2
+P-Value               Implied test
+                                                                         Test Statistic0.10.1
+0.05                                                           0.05
+                                                                                  P-Value
+                                                                                                                                                            Test Statistic00
+         1                                                           0
+                                                                                                                                                                     P-Value
+                                                                                                                                                                                                                                               Test Statistic
+                      Hjalmars son (right y-axis)      -2
+
+                                                       -3
+
+                                                                                                                         0.1
+
+                                                                                                                     0.05
+
+                                                                                                                          0
+
+                   2        3         4            5                        5             10                                  0      10       20          30  40
+
+                      Horizon                                                   Horizon                                                       Horizon
+
+Figure 16
+Various tests (one-sided) of multiple-horizon predictability, when the predictor is the dividend-to-price
+(DP) ratio, using the annual, quarterly and monthly data over 1926-2017
+The figure shows Hjalmarsson's test statistic at the 5% level (right y-axis) (thus the critical value is 1.645). For
+other tests, the figure shows the p-values (left y-axis).
+
+folklore evidence that "stock returns are more predictable at longer horizons"
+(Campbell, Lo, and MacKinlay 1997; Cochrane 2005).
+
+   Other tests provide weaker evidence of significance at long horizons. Hodrick
+test is in general insignificant or marginally significant at the 5% level. The p-
+value of the KMS test is mostly floating around 5% across horizons. The implied
+test and Hjalmarsson's scaled test are quite far from being significant for all
+horizons considered.
+
+4430
+Testing for Multiple-Horizon Predictability
+
+(a) 1       Annual data                        (b) 1          Quart erly dat a                        (c) 1                                                                                                    M on t hly d at a
+
+       0.8                  DP (Dataset I)            0.8                                                      0.8
+
+0.6                                            0.6                              DP (Dataset I)                                                                                                     0.6
+AR(1) Root of X t-1u0t (h)                                                                                                                                                                                                        DP (Dataset I)
+                                                                                   AR(1) Root of X t-1u0t (h)
+                                                                                                                                                                       AR(1) Root of X t-1u0t (h)CAY (Dataset II)                 SII (Dataset III)
+
+                                                                                DP (Dataset II)                                                                                                                                   DFR (Dataset III)
+
+                                                                                DY (Dataset II)                                                                                                                                   LTR (Dataset III)
+
+0.4                                            0.4                                                                                                                                                 0.4                            TMS (Dataset III)
+
+                                                                                TBL (Dataset II)                                                                                                                                  DP (Dataset III)
+
+                                                                                DFR (Dataset II)                                                                                                                                  DY (Dataset III)
+
+                                               0.2                              LTR (Dataset II)
+
+0.2                                                                                                                                                                                                0.2
+
+0                                              0                                                                                                                                                   0
+
+-0.2                                           -0.2                                                                                                                                                -0.2                                                 Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+     1                                                                                                                                                                                                  0
+            2            3                  4              0  5           10                      15                                                                                                       10  20       30        40
+
+               Horizon                                           Horizon                                                                                                                                       Horizon
+
+Figure 17
+Autocorrelation of xt-1u0t (h) for all samples in Data sets I-III
+
+6.2.2 Data set II. Now we turn to Data set II with quarterly observations.
+For 4 persistent predictors (CAY, DP, DY, and TBL), the pattern of slopes of
+LH regressions generally follows that of slopes estimated through implication
+(Figures 18 and 20), though two estimators tend to deviate from each other for
+longer horizons (in particular, for DY and TBL). For predictors with nearly no
+serial correlation (DFR and LTR), two estimators perform very differently; the
+implied estimators stabilize quickly as the horizon increases, and the slopes
+stay rather flat over the whole range of horizons. This is expected, as the added
+amount of predictability is very small over multiple horizons if the predictor
+itself is serially almost uncorrelated. In these cases (DFR and LTR), however,
+the LH regression slopes behave wildly across horizons (Figures 20b and 20c),
+probably because of the large estimation uncertainty induced by the large
+variance accumulated in the regression error u0t (h) across horizons (which does
+not occur for the implied estimator). Figures 22b and 22c depict the slopes of
+these two predictors using Data set III, and the similar observation follows.
+
+   The R2s of LH regressions (Figures 18d and 20d) increase with horizon for
+persistent predictors, but they largely decrease with horizon for predictors with
+almost no serial correlation. This corroborates our asymptotic analysis (Remark
+1).
+
+   Regarding return predictable ability, CAY appears to strongly predict returns.
+All tests (except the scaled test) are significant at the 5% level at almost all
+horizons. LTR is also likely a strong predictor at all horizons. All tests (except
+the scaled test) are significant at 10% at almost all horizons. DP is not likely a
+strong predictor in this data set. The only evidence for predictability at the 5%
+level comes from a Newey-West test and perhaps a Hodrick test; however, that
+evidence may result from overrejections.
+
+   Th results for other predictors are less clear across all tests. One may attempt
+to believe TBL and DFR are strong predictors since the implied test at the 5%
+level is significant for both predictors. That the KMS test offers significance
+
+                                                                                                                                                                                                                                                  4431
+The Review of Financial Studies / v 33 n 9 2020
+
+                   (a)                                Coefficient of CAY                                    (b)                             Coefficient of DP
+                                                                                                                    0.3
+                        6     LH Regression Slope                                                                 0.25
+                        5     Implied Estimator                                                                     0.2
+                        4                                                                                         0.15
+             h          3                                                                                           0.1h
+                  h     2                                                                                         0.05
+                        1
+
+                     0                                                                                               0
+
+                           0  2     4              6            8           10  12               14     16                0  2           4  6        8         10          12  14                                                                                                     16
+
+                                                      Horizon                                                                                        Horizon
+
+                   (c)                             Coefficient of DY                                        (d)                                   R2 (LH Regression)
+
+                      0.3                                                                                            0.2
+
+                    0.25                                                                                                     CAY
+
+                      0.2                                                                                                    DP
+
+                                                                                                                 0.15        DY
+
+                   0.15                                                                                     R2       0.1                                                                                                                                                                  Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+                    0.1                                                                                          0.05
+                   0.05
+
+                     0                                                                                               0
+
+                           0  2     4              6            8           10  12               14     16                0  2           4  6        8         10          12  14                                                                                                     16
+
+                                                      Horizon                                                                                        Horizon
+
+Figure 18
+Point estimates of h, when the predictor is CAY, DP, or DY, using the quarterly data over 1952­2017
+
+(a) 0.3                             CAY                                         (b) 0.3                 DP                               (c) 0.3               DY
+                                                                         2
+     0.25                                                                             0.25                                       0
+       0.2                                                                              0.2
+                                                                                                                                 -0.5       0.25                                                                                                                                2
+     0.15                                                                             0.15                                                                                                                                                                                      1.5
+       0.1                                                         1.5                  0.1                                                                                                                                                                                     1
+                                                                                                                                                                                                                                                                                0.5
+     0.05                                                          1                                                               -1        0.2                                                                                                                                0
+          0                                                                                                                        -1.5     0.15                                                                                                                                -0.5
+            0P-Value                                                                                                               -2                                                                                                                                           -1
+                                                                                      Test Statistic                               -2.5      0.1                                                                                                                          15
+                                                                                                                                   -3       0.05
+                                                                                               P-Value                             -3.5
+                                                                                                                                                                         Test Statistic150
+                                                                                                                                                  0
+                                                                                                                                                                                  P-Value
+                                                                                                                                                                                                                                                            Test Statistic
+                                    Newey-W es t
+
+                                    Hodri c k
+
+                                    K MS                           0.5
+
+                                    Implied test
+
+                                    Hjalmarsson (right y-axis)
+
+                                                                   0
+
+                                                                                        0.05
+                                                                   -0.5
+
+                                                                                0
+
+                                                                   -1
+
+                                 5             10     15                                      0      5           10                                     5              10
+
+                                    Horizon                                                             Horizon                                               Horizon
+
+Figure 19
+Various tests (one-sided) of multiple-horizon predictability, when the predictor is CAY, DP, or DY, using
+the quarterly data over 1952­2017
+The figure shows Hjalmarsson's test statistic at the 5% level (right y-axis) (thus the critical value is 1.645). For
+other tests, the figure shows the p-values (left y-axis)
+
+for TBL and DFR only at very short horizons, but not at other horizons, may
+attribute to its smaller power relative to the implied test at longer horizons.
+
+   The advantage of using the implied test is exemplified by the case of DFR.
+We note that for DFR, all tests considered except the implied test point to its
+inability to predict future returns for almost all multiple horizons (Figure 21b).
+This is likely due to the power advantage of the implied test as we have seen
+in Section 5 under DGP D. Figure 23b also illustrates a similar finding for the
+same predictor using Data set III.
+
+4432
+Testing for Multiple-Horizon Predictability
+
+(a) 4                                      Coefficient of TBL(-)                            (b) 0.6                                                                                         Coefficient of DFR
+
+         3         LH Regression Slope                                                              0.5
+                   Implied Estimator                                                                0.4
+
+             h2                                                                                                                                                      0.3
+                h
+
+                                                                                                                               R2
+                                                                                                                                                                  h
+                                                                                                                                         0.2
+             1
+
+                                                                                                                                         0.1
+
+             0                                                                                                                                                       0
+
+                   2        4         6        8           10     12             14     16                                                                                0  2           4  6             8        10           12  14                                                 16
+
+                                               Horizon                                                                                                                                                    Horizon
+
+(c)                                   Coefficient of LTR                                    (d) 0.05                                                                                        R2 (LH Regression)
+
+      0.5                                                                                                                                                                    TBL
+      0.4
+      0.3                                                                                                                                                          0.04      DFR
+      0.2
+      0.1                                                                                                                                                                    LTR
+
+                                                                                                                                                                   0.03                                                                                                                    Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+                                                                                                                                                                   0.02
+
+                                                                                                 0.01
+
+             0                                                                                                                                                       0
+
+                0     2        4            6     8        10     12             14     16                                                                                0  2           4  6             8        10           12  14                                                 16
+
+                                               Horizon                                                                                                                                                    Horizon
+
+Figure 20
+Point estimates of h, when the predictor is TBL, DFR, or LTR, using the quarterly data over 1952­2017
+
+(a)                         TBL                                   (b)                   DFR                                                                                                 (c)                    LTR
+
+        0.5                 Ne wey-W e s t           2.5                  0.5                                                                                                      2.5             0.5                                                                           2.5
+      0.45                                                              0.45                                                                                                       2             0.45                                                                            2
+                            Hodric k                                                                                                                                               1.5                                                                                           1.5
+        0.4                                                               0.4                                                                                                      1               0.4                                                                           1
+      0.35                  KMS                                         0.35                                                                                                       0.5           0.35                                                                            0.5
+                                                                                                                                                                                   0                                                                                             0
+        0.3                 Implied test                                  0.3                                                                                                      -0.5            0.3                                                                           -0.5
+      0.25                  Hjalmarsson (right y-axis) 2                0.25                                                                                                       -1            0.25                                                                            -1
+                                                                                                                                                                             15                                                                                            15
+        0.2                                          1.5                  0.2                                                                                                                      0.2
+      0.15   P-Value                                                    0.15                                                                                                                     0.15
+                                                                                      Negative of Test Statistic1
+        0.1                                                               0.1                                                                                                                      0.1
+      0.05                                                                                      P-Value0.50.05                                                                                   0.05
+                                                                                                                                                                         Test Statistic
+          0                                                                 0                                                                                                                        0
+            0                                                                                                                                                                      P-Value0            0
+                                                                                                                                                                                                                                                             Test Statistic
+
+                                                     0
+
+                                                     -0.5
+
+                         5            10             -1                              5           10                                                                                                          5              10
+                                               15
+
+                            Horizon                                                     Horizon                                                                                                                    Horizon
+
+Figure 21
+Various tests (one-sided) of multiple-horizon predictability, when the predictor is TBL, DFR, or LTR,
+using the quarterly data over 1952­2017
+The figure shows (the negative of) Hjalmarsson's test statistic at the 5% level (right y-axis) (thus the critical value
+is 1.645). For other tests, the figure shows the p-values (left y-axis).
+
+   The scaled test generally provides very weak (if any) evidence for
+predictability, especially at multiple horizons. The test is far from significant at
+the 5% level for DP at all horizons but is significant or marginally significant
+for other predictors only at the first or second horizon. Significance is almost
+immediately gone as the horizon increases. We can identify a remarkable
+decaying trend in the scaled test statistic as the horizon increases for all
+predictors (DFR and LTR in particular) except DP. This is predicted by our
+asymptotic theory, which states that the scaled test statistic should converge to
+zero if the horizon becomes dominant over the persistence level of the predictor.
+
+                                                                                                                                                                                                                                                                           4433
+The Review of Financial Studies / v 33 n 9 2020
+
+(a)                                      Coefficient of SII (-)                                        (b)                                                        Coefficient of DFR
+       0.15                                                                                                    1.5
+         0.1     LH Regression Slope                                                                              1
+                 Implied Estimator
+
+h                                                                                                       R2
+                                                                                                            h
+   0.05                                                                                                         0.5
+
+            0                                                                                                   0
+              0
+                 5   10         15  20           25                        30  35      40      45                    0      5                             10  15          20  25       30       35  40  45
+(c) 0.8
+                                        Horizon                                                                                                                               Horizon
+         0.6
+         0.4                        Coefficient of LTR                                                 (d) 0.15                                                        R2 (LH Regression)
+         0.2
+                                                                                                                                                                                                                                        SII
+            0                                                                                                                                                                                                                           DFR
+              0                                                                                                                                                                                                                         LTR
+
+                                                                                                                0.1                                                                                                                                           Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+h
+
+                                                                                                            0.05
+
+                                                                                                                0
+
+                 5   10         15  20           25                        30  35      40      45                    0      5                             10  15          20  25       30       35  40  45
+
+                                        Horizon                                                                                                                               Horizon
+
+Figure 22
+
+Point estimates of h, when the predictor is (the negative of) SII, DFR, or LTR, using the monthly data
+over 1973­2014
+
+(a) 0.7              SII                         3                         (b) 0.7                 DFR                         3                              (c) 0.7                  LTR              3
+
+                     Newey-W es t
+
+                     Hodri c k
+
+   0.6               KMS                         2.5                           0.6                                             2.5                                0.6                                   2.5
+                     Implied test
+
+                     Hjalmarsson (right y-axis)
+
+                                                 2                                                                             2                                                                        2
+
+   0.5                                                                         0.5                                                                                0.5
+
+P-Value                                          1.5                                                                           1.5                                                                      1.5
+                                                                         Negative of Test Statistic
+   0.4                                                                         0.4                                                                                0.4
+                                                                                  P-Value
+                                                                                                                                                            Test Statistic11                            1
+
+                                                                                                                                                                     P-Value0.30.30.3
+                                                                                                                                                                                                                                              Test Statistic
+                                                 0.5                                                                           0.5                                                                      0.5
+
+   0.2                                                                         0.2                                                                                0.2
+
+                                                 0                                                                             0                                                                        0
+
+ 0.1                                                                            0.1                                                                            0.1
+                                                                     -0.5                                                                           -0.5                                                                           -0.5
+
+0.05                                                                           0.05                                                                           0.05
+
+      0                                          -1                            0                                               -1                                 0                                     -1
+
+         0       10  20         30  40                                              0      10      20       30          40                                             0      10       20       30  40
+
+                     Horizon                                                                       Horizon                                                                             Horizon
+
+Figure 23
+Various tests (one-sided) of multiple-horizon predictability, when the predictor is SII, DFR, or LTR, using
+the monthly data over 1973­2014
+The figure shows (the negative of) Hjalmarsson's test statistic at the 5% level (right y-axis) (thus the critical value
+is 1.645). For other tests, the figure shows the p-values (left y-axis).
+
+6.2.3 Data set III. Using Data set III with monthly (and more recent)
+observations, the implied test proposed in this paper identifies (or confirms)
+four potentially useful predictors: SII, DFR, LTR, and TMS. The test shows
+that these predictors are all significant around the level 5% across all horizons.
+The finding that DFR is at the almost same level as SII in terms of predicting
+future returns over various horizons is missed by other tests. The KMS test
+detects predictability for these predictors at some horizons but misses it at
+other horizons. The traditional predictors DP and DY are not significant by all
+tests at almost all horizons.
+
+4434
+Testing for Multiple-Horizon Predictability
+
+(a) 10                                          Coefficient of TMS                            (b) 0.25                              Coefficient of DP
+
+        8               LH Regression Slope                                                            0.2
+                        Implied Estimator
+
+                 6                                                                                 0.15
+
+           h                                                                                  h
+              h
+                 4                                                                                     0.1
+
+                 2                                                                                 0.05
+
+        0                                                                                              0
+          0
+                        5   10         15  20           25    30    35        40      45                    0      5        10  15          20  25       30        35  40  45
+(c)
+                                               Horizon                                                                                          Horizon
+    0.25
+                                           Coefficient of DY                                  (d)                                              R2 (LH Regression)
+
+                                                                                                       0.2         TMS
+                                                                                                                   DP
+                0.2                                                                                0.15            DY
+               0.15                                                                                 0.1
+                                                                                              R2                                                                                                                                                               Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+                0.1                                                                                0.05
+               0.05
+
+                 0                                                                                     0
+
+                     0  5   10         15  20           25    30    35        40      45                    0      5        10  15          20  25       30        35  40  45
+
+                                               Horizon                                                                                          Horizon
+
+Figure 24
+Point estimates of h, when the predictor is TMS, DP, or DY, using the monthly data over 1973­2014
+
+(a) 1                       TMS                         2           (b) 1                 DP                          2         (c) 1                    DY                2
+
+               0.9                                      1.5         0.9                                               1.5           0.9                                    1.5
+
+               0.8                                      1           0.8                                               1             0.8
+                                                                                                                                                                                                       1
+               0.7                                                  0.7
+                                                                                                                                    0.7
+                                                        0.5                                                           0.5                                                                              0.5
+
+               0.6          Newey-W es t                            0.6                                                             0.6
+                                                                                                                                                                                                       0
+
+                                                                                                                                    0.5
+
+                                                                                                                                                                                                       -0.5
+                                                                                                                                    0.4
+P-Value                     Hodri c k                   0                                                             0
+                                                                         Test Statistic
+                            K MS
+                                                                                  P-Value
+                                                                                                                                                            Test Statistic0.50.5
+
+                                                                                                                                                                     P-Value
+                                                                                                                                                                                                                                               Test Statistic
+                            Implied test
+
+                            Hjalmarsson (right y-axis)  -0.5                                                          -0.5
+
+               0.4                                                  0.4
+
+               0.3                                      -1          0.3                                               -1            0.3                                    -1
+
+               0.2                                      -1.5        0.2                                               -1.5          0.2                                    -1.5
+
+               0.1                                      -2          0.1                                               -2            0.1                                    -2
+
+           0.05                                                     0.05                                                        0.05
+
+                 0                                      -2.5            0                                             -2.5          0                                      -2.5
+
+                    0   10  20         30  40                              0      10      20       30          40                        0      10       20        30  40
+
+                            Horizon                                                       Horizon                                                        Horizon
+
+Figure 25
+Various tests (one-sided) of multiple-horizon predictability, when the predictor is TMS, DP, or DY, using
+the monthly data over 1973­2014
+The figure shows Hjalmarsson's test statistic at the 5% level (right y-axis) (thus the critical value is 1.645). For
+other tests, the figure shows the p-values (left y-axis)
+
+   Like what we have illustrated for the samples in Data set II, the scaled test
+still struggles to detect any predictability. The only evidence for significance
+we find in Data set III is for SII but only for horizons less than two years. For the
+predictors SII, DFR, and LTR, the scaled t-statistic quickly converges to zero as
+the horizon increases, which is just a mechanical artifact for this statistic if the
+predictor is not strongly persistent, instead of indicating lack of predictability.
+
+6.2.4 Specification checking. The assumption of the AR(1) approximation
+of the dynamics of xt-1 works very well for all predictors considered in
+this section. In the Online Appendix, we report the autocorrelations of the
+
+                                                                                                                                                                              4435
+The Review of Financial Studies / v 33 n 9 2020
+
+(a) 0.4        (a) H : DP = TBL =0                            (b) 0.4            (b) H : DP =0        (c) 0.4                                                                             (c) H : TBL =0
+                       0h h                                                              0h                                                                                                       0h
+      0.35                                                           0.35                                   0.35
+       0.3                                Newey-West test             0.3                                     0.3
+                                          Hodrick test
+                                          KMS test
+                                          Implied test
+
+0.25                                                          0.25                                                                                                            0.25
+
+P-Value0.2                                                    0.2                                                                                                             0.2
+                                                                                  P-Value
+                                                                                                                                                                     P-Value
+
+0.15                                                          0.15                                                                                                            0.15
+
+0.1                                                           0.1                                                                                                             0.1
+
+0.05                                                          0.05                                                                                                            0.05
+
+      0                                                       0                                                                                                               0                                 Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+            1  2  3        4                               5               1  2  3              4  5                                                                                1  2  3               4  5
+
+                  Horizon                                                        Horizon                                                                                                  Horizon
+
+Figure 26
+Various tests (two-sided) of multiple-horizon predictability, when the predictors are dividend-to-price (DP)
+ratio and Treasury-bill rate (TBL), using the annual data over 1926­2017
+Panel a shows joint predictability, and panels b and c show individual predictability
+
+predictor series and those of AR(1) residuals, providing support that most of
+the autocorrelation is captured by the first lags, and AR(1) residuals behave
+close to an uncorrelated sequence. In further misspecification analysis, we fit
+the AR(1) model to uxt and find that the AR slope is minor for all series, with
+the largest one (in magnitude) being -0.157, which occurs for the monthly SII
+series in Data set III. With robust standard errors, these slopes are insignificant
+at the 5% level except for the monthly SII series. Guided by the empirical
+Monte Carlo experiments under misspecification reported in Section 5.3.4, we
+conclude that such minor misspecification in most of our samples does not
+materially affect the validity of the implied test and its comparative advantage.
+The Online Appendix provides detailed results.
+
+6.2.5 Two-predictor predictive regression. We now consider predictability
+tests using two predictors, dividend-to-price (DP) ratio and Treasury-bill rate
+(TBL), as suggested by Ang and Bekaert (2007). We use annual observations
+over years 1926-2017, as in Data set I. We focus on 4 two-sided tests,
+Newey-West, Hodrick, and KMS Wald tests as in Kostakis, Magdalinos, and
+Stamatogiannis (2015), which all use chi-squared critical values, together with
+the implied test suggested in Section 4, equipped with a bootstrap procedure
+as in Algorithm 1. The scaled test is mainly designed for univariate regression,
+and thus is not considered in this section.
+
+   Figure 26 reports the results for the joint and individual predictability tests.
+All tests, except for the Newey-West test, are insignificant at the 5% level at
+all horizons for all hypotheses. The Newey-West test is insignificant at short
+horizons, but becomes significant at longer horizons for the joint test and one
+individual predictability test. Guided by our simulation results in Section 5.4,
+which was designed to mimic the data in this case, it is highly probable that
+
+4436
+      Testing for Multiple-Horizon Predictability                                                     Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+    Newey-West test leads to spurious rejection even when predictability does not
+    exist.
+
+    6.2.6 Summary. Our results show that even with more powerful tests (against
+    one-sided or two-sided alternatives), the widely used predictor the dividend-
+    to-price ratio presents quite weak predictive ability for market returns when
+    the persistence is properly accommodated, even at long horizons for which the
+    strongest evidence typically occurs. Other predictors such as the consumption-
+    wealth ratio, the short interest and the corporate-government bond returns
+    spread provide stronger evidence than the dividend-to-price ratio, and the
+    evidence is fairly coherent over various horizons.
+
+7. Conclusion
+
+    Foreseeability of the price of stocks and bonds over longer (instead of shorter)
+    periods was one of the key findings of the Laureates of the 2013 Nobel prize in
+    economic sciences (Pressmeddelande 2013). Recent research on appropriate
+    statistical inference procedures for long-horizon predictability has focused
+    on accommodation of strong persistence in predictors. The current paper
+    demonstrates a potential pitfall of the popular test based on the scaled t-statistic,
+    which uses a too large standard error when the predictor is not persistent. The
+    test based on the implication of the short-run model circumvents the necessity
+    of dealing with the aggregated error, which is strongly dependent as the horizon
+    increases. Unlike the scaled test, the implication-based test uses the persistence-
+    adaptive standard error. Coupled with the bias-corrected bootstrap procedure
+    we suggest, the implication-based test has attractive properties, as we elaborate
+    in the paper, and is thus recommended.
+
+       The validity of the test hinges on specification of the autocorrelation structure
+    of the predictor. Such specification has been proved fruitful in the literature
+    on short-run predictability to design tests against unknown persistence of
+    the predictor, and it underlies several popular robust procedures, prominently
+    those of Campbell and Yogo (2006) and Phillips (2014). The alternative
+    bias-correction approach (to short-run predictability), proposed by Stambaugh
+    (1999), Amihud and Hurvich (2004), and Amihud et al. (2009), also relies on
+    the correct specification of predictors' autocorrelation structure. Although we
+    demonstrate that the level of mild misspecification in the empirical analysis is
+    mostly harmless, an important direction for future work is to allow for flexible
+    specification of the predictor dynamics.
+
+    Appendix
+
+     A. Implementation
+     Algorithm 1. (two-sided 100 % Bootstrap Implied test for H0 : Rh = R0)
+
+            · 1. Run OLS regressions of (11) and (12) to obtain OLS estimates of coefficients
+              {y ,,x ,}, and residuals ut = (u0t ,uxt ) . Compute the Wald statistic WIM as in (15).
+
+                                                                                            4437
+The Review of Financial Studies / v 33 n 9 2020
+
+· 2. Generate the bootstrap sample {yt,xt : t = 1,...,n}.
+
+       ­ 2.1. Generate ut = ut et , where et is a random number generated from the standard
+           normal distribution. Write ut = (u0t ,uxt ) .
+
+       ­ 2.2. Generate xt and xt = x +bcxt-1 +uxt , where bc is the bias-corrected
+           estimator of , defined as
+
+      bc =  +x (Ik - )-1+ (Ik - 2)-1+                  k     j     (Ik -j    )-1  n     xt  -1  xt  -1  -1 ,
+                                                       j =1                       t =2
+
+                                                                                                    (A1)
+
+         where j 's (j = 1,...,k) are k eigenvalues of  . We set x1 = x1.                                     Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+      ­ 2.3. Generate yt as yt = y +xt-1 +u0t . We set y1 = y1.
+      ­ 2.4. Repeat Steps 2.1-2.3 B times (e.g., B = 1,000).
+
+· 3. For each bootstrap sample, calculate the bootstrap Wald statistic
+
+      WIM = (Rh -Rh) Rq                          n     xt-1  xt-1  -1  q R   -1 (Rh -Rh),
+                                                 t =2
+
+  where h,q, are computed like h,q, except that the bootstrap sample {yt,xt} in
+  place of the original sample {yt ,xt }.
+· 4. Use the 100(1- )% quantile QWIM (1- ) (e.g., = 0.05) of WIM over B bootstrap
+  replications as the critical value, that is, the hypothesis H0 is rejected at the level
+
+     if WIM > QWIM (1- ). Here, QX( ) denotes the 100 % quantile of the random
+  variable X.
+
+Remark A1. In the univariate predictive regression, the bootstrap procedure above can be similarly
+applied to the t-statistic TIM(0). We can also form a one-sided test if we know the sign of the
+slope h, for example, via economic theory. To implement it, supposing that the sign is known
+to be positive (e.g., the slope of the dividend-to-price ratio), we can use the 100(1- )% quantile
+QTIM(0)(1- ) of TIM (0) as the critical value; that is, the hypothesis H0 : h = 0 against HA : h > 0
+is rejected at the level if TIM(0) > QTIM(0)(1- ). Similarly, if the sign is known to be negative
+(e.g. the slope of Treasury-bill rates), the hypothesis H0 : h = 0 against HA : h < 0 is rejected at the
+level if TIM(0) < QTIM(0)( ). In the univariate predictive regression, the bias-corrected estimator
+of  can be computed as bc =  +(n-1)-1(1+3) (Stambaugh 1999), consistent with (A1), or to
+a higher order as bc2 =  +(n-1)-1(1+3)+(n-1)-23(1+3) (Amihud and Hurvich 2004).
+
+Remark A2. The bias expression (A1) comes from Nicholls and Pope (1988); see also Amihud
+et al. (2009). The naive bootstrap uses  (instead of bc) in Step 2.2. For the univariate predictive
+regression model, it is possible to prove that the implied statistic using the naive bootstrap is
+distributionally valid for 0  r < 1 under the null hypothesis. However, when r = 1, the naive
+bootstrap is not consistent in that the bootstrap implied statistic has a limit distribution 1(c,)
+conditional on the data, where c = n( -1). Using the unbiased estimator of  (to the first or higher
+order) in generating the bootstrap data, as the biased-corrected bootstrap does, helps to mitigate
+the inconsistency issue. Our empirical Monte Carlos in Section 5 show that the method works very
+well in finite samples.
+
+Remark A3. The residual-based wild bootstrap (Wu 1986; Liu 1988) employed in Step 2.1 is
+useful to recover the null distribution even when the error is heteroscedastic. This is in contrast to
+the standard bootstrap that takes random draws from {ut }.
+
+B. Asymptotic Theory for Long-Horizon Regression Estimator and Implied Estimator
+We will now present the asymptotic distributions of h and h in Theorems A1 and A2, respectively.
+
+4438
+Testing for Multiple-Horizon Predictability
+
+Theorem A1 (Asymptotics for the LH-regression-based slope estimator h). Suppose Assumption
+
+1 holds.
+
+(i) Suppose  = 0. As n  ,
+
+              nh-1h d x-10                   Jx2,c -1/2 1(c,),              if r = 1;
+              n(1+r)/2h-1h d N               0,(-2c)x-202 ,                 if 0 < rh < r < 1;
+                                                                            if rh > r > 0;
+              n1/2h-1/2h d N (0,402x-2),                                    if rh > r = 0.
+              n1/2h-1/2h d N (0,(3-)(1+)02x-2),
+
+(ii) Suppose  = 0. As n  ,                                                                                Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+            
+             nh-2(h -h) d  Jx2,c -1/2 2(c)/2,
+                                                                     if r = 1;
+              n(1+r)/2h-2(h -h) d N 0,(-c)2/2 ,                      if 0 < rh < r < 1;
+              n1/2-r- h-1/2(h -h) p 0,                               if rh > r  0.
+
+Theorem A2 (Asymptotics for the implied estimator h). Suppose Assumption 1 holds.
+   (i) Suppose  = 0. As n  ,
+
+              nh-1h d x-10                   Jx2,c -1/2 1(c,),       if r = 1;
+              n(1+r)/2h-1h d N               0,(-2c)x-202 ,          if 0 < rh < r < 1;
+                                                                     if rh > r  0;
+              n(1-r)/2h d N (0,2(-c)-1x-202),                        if rh > r = 0.
+              n1/2h d N (0,(1+)(1-)-1x-202),
+
+(ii) Suppose  = 0. As n  ,
+
+          nh-2(h -h) d  Jx2,c     -1/2 2(c)/2,                                  if r = 1;
+          n(1+r)/2h-2(h -h) d N   0,(-c)2/2 ,                                   if 0 < rh < r < 1;
+                                                                                if rh > r > 0;
+          n(1-3r)/2(h -h) d N 0,2(-c)-32 ,                                  , if rh > r = 0.
+
+          n1/2(h -h) d N  0,  1+             02 x-2    +   20x    +    2
+                              1-                          (1-)x2     (1-)2
+
+C. Proofs of Theorems
+The Online Appendix provides the proofs of Theorems 1-4 and Theorems A1 and A2. Preliminary
+
+results are summarized in the following Lemmas 1-3, the proofs of which are also provided in the
+Online Appendix.22
+
+   For a (non)random quantity  , we write  = 1 +op(1) simply as  = 1 +s.o., where s.o. means
+a term of smaller order in probability.
+
+Lemma 1. Under the assumptions in (6) and (7), the following results hold.
+
+(i) For h,
+
+                     h-1                     h + s.o.,               if rh < r;                     (A2)
+                                             (-c)-1nr +s.o.,         if rh > r  0,
+              q1 = j =
+
+                     j =0
+
+and                  h-1
+
+              q2 = jj-1 =                    h(h - 1) /2 + s.o.,     if rh < r;
+                                             c-2n2r  +s.o.,          if rh > r  0.
+                     j =0
+
+22 https://sites.google.com/site/xukeli2015/research.
+
+                                                                                                    4439
+The Review of Financial Studies / v 33 n 9 2020
+
+(ii) For h, recall that j =            h-2-j      i  ,    then
+                                       i=0
+
+                              h-2               h(h - 1)/2 + s.o.,              if rh < r;
+                                                (-c)-1nr h+s.o.,                if rh > r  0,
+                                  j =
+
+                              j =0
+
+                              h-2                 h3 /3 + s.o.,                 if rh < r;                                  (A3)
+                                                  c-2n2r h+s.o.,                if rh > r  0,
+                                  j2 =
+
+                              j =0
+
+and                                                  
+                                                      h4/4+s.o.,
+            h-2           h-2 h-2                                                                 if rh < r;
+
+                  j2 +2 k j j-k =                         2(-c)-3n3r h+s.o.,                      if rh > r > 0;                       Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+            j =0          k=1 j =k                        h(1 -  )-3 (1 +  ) + s.o.,              if rh > r = 0.
+
+Lemma 2. Let u0t (h) be as defined in (5), which takes the MA(h-1) form of
+
+                                                                h-1
+
+                                                  u0t (h) =              j ut+j ,
+
+                                                                j =0
+
+where j =   (1,j )      with j   = j     (for 0  j  h           -2) and h-1 = 0.            Suppose  0    r  <  1.  Denote  Vlur v  =
+V ar(n-1/2             (h)) and  Vl r v  = V ar(n-1/2                                       where,
+            n     u0t                                           n        xt -1  u0t  (h)),
+            t =2                                                t =2
+
+            Vl r v  =  1  x2       h-1         j     j +2       hk=-11 (1 - k/ n) k         h-1   j         j -k ,
+                          -2       j =0                                                     j =k
+
+Under Assumption 1, asymptotics of Vlrv and Vlurv are given below.
+   (i) If  = 0, then h-2Vlurv  02, and
+
+                              h-2n-r Vlrv  (-2c)-1x202,                         if 0 < rh < r < 1;
+                              h-1n-2r Vlrv  c-2x202,                            if rh > r > 0;
+                              h-1Vlrv  (1-)-2x202,                              if r = 0.
+                       
+
+(ii) If  = 0, then
+
+                              h-4Vlurv  2x2/4,                                       if rh < r;
+                              n-2r h-2Vlurv  2x2c-2,                                 if rh > r > 0;
+                                                                        2 x2
+                              h-2 Vlur v   02 +           20x   +     (1-)2          if rh > r = 0.
+                                                          1-
+
+and               h-4n-r Vlrv  (-c)-1x42/8,
+                  n-4r h-1Vlrv  (-c)-4x42,
+                                                                                            if 0 < rh < r < 1;
+                                                                                            if rh > r > 0;
+
+                  h-1 Vl r v     x2 02       +  2(1+ 2 )x2 0x         +    x4        2,     if rh > r = 0.
+                                 (1-)2           (1- )4 (1+ )            (1-)4
+
+Lemma 3. Suppose Assumption 1 holds. If  = 0,
+
+                                                              n
+
+                                                n-1h-1 u20t (h) p 02.
+
+                                                             t =2
+
+If  = 0,    
+            
+                    n-1 h-3      n     u02t  (h)  p  3-1     2 x2     ,                     if 0 < rh < r  1;
+                                 t =2                                                       if rh > r > 0;
+                                                          p                                 if r = 0.
+                    n-(1+2r ) h-1        n     u20t  (h)     c-2      2  x2  ,
+                                         t =2
+                                                                             x2  2
+                    n-1 h-1      n     u20t  (h)  p  02   +  20x         +  (1-)2    ,
+                                 t =2                         1-
+
+4440
+Testing for Multiple-Horizon Predictability                                                                           Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+References
+
+Amihud, Y., and C. M. Hurvich. 2004. Predictive regression: A reduced-bias estimation method. Journal of
+Financial and Quantitative Analysis 39:813-41.
+Amihud, Y., C. M. Hurvich, and Y. Wang. 2009. Multiple-predictor regressions: Hypothesis testing. Review of
+Financial Studies 22:413-34.
+Andersen, T. G., and R. T. Varneskov. 2018. Consistent inference for predictive regressions in persistent VAR
+economies. Working Paper, Kellogg School of Management, Northwestern University.
+Andrews, D. W. K., and P. Guggenberger. 2014. A conditional-heteroskedasticity-robust confidence interval for
+the autoregressive parameter. Review of Economics and Statistics 96:376-81.
+Ang, A., and G. Bekaert. 2007. Stock return predictability: Is it there? Review of Financial Studies 20:651­707.
+Bakshi, G, G. Panayotov, and G. Skoulakis. 2011. Improving the predictability of real economic activity and asset
+returns with forward variances inferred from option portfolios. Journal of Financial Economics 100:475-95.
+Bandi, F. M., and B. Perron. 2008. Long-run risk-return trade-offs. Journal of Econometrics 143:349-74.
+Bandi, F. M., B. Perron, A. Tamoni, and C. Tebaldi. 2019. The scale of predictability. Journal of Econometrics
+208:120-40.
+Bansal, R., and I. Shaliastovich. 2013. A long-run risks explanation of predictability puzzles in bond and currency
+markets. Review of Financial Studies 26:1­33.
+Boudoukh, J., M. Richardson, and R. Whitelaw. 2008. The myth of long-horizon predictability. Review of
+Financial Studies 21:1577-605.
+Campbell, J. Y. 2001. Why long horizons? A study of power against persistent alternatives. Journal of Empirical
+Finance 9:459­91.
+Campbell, J. Y., A. Lo, and A. MacKinlay. 1997. The econometrics of financial markets. Princeton, NJ: Princeton
+University Press.
+Campbell, J. Y., and R. J. Shiller. 1988. The dividend-price ratio and expectations of future dividends and discount
+factors. Review of Financial Studies 1:195­227.
+Campbell, J. Y., and M. Yogo. 2006. Efficient tests of stock return predictability. Journal of Financial Economics
+81:27-60.
+Cavanagh, C. L., G. Elliott, and J. H. Stock. 1995. Inference in models with nearly integrated regressors.
+Econometric Theory 11:1131­47.
+Chen, Y.-C., K. S. Rogoff, and B. Rossi. 2010. Can exchange rates forecast commodity prices. Quarterly Journal
+of Economics 125:1145­94.
+Chen, Y.-C., and K. P. Tsang. 2013. What does the yield curve tell us about exchange rate predictability? Review
+of Economics and Statistics 95:185­205.
+Choi, Y., S. Jacewitz, and J. Y. Park. 2016. A reexamination of stock return predictability. Journal of Econometrics
+192:168­89.
+Cochrane, J. H. 2005. Asset pricing. Revised Edition. Princeton, NJ: Princeton University Press.
+------. 2008. The dog that did not bark: A defense of return predictability. Review of Financial Studies 21:1533­75.
+Colacito, R., and M. M. Croce. 2011. Risks for the long run and the real exchange rate. Journal of Political
+Economy 119:153­81.
+Dangl, T., and M. Halling. 2012. Predictive regressions with time-varying coefficients. Journal of Financial
+Economics 106:157­81.
+Elliott, G., U. K. Muller, and M. W. Watson. 2015. Nearly optimal tests when a nuisance parameter is present
+under the null hypothesis. Econometrica 83:771­811.
+
+                                                                                        4441
+The Review of Financial Studies / v 33 n 9 2020                                                                   Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+Fama, E., and K. French. 1988. Dividend yields and expected stock returns. Journal of Financial Economics
+22:3­25.
+Gourinchas, P. O., and H. Rey. 2007. International financial adjustment. Journal of Political Economy 115:665­
+703.
+Hansen, L., and R. Hodrick. 1980. Forward exchange rates as optimal predictors of future spot rates. Journal of
+Political Economy 88:829­53.
+Henkel, S., J. Martin, and F. Nardari. 2011. Time-varying short-horizon predictability. Journal of Financial
+Economics 99:560­80.
+Hjalmarsson, E. 2011. New methods for inference in long-horizon regressions. Journal of Financial and
+Quantitative Analysis 46:815­39.
+Hodrick, R. J. 1992. Dividend yields and expected stock returns: Alternative procedures for inference and
+measurement. Review of Financial Studies 5:357­86.
+Jansson, M., and M. J. Moreira. 2006. Optimal inference in regression models with nearly integrated regressors.
+Econometrica 74:681­714.
+Kilian, L. 1999. Exchange rates and monetary fundamentals: What do we learn from long-horizon regressions?
+Journal of Applied Econometrics 14:491­510.
+Kostakis, A., T. Magdalinos, and M. Stamatogiannis. 2015. Robust econometric inference for stock return
+predictability. Review of Financial Studies 28:1506-53.
+Lanne, M. 2002. Testing the predictability of stock returns. Review of Economics and Statistics 84:407­15.
+Lee, J. H. 2016. Predictive quantile regression with persistent covariates: IVX-QR approach. Journal of
+Econometrics 192:105-18.
+Lee, J. H., Z. Shi, and Z. Gao. 2018. On LASSO for predictive regression. Working Paper, University of Illinois.
+Lettau, M., and S. Ludvigson. 2001. Consumption, aggregate wealth, and expected stock returns. Journal of
+Finance 56:815-49.
+Lettau, M., and S. van Nieuwerburgh. 2008. Reconciling the return predictability evidence. Review of Financial
+Studies 21:1607­52.
+Liu, R. Y. 1988. Bootstrap procedures under some non-I.I.D. models. Annals of Statistics 16:1696­708.
+Lutkepohl, H. 2005. New introduction to multiple time series analysis. Berlin, Germany: Springer.
+Magdalinos, T., and P. C. B. Phillips. 2009. Limit theory for cointegrated systems with moderately integrated
+and moderately explosive regressors. Econometric Theory 25:482-526.
+Mark, N. C. 1995. Exchange rates and fundamentals: Evidence on long-horizon predictability. American
+Economic Review 85:201-18.
+Mikusheva, A. 2007. Uniform inference in autoregressive models. Econometrica 75:1411­52.
+Newey, W. K., and K. D. West. 1987. A simple positive semi-definite, heteroskedasticity and autocorrelation
+consistent covariance matrix. Econometrica 55:703­708.
+Nicholls, D. F., and A. L. Pope. 1988. Bias in the estimation of multiple autoregressions. Australian Journal of
+Statistics 30A:296­309.
+Park, J. Y. 2003a. Bootstrap unit root tests. Econometrica 71:1845­95.
+------. 2003b. Weak unit roots. Unpublished Manuscript, Indiana University at Bloomington.
+Pastor, L., and R. F. Stambaugh. 2009. Predictive systems: Living with imperfect predictors. Journal of Finance
+64:1583­628.
+Phillips, P. C. B. 1986. Understanding spurious regressions in econometrics. Journal of Econometrics 33:311­40.
+
+4442
+Testing for Multiple-Horizon Predictability                                                                          Downloaded from academic.oup.com/rfs/article/33/9/4403/5620729 by Lancaster University user on 12 September 2026
+
+------. 1987. Towards a unified asymptotic theory for autoregression. Biometrika 74:535­47.
+------. 2014. On confidence intervals for autoregressive roots and predictive regression. Econometrica 82:
+1177­95.
+Phillips, P. C. B., and J. H. Lee. 2013. Predictive regression under various degrees of persistence and robust
+long-horizon regression. Journal of Econometrics 177:250­64.
+Phillips, P. C. B., and T. Magdalinos. 2007. Limit theory for moderate deviations from a unit root. Journal of
+Econometrics 136:115­30.
+Pressmeddelande. 2013. Trendspotting in asset markets. (www.nobelprize.org/nobel_prizes/economic-
+sciences/laureates/2013/press.html).
+Rapach, D. E., J. K. Strauss, and G. Zhou. 2013. International stock return predictability: What is the role of the
+United States? Journal of Finance 68:1633-62.
+Rapach, D. E., M.C. Ringgenberg, and G. Zhou. 2016. Short interest and aggregate stock returns. Journal of
+Financial Economics 121:46­65.
+Richardson, M., and J. Stock. 1989. Drawing inferences from statistics based on multi-year asset returns. Journal
+of Financial Economics 25:323­48.
+Rossi, B. 2007. Expectations hypotheses tests at long horizons. Econometrics Journal 10:1­26.
+Santos, T., and P. Veronesi. 2006. Labor income and predictable stock returns. Review of Financial Studies
+19:1­44.
+Sizova, N. 2013. Long-horizon return regressions with historical volatility and other long-memory variables.
+Journal of Business and Economic Statistics 31:546­59.
+Stambaugh, R. F. 1999. Predictive regressions. Journal of Financial Economics 54:375­421.
+Stock, J. H. 1991. Confidence intervals for the largest autoregressive root in US macroeconomic time series.
+Journal of Monetary Economics 28:435­59.
+Stock, J. H., and M. W. Watson. 2011. Introduction to econometrics, 3rd edition. Boston, MA: Pearson.
+Torous W., R. Valkanov, and S. Yan. 2004. On predicting stock returns with nearly integrated explanatory
+variables. Journal of Business 77:937­66.
+Valkanov, R. 2003. Long-horizon regressions: Theoretical results and applications. Journal of Financial
+Economics 68:201­32.
+Wei, M., and J. H. Wright. 2013. Reverse regressions and long-horizon forecasting. Journal of Applied
+Econometrics 28:353­71.
+Welch, I., and A. Goyal. 2008. A comprehensive look at the empirical performance of equity premium prediction.
+Review of Financial Studies 21:1455­508.
+Wu, C. F. J. 1986. Jackknife bootstrap and other resampling methods in regression analysis. Annals of Statistics
+14:1261­95.
+Xu, K.-L. 2017. Testing for return predictability with co-moving predictors of unknown form. Working Paper,
+Indiana University Bloomington.
+------. 2018. Testing for multiple-horizon predictability: Direct regression based versus implication based.
+Working Paper, Indiana University Bloomington.
+------. 2019. On Hodrick standard error in multiple predictive regression. Working Paper, Indiana University
+Bloomington.
+Xu, K.-L., and J. Guo. 2019. A dimensionality-robust test in multiple predictive regression. Working Paper,
+Indiana University Bloomington.
+
+                                                                                        4443
+

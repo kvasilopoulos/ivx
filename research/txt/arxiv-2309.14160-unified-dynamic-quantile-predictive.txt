@@ -1,0 +1,720 @@
+arXiv:2309.14160v2 [econ.EM] 10 Nov 2023        Unified Inference for Dynamic Quantile Predictive
+                                                                             Regression
+
+                                                                                 Christis Katsouris
+                                                                                University of Helsinki
+
+                                                                        First Version: September 26, 2023
+                                                                         This Version: November 10, 2023
+
+                                                                                                        Abstract
+                                                      This paper develops unified asymptotic theory for dynamic quantile predictive regression
+                                                  models which holds regardless of the presence of intercept without a priori knowledge on the
+                                                  persistence properties of regressors. Our framework establishes the asymptotic distribution
+                                                  of the proposed test statistics based on two commonly used estimation methods for dealing
+                                                  with nonstationarity in predictive regressions. A finite-sample analysis of the proposed testing
+                                                  procedure will be examined via Monte Carlo simulations to compare the performance of these
+                                                  two competing estimation methods. Using a stock return dataset with monthly frequency we
+                                                  can also study the quantile predictability puzzle when the model has a dynamic specification.
+
+                                                      Keywords: persistence; local-to-unity; dynamic regression; quantile predictability.
+
+                                                      JEL Classification: C12, C22
+
+                                              Article history: First draft - September 26, 2023, Second draft - November 10, 2023. I am grateful to Jose
+                                          Olmo, Tassos Magdalinos and Jean-Yves Pitarakis from the School of Economic, Social and Political Sciences,
+                                          University of Southampton for helpful conversations. Moreover, I am also grateful to Jayeeta Bhattacharya, Pietro
+                                          Spini and Byunghoon Kang for stimulating discussions on relevant aspects to this paper. Financial support from
+                                          the Research Council of Finland (grant 347986) is gratefully acknowledged.
+
+                                              Postdoctoral Researcher, Economics Division, Faculty of Social Sciences, University of Helsinki, P.O. Box 17,
+                                          Arkadiankatu 7 Helsinki, FI-00014 Finland. E-mail: christis.katsouris@helsinki.fi
+
+                                                                                                        i
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+1 Introduction
+
+Modelling financial and macroeconomic data commonly exhibit features such as structural breaks,
+nonstationarity in the form of near unit roots, stochastic trends or cointegration dynamics. Mo-
+tivated by the growing interest in estimating the risk measures of VaR and CoVaR using the
+local-to-unity parametrization which allows to capture the persistence properties of regressors
+(see, Katsouris (2021)), we focus on the dynamic quantile predictive regression. Limit results
+for predictive regressions with conditional mean (see, Chen et al. (2013), Kostakis et al. (2015),
+Kasparis et al. (2015), Li et al. (2017), Yang et al. (2023), Harvey et al. (2023)) and conditional
+quantile functional forms (see, Lee (2016), Fan and Lee (2019) and Liu et al. (2023)), have al-
+ready been extensively examined under various econometric conditions. Similarly unified inference
+in a dynamic predictive regression with a conditional mean functional form has been proposed by
+Yang et al. (2021). To the best of our knowledge the relevant asymptotic theory for conditional
+quantile functional forms in dynamic quantile predictive regressions is novel.
+
+Due the unknown persistence properties of regressors, imposing a local-to-unity specification1 al-
+lows to capture various nonstationarity regimes; although with the challenge that one has to
+ensure asymptotic theory is nuisance parameter-free. Both the empirical likelihood approach
+(see, Zhu et al. (2014) and Cai and Wang (2014)) as well as the IVX filtration method (see,
+Phillips and Magdalinos (2009) and Kostakis et al. (2015)) ensure that statistical inference is uni-
+form regardless of whether the predicting variable is stationary or nonstationary or has an infinite
+variance. Inference for a multivariate nonstationary regressor or even within a high-dimensional
+setting still involves challenges in both cases but is beyond the scope of this paper.
+
+The predictive regression model has been widely used for investigating the predictability of asset re-
+turns. Applications include estimation and inference methodologies for predictive regression model
+based on a parametric (see, Kostakis et al. (2015)) or nonparametric (see, Kasparis et al. (2015))
+conditional mean functional form. The current literature mainly covers linear conditional mean
+autoregressive and predictive regression models as well as dynamic conditional mean predictive
+regression models. Thus, when one is interested for testing the presence of quantile predictability,
+related studies have considered the implementation of the model based on the conditional quantile
+functional form. Related studies include Maynard et al. (2023), Lee (2016), Fan and Lee (2019),
+Katsouris (2022), Cai et al. (2022) and Liu et al. (2023). Furthermore, the inclusion of model
+intercepts in both the predictive regression model as well as the autoregressive model either based
+on a conditional mean or on a conditional quantile functional forms imposes additional challenges
+when developing inference techniques for the  parameter based on the usual likelihood ratio test
+or Wald-type statistics; especially when the autoregressive coefficient is nearly-integrated (see,
+Romano and Wolf (2001), Liu and Peng (2019), Wang et al. (2022), Yang et al. (2023)).
+
+    1The limit theory for moderate deviations from a unit root in autoregressive processes have been examined by
+Giraitis and Phillips (2006), Jansson and Moreira (2006), Phillips and Magdalinos (2007), Aue and Horváth (2007)
+and Huang et al. (2014) among many others.
+
+                                                              1
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+Several studies in the literature employ the likelihood-based approach to investigate the properties
+and asymptotic theory of corresponding estimators and test statistics for nonstationary autoregres-
+sive processes and predictive regression models. These likelihood approaches include the weighted
+least squares, the empirical likelihood methodology as well as the profile likelihood approach. In
+particular, Zhu et al. (2014), Liu et al. (2019a,b) and Yang et al. (2021) consider an application of
+the empirical likelihood approach which induces uniform inference across the different degrees of
+persistence and confidence regions for the coefficients of the linear predictive regression. Moreover,
+the framework of Chen et al. (2013) proposes a uniform inference approach (see, also Chen and Deo
+(2009a)2) which is valid regardless of the persistence of regressors using the weighted least squares
+approximate restricted likelihood (WLSRL). Liu et al. (2019b) propose predictability tests that
+correspond to testing the null hypothesis of no statistical significance for the model coefficients of
+a predictive regression model with additional covariates the difference of the predicting variable.
+These predictability tests are based on the unified empirical likelihood methodology that rejects
+the null hypothesis H0 : 1 = 2 = 0 or testing the hypothesis H0 : 1 = 0 and H0 : 2 = 0.
+Under the presence of known nonzero model intercept in the predictive regression model using
+weighted score equations and the sample-splitting methodology it can be proved that nuisance
+parameter-free inference holds regardless of the persistence properties of regressors.
+
+Both methodologies are fundamentally aiming to develop asymptotic theory which is valid to the
+presence of model intercept in the predictive regression model as it is well-known that nonstan-
+dard limit distribution results appear when {Xt}nt=1 is nonstationary. The empirical likelihood
+method takes the first difference of the paired data such that {Yt+1 - Yt}tn=1 and {Xt+1 - Xt}nt=1,
+but a new issue arises as the corresponding error sequence {Ut+1 - Ut}nt=1 violates the indepen-
+dence assumption. Therefore, to fix this issue a split sample methodology is applied and the first
+difference transformation is applied based on a larger lag (i.e., the value of m = n/2) which en-
+sures m-dependence holds (i.e., approximate or asymptotic independence as m  ), and lastly
+the empirical likelihood estimation is applied. The asymptotic theory for the empirical likelihood
+confidence interval for 0 is then proved to follow standard distribution results (i.e., converges
+to a 2-distribution). The IVX filtration is an endogenous instrumentation procedure which is
+used as an alternative to the OLS estimator for the unknown model coefficient 0. In particular,
+the IVX instruments are constructed with the main consideration of obtaining less persistence re-
+gressors than the original series {Xt} without having to consider a first-difference transformation
+based on a large value of the lag as well as the application of sample splitting to ensure that the
+distribution of the innovations of the predictive regression have independent realizations. This
+methodology implies that asymptotic theory for the unknown model coefficient follows a mixed
+gaussian distribution and the corresponding Wald test follow a 2-distribution.
+
+Uniform inference for unit root moderate deviations (based on the local-to-unity parametrization)
+holds in both cases. The empirical likelihood plus weighted least squares induces uniform inference
+
+    2Related studies include Chen and Deo (2009b), Chen and Deo (2012) as well as Zhao (2000).
+
+                     2
+Katsouris C. (2023)                 Unified Inference for Dynamic Quantile Predictive Regression
+
+regardless of persistence properties or the presence of an intercept in the autoregressive equation.
+Likewise, robustness to the abstract degree of persistence holds for the IVX estimator and uniform
+inference can be established based on the mixed gaussianity property (see, Kostakis et al. (2015)).
+Recently Magdalinos and Petrova (2022) show that the IVX-instrumentation is indeed robust to
+the presence of an intercept under general autoregressive dependence. Similar properties hold for
+conditional quantile functional forms; Lee (2016) develops a framework for the implementation
+of the IVX instrumentation in quantile predictive regressions, which is found to have standard
+asymptotic theory while Liu et al. (2023) proved that their approach is indeed robust to both the
+presence of intercept in the autoregressive equation and nonstationarity of the {Xt} process.
+
+The rest of the paper is organized as follows. Section 2, presents the model estimation procedure
+and main assumptions of our framework. Section 3, examines the finite-sample performance of
+the proposed unified tests using a Monte Carlo simulation study and Section 4 illustrates the
+implementation of the method using real data. Section 5 summarizes the main conclusions. Proofs
+of the main results can be found in the Appendix of the paper.
+
+2 Econometric Model of Dynamic Quantile Predictive Regression
+
+2.1 Classical Predictive Regression
+
+Let yt be a realization of the random variable {Yt}nt=1, which corresponds to a univariate predic-
+
+tant (such as stock return) that is assumed to be stationary, and xt a realization of the random
+variable {Xt}nt=1, which corresponds to be a predictive variable which is assumed to be possibly
+nonstationary. The pair {(Yt, Xt-1)}tn=1 is assumed to follow the predictive regression structure:
+
+                         Yt = n + nXt-1 + Ut, for 1  t  n                       (2.1)
+                         Xt = µn + nXt-1 + Vt                                   (2.2)
+
+where n =  1  +   c    with kn = n, such that  = 0,  = 1 or   (0, 1). Moreover, assume that
+                 kn
+
+the initial condition X0 is constant and (Ut, Vt) are independently and identically distributed errors
+
+with mean zero and finite variance. Consider the vector Wt = (Ut, Vt) such that Wt is a strictly
+
+stationary martingale difference sequence. Then, the partial sums process for the sequence Wt
+
+satisfy the invariance principle as proposed by Phillips (1987a,b) (see, Phillips and Solo (1992))
+
+              ns                                                           
+              t=1
+1                  Wt    Bz(s)  :=  Bu(s), Bv(s)   BM (ww) ,  ww  :=  uu   uv   (2.3)
+  n                                                                    uv  vv
+
+where Bw(s) is a vector Brownian motion with a positive-definite matrix ww such that uu > 0,
+uu > 0 and vv > 0.
+
+                                     3
+Katsouris C. (2023)               Unified Inference for Dynamic Quantile Predictive Regression
+
+2.1.1 Variable-Augmented Predictive Regression
+
+The econometric specification for the predictive regression model with variable-augmentation is:
+
+                     Yt = n + nYt-1 + nXt-1 + Ut, for 1  t  n         (2.4)
+                     Xt = µn + nXt-1 + Vt                             (2.5)
+
+In terms of statistical inference, based on the above conditional mean functional form, the unknown
+parameters of interest are n = (n, n). A relevant hypothesis testing formulation is the joint
+existence of the lagged predicted variables and predictability, which implies that under the null
+hypothesis it holds that H0 : {n = 0} {n = 0}. Unified tests which are robust to the unknown
+degree of persistence, imply that uniform inference regardless of regressors being stationary or
+nearly intergated as well as in the case that the autoregressive equation is specified with or without
+an intercept holds. In particular, Li et al. (2017) assumes that  is unknown and tests either
+H0 :  = 0 or H0 :  = 0 without requiring that  = 0. A simplified approach is the case
+that one assumes that  = 0 and formulates the null hypothesis H0 :  = 0 (see, Demetrescu
+(2014)). However, is more economically meaningful to avoid imposing the assumption that the
+model parameter  = 0 a priori. Then, the main interest is to construct a robust inference method
+for testing the null hypothesis that H0 :  = 0 and H0 :  = 0, regardless of the following cases:
+
+· {Xt} is stationary: |0| < 1
+
+· {Xt} is nearly-integrated: 0 =  1  -  c  for some c = 0.
+                                        n
+
+· {Xt} is unit root: 0 = 1.
+
+Under the assumption that 0 = 0 then, the least squares estimator for (, ) can be obtained
+by solving the following score equations:
+
+                     St = n       Yt - 0 - Yt-1 - Xt-1      Yt-1  0   (2.6)
+                      t=1                                             (2.7)
+
+                     St  =    n   Yt - 0 - Yt-1 - Xt-1      Xt-1 = 0
+                             t=1
+
+Therefore, we can construct an inference procedure about the model parameters  and  by directly
+applying the empirical likelihood method based on estimating equations. However, the asymptotic
+theory of the empirical likelihood function is nonstandard when {Xt} is nearly-integrated.
+
+                                           4
+Katsouris C. (2023)       Unified Inference for Dynamic Quantile Predictive Regression
+
+2.1.2 Empirical Likelihood Estimation Approach
+
+The empirical likelihood approach is defined as below:
+
+                     n                                  n                  n
+
+Ln() = sup (npt) : p1  0, ..., pn  0, p + t = 1, ptZt()                         (2.8)
+
+                     t=1                                t=1                t=1
+
+where Zt() = Yt-Xt-1 Xt-1 1 + Xt2-1. Then, based on the Lagrange multiplier optimization
+method it follows that
+
+                                                                       n        (2.9)
+
+                     n() := -2logLn() = 2 log 1 + Zt()
+
+                                                                      t=1
+
+Then, taking the first-order-condition for some  = () satisfies
+
+                           n   1   Zt()                 0.                      (2.10)
+                          t=1     + Zt()
+
+2.2 Dynamic Quantile Predictive Regression Model
+
+Recall that the quantile predictive regression model has the advantage that the innovation se-
+quences of the predictive regression based on a conditional quantile functional form, denote with
+(ut()) are only contemporaneously correlated with the innovations of unit root sequences. Our
+main contribution to the literature is to propose a unified inference procedure for Dynamic Quantile
+Predictive Regressions (DQPRs), which can be considered as further extension to the frameworks
+proposed by Liu et al. (2023) and Yang et al. (2021).
+
+Consider the dynamic quantile predictive regression model:
+
+                     yt =  +  xt-1 +  yt-1 + t , t = ut - tQ( )                 (2.11)
+                     xt = µ + xt-1 + ut                                         (2.12)
+
+Moreover, consider the following quantile moment conditions as expressed below
+
+                        E 1 {yt  xt-1} -  · xt-1 = 0                            (2.13)
+
+Following the framework proposed by Whang (2006) we replace the indicator function which is
+not differentiable in the whole of the support of the model parameter  with a smooth function.
+
+                                  5
+Katsouris C. (2023)                               Unified Inference for Dynamic Quantile Predictive Regression
+
+Define the following two score functions:
+
+                   Zt, (, ) :=  Yt - 0 - Xt-1 - Yt-1  0                                      wt =   Xt-1                      (2.14)
+                   Zt, (, ) :=  Yt - 0 - Xt-1 - Yt-1 wt  0,                                        1 + Xt2-1                  (2.15)
+                                                                                                                              (2.16)
+                   Zt, (, ) :=  Yt - 0 - Xt-1 - Yt-1 wt  0,                                  wt = (Yt-1 - Xt-1).
+
+In  particular        the  random  variable       Xt-1  is  replaced    by   a  weighted     random  variable    Xt-1         where
+                                                                                                               (|Xt-1|)
+                                                               t
+the weight function        (t) satisfies the         limit   (t)   1 as t           . Thus a simple choice which satisfies
+these requirements         is (t) = 1 +                           implies the
+                                                     t2 which                       weight   w(t)  =  t        that   is   indeed   a
+                                                                                                        1+t2
+
+bounded continuous function. Notice that self-weighted M-estimators are proved in the literature
+
+to have normal asymptotic theory. Furthermore, the purpose of weight wt is to downweight the
+
+leverage points in Xt ensuring this way the finiteness property of covariance matrices under the
+
+presence of heavy-tailed errors. Furthermore, the weight is added in the second estimating equation
+
+to  ensure      that    1  n       Xt2-1  converges     in   probability     to  a  constant  regardless  the  nonstationarity
+                        n  t=1   1+Xt2-1
+
+of the regressor series {Xt}.
+
+Then we define with
+
+                                                                                    
+                                                                     ZZtt,,  (,  )
+                                                     Z t ( ,  )   =          (,  )                                            (2.17)
+
+                                                                        Zt, (, )
+
+Therefore, the empirical likelihood approach satisfies the following equation:
+
+                                                      n   1    Zt(, )               0.                                        (2.18)
+                                                     t=1     + Zt(, )
+
+Furthermore define the following matrices V n := E Zt(, )Zt(, ) . Similarly defining the
+standardized Lagrangian multiplies ~ = V 1n/2 and the standardized score function W t(, ) =
+
+V   1/2  Z  t(  ,  )  we   have  the  following   log-likelihood        function.
+    n
+
+                                                                      n                                                       (2.19)
+
+                                             n(, ) = 2 log 1 + ~ · W t(, ) .
+
+                                                                    t=1
+
+Then, developing a Taylor expansion for ~ for ~ and h(0) implies that around the FOC:
+
+         0  =  1    n   1    W t(, )
+               n   t=1     + ~ · W t(, )
+
+            =  1    n                     1   n   W  t(,  )W      t(,   )        +  1    n   W t(, )  2        t(  ,    )  -  ....
+               n                          n  t=1                                    n   t=1
+                       W t(, ) -                                                                       W
+
+                   t=1
+
+                                                                     6
+Katsouris C. (2023)                    Unified Inference for Dynamic Quantile Predictive Regression
+
+Therefore, it can be proved that:
+
+                           1 n                                                         
+                             n t=1
+          h(0) =                       Zt(, ) - EZt(, )          + g(n)EZt(, )            ×  V  -1
+                                                                                                n
+
+                      ×    1 n      Zt(, ) - EZt(, )             + g(n)EZt(, )
+                             n t=1
+
+where g(n) = n1/2. In the stationary case when || < 1 we have that as n  
+
+                                D1,m          (^   -          d  N   0, 1  .                               (2.20)
+                                       m       ^   -
+                                                       )
+                                           m          
+
+                                    1m                                                                   
+                                    m t=1          
+D1,m   =  f(0)   1     1        1          xt-1          and  1 =  (1 -  ) 01             E       0        (2.21)
+                  m             m      2m  wtxt-1                                                 x21
+                        2m  wt                                                                  1 + x21
+                                    t=m+1
+                     t=m+1
+
+                                              ^ -        d N     0,       1   1                            (2.22)
+                             A1,m × m                                  1
+
+where
+
+                 xt2       
+                1+
+1 = -E                xt2    ,  A1,m =     1     2m  xt-1wt   -  1        2m  wt       1     2m  xt-1      f(0).
+                                           m  t=m+1              m     t=m+1           m  t=m+1
+                1
+
+Denote with t = (1, xt) such that
+
+                           Z m (v)  =       1 m          t - vM-m1t-1                                      (2.23)
+                                              m t=1      t - vMm-1t-1
+                                                         t - vMm-1t-1            wwtt
+                                         1 2m
+                                           m t=m+1
+
+                                         1 2m
+                                           m t=m+1
+
+                                                      7
+Katsouris C. (2023)                         Unified Inference for Dynamic Quantile Predictive Regression
+
+Then, for any given v  R2 we have that
+
+              Zm(v)       =       1 m                           -  Dmv  +  op(1),  as  n  ,  (2.24)
+                                    m t=1
+                                                 (((ttt)))wwtt
+                               1 2m
+                                 m t=m+1
+
+                               1 2m
+                                 m t=m+1
+
+Proof. Since it holds that  =  - 1 {u  0}, we have that
+
+Z m (v)  -       1 m                     =  -    1111mmmm1mtttt1====mt2222mmmm=mmmmm1++++t=mE11111EE1111,t23|,,ttttFt||FFt-tt1--vvv11MMM-m-m-m-111tt--t-1111mm11m--tt-==t2211mm=mmm11++111ttt,t32,,-tt 00--0EEE··1ww,t32|,,ttttF||FFt-tt1--11
+                   m t=1                 =  -  
+                          (((ttt)))wwtt
+              1 2m                             
+                m t=m+1                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                               
+              1 2m
+                m t=m+1
+
+where we denote with
+
+                          1,t = 1 t  vMm-1t-1 - 1 t  0                                       (2.25)
+                          2,t = 1 t  vMm-1t-1 - 1 t  0 · wt                                  (2.26)
+                          3,t = 1 t  vMm-1t-1 - 1 t  0 · wt                                  (2.27)
+
+Notice that the following invariance principles hold:
+
+                               1         x2mr    d  Jc(r)  =     r                           (2.28)
+                                 m                                                           (2.29)
+                                                                  e(r-s)dWu(s)
+
+                                                                0
+
+                                            1 m xt-1 d      1      r    dr
+                                            m t=1 m                2
+                                                             Jc
+
+                                                           0
+
+                                                    8
+Katsouris C. (2023)                     Unified Inference for Dynamic Quantile Predictive Regression
+
+2.2.1 Conditional Heteroscedasticity Assumptions
+
+Consider the following formulation of the predictive regression model
+
+                                        yt =  + xt-1 + y,t                                    (2.30)
+                                        xt = µ(1 - ) + xt-1 + x,t                             (2.31)
+                                       y,t = x,t + y.x,t                                      (2.32)
+
+Two major problems stem from the observed behaviour of the predictors. The first problem is
+if  = 0, such that y,t and x,t are correlated, which raises the issue of endogeneity bias. The
+second problem is the presence of persistence predictors. In other words, although according to
+theory many of the predictors used should be stationary, empirically most predictors are slowly
+mean-revering, with a near unit root behaviour (see, Westerlund and Narayan (2015)). Moreover,
+motivated by the possible presence of volatility clustering in stock returns, suitable modifications to
+the statistical methodology should be employed in order to account for heteroscedasticity similarly
+to how the degree of endogeneity is modeled to improve the power performance of test statistics.
+Specifically, modelling conditional heteroscedasticity using a suitable econometric specification,
+deals with the noisiness of the regression error (y,t), thereby capturing accurately the signal
+coming from xt, and thus leading to correct inference when returns are truly predictable.
+
+In particular, a feasible quasi-GLE (FQGLS) t-test can be proposed that is robust to misspecifica-
+tion of the conditional variance, which is asymptotically equivalent to GLS if the model is correct.
+In other words, it can be shown (both analytically and using simulations), that the information
+contained in the heteroscedasticity is useful, and that the power of the FQGLS test can be in-
+creased above that achievable by existing LS-based tests that do not make use of this information.
+Consider below modelling conditional heteroscedasticity
+
+                               E 2y,t|Ft-1 = 2E 2x,t|Ft-1 + E 2y.x,t|Ft-1                     (2.33)
+
+which implies that y2,t = 2x2,t + y2.x,t. Notice that the FQGLS estimator relies on having an
+estimator s^y2,t of y2,t. In particular, s^y2,t can be the fitted value from a parametric specification of
+
+the conditional heteroscedasticity, such as an ARCH model.
+
+Example 1. A commonly used multivariate conditional heteroscedasticity model is the constant-
+correlation ARCH specification proposed by Bollerslev (1990), which implies that
+
+                                                                                         
+                                  =  x2,t                     x2,t         x2,t
+             ,t := E tt               xy,t   xy,t    DtD  =   x2,t                         ,  (2.34)
+                                             y2,t                        y2.x,t + 2x2,t
+
+                                  
+
+where  t  =  (x,t, y.x,t),  D  =  1  0  and  t  =  diag  x2,t, y2.x,t .
+                                     1
+
+                                                     9
+Katsouris C. (2023)      Unified Inference for Dynamic Quantile Predictive Regression
+
+3 Monte Carlo Simulation Study
+
+The numerical studies of our paper include both a Monte Carlo simulation experiments as well
+as an empirical application to validate the performance of the proposed statistical methodologies
+on a real data set. In this Section, we examine the finite sample performance of the proposed
+estimators and predictability tests via an extensive Monte Carlo simulation study. We consider
+the finite sample size and power performance of the proposed QR method.
+
+3.1 Experimental Design
+
+The data generating mechanism is given by the following expression:
+
+                         yt = ( ) + ( )xt-1 + ut( )                  (3.1)
+                                                                     (3.2)
+                         xt = µ + xt-1 + vt,  =  1   -  c
+                                                        n
+
+3.2 Empirical size and power analysis of predictability tests
+
+Before illustrating insights from Monte Carlo simulation study it is useful to discuss main findings
+presented in the literature. In particular, from Table 1 in Yang et al. (2021) we summarize the
+following observations. Under the presence of a non-zero augmented variable for large samples
+the IVX estimator for testing the null hypothesis H0 :  = 0 has an excellent empirical size com-
+parable with the empirical likelihood approach given a zero model intercept in the autoregressive
+equation. On the other hand, under the presence of a non-zero model intercept the size of the
+IVX-based test statistic detiorates while the corresponding test statistic based on the empirical
+likelihood approach seems to preserve a good control of size in both finite and large samples.
+Furthermore, Hosseinkouchack and Demetrescu (2021) propose finite-sample size control for the
+IVX instrumentation by considering recursive demeaning as a possible correction. Specifically, by
+using a recursively demeaned regressor and forward demeaning for the regressand implies that the
+recursively demeaned regressor and the forward demeaned distrurbance are orthogonal irrespective
+of the correlation between the innovation sequences ut and vt, thereby ensuring robustness to the
+degree of endogeneity regardless of the presence of model intercepts in the two functional forms.
+
+3.2.1 Weighted Bootstrap
+
+Since the random weighted bootstrap method neither infers the heteroscedastic errors nor generates
+samples from the fitted model via resampling residuals like residual-based bootstrap methods, the
+developed test is robust against conditional heteroscedasticity and computational convenient (see,
+Liu et al. (2023) and Hong et al. (2023)).
+
+                                                             10
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+4 Empirical Application
+
+The stock return predictability is a major puzzle in financial economics. The literature goes back
+several decades; we briefly highlight important studies. The seminal paper of Perron (1989) discuss
+the unit root hypothesis around periods of financial turbulence. DeJong and Whiteman (1991)
+study the debate whether divided are trend-stationary or integrated processes while Stein and Stein
+(1991) propose a framework for stock price distributions and stochastic volatility. We focus on
+examining the presence of predictability for monthly US stock market excess returns over the
+period 1990-2019 using the set of variables considered in Welch and Goyal (2008)3 which capture
+economic and financial conditions for the US economy. Following the common practise in the
+predictability literature, we use value weighted returns for the with monthly sampling frequency
+from Jan-1990 to Dec-2020. Therefore, we employ the predictive regression model which is an
+econometric environment that allows for the two innovations of the system to be correlated a more
+realistic assumption when modelling the presence of cointegrating dynamics between stock returns
+and macroeconomic and/or financial variables in the economy.
+
+5 Conclusion
+
+The use of optimization techniques such as the empirical likelihood estimation procedure or the
+profile likelihood approach can be used for estimating predicting regression models and are found
+to be robust to unknown degree of persistence is a similar spirit as when the IVX instrumentation
+is applied. Although these two estimation methodologies work differently there is a common
+denominator: regardless of the persistence properties of regressors uniform inference can be applied
+which provides a solution to the challenges that other methodologies in the literature have (such as
+Bonferonni corrections and the alike). Both procedures are practical in empirical applications and
+it is up to the econometrician to decide which methodology is preferable especially when developing
+asymptotic theory results for constructing test statistics.
+
+In this article we develop a framework for unified statistical inference for dynamic quantile predic-
+tive regression models regardless of zero on nonzero intercept, without any prior information on
+the unknown degree of persistence in modeling possibly nonstationary predictors. Our test statis-
+tics are constructed using weighted quantile regression estimation which preserves the asymptotic
+mixed-Gaussianity (AMG) property of the estimators. Consequently, we can obtain a unified pre-
+dictability test whose statistic follows a Chi-square distribution. Although the empirical likelihood
+approach is not always a preferable approach by econometricians it does provide valid uniform in-
+ference methodology. On the other hand the IVX filtration is also a robust uniform methodology
+while allows to develop and extend relevant econometric theory results in various directions.
+
+    3The dataset can be retrieved from Amit Goyal's website at http://www.hec.unil.ch/agoyal/. Detailed
+descriptions of variables can be found in the Online Appendix of Welch and Goyal (2008).
+
+                                                             11
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+Conflicts of interest The author declares that there are no known conflicts of interest.
+
+ORCID Dr. Christis Katsouris ID http://www.orcid.org/0000-0002-8869-6641
+
+References
+
+Aue, A. and Horváth, L. (2007). A limit theorem for mildly explosive autoregression with stable
+  errors. Econometric Theory, 23(2):201­220.
+
+Bollerslev, T. (1990). Modelling the coherence in short-run nominal exchange rates: a multivariate
+  generalized arch model. The review of economics and statistics, pages 498­505.
+
+Cai, Z., Chen, H., and Liao, X. (2022). A new robust inference for predictive quantile regression.
+  Journal of Econometrics.
+
+Cai, Z. and Wang, Y. (2014). Testing predictive regression models with nonstationary regressors.
+  Journal of Econometrics, 178:4­14.
+
+Chen, W. W. and Deo, R. S. (2009a). Bias reduction and likelihood-based almost exactly sized
+  hypothesis testing in predictive regressions using the restricted likelihood. Econometric Theory,
+  25(5):1143­1179.
+
+Chen, W. W. and Deo, R. S. (2009b). The restricted likelihood ratio test at the boundary in
+  autoregressive series. Journal of Time Series Analysis, 30(6):618­630.
+
+Chen, W. W. and Deo, R. S. (2012). The restricted likelihood ratio test for autoregressive processes.
+  Journal of Time Series Analysis, 33(2):325­339.
+
+Chen, W. W., Deo, R. S., and Yi, Y. (2013). Uniform inference in predictive regression models.
+  Journal of Business & Economic Statistics, 31(4):525­533.
+
+DeJong, D. N. and Whiteman, C. H. (1991). The temporal stability of dividends and stock prices:
+  Evidence from the likelihood function. The American Economic Review, pages 600­617.
+
+Demetrescu, M. (2014). Enhancing the local power of ivx-based tests in predictive regressions.
+  Economics Letters, 124(2):269­273.
+
+Fan, R. and Lee, J. H. (2019). Predictive quantile regressions under persistence and conditional
+  heteroskedasticity. Journal of Econometrics, 213(1):261­280.
+
+Giraitis, L. and Phillips, P. C. (2006). Uniform limit theory for stationary autoregression. Journal
+  of time series analysis, 27(1):51­60.
+
+Harvey, D. I., Leybourne, S. J., and Taylor, A. (2023). Improved tests for stock return predictabil-
+  ity.
+
+Hong, S., Henderson, D. J., Jiang, J., and Ni, Q. (2023). Unifying estimation and inference
+  for linear regression with stationary and integrated or near-integrated variables. Journal of
+  Financial Econometrics, page nbad030.
+
+Hosseinkouchack, M. and Demetrescu, M. (2021). Finite-sample size control of ivx-based tests in
+  predictive regressions. Econometric Theory, 37(4):769­793.
+
+                                                             12
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+Huang, S.-H., Pang, T.-X., and Weng, C. (2014). Limit theory for moderate deviations from a
+  unit root under innovations with a possibly infinite variance. Methodology and Computing in
+  Applied Probability, 16(1):187­206.
+
+Jansson, M. and Moreira, M. J. (2006). Optimal inference in regression models with nearly inte-
+  grated regressors. Econometrica, 74(3):681­714.
+
+Kasparis, I., Andreou, E., and Phillips, P. C. (2015). Nonparametric predictive regression. Journal
+  of Econometrics, 185(2):468­494.
+
+Katsouris, C. (2021). Optimal portfolio choice and stock centrality for tail risk events. arXiv
+  preprint arXiv:2112.12031.
+
+Katsouris, C. (2022). Asymptotic theory for moderate deviations from the unit boundary in
+  quantile autoregressive time series. arXiv preprint arXiv:2204.02073.
+
+Kostakis, A., Magdalinos, T., and Stamatogiannis, M. P. (2015). Robust econometric inference for
+  stock return predictability. The Review of Financial Studies, 28(5):1506­1553.
+
+Lee, J. H. (2016). Predictive quantile regression with persistent covariates: Ivx-qr approach.
+  Journal of Econometrics, 192(1):105­118.
+
+Li, C., Li, D., and Peng, L. (2017). Uniform test for predictive regression with ar errors. Journal
+  of Business & Economic Statistics, 35(1):29­39.
+
+Liu, X., Liu, Y., and Lu, F. (2019a). Empirical likelihood-based unified confidence region for a
+  predictive regression model. Communications in Statistics-Simulation and Computation, pages
+  1­18.
+
+Liu, X., Long, W., Peng, L., and Yang, B. (2023). A unified inference for predictive quantile
+  regression. Journal of the American Statistical Association, pages 1­15.
+
+Liu, X. and Peng, L. (2019). Asymptotic theory and unified confidence region for an autoregressive
+  model. Journal of Time Series Analysis, 40(1):43­65.
+
+Liu, X., Yang, B., Cai, Z., and Peng, L. (2019b). A unified test for predictability of asset returns
+  regardless of properties of predicting variables. Journal of Econometrics, 208(1):141­159.
+
+Magdalinos, T. and Petrova, K. (2022). Uniform and distribution-free inference with general
+  autoregressive processes.
+
+Maynard, A., Shimotsu, K., and Kuriyama, N. (2023). Inference in predictive quantile regressions.
+  arXiv preprint arXiv:2306.00296.
+
+Perron, P. (1989). The great crash, the oil price shock, and the unit root hypothesis. Econometrica:
+  journal of the Econometric Society, pages 1361­1401.
+
+Phillips, P. C. (1987a). Time series regression with a unit root. Econometrica: Journal of the
+  Econometric Society, pages 277­301.
+
+Phillips, P. C. (1987b). Towards a unified asymptotic theory for autoregression. Biometrika,
+  74(3):535­547.
+
+Phillips, P. C. and Magdalinos, T. (2007). Limit theory for moderate deviations from a unit root.
+  Journal of Econometrics, 136(1):115­130.
+
+Phillips, P. C. and Magdalinos, T. (2009). Econometric inference in the vicinity of unity. Singapore
+
+                                                             13
+Katsouris C. (2023)  Unified Inference for Dynamic Quantile Predictive Regression
+
+  Management University, CoFie Working Paper, 7.
+Phillips, P. C. and Solo, V. (1992). Asymptotics for linear processes. The Annals of Statistics,
+
+  pages 971­1001.
+Romano, J. P. and Wolf, M. (2001). Subsampling intervals in autoregressive models with linear
+
+  time trend. Econometrica, 69(5):1283­1314.
+Stein, E. M. and Stein, J. C. (1991). Stock price distributions with stochastic volatility: an analytic
+
+  approach. The review of financial studies, 4(4):727­752.
+Wang, Q., Liu, X., Fan, Y., and Peng, L. (2022). Testing the intercept of a balanced predictive
+
+  regression model. Entropy, 24(11):1594.
+Welch, I. and Goyal, A. (2008). A comprehensive look at the empirical performance of equity
+
+  premium prediction. The Review of Financial Studies, 21(4):1455­1508.
+Westerlund, J. and Narayan, P. (2015). Testing for predictability in conditionally heteroskedastic
+
+  stock returns. Journal of Financial Econometrics, 13(2):342­375.
+Whang, Y.-J. (2006). Smoothed empirical likelihood methods for quantile regression models.
+
+  Econometric Theory, 22(2):173­205.
+Yang, B., Liu, X., Long, W., and Peng, L. (2023). A unified unit root test regardless of intercept.
+
+  Econometric Reviews, pages 1­16.
+Yang, B., Liu, X., Peng, L., and Cai, Z. (2021). Unified tests for a dynamic predictive regression.
+
+  Journal of Business & Economic Statistics, 39(3):684­699.
+Zhao, Q. (2000). Restricted regression quantiles. Journal of Multivariate Analysis, 72(1):78­99.
+Zhu, F., Cai, Z., and Peng, L. (2014). Predictive regressions for macroeconomic data. The Annals
+
+  of Applied Statistics, 8(1):577­594.
+
+                     14
+

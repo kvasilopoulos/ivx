@@ -1,0 +1,1516 @@
+Econometric Theory, 37, 2021, 769­793.
+doi:10.1017/S0266466620000298
+
+    FINITE-SAMPLE SIZE CONTROL
+         OF IVX-BASED TESTS IN
+
+      PREDICTIVE REGRESSIONS*
+
+                         MEHDI HOSSEINKOUCHACK
+
+                               University of Mannheim
+
+                            MATEI DEMETRESCU
+
+                      Christian-Albrechts-University of Kiel
+
+    In predictive regressions with variables of unknown persistence, the use of extended
+    IV (IVX) instruments leads to asymptotically valid inference. Under highly per-
+    sistent regressors, the standard normal or chi-squared limiting distributions for the
+    usual t and Wald statistics may, however, differ markedly from the actual finite-
+    sample distributions which exhibit in particular noncentrality. Convergence to the
+    limiting distributions is shown to occur at a rate depending on the choice of the IVX
+    tuning parameters and can be very slow in practice. A characterization of the leading
+    higher-order terms of the t statistic is provided for the simple regression case, which
+    motivates finite-sample corrections. Monte Carlo simulations confirm the usefulness
+    of the proposed methods.
+
+1. INTRODUCTION
+
+A common inferential task of practical relevance is to decide whether a potential
+predictor variable does indeed forecast another variable of interest. In the simplest
+setup, practitioners thus test the null hypothesis of no predictability in the model
+
+yt = µ + xt-1 + ut, t = 2, . . . ,T ,                                                        (1)
+
+where the regressor is usually assumed to have an autoregressive structure,
+
+xt = xt-1 + vt ,                                                                             (2)
+
+with initial condition bounded in probability, x1 = Op(1). With financial data,
+predictors such as dividend yields or earnings-price ratios are often quite persistent,
+even if still mean-reverting (typically captured by a value of  close to unity), and
+its shocks are contemporaneously correlated with the variable to be predicted (see
+Phillips, 2015, for a recent review). This biases the OLS estimator of the slope
+
+*The authors would like to thank three anonymous referees, the Co-Editor (Giuseppe Cavaliere), as well as Karim
+Abadir and Uwe Hassler for very useful comments. Demetrescu gratefully acknowledges the support of the German
+Research Foundation (DFG) through the project DE 1617/4-2. Address correspondence to Mehdi Hosseinkouchack,
+University of Mannheim, L7, 3-5, 68161 Mannheim, Germany; e-mail: hosseinkouchack@uni-mannheim.de.
+
+© The Author(s), 2020. Published by Cambridge University Press. This is an Open Access       769
+article, distributed under the terms of the Creative Commons Attribution licence (http://
+creativecommons.org/licenses/by/4.0/), which permits unrestricted re-use, distribution, and
+reproduction in any medium, provided the original work is properly cited.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+770 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+parameter and induces heavy non-normality of t statistics (Elliott and Stock, 1994;
+
+Stambaugh, 1999) such that tests for predictability are size-distorted.
+
+Near to unity asymptotics, obtained by letting  = 1 - c/T, offer a better
+
+approximation of the actual distribution of the OLS t statistic than the standard
+
+normal in this situation; cf. Elliott and Stock (1994). The limiting distribution of
+
+the OLS estimator and test is explicitly non-normal under near integration and
+
+depends on the mean-reversion parameter c and the correlation between ut and
+vt. Since consistent estimation of c is not possible in such highly persistent cases
+(Phillips, 1987), the literature suggested several different ways of circumventing
+
+the lack of knowledge on . See, among others, Campbell and Yogo (2006),
+
+Jansson and Moreira (2006), Maynard and Shimotsu (2009), Camponovo (2015),
+
+Phillips (2015), and Breitung and Demetrescu (2015).
+
+Building on the work of Phillips and Magdalinos (2007) and Magdalinos and
+
+Phillips (2009), the extended IV (IVX) estimation and testing approach introduced
+
+by Phillips and Magdalinos (2009) is gaining momentum for predictive regres-
+
+sions; see, for example, Gonzalo and Pitarakis (2012), Phillips and Lee (2013),
+
+Kostakis, Magdalinos, and Stamatogiannis (2015), Demetrescu and Rodrigues
+
+(2016), Demetrescu et al. (2020), or Yang et al. (2020). In the IVX framework,
+
+xt-1 is instrumented by the specifically constructed instrumental variable zt-1 =
+(1 - L)-+1 xt-1 =  t-2
+                   j=0  j  xt-1-j with initial condition z1 = 0 and  = 1-a/T,
+
+where a > 0 and   (0,1). This "endogenous instrumentation" method has
+
+convenient properties: the persistence of zt is under control, and is below that of
+the near-integrated xt-1. Regularity conditions assumed, the resulting IV estimator
+follows a mixed Gaussian distribution in the limit, and the limiting null distribution
+
+of the corresponding t ratio is standard normal.
+
+   Should the regressor xt be highly persistent with localization parameter c close
+to zero, the IVX-based test of no predictability may still be seriously distorted in
+
+finite samples, even if less so than the OLS-based test. This is clearly the case
+
+when choosing  too close to unity or a too close to zero, and the difference
+
+in terms of persistence between the instrument zt and the regressor xt becomes
+small: for example, the rule of thumb proposed by Kostakis et al. (2015), which
+sets  = 1 - 1/T0.95, is actually equivalent to a near unit root with localizing
+
+coefficient c~ between 1 and 2 for sample sizes between T = 100 and T = 10,000.
+
+Kostakis et al. (2015), therefore, recommend the use of a finite-sample correction
+
+leading to reliable size control for two-sided tests.1 We find, however, that the
+
+correction is not equally effective for tests against one-sided alternatives. This is
+
+relevant in practice, as economic theory often predicts a certain sign of the slope
+
+coefficient .
+
+                    1In the more general context of IVX predictive regressions with serially correlated errors, Yang et al. (2020) employ
+                    autoregressive prewhitening to eliminate the second-order bias of the IVX estimator induced by correlated regression
+                    errors, whereas Phillips and Magdalinos (2009) use nonparametric estimates of one-sided long-run covariance
+                    matrices to correct for this bias.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                    FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 771
+
+   We, therefore, examine in Section 2 the behavior of components of the t statistic
+that vanish in the limit, but still have an effect in finite samples. We do so in a setup
+allowing for deterministically varying variances and correlations of the errors ut
+and vt. Since the main source of distortions in finite samples appears to be the
+fact that the finite-sample distribution is not centered at zero (see also Stambaugh,
+1999), we focus on correcting for the noncentrality of the t ratio. One way of
+doing so is to resort to backward and forward demeaning of the involved variables.
+In time series analysis, backward (or recursive, or adaptive) demeaning can be
+traced back to at least the work of So and Shin (1999) where recursive demeaning
+is shown to reduce bias in estimators of large autoregressive roots. Specifically
+for (panel) predictive regressions, Westerlund, Karabiyik, and Narayan (2017)
+resorts to forward and backward demeaning to reduce endogeneity bias. While
+this is shown to stabilize size, we also find that it has the side effect of reducing
+power in a nontrivial manner. This is a specific effect of forward demeaning in
+the context of persistent predictors, and not of IVX. Therefore, we discuss the
+use of direct approximations of the higher-order terms affecting the finite-sample
+behavior of the t statistic. Some depend on the localizing coefficient c, which
+cannot be consistently estimated, so we provide a method of side-stepping this
+issue. In extensive Monte Carlo experiments (see Section 3), we find it to work
+reasonably well under various patterns of changing error variances.
+
+   The technical details of the proofs can be found in the Appendix and in an
+Online Supplement, which also contains additional simulation results pertaining
+to conditional heteroskedasticity.
+
+2. IMPROVED IVX INFERENCE
+
+2.1. Preliminaries
+
+Let us first specify the details of the predictive regression model we work with.
+
+   Assumption 1. The data {yt, xt}, t = 2, . . . ,T, are generated from (1) and (2)
+with x1 = Op(1).
+
+   To keep a realistic setup, we allow for error heterogeneity in the form of time-
+varying variances and correlations, as well as short-run dynamics. Specifically, we
+work under the following assumptions.
+
+   Assumption 2. Let vt = (L) t, where t is heteroskedastic white noise
+as specified below and (L) is a lag polynomial, (L) = j0 bjLj with
+
+   j0 j bj <  and  = (1) = 0.
+
+Assumption  3. Let  (ut, t )    =H  t  (1t, 2t),  with  (1t, 2t )   iid (0,I2),
+                                    T
+Lr-bounded for some r > 4, where H(·) := {hij}i,j=1,2 is a matrix of piecewise
+
+Lipschitz-continuous bounded functions on (-,1], which is of full rank at all
+
+but a finite number of points.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+772 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+   This would be a typical structure in predictive regressions for stock returns,
+where the disturbance ut is not predictable using the past of vt. We do not assume a
+particular distribution for the errors but only require finite fourth-order moments.
+Although daily returns may exhibit fat tails, standard predictive regression models
+are used in conjunction with monthly, quarterly, or even annual data, where infinite
+kurtosis is not an issue. For the same reason, the serial independence assumption
+we make on the innovations is justifiable. The 1-summability condition placed on
+the coefficients of the filter is standard in the literature involving integrated and
+near-integrated variables. Let
+
+t = H(t/T) H(t/T) =                  u2(t/T) u(t/T)
+                                     u(t/T) 2(t/T)
+
+and notice that we have time varying variances, covariances, and correlations of
+the errors, as Cov((ut,t)) = t is not restricted beyond piecewise smoothness.
+The off-diagonal elements of t are not required to be zero, thereby allowing
+for predictive regression endogeneity. The assumption on H(s) allows for a wide
+range of covariance matrices of the innovations, including, for example, single
+or multiple (co-) variance shifts, smooth transition (co-) variance shifts, or even
+trending variances.
+
+   With W a vector of two independent standard Wiener processes and ""
+denoting weak convergence of probability measures on the space of càdlàg real
+functions on [0,1] equipped with the Skorokhod topology, we have (see Cavaliere,
+Rahbek, and Taylor, 2010)
+
+ 1 [sT]  ut              s                     UH(s)  ;
+         t                                     VH(s)
+                 H(r)dW(r) =:
+  T t=1
+                       0
+
+the normalized levels of xt converge weakly to a heteroskedastic Ornstein­
+Uhlenbeck type process,
+
+                                                  s
+
+T-1/2x[sT]   VH(s) - c e-c(s-r)VH(r)dr :=  Jc,H(s) .
+
+                                                0
+
+IVX estimation relies on using the instrument zt-1 = (1 - L)-+1 xt-1 =
+t-2
+j=0    xt-1-j,  where         =      1  -   a  with a > 0 and    (0,1). The IVX t  statistic
+                                           T
+for the null  = 0 is
+
+tvx =    T    (zt-1  -  z¯)  yt      ,                                             (3)
+         t=2
+
+         T    (zt-1  -  z¯)2  u^ t2
+         t=2
+
+with Eicker­White standard errors to account for the heteroskedasticity. The
+
+residuals u^t are computed using the OLS estimator of , as is common in the
+predictive IVX regression literature.2
+
+2The IVX estimator has convergence rate T1/2+/2 so IVX residuals, although still consistent for  > 0, are typically
+less precise; see Kostakis et al. (2015).
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+               FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 773
+
+   0.4         0.4      0.4      0.4      0.4
+
+   0.3         0.3      0.3      0.3      0.3
+
+   0.2         0.2      0.2      0.2      0.2
+
+   0.1         0.1      0.1      0.1      0.1
+
+        0      0        0        0        0
+
+        -5  0  5 -5  0  5 -5  0  5 -5  0  5 -5  0  5
+
+   0.4         0.4      0.4      0.4      0.4
+
+   0.3         0.3      0.3      0.3      0.3
+
+   0.2         0.2      0.2      0.2      0.2
+
+   0.1         0.1      0.1      0.1      0.1
+
+        0      0        0        0        0
+
+        -5  0  5 -5  0  5 -5  0  5 -5  0  5 -5  0  5
+
+F           1. Finite sample null distribution of tvx for a = 1;  = 0.95 versus N (0,1); DGP: (1) with
+
+(2),  = 1, (ut,vt)  iidN (0, ((1,);(,1))), 25,000 replications, different correlations , and sample
+
+sizes.
+
+   What makes the IVX approach interesting for practitioners is that the terms
+involving c vanish as T   and pivotal inference on  can be obtained
+asymptotically. See Kostakis et al. (2015) for details on IVX-based predictive
+regression under strict stationarity of errors, and Demetrescu and Rodrigues (2016)
+for a case with time-varying variances with some (nontrivial) restrictions on the
+correlations. In finite samples, however, the actual distribution is not centered at
+zero because numerator and denominator correlate, and has a variance somewhat
+smaller than 1, as can be seen in Figure 1. Notice also the slow convergence to the
+standard normal.
+
+2.2. Higher-Order Terms
+
+We, therefore, study corrections that make IVX-based inference in predictive
+regressions even more reliable. To this end, we first characterize the leading terms
+of the IVX t statistic.
+
+   Proposition 1. Under Assumptions 1­3 and any   (1/2,1), it holds as T  
+that
+tvx = ZT + BT + CT + op T/2-1/2 ,
+
+where
+ZT d N (0,1) with E (ZT ) = 0,
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+774 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+BT  0      with  T 1/2-/2  E (BT )        1    1  u  (s)  u2  (s)  2  (s)  ds  ,
+                                      -        0
+
+                                           2a     1  u2(s)2(s)ds           3
+                                                  0
+
+and
+
+T1/2-/2CT  -     2  UH (1) Jc,H (1) .
+                 a  1
+                    0      u2(s)2   (s)ds
+
+Proof: See Appendix B.
+
+   Proposition 1 provides an explanation for the finite sample behavior of tvx as
+observed in Figure 1 for c = 0. For instance, the direction and magnitude of the
+
+noncentrality depend on the average sign and magnitude of the correlation between
+
+the errors ut and t via the two terms BT and CT . It can be seen from the discussion
+
+below that, under constant correlation , the magnitude of the noncentrality is in
+
+fact proportional to . Moreover, the slow convergence of tvx to the standard normal
+
+seen in Figure 1 can also be explained by the behavior of the two terms BT and CT :
+although they do vanish, they do so at rate T/2-1/2, which is low whenever  close
+
+to unity.
+
+The noncentrality is mainly driven by the two terms BT and CT . The first depends
+
+on the user-chosen parameters a and  (with the additional restriction  > 1/2
+
+required for the calculation of E(BT )), as well as on a particular form of average
+
+correlation.  In fact, under  homoskedasticity(H     = const.),       the expectation of
+T1/2-/2BT is  asymptotically  equivalent to -/ 2a    with  the        constant correlation
+
+of ut and t. If u(s) = 0s  [0,1], BT does not affect the centering of tvx.
+
+The same holds for the second component, CT : if u(s) = 0s  [0,1], then UH
+
+and Bc,H are independent; therefore, the expectation of the limit of the normalized
+
+CT is zero as well. Should there, however, be contemporaneous correlation, the
+
+behavior of CT --in particular its expectation--does depend on c. Moreover, the
+
+dependence is nonlinear, since it is easily shown that
+
+                                        1
+
+E UH (1) Jc,H (1) = e-c(1-s)u (s)ds.
+
+                                      0
+
+As expected, the expectation decreases in magnitude as c increases. This expres-
+
+sion simplifies too under homoskedasticity, where T1/2-/2CT has an asymptotic
+
+expectation depending on the (constant) correlation , namely -                    2  1-e-c  .  For
+                                                                                  a     c
+
+c = 0, the case with the largest distortions, we see this expectation to be twice as
+
+large as that of the normalized BT , with the relative importance of CT diminishing
+
+as c increases. This component depends, however, on the localizing coefficient c
+
+which cannot be consistently estimated, unlike the expectation of BT .
+
+Figure 2 plots the contribution of both BT and CT to the noncentrality of the
+
+t statistic tvx. We note that heteroskedasticity only has a secondary influence
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                 FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 775
+
+   1                            1
+
+0.8                             0.8
+
+0.6                             0.6
+
+0.4                             0.4
+
+0.2                             0.2
+
+   0                            0
+
+      0 5 10 15 20 25 30 0 5 10 15 20 25 30
+
+F         2. Finite sample average of T1/2-/2 (BT + CT ) under the null of  = 0 as a function of c. DGP:
+
+(1) with (2) where T = 250, a = 1,  = 0.95,  = 1 - c/T, (ut,vt)  iidN (0, t), 10,000 replications,
+
+breaks in variances or in the correlation. Left panel: t = (u2(t/T),);(,v2(t/T)) ,  = -0.95 (see
+
+the Section 3 for more details); right panel: t = ((1,(t/T));((t/T),1)), (·) switching between -0.5
+
+and -0.95.
+
+compared to the localizing coefficient c, and that most (but not all) of the finite-
+sample noncentrality seen in Figure 1 for c = 0 is accounted for by the two
+terms.
+
+2.3. Corrections
+
+The term CT from Proposition 1 appears because of the full-sample demeaning of
+the dependent variable (see the proof of Proposition 1 for details). To deal with
+this, we first discuss recursive demeaning as a possible correction. In particular,
+we use backward recursive demeaning for the regressor and forward demeaning
+for the dependent variable, in that we write
+
+tvrexc =    T    (zt-1  -  z¯t-1)  (yt  -  y¨t  )  ,  with            1       T     and        1t
+            t=2                                             y¨t = T - t + 1              z¯t = t zj.
+                                                                                yj
+                 T    (zt-1  -  z¯t-1  )2  ut2                                                       j=1
+                 t=2                                                         j=t
+
+The motivation for such demeaning schemes is that the recursively demeaned
+regressor and the forward demeaned disturbance are now orthogonal irrespective
+of the correlation between ut and t, which is not the case with usual demeaning.
+Such orthogonal schemes of mean adjustment have been used before in predictive
+regressions: for example, Westerlund et al. (2017) uses such a scheme to develop
+a predictability test in panel predictive regression.3 In fact, in the panel literature,
+forward and backward demeaning have a much longer history in dealing with the
+Nickell bias (Nickell, 1981); see Everaert (2013) for a recent contribution.
+
+3Moreover, recursive adjustment schemes are popular in the related unit root testing literature as a means for reducing
+noncentrality and improving local power; see, for example, Shin and So (2001).
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+776 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+   This effect of recursive adjustment is very much in the spirit of the proposal of
+Kostakis et al. (2015), who point out that not demeaning the instrument zt-1 (while
+still demeaning the dependent variable and the predictor itself to account for a
+nonzero intercept in the predictive regression) reduces the finite-sample correlation
+between the numerator and the denominator of the IVX t statistic. We shall closer
+examine the corrections of Kostakis et al. (2015) after analyzing the effect of the
+orthogonal mean adjustment scheme in:
+
+   Proposition 2. Under the assumptions of Proposition 1, it holds as T   that
+tvrexc = ZT + BT + op T/2-1/2 with ZT and BT from Proposition 1.
+Proof: See Section I of the Online Supplement.
+
+   Proposition 2 shows that dependence on c of the leading higher-order terms
+may in fact be eliminated. Our Monte Carlo study (see Section 3) shows that tvrexc
+performs quite well in terms of size in spite of the remaining term BT , so the first
+
+correction we suggest is orthogonal mean adjustment.
+   The Monte Carlo study also shows that the local power of tvrexc is low. To see why,
+
+examine
+
+yt - y¨t =  (xt-1 - x¨t-1) + ut - u¨t,
+
+with ¨·t denoting forward demeaned quantities. Under the alternative  = 0, power
+is driven by the cross-product (zt-1 - z¯t-1) (xt-1 - x¨t-1). But the forward demeaned
+xt-1 may be rewritten as
+
+        1           T                          1  T j-t-1
+
+xt-1 - T - t + 1 xj-1 = - T - t + 1                        xj+k,
+
+             j=t                                  j=t k=0
+
+so, in the extreme case of xt being a random walk, xt = t and (xt-1 - x¨t-1) is
+uncorrelated with zt-1 - z¯t-1. The effect on tvrexc under the alternative is similar to
+that of a weak instrument. This phenomenon is caused by the correction itself and
+
+not by the IVX instrumentation.
+
+   Turning our attention to the corrections proposed by Kostakis et al. (2015), they
+
+result in
+
+tvWx =  T    zt-1      (yt    -  y¯)        ,
+        t=2
+
+        T    zt2-1  u^ t2  -  T  z¯2^ u2|v
+        t=2
+
+where ^ u2|v = ^ u2 - ^ u2v^ v-2 with ^ u2 and ^ v2 estimators of the long-run variances of
+ut and vt, and ^ uv an estimator of the long-run covariance of ut and vt. The behavior
+of tvWx is discussed in
+
+   Proposition 3. Under the assumptions of Proposition 1, it holds as T   that
+tvWx = ZT + BT + CT + op T/2-1/2 with ZT,BT, and CT from Proposition 1.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                 FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 777
+
+Proof: See Appendix B.
+
+   Although tvWx has the same leading terms as tvx, we give in Section II of the Online
+Supplement some of the higher-order terms of tvx which are of order Op(T-1)
+and missing from tvWx. Since they contribute to the noncentrality (cf. Kostakis
+et al., 2015, p. 1516 and also the differences seen by comparing Figures 1 and 2),
+
+their absence likely improves the finite-sample behavior of tvWx and thus explains
+our findings in the Monte Carlo section that the two-sided tvWx statistic performs
+remarkably well. The impact of the terms BT and in particular CT on the one-sided
+versions of tvWx is, however, not negligible and we, therefore, move on to propose
+explicit corrections for BT and CT .
+
+   The quantities involved in the expectation of BT may for instance be estimated
+
+using smoothed residuals, delivering an estimate of
+
+  T /2-1/2  1  ^u   (s)^u2    (s)^2(s)ds  .
+-           0
+
+      2a         1  ^u2  (s)^2         3
+                 0
+                                (s)ds
+
+In dealing with CT , it may be tempting to proceed analogously. Yet, with c
+unknown and no consistent estimator available, this approach seems of limited
+
+applicability in general.
+
+Alternatively, one may try to match the functional                  1  e-c(1-s)u (s)ds  using  the
+                                                                    0
+
+expectation of another functional depending on c. We illustrate this idea for the
+
+case of homoskedasticity, where we have
+
+E (UH (1) Jc (1)) = uv(1 - e-c)/c.
+
+Recall that      1    x[sT ]    Jc,H (s),    where  it  is  easily  seen  that  Var  Jc,H (s)  =
+                   T
+
+1-e-2sc  under homoskedasticity. Therefore, 2 Var Jc,H (1/2)              =     1-e-c   ,  which
+    2c                                                                             c
+suggests employing a quantity with this expectation to accommodate the
+
+noncentrality induced by CT .
+
+While it is likely possible to modify this approach in certain particular cases (say
+
+for breaks in variances and covariances at suitable times), the general case seems
+
+out of reach. We, therefore, propose the use of the correction for the homoskedastic
+
+case (and also point to Figure 2 as additional motivation for this proposal). In fact,
+
+our simulations in Section 3 and in Section III of the Online Supplement show this
+
+to work reasonably well under heteroskedasticity too.
+
+The resulting correction term for the expectation of BT is then
+
+bT = -/ 2T (1 - ),
+
+where  may be estimated as the correlation of t and ut based on u^t and ^t from an
+AR(p) approximation of xt with p selected via an information criterion (we resort
+to the Akaike IC).
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+778 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+   For CT , the natural choice following from the property of the Ornstein­
+Uhlenbeck process discussed above is then 1/(22)T-1x[2T/2], leading to
+
+cT                         ·  2x[2T /2]  =   2bT    2x[2T /2]  ,
+    = -  2                     2T                    2T
+
+            T (1 - )
+
+since 2 = 22 is simply the (stationary) long-run variance of vt (which may
+be estimated either based on xt, or--as we proceed in our simulations--on the
+residuals of a first-order autoregression of xt).
+
+   It should be noted, however, that this delivers a noisy proxy for the mean of CT :
+while it will remove the noncentrality due to CT (at least under homoskedasticity),
+it will at the same time marginally inflate the variance of the corrected t statistic.
+The presence of the estimator ^ 2 in the denominator further inflates the variance:
+
+since we employ a nonparametric estimator, its variability in finite samples is large
+
+enough to affect the positive effect of the correction. Concretely, it induces outliers
+
+in the distribution of the correction and inflates the variance of the corrected
+
+statistic. To deal with these issues, we add finite-sample modifications which do
+
+not affect the asymptotics.
+
+   First, we use the fact that the term to be corrected is bounded to [0,1], so we
+censor 2x[2T/2]/(^ 2T) on [0,1]. While this reduces the variability of the term, it
+changes its expectation, so we re-normalize it. The limit of 2x[2T/2]/(^ 2T) is  2(1)
+under the worst-case scenario of c = 0, which, upon censoring on [0,1], loses the
+
+unity expectation, and has an expectation of
+
+ = 1 - 2/( e)  0.5161,
+
+and a variance of
+
+ = 4 ( (1) - (0)) - 2/( e) - 2 2/( e)  0.1633.
+
+Second, we standardize the t statistic to take the variance of the correction cT into
+account.
+
+   Finally, should xt be stationary instead of near-integrated, this bias correction
+may overcorrect, since, for  away from unity, the standard normal asymptotics do
+
+relatively well even when  is close to unity; see Kostakis et al. (2015). A practical
+adjustment of the correction is to restrict  in tvx to be smaller than an estimate of
+. In particular, we suggest  = min{,^}, where ^ is the OLS estimator in a first-
+order autoregression of xt. Asymptotically, this restriction makes no difference
+under near-integration, but prevents the bias correction to "overshoot."
+
+   To sum up, we suggest to use, with b^T = -^/ 2T 1 - min{,^} , the statistic
+
+       tvx - b^T  1+       2  min        1,  2x[2T /2]
+                                              ^ 2T
+tvx =
+                        ^                               ,
+                        3  
+       1          +  2        b^ T  +        b^ T2
+                                         2
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                    FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 779
+
+where ^/3 is intended to capture finite-sample correlation of c^T and tvx, and is tuned
+to homoskedasticity. Our Monte Carlo study in Section 3 and in Section III of the
+Online Supplement shows that tvx works well under heteroskedasticity too.
+
+3. FINITE SAMPLE EVIDENCE
+
+In this section, we provide finite sample evidence on the merits of the remedies
+proposed in this paper. We use a data generating process (DGP) as outlined under
+equations (1) and (2) with independent innovation process governed by a bi-variate
+normal distribution with a correlation coefficient of  = -0.95 (which is typical
+for predictive regressions with stock returns; see, e.g., Phillips, 2015), as well as
+time-varying volatility. Concretely,
+
+ut        iidN  0       ,t,
+t               0
+
+    t=   u(t/T) 0                   1  u(t/T) 0    ;
+            0 (t/T)                 1     0 (t/T)
+
+furthermore, vt = vt-1 + t for  = 0.5. The variance of the innovations is taken
+to vary in time according to the following scenarios:
+
+1. Homoskedasticity [cst.]: u2(s) = 2(s) = 1, s  [0,1],
+2. Early upward break [e.u.]: u2(s) = 2(s) = 1 · I (s < 0.3) + 4 · I (s  0.3),
+3. Late upward break [l.u.]: u2(s) = 2(s) = 1 · I (s < 0.7) + 4 · I (s  0.7),
+4. Early downward break [e.d.]: u2(s) = 2(s) = 4 · I (s < 0.3) +
+
+   1 · I (s  0.3),
+
+5. Late downward break [l.d.]: u2(s) = 2(s) = 4 · I (s < 0.7) +
+   1 · I (s  0.7).
+
+The size study results are generated using 10,000 replications and considering c 
+
+{0,1,5,10,30,50} together with  = 0 for T = 250 and 500. To analyze the behavior
+
+of the corrected tests under the alternative, we consider a sequence of local alter-
+natives  characterized  by    =  b  1 - 2, for b  {-26, - 24, . . . ,-2,0,2, . . . ,26}.
+                                 T
+Note under b = 0, the size properties of the test will be recovered. Since the
+
+sign of  might be known in practice (as is often the case when the choice of
+
+the predictor is motivated by economic theory4), we consider local alternatives
+
+covering both situations,  < 0 and  > 0, alongside with cases where two-sided
+
+testing is of interest. All through this section, we fix a = 1 and  = 0.95 following
+
+the recommendation of Kostakis et al. (2015).
+
+We compare four versions of the IVX statistic testing the null  = 0: the original
+
+IVX t statistic (tvx), the finite-sample adjusted version of Kostakis et al. (2015)
+
+4For example, the effect of dividend yields on excess returns can be expected to be positive, while increasing risk-free
+rates could have a negative effect on excess returns (see, e.g., Ang and Bekaert, 2007).
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+               780 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+              (tvWx),5 the IVX t statistic computed with orthogonal mean adjustment (tvrexc), as well
+              as our bias-corrected proposal (tvx).
+
+                 Table 1 shows the finite-sample rejection frequencies at the 5% nominal level
+              for strong negative contemporaneous correlation  = -0.95.6 The finite-sample
+              noncentrality of the standard IVX t statistic, tvx, leads as expected to huge size
+              distortions that only drop to reasonable levels for c = 10 if not c = 30. The time
+              variation of the variance influences these distortions, but not by much. Also, they
+              do not drop with increasing T, as predicted by the small rates in Proposition 1. The
+              statistic tvWx on the other hand shows that the finite-sample corrections introduced
+              in Kostakis et al. (2015) work excellently in the two-sided case. Only for c = 50,
+              can one observe a very slight tendency to overreject (with rejection frequencies
+              closer to 6% than to 5% for T = 250). However, the tvWx statistic does not behave
+              too well in each tail taken alone, as it tends to overreject to the right (one sees large
+              rejection frequencies for small c, and even for c = 50 we note rejection frequencies
+              above 8%) and to underreject to the left (this is most visible for small c, where the
+              rejection frequencies are below 1%). This also does not significantly improve for
+              larger T = 500, and exhibits little variation across the different variance patterns.
+              The statistic with backward and forward recursive demeaning, tvrexc, has very good
+              size control (with some exceptions for c = 0, where rejection frequencies of 7%
+              may be observed for the test against right-sided alternatives, and some cases of
+              under-rejections: for left-sided testing under downward breaks and c = 0,1 we
+              observe rejection frequencies of 2 or 3%). Finally, the tvx statistic has the best size
+              control of all four tests: while it sometimes underrejects for left-sided testing (in the
+              same situations where the tvrexc statistic was undersized), most rejection frequencies
+              lie between 4% and 6%, with only a handful of cases where the 6% threshold is
+              exceeded, and no rejection frequency above 7%.
+
+                 Summing up, all three modified statistics may be used in a two-sided testing
+              situation in what concerns size control. For one-sided testing situations, the use of
+              tvWx is not recommended as it overrejects to the right and severely underrejects to the
+              left, which has a dampening effect on rejection frequencies under the alternative;
+              see below. The simulations will also confirm the power-reducing effect of the
+              orthogonal mean adjustment scheme mentioned after Proposition 2.
+
+                 We present in Figures 3­5 plots of rejection frequencies of the four statistics
+              compared for c = 0,10,30 and all variance patterns and test variants (left-, right-,
+              and two-sided).
+
+                 For left-sided testing, it is tvx that has best rejection rates in all cases. Compared
+              to tvx and tvWx, this is because tvx is centered correctly and therefore not undersized.
+              Here, tvx seems to perform a bit better than tvWx. The test based on backward and
+              forward adjustment has poor rejection properties under the alternative; the gap
+
+                    5Kostakis et al. (2015) consider a Wald statistic W for which tvWx 2 = W.
+                   6The findings are symmetric in the sign of ; moreover, size behavior improves uniformly for decreasing magnitude
+                   of  so we do not include the exact figures to save space.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                                                                                                                                                                                                       FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 781
+
+    Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+T 1. Size properties of different tests under short-run dynamics and strong contemporaneous shock correlation
+
+                               T = 250                                                        T = 500
+
+c Var          Two-sided           Left-sided            Right-sided          Two-sided           Left-sided            Right-sided
+          tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx
+
+   cst. 20.90 4.90 4.69 4.48 0.11 2.91 0.08 4.08 33.01 6.83 8.82 5.42 20.65 5.09 4.39 4.42 0.09 2.82 0.05 4.50 33.51 7.27 9.00 5.19
+   e.u. 16.18 4.97 4.66 4.91 0.20 3.11 0.12 6.28 26.30 6.87 9.38 4.72 14.56 4.80 3.88 4.75 0.16 3.07 0.08 6.16 25.15 6.62 8.35 4.18
+0 l.u. 16.01 5.73 4.93 5.87 0.76 3.71 0.50 6.38 25.51 7.64 9.07 5.22 15.49 5.93 4.69 5.49 0.75 3.70 0.48 6.54 24.62 7.43 9.06 4.59
+   e.d. 23.55 4.91 4.62 3.52 0.02 2.70 0.02 1.82 37.00 7.14 9.46 5.54 21.79 4.64 4.37 3.28 0.00 2.33 0.01 2.00 35.27 6.99 9.20 5.18
+    l.d. 22.38 3.81 4.94 3.35 0.01 1.94 0.00 2.64 35.38 6.15 9.51 5.44 21.45 4.02 4.13 3.22 0.01 1.94 0.00 2.77 34.86 6.34 8.64 4.99
+
+   cst. 15.94 4.48 4.87 6.28 0.24 2.58 0.18 6.42 25.58 6.85 9.22 5.82 15.54 5.01 4.46 6.27 0.23 3.24 0.15 6.59 25.03 7.06 9.22 5.56
+   e.u. 12.56 4.73 5.10 5.95 0.33 3.08 0.21 7.04 21.40 6.99 9.55 5.40 12.87 4.94 4.78 6.08 0.32 3.10 0.20 7.44 20.90 7.02 9.19 5.03
+1 l.u. 13.14 5.30 5.44 5.73 1.07 3.52 0.70 6.12 21.19 7.29 10.13 5.41 12.42 5.12 4.93 5.47 0.63 3.44 0.46 5.43 19.91 7.28 9.35 5.15
+   e.d. 15.76 4.50 4.84 5.50 0.06 2.76 0.04 5.39 25.28 6.70 10.15 5.65 14.54 4.55 4.53 5.24 0.11 2.52 0.01 6.01 23.80 6.78 9.07 5.07
+    l.d. 16.47 4.61 4.95 5.44 0.04 2.16 0.03 5.90 26.98 7.20 10.01 5.98 15.24 4.22 4.72 4.96 0.04 2.10 0.04 5.80 24.72 6.30 9.19 5.44
+
+   cst.   9.96 5.10 5.69 6.03 1.15 3.33 0.89 5.47 16.01 6.91 10.12 5.89  9.39 4.70 5.18 5.67 1.24 3.36 1.02 5.41 15.10 6.46 9.65 5.56
+   e.u.   8.42 5.29 5.20 6.43 1.04 3.13 0.73 6.47 14.24 6.85 9.54 4.94   8.95 5.16 5.13 5.95 0.91 3.24 0.54 5.67 14.76 7.02 9.95 5.18
+5 l.u.    9.18 5.22 5.81 4.00 1.35 3.34 0.94 2.31 15.20 7.10 10.51 5.39  9.06 5.39 5.46 3.75 1.35 3.49 0.91 2.36 14.63 7.05 10.45 5.48
+   e.d.   8.65 4.95 5.60 4.65 1.07 3.02 0.77 3.99 14.18 6.61 10.49 5.48  8.07 4.85 4.86 4.66 1.22 3.12 0.89 4.09 13.62 6.36 9.74 4.92
+    l.d.  9.19 4.81 5.52 6.82 0.86 2.31 0.54 6.41 14.97 6.80 10.40 5.57  8.14 4.14 4.62 5.92 0.78 2.41 0.57 6.29 14.14 6.31 9.24 4.86
+
+                                                                                                                   (Continued)
+                                                                                                                                                                                                       782 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCUT 1. (Continued)
+
+    Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms ofT = 250T = 500
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                 Two-sided      Left-sided              Right-sided          Two-sided            Left-sided          Right-sided
+c Var tvx tvrexc tvWx tvx   tvx tvrexc tvWx tvx    tvx tvrexc tvWx tvx   tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx  tvx tvrexc tvWx tvx
+
+     cst. 7.70 4.84 5.81 4.34 1.68 3.39 1.47 3.15 12.18 6.12 9.80 5.37 7.71 4.92 5.74 4.15 1.78 2.95 1.53 3.23 11.95 6.43 9.60 5.31
+     e.u. 7.69 5.17 5.59 4.87 1.61 3.37 1.24 4.01 12.24 6.56 9.57 5.27 7.29 5.28 5.51 4.83 1.70 3.46 1.33 3.94 11.83 6.66 9.18 5.11
+10 l.u. 7.88 5.29 6.00 3.65 1.84 3.46 1.24 1.89 12.11 6.82 10.07 5.76 7.44 5.34 5.58 3.26 1.70 3.31 1.14 1.68 11.56 6.96 9.78 5.45
+     e.d. 7.50 4.94 5.94 3.47 1.85 3.15 1.53 2.18 11.60 6.70 9.98 5.22 7.04 4.78 5.67 3.29 1.82 3.13 1.56 2.06 11.05 6.62 9.42 5.04
+     l.d. 7.85 4.44 6.10 4.86 1.97 2.89 1.68 4.27 11.62 6.11 9.49 5.33 6.31 4.31 4.70 4.20 1.67 2.72 1.33 4.07 10.61 5.87 8.81 4.42
+
+     cst. 6.72 5.17 6.14 4.07 2.82 4.07 2.74 3.13  9.72 6.57  9.18 5.57  6.07 4.81 5.52 3.78  2.90 3.74 2.82 3.11  8.40 6.03 7.84 4.91
+     e.u. 6.95 5.31 6.21 4.44 3.47 4.11 3.18 3.78  9.22 6.40  8.63 5.50  6.02 4.86 5.51 3.83  2.83 3.78 2.65 3.26  9.00 6.36 8.29 5.10
+30 l.u. 6.68 5.10 5.97 4.29 2.95 3.37 2.52 2.90    9.56 6.61  8.88 5.58  5.99 5.06 5.26 3.64  2.45 3.73 2.06 2.42  8.87 6.41 8.16 5.20
+     e.d. 6.28 5.16 5.90 3.65 3.09 4.02 2.86 3.09  8.76 6.38  8.38 5.11  5.77 5.16 5.45 3.43  3.03 3.50 2.85 2.98  8.43 6.30 7.93 4.86
+     l.d. 6.00 4.80 5.56 3.97 2.99 3.59 2.76 3.44  8.94 6.16  8.34 5.00  6.03 4.74 5.65 3.84  2.86 3.48 2.73 3.16  8.51 6.22 8.03 4.87
+
+     cst. 6.14 5.06 5.91 4.22 3.26 4.10 3.09 3.37  8.41 5.99  8.11 5.48  5.44 4.82 5.11 3.59  3.12 3.90 3.04 3.16  7.14 5.63 6.84 4.65
+     e.u. 6.50 5.26 6.17 4.58 3.33 4.28 3.21 3.61  8.84 6.23  8.40 5.59  5.97 5.18 5.62 4.22  2.96 4.13 2.84 3.15  7.85 6.28 7.65 5.33
+50 l.u. 6.60 5.25 6.05 4.70 3.62 4.15 3.31 3.62    8.76 6.13  8.36 5.69  5.43 5.00 5.03 3.70  2.68 3.72 2.37 2.69  7.87 5.93 7.46 5.02
+     e.d. 5.97 5.12 5.72 4.17 3.39 3.97 3.28 3.44  7.71 6.58  7.56 5.02  5.78 4.87 5.60 3.88  3.27 3.83 3.18 3.26  8.08 6.21 7.89 5.25
+     l.d. 6.35 5.18 6.11 4.71 3.68 4.03 3.63 3.88  7.87 6.30  7.62 5.22  5.65 5.09 5.40 3.75  3.45 4.15 3.35 3.59  7.39 5.87 6.99 4.88
+
+Note: Data generated with (1) and (2) with vt = vt + t for  = 0.5, where (ut,t)  iiN(0, t) and t exhibits constant correlation  = -0.95 and time-varying
+variances. We set  = 1 - c/T for various c and  = 1 - 1/T0.95 and use standard normal critical values. See the text for details.
+               FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 783
+
+        1                   1                   1
+
+        0.5                 0.5                 0.5
+
+        0                   0                   0
+         -0.03 -0.02 -0.01   -0.03 -0.02 -0.01   -0.03 -0.02 -0.01
+
+        1                   1                   1
+
+        0.5                 0.5                 0.5
+
+        0                   0                   0
+         -0.03 -0.02 -0.01   -0.03 -0.02 -0.01   -0.03 -0.02 -0.01
+
+        1                   1                   1
+
+        0.5                 0.5                 0.5
+
+        0                   0                   0
+         -0.03 -0.02 -0.01   -0.03 -0.02 -0.01   -0.03 -0.02 -0.01
+
+        1                   1                   1
+
+        0.5                 0.5                 0.5
+
+        0                   0                   0
+         -0.03 -0.02 -0.01   -0.03 -0.02 -0.01   -0.03 -0.02 -0.01
+
+        1                   1                   1
+
+        0.5                 0.5                 0.5
+
+        0                   0                   0
+         -0.03 -0.02 -0.01   -0.03 -0.02 -0.01   -0.03 -0.02 -0.01
+
+F       =  3.  Power properties of different  test statistics when T = 250 for   H0   : =0     versus   H1 :   <0
+with             1 - 2 for b  {-26, - 24, .   . . , - 2,0}. Data generated with  (1)  and (2)  with vt  = vt   + t
+            b
+           T
+
+for  = 0.5, where (ut,t)  iiN(0, t) and t exhibits constant correlation  = -0.95 and time-varying
+
+variances. We set  = 1 - c/T for various c and  = 1 - 1/T0.95 and use standard normal critical values.
+
+See the text for details.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+784 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+        1                            1                          1
+
+      0.5                            0.5                        0.5
+
+        0                            0                          0
+
+           0               0.02           0               0.02       0                           0.02
+
+        1                            1                          1
+
+      0.5                            0.5                        0.5
+
+        0                            0                          0
+
+           0               0.02           0               0.02       0                           0.02
+
+        1                            1                          1
+
+      0.5                            0.5                        0.5
+
+        0                            0                          0
+
+           0               0.02           0               0.02       0                           0.02
+
+        1                            1                          1
+
+      0.5                            0.5                        0.5
+
+        0                            0                          0
+
+           0               0.02           0               0.02       0                           0.02
+
+        1                            1                          1
+
+      0.5                            0.5                        0.5
+
+        0                            0                          0
+
+           0               0.02           0               0.02       0                           0.02
+
+F       =4.TbPo1w-erp2rofpoerrbties  of different test    statistics when T = 250 for H0 :  = 0  versus H1 :  > 0
+with                                 {0,2,4, . . . ,26}.  Data generated with (1) and (2) with   vt = vt + t for
+
+ = 0.5, where (ut,t)  iiN(0, t) and t exhibits constant correlation  = -0.95 and time-varying
+
+variances. We set  = 1 - c/T for various c and  = 1 - 1/T0.95 and use standard normal critical values.
+
+See the text for details.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+              FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 785
+
+        1                                   1                                  1
+
+      0.5                                   0.5                                0.5
+
+        0                                   0                                  0
+            -0.02 0 0.02                        -0.02 0 0.02                       -0.02 0 0.02
+
+        1                                   1                                  1
+
+      0.5                                   0.5                                0.5
+
+        0                                   0                                  0
+            -0.02 0 0.02                        -0.02 0 0.02                       -0.02 0 0.02
+
+        1                                   1                                  1
+
+      0.5                                   0.5                                0.5
+
+        0                                   0                                  0
+            -0.02 0 0.02                        -0.02 0 0.02                       -0.02 0 0.02
+
+        1                                   1                                  1
+
+      0.5                                   0.5                                0.5
+
+        0                                   0                                  0
+            -0.02 0 0.02                        -0.02 0 0.02                       -0.02 0 0.02
+
+        1                                   1                                  1
+
+      0.5                                   0.5                                0.5
+
+        0                                   0                                  0
+            -0.02 0 0.02                        -0.02 0 0.02                       -0.02 0 0.02
+
+F       5.    Power properties  of different test statistics when T = 250      for H0 :   = 0 versus H1 :  = 0
+with            1 - 2 for b     {-26, - 24, . . . , - 2,0,2, . . . ,26}. Data  generated  with (1) and (2) with
+        =  b
+           T
+
+vt = vt + t for  = 0.5, where (ut,t)  iiN(0, t) and t exhibits constant correlation  = -0.95
+
+and time-varying variances. We set  = 1 - c/T for various c and  = 1 - 1/T0.95 and use standard normal
+
+critical values. See the text for details.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+               786 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+              to the other tests decreases as c increases, but rejection rates drop anyway with
+              increasing c.
+
+                 For right-sided testing, tvx rejects very often, but this is of course due to the
+              extreme liberality compared to the other tests. The test based on tvrexc performs, like
+              before, worst (again, with differences decreasing as c increases). To the right, tvWx
+              typically rejects more often than tvx, but keep in mind that it is also quite oversized,
+              even if not as oversized as the uncorrected tvx.
+
+                 Finally, examining the two-sided tests, we observe as expected a combination
+              of the findings for the left- and right-sided tests, with the difference that the tvWx test
+              is now correctly sized and the corresponding test decisions are now reliable. The
+              test based on tvx is also correctly sized, and the power ranking of the two depends
+              on the sign of  under the alternative. While tvWx is more powerful against right-
+              sided alternatives, but less powerful against left-sided ones, tvx exhibits a more
+              balanced behavior. Again, the larger c, the closer the rejection frequencies of the
+              three corrected tests.
+
+                 Summing up, when the theory provides clear justifications about using a one-
+              sided test, we could safely recommend the use of tvx. For two-sided testing, one
+              has the choice between tvWx and tvx, with the symmetry of the rejection frequencies
+              under the alternative being an argument in favor of tvx, and the higher power against
+              right-sided alternatives (or left-sided, should the correlation  be positive) being
+              an argument in favor of tvWx. Altogether, as our Monte Carlo results show, we would
+              like to stress that tvWx has a very good size control for two-sided testing. Allowing
+              for conditional heteroskedasticity does not alter this general recommendation (see
+              Section III of the Online Supplement for further Monte Carlo simulation results
+              supporting this claim).
+
+              4. CONCLUDING REMARKS
+
+              A convenient approach in the context of predictive regressions where the per-
+              sistence of the endogenous forecasting variable is unknown, is to turn to IV
+              regressions where a so-called extended instrumental variable with a controlled
+              level of persistence is constructed. The resulting IVX estimator is asymptotically
+              mixed Gaussian and makes for standard asymptotic inference. Finite-sample
+              deviations from the asymptotic limit can, however, be quite serious. Typically
+              manifested in the form of noncentrality, they depend heavily on how the IV
+              estimator is constructed.
+
+                 In this paper, we provide a structured approach to control the small sample
+              noncentrality of the IVX t statistic for a given instrumental variable, and as a
+              result control the size distortions. First, we develop a higher-order expansion of
+              the corresponding IVX t statistic and as such provide a theoretical understanding
+              of the small sample deviations of the t statistic from its limit. This in turn suggests
+              ways to center the t statistic at the origin under the null. Combining forward and
+              recursive demeaning does account for most leading terms of the bias at the cost of
+              some loss of power. An explicit correction for the noncentrality achieves similar
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                                   FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 787
+
+              size control but without the power reduction. These proposals do not assume any
+              parametric restriction on the persistence of the extended instrumental variable, and
+              rather provide, for any given parameterization thereof, a corresponding way of
+              reducing noncentrality.
+
+                 Our recommendations do not concern Wald tests of the null of no predictability
+              in multiple regressions, the main reason being that the corrections already proposed
+              by Kostakis et al. (2015) are quite effective for the Wald statistic. We leave a full
+              analysis of higher-order terms of the involved quadratic forms to future work.
+
+                 Our Monte Carlo study shows that all of these proposals provide substantial
+              remedies to small sample size distortions to the IVX t statistic while maintaining
+              relatively good properties under the alternative. Further, when the effect of a
+              forecasting variable is negative, we suggest using a left-sided t statistic with one
+              of the corrections we provided in this paper, since our Monte Carlo study provides
+              evidence that such a strategy is associated with a better statistical power compared
+              to using a two-sided test. For two-sided alternatives, the Wald test of Kostakis et al.
+              (2015) offers the better balance between size and power.
+
+              5S.UPPLEMENTARY MATERIAL
+
+              To view supplementary material for this article, please visit http://dx.doi.org/
+              10.1017/S0266466620000298
+
+               REFERENCES
+
+                 Ang, A. & G. Bekaert (2007) Return predictability: Is it there? Review of Financial Studies 20(3),
+                    651­707.
+
+                 Breitung, J. & M. Demetrescu (2015) Instrumental variable and variable addition based inference in
+                    predictive regressions. Journal of Econometrics 187(1), 358­375.
+
+                 Campbell, J.Y. & M. Yogo (2006) Efficient tests of stock return predictability. Journal of Financial
+                    Economics 81(1), 27­60.
+
+                 Camponovo, L. (2015) Differencing transformations and inference in predictive regression models.
+                    Econometric Theory 31(6), 1331­1358.
+
+                 Cavaliere, G., A. Rahbek, & A.M.R. Taylor (2010) Testing for co-integration in vector autoregressions
+                    with non-stationary volatility. Journal of Econometrics 158(1), 7­24.
+
+                 Demetrescu, M., I. Georgiev, P.M.M. Rodrigues, & A.M.R. Taylor (2020) Testing for episodic
+                    predictability in stock returns. Journal of Econometrics, forthcoming.
+
+                 Demetrescu, M. & P.M.M. Rodrigues (2016) Residual-Augmented IVX Predictive Regression. Work-
+                    ing paper 5/2016, Banco de Portugal.
+
+                 Elliott, G. & J.H. Stock (1994) Inference in time series regression when the order of integration of a
+                    regressor is unknown. Econometric Theory 10(3­4), 672­700.
+
+                 Everaert, G. (2013) Orthogonal to backward mean transformation for dynamic panel data models. The
+                    Econometrics Journal 16(2), 179­221.
+
+                 Gonzalo, J. & J.-Y. Pitarakis (2012) Regime-specific predictability in predictive regressions. Journal
+                    of Business & Economic Statistics 30(2), 229­241.
+
+                 Jansson, M. & M.J. Moreira (2006) Optimal inference in regression models with nearly integrated
+                    regressors. Econometrica 74(3), 681­714.
+
+                 Kostakis, A., T. Magdalinos, & M.P. Stamatogiannis (2015) Robust econometric inference for stock
+                    return predictability. Review of Financial Studies 28(5), 1506­1553.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+788 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+Magdalinos, T. & P.C.B. Phillips (2009) Limit theory for cointegrated systems with moderately
+   integrated and moderately explosive regressors. Econometric Theory 25(2), 482­526.
+
+Maynard, A. & K. Shimotsu (2009) Covariance-based orthogonality tests for regressors with unknown
+   persistence. Econometric Theory 25(1), 63­116.
+
+Nickell, S. (1981) Biases in dynamic models with fixed effects. Econometrica 49(6), 1417­1426.
+Phillips, P.C.B. (1987) Towards a unified asymptotic theory for autoregression. Biometrika 74(3),
+
+   535­547.
+Phillips, P.C.B. (2015) Pitfalls and possibilities in predictive regression. Journal of Financial Econo-
+
+   metrics 13(3), 521­555.
+Phillips, P.C.B. & J.H. Lee (2013) Predictive regression under various degrees of persistence and robust
+
+   long-horizon regression. Journal of Econometrics 177(2), 250­264.
+Phillips, P.C.B. & T. Magdalinos (2007) Limit theory for moderate deviations from a unit root. Journal
+
+   of Econometrics 136(1), 115­130.
+Phillips, P.C.B. & T. Magdalinos (2009) Econometric Inference in the Vicinity of Unity. CoFie Working
+
+   Paper 7, Singapore Management University.
+Phillips, P.C.B. & V. Solo (1992) Asymptotics for linear processes. Annals of Statistics 20(2),
+
+   971­1001.
+Shin, D.W. & B.S. So (2001) Recursive mean adjustment for unit root tests. Journal of Time Series
+
+   Analysis 22(5), 595­612.
+So, B.S. & D.W. Shin (1999) Recursive mean adjustment in time-series inferences. Statistics &
+
+   Probability Letters 43(1), 65­73.
+Stambaugh, R.F. (1999) Predictive regressions. Journal of Financial Economics 54(3), 375­421.
+Westerlund, J., H. Karabiyik, & P. Narayan (2017) Testing for predictability in panels with general
+
+   predictors. Journal of Applied Econometrics 32(3), 554­574.
+Yang, B., W. Long, L. Peng, & Z. Cai (2020) Testing the predictability of US housing price index
+
+   returns based on an IVX-AR model. Journal of the American Statistical Association, forthcoming.
+
+                                           APPENDIX
+
+A. PRELIMINARIES
+
+Note that, for large enough T,       t-1   kj  =  1-kt   =      T          1-kt            1   T     for  fixed
+                                     j=0          1-k           a     1++···+k-1           ka
+
+k  and    =  1  -   a  with   (0,1) and a > 0. In fact, for t/T  s > 0, kt =                   1  -  a    kt =
+                    T                                                                                T
+                          t     1-
+                T    -ka  T  T
+         a   -   a                         t-1           1
+   1  -  T                           0 so  j=0  kj       ka  T    in  such  cases.  Let  further  C  denote  a
+
+generic constant whose value may change from occurrence to occurrence. Before moving
+
+on to the proofs, we state three helpful lemmas.
+
+   Lemma A.1. Under the assumptions of Proposition 1, it holds that
+
+ sup      T -1/2 xt    C        and   sup      T -/2 zt    C          T .
+
+1tT                  4               1tT                 4
+
+   Proof. See Section I of the Online Supplement.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                      FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 789
+
+   Lemma A.2. Under the assumptions of Proposition 1, we have under the null  = 0 that
+
+             1        T       z~t-1 - z~¯  (ut - u¯)            T -/2          ,
+                      t=2                            + Op
+tvx = T1/2+/2
+                                              2 u2t
+                1       T        z~t-1 - z¯~
+              T 1+      t=2
+
+where z~t-1 = (1 - L)-+1 x~t-1 with x~t =                         t-2    jt-1-j         and  z¯~  the  sample  average  of
+                                                                  j=0
+
+z~t-1.
+
+   Proof. See Appendix B.
+
+   Lemma A.3. Under the assumptions of Proposition 1, we have
+
+T  1/2-/2  E  (BT  )       -  1     1    u     (s)  u2  (s)  2  (s)  ds  .
+                                2a  0
+
+                                              1  u2  (s)2    (s)ds   3
+                                              0
+
+   Proof. See Section I of the Online Supplement.
+
+B. PROOFS
+
+Proof of Lemma A.2
+
+With x~t-1 =          t-2  jt-1-j     =    (1  -  L)+-1      t-1    (i.e.,  the   DGP   without   short   run  dynamics),
+                      j=0
+
+use the Phillips­Solo decomposition (see Phillips and Solo, 1992) of vt (see the proof of
+
+Lemma A.1), to obtain that
+
+        t-2                         t-2                    t-2
+
+xt-1 = jvt-1-j =  jt-1-j + j v~t-1-j
+
+        j=0                         j=0                    j=0
+
+such that xt-1 =  x~t-1 + qt-1 where
+
+        t-2                                                             t-4
+
+qt-1 = j v~t-1-j = v~t-1 - t-3v~1 + ( - 1) j-1v~t-2-j.
+
+        j=0                                                             j=0
+
+Note that qt is uniformly L4-bounded. Now, Demetrescu et al. (2020, Lemma. A.1) show
+
+under slightly stricter assumptions than ours that                          T     zt-1  =  Op     T 1/2+  such that z¯ =
+                                                                            t=2
+
+Op T-1/2 and hence
+
+T                          T                            T                      T
+
+     z~t-1 - z¯ ut = zt-1 (ut - u¯) = zt-1ut - u¯ zt-1 = p T1/2+/2 .
+
+t=2                        t=2                       t=2                    t=2
+
+Moreover,             T    zt-1 - z¯     2 u^2t has the same order: using the OLS residuals u^t = ut - u¯ -
+                      t=2
+
+(xt-1 - x¯) ^ -  , we obtain
+
+T                             T                                             T
+     zt-1 - z¯ 2 u^t2 = zt-1 - z¯ 2 u2t - 2 ^ -                                   zt-1 - z¯ 2 (xt-1 - x¯)ut
+
+t=2                        t=2                                           t=2
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+790 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+                          + ^ -  2 T zt-1 - z¯ 2 xt-1 - x¯ op T1+ ,
+
+                                           t=2
+
+and, using Lemma A.1, together with the superconsistency of the OLS estimator ^,7 it
+follows that
+
+T    zt-1 - z¯ 2 u^2t =     T      zt-1 - z¯ 2 u2t + Op T1/2+ .
+
+t=2                        t=2
+
+Therefore,
+
+  1      T   zt-1 - z¯   2 ut2 =         1     T                  -     2z¯      T              +    z¯2        T
+T 1+    t=2                            T 1+                           T 1+                         T 1+
+                                                  zt2-1u2t                          zt-1ut2                        u2t
+
+                                              t=2                               t=2                            t=2
+
+                                =        1     T                  + op (1),
+                                       T 1+
+                                                  zt2-1ut2
+
+                                              t=2
+
+since     T    zt-1u2t =       T    zt-1      ut2 - u2,t      +       T    u2, t zt-1  =  Op    max       T 1/2+/2 ; T 1/2+             .
+          t=2                  t=2                                    t=2
+
+At the same time, it is easily shown using the exact same arguments as in the proof of
+
+Lemma A.4 item 2 of Demetrescu and Rodrigues (2016) that
+
+  1      T            p    2         1                                                                                        (B.1)
+T 1+                       2a
+            z2t-1u2t                   u2(s)2(s)ds > 0,
+
+        t=2                         0
+
+so it follows that
+
+     T     zt-1 - z¯   ut      =       T             zt-1 - z¯    ut     + Op T-1/2 .                                         (B.2)
+     t=2                               t=2
+
+     T     zt-1 - z¯   2 u^t2                 T      zt-1 - z¯    2 u2t
+     t=2                                      t=2
+
+Note now that zt-1 = z~t-1 +                             t-3  j   qt-1-j = z~t-1 + rt-1, where the sum
+                                                         j=0
+
+   t-3  j    qt-1-j may be re-arranged to give
+   j=0
+
+                                              t-4
+
+rt-1 = qt-1 - t-3q1 + ( - 1) j-1qt-1-j;
+
+                                              j=0
+
+since qt is uniformly L4-bounded, it is easily seen that rt is itself uniformly L4-bounded.
+We now show that
+
+  1T         zt-1  - z¯  2 u2t  =       2      T         z~t-1 - z~¯  ut2 + Op        T -/2     ,                             (B.3)
+T1+ t=2                                T 1+   t=2
+
+and
+
+     1T          zt-1 - z¯         =          1T                         - u¯)
+                               ut                        zt-1 (ut
+T1/2+/2 t=2                            T 1/2+/2
+                                                     t=2
+
+7Showing that T  ^ -                1  Jc2,H  (s)ds  -1  1  Jc,H  (s)dUH  (s)  is  a  standard  exercise  and  we  omit  the  details.
+                                    0                    0
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                    FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 791
+
+                                 =     T                         - u¯) + Op     T -/2
+                                                     z~t-1 (ut                            .                   (B.4)
+                                       T 1/2+/2
+                                                 t=2
+
+For (B.3), the difference between the terms on the l.h.s. and r.h.s. is given by
+
+ 2      T                       1       T            =      A1T  + A2T .
+T 1+                          T 1+
+           z~t-1rt-1u2t +                  rt2-1ut2
+
+       t=2                             t=2
+
+Then,
+
+                 CT           E        z~2t-1  E rt2-1        E ut2      = O T-/2
+E (|A1T |)  T1+ t=2
+
+and, using Lr-boundedness again (and again), A2T = Op T- .
+
+For (B.4), the vanishing term is given by
+
+1T                       - u¯)   =        1T                             1T                         T -/2
+               rt-1 (ut                              rt-1ut   - u¯ T1/2+/2          rt-1     =  Op         ,
+T 1/2+/2                               T 1/2+/2
+           t=2                                   t=2                            t=2
+
+since the elements of the first sum have the md property and are uniformly L4-bounded,
+
+while for the second summand we have                          T    rt-1  4 = O (T) but u¯ = Op      T -1/2    as
+required.                                                     t=2
+
+Proof of Proposition 1
+
+Begin by applying Lemma A.2; since T-/2 = o(T/2-1/2), we may focus on
+
+    1      T    z~t-1    (ut  -  u¯ )                1        T    z~t-1ut
+T 1/2+/2   t=2                                   T 1/2+/2     t=2
+                                       =
+    1                         2 ut2                                         2 u2t
+ T 1+      T    z~t-1 - z¯~                      1       T    z~t-1 - z¯~
+           t=2                                 T 1+      t=2
+
+                                          - u¯           1         T     z~t-1         .
+                                                     T 1/2+/2      t=2
+
+                                                   1          T    z~t-1 - z¯~  2 u2t
+                                                 T 1+         t=2
+
+For the second term, we have (using the arguments in the proof of Lemma A.1 of
+Demetrescu et al., 2020) that
+
+1T                       1             + op(1)           1
+            z~t-1   =  T1/2a x~T-1                       a Jc,H (1),
+T 1/2+
+        t=2
+
+such that
+
+T 1/2-/2      u¯     T                 1       (1) Jc,H  (1)
+          T 1/2+/2                     a UH
+                        z~t-1
+
+                    t=2
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+792 MEHDI HOSSEINKOUCHACK AND MATEI DEMETRESCU
+
+and  the  limit  of  CT    follows     since         1       T         z~t-1 - z~¯  2  ut2  =   1        1  u2(s)2(s)ds        +  op  (1);
+                                                   T 1+      t=2                                2a       0
+
+cf. equation (B.1).
+
+For the first term, use a first-order Taylor series expansion with rest term in
+
+differential     form      for    the    function            a    about      x0 =      1       1  u2(s)2(s)ds,          where       x=
+                                                               x                       2a      0
+
+  1       T      z~t-1 - z~¯    2 ut2  and      a     =      1          T    z~t-1ut   ,  such     that
+T 1+      t=2                                            T 1/2+/2       t=2
+
+      1              T     z~t-1  ut          = ZT + BT           + RT,
+  T 1/2+/2           t=2
+
+  1T                 z~t-1 - z~¯ 2 ut2
+T1+ t=2
+
+where
+
+ZT =        1           T     z~t-1ut      ,                                                                                        (B.5)
+        T 1/2+/2        t=2                                                                                                         (B.6)
+
+          1      1  u2(s)2(s)ds                                                           
+          2a     0
+
+          1                     1                         1               T
+BT = - 2                                                    T 1/2+/2
+                    1   1  u2   (s)2       (s)ds       3                     z~t-1 ut 
+                    2a  0
+                                                                         t=2
+
+                            T                                                     
+
+          ×         1          z~t2-1u2t -         1       1
+                                                   2a
+                 T  1+     t=2                               u2(s)2(s)ds
+
+                                                          0
+
+and,  with   T   between        1     1    u2(s)2(s)ds            and     1         T       z~t-1 - z¯~      2 ut2,
+                                2a    0                                 T 1+        t=2
+
+                                     T                                  T                                                        2
+                                    t=2                                t=2
+       3     1   1                         z~t-1   ut          1             z~t-1 - z~¯    2   ut2  -   1     1
+RT = 4       T5    T 1/2+/2                                  T 1+                                        2a
+                                                                                                                 u2(s)2(s)ds
+                                                                   T                            T
+                                                                  t=2                          t=2            0
+
+                                                                                                                                   
+                                                                                                                                T
+-1                      1                      1                       z~t-1utT-1+2                  z~t-1   z¯~ut2  +    1    t=2  z~¯2u2t .
+   2                                          3 T1/2+/2                                                                 T 1+
+          1      1  u2(s)2(s)ds
+          2a     0
+
+Given that T = Op (1), the first term on the r.h.s. is seen to be op(BT ), and we
+
+have from Lemma A.3 that BT                           is O   T /2-1/2       . Then,        z~¯2          T    ut2    =  Op  T -1      =
+                                                                                          T 1+           t=2
+
+  1       T    z~t-1z~¯u2t ,  such    that      the   second      term  on   the    r.h.s.  is  also     op   T /2-1/2      , and RT is
+T 1+      t=2
+
+therefore dominated by BT and ZT .
+
+Then, ZT has the required limiting standard normal (see Lemmata A.3 item (ii) and A.4
+
+item 2 in Demetrescu and Rodrigues, 2016), and has zero mean for all T; the result follows
+
+with Lemma A.3.
+
+Proof of Proposition 3
+
+Write under the null
+
+tvWx =      1           T     zt-1    (ut  -    u¯ )      1      1          T    zt-1     (ut   -  u¯ )  T-z¯2^ u2|v
+        T 1/2+/2        t=2                                  T 1/2+/2       t=2
+                                                      +                                                                     ,
+                 1         T      z2t-1  u^ 2t            2                   T
+               T 1+        t=2
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+                   FINITE-SAMPLE SIZE CONTROL OF IVX-BASED TESTS 793
+
+where   T  =     1     T          z2t-1 u^ t2  -  T  T  z¯2  ^ u2|v  for T  [0,1] is obviously Op(1).
+               T 1+    t=2
+
+The second summand on the r.h.s. is seen to vanish at a sufficient rate: recall that
+
+z¯ = Op    T -1/2    , such that, not surprisingly,                      1     T    zt-1       (ut  - u¯)  =  Op(1);  also,
+                                                                     T 1/2+/2  t=2
+
+T-z¯2^ u2|v = Op T-1 .
+
+For the first summand, we obtain after some straightforward algebra along the lines of
+
+the proof of Lemma A.2 that
+
+    1      T    zt-1   (ut  - u¯)              T    z~t-1(ut  -      u¯ )     Op (T -/2 )
+T 1/2+/2   t=2                                 t=2
+                                   =                                       +
+       1       T     z2t-1 u^ t2                    T    z~2t-1ut2
+     T 1+      t=2                                  t=2
+
+= ZT + BT + CT + RWT + op(T/2-1/2),
+
+where,   with  TW   =  Op(1)      between         1     1    u2(s)2(s)ds       and    1           T    z~t-1 - z¯~  2 ut2, it
+                                                  2a    0                           T 1+          t=2
+
+follows that
+
+                                    T                                           T                                         2
+                                   t=2                                         t=2
+RTW  =  3  TW   -5/2 1                         z~t-1(ut  - u¯)T11+                  z~t2-1ut2  -  1     1
+        4              T 1/2+/2                                                                   2a
+                                                                                                          u2(s)2(s)ds .
+
+                                                                                                       0
+
+Like RT from the proof of Proposition 1, RWT is easily shown to be op(T/2-1/2) and the
+result follows.
+
+Downloaded from https://www.cambridge.org/core. IP address: 176.58.196.100, on 12 Sep 2026 at 10:34:44, subject to the Cambridge Core terms of
+use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/S0266466620000298
+

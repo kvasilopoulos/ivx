@@ -1,0 +1,1794 @@
+                                               Journal of Econometrics 177 (2013) 250­264
+
+                                          Contents lists available at ScienceDirect
+
+                                     Journal of Econometrics
+
+                                journal homepage: www.elsevier.com/locate/jeconom
+
+Predictive regression under various degrees of persistence and robust
+long-horizon regression
+
+Peter C.B. Phillips a,b,c,d,, Ji Hyung Lee a
+
+a Yale University, United States
+b University of Auckland, New Zealand
+c Singapore Management University, Singapore
+d University of Southampton, United Kingdom
+
+article info                    abstract
+
+Article history:                The paper proposes a novel inference procedure for long-horizon predictive regression with persistent
+Available online 17 April 2013  regressors, allowing the autoregressive roots to lie in a wide vicinity of unity. The invalidity of
+                                conventional tests when regressors are persistent has led to a large literature dealing with inference in
+JEL classification:             predictive regressions with local to unity regressors. Magdalinos and Phillips (2009b) recently developed
+C22                             a new framework of extended IV procedures (IVX) that enables robust chi-square testing for a wider
+                                class of persistent regressors. We extend this robust procedure to an even wider parameter space in
+Keywords:                       the vicinity of unity and apply the methods to long-horizon predictive regression. Existing methods in
+Asymptotic theory               this model, which rely on simulated critical values by inverting tests under local to unity conditions,
+Balanced regression             cannot be easily extended beyond the scalar regressor case or to wider autoregressive parametrizations. In
+Endogeneity                     contrast, the methods developed here lead to standard chi-square tests, allow for multivariate regressors,
+Instrumentation                 and include predictive processes whose roots may lie in a wide vicinity of unity. As such they have
+IVX methods                     many potential applications in predictive regression. In addition to asymptotics under the null hypothesis
+Local power                     of no predictability, the paper investigates validity under the alternative, showing how balance in the
+Mild integration                regression may be achieved through the use of localizing coefficients and developing local asymptotic
+Mildly explosive                power properties under such alternatives. These results help to explain some of the empirical difficulties
+Predictive regression           that have been encountered in establishing predictability of stock returns.
+Robustness
+                                                                                                                     © 2013 Elsevier B.V. All rights reserved.
+
+1. Introduction                                                                         need to robustify econometric procedures to the time varying pre-
+                                                                                        dictive power of economic factors on stock returns. The present
+    Predictive regression typically encounters the problem of                           paper explores a related theme and investigates robust predictive
+predicting some noisy stationary variable using a highly persistent                     regressions in the presence of multivariate nonstationary regres-
+regressor. A leading practical example is stock return predictability                   sors developing results that have direct application to stock return
+in finance and the empirical puzzles associated with these                              forecasting.
+regressions that have emerged in the financial literature. The
+traditional form of the efficient market hypothesis supports the                            The empirical model employed in stock return predictive re-
+idea of martingale behavior in stock prices and stock return                            gressions commonly involves a linear regression of returns on eco-
+unpredictability. But empirical evidence on the predictability of                       nomic fundamentals. The regressors typically manifest a high, but
+returns shows mixed results on the explanatory power of various                         imprecisely determined, degree of persistence. This uncertainty in
+economic fundamentals such as the dividend­price ratio, leading                         the degree of regressor persistence is usually modeled in terms
+to what has become known as the stock return predictability                             of an autoregressive coefficient with an unknown local to unity
+puzzle. Some researchers have even characterized stock return                           parameter (the localizing coefficient) that measures the (sample
+predictability as a new stylized fact in finance.                                       size normalized) departure of this autoregressive coefficient from
+                                                                                        unity. The localizing coefficient is not consistently estimable and
+    Forecasting stock returns has been a longstanding interest of                       this characteristic leads to nonstandard and nonpivotal inference
+Hashem Pesaran. His well cited paper with Alan Timmerman                                problems.
+(1995) is an early contribution in the field that highlighted the
+                                                                                            Other commonly occurring predictive regressions include for-
+  Corresponding author at: Yale University, United States.                              ward premium regressions in international finance and consump-
+                                                                                        tion growth regressions in macroeconomics. These models share
+     E-mail addresses: peter.phillips@yale.edu (P.C.B. Phillips), jihyung.lee@yale.edu  the same problem of nonstandard and nonpivotal inference that
+(J.H. Lee).
+
+0304-4076/$ ­ see front matter © 2013 Elsevier B.V. All rights reserved.
+http://dx.doi.org/10.1016/j.jeconom.2013.04.011
+P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                                                                  251
+
+originates in the unknown degree of persistence in the predic-         limitations of the methods currently used in empirical research.
+tive regressors. These common difficulties in predictive regressions   Section 3 develops a limit theory for the extended IVX approach in
+have kindled a widespread search for robust inference methods.         long horizon predictive regression. Section 4 concludes and proofs
+There have been extensive efforts and some procedures such as          of the main results are given in the Appendix. The Appendix also
+Bonferroni type methods have received much attention. At present,      contains a discussion of balancing predictive regression and an
+Bonferroni type procedures represent the state-of-the-art in this      analysis of local asymptotic power.
+literature but they do have some undesirable and limiting prop-
+erties. In particular, simulations are required to compute critical        A supplement (Phillips and Lee, 2012a) is available online and
+values to perform inference and confidence interval construction       provides supporting lemmas and further technical arguments that
+since the limit distribution employed in the calculations is non-      are used in the paper.
+standard. A second limitation is that the method is very difficult to
+extend beyond the scalar regressor case. In practical work, there      2. Predictive regressions: literature review and motivation
+are often a selection of variables representing various economic
+fundamentals which need to be investigated in applied work on              This Section reviews key results in the predictive regression
+predictive regression and it is delimiting for empirical procedures    literature and identifies the source of the difficulties encountered
+to be restricted to a single regressor.                                by existing methods. The basic linear predictive model can be
+                                                                       characterized as:
+    Magdalinos and Phillips (2009b, MP henceforth) recently devel-
+oped a novel extended IV procedure (called IVX regression) and         yt = xt-1 + u0t ,                                                                (2.1)
+established some attractive asymptotic features of this method         xt = xt-1 + uxt .                                                                (2.2)
+that apply in quite general cointegrating regression models. In
+particular, the IVX method has some useful and somewhat surpris-       We impose a simple but widely used structure of martingale dif-
+ing features such as standard chi square testing without any pre-
+cise knowledge about the degree of persistence in the regressors,      ference sequence (mds) innovations for ut := [u0t , uxt ] with con-
+straightforward extension of the methods to multivariate models,
+and great generality in terms of the permissible persistence (or       ditional variance
+vicinity of unity) space. This method has very recently been ap-
+plied to a predictive regression model and was shown to inherit all                       00       0x    
+these advantages in this context (Kostakis et al., 2010).                                  x0      xx
+                                                                       EFt-1  ut ut    =                    ,
+    In empirical research short horizon predictive regressions have
+shown generally inconclusive findings. In response, researchers        where Ft is the natural filtration. This framework allows only
+have been studying prediction over longer horizons for such            for contemporaneous correlation between the components of the
+variables as stock returns and the forward premium. Long-              model. More general dependence structures will be permitted later
+horizon predictive regressions share the same problems as their        but for the purpose of this overview we retain the simple mds
+short horizon counterparts (viz., nonstandard and nonpivotal           structure. Full details of the conditions and notation used in the
+inference with persistent regressors) and similar solutions such       paper are provided in Appendix A.1.
+as Bonferroni techniques have been applied with the same
+limitations noted above. It is therefore natural to explore whether    2.1. Existing problems
+IVX methodology has potentially beneficial applications in long-
+horizon regressions.                                                   2.1.1. Finite sample bias with stationary regressors
+                                                                           The centered OLS coefficient estimator in (2.1) has the form:
+    That question forms the focus of the present paper. We study
+long-horizon predictive regressions and propose a novel infer-                      n                 n                                n
+ence procedure which is based on an extended version of MP and
+Kostakis et al. (2010). The long-horizon version of IVX is analyzed,              xt-1u0t              xt-1u0.xt       0x                    xt -1 uxt
+and shown to be applicable to even much wider parameter region
+near unity: from boundary of stationary/unit root side (mildly inte-   ^ -       t =1                 t =1                             t =1
+grated regressors) to mildly explosive regressors. This is the most
+extensive treatment of the parameter region near unity not only               =    n              =      n         +     xx             n
+within this setting of predictive regression but also in more gen-
+eral time series regressions such as cointegrating regressions. All               (xt-1)2              (xt-1)2                          (xt-1)2
+the attractive features of IVX regression such as standard asymp-
+totic chi square inference with possible multivariate regressor and              t =1                 t =1                          t =1
+regressand are shown to apply.
+                                                                                    n
+    A further contribution of the paper is to investigate validity of
+the predictive model specification under the alternative. In par-             =   xt-1u0.xt        +  0x  ^ -  ,                                        (2.3)
+ticular, we show how balance in the regression may be achieved                                          xx
+through the use of localizing coefficients and that non trivial local            t =1
+asymptotic power applies under such alternatives. These results
+partly explain some of the practical difficulty that has been en-                   n
+countered in establishing empirical evidence of predictability. In
+effect, the departures from the null that deliver predictability are              (xt-1)2
+necessarily small in order to preserve the observed character of the
+dependent variable, thereby making detection difficult. Nonethe-                    t =1
+less, as we show here, long horizon IVX regression provides a
+simple and effective machinery for testing predictability that has     where u0.xt    =   u0t  -  0x  uxt   and ^  =  n           x2t -1 -1  n          xt -1 xt  .
+non-trivial asymptotic power against local alternatives.                                          xx
+                                                                                                                            t =1                 t =1
+    The paper is organized as follows. Section 2 overviews
+existing results on predictive regression literature and the various   Under normality and with a stationary regressor (|| < 1), Stam-
+
+                                                                                                                         
+
+                                                                       baugh (1999) gave a bias expansion for E ^ -  using the well
+
+                                                                       known bias expansion for a fitted AR(1) (Kendall, 1954), which in
+                                                                       the case of a fitted intercept has the form
+
+                                                                                               0x       1   + 3            1      
+                                                                                               xx                          n2
+                                                                       E      -     =     -                  n     +  O             ,                   (2.4)
+                                                                           ^     
+
+                                                                       which has come to be known as the ``Stambaugh bias''.1 Accord-
+
+                                                                       ingly, the first order bias adjusted estimator has been used by
+
+                                                                         1 As indicated, the bias formula given in (2.4) is for a stationary AR(1) process
+                                                                       with a fitted intercept. Unlike the stationary case, fitting an intercept affects
+                                                                       asymptotics in both the nonstationary and explosive regressor cases. For the
+                                                                       subsequent development, which focuses on persistent and explosive regressors, it
+                                                                       is convenient to keep to the no-intercept case in the generating mechanism for xt .
+                                                                       On the other hand, introducing an intercept in the predictive regression (2.1), so
+
+                                                                       that yt = µy + xt-1 + u0t , is easily handled even with nonstationary regressors --
+
+                                                                       see Kostakis et al. (2010) -- and this is the primary case of interest in practice.
+252                                                                   P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+subsequent researchers, e.g., Kothari and Shanken (1997),                                               Note that, with 00.x              = 00 - 0xx-x1x0                            = 00 -      , x20 00.x            =
+
+                                                                                                                                                                                                 xx 00
+
+                                                                                                                   x20                            1                      1        
+                                                                                                                 00 xx                            n                     
+^ adj        ^       ^ 0x     1      + 3^  ,                                                     (2.5)  1-              ,  and   nt    :=            xt  -1 u0.xt    ,       uxt     we have the diagonal
+                     xx                                                                                                                                                   n
+       =        +                     n
+                                                                                                        conditional variance
+
+and Amihud and Hurvich (2004) refined this estimator by using                                             n                      =      1                                                
+a second order bias correction. Within this framework, the prob-                                                                        n2         x2t-1 00.x
+lem is only considered as a ``finite sample problem'', and therefore                                                                                                                  0
+disappears asymptotically. Additionally, the bias formula (2.4) and                                         EFnt-1 nt nt
+associated correction (2.5) is only valid in the stationary case.                                                                                                                        
+                                                                                                        t =1                                              0                          xx
+
+                                                                                                        and the first term of (2.7) converges to the mixed normal (MN)
+                                                                                                        limit,
+
+                                                                                                        1     n
+                                                                                                        n
+                                                                                                                    xt -1 u0.xt
+
+2.1.2. Nonstandard limit theory and uncorrectable bias with persis-                                                                                                                    -1
+                                                                                                                                                         
+
+tent regressors                                                                                            t =1                   MN 0, 00.x                            Jxc (r)2dr           ,
+
+                                                                                                                 n
+                                                                                                        1      (xt-1)2
+     There is wide consensus that most economic fundamentals                                            n2
+
+used as regressors in predictive regressions are likely to have                                               t =1
+
+persistent time series characteristics. The literature has sought                                       while the second term is the standard unit root statistic
+
+to find a realistic approach to allow for this general phenomena.                                       1     n
+                                                                                                        n
+                                                                                                                    xt -1 uxt
+
+One approach that has received much attention is to develop                                                                              Jxc (r)dBx(r         )
+                                                                                                                                          Jxc (r)2dr
+                                                                                                            t =1                                                 .
+
+asymptotics for inference using a local to unity autoregressive                                                  n               
+
+specification        for      the    regressor    xt   in  (2.1)  so  that     =   1   +  c  in  (2.2)  1      (xt-1)2
+                                                                                          n             n2
+e.g., Campbell and Yogo (2006) and Jansson and Moreira (2006).                                               t =1
+
+     In this local to unity case, the well known ``finite sample                                        Hence
+
+bias'' in estimation is still present in the limit and correcting the                                                                                                                -1
+                                                                                                                                                  
+
+asymptotic bias is generally not possible since the bias depends on                                     n ^ -   MN 0, 00.x                                             Jcx (r )2 dr
+
+the localizing coefficient c and this parameter is not consistently
+
+estimable (see below for further discussion).                                                                                           x0                Jxc (r)dBx(r       )
+                                                                                                                                         xx                Jxc (r)2dr
+     Moreover, the limit theory in this case is nonstandard by virtue                                                            +                                              .
+
+of the stronger signal/noise ratio and near unit root behavior in the                                   Therefore the source of the nonstandard limit distribution comes
+
+regressor. In particular, standard methods and notation (Phillips,                                      from the regression endogeneity and the persistent regressor. In
+
+1987) lead to the following limit theory                                                                fact, we can show that after using a standard fully modified endo-
+
+                          1    n                                                                        geneity bias correction method, such as Phillips and Hansen (1990),
+                          n
+                                     xt -1 u0t                                                          which is designed for the unit root case (c = 0), we have
+
+                              t =1                     Jxc (r)dB0(r)                             (2.6)                                                                                           -1
+n ^ -  =                                            Jxc (r)2dr
+                                                                                                                                                     x0                      
+                                                                                                                                                     xx
+                               n                                                                                                                                                     Jxc (r)2dr
+
+                          1     (xt-1)2                                                                 n ^FM -                   MN           c                    ,  00.x                                   .
+                          n2
+                               t =1
+
+where B0 is Brownian motion and Jxc (r) is a linear diffusion. For de-                                  Thus, without precise information on c, the bias is not correctable.
+                                                                                                            Since
+tails on notation, conditions, and limit theory see the Appendix A.1.
+                                                                                                                     1/2               n                  -1/2                                              -1/2
+                                                                                                                     ^ 00
+The limit distribution (2.6) is not mixed normal and is not piv-                                        n     =                     1   (xt-1)2                          (00)1/2             Jxc (r)2dr            ,
+
+otal. The main source of nonnormality comes from the depen-                                                                        n2  t =1
+
+dence between the martingale components that are involved in                                                                                                         -1            x0        Jxc (r)dBx(r)  
+                                                                                                                                  0, 00.x                                          xx         Jxc (r)2dr
+the numerator and denominator together with the nonstationary                                           ^ -                MN                        Jxc  (r  )2 dr          +
+                                                                                                          
+regressor.        More        specifically        the  martingale     t        ns      where nt                                                 (00)1/2  Jxc (r)2dr-1/2
+
+                                                                          s=1                    :=
+
+  1                   1                                                                                                                1/2                                                                       
+  n                  
+     xt      u0t  ,       uxt     has conditional variance                                                                  00.x                               x0                         Jxc (r)dBx(r)
+                       n                                                                                                      00                          (xx 00 )1/2                xx    Jxc (r)2dr1/2
+         -1                                                                                                         =                        Z  +
+
+  n                                                                                                                 =: DF + 1 - 21/2 Z ,
+
+                                                                                                        where
+    EFnt-1 nt nt
+
+t =1
+
+             1                                    1                                                                      x0         and Z            N(0, 1) independent of DF .
+                      x2t-1 00                                       xt-1 0x                                =       (xx00)1/2                   
+               n2                                       
+  =                                                                                    ,
+                                                       nn                         
+         
+                  1                   x0                   xx                                           This result is well known (e.g. Elliott and Stock, 1994) and is used
+
+                               xt -1                                                                    frequently in the literature (e.g. Cavanagh et al., 1995; Campbell
+                nn
+                                                                                                        and Yogo, 2006). Therefore, unless x0 = 0, standard t-ratio
+which is not diagonal unless 0x = 0. The earlier decomposition
+                                                                                                        testing or chi-square inference is unavailable. The source of the
+(2.3) leads to
+                                                                                                        uncorrectable bias difficulty lies clearly in the nuisance parameter
+
+                          1    n                                                                        in the limit distribution and the lack of mixed normality.
+                          n
+                                     xt -1 u0.xt
+
+                              t =1                +  x0  n ^ -                                          2.2. Suggested solutions
+n ^ -  =                                               xx
+                                  n
+                          1     (xt-1)2
+                          n2                                                                                 A primary desirable characteristic in a solution that maintains
+                               t =1
+                                                                                                                                                     c
+                               n                                      n                                 a  local    to  unity          =1+                    condition         of   persistence  in          xt   is  a
+                                                                                                                                                     n
+                          1                                       1                                     pivotal limit distribution or distribution with readily correctable
+                          n          xt -1 u0.xt                  n         xt -1 uxt
+
+                              t =1                    x0              t =1             .         (2.7)  bias. There are many existing and ongoing studies that seek to
+                                                  +                     n
+                     =            n                                                                     resolve these problems and the following is a brief summary of the
+                                                       xx
+                          1     (xt-1)2                           1    (xt-1)2                          main approaches.
+                          n2                                      n2
+                               t =1                                   t =1
+                                                         P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                          253
+
+2.2.1. The Bonferroni method                                                                 to poor performance in predictive regression tests based on Bon-
+                                                                                             ferroni methods such as those in Campbell and Yogo (2006) and
+    The limit distribution of the t statistic                                                Cavanagh et al. (1995) when the regressor is stationary or mildly
+                                                                                             integrated (as in (I1) below).
+      ^ -       DF (c) + 1 - 21/2 Z
+t^ = 
+
+depends on c, which is not consistently estimable. So Cavanagh                               2.2.2. A conditional likelihood approach with sufficient statistics
+
+et al. (1995) introduced a pretest for identifying conditions under                              Jansson and Moreira (2006) suggested a conditional likelihood
+                                                                                             method that uses sufficient statistics. The central idea is to find the
+which the conventional t-test is approximately valid. If the con-
+                                                                                             sufficient statistics R , R , R , R  for (, ) in (2.1) and (2.2).
+ditions do not hold, they suggested a Bonferroni approach which                              A test for  is then constructed from the conditional likelihood of
+                                                                                             R , R  given R , R , whose distribution does not depend on
+searches possible values for c (and hence ) and uses the most                                . Final critical value functions are obtained from the conditional
+                                                                                             likelihood of R given R , R , R . The test based on this
+conservative ones in constructing a confidence interval or test.
+                                                                                             approach attains conditional optimality within a certain class,
+To construct a Bonferroni confidence interval (CI), the investiga-                           and has therefore also received attention. Like the Bonferroni
+                                                                                             method, the approach also has some undesirable aspects. In
+tor first constructs a 100 (1 - 1) % CI for c, denoted as CIc (1).                           particular, it is difficult to extend beyond a single regressor
+                                                                                             model -- for the same reason as before -- and the algorithm
+Then, for each value of c in this confidence interval, construct a                           for implementation involves some highly complicated numerical
+                                                                                             quadrature that is known to present numerical difficulties in
+100 (1 - 2) % CI for  given that value of c, denoted as CI|c (2).                            implementation (Kasparis et al., 2012). Both properties reduce the
+                                                                                             appeal of this method for applied research.
+A CI that does not depend on c is then obtained as
+
+CI () =             CI|c (2) .
+
+         cCIc (1)
+
+By Bonferroni's inequality, the CI has coverage probability of at                            2.2.3. A control function approach
+
+least 100 (1 - 1 - 2) %.                                                                         Recent work by Elliott (2011) proposed adding a stationary
+   More specifically, based on the estimator ^ and using the unit                            variable to the predictive regression to help stabilize the limit
+                                                                                             theory. The idea stems from the following augmented system
+root t-statistic, the proposal is to find CIc (1) = [cl (1) , cu (1)]
+                                                                                             assuming a known 
+as in Stock (1991). Using the critical value dt^ ,c of the limit variate
+
+DF (c) + 1 - 21/2 Z ,
+
+the approach calculates
+
+CI (1, 2)   =  dl   (1     ,  2  ),    du  (1,  2   
+                                                   )
+
+                                                                                             yt  =  xt-1 + u0t     = xt-1 +      0x        uxt  + u0.xt
+                                                                                                                                 xx
+                  , min                                                  .
+
+                 cl c cu
+            =                 dt^ ,c,  1  2   max     dt^ ,c,1-  1  2                 (2.8)
+                                       2                         2
+                                             cl c cu                                                               0x
+                                                                                                                   xx
+Finally, a CI for  is proposed                                                                   =   xt -1  +          (1  -     L) xt  +  u0.xt .
+
+    -   du (1,  2),    ^   -    dl (1,                ,                                      By the same logic as before we have a mixed normal limit theory
+ ^                                              2)
+                                                                                             for ^ regardless of . But since this procedure is not feasible
+for which the limit theory is
+                                                                                             Elliott (2011) suggested finding a proxy orthogonalizing variable
+         dl  (1  ,  2  ),  du  (1    ,                                                       zt leading to
+                                          2)
+Pr t^
+
+               (c)     1         21/2        Z    dl     (1,  2     ),  du  (1  ,  2         yt = xt-1 + zt + u~ 0t
+       Pr DF                                                                          )
+                    +         -                 
+
+ 1 + 2.                                                                                      so that the correlation between u~0t and uxt is less than that of
+
+    Campbell and Yogo (2006) utilized this idea by employing an                              u0t and uxt , thereby diminishing the effect of endogeneity in the
+augmented regression equation as in Phillips and Hansen (1990).                              regression. Then the following limit theory applies
+They used the Bonferroni method above in conjunction with a
+DF-GLS unit root test statistic (Elliott et al., 1996) to remove the                         ^ -                                 1/2
+dependence on c in the confidence interval.                                                               ~DF + 1 - ~ 2 Z,
+
+    With a regressor whose autoregressive root is very close to                              with |~ | < ||. In simulations this approach was shown to have
+unity, this approach shows successful size control while main-
+taining local power. The method has been frequently employed                                 better size control with higher local power than the infeasible
+in the applied literature, but has some undesirable properties
+that should be noted. First, empirical size may be substantially                             Campbell and Yogo method (based on a known value of ) in
+lower than nominal size resulting in a conservative test whose
+power is often negligible in near local alternatives to the null of                          the presence of perfect orthogonalizing regressors that might be
+non predictability. Another critical limitation is the difficulty of                         suggested by economic theory. However, in the absence of a perfect
+extending this approach to multivariate regressions involving sev-                           orthogonalizing variable, the approach cannot completely remove
+eral predictors which induce many unknown c coefficients, sub-                               the nonstandard and non pivotal features of the limit distribution.
+stantially complicating constructions of confidence intervals of
+                                                                                             2.2.4. The IVX approach
+the type (2.8). Finally, Stock's confidence intervals for  are now
+                                                                                                 Another recent approach to predictive regression relies on the
+known to be invalid and seriously biased asymptotically when                                 IVX method of MP. The idea of IVX is to generate a less persistent
+                                                                                             instrument for the regressor than the regressor itself which uses
+c  - (Phillips, 2012b).2 This failure in the approach leads                                  no extraneous information so that the instrument relies only on
+                                                                                             the regressor. The instrument construction takes the form
+
+                                                                                                          t
+
+                                                                                             z~t =  nt-z jxj
+
+  2 Asymptotic analysis of the invalidity in this construction and confirmatory                     j=1
+finite sample simulations are given in Phillips (2012b). Lee (2012, Section 4) also
+reports simulation results confirming the problem in predictive regression settings.         nz  =  1    +  cz  ,    (0, 1) , cz < 0,
+                                                                                                            n
+254                                                                   P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+which is clearly dependent only on {xt }- hence the terminology IVX                                         explanatory power. Long-horizon regression was proposed as an
+
+­ and parameters   (0, 1) and cz < 0 which are specified by the                                             alternate model and has been extensively used to argue the pre-
+
+investigator to ensure that z~t is less persistent than the regressor                                       dictability of stock returns over a reasonable time horizon. The
+
+xt .  Since xj        =      c  xj-1   + uxj,                                                               process of aggregation inevitably lends some persistence to a noisy
+                             n
+                                                                                                            dependent variable since the time sum of any I(0) variable ev-
+            t            c                              t                     c    t
+z~t   =        nt-z j                  +        =          nt-z juxj  +       n                             idently becomes more persistent as the horizon (or period of
+                           n xj-1                                                 nt-z jxj-1
+                                           uxj                                                              summation) increases. Currently, the most popular econometric
+          j=1                                         j=1                        j=1
+                                                                                                            procedure is Valkanov (2003). Under the assumption of an increas-
+                 c
+                                                                                                            ing horizon k = O(n), the author suggested an asymptotically valid
+      = zt + n nt ,
+                                                                                                            procedure based on a well defined limit distribution of the test.
+and zt = nz zt-1 + uxt plays the role of mildly integrated
+                                                c                                                           Nuisance parameters were handled as in Cavanagh et al. (1995) and
+                                                n  nt
+instrument.           The       remainder                  turns    out  to      be  asymptotically         Campbell and Yogo (2006) in conjunction with another procedure.
+
+negligible, which enables nuisance parameter free inference. Then,                                          Accordingly, the distributions of the test statistics are again non-
+
+it can be shown that the IVX estimator                                                                      standard and simulations are needed to compute critical values.
+
+               n                                n                                                           The procedure is also restricted to the scalar regressor case. So the
+
+              z~t-1yt                            z~t-1u0t                                                   approach has similar limitations to many of those described earlier.
+
+^ IVX =      t =1                   =+          t =1                                                        As noted above, the IVX approach addresses these limitations. In
+             n                                  n
+
+              z~t-1xt-1                         z~t-1xt-1                                                   view of the promise in this approach, the present Section develops
+
+             t =1                              t =1                                                         a long-horizon version of IVX and shows that robust inference with
+
+has a following limit theory,                                                                               standard asymptotics is available using this method. In the analytic
+
+   1+                             ,                                                                         framework of long-horizon regression, specifications for both a
+          ^ IVX          
+n2                 -                                                                                        fixed and increasing horizon k have been used where in the latter
+
+where   is a correctly centered mixed normal random variable,                                               case k is proportional to the sample size n. We focus here on a
+
+and                                                                                                         bridging intermediate case where k may increase according to the
+
+                                                                                                            condition  k  +  1    0. This framework is general enough to cover
+                                                                                                                       n     k
+^IVX -                                                                                                      most cases of practical interest involving long horizon forecasting.
+  IVX               Z,
+
+which is standard normal. The key element in this limit theory                                              3.1. Model framework
+
+is the asymptotic independence between the martingale part of
+n                                n
+          z~t -1 u0t     and               z~t -1 xt -1 ,  which    obtains       by  virtue     of   the   We consider the multivariate predictive regression system
+    t =1                             t =1
+
+reduced order of magnitude of zt (hence z~t ). Compared to the                                              yt+1 = Axt + u0t+1,                        (3.1)
+                                                                                          1                 xt+1 = Rnxt + uxt+1,
+earlier discussion, we now have the mds nt                                       :=   (  1+     zt-1u0t ,
+                                                                                                                           C
+ 1                                                                                       n2
+                                                                                                            Rn = Ip + n , for some  > 0,
+      uxt )  and    martingale            conditional      variance
+  n
+
+  n                                                                                                         where A is an m×p coefficient matrix and C = diag c1, c2, . . . , cp
+
+                                                                                                            is a diagonal matrix of localizing coefficients that are unknown
+    EFnt-1 nt nt                                                                                            and provide some flexibility in the properties of the multivariate
+                                                                                                            regressors. We allow for more general degrees of persistence in the
+t =1                                                                                                        regressors than the existing literature since xt may belong to any
+                                                                                                            of the following categories:
+          1                                          1   
+          n1+             zt2-1 00                                    zt-1 0x
+                                                      n1+  
+     =                                                     2                             ,
+                                                                                      
+                 1                
+                                                                    xx                
+
+             n1+             zt-1 0x
+                      2
+
+which     has      a  diagonal         limit   since                n                 =     Op(1) but       (I1) mildly integrated (C < 0,   (0, 1)),
+                                                                 1                                          (I2) near integrated (C < 0,  = 1),
+                                                              n1+       t =1  zt2-1                         (I3) integrated (C = 0),
+                                                                                                            (I4) locally explosive (C > 0,  = 1),
+n         zt -1    =     Op  (n  1  +  )  for  mildly integrated         zt   as  shown     in  Phillips    (I5) mildly explosive (C > 0,   (0, 1)).
+                                 2
+    t =1
+                                                                                                 1-
+and      Magdalinos             (2007a,b),      so    n-(1+   2  )  n         zt -1  =      n-(    2  )  ×
+
+Op(1) = op(1).                                                          t =1
+
+      This approach to predictive regression has many desirable                                                 This framework adds considerable generality that is useful in
+                                                                                                            both empirical work and theory.3 Existing studies of predictive re-
+properties. It leads to a pivotal mixed normal limit distribution un-                                       gression typically considered only the near integrated scalar re-
+                                                                                                            gressor case and relied on asymptotic results for such processes
+der persistent regressors, and the degree of allowable persistence                                          (such as Phillips, 1987; Chan and Wei, 1987) combined with Bon-
+                                                                                                            ferroni methods to control test size. One reason for the restriction
+in the regressor is quite general, including mildly integrated, lo-                                         to near integrated processes as regressors is that the asymptotic
+                                                                                                            theory for time series with a local to unity parameter has long been
+cal to unity and unit root regressors. In another paper by the same                                         well known among empirical researchers and is better understood
+                                                                                                            than the limit theory in wider vicinities of unity. The recent work
+authors (Phillips and Lee, 2012b), we show that even under the lo-                                          on limit theory encompassing a wider autoregressive parameter
+
+cally and mildly explosive regressors, the chi-square limit theory
+
+remains robust. Another attractive feature of the framework is that
+
+it is very straightforward to extend to multivariate systems. Thus,
+
+most of the existing difficulties of inference in predictive regres-
+
+sions are nicely resolved by this approach. Kostakis et al. (2010)
+
+and Gonzalo and Pitarakis (2009) have applied an IVX approach to
+
+the predictive regression setting.
+
+3. Long-horizon IVX                                                                                           3 Further flexibility may be introduced by allowing variation in the power
+
+    Studies on short horizon predictive regression frequently found                                         exponent rate parameter  across regressors, thereby directly influencing the
+no significant predictive power or at most a marginal degree of
+                                                                                                            degree of persistence in individual regressors. This additional level of generality is
+                                                                                                            not considered in the present work but may be handled by the methods given here
+                                                                                                            and in MP.
+                                                     P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                             255
+
+space (Phillips and Magdalinos, 2007a,b; Magdalinos and Phillips,                                                             =  + E u1u1 ,
+2009a) enables a more generally applicable approach to predictive
+regression. That approach is pursued here.                                       =  E ut ut-h ,
+
+    As noted, a further advantage of the approach we consider is                      h=1
+that all cases (I1)­(I5) above are encompassed in the theory in the
+context of multivariate regressors whose autoregressive roots can                     00       0x                                  00     0x 0                    0
+lie in a wide vicinity of unity. The approach is therefore compatible                  x0      xx                                   x0    xx = 0                 xx
+with models where there are a variety of economic fundamentals                     =                       ,                    =                                    ,
+or factors that serve as common elements in determining variables
+such as stock returns or the forward premium, as is common in                   and use the functional law (Phillips and Solo, 1992)
+empirical finance models (Fama and French, 1993; Kothari and
+Shanken, 1997; Lewellen, 2004, and many others).                                1    ns                1      ns             u0t        B0n(s)
+
+    To proceed, we formulate a general weakly dependent innova-                                               
+tion structure of the linear process form
+                                                                                           uj  =                             uxt     =  Bxn(s)
+
+                                                                                  n   j=1                n j=1
+
+                                                                                                       B0(s)                         00          0x  
+                                                                                                        Bx(s)                         x0         xx
+                                                                                                                             =  BM                     ,
+
+                                                                                and local to unity limit law for cases (I2)­(I4) (Phillips, 1987):
+
+ut  :=  u0t      =                                                              xnr     Jxc (r),                                                                        (3.5)
+
+         uxt                                                                    
+                        Fjt-j,
+                                                                                   n
+                    j=0
+                                                                         (3.2)
+                                                                                where Jxc (r)     r        e(r-s)C dBx(s), which encompasses the unit root
+           0t                                                                                              = Bx(r) when C = 0. Under (3.2)­(3.3) we
+    t  =    xt      mds     (0, ) ,    > 0,          E  1       4  <  ,         case where     =        0
+                                                                                               Jxc (r
+                                                                                                       )
+
+                                                                                have the Beveridge­Nelson (BN) decomposition (Phillips and Solo,
+
+                                                                                1992)
+
+F0 = Im+p,                      <  ,
+                            Fj
+                         j
+
+                    j=0                                                                                                                                
+
+                                                                         (3.3)                                                                         
+                                                                                ut = F (1)t - ~t , ~t = F~jt-j, F~j =                                       Fs.
+                                      
+
+F (z) =  Fjzj       and                                                                                                         j=0                  s=j+1
+                            F (1) = Fj > 0.
+
+           j=0                       j=0                                        Note that F~0j = 0 and hence ~0t = 0 for all j and t, from (3.4). The
+
+Following convention in the predictive regression literature, we                component decompositions are then
+impose an mds structure on the regression error u0t using the
+following restricted Fj matrices                                                u0t = F0(1)t - ~0t = 0t ,
+                                                                                uxt = Fx(1)t - ~xt .
+       F0j                  Im : 0m×p        for  j     0
+Fj  =         ,     F0j  =                   for  j  =  1  ,             (3.4)
+        Fxj                   0p×(m+p)               
+
+giving a special case of (3.2) and (3.3). This formulation allows               3.2. Rearranging the regression and long-horizon IVX
+general linear dependence in uxt but imposes an mds structure
+on u0t to ensure that there is non-predictability of yt under the                   Because of its flexibility and analytic convenience we consider
+null hypothesis, as is explained below in Section 3.2. While this
+case is of great practical relevance in some financial applications,            a moderately increasing horizon such as k = n , with   (0, 1) ,
+dependent u0t specifications are also meaningful, sometimes in
+the same context. For example, a bivariate regression specification             and accordingly impose the horizon rate condition
+with mds innovations as in (2.1) is unconvincing when there are
+two or more significant predictors. To see this, let x1t and x2t be             1 + k  0,
+the dividend­price and earnings price ratios, two explanatory
+variables for stock returns for which many authors have found                   kn
+significant predictive power (e.g. Campbell and Yogo, 2006). Then,
+taking a single regressor specification (as is commonly done in                 which has substantial generality. Application of the IVX proce-
+empirical research such as Campbell and Yogo) we have                           dure in its original form leads to inconsistent estimation, just as
+                                                                                in Valkanov (2003). However, a simple rearrangement of the re-
+yt+1 = x1t + u0t+1,                                                             gression about the null hypothesis is useful in producing a stronger
+                                                                                regressor signal and consistent estimation. Such a rearrangement
+E (u0t+1|Ft ) = 0 since x2t  Ft ,                                               was originally suggested in Jegadeesh (1991) and Cochrane (1991)
+                                                                                for stationary regressor cases in order to vitiate the effects of se-
+thereby contradicting the mds condition.                                        rial correlation of the residuals in long-horizon regression. Liu and
+    On the other hand, even though we impose (3.4), the multiple                Maynard (2007) recently used this same rearrangement to make
+                                                                                the dependent variable white noise under the null and employed
+predictor model is less subject to omitted variable misspecification            sign and signed rank regression methods. The same idea is applied
+of this type. Of course, the mds assumption also conforms with                  here to empirical long-horizon regressions.
+non-predictability under the null in Section 3.2. In what follows,
+the notation we use can be interpreted as belonging to the special                  The starting point is to consider testing predictability in a long
+mds case. For example, the matrices 0x and 00 are simply                        horizon regression based on the following empirical regression and
+special cases of general long-run covariances corresponding to                  null hypothesis:
+contemporaneous covariances.
+                                                                                ytk+1 = Axt + uk0t+1                                                                    (3.6)
+    We denote the long run covariance matrices associated with ut                                                                                                       (3.7)
+as                                                                              H0 (k) : Et ytk+1 = 0 or A = 0,
+
+                                                                                                 k                                   k
+
+                                                                                ykt+1 =  yt+j,                uk0t +1           =  
+                                                                                                                                       u0t +j ,
+                                                                                             j=1
+                                                                                                                                   j=1
+ =  E ut ut-h = F (1)F (1),
+                                                                                where we use the natural filtration Ft =  (x0, y0, ut , ut-1, . . .)
+         h=-                                                                    with ut = (u0t , ux t ) and set EFt (·) = Et (·). The alternative
+                                                                                hypothesis is H1 (k) : Et ytk+1 = 0 or A = 0. This type of
+    F (1)  =  F0(1)      =  Im : 0m×p     ,
+               Fx(1)             Fx(1)
+256                                                        P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+empirical regression has been frequently used in the literature.                        alternatives to H0 (k) based on (3.1) and those of H0 (k) from
+
+As discussed in Hjalmarsson (2011), Eq. (3.6) is formulated not                         (3.10). We then analyze the local asymptotic power properties
+                                                                                        of the long horizon IVX procedure suggested below. Using
+as the data-generating process (DGP) but for a fitted regression.                       local alternatives, Appendix A.2 also provides a mechanism for
+                                                                                        rectifying the apparently unbalanced nature of the regression,
+The conventional DGP employed in the literature describes the                           which has been a universal problem in the predictive regression
+                                                                                        literature, e.g., see the discussions in Gospodinov (2009) or Torous
+mechanism yt+1 = Axt + u0t+1 and xt+1 = Rnxt + uxt+1 as in                              and Valkanov (2000). The remainder of the main text develops
+(3.1). So yt is an mds with the natural filtration Ft under the null of                 inference procedures and asymptotics under the maintained
+                                                                                        hypothesis of non-predictability since the focus in predictive
+non-predictability in this DGP. One statistical obstacle in the model                   regression testing is still primarily on the behavior of the tests
+                                                                                        under the null hypothesis.
+(3.6) is that the innovation uk0t+1 is a partial sum of I(0) variables
+                                                                                            In the model (3.10) the regressors are persistent and the
+and therefore has some persistence characteristics which affect the
+                                                                                        innovations are I(0), so the equation's stronger signal ensures
+estimation limit theory, including that of IVX.
+    We therefore seek an alternative empirical regression for                           regression consistency. Importantly with this formulation, a
+                                                                                        modified IVX procedure is applicable that removes dependence of
+testing predictability or absence of predictability in long horizon                     the test statistics on the localizing coefficient nuisance parameter
+                                                                                        C in xt and enables us to enjoy the benefits of IVX regression.
+regression. To motivate the construction we note that if
+                                                                                            In short-horizon predictive regression, the IVX instrument is
+Et [yt+k] = Et+1 [yt+k] = · · · = Et+k-1 [yt+k] = 0,                            (3.8)   constructed as
+
+then in view of stationarity of yt+k and under the null of
+unpredictability
+
+Et +1  [yt+k]  =  0        (1-period  backshifting)  Et  [yt +k-1 ]  =  0,
+
+                       
+
+Et +2  [yt+k]  =  0        (2-period  backshifting)  Et  [yt +k-2 ]  =  0,
+
+                       
+
+...                                                                                                  t
+
+Et +k-1  [yt+k]   =    0      ((k-1)-period backshifting)  Et  [yt+1]   =   0.          z~t =  Rnt-z jxj,
+
+                                                                                                 j=1
+
+It follows that:                                                                              with    Rnz  =      Ip  -  Cz  ,       (0, 1) , Cz = cz Ip and cz > 0.
+                                                                                                                         n
+Et [yt+k] = Et [yt+k-1] = · · · = Et [yt+1] = 0.                                (3.9)
+
+This formulation motivates regressing one period returns on a                           Since    xj      =    C       xj-1  + uxj,
+long-horizon version of the regressor, leading to the following                                               n
+empirical regression:
+                                                                                                   t                  C                
+                                                                                                                      n
+                                                                                        z~t   =          Rtn-z j         xj-1   +   uxj
+
+                                           k                                                     j=1
+
+yt+k = Bxtk + u0t+k,         xtk      =                                         (3.10)             t                        C     t
+                                                                                                                            n
+                                                xt +j-1                                           Rnt-z juxj                     Rnt-z jxj-1                                    (3.12)
+
+                                           j=1                                                =  j=1                  +         j=1
+
+H0 (k) : B = 0.                                                                 (3.11)                   C
+
+for which the alternative hypothesis is H1 (k) : B = 0. Later in                              = zt + n nt .                                                                     (3.13)
+
+the paper we will consider model validity under a class of local                        After decomposition, zt = Rnz zt-1 + uxt plays the role of a mildly
+
+alternatives within H1 (k). Note that (3.8), which is equivalent to                     integrated instrument and the remainder nt is controllable due
+H0 (k), implies (3.9) and hence eventually guarantees H0 (k), i.e.,                                                   C
+                                                                                        to its coefficient            n      (except for the mildly explosive (I5) case --
+
+                           Et [yt+k] = 0                                                see (Phillips and Lee, 2012b)), which leads to robust, nuisance
+                                                         
+                             Et+1 [yt+k]      =      0                                  parameter free inference.
+                                                         
+                                      ...                
+
+                                                                                                                                                            is xtk     k
+H0 (k) : B = 0 
+                                                                                              Since the     long-horizon               regressor in (3.10)          =      j=1  xt +j-1 ,
+
+                                      [yt+k]    =    0                                  we design a long-horizon IVX (LHIVX) approach using the
+                          Et+k-2                      
+                                                                                        following IVX instruments
+                                      [yt+k]    =    0
+                            Et +k-1
+
+        Et [yt+1] = 0                                                                                k                                t
+                             
+           Et [yt+2] = 0                                                                z~tk =  z~t+j-1,                 z~t =  Rnt-z jxj
+                             
+                  ...                                                                             j=1                             j=1
+
+                                                                                                           Cz
+                                 H0 (k) : A = 0.                                                           n
+
+           [yt +k-1 ]     =  0                                                          Rnz   =  Ip   -           ,     (0, 1) , Cz > 0.
+       Et                     
+
+        Et [yt+k] = 0                                                                   Then
+
+   The first equivalence () above holds since the empirical                             z~tk  =  ztk  +    C      nkt ,                                                         (3.14)
+                                                                                                           n
+regression coefficient B in (3.10) satisfies the following relation for
+
+j = 1, . . . , k,
+
+Et+j-1 [yt+k] = Bxjt + BEt+j-1 xkt+-jj ,                                                where
+
+                                                                                                     k                              t              C
+
+so that B = 0 implies Et+j-1 [yt+k] = 0 for all j = 1, . . . , k. The                   ztk =  zt+j-1,                   zt  =      Rtn-z j xj  -  n xj-1
+
+opposite direction is easy to show by contraposition but for our                                  j=1                              j=1
+
+purposes here we only need the primary direction. In particular,                                 t                              t
+
+the alternative empirical regression (3.10) produces a test that                              =  Rtn-z j C xj =  Rtn-z juxj,
+
+provides a sufficient condition for the test in the original regression                          j=1                           j=1
+
+(3.6) in the sense that H0 (k) implies H0(k).                                                         k                                        t
+
+    Under the alternative, the two models (3.6) and (3.10)                              nkt   =                                nt =  Rtn-z jxj-1.
+                                                                                                     nt +j-1 ,
+have different specifications. In Appendix A.2, we relate local                                                                            j=1
+                                                                                                    j=1
+                                                              P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                            257
+
+We impose the rate condition                                                                  In the general case where C = 0 the nuisance parameter
+
+   1     n        k     0,                                                                 dependency in the denominator can be removed simply by using
+                                                                                           a self-normalized estimator. In this way standard pivotal inference
+n2                                                                                         obtains. In particular, the self-normalized estimator given in the
+                                                                                           following theorem provides a convenient tool for robust inference
+n     +  k    +                                                                            across (I2), (I3) and (I4) cases uniformly in long-horizon prediction
+                                                                                           regression.
+                 n
+
+so that the prediction horizon increases slower than the sample
+
+size n, but faster than the degree of mild integration in the IVX
+variate. The faster rate  > 0.5 indicates that the mildly integrated
+
+instrument should not be too close to stationarity, a point on which
+
+MP provide a detailed discussion.                                                          Theorem 3.2.
+
+    Simulations in Phillips and Lee (2012b) show that the size                             vec                                        PZ X  -1        -1
+                                                                                                    B^ LHIVX                    X                 ^ 00
+performance of the IVX procedure is robust to choices of                                                      -  B                              
+(0.5, 1) with a normalized value Cz = -5Ip, even for sample
+sizes as low as n = 100. Local discriminatory power also seems                                                                 
+                                                                                                 × vec B^LHIVX - B   2 (mp) ,
+satisfactory with a slight tendency for power to increase with the
+                                                                                           where
+magnitude of . In view of the rate condition above, we recommend
+for practical work that  be chosen close to but less than the horizon                                            n-k                        
+rate  in k = n . For example, if the horizon is set as k = n0.75 then
+the IVX rate parameter might be chosen as  = n0.7. Note that                               X PZ X -1 =                  xkt z~tk
+k = n itself is chosen according to the selected length of the
+                                                                                                                       t =1
+horizon and that larger k typically leads to higher local power (see
+                                                                                                                  n-k                           -1  n-k      -1
+
+Appendix A.2).                                                                                                  ×  z~tk z~tk                       xtk z~tk         ,
+
+      To test the null of unpredictability (3.11) in the long horizon                                                  t =1                       t =1
+
+regression (3.10) we propose the LHIVX estimator                                           with any consistent estimator ^ 00 for 00.
+
+               n-k                n-k                     -1                               In view of the mds assumption (3.4) for the regression errors,
+
+B^ LHIVX =  yt+k z~tk  xtk z~tk                               ,                            a simple consistent estimator ^ 00 is the residual variance ma-
+
+                 t =1                      t =1                                            trix  n-1  n         u^ 0t  u^ 0 t  for    any   regression   residuals  (including  OLS
+
+whose asymptotic null distribution is mixed Gaussian for a wide                                           t =1
+class of processes as will be shown in subsequent Sections. The
+estimator is an extended version of the IVX estimator of MP.                               and IVX) for all (I1)­(I5) cases. In other applications with depen-
+
+    The following Sections develop the limit theory for testing pre-                       dent errors u0t , conventional lag kernel HAC estimators can be
+dictive capability using LHIVX regression. We start by considering
+the unit root and near integrated cases and then move on to con-                           employed--see Kostakis et al. (2010).
+sider the mildly integrated and mildly explosive cases.
+                                                                                           Unlike earlier work on predictive regression such as Valkanov
+
+                                                                                           (2003), the regressors in the empirical model can be multivariate
+
+                                                                                           and their autoregressive roots may fall into any of the following
+
+                                                                                           classes: near integration (I2), unit roots (I3), or locally explosive
+
+                                                                                           roots (I4). Moreover, we do not need to simulate critical values
+
+3.3. Limit theory with  = 1                                                                since the limit theory is chi square and is free of any nuisance
+
+                                                                                           parameter. These advantages are not present in Bonferroni type
+
+    This case covers unit roots, near integration and locally                              methods even with the (I2) case alone. It turns out that these
+explosive cases, i.e., cases (I2)­(I4). The specification is more
+general than the conventional local to unity specification in                              benefits to LHIVX also hold in cases of mild integration (I1) and
+predictive regression which is largely preoccupied with (I2). The
+                                                                                           mildly explosive roots (I5), as we now discuss.
+LHIVX estimator has estimation error under the null B = 0,
+                                                                                           3.4. Mildly integrated regressors
+
+                   n-k                       n-k              -1
+
+B^ LHIVX - B =  u0t+k z~tk  xtk z~tk                                  ,       (3.15)       In spite of the extensive research in time series econometrics it
+
+                       t =1                         t =1                                   is still challenging to discriminate clearly between stationarity and
+
+and we provide its limit theory.                                                           unit roots in empirical data. Beyond power and size deficiencies
+
+   The following result gives the limit theory for B^LHIVX covering                        in conventional unit root tests, a potential explanation for some
+
+the cases (I2)­(I4).                                                                       empirical results is that many economic time series have roots that
+
+                                                                                           are in a wide local region of unity rather than strictly at unity or
+
+                                                          1        n                       in its immediate vicinity. Phillips and Magdalinos (2007a,b) and
+
+Theorem 3.1.           Under    the  rate  condition      n2  +k           k   0, we have  Magdalinos and Phillips (2009a) recently analyzed this type of
+                                                          n
+                                                                      +n
+
+      1       3                                                                            wide vicinity of unity and called processes with this characteristic
+                  B^ LHIVX
+vec    n2  k2                -  B           MN (0, B) ,                                    on the stationary side of unity mildly integrated processes. Many
+
+where                                                                                      variables regarded as economic fundamentals, such as Treasury
+
+                                                                                           Bill rates, show varying degrees of persistence and seem to be
+
+B = c-xz1 Cz-1xxCz-1 c-xz1  00,                                                            better classified as mildly integrated processes with roots in a
+
+           1                1                                                              broad vicinity of unity rather than as strictly unit root or near
+           2                                        (r) dr Cz-1C .
+cxz   =       xx  Cz-1  +             Jxc  (r) Jxc                                         integrated processes. It therefore seems worthwhile to develop
+
+                                   0                                                       asymptotics for predictive regression that allows for such behavior
+
+                                                                                           in the regressors. Accordingly, this Section focuses on the limit
+
+    The limit theory is mixed normal (MN) and the convergence                              theory of the LHIVX estimator with mildly integrated regressors
+
+rate is fast. But in the unit root case I(3), as mentioned earlier,                        (C < 0,   (0, 1)), i.e., case (I1) in the earlier notation.
+                                                                                                                                                          k
+Jxc (r) = Bx(r) and C = 0, so the second part of cxz disappears, the                           We impose         the   technical            restriction  n    0,    which requires
+variance matrix B is non random, and we have a pivotal limiting                            the degree of                                                            n) to exceed
+                                                                                                                 mild integration (measured by
+normal distribution after using consistent estimators for the long-
+                                                                                           asymptotically the prediction horizon (k) used in the empirical
+run variances.
+                                                                                           regression. This condition is not too restrictive because there
+258                                                            P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+is flexibility in the choice of the empirical horizon k, so the                        holds as earlier with ztk                       =     k        zt +j-1 ,  zt  =  t        Rnt-z j(xj  -
+
+                                                                                                                                                 j=1                        j=1
+
+findings from the predictive regression test can be regarded as                        C  xj-1)  =  t           Rnt-z juxj,            and   nkt      =  k        nt +j-1 ,  nt  =  t
+                                                                                       n
+robust up to this condition on the horizon. Note that although                                          j=1                                                  j=1                        j=1
+
+the rate parameter  is generally unknown, it is also possible                          Rnt-z jxj-1. However, the remainder term nt plays a different
+
+to consistently estimate this parameter in practice, as shown in                       role with mildly explosive regressors. The signal strength of the
+
+Phillips (2012a). Taken together with the earlier rate conditions,                     regressors is stronger for mildly explosive processes than for
+
+we therefore impose               n1/2  +     n  +   k  +  n    0.                     persistent regressors. So the order of magnitude of nt is also
+                                   n          k     n       n
+                                                                                       larger and that component of (3.17) ends up dominating the
+      We continue to work with the LHIVX estimator B^LHIVX . The
+                                                                                       IVX asymptotics in spite of the coefficient C /n -- see Phillips and
+following limit theory for B^LHIVX applies in the mildly integrated
+                                                                                       Lee (2012b) for further details. Consequently, the LHIVX remainder
+
+regressor case.                                                                        nkt also behaves differently and dominates the asymptotics just as
+
+Theorem 3.3.                                                                           in Phillips and Lee (2012b).
+
+      1          3                       N 0, 4x-x1  00 .                                 We have the following limit theory for the estimator B^LHIVX
+                     B^ LHIVX
+vec    n2     k2               -  B                                                    under mildly explosive regressors.
+
+   We have the same rate of convergence as in the  = 1 (I2)­(I4)                       Theorem 3.5.
+
+cases, which is a similar finding to that of MP for the original                       vec  kn              -          
+IVX estimator. We also confirm that for mildly integrated                                         B^ LHIVX
+regressors, the limit distribution is normal rather than mixed                                                  B    Rnn
+normal. The following theorem provides a robust chi square test
+that is free of nuisance parameter for cases (I1)­(I4) cases in                                                                                          -1             
+combination with Theorem 3.2.                                                                             
+
+                                                                                             MN 0,                   e-pC YC YC e-pC dp                           00 ,              (3.18)
+
+                                                                                                                0
+
+Theorem 3.4.                                                                           where YC          N  0,       e-pC xxe-pC dp as defined in Lemma A.9.
+
+                                                                                                                  0
+
+vec                                     PZ X  -1        -1                                The limit distribution of B^LHIVX with mildly explosive regressors
+         B^ LHIVX               X                   ^ 00
+                    -      B                                                           is therefore essentially the same as the OLS estimator without
+                                                                                       using IVX. In short horizon models this result was confirmed in
+                                                2 (mp) .                               Phillips and Lee (2012b).
+       × Vec B^ LHIVX - B
+                                                                                           The variance matrix in (3.18) can be estimated leading to a self-
+3.5. Mildly explosive regressors                                                       normalized estimator that is robust to mildly explosive regressors.
+                                                                                       As the following result shows we therefore have a single uniform
+      This Section develops the limit theory for mildly explosive re-                  inference method that covers all of the cases (I1)­(I5).
+
+gressors C > 0,   (0, 1) covering case (I5). Booms and finan-
+
+cial exuberance are recurring features in economic activity and                        Theorem 3.6.
+
+these phenomena can be well characterized over subperiods by                                                                                 -1           -1
+                                                                                               B^ LHIVX             X                                 ^ 00
+mildly explosive processes, as described in Phillips et al. (2011)                     vec               -  B                          PZ X      
+
+and Phillips and Yu (2011). This parameter region is not covered                                                     
+
+in any of the earlier literature on predictive regression, although                         × vec B^LHIVX - B   2 (mp) .
+
+there are certainly subperiods of financial exuberance and rising
+
+economic fundamentals that may be modeled as temporarily ex-                               Theorem 3.6 shows that, although the LHIVX estimator with
+                                                                                       mildly explosive regressors has different asymptotic behavior than
+plosive or very mildly so. Such periods may also have predictive                       the other cases (I1)­(I4), the self-normalized estimator has the
+                                                                                       same standard chi square limit theory which is pivotal and simple
+content, especially in cases of contagion. Hence it is of some inter-                  to use. Theorems 3.2, 3.4 and 3.6 together show that a single test
+                                                                                       procedure for predictive regression may be employed that covers
+est to include such cases in our analysis to achieve a comprehensive                   a large range of potential predictors with autoregressive roots in a
+                                                                                       wide neighborhood of unity.
+coverage in predictive regression tests.
+                                                                                       4. Conclusion
+      We show below that the asymptotic behavior of the LHIVX
+                                                                                           This paper develops a theory of inference for long-horizon
+test is robust to mildly explosive behavior in the regressors under                    predictive regressions with multivariate regressors that have roots
+                                                                                       in a broad vicinity of unity. We propose a long-horizon version of
+certain conditions. In particular, we assume that  < , so that the                     the IVX method which extends some recent developments on this
+                                                                                       methodology in Magdalinos and Phillips (2009b). Our procedure
+regressor's mildly explosive behavior (measured by the parameter                       allows the autoregressive roots of the predictive regressors to
+                                                                                       range from mildly integrated (close to the boundary of stationarity)
+) is closer to the local to unity parameter region than is the                         through to mildly explosive roots (close to the boundary of full
+                                                               Cz                      explosive behavior). This extension is more comprehensive than
+generated instrument for which Rnz = Ip -                      n   (see (3.16) below)  existing local to unity specifications for predictive regressors.
+
+and whose behavior is largely determined                       by   . This condition       The method developed here has both empirical and theoreti-
+                                                                                       cal benefits. The LHIVX test statistics have asymptotic chi-square
+does not seem strong as empirical evidence suggests that economic                      distributions that are free of any nuisance parameters and there is
+                                                                                       no need for simulation methods. The method also has non-trivial
+exuberance is intermittent and interspersed with more normal                           power against local alternatives. These advantages are especially
+
+periods of unit root or near integrated behavior, so that explosive
+
+behavior is often only a mild departure from normality.
+
+      We define the LHIVX instruments in the same way as before,
+
+viz.,
+
+         k                                  t
+
+z~tk  =                        z~t =  Rtn-z jxj
+             z~t+j-1,
+                                        j=1
+         j=1
+
+Rnz   =  Ip   -     Cz  ,      (0, 1) , Cz > 0.                     (3.16)
+                    n
+
+Then, the decomposition
+
+z~tk  =  ztk  +     C   nkt                                         (3.17)
+                    n
+                                                         P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                                259
+
+appealing for empirical practice in view of the simplicity, conve-                   model validated (or balanced) by assigning localized forms to the
+nience and generality of the approach. A further notable feature                     regression coefficients A and B in (3.1) and (3.10). This formulation
+is that the predictive regressions can be multivariate with regard                   allows the dependent variable to faithfully retain a near mds or
+to both regressor and regressand, thereby extending the range of
+coverage and realism in empirical model testing of predictability.                   I (0) form even under the alternative, thereby ensuring model
+To the best of our knowledge, this general formulation of predictive
+regression is not presently available in the literature.                             validity. Localized coefficients also enable us to analyze test power
+                                                                                     and determine conditions under which non negligible power may
+Acknowledgment                                                                       be achieved.
+
+    The first author's research support is acknowledged from NSF                         To avoid lengthy enumeration of the various cases we restrict
+grant no. SES 09-56687 and from the University of Auckland.                          our attention in what follows to cases (I2)­(I4). Local departures
+                                                                                     from the null based on model (3.1) may be expressed as
+
+                                                                                     yt+1 = Axt + u0t+1,                                                                       (A.1)
+
+Appendix                                                                                                    a
+
+    This Section provides some useful preliminaries and proofs of                    H1 : A = An = n for some a,  > 0.
+the main results in the paper. An online supplement (Phillips and
+Lee, 2012a) contains proofs of the supporting lemmas listed here                     In view of (3.8), this formulation results in the following sequence
+and further technical arguments that are used in the paper. Also
+included is a discussion of model validity and equation balancing                    of local-to-zero predictive components from the regressors. First,
+in predictive regression under various alternatives.
+                                                                                     we have
+
+                                                                                                            a
+
+                                                                                     Et+k-1 [yt+k] = n xt+k-1,
+
+                                                                                     Et+k-2 [yt+k]              a                   [xt +k-1 ]
+
+                                                                                                          =     n  Et +k-2          c
+                                                                                                                a  
+                                                                                                                                                              
+
+                                                                                                          = n          1+              xt+k-2 + uxt+k-1         ,
+
+A.1. Notation, conditions and limit theory of Section 2                                                                      n
+
+    We provide conditions for the results given in the review                        ...
+Section 2 and the accompanying limit theory. We impose the
+following moment conditions on the mds innovations in (2.1) and                                                                                 k-1                          
+(2.2),                                                                                                   a  c k-1
+                                                                                                                                                            c k-1-j
+
+                                                                                     Et [yt+k] = n              1+                     xt +          1+              uxt +j
+
+                                                                                                                      n                         j=1        n
+
+                                                                                                                                  
+
+                                                                                                         a                          k
+         u0t                                          00        0x                                  = n xt + Op n .                                                            (A.2)
+                                                       x0       xx
+ut  :=    uxt       ,      EFt-1   ut ut      =    =                >  0,
+
+sup E ui4t  <  for i = 0, x                                                          Summing up we have
+  t
+                                                                                       k
+where the natural filtration is Ft =  (x0, y0, ut , ut-1, . . .). Under
+                                                                                     
+this innovation framework, we have the well known functional law                          Et+k-i [yt+k]
+(e.g. Phillips and Solo, 1992)
+                                                                                     i=1
+
+                                                                                                  k                                              k i-1                         
+                                                                                                   
+                                                                                             a                     c i-1                                      c i-1-j
+
+     ns                       ns                                                          = n               1+     n             xt+k-j +                 1+           uxt +j
+
+1                          1       u0j           B0n(s)                                                                                          i=1 j=1        n
+
+              uj                                                                                    i=1
+
+                    :=                 uxj    =  Bxn(s)                                          k                 
+
+  n      j=1              n j=1                                                              a       
+                                                                                             n
+                        B0(s)                 00      0x                                  =               xt +k-j      1 +          op (1)
+                         Bx(s)                 x0     xx
+                                   =      BM                 ,                                       i=1
+
+and  local    to    unity  limit   law    (Phillips,  1987)  xnr    Jxc (r), where           +    k                   i-1           +  c i-1-j            
+                                                              
+                                                                                                 i1/2       i-1/2                      n             uxt +j
+
+              r                                                 n                               i=1                          1
+
+Jxc (r)         0  e(r-s)C dBx(s)                                                                                     j=1
+
+         =                         is  a  standard    Ornstein­Uhlenbeck   process.          a                                          
+                                                                                             n
+Under certain conditions, similar results for weakly dependent                            =       xkt 1 + op (1) + Op k
+
+vector processes also hold (see Section 3.1).                                                a
+                                                                                             n
+                                                                                          =     xtk 1    +  op (1)     =         kEt   [yt+k] 1 + op (1) ,
+
+A.2. Model validity and consistency under local alternatives                         using (A.2), which implies that
+
+    A common characteristic of linear predictive regression equa-                    Et   [yt+k]  =   a     xkt 1 + op (1) .                                                   (A.3)
+tions is their unbalanced nature under the alternative hypothesis.                                   kn
+Stock return regressions are a striking example because the depen-
+dent variable (stock returns) has features close to an mds whereas                        These results enable us to investigate model validity (or
+the posited predictive regressors are typically persistent and are
+often modeled as near integrated processes. In consequence, most                     balance) under the alternative hypothesis. Observe that under the
+of the existing literature studies test performance and asymptotics
+only under the null hypothesis, completely forgoing problems of                      alternative H1 (3.10) becomes
+imbalance. Given that the focus is actually the alternative -- consti-
+tuting a search for regressors with predictive capability -- attention                           a                                                   kn1/2      xkt  
+to the null is really just a concern about controlling size, while the                          kn                                                            kn1/2
+main interest is fundamentally on the power to detect predictive                     yt +k   =       xkt  1     +  op  (1)          +  u0t +k   = a kn                 +  u0t +k
+capability in potential explanatory variables.
+                                                                                                              1                                                                (A.4)
+    This problem of imbalance is addressed here. We discuss how
+linear regression specification may be justified and the underlying                                                n2
+
+                                                                                             = u0t+k + Op n ,
+
+                                                                                     Hence, to retain the validity of the regression equation (3.10) under
+
+                                                                                     the local departure,              >         1  preserves the apparent mds character
+                                                                                                                                 2
+                                                                                                             1
+                                                                                     of yt+k    and          2  preserves its Op (1) order of magnitude.
+260                                                                              P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+       It might initially appear that local alternatives like H1 might be                                          Lemma A.1-2 shows the last term is negligible, thereby remov-
+
+indistinguishable from the null H0. However, tests based on the                                                    ing the dependence on C asymptotically. The limit theory of
+
+long horizon IVX estimator B^LHIVX will have discriminatory power                                                  k-    1  n-(   1  +)    n-k            u0t +k  ztk     follows        from      Lemma      A.1-3    and  -4  and
+                                                                                                                         2        2
+                                                                                                                                               t =1
+against local alternatives of the form B                                         Bn         a  .  In  particular,
+                                                                             =       =     kn                      the martingale CLT.
+
+we have
+
+   13                                  13                                       13                                 Lemma A.2 (Numerator of B^LHIVX ).
+              B^ LHIVX                        B^ LHIVX           -B
+n2 k2                         =     n2 k2                                 +  n2 k2 B
+
+                                                                                                                                                 n-k                      
+
+                                                            1 1                                                    Vec             1           u0t+k z~tk                           N 0, Cz-1xxCz-1  00 .
+
+                                                                 k2 n2                                                         k  1  n  1  +
+                              = Op(1) + Op n                                                              (A.5)                   2     2        t =1
+                                                                             
+
+provided                 <    1    +      when k = n . Thus, the simple rate condition                                Thus, the normalized numerator of B^LHIVX has a centered asymp-
+                              2        2
+1                       1                                                                                          totic normal distribution that does not depend on the nuisance
+2               <                ensures (i) model validity and (ii) consistent testing                            parameter C but rather depends on the localizing coefficient Cz
+                        2+2                                                                                        chosen in the construction of the IVX instruments. This removal of
+                                                                                                                   unestimable nuisance parameters in the limit distribution is one of
+against local alternatives using B^LHIVX . In effect, local departures                                             the features of IVX and this benefit applies in long-horizon predic-
+                                                                                                                   tive regressions.
+from the null must be small enough to preserve the character of
+                                                                                                                      For the denominator matrix of B^LHIVX we have the following
+yt+k (including apparent mds behavior if that is evident), which
+                                                              1                                                    decomposition
+is     assured           by   the      inequality             2            , and the forecast horizon
+
+must be large enough to ensure that the test statistic diverges
+
+under the alternative, which is assured by the inequality  <
+1            
+2   +        2  .  Note      that      this  formulation                  may    in  part  explain    some  of                    n-k                                        n-k
+
+the practical difficulty that has been encountered in establishing                                                    1            xkt z~tk               =       1           xkt ztk
+                                                                                                                   k2 n1+                                      k2 n1+
+empirical evidence of predictability ­ the departures from the null                                                               t =1                                       t =1
+
+are necessarily small in order to preserve the observed character                                                                                                                  n-k
+
+of the dependent variable.                                                                                                                                             1            xtk nkt  C ,
+                                                                                                                                                                    k2 n2+
+       In a similar way, it can be demonstrated that the short-horizon                                                                                        +                    t =1
+
+estimator B^IVX (MP) can successfully discriminate the null from                                                   and the following lemma gives the asymptotic behavior of these
+                                                                                                                   two normalized components and the overall matrix.
+the local alternatives (which retain model validity) of the form
+                                                                    
+An     =         a      where       1               <      1  +     2  .  From   the  rate     condition    <
+                n                   2                      2
+, we confirm that there is an asymptotic gain in discriminatory
+                                                                                                                   Lemma A.3.                 1.        1      n-k        xkt   nkt        C             (01 Jxc (r)Jxc (r)dr)
+                                                                                                                                                    k2 n2+
+power by using the long-horizon IVX procedure. In effect, the use                                                                                                  t =1
+
+of a longer horizon (larger ) enables higher discriminatory power                                                        Cz-1C .     n-k
+
+thereby providing a central motivation for the use of long-horizon                                                 2.        1           t =1       xkt   ztk  Cz    p       1  xx.
+                                                                                                                         k2 n1+                                              2
+regression.
+                                                                                                                   3.       (Denominator                  of  B^ LHIVX )      1          n-k       xkt  z~tk        1  xx Cz-1    +
+                                                                                                                                                                          k2 n1+                                    2
+                                                                                                                                                                                             t =1
+
+A.3. Useful lemmas                                                                                                       (01 Jxc (r)Jxc (r)dr)Cz-1C .
+
+       Hereafter, we use the spectral norm                                                                             The next lemma helps establish an intermediate result for the
+                                                                                                                   self-normalized estimator in Theorem 3.2.
+
+                         1i /2                                                                                     Lemma A.4.                     1       n-k       z~tk     z~tk                      1  n-k       ztk    ztk  
+                                                                                                                                              kn1+2                                                kn1+2
+M            =     max                 :  i  is  an    eigenvalue            of  MM     ,                                                                     t =1                       =                    t =1                +
+
+                      i                                                                                            op(1).
+
+and other norms, such as the L1 or L2-norm, will be explicitly                                                     A.3.2. Mildly integrated regressors
+specified.                                                                                                             We collect together the lemmas needed for Section 3.4. The
+
+A.3.1. The  = 1 case                                                                                               normalized numerator in the LHIVX estimation error (3.15) is
+
+    The following lemmas develop the limit theory for the                                                                1           n-k                                     1           n-k
+numerator and denominator elements in the LHIVX estimator
+(3.15) in Section 3.3.                                                                                                1     1  +      u0t+k z~tk                  =       1     1  +      u0t+k ztk
+                                                                                                                      2     2                                             2     2
+                                                                                                                   k     n           t =1                            k       n           t =1
+
+Lemma A.1.                 1.           Cz   k          Jxc (r), with t = nr .                                                                                                        1       n-k                      C,
+
+                                       1  +  nt                                                                                                                      +          1     1  ++    u0t+k nkt 
+                                       2                                                                                                                                        2     2
+                                   kn                                                                                                                                        k     n          t =1
+
+2.            1          n-k       u0t +k    nkt  C           =     op(1).
+
+       k  1  n  3  +         t =1                                                                                  with a dominant leading term and secondary term that is
+          2     2                                                                                                  negligible. The following lemma establishes the negligibility of this
+                                                                                                                   second term.
+3.        Cz       ztk    Vx (t)  N (0, xx) for any t.
+
+       k  1  n
+          2
+
+                                                              
+
+ 4.    1           n-k        Cz    ztk          Cz     ztk      p xx = Fx(1) Fx(1).                               Lemma A.5.                          1       n-k           u0t+k nkt                  op(1).
+       n           t =1
+                           k  1  n           k   1  n                                                                                            1     1  ++       t =1                            =
+                              2                  2                                                                                               2     2
+                                                                                                                                              k     n
+
+   From (3.17) the normalized numerator of B^LHIVX can be                                                              Therefore, asymptotics of the normalized numerator are the
+                                                                                                                   same as the (I2)­(I4) cases and so are free of the nuisance
+decomposed as                                                                                                      parameter C .
+
+       1            n-k                                       1        n-k
+
+    1     1  +       u0t+k z~tk              =          1     1  +      u0t+k ztk                                  Lemma A.6 (Numerator of B^LHIVX ).
+    2     2                                             2     2
+k      n            t =1                             k     n           t =1
+
+                                                                                                                                                 n-k                      
+
+                                                                 1        n-k                                      vec             1           u0t+k ztk                            N 0, Cz-1xxCz-1  00 .
+
+                                                     +        1     3  +   u0t+k nkt  C .                                      k  1  n  1  +
+                                                              2     2                                                             2     2
+                                                           k     n        t =1                                                                   t =1
+                                                                 P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                                               261
+
+    Now we turn to the denominator. It turns out we can remove                                  Lemma A.12 (Numerator of B^LHIVX ).
+the nuisance parameter dependence for the denominator as well.
+Hence, for the mildly integrated regressor case, we have a pivotal                              vec              n-k           z~tk          
+test statistic even without self-normalization.
+                                                                                                         1                               R-n n
+
+                                                                                                       kn             u0t +k
+
+                                                                                                                 t =1
+
+Lemma A.7.         1.         1   n-k       xkt  ztk    Cz       1  xx   .                                                                                                                       
+                          k2 n1+                                 2
+                                      t =1                  p                                         Cz-1C  Im × MN 0,                                    e-pC YC YC e-pC dp  00 .
+
+2.        1    n-k           xkt nkt        =  op(1).                                                                                               0
+    k2 n1++
+                   t =1
+
+    This result shows that a more concise limit theory holds for the                                This result shows the nuisance parameter matrix C is not
+
+denominator in the mildly integrated case.                                                      removed from the numerator if the regressors are mildly explosive.
+
+   1     n-k                            1         n-k                                           The coefficient        C    is not strong enough to make the remainder term
+k2 n1+                               k2 n1+                                                                            n
+          xtk z~tk                                 xkt ztk                                      negligible. Nonetheless the stronger signal of the mildly explosive
+                             =
+         t =1                                     t =1
+                                                                                                regressors does enable the mixed normal limit theory of the LHIVX
+
+                                                 1      n-k                                     estimator. Eventually, therefore, we end up with a pivotal test
+                                            k2 n1+ +
+                                     +                   xkt nkt  C                             statistic using self-normalization, as explained in the text.
+
+                                                        t =1                                        The next lemma gives the asymptotic behavior of the compo-
+
+                                     1                                                          nents of the denominator.
+                                     2
+                             p          xx Cz-1      .                                          Lemma A.13.            1.      1      R-n t xkt  =  YC  + op(1)      for  all  t    [n      + n , n -
+                                                                                                                            kn/2
+                                                                                                   k].
+                                                                                                                n-k                                               n-k
+                                                                                                2.       1                R-n nxtk  z~tk  Rn-n               1                 R-n nxkt  nkt       C  R-n n
+                                                                                                     k2 n+          t =1                                k2 n2+        t =1
+Lemma A.8 (Denominator of B^LHIVX ).                                                                                                                =
+
+                                                                                                    + op(1).
+
+   1     n-k                         1  xx  Cz-1  .                                             3.        1      n-k        R-n nxkt  nkt        R-n n               e-pC YC YC e-pC dpCz-1
+k2 n1+                               2                                                               k2 n2+
+          xtk z~tk p                                                                                                 t =1                                         0
+
+         t =1                                                                                       From        the    decomposition             n-k       xtk  z~tk      =       n-k       xtk  ztk   +
+
+                                                                                                                                                     t =1                             t =1
+
+                                                                                                n-     n-k       xkt  nkt      C  ,we    have
+
+                                                                                                           t =1
+
+A.3.3. Mildly explosive regressors                                                                 1      n-k
+    The lemmas used in Section 3.5 are developed here. The follow-                              k2 n +
+                                                                                                           R-n nxkt z~tk Rn-n
+ing is from Magdalinos and Phillips (2009a, Lemma 4.1).
+                                                                                                          t =1
+
+Lemma A.9. For each sequence ln satisfying Rn-ln                                     0, n           =      1           n-k                                 + op(1)
+                                                                                                       k2 n2 +
+Rn -(n-ln )           0, define YCn         :=     1    ln       Rn-jFx(1)j.  Then                                      R-n nxkt nkt  Rn-nC
+                                                 n/2
+                                                            j=1                                                        t =1
+
+                                                                                                        
+
+n- /2 Rn-n xn            1        n                                                                                 e-pC YC YC e-pC dpCz-1C .
+                       n/2
+                   =             R-n juxj                                                                    0
+
+                                j=1                                                             As in the numerator case, the component involving the remainder
+
+                         1        ln                                                            plays the leading role in the asymptotics. Hence the limit of the
+                       n/2
+                   =             R-n juxj        +   op(1)  =    YCn  +  op(1),                 normalized denominator involves the nuisance parameter C as
+
+                                j=1                                                             well.
+
+                                                                                                Lemma A.14 (Denominator of B^LHIVX ).
+
+YCn  YC  N 0,                           e-pC xxe-pC dp .
+
+                                  0                                                                1      n-k
+                                                                                                k2 n +
+    The next lemma comes from other work by the authors (Phillips                                          Rn-nxkt z~tk Rn-n
+and Lee, 2012b, Lemma 5.4).
+                                                                                                          t =1
+
+                                                                                                        
+
+                                            = Cz-1YC +op (1) for all t  [n +n , n]                                  e-pC YC YC e-pC dpCz-1C .
+
+                          1  R-n t
+Lemma A.10.            n             nt                                                                      0
+                       2  +
+
+with  n    +   n       0.                                                                           The following lemma is used in developing the limit theory for
+      n        n                                                                                the self-normalized estimator given in Theorem 3.6.
+
+   As discussed in the text, the order of magnitude of nt becomes                               Lemma A.15.               1    n-k       R-n n   z~tk z~tk R-n n                  CCz-1          e-pC  YC
+                                                                                                                       k2 n2
+larger for explosive processes and ends up dominating the IVX                                                                      t =1                                                    0
+
+asymptotics. Similarly, the LHIVX remainder nkt also dominates                                  YC e-pC dpCz-1C .
+
+the asymptotics. These characteristics are demonstrated in the                                  A.4. Proofs of the main results
+
+following lemma.
+
+                             1       R-n t  k    = Cz-1YC + op (1) for all t  [n +
+Lemma A.11.           1.      kn+           nt                                                  Proof of Theorem 3.1. From Lemmas A.2 and A.3-3,
+                             2
+
+    n , n - k].                                                                                 vec                    n-k                    
+                                                                                                                                         ztk
+         n-k                                                n-k                                             1          
+
+2.   1       t =1  u0t +k    z~tk    R-n n              1       t =1  u0t +k  nkt    Rn-n C                                 u0t +k
+    kn                                               kn+
+                                               =                                             +         k  1  n   1  +  t =1
+                                                                                                          2      2
+    op(1).
+                                                                                                      N 0, Cz-1xxCz-1  00 ,
+              1    n-k                                  
+           kn+
+3.  vec                t =1  u0t +k     nkt       Rn-n C          Cz-1C  Im ×
+
+    MN   0,           e-pC   YC  YC  e-pC   dp       00     .                                      1      n-k          z~tk
+                                                                                                k2 n1+
+                0                                                                                          xkt
+
+    It therefore follows that the asymptotic distribution of the                                          t =1
+normalized numerator directly comes from the limit behavior of
+the remainder term as shown in Lemma A.11-3.                                                              1                     1                               
+                                                                                                          2
+                                                                                                             xx       Cz-1  +            Jcx (r) Jcx (r) dr Cz-1C           :=    cxz .
+
+                                                                                                                                      0
+262                                                             P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+Hence                                                                                          Proof of Theorem 3.3. From Lemmas A.6 and A.8, we have
+
+vec   1       3                 -                                                              vec  1       3                 -    
+                  B^ LHIVX                                                                                      B^ LHIVX
+       n2  k2                        B                                                               n2  k2                       B
+
+                                n-k             -1                                                                            n-k            -1                  
+                                                             I                                                                                                  I
+                                 xtk                                                                                           xtk
+         1                                 z~tk                                                        1                                z~tk
+                                t =1                                                                                          t =1
+   =             k2 n1+                                                                           =                                                          
+         
+                                                                                                               k2 n1+
+                                                                                                       
+
+                                     n-k                 
+
+      × Vec               1           u0t+k ztk                                                                                   n-k                    
+                                                                                                                                                    ztk
+                       1     1  +                                                                    × vec            1           
+                       2     2
+                    k     n          t =1                                                                            1     1  +        u0t +k
+                                                                                                                k    2  n  2
+                                                                                                                                  t =1
+      MN 0, c-xz1 Cz-1xxCz-1 c-xz1  00 .
+                                                                                                                              -1                     
+                                                                                                                1    xx Cz-1
+                                                                                                                2                                   I
+Mixed normality holds since the MG components of the numerator                                                                                          N  0,   Cz-1 xx Cz-1       00
+and denominator are asymptotically independent. In particular,
+defining the martingale difference                                                                 N 0, 4x-x1  00 .
+
+                    1  1     +  ztk                                                            Proof of Theorem 3.4. From Lemmas A.1-4 and A.4, we have
+                    2
+nt +k            k        1              t +k       ,
+       :=                    1               
+                       n2                    
+
+                                t                                                                       n-k
+
+                                     +k                                                        1                     Cz                 Cz      
+                                                                                               n                           z~tk               z~tk
+                            n                                                                     Cz-1  t =1                                            Cz-1
+
+                                                                                                                k    1  n           k   1  n
+                                                                                                                     2                  2
+
+and letting Fnt be the natural filtration associated with the array                                  1         n-k            Cz                 Cz       
+nt , we have the martingale conditional variance                                                     n
+                                                                                                        Cz-1                        ztk                 ztk     Cz-1     op(1),
+                                                                                                  =                           1                  1                    +
+                                                                                                               t =1           2                  2
+                                                                                                                           k     n            k     n
+               
+                                                                                                  p Cz-1xxCz-1,
+     EFnt+k-1 nt+k nt+k
+
+      1    n-k            1                   1                 1  n-k   1                   
+                                                                n
+      n                   1     ztk           1     ztk                       1     ztk        and from Lemma A.8,
+                          2                   2                               2              
+           t =1        k     n             k     n                 t =1    k     n           
+   =  
+                       n-k                                                                 
+                    1                1
+                    n             k        ztk                                                    1      n-k                        1
+                                                                                               k2 n1+                               2
+                       t =1          1                                                                    xkt z~tk                      xx    Cz-1.
+                                     2
+                                        n                                                                t =1                 p
+
+          Cz-1xxCz-1                          0   
+                                              
+   p                  0                             ,                                          Thus,
+
+from Lemma A.1-3 and -4.                                                                       nk3  X PZ X -1                                 n-k               
+                                                                                                                                                           z~tk
+                                                                                                                        =          1           xtk
+
+                                                                                                                                k2 n1+        t =1
+
+Proof of Theorem 3.2. From Lemmas A.1-4 and A.4, we know that                                                                                    -1                              -1
+                                                                                                                                                                            z~tk
+                                                                                                                           n-k                                        n-k
+
+1  n-k    Cz                  Cz                                                                     ×        1           z~tk z~tk                           1        xtk
+n                      z~tk                z~tk
+              1                      1                                                                    kn1+2            t =1                           k2 n1+      t =1
+              2                      2
+   t =1    k     n              k       n                                                                                                                                -1
+                                                                                                          1                                                  1  xx Cz-1
+                                                                                                          2                                                  2
+       1  n-k          Cz                     Cz                                                  p            xx Cz-1        Cz-1 xx Cz-1 -1
+       n
+   =                   1        ztk           1     ztk  + op(1)   =  xx   + op(1).
+                       2                      2
+          t =1      k     n                k     n                                                = 4x-x1,
+
+Moreover,            1       n-k         xkt  z~tk      cxz . Thus,                            and then
+                 k2 n1+
+                                 t =1
+
+nk3 X PZ X -1                                     n-k                                                X PZ X -1                    -1       p        4x-x1         00-1   ,
+                                                         z~tk                                                                 ^ 00
+                                     1             xkt                                          nk3
+
+                       =          k2 n1+          t =1
+
+                                                                                               which leads to the required result.
+
+                             n-k                    -1             n-k          -1
+                                                                           z~tk
+      ×         1             z~tk z~tk                        1    xtk                        Proof of Theorem 3.5. From Lemmas A.12 and A.14,
+
+            kn1+2            t =1                          k2 n1+  t =1                                                                     
+
+      (cxz ) Cz (xx)-1 Cz (cxz )-1                                                             vec      1     n-k                z~tk   Rn-n
+
+                                                                                                      kn      
+
+                                                                                                                   u0t +k
+
+   = c-xz1 Cz-1 (xx) Cz-1 c-xz1 ,                                                                              t =1
+
+                                                                                                                                                                                       
+
+and                                                                                                  CCz-1  Im × MN 0,                                     e-pC YC YC e-pC dp  00 ,
+
+                                                                                                                                                     0
+
+                                    -1                                                            1      n-k                                         
+                                ^ 00                                                           k2 n +
+       X PZ X -1                                                                                          R-n nxtk z~tk R-n n                                e-pC YC YC e-pC dpCz-1C .
+
+ nk3                                                                                                     t =1
+
+                                                                                                                                                        0
+
+                          Cz-1     (xx) Cz-1        c-xz1        -1      =    B-1,             Joint convergence of these two processes is established in the
+           c-xz1                                             00                                context of OLS estimation by Magdalinos and Phillips (2009a, Proof
+                                                                                               of Theorem 4.1).
+giving the required result.
+                                                            P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264                                                 263
+
+Hence                                                                                  and
+
+                                                         n-k                                n2  Rnn  X PZ X -1   Rnn                    -1
+                                                                                                                                    ^ 00
+     kn                                              1    u0t+k z~tk R-n n              k2                             
+              B^ LHIVX      - B Rnn
+vec                                    =  vec kn                                                                                                           -1
+
+                                                         t =1                                                                               -1
+                                                                                                  
+
+                                                 -1                                                         e-pC YC YC e-pC dp                   00             .
+
+              1             n-k        z~tk  R-n n                                                   0
+
+     ×    k2 n +             R-n nxkt
+
+                            t =1                                                       Therefore,
+
+                            n-k                  -1                                    vec                                          PZ X  -1        -1     vec                   
+                                                                 Im                            B^ LHIVX              X                          ^ 00               B^ LHIVX
+                             R-n nxtk  z~tk  R-n n                                                       -  B                                                                -  B
+                1
+=                           t =1                               
+      k2n+
+                                                                                                                                    Rnn     Im Rnn         Im-1
+                                                                                       =    vec     B^ LHIVX  -                                     
+                                                                                                                    B
+
+                            n-k                    
+
+     × vec          1        u0t+k z~tk Rn-n                                                         PZ X   -1          -1
+                                                                                                 X                  ^ 00
+                  kn                                                                        ×                   
+
+                            t =1
+
+                                                     -1                                     ×   Rnn      Im-1   Rnn                 Im vec                 -   
+                                                                                                                                                 B^ LHIVX
+                                                                                                                                                              B
+
+                            e-pC YC YC e-pC dpCz-1C             Im
+
+                      0                                                                =    vec  kn                 -                  Rnn
+                                                                                                          B^ LHIVX
+                                                                                                                                    B
+
+                                                                              
+
+     × CCz-1  Im × MN 0,                           e-pC YC YC e-pC dp  00                   ×        n2  Rnn  X PZ X -1                Rnn        -1
+                                                                                                                                              ^ 00
+                                             0                                                   k2
+
+                                          -1                                                vec  kn                     
+                                                                                                          B^ LHIVX
+                                                                                                                       B Rnn
+                      e-pC YC YC e-pC dp         Im                                                                 -
+
+=
+
+             0                                                                                2 (mp) .
+
+                                                            
+
+     × MN 0,                e-pC YC YC e-pC dp  00
+
+                         0                                                             References
+
+                                                   -1                                  Amihud, Y., Hurvich, C., 2004. Predictive regressions: a reduced-bias estimation
+                                                                                            method. Journal of Financial and Quantitative Analysis 39 (04), 813­841.
+
+ MN 0,                      e-pC YC YC e-pC dp            00 ,                         Campbell, J., Yogo, M., 2006. Efficient tests of stock return predictability. Journal of
+                                                                                            Financial Economics 81 (1), 27­60.
+                         0
+                                                                                       Cavanagh, C., Elliott, G., Stock, J., 1995. Inference in models with nearly integrated
+as required.                                                                                regressors. Econometric Theory 11 (05), 1131­1147.
+
+Proof of Theorem 3.6. From Lemmas A.14 and A.15, we know                               Chan, N.H., Wei, C.Z., 1987. Asymptotic inference for nearly nonstationary AR(1)
+                                                                                            processes. Annals of Statistics 15, 1050­1063.
+   1      n-k                                
+k2 n +                                                                                 Cochrane, J., 1991. Volatility tests and efficient markets. Journal of Monetary
+           Rn-nxkt z~tk Rn-n                         e-pC YC YC e-pC dpCz-1C ,              Economics 27, 463­485.
+
+          t =1                                  0                                      Elliott, G., 2011. A control function approach for testing the usefulness of trending
+                                                                                            variables in forecast models and linear regression. Journal of Econometrics 164,
+  1    n-k                                                                                  79­91.
+k2 n2
+        R-n n z~tk z~tk R-n n              CCz-1            e-pC YC YC e-pC dpCz-1C .  Elliott, G., Rothenberg, T.J., Stock, J.H., 1996. Efficient tests for an autoregressive unit
+                                                                                            root. Econometrica 64, 813­836.
+       t =1                                              0
+                                                                                       Elliott, G., Stock, J.H., 1994. Inference in time series regression when the order
+Thus,                                                                                       of integration of a regressor is unknown. Econometric Theory 10 (3­4),
+                                                                                            672­700.
+k2n2 Rnn  X PZ X -1         Rnn   =                n-k           z~tk      
+                                                                                       Fama, E., French, K., 1993. Common risk factors in the returns on stocks and bonds.
+                                              1     R-n nxkt           R-n n                Journal of Financial Economics 33 (1), 3­56.
+
+                                          k2 n +   t =1                                Gonzalo, J., Pitarakis, J., 2009. Regime specific predictability in predictive regres-
+                                                                                            sions. Discussion Papers in Economics and Econometrics (0916), University of
+     ×                   n-k      z~tk z~tk      -1                                         Southampton.
+
+             1            R-n n              R-n n                                     Gospodinov, N., 2009. A new look at the forward premium puzzle. Journal of
+                                                                                            Financial Econometrics 7 (03), 312­338.
+          k2 n2          t =1
+                                                                                       Hjalmarsson, E., 2011. New methods for inference in long-horizon regressions.
+     ×                      n-k                  -1                                         Journal of Financial and Quantitative Analysis 46 (3), 815­839.
+
+              1              Rn-nxkt z~tk    Rn-n                                      Jansson, M., Moreira, M., 2006. Optimal inference in regression models with nearly
+                                                                                            integrated regressors. Econometrica 74 (3), 681­714.
+          k2 n +            t =1
+                                                                                       Jegadeesh, N., 1991. Seasonality in stock price mean reversion: evidence from the
+                                                                                            US and the UK. Journal of Finance 1427­1444.
+
+                         e-pC YC YC e-pC dpCz-1C                                       Kasparis, I., Andreou, E., Phillips, P.C.B., 2012. Nonparametric Predictive Regression.
+                                                                                            Unpublished manuscript, Yale University.
+                   0
+                                                                                       Kendall, M.G., 1954. Note on bias in the estimation of autocorrelation. Biometrika
+                                                         -1                                 41, 403­404.
+
+     × CCz-1                e-pC YC YC e-pC dpCz-1C                                    Kostakis, A., Magdalinos, A., Stamatogiannis, M., 2010. Robust econometric
+                                                                                            inference for stock return predictability. Unpublished Manuscript, University
+                         0                                                                  of Nottingham.
+
+                                                   -1                                  Kothari, S.P., Shanken, J., 1997. Book-to-market, dividend yield, and expected
+                                                                                            market returns: a time series analysis. Journal of Financial Economics 18,
+     ×                e-pC YC YC e-pC dpCz-1C                                               169­203.
+
+                0                                                                      Lee, J.H., 2012. Predictive quantile regression with persistent covariates. Unpub-
+                                                                                            lished Manuscript, Yale University.
+                                       -1
+                                                                                       Lewellen, J., 2004. Predicting returns with financial ratios. Journal of Financial
+=               e-pC YC YC e-pC dp                                                          Economics 74 (2), 209­235.
+
+          0                                                                            Liu, W., Maynard, A., 2007. A new application of exact nonparametric methods
+                                                                                            to long-horizon predictability tests. Studies in Nonlinear Dynamics and
+                                                                                            Econometrics 11 (1).
+264  P.C.B. Phillips, J.H. Lee / Journal of Econometrics 177 (2013) 250­264
+
+Magdalinos, T., Phillips, P.C.B., 2009a. Limit theory for cointegrated systems            Phillips, P.C.B., Magdalinos, T., 2007a. Limit theory for moderate deviations from a
+     with moderately integrated and moderately explosive regressors. Econometric               unit root. Journal of Econometrics 136, 115­130.
+     Theory 25, 482­526.
+                                                                                          Phillips, P.C.B., Magdalinos, T., 2007b. Limit theory for moderate deviations from
+Magdalinos, T., Phillips, P.C.B., 2009b. Econometric inference in the vicinity of unity.       a unit root under weak dependence. In: Phillips, G.D.A., Tzavalis, E. (Eds.), The
+     CoFie Working Paper (7), Singapore Management University.                                 Refinement of Econometric Estimation and Test Procedures: Finite Sample and
+                                                                                               Asymptotic Analysis. Cambridge University Press, Cambridge, pp. 123­162.
+Pesaran, M.H., Timmermann, A., 1995. Predictability of stock returns: robustness
+     and economic significance. Journal of Finance 50, 1201­1228.                         Phillips, P.C.B., Solo, V., 1992. Asymptotics for linear processes. The Annals of
+                                                                                               Statistics 971­1001.
+Phillips, P.C.B., 1987. Towards a unified asymptotic theory for autoregression.
+     Biometrika 74, 535­547.                                                              Phillips, P.C.B., Wu, Y., Yu, J., 2011. Explosive behavior in the 1990s Nasdaq:
+                                                                                               when did exuberance escalate asset values? International Economic Review 52,
+Phillips, P.C.B., 2012a. Estimation of the localizing rate for mildly integrated and           201­226.
+     mildly explosive processes. Yale University mimeographed.
+                                                                                          Phillips, P.C.B., Yu, J., 2011. Dating the timeline of financial bubbles during the
+Phillips, P.C.B., 2012b. On confidence intervals for autoregressive roots and                  subprime crisis. Quantitative Economics 2, 455­491.
+     predictive regression. Unpublished Manuscript, CFDP 1879.
+                                                                                          Stambaugh, R., 1999. Predictive regressions. Journal of Financial Economics 54
+Phillips, P.C.B., Hansen, B., 1990. Statistical inference in instrumental variables            (375), 421.
+     regression with I(1) processes. The Review of Economic Studies 57 (1), 99.
+                                                                                          Stock, J., 1991. Confidence intervals for the largest autoregressive root in US
+Phillips, P.C.B., Lee, J.H., 2012a. Technical Supplement to: Predictive Regression un-         macroeconomic time series. Journal of Monetary Economics 28 (3), 435­459.
+     der Various Degrees of Persistence and Robust Long-Horizon Regression. Online
+     Technical Supplement. Available at https://sites.google.com/site/jihyung412/         Torous, W., Valkanov, R., 2000. Boundaries of predictability: noisy predictive
+     research.                                                                                 regressions. Unpublished Manuscript, UCLA.
+
+Phillips, P.C.B., Lee, J.H., 2012b. Robust econometric inference with mixed integrated    Valkanov, R., 2003. Long-horizon regressions: theoretical results and applications.
+     and mildly explosive regressors. Unpublished Manuscript, Yale University.                 Journal of Financial Economics 68 (2), 201­232.
+
