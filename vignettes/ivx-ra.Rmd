@@ -98,6 +98,31 @@ the residual offset of about 0.01 at small $c$ is shared by the plain IVX
 column and so reflects a detail of the simulation design rather than the
 estimator.
 
+## Long horizons: the transformed regression
+
+Demetrescu, Rodrigues & Taylor (2023) extend the estimator to the $h$-period
+regression without HAC estimation. Following Britten-Jones et al. (2011), the
+overlapping regression of $\sum_{j=1}^h y_{t+j}$ on $x_t$ is numerically the
+non-overlapping regression of $y_{t+1}$ on the transformed regressor
+$A_h' x$, and the same trick applies to the instrument:
+$$
+z_t^{trf,(h)} = \sum_{i=\max(1,\,t-h+1)}^{\min(t,\,T-h)} z_i, \qquad
+\hateta_h = \Big(\sum_{t=1}^{T-h} z_t ar x_t'\Big)^{-1}
+\sum_{t=p}^{T-1} z_t^{trf,(h)}\,(ar y_{t+1} - \hat\gamma'\hatarepsilon_{t+1}),
+$$
+with the sandwich covariance of eq. (5.7), i.e. the short-horizon one with
+$z_t$ replaced by $z_t^{trf,(h)}$. `horizon = h` does exactly this and reduces
+to the short-horizon estimator at `h = 1`.
+
+```{r}
+sapply(c(1, 3, 12), function(h) ivx_ra(Ret ~ DP, data = kms, horizon = h)$tstat)
+```
+
+Under the null with a near-integrated, strongly endogenous predictor
+($c = 0$, $\delta = -0.95$, $T = 500$) the two-sided 5% test rejects at
+0.034 ($h = 10$) and 0.040 ($h = 20$) in 2000 replications, inside the
+[0.023, 0.058] range the paper reports for $T = 500$.
+
 ## Caveats and implementation notes
 
 * Two details the paper leaves implicit are decisive: the autoregression must
@@ -109,8 +134,10 @@ estimator.
 * The remaining bias is $-\gamma$ times the bias of the AR coefficients, so
   it grows with $|\gamma|$ and with the persistence of the predictor; it is
   much smaller than for plain IVX but not zero.
-* Short horizon only, and no bootstrap: `ivx_boot()` does not accept
-  `ivx_ra` objects.
+* No bootstrap: `ivx_boot()` does not accept `ivx_ra` objects. For
+  `horizon > 1` the Kostakis et al. (2015) intercept correction is not applied
+  (it is not derived for the transformed regression), and fitted values and
+  residuals are those of the transformed regression.
 * The AR order is selected by AIC in levels, which the authors argue copes
   with both the stationary and the integrated case; `ar` fixes it instead.
 
@@ -118,6 +145,9 @@ estimator.
 
 * Demetrescu, M., & Rodrigues, P. M. M. (2022). Residual-augmented IVX
   predictive regression. *Journal of Econometrics*, 227(2), 429–460.
+* Demetrescu, M., Rodrigues, P. M. M., & Taylor, A. M. R. (2023). Transformed
+  regression-based long-horizon predictability tests. *Journal of
+  Econometrics*, 237(2), 105316.
 * Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A reduced-bias
   estimation method. *Journal of Financial and Quantitative Analysis*, 39(4),
   813–841.

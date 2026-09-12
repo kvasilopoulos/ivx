@@ -121,6 +121,23 @@ one-step regression. The statistic keeps its $\chi^2$ limit.
 summary(ivx(Ret ~ DP + TBL, data = kms, horizon = 12))
 ```
 
+## Lag augmentation for power
+
+The IVX instrument is less persistent than $x_t$, so the test loses local power
+against OLS exactly when $x_t$ is near-integrated and endogenous. Demetrescu
+(2014) shows that adding $y_{t-1}$ to the regression, instrumented by itself,
+$$
+y_t = \phi\, y_{t-1} + eta' x_{t-1} + u_t, \qquad \phi = 0 	ext{ under the null},
+$$
+feeds the signal back into the instrument and can raise power substantially
+when the instrument is weak (small $\eta$), while being asymptotically
+equivalent to plain IVX otherwise. `lag_y = TRUE` does this; the joint Wald
+statistic still tests only $eta$.
+
+```{r}
+ivx(Ret ~ DP + TBL, data = kms, lag_y = TRUE)
+```
+
 ## Heteroskedasticity-robust standard errors
 
 Demetrescu, Georgiev, Rodrigues & Taylor (2023) show that the IVX statistics
@@ -178,6 +195,9 @@ round(cbind(horizon = h, t13), 3)
 * Weighted fits (`weights`) are supported but rarely appropriate for the theory.
 
 ## References
+
+* Demetrescu, M. (2014). Enhancing the local power of IVX-based tests in
+  predictive regressions. *Economics Letters*, 124(2), 269–273.
 
 * Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2015). Robust
   econometric inference for stock return predictability. *Review of Financial

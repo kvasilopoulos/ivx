@@ -58,7 +58,23 @@ See `replication/` for per-article replication scripts, data and results.
 
 Items already implemented are removed from this list and recorded in `NEWS.md`.
 
-7. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.
+Next, from the newly collected papers (ranked):
+
+1. **Fan & Lee (2019)** — size-corrected bootstrap for `ivx_qr()` under conditional
+   heteroskedasticity. Reuses the `ivx_boot()` machinery.
+2. **Amihud, Hurvich & Wang (2009)** — `arm()` multivariate augmented-regression test;
+   closed-form OLS with bias-corrected VAR(1); pairs with the Elliott (2011) to-do.
+3. **Breitung & Demetrescu (2015)** — generic IV test with type-I/II instruments
+   (sign, fractional, sine, long-difference) and their 2SLS combination; `ivx_iv()`.
+4. **Harvey, Leybourne & Taylor (2021)** — switching t-test with quasi-GLS demeaning;
+   needs the paper's tabulated conservative critical values.
+5. **Liu, Yang, Cai & Peng (2019)** — empirical-likelihood unified test; companion to
+   `ivx_ar` but needs an EL optimiser.
+6. **Chen, Deo & Yi (2013)** — restricted-likelihood uniform test; simulated critical values.
+7. **Lee, Shi & Gao (2022)** — TAlasso variable selection; out of the package's scope
+   (inference, not selection).
+
+8. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.
    Deferred: unpublished, and Algorithm 1 (sample-split weights, bias term with its own
    tuning, variance-enlargement correction, LM residuals) needs the authors' code or the
    typeset equations to implement faithfully; not worth shipping from the text extraction.
