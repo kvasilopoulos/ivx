@@ -27,7 +27,11 @@ ivx_ar_fit(
 \item{x}{design matrix of dimension \code{n * p}.}
 
 \item{horizon}{is the horizon (default horizon = 1 corresponds to a
-short-horizon regression).}
+short-horizon regression). For \code{horizon > 1} the estimator and modified
+Wald statistic are those of Kostakis et al. (2023), eqs (15) and (23):
+K-period sums of the response and of the lagged predictors, a single-lag
+instrument in the signal matrix and the K-period sum of the instrument in
+the covariance.}
 
 \item{offset}{(numeric of length \code{n}).  This can be used to
     specify an \emph{a priori} known component to be included in the
