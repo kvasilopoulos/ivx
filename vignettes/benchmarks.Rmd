@@ -1,0 +1,127 @@
+---
+title: "Non-IVX benchmarks: ARM and the hybrid t-test"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Non-IVX benchmarks: ARM and the hybrid t-test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r setup, message = FALSE}
+library(ivx)
+```
+
+Two non-IVX procedures are included as the benchmarks the IVX literature
+compares against: the augmented regression method of Amihud, Hurvich & Wang
+(2009), `arm()`, and the hybrid switching t-test of Harvey, Leybourne & Taylor
+(2021), `hlt_test()`.
+
+# Augmented regression method
+
+`arm()` is reduced-bias OLS for *stationary* persistent predictors
+(Demetrescu & Rodrigues, 2022, build `ivx_ra()` on the same augmentation idea).
+
+## Idea
+
+With $y_t = \alpha + \beta' x_{t-1} + u_t$ and $x_t = \mu + \Phi x_{t-1} + v_t$,
+write $u_t = \phi' v_t + e_t$ with $e_t$ independent of $x$. OLS of $y_t$ on
+$x_{t-1}$ is biased because $u_t$ is correlated with $v_t$ and hence with the
+future of the regressor (Stambaugh, 1999). Regressing $y_t$ on $x_{t-1}$ *and*
+$v_t$ removes it — if $v_t$ were known. Using OLS VAR residuals does not help
+(they are orthogonal to $x_{t-1}$ by construction), so the VAR coefficient
+matrix is first bias-corrected with the Nicholls & Pope (1988) expansion
+$$
+E[\hat\Phi - \Phi] = -\tfrac{1}{n}\,\Sigma_v\Big[(I-\Phi')^{-1} +
+\Phi'(I-\Phi'^2)^{-1} + \sum_{\lambda \in \mathrm{Spec}(\Phi)} \lambda (I-\lambda\Phi')^{-1}\Big]\Gamma_0^{-1},
+$$
+iterated up to `iter` times (Kendall's $1 + 3\phi$ in the scalar case), and
+the corrected residuals $v^c_t = x_t - \hat\mu^c - \hat\Phi^c x_{t-1}$ are the
+control variables.
+
+The OLS covariance of the augmented regression is wrong for $\hat\beta^c$
+because $v^c_t$ is estimated. The paper's estimator (eqs 7–8) adds the
+uncertainty of $\hat\Phi^c$:
+$$
+\widehat{\mathrm{cov}}[\hat\beta^c] = (\hat\phi'\hat\Sigma_v\hat\phi)\,(X'X)^{-1}_{xx}
++ \hat\sigma_e^2 \Big[\tfrac{\sum_t r_{it} r_{jt}}{\sum_t r_{it}^2 \sum_t r_{jt}^2}\Big]_{ij},
+$$
+with $r_{jt}$ the residual of $x_{j,t-1}$ on the other regressors of the
+augmented regression. `summary()` reports $t$-ratios and the joint Wald test
+from this matrix.
+
+```{r}
+m <- arm(Ret ~ DP + TBL, data = kms)
+summary(m)
+m$Phi      # bias-corrected VAR(1) coefficients
+m$Phi_ols  # OLS
+```
+
+## Check
+
+With $\phi = 0.9$, $\mathrm{corr}(u, v) = -0.9$, $n = 100$ and $\beta = 0$
+the OLS slope has mean bias about $0.037$ ($\approx -\rho(1+3\phi)/n$) over
+400 replications; `arm()` reduces it to $0.003$, with $\hat\Phi^c$ averaging
+$0.894$ against an OLS mean of $0.857$. In the paper's two-predictor Case 1 the
+5% $t$-tests reject 7–8% at $n = 100$, in line with the 6–10% ($n = 50$) and
+5–7% ($n = 200$) the paper reports.
+
+## Caveats
+
+* Assumes stationary predictors: the correction diverges as the largest
+  eigenvalue of $\Phi$ approaches one, and the iteration stops if the
+  corrected VAR becomes non-stationary. For near-unit-root predictors use
+  `ivx()` or `ivx_ra()`.
+* VAR(1) only, short horizon only, no bootstrap.
+
+# Hybrid t-test
+
+`hlt_test()` implements $T_{hyb}$ of Harvey, Leybourne & Taylor (2021) for a
+single predictor. It uses only regression t-ratios: the standard one, $T$,
+and $	ilde T$, in which the predictor is quasi-GLS demeaned with
+$ar c = 7$ as in Elliott et al. (1996). Under strong persistence their null
+distributions depend on $c$ and on $ho_{xy}$, so the paper tabulates
+*conservative* critical values — the maximum over $c$ of the $lpha$-level
+quantile — as response surfaces in $\hatho_{xy}$ (their Table 1), and
+switches:
+
+1. if the ADF normalised-bias statistic (lag length by MBIC) is below
+   $-4\sqrt{T}$ the predictor is weakly persistent: $T$ with a normal
+   critical value;
+2. otherwise, for an upper-tail test, $T$ with $cv(\hatho_{xy})$ when
+   $\hatho_{xy} > -0.1$ and $	ilde T$ with $	ilde{cv}(\hatho_{xy})$
+   when $\hatho_{xy} < -0.1$ (quasi-GLS demeaning pays off only when the
+   endogeneity is strong); lower-tail tests mirror this.
+
+```{r}
+hlt_test(Ret ~ DP, data = kms)
+hlt_test(Ret ~ TBL, data = kms, alternative = "less", level = 0.1)
+```
+
+In the paper's design ($T = 200$, upper-tail 5% test) the empirical size in
+1000 replications is 0.07/0.04/0.05 for $ho_{xy} = -0.9$ and
+$ho = 1, 0.95, 0.5$, and 0.00/0.02/0.04 for $ho_{xy} = 0.9$ — the
+"undersize for positive $ho_{xy}$ in the more persistent cases" the paper
+notes is the price of the conservative critical values. The test is one-sided
+by construction and has no p-value; the object reports the selected test, its
+statistic and critical value.
+
+## References
+
+* Amihud, Y., Hurvich, C. M., & Wang, Y. (2009). Multiple-predictor
+  regressions: Hypothesis testing. *Review of Financial Studies*, 22(1),
+  413–434.
+* Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A reduced-bias
+  estimation method. *Journal of Financial and Quantitative Analysis*, 39(4),
+  813–841.
+* Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple tests
+  for stock return predictability with good size and power properties.
+  *Journal of Econometrics*, 224(1), 198–214.
+* Nicholls, D. F., & Pope, A. L. (1988). Bias in the estimation of
+  multivariate autoregressions. *Australian Journal of Statistics*, 30A,
+  296–309.
+* Stambaugh, R. F. (1999). Predictive regressions. *Journal of Financial
+  Economics*, 54(3), 375–421.

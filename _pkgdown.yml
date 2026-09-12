@@ -40,6 +40,7 @@ reference:
     desc: Reduced-bias OLS alternatives for stationary persistent predictors.
     contents:
       - arm
+      - hlt_test
 
   - title: Fitter functions
     desc: Low-level functions taking a response and a design matrix.
@@ -87,8 +88,8 @@ articles:
       - ivx-ar
       - ivx-ra
       - ivx-qr
-      - arm
       - ivx-iv
+      - benchmarks
   - title: Inference
     navbar: Inference
     contents:
