@@ -1,0 +1,844 @@
+      Journal of Business & Economic Statistics
+
+           ISSN: 0735-0015 (Print) 1537-2707 (Online) Journal homepage: www.tandfonline.com/journals/ubes20
+
+Uniform Inference in Predictive Regression
+Models
+
+Willa W. Chen, Rohit S. Deo & Yanping Yi
+
+To cite this article: Willa W. Chen, Rohit S. Deo & Yanping Yi (2013) Uniform Inference in
+Predictive Regression Models, Journal of Business & Economic Statistics, 31:4, 525-533, DOI:
+10.1080/07350015.2013.818008
+To link to this article: https://doi.org/10.1080/07350015.2013.818008
+
+           Published online: 23 Oct 2013.
+           Submit your article to this journal
+           Article views: 502
+           View related articles
+           Citing articles: 1 View citing articles
+
+                                 Full Terms & Conditions of access and use can be found at
+                   https://www.tandfonline.com/action/journalInformation?journalCode=ubes20
+Uniform Inference in Predictive Regression
+Models
+
+Willa W. CHEN
+   Department of Statistics, Texas A&M University, College Station, Texas 77843 (wchen@stat.tamu.edu)
+
+Rohit S. DEO
+   New York University, 44 W 4th St., New York, NY 10012 (rdeo@stern.nyu.edu)
+
+Yanping YI
+   School of Statistics and Management, Shanghai University of Finance and Economics, 200433 Shanghai,
+   People's Republic of China (yi.yanping@mail.shufe.edu.cn)
+
+The restricted likelihood has been found to provide a well-behaved likelihood ratio test in the predictive
+regression model even when the regressor variable exhibits almost unit root behavior. Using the weighted
+least squares approximation to the restricted likelihood obtained in Chen and Deo, we provide a quasi
+restricted likelihood ratio test (QRLRT), obtain its asymptotic distribution as the nuisance persistence
+parameter varies, and show that this distribution varies very slightly. Consequently, the resulting sup
+bound QRLRT is shown to maintain size uniformly over the parameter space without sacrificing power.
+In simulations, the QRLRT is found to deliver uniformly higher power than competing procedures with
+power gains that are substantial.
+
+KEY WORDS: Efron curvature; REML; Sup bound.
+
+1. INTRODUCTION                                                      tial power loss. However, Chen and Deo (2009a) did not obtain
+                                                                     the limiting distribution of the RLRT when  is close to the unit
+The basic predictive regression model is given by                    root. As a consequence, the current theory does not allow for
+                                                                     uniform inference over the entire parameter space of .
+Yt =  + Xt-1 + ut  ut  iid N (0, ) , (1.1)
+Xt =  + Xt-1 + vt  vt                                                   In this article, we consider the weighted least squares approx-
+                                                                     imate restricted likelihood (WLSRL) of vector autoregressive
+where X0 = 0 and   (0, 1]. In this model, it is well known           (VAR) processes (Chen and Deo 2010) which approximates the
+that carrying out inference on  using standard procedures, such      exact RL and has the virtue of yielding an explicit weighted
+as t-statistics or the usual likelihood ratio test, is problematic,  least squares estimator of the AR coefficient matrix. Chen and
+particularly when the nuisance autoregressive parameter  in          Deo (2010) showed that this WLSRL estimator is asymptoti-
+the regressor Xt is close to unity, as is often the case in empiri-  cally equivalent to the exact RL maximum likelihood estimator
+cal applications. Chen and Deo (2009a) showed that the reason        and shares its superior bias properties. We obtain the limiting
+why the standard inference procedures fail is primarily due to       distribution of the WLSRL estimators of the predictive regres-
+the presence of the nuisance intercept parameter  and not as         sion model (1.1) under three scenarios for the AR coefficient
+much due to the autoregressive parameter , as was generally          , viz. stationarity, moderate deviations from unity and local to
+thought. Hence, they proposed using the restricted likelihood        unity. We then obtain the asymptotic distribution of the result-
+(RL), which is the exact likelihood of any linear transformation     ing quasi-RLRT (QRLRT), based on the WLSRL, under these
+of the data (Yt , Xt ) that eliminate the intercepts  and  (the      scenarios. Since the WLSRL approximates the RL, the discus-
+linear transformations are not unique, though the RL is unique       sion above suggests that this limiting distribution also should
+up to a multiple). Chen and Deo (2009a) showed that the RL           not vary too much as  varies. Indeed, we find in simulations
+possesses low Efron curvature, due to which it yields a well         that the resulting sup-bound test based on the QRLRT maintains
+behaved restricted likelihood ratio test (RLRT). When the au-        size over the entire parameter space without significant power
+toregressive parameter  is in the stationary region, they show       loss and has uniformly higher power than the Jansson Mor-
+that the error in the  2 distribution approximation to that of the   eira (2006) test, with power gains that can be substantial. The
+RLRT is very small and, more importantly, does not depend on         asymptotic distribution of the QRLRT is also obtained under
+, that is, the distribution of the RLRT is second-order pivot        local alternatives allowing for varying degrees of persistence in
+with respect to . As a consequence, the deviation of the RLRT        the autoregressive parameter.
+distribution from  2 would not be expected to be substantial as
+ approached unity, an expectation that was supported in their           In the next section, we introduce the WLSRL for the predic-
+simulations. This finding suggests that a sup-bound approach to      tive regression model and obtain the limiting distributions of
+inference for  based on the distribution of the RLRT across
+different configurations of  will result in a testing procedure                                           © 2013 American Statistical Association
+that, while maintaining correct size, will not result in a substan-                                   Journal of Business & Economic Statistics
+
+                                                                                                                            October 2013, Vol. 31, No. 4
+                                                                                                                 DOI: 10.1080/07350015.2013.818008
+
+                                                   525
+526                                                                                 Journal of Business & Economic Statistics, October 2013
+
+the resulting WLSRL estimators, comparing them to the lim-           and Wn = Wn( , ^, ^ ) with
+iting distributions of the usual ordinary least squares (OLS)
+estimators. In Section 3, we obtain the limiting distribution of     Wn( , , ) = { + (n - 1)(I - H ) (I - H )}-1,
+the QRLRT under the three scenarios mentioned above for  and
+define the sup-bound test procedure for inference on , which                           H=           0           .                                 (2.2)
+yields uniform inference over the entire nuisance parameter
+space. We also obtain the limiting distribution of the QRLRT                                        0
+under various specifications of local alternatives for . Finally,
+in Section 4 we evaluate finite sample performance of the sup-       The objective function QOLS is the usual least squares function
+bound QRLRT test through a simulation study and compare its          which uses the sample mean corrected data. The second term,
+performance to the procedure of Jansson and Moreira (2006).          QW , in the WLSRL function Qn(, ) serves as a correction,
+All proofs are relegated to the appendix at the end.                 with the magnitude of correction depending on its weight func-
+                                                                     tion Wn, which in turn depends on . Lemma 2 in the Appendix
+2. WEIGHTED LEAST SQUARES APPROXIMATED                               shows how this weight function Wn changes as  = 1 - c/kn
+                          LIKELIHOOD                                 varies. When kn n, the sample mean X is a consistent
+                                                                     estimator of  (Giraitis and Phillips 2012) and so estimators
+   Though the RL of AR processes is known to have good prop-
+erties (see Chen and Deo 2009a, 2009b, 2012), it is difficult to     based on sample mean corrected data will behave well. In this
+use it in vector AR series, since optimizing the RL is not easy due  situation, as Lemma 2 shows, the weight function Wn is asymp-
+to its nonlinear nature. Hence, Chen and Deo (2010) obtained         totically negligible and the WLSRL behaves approximately like
+a weighted least squares approximation to the RL of vector AR        the OLS function. However, when kn n, the sample mean
+processes, which yields weighted least squares estimators that       is not a consistent estimator of  (Giraitis and Phillips 2012) but
+are easy to compute and which share the good properties of           the weight function Wn is nonnegligible. As a matter of fact, it
+the exact RL estimators. Letting Zt = (Yt , Xt ) , the predictive    results in a correction term QW which is such that the WLSRL
+regression model (1.1) implies that Zt is a bivariate AR process,    estimator of  is asymptotically the same as the OLS estima-
+allowing us to use Chen and Deo (2010) to obtain the WLSRL           tor computed with Xt,d = Xt - X1, and so achieves location
+of Zt , as follows.                                                  invariance without depending on the sample mean.
+
+   We start by defining some notation. For t = 2, . . . , n and any     Letting Zt = (Yt , Xt ) , the WLSRL estimator of (, ) is the
+time series t , we will denote the corresponding sample mean         minimizer of Qn(, ) and is given by
+corrected series and its lag series as,
+                                                                     (^WLS, ^ WLS)
+
+                                                                                                                                    2 -1
+                                                                                                                                     Wn
+                                                                              n  Xt2-1,^     ^  -1  +     1            n
+                                                                                                          -
+                 1n                                      1n          =                                 n     1            Xt -1,d
+t,^ = t - n - 1 u=2 u,             t-1,^ = t-1 - n - 1 u=2 u-1.
+                                                                        t =2                                          t =2
+
+                                                                                       n                              1        n            n
+                                                                                                                      -
+Furthermore, denote the series with the first observation sub-       ×           ^ -1        Xt-1,^ Zt,^  +              1 Wn       Xs-1,d        Zt ,d  .
+tracted as
+                                                                                       t =2                        n           s=2          t =2
+
+                  s,d = s - 1, s = 1, . . . , n.                                                                                                  (2.3)
+For t = 2, . . . , n, let
+                                                                     The next theorem gives the limiting distribution of the WLSRL
+                       ut ,^       Yt,^ - Xt-1,^                     estimator. The parameter  = Corr(ut , vt ) will play an impor-
+                       vt ,^       Xt,^ - Xt-1,^                     tant role in all of our theoretical results.
+
+       t,^ (, ) =             =                       and
+
+                       Yt,d - Xt-1,d                                    Theorem 1. Under the model in (1.1), the WLSRL estimator
+                       Xt,d - Xt-1,d                                 given in (2.3) has the following limiting distributions:
+
+       rt (, ) =                      .                              (i) If   (-1, 1) and  is fixed,
+
+Let ( , ^, ^ ) be any consistent estimators of ( , , ). For                                  ^WLS -          --- N 0, (1 - 2)                  .
+example, such consistent estimators can be obtained from OLS                          n      ^ WLS - 
+estimation of model (1.1). From Lemma 1 of Chen and Deo                                                          D
+(2010), the WLSRL of model (1.1) based on the observations
+(Yt , Xt ) , t = 1, . . . , n is given by                            (ii) If  = 1 - c/kn, where kn = n,   (0, 1), then
+
+                                                                                          nkn       ^WLS -            --- N 0, 2c           .
+                                                                                                    ^ WLS - 
+       Qn(, ) = QOLS(, ) + QW (, ),                        (2.1)                                                          D
+
+where                                                                (iii) If  = 1 - c/n,
+
+                 n                                                                     n ^WLS -  ---                           1 - 2 
+                                                                                                                                 01
+QOLS(, ) =             t,^ (, ) ^ -1 t,^ (, ),                                               ^ WLS - 
+
+                 t =2                                                                                              D
+
+     QW (, )  =    1   1      n                   n                                          ×             Jc2,(r)dr -1/2 Z                 ,
+                 n-                                                                                    Jc2(r)dr -1 Jc(r)dW (r)
+                                 rs(, ) Wn           rt (, ) ,
+
+                              s=2               t =2
+Chen, Deo, and Yi: Uniform Inference in Predictive Regression Models                                                                           527
+
+where                                                                       where Jc(r), W (r), and Z are defined as in Theorem 1
+                                                                            and
+                   1                                                  r
+
+Jc(r) = e-(r-u)cdW (u), Jc,(r) = Jc(r) - Jc(s)ds                                      1-    Jc2()d -1 (            Jc ()d )2
+                                                                            gc, =            Jc2()d -1              Jc ()d )2
+                0                                                  0                                                                        .
+                                                                                     1 - 2
+and W (r) is Brownian Motion that is independent from                                                           (
+Z  N(0, 1).
+
+   The result above shows that regardless of the value of , the                A QRLRT statistic for testing H0 :  = 0 based on the
+limiting distribution of the WLSRL estimator of  is identical               WLSRL may now be defined as
+to that of the OLS estimator of  in a model without intercept.
+It is well known that when  is close to unity, this distribution is         n = Qn 0, ^ W0 LS - Qn(^WLS, ^ WLS),                               (3.2)
+markedly different from that of the OLS estimator in the model
+with an intercept, with significantly smaller bias and variance. In         and the next theorem provides its asymptotic distribution.
+the next section, we study the QRLRT for testing the hypothesis
+that  = 0.                                                                     Theorem 2. For the QRLRT defined above, we have, under
+                                                                            H0 :  = 0,
+
+3. THE QUASI-RESTRICTED LIKELIHOOD                                          (i) If   (-1, 1) and  is fixed,  n  ---           12.
+                     RATIO TEST
+                                                                                                                    D
+
+                                                                            (ii) If  = 1 - c/kn, where kn = n,   (0, 1),           n ---
+
+                                                                                                                                          D
+
+As pointed out in the Introduction, the WLSRL approximates                       12.
+                                                                            (iii) If  = 1 - c/n, n --- c,, where
+the exact RL of a vector AR process, and hence can be used
+                                                                                                                           D
+
+to construct a quasi-RL ratio test to test any hypothesis on the                                                                         2
+
+parameters in the coefficient matrix. In the predictive regression          c, := gc1,/2c + 1 - 2gc, Z ,
+
+context, one is interested in testing the null hypothesis of no
+
+predictability, that is, in testing H0 :  = 0. To compute the                            c = Jc()dW () ,
+                                                                                                      Jc2 ()d 
+corresponding QRLRT for this hypothesis, one needs to first
+                                                                            and Z  N (0, 1) is independent from c and gc, is de-
+obtain the constrained estimate of the nuisance parameter                   fined as in Lemma 1.
+
+under the hypothesis  = 0. This constrained estimator is the
+
+minimizer of Qn(0, ) and is given by
+
+                                                             2-1
+                                                              
+^ W0 LS = ^ 22     n               w^ 22    n
+                                  n-1
+                      Xt2-1,^  +               Xt -1,d                         Remark 1. By its definition, 0 < gc,  1 and the equality
+                                                                            holds only if || = 1.
+                t =2                       t =2
+                                                                               Remark 2. The random variable c is the limiting distribution
+×       n             Xt-1,^ (^ 21Yt,^  +  ^ 22Xt,^ )  +  n  1  1           of the t-statistic for testing  in a local-to-unity AR(1) process
+       t =2                                                  -              with zero mean. As c  , c -D N (0, 1) (Bobkoski 1983;
+                                                                            Phillips 1987) and, from Phillips (1987), gc, -p 1. Thus
+                n                  n
+                                                                              c,  -D 12, as c  .
+×                     Xs-1,d          w^ 21Yt,d + w^ 22Xt,d        , (3.1)
+                                                                               Remark 3. Larsson (1995) showed that |P (c2 > x) -
+       s=2                        t =2                                      P (12 > x)| = o(1) as x  . Thus the right tail of c, should
+                                                                            be very close to that of a 12.
+where ^ ij and w^ ij are the (i, j )th entries of ^ -1 and Wn, respec-
+tively. The following lemma provides the asymptotic distribu-                  Remark 4. Note that the limiting distribution of QRLRT in
+tion of this constrained estimator when  lies in different parts            Theorem 2 above is obtained under the assumption of the null
+of the parameter space.                                                     hypothesis H0 :  = 0, which is the commonly considered hy-
+                                                                            pothesis of no predictability. If one wished to test an arbitrary
+Lemma 1. When  = 0, we get                                                  value of , say H0 :  = b for some b = 0, then one would
+                                                                            simply replace the Yt values by Yt - bXt-1 and then test the
+(i) If   (-1, 1) and  is fixed,                                             H0 :  = 0. Hence, there is no loss of generality in focusing on
+                                                                            the null value of 0 for .
+       ^ W0 LS -              --- N        0, (1 - 2)(1 - 2)
+  n                                                                            The theorem above shows that the QRLRT distribution
+                                  D                                         changes depending on the value of the nuisance parameter .
+                                                                            Hence, to have a test that controls size over the entire nuisance
+(ii) If  = 1 - c/kn, where kn = n,   (0, 1),                                parameter space, one would have to work with the sup-bound
+                                                                            critical value, with the supremum taken over all possible values
+       nkn            ^ W0 LS -   --- N    0, 2c(1 - 2)                     of ; see, for example, Cavanagh, Elliot, and Stock (1995). More
+                                                                            specifically, for a given  and level of significance , define
+                                      D
+                                                                                      q, = sup{q,(c) : P ( c, > q,(c)) = }.
+(iii) If  = 1 - c/n,
+                                                                                                       c0
+n      ^ w0 ls -      --- (1 - 2gc,) Jc()dW ()
+                               D           Jc2 ()d 
+
+       + gc1,/2 1 - 2gc, Z ,
+                    Jc2 ()d 
+528                                                                           Journal of Business & Economic Statistics, October 2013
+
+                                                  Table 1. P ( c, > q,0.05) in percentage  = 5%
+
+/c               0                          1              3           5                         7                9                  12
+
+0.98             5%                     4.66%              4.31%       4.21%               4.16%                  4.16%              4.13%
+
+0.75             5%                     4.57%              4.16%       4.01%               3.94%                  3.95%              3.91%
+
+0.50             5%                     4.78%              4.55%       4.47%               4.43%                  4.42%              4.40%
+
+NOTE: Based on 1,000,000 replications simulated from the distribution of (c, ). Each replication of (c, ) is generated by approximating the relevant stochastic integrals in it using
+32,768 (215) observations from a Gaussian white-noise.
+
+Since, as pointed out in Remark 2, the local-to-unity limiting      (ii) If  = 1 - c/kn, where kn = n,   (0, 1), and  =
+distribution of the QRLRT transitions to the limiting chi-square         b/ nkn, then
+distribution as c  , the results of Theorem 2 imply that
+                                                                                                       ---    12{b2/(2c)}
+                                                                                                    n
+                                                                                                           D
+      lim   sup  P=0       (     n > q,)               (-1, 1].
+
+      n                                                                  a noncentral 12 with noncentrality parameter b2/(2c).
+                                                                    (iii) If  = 1 - c/n and  = b/n, then n --- c,(b),
+Though  is not known, it is trivial to obtain a consistent esti-
+                                                                                                                                                        D
+mator of it and hence of q,, which we denote by q^,. We thus
+get the following theorem:                                               where
+
+Theorem 3. For testing H0 :  = 0,                                                     c, (b) = gc1,/2c + 1 - 2gc, Z
+
+      lim   sup  P     =0  (     n > q^,)              (-1, 1].                                                                   2
+
+      n                                                                                                           Jc2 (r )d r
+
+                                                                                                       + bgc1,/2
+
+   Theorem 3 defines our sup-bound test, which maintains size             where Z, c, and gc, are defined as in Theorem 2.
+over the nuisance parameter space, with q^, as the required
+sup-bound critical value. This sup-bound critical value can be      3.1 The AR(p) Regressor Case
+easily found by simulation and, as a matter of fact, we found in
+our extensive simulation study that for a given  and , q,(c)           The above results in Theorem 2 for the QRLRT also extend
+is monotone decreasing in c, that is,                               easily to the more general case where the regressor series follows
+                                                                    an AR(p) process. Most specifically, let
+   q, = sup{q,(c) : P ( c, > q,(c)) = } = q,(0).
+                                                                              Yt =  + Xt-1 + ut                                      (3.3)
+                  c0
+                                                                              Xt =  + 1Xt-1 + · · · + pXt-p + vt .
+This phenomenon of the sup-bound occurring at the unit root
+was also noticed in the sup-bound tests considered in Cavanagh,     Letting   =       p    i     and     = (1, . . . , p-1), where   s  =
+Elliot, and Stock (1995).                                              p      j , we  i=1                in the Dickey-Fuller form,
+                                                                    -  j =s
+   In general, the drawback of a sup-bound test is that the test                      can rewrite Xt
+can be too conservative if the null distribution changes a great
+deal over the nuisance parameter space (see Cavanagh, Elliot,          Xt =  + Xt-1 + 1Xt-1 · · · + p-1Xt-p+1 + vt .
+and Stock 1995), resulting in significant power losses. However,
+Remark 3 above shows that the distributions of the QRLRT for        The expressions of the WLSRL Qn(, ,  ) along with the
+different values of  look quite similar in the right tail. As a     WLSRL estimator (^, ^ WLS, ^WLS) and the constrained estimator
+consequence, the sup-bound test for the QRLRT should not be         under H0 :  = 0, (^ W0 LS, ^W0LS) are given by Equations (A.1),
+expected to be very conservative. Table 1 below demonstrates        (A.2), and (A.3) in Appendix A. The proof of the following
+this by computing the tail probability of c, beyond sup-bound
+critical values q,0.05 for different values of c and  at  = 5%. It  theorem is similar to that of Theorem 2, except it is much more
+is seen that though the sup-bound test can become conservative,
+it is not very undersized, suggesting that any power losses will    lengthier, we thus omit it.
+not be significant. This is indeed found to be the case in our
+simulation study presented in Section 4.                               Theorem 5. Let Qn(, ,  ) be the WLSRL objected func-
+                                                                    tion under model 3.3, (^, ^ WLS, ^WLS) be the WLSRL estima-
+   In the next theorem, we establish the limiting distributions     tor and (^ W0 LS, ^W0LS) be the WLSRL estimator under constraint
+of the QRLRT statisticunder the local alternatives Ha :  =           = 0. Then the QRLRT
+b/sn, where sn = n, nkn and n for  that is fixed, deviates
+moderately from unity and is local to unity, respectively.                    n = Qn 0, ^ W0 LS, ^W0LS - Qn(^WLS, ^ WLS, ^WLS)
+
+                                                                    has the same limiting distributions as stated in Theorem 2.
+
+Theorem 4. For the QRLRT n, we have                                    We now turn toward studying the finite sample size and power
+                                                                    of our procedure through simulations.
+                                        
+(i)   If    is  fixed  and         =  b/ n  then
+
+                              n  ---    12{b2/(1  -  2)},                               4. SIMULATION STUDY
+
+                                     D                                 In this section, we carry out Monte Carlo studies to compare
+                                                                    the size and power of our sup-bound-based QRLRT test given
+      a noncentral 12 with noncentrality parameter b2/(1 - 2).
+Chen, Deo, and Yi: Uniform Inference in Predictive Regression Models                                                                                             529
+
+                                                                   1-  2
+                                                                   n
+      Table 2. Rejection rates for testing H0 :  = 0. True  = b           ,     =   -0.98,       =  1  -  c  ,  nominal  size  =  5%,  5000    replications
+                                                                                                          n
+
+                                b=0                                                        b = 25                                              b = 50
+
+c         n            QRLRT           JM                                    QRLRT                        JM                      QRLRT                      JM
+
+   0     100           0.0526          0.0462                                0.9514                    0.7718                        1                       0.9852
+                       0.0534          0.0544                                0.9536                    0.7846                        1                       0.9940
+         200           0.0522          0.0448                                0.9552                    0.7906                        1                       0.9992
+                       0.0472          0.0506                                0.8832                    0.4796                     0.9998                     0.9990
+         400           0.0460          0.0522                                0.8910                    0.4688                        1                       0.9990
+                       0.0440          0.0500                                0.8908                    0.4680                        1                       0.9996
+   1     100           0.0400          0.0492                                0.2556                    0.0782                     0.9872                     0.5454
+                       0.0400          0.0500                                0.2658                    0.0828                     0.9922                     0.5352
+         200           0.0394          0.0568                                0.2620                    0.0886                     0.9908                     0.5124
+                       0.0416          0.0560                                0.1598                    0.0724                     0.6682                     0.1110
+         400           0.0378          0.0500                                0.1574                    0.0650                     0.6752                     0.1016
+                       0.0396          0.0570                                0.1512                    0.0728                     0.6684                     0.1044
+   5     100           0.0460          0.0610                                0.1182                    0.0646                     0.3428                     0.0784
+                       0.0368          0.0570                                0.1052                    0.0634                     0.3198                     0.0770
+         200           0.0380          0.0622                                0.0994                    0.0684                     0.3138                     0.0804
+
+         400
+
+10       100
+
+         200
+
+         400
+
+20       100
+
+         200
+
+         400
+
+in Theorem 3 with the test proposed in Jansson and Moreira                other values of  yielded results similar in nature to those re-
+(2006) (henceforth, JM). The data were generated from
+                                                                          ported here for  = -0.98. The sample size n was set to be
+
+Yt = Xt-1 + ut  = 1 - c     ut iid N 0, 1  ,                              100, 200, and 400 with c = 0, 1, 5, 10,and 20. Following JM's
+                                                                          set-up, the parameter  was set to be b                  1-2
+Xt = Xt-1 + vt         n    vt         1                                                                                          n         ,  where  b  =   0,  25,
+
+                                                                          and 50. The rejection rates when b = 0 correspond to the size
+
+where the intercept in each equation was set to zero without loss         of the tests and when b = 25 and 50, to the power against lo-
+of generality, since our test is location invariant. As mentioned
+earlier in Section 3, initial simulation results showed that for          cal alternatives. Not surprisingly, it is seen from the table that
+a given pair (, ), the sup-bound critical value was q,(0),
+that is, the supremum, over c, of the critical value was attained         the size of our test is slightly below the nominal level when c
+at c = 0. Hence, for each replication, we first estimated  and
+then used q^,(0) as the critical value for our test. Furthermore,         takes large value, since QRLRT is asymptotically conservative.
+since Chen and Deo (2010) reported that the iterated WLSRL
+estimates, obtained by using the first step WLSRL estimates in            However, despite the conservative size, the power of our test is
+the weight function Wn, have better finite sample behavior, we
+computed the QRLRT using these iterated WLSRL estimates.                  uniformly higher than that of the JM test, with the power gains
+
+   In Table 2, we compare our test procedure with JM's condi-             being very substantial at times.
+tional test for  = -0.98. This large negative value of  was
+chosen to reflect the kind of values observed empirically (see                  In Table 3, we provide, for comparison, simulation results
+Chen and Deo 2006). Simulation studies not reported here for
+                                                                          for the configuration presented in Table II on page 702 of JM.
+
+                                                                          Following the settings in Table II of JM, the correlation  is
+
+                                                                          set to -0.5 and 0.5, while the sample size is set at n = 1000
+
+                                                                          with 500 replications. Once again, it is seen that the QRLRT
+
+                                                                          maintains size while delivering power that is either identical to
+
+                                                                          or higher than that of the JM test, with several power gains being
+
+                                                                          very substantial.
+
+                                                                      1-2
+                                                                      n
+      Table 3. Rejection rates for testing H0 :  = 0. True  = b              ,    =  1  -  c  ,  nominal  size  =  5%,   n  =  1000,   500  replications
+                                                                                           n
+
+      c                c=0                     c=5                                                        c = 10                               c = 15
+
+      b         QRLRT           JM     QRLRT                                    JM               QRLRT                   JM            QRLRT                 JM
+
+­0.5  0         0.040           0.054  0.042                                 0.058               0.056             0.042               0.046                 0.066
+                0.488           0.424  0.186                                 0.102               0.138             0.076               0.112                 0.080
+      5         0.892           0.826  0.620                                 0.338               0.438             0.180               0.316                 0.154
+                0.990           0.946  0.904                                 0.702               0.772             0.392               0.646                 0.230
+      10        0.062           0.046  0.052                                 0.036               0.064             0.018               0.058                 0.022
+                0.398           0.412  0.196                                 0.132               0.150             0.054               0.114                 0.040
+      15        0.728           0.602  0.504                                 0.220               0.372             0.122               0.300                 0.088
+                0.908           0.720  0.746                                 0.274               0.622             0.196               0.508                 0.082
+0.5   0
+
+      5
+
+      10
+
+      15
+530                                                                                                  Journal of Business & Economic Statistics, October 2013
+
+APPENDIX A: MODEL WITH AN AR (p) REGRESSOR                                       and Wn = Wn( , ^, ^ , ^ ) with Wn( , , ,  ) = {Ip  +
+                                                                                 D D}-1, where
+   We start by defining some notation. For t = p + 1, . . . , n
+and any time series t , we will denote the corresponding sample                            D = ((I - H1 - H2) . . . (I - H1 - Hp)
+mean corrected series and its lag series as,                                                        
+
+                                    1        n                                                   × n - p(I - H1) )
+                                    -
+                 t ,^  =  t  -   n     p          u,
+
+                                          u=p+1                                  and
+
+          t -1,^       =  t -1   -  n  1  p     n                                H1 =             0           Hs =          00               s = 2, . . . , p .
+                                       -                                                                   ,                          ,
+                                                    u-1,                                                                       s-1
+
+                                             u=p+1                                                0                         0
+
+                                          1       n
+                                          -
+           t -k,^      =   t -k     -  n     p          u-k .                    For the WLSRL estimator of (, ,  ), define
+
+                                                u=p+1
+
+For t = p + 1, . . . , n, let                                                                                                                    
+
+     t,^ (, , b) =        ut ,^                                                         VZ = Z2,d , . . . , Zp,d , n1- p n Zt,d  ,
+                          vt ,^
+                                                                                                                                                 t =p+1
+
+                                                                                                                                                         
+
+                                       Yt,^ - Xt-1,^                                       U = X1,d , . . . , Xp-1,d , n1- p n Xt-1,d  ,
+
+                 =  Xt,^ - Xt-1,^ - p-1 kXt-k,^ .                                                                                                      t =p+1
+
+                                                  k=1                            and the (p - 1) × p matrix S = (S1, . . . , Sp), where
+
+Furthermore, denote the series with the first observation                               Sk = (Xs, . . . , X1, 0, . . . , 0), k = 1, . . . , p - 1
+subtracted as, s,d = s - 1, s = 1, . . . , n, as before. Define
+R(, ,  ) = (R1, . . . , Rp), where                                                    Sp = n1- p              n
+
+                                                                                                                 (Xt-1, . . . , Xt-p+1).
+
+R1 =      Y2,d - X1,d                                                                                         t =p+1
+          X2,d - X1,d
+                                                                                 Further define the p × 1 vector Lt = (Xt-1,^ , . . . ,
+                  Ys+1,d - Xs,d                                                  Xt-p+1,^ ) . Let Ar2, Ac2, A22 denote the second row, the sec-
+                                                                                 ond column, and the (2, 2) entry of a 2 × 2 matrix A, respec-
+Rs   =   Xs+1,d                      s-1          ,    s  =  2, . . . , p - 1 ,
+                                                                                 tively, the WLSRL estimator
+                 - Xs,d - kXs-k
+
+                                 k=1
+
+and                                                                              (^WLS  ,  ^WLS   ,  ^WLS  )
+                                                                                    
+                                                                                    n
+          Rp = n1- p n rt where                                                  = 2                          Xt2-1 -1         Xt-1Lt        -1
+                                                                                                                                             c2
+                                     t =p+1                                                t =p+1
+                                                                                                       Xt-1Lt           -1     Lt Lt     -1
+                                                                                                                        r2               22
+
+                                                                                                                               Ui Sj +Uj Si  W^ cij2 -1
+                             Yt,d - Xt-1,d                                                                                      Si Sj + Sj Si W^ 2ij2 
+          rt =  Xt,d - Xt-1,d - p-1 kXt-k  .                                           p                2Ui Uj W^ ij
+                                                                                                  (Ui Sj + Uj Si )  W^ rij2
+                                                                                 +
+
+                                                                                    i,j =1
+
+                                             k=1                                           
+                                                                                        n
+Let ( , ^, ^ , ^ ) be any consistent estimators of ( , , ,  ).                        × 2                     -1Zt,^ Xt-1,^
+From Lemma 1 of Chen and Deo (2010), the WLSRL of model
+(3.3) based on the observations (Yt , Xt ) , t = 1, . . . , n is given                          t =p+1        -1  Zt    ,^ Lt
+by                                                                                                            r2
+
+                                                                                                                                      
+                                                                                                                                      
+                                                                                            p          W^ ij(VZ,i Uj + VZ,j Ui )      ,                        (A.2)
+                                                                                                       W^ rij2 VZ,i Sj + VZ,j Si
+        Qn(, ,  ) = QOLS(, ,  ) + QW (, ,  ), (A.1)                                   +
+
+                                                                                          i,j =1
+
+where                                                                            where W^ ij is the (i, j ) block, a 2 × 2 matrix, of Wn and VZ,i is
+                                                                                 the ith column of VZ . Let
+                          n
+
+     QOLS(, ,  ) =               t,^ (, ,  ) ^ -1 t,^ (, ,  ),
+
+                          t =2                                                   UX =        U       = (UX,1, . . . , UX,p) and LX,t =             Xt-1,^ ,
+                                                                                             S                                                       Lt
+        QW (, ,  ) = vec{R(, ,  )} Wnvec{R(, ,  )},
+Chen, Deo, and Yi: Uniform Inference in Predictive Regression Models                                                                                                     531
+
+the WLSRL estimator under H0 : 0 is given by                                           Proof of Lemma 1. The restricted estimate of  in (3.1) is
+                  
+                  n                                                                               ^ W0 LS = 0 + (1 - 2)Tn0 + ^Sn0 + Rn0,
+   ^ W0 LS                                              p
+   ^W0LS
+               = 2               LX,t LX,t    22 +            UX,i UX,j
+
+                      t =p+1                          i,j =1                           where
+
+                                           -1                 n                        Tn0 =      t  Xt-1,^ vt,v   +      w^ 22   s,t Xs-1,d (Xt,d - 0Xt-1,d )           ,
+                                                                                       Sn0 =                              n-1
+
+                  + UX,j UX,i W^ 2ij2 × 2                          -1  Zt  ,^  LX,t                       t Xt2-1,^ +            (1-^2)w^ 22     s Xs-1,d 2
+                                                                   r2                                                                n-1
+
+                                                           t =p+1                                                t Xt-1,^ et,^
+
+                                                                       
+                                                                       
+                              p                                                                      Xt2-1,^  +    (1-^2)w^ 22       s Xs-1,d 2
+                                                                                                                       n-1
+                  +              W^ rij2 VZ,i UX,j + VZ,j UX,i  . (A.3)                           t
+
+                      i,j =1                                                           and
+
+                                                                                              Rn0 =                w^ 12         s Xs-1,d        t Yt,d      2.
+                                                                                                                   n-1                            s Xs-1,d
+
+                              APPENDIX B: PROOF                                                           t   Xt2-1,^     +      (1-^2)w^ 22
+                                                                                                                                     n-1
+
+Throughout this appendix, we will use the summation nota-                              Let Sn and Tn be the same as in (B.2), and define
+
+tion   t for         n     unless   stated    otherwise.                                                                          t Xt2-1,^
+                     t =2
+
+Proof of Theorem 1. Without loss of generality, we will                                           gn :=          Xt2-1,^         (1-^2)w^ 22     s Xs-1,d 2
+                                                                                                                                     n-1
+prove for  = 0. Following from Phillips (1987), Phillips and                                                  t              +
+
+Magdalinos (2007), and Giraitis and Phillips (2012),                                                      1 + Op(kn/n),                         [0, 1)
+                                                                                                          g,c + Op(n-3/2),                                 ,
+      Xt2-1,^ = Op(nkn),                                                                             =                                                                 (B.3)
+                                              Xt-1,d = Op(kn n + n). (B.1)                                                                    =1
+
+t                                   t
+
+Using the matrix inversion formulas and letting                                        by (B.1), Lemma 2 and Corollary 2. We obtain
+
+                  det( Wn)          s Xs-1,d 2                     kn                         ^ W0 LS - 0 = (1 - ^2gn)Tn + ^gnSn + Rn0 .                               (B.4)
+                    n-1             t Xt2-1,^                      n2
+            n  =                                      = Op             ,               The remainder term Rn0 = Op(1/n) if   [0, 1/2] and Rn0 =
+                                                                                       Op(1/kn n) if   [1/2, 1]. The limiting distribution of
+by (B.1), Lemma 2, and Corollary 2, the WLS estimate in (2.3)                          (^ W0 LS - 0 follows from from (B.4) and Lemma 3.
+becomes
+
+^WLS        = 1 I + nWn-1 ^ -1                                                            Proof of Theorem 2. We will prove only for Q, the proof
+^ WLS                                                                                  of L will follow by the same proof in combination with Lemma
+                    n                                                                  2 and Corollary 2. For algebraic convenience, we use the fol-
+                                                                                       lowing notations:
+                                                    Wn
+                  ×              Xt-1,^ Zt,^  +  n  -1              Xs-1,d Zt,d ,                                                        1
+                                                                                                                                           n-1
+                           t                               s     t                            n=        Xt2-1,^ ,  and           n   =                       Xs-1,d .
+
+where                                                                                                t                                                s
+
+                                                 1       s Xs-1,d 2                    The second partial derivatives of Qn(, ) are
+                                                        t Xt2-1,^
+                  n=             Xt2-1,^ 1 + n-1                                       2Qn(, )
+                                                                                           2
+                           t                                                                         =     2n      +         2w^ 11n2   =      2n     +   Op (1),
+                                                                                                          1 - ^2                              1 - ^2
+
+                      × (w^ 11 + w^ 22 + 2^w^ 12 + n) .                                2Qn(, )       =    -      2^ n        + 2w^ 12n2       =  - 2^ n      + Op(kn),
+                                                                                                                 1 - ^2                            1 - ^2
+With detailed algebraic calculation and writing ut = vt + et ,
+                                                                                       2Qn(, )             2n
+            (^WLS, ^ WLS - 0) = (Sn + ^Tn, Tn) + Rn, (B.2)                                 2         =    1 - ^2   +         2w^ 22n2,
+
+where                                                                                  by (B.1), Lemma 2 and Corollary 2. With a Taylor expansion of
+                                                                                       Qn,
+Sn =           t  Xt-1,^ et,^    ,
+                  t Xt2-1,^
+                                                                                              n = Qn 0, ^ W0 LS - Qn(^WLS, ^ WLS)
+
+Tn =           t  Xt-1,^ vt,v    +  w^ 22     s,t Xs  -1,d (Xt,d -  0  Xt  -1,d  )  ,         =1      2 Qn (^WLS ,        ^ WLS) (0
+                                    n-1                 s Xs-1,d 2                               2           2
+                                              w^ 22                                                                                      -    ^WLS)2
+                                 t Xt2-1,^ +  n-1
+
+and the remainder term Rn = Op(1/n) if   [0, 1/2], and                                            +  2    2Qn(^WLS        ,  ^ WLS)  (0    -  ^WLS)(^ W0 LS  -   ^ WLS)
+Rn = Op(1/kn n) if   [1/2, 1] by (B.1), Lemmas 2 and                                                           
+Corollary 2. The theorem follows from Giraitis and Phillips
+                                                                                                              (^WLS,
+(2012), the theorem follows from Phillips (1987) and Phillips                                          2  Qn   2          ^ WLS)
+
+and Magdalinos (2007).                                                                            +                               (^ W0 LS    -  ^ WLS)2  .            (B.5)
+532                                                                                                  Journal of Business & Economic Statistics, October 2013
+
+Writing ^ W0 LS - ^ WLS = (^ W0 LS - 0) - (^ WLS - 0) and using                        Lemma 2. Let Wn(, , ) be defined as (Corollary 2.2) and
+(B.2) and (B.4), Equation (B.5) becomes                                              = 1 - c/n,   [0, 1]. If  = 0, then
+
+      n  {Sn   +    ^Tn}2    -  2^       n  {Sn  +    ^Tn}  (-^2gnTn    +   ^gnSn)                         O (n-2+2 ),                      [0, 1/2]
+                                1-                                                        det(Wn) = (n - 1)-1 + O(n-2),   (1/2, 1]
+1  - ^2                                 ^2
+
+      +     n  +  (1 - ^2)w^ 22n2       (-^2gnTn      +  ^gnSn)2
+                   1 - ^2
+                                                                                    and furthermore,
+
+   =        n + w^ 22n2     ^2gnTn2     +   (1  -  ^2gn)    n Sn2                   Wn(, 0, )
+                                                1  - ^2                                   
+                                                                                             n-1+2{c2(1       -  2)}-1    + O(n-1+),        [0, 1/2)
+                                                                                                                                           = 1/2 ,
+      +  2(1   -    ^2gn)^   n    SnTn                                              =        {1  +   c2(1 - 2)}-1       + O(n-1/2),         (1/2, 1]
+               1    - ^2                                                                         +   O (n- ),
+                                                                                          
+
+                                                                      2
+                                                                   Sn .
+                                                (1 - ^2gn)     n                                              00
+   =  n + w^ 22 2^gn1/2Tn +                        1 - ^2                                 where =                    .
+                                                                                                              01
+
+The limiting distribution of n follows from Lemmas 4                                Proof. With a few algebraic steps,
+
+and 5 .                                                                             Wn(, , ) =                     1
+                                                                                                      det     Wn-1(, , )
+
+   Proof of Theorem 4. Let n = b/ nkn and ^  be the
+WLSRL estimator of  for fixed . Now,
+
+      0 = Qn(0, ^ , 0) - Qn(n, ^ , n)                                                       1 + (n - 1)(1 - )2 - - (n - 1){(1 - )( - )}                 
+
+                                                                                    ×  - - (n - 1)                      1 + (n - 1)(1 - 2 + 2) 
+
+         =     2Qn   (0   - n) +         2 Qn   (^ 0  - ^ n ) + op(     nkn).               {(1 - )( - )}
+                                         2
+                                                                                    and the determinant of Wn-1(, , ),
+We get, from the above equation,
+
+                    -        =       b       2 Qn      2 Qn    -1                           det Wn-1(, , )
+                                -                      2                                       = (n - 1){(1 + 2 + 2) - 2( + )(1 - )
+               ^ 0     ^ n
+                                     nkn
+
+                             =  -      b    ^gn    +  op (1/   nkn).                             +(1 - )2} + (1 - 2){1 + (n - 1)2(1 - )2}
+                                     
+
+                                       nkn
+
+Under HA :  = n, the expressions of (B.2) and (B.4) are valid We have, when  = 0,
+
+with 0 being replaced by n, thus, together with the above                           det Wn-1(, 0, )
+equation,
+
+^ W0 LS - ^ WLS = ^ 0 - ^ n + ^ 0 - 0 - (^ WLS - 0)                                       = (n - 1){(1 - 22(1 - ) + (1 - )2}
+
+                                                     ^gnb                                    + (1 - 2){1 + (n - 1)2(1 - )2}
+                                                       nkn                                   
+                  =  -^2gnTn         +  ^gnSn    -          +  op (1/   nkn)                     (n  -  1)2-2c2  (1  -    2)  +  O  (n),   = 1 - c/n,
+
+      0 -^WLS     =  0    -  n  - (^WLS     -    n)   =       b    -   (Sn +^Tn).         =      (n  -  1){1  +  c2(1 - 2)},                 [0,  1/2)  ,
+                                                         -                                       (n  -  1)(1  +  O (n1-2 )),               = 1-   c/ n
+                                                                                             
+                                                              nkn                                                                          = 1 - c/n,
+
+Plugging the above equations into (B.5) and ignoring the smaller                                                                            (1/2, 1]
+order terms,
+
+                                                                               2    and,
+                                                                               
+      =        1/2   1 - ^2gn Tn+           (1 - ^2gn) n           Sn+    b
+               n                               1 - ^2                   
+
+   n                1 - ^2                                                nkn                                      1                1 + c2/n  -(1 + c)
+                                                                                                              Wn-1(, 0, )           -(1 + c)       n
+                                                                                    Wn(, 0, ) =                                                               .
+                                                                                                      det
+         
+        
+      = ^gn1/2       n + w22n2 1/2 Tn +               (1 - ^2gn)   n    Sn          The lemma follows immediately.
+                                                         1 - ^2
+
+         + gn1/2       n  +  w22n2      1/2 b    2                                     Corollary 1. Let Wn(, , ) be defined as 2.2, then the ex-
+                                                                                    pressions of Wn in Lemma 2 hold for any value of .
+                             nkn                  ,
+                                                                                       Corollary 2. Let ^ be a consistent estimate of  and ^ be
+because                                                                             a consistent estimate of . Furthermore, let ^ be a consistent
+                                                                                    estimate of  such that n(1+)/2|^ - | = Op(1) where  =
+               (1 - ^2gn)         n  = gn1/2     n + w22n2 1/2 .                    1 - c/n,   [0, 1]. Then the expression of Wn in Lemma 2
+                  1 - ^2                                                            holds for Wn(^, ^, ^ ) holds with the order of remainder terms
+                                                                                    O(·) being replaced by Op(·).
+The theorem follows from Lemmas 4 and 5 .
+Chen, Deo, and Yi: Uniform Inference in Predictive Regression Models                                                                                 533
+
+   Lemma 3. Let w22 be the (2, 2)th entry of Wn(, , ) in                     When  is fixed, n-1 t Xt2-1,^ p (1 - 2)-1. When
+(2.2),                                                                        = 1 - c/n with   (0, 1), (nkn)-1 t Xt2-1 p 1/2c from
+                                                                             Phillips and Magdalinos (2007), and (n - 1)-1 t Xt-1 =
+                        w22           s,t Xs-1,d Xt,d -          s Xs-1,d 2  Op(kn2/n) from Giraitis and Phillips (2012), thus
+        Xt-1,^ vt,^ +                            n-1
+                                                                              1            Xt2-1,^         1           Xt2-1(1 + op(1))      1
+     t                                                                       nkn                       =  nkn                            -p  2c  .
+
+      =    t     Xt-1,^ vt,^  +    Op (n ),    [0, 1/2]                              t                              t
+                                   
+           t Xt-1vt + Op( n),                  [1/2, 1]                      Furthermore, when                  = 1 - c/n,  n-2 t Xt2-1,^ 
+                                                                               Jc mu(r)2dr.
+and
+
+              Xt2-1,^ + w22             s Xs-1,d 2                           Lemma 5. Let w22 be the (2, 2)th entry of Wn, and
+                                      n-1
+           t                                                                 Tn =       t  Xt-1,^ vt,v    +    w22     s,t Xs-1,d (Xt,d - 0Xt-1,d )  ,
+                                                                                                               n-1
+
+                       t Xt2-1,^ + Op(n2),                 [0, 1/2]                                    t Xt2-1,^ +     w22  s Xs-1,d 2
+                       t Xt2-1 + Op(n1/2+),                              .                                             n-1
+
+           =                                               [1/2, 1]          then
+
+                                                                             nknTn ---
+                                                                                           D
+   Proof. The lemma follows from Lemma 2 that w22 =
+O(n-1+2), when   [0, 1/2] and w22 = 1 + o(1), when                                   N     (0,  (1  -  2  )),   is fixed , kn = 1
+                                                                                   
+(1/2, 1], and the fact that                                                          N (0, 2c),                 = 1 - c/kn, kn = n,   (0, 1)
+                                                                             ×           Jc (r )2 d r           = 1 - c/n .
+
+                    Xs-1,d Xt,d -                             2                                           c ,
+
+                 s,t                           Xs-1,d                           Proof. The lemma follows from Lemma 3, Phillips (1987),
+                                                                             and Phillips and Magdalinos (2007).
+                                            s
+
+                 = (Xs - X1) {vt - (1 - )X1}
+
+                       s                 t
+
+and                                                                                            ACKNOWLEDGMENTS
+                                                                             Chen's research was supported by NSF grant DMS-1007652.
+                                   2                     2
+                                                                                           [Received January 2013. Revised June 2013.]
+                    Xs-1,d =                Xs-1 - (n - 1)X1
+
+                 s                       s
+
+           × Xs-1 + (n - 1)2X12 .                                                                         REFERENCES
+
+                  s
+
+Lemma 4. Let et = ut - vt and                                                Bobkoski, M. J. (1983), "Hypothesis Testing in Nonstationary Time Series,"
+                                                                                 Ph.D. Thesis, The University of Wisconsin. [527]
+                          Sn =        t  Xt-1,^ et,^  ,
+                                         t Xt2-1,^                           Cavanagh, C. L., Elliott, G., and Stock, J. H. (1995), "Inference in Models With
+                                                                                 Nearly Integrated Regressors. Trending Multiple Time Series," Econometric
+then                                                                             Theory, 11, 1131­1147. [527,528]
+
+nknSn ---                                                                    Chen, W., and Deo, R. (2009a), "Bias Reduction and Likelihood Based Almost-
+           D                                                                     Exactly Sized Hypothesis Testing in Predictive Regressions Using the Re-
+                                                                                 stricted Likelihood," Econometric Theory, 25, 1143­1179. [525,526]
+NN    (0,  (1 -  2)(1 -   2   )),      is fixed, kn = 1
+      (0,  2c(1  - 2)),                = 1 - c/kn, kn = n,   (0, 1)          ------ (2009b), "The Restricted Likelihood Ratio Test at the Boundary in
+                                                                                 Autoregressive Series," Journal of Time Series Analysis, 30, 618­630. [526]
+                       -1/2
+                                                                             ------ (2010), "Weighted Least Squares Approximate Restricted Likelihood
+         Jc2, (r )d r                  = 1 - c/n .                               Estimation for Vector Autoregressive Processes," Biometrika, 97, 231­237.
+         1 - 2 Z,                                                                [525,526,529,530]
+
+Proof. Since et,^ is independent of Xt-1,^ ,                                 ------ (2012), "The Restricted Likelihood Ratio Test for Autoregressive Pro-
+                                                                                 cesses," Journal of Time Series Analysis, 33, 325­339. [526]
+                       t Xt-1,^ et,^         Xt-1,^  Z .
+                                                                             Giraitis, L., and Phillips, P. C. B. (2012), "Mean and Autocovariance Function
+                 (1 - 2) t Xt2-1,^                                               Estimation Near the Boundary of Stationarity," Journal of Econometrics,
+                                                                                 169, 166­178. [526,531,533]
+
+                                                                             Jansson, M., and Moreira, M. (2006), "Optimal Inference in Regression Models
+                                                                                 With Nearly Integrated Regressors," Econometrica, 74, 681­714. [525,529]
+
+                                                                             Larsson, R. (1995), "The Asymptotic Distributions of Some Test Statistics in
+                                                                                 Near-Integrated AR Processes," Econometric Theory, 11, 306­330. [527]
+
+                                                                             Phillips, P. C. B. (1987), "Towards a Unified Asymptotic Theory for Autore-
+                                                                                 gression," Biometrika, 74, 535­547. [527,531,533]
+
+                                                                             Phillips, P. C. B., and Magdalinos, T. (2007), "Limit Theory for Moderate
+                                                                                 Deviations From a Unit Root," Journal of Econometrics, 136, 115­130.
+                                                                                 [531,533]
+

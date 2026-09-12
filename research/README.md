@@ -40,29 +40,19 @@ See `replication/` for per-article replication scripts, data and results.
 | `jansson-moreira-2006-optimal-inference` | NBER WP (journal: [10.1111/j.1468-0262.2006.00679.x](https://doi.org/10.1111/j.1468-0262.2006.00679.x)) | Jansson & Moreira (2006) *Optimal inference in regression models with nearly integrated regressors*, Econometrica 74(3) 681-714. | Conditional likelihood approach; package README to-do. Non-IVX benchmark. |
 | `cavanagh-elliott-stock-1995-nearly-integrated` | journal | Cavanagh, Elliott & Stock (1995) *Inference in models with nearly integrated regressors*, ET 11(5) 1131-1147. [CUP](https://doi.org/10.1017/S0266466600009981) | Bonferroni method; package README to-do. |
 | `elliott-2011-control-function` | journal | Elliott (2011) *A control function approach for testing the usefulness of trending variables in predictive regressions and econometric models*, JoE 164(1) 79-91. [SD](https://doi.org/10.1016/j.jeconom.2011.02.014) | Control function approach; package README to-do (cited there as "Elliott 2001"). |
+| `demetrescu-2014-local-power-ivx` | journal | Demetrescu (2014) *Enhancing the local power of IVX-based tests in predictive regressions*, Econ. Letters 124 269-273. [SD](https://doi.org/10.1016/j.econlet.2014.05.032) | Lagged-y augmentation of the IVX regression; one `ivx()` argument. |
+| `breitung-demetrescu-2015-iv-variable-addition` | journal | Breitung & Demetrescu (2015) *Instrumental variable and variable addition based inference in predictive regressions*, JoE 187 358-375. [SD](https://doi.org/10.1016/j.jeconom.2013.10.018) | Alternative IV choices / combined IVs, variable-addition tests. |
+| `demetrescu-rodrigues-taylor-2023-transformed-long-horizon` | journal | Demetrescu, Rodrigues & Taylor (2023) *Transformed regression-based long-horizon predictability tests*, JoE 237 105316. [SD](https://doi.org/10.1016/j.jeconom.2022.06.006) | Competitor to KMS long-horizon; goes with the `horizon > 1` audit. |
+| `fan-lee-2019-ivx-qr-garch` | SSRN WP (journal: JoE 213) | Fan & Lee (2019) *Predictive quantile regressions under persistence and conditional heteroskedasticity*, JoE 213 261-280. [SSRN](https://doi.org/10.2139/ssrn.3016449) | IVX-QR with GARCH errors; extends `ivx_qr()`. |
+| `lee-shi-gao-2022-lasso-predictive` | journal | Lee, Shi & Gao (2022) *On LASSO for predictive regression*, JoE 229 322-349. [SD](https://doi.org/10.1016/j.jeconom.2021.02.002) | Many-predictor selection with IVX. |
+| `amihud-hurvich-wang-2009-multiple-predictor` | journal | Amihud, Hurvich & Wang (2009) *Multiple-predictor regressions: hypothesis testing*, RFS 22(1) 413-434. [OUP](https://doi.org/10.1093/rfs/hhn056) | Multivariate augmented-regression (ARM); pairs with Elliott (2011). |
+| `liu-yang-cai-peng-2019-unified-test` | journal | Liu, Yang, Cai & Peng (2019) *A unified test for predictability of asset returns regardless of properties of predicting variables*, JoE 208 141-159. [SD](https://doi.org/10.1016/j.jeconom.2018.09.009) | WEL test; same machinery as `ivx_ar`. |
+| `harvey-leybourne-taylor-2021-simple-tests` | journal | Harvey, Leybourne & Taylor (2021) *Simple tests for stock return predictability with good size and power properties*, JoE 224 198-214. [SD](https://doi.org/10.1016/j.jeconom.2021.01.004) | Cheap OLS-based tests. |
+| `chen-deo-yi-2013-uniform-inference` | journal | Chen, Deo & Yi (2013) *Uniform inference in predictive regression models*, JBES 31(4) 525-533. [T&F](https://doi.org/10.1080/07350015.2013.818008) | Restricted-likelihood test; pairs with Jansson & Moreira (2006). |
 
 ## Candidates not yet collected
 
-Papers with an implementable estimator/test that would fit the package, ranked by fit. Not in `pdf/`.
-
-Direct IVX extensions:
-
-1. Demetrescu (2014) *Enhancing the local power of IVX-based tests in predictive regressions*, Econ. Letters 124. [SD](https://doi.org/10.1016/j.econlet.2014.05.032). Lagged-y augmentation of the IVX regression; one `ivx()` argument.
-2. Breitung & Demetrescu (2015) *Instrumental variable and variable addition based inference in predictive regressions*, JoE 187. [SD](https://doi.org/10.1016/j.jeconom.2013.10.018). Alternative IV choices / combined IVs in the `ivx_fit` framework.
-3. Demetrescu, Rodrigues & Taylor (2023) *Transformed regression-based long-horizon predictability tests*, JoE 237. [SD](https://doi.org/10.1016/j.jeconom.2022.06.006). Competitor to KMS long-horizon; goes with the `horizon > 1` audit.
-4. Fan & Lee (2019) *Predictive quantile regressions under persistence and conditional heteroskedasticity*, JoE 213. [SSRN](https://doi.org/10.2139/ssrn.3016449). IVX-QR with GARCH errors; extends the planned `ivx_qr()`.
-5. Lee, Shi & Gao (2022) *On LASSO for predictive regression*, JoE 229. [SD](https://doi.org/10.1016/j.jeconom.2021.02.002). Many-predictor selection with IVX.
-
-Non-IVX competitors (same spirit as the package README to-dos):
-
-6. Amihud, Hurvich & Wang (2009) *Multiple-predictor regressions: hypothesis testing*, RFS 22. [OUP](https://doi.org/10.1093/rfs/hhn056). Multivariate augmented-regression (ARM); pairs with Elliott (2011).
-7. Liu, Yang, Cai & Peng (2019) *A unified test for predictability of asset returns regardless of properties of predicting variables*, JoE 208. [SD](https://doi.org/10.1016/j.jeconom.2018.09.009). WEL test; same machinery as `ivx_ar`.
-8. Harvey, Leybourne & Taylor (2021) *Simple tests for stock return predictability with good size and power properties*, JoE 224. [SD](https://doi.org/10.1016/j.jeconom.2021.01.004). Cheap OLS-based tests.
-9. Chen, Deo & Yi (2013) *Uniform inference in predictive regression models*, JBES 31. [T&F](https://doi.org/10.1080/07350015.2013.818008). Restricted-likelihood test; pairs with Jansson & Moreira (2006).
-
-Structural instability:
-
-10. Georgiev, Harvey, Leybourne & Taylor (2018) *Testing for parameter instability in predictive regression models*, JoE 204. [SD](https://doi.org/10.1016/j.jeconom.2018.01.005). Pairs with the episodic / sup-Wald items.
+- Georgiev, Harvey, Leybourne & Taylor (2018) *Testing for parameter instability in predictive regression models*, JoE 204. [SD](https://doi.org/10.1016/j.jeconom.2018.01.005). Pairs with the episodic / sup-Wald items.
 
 ## Suggested extensions (ranked by value / effort)
 

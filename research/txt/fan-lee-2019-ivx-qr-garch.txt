@@ -1,0 +1,1878 @@
+             Predictive Quantile Regressions
+under Persistence and Conditional Heteroskedasticity
+
+Rui Fan  Ji Hyung Lee 
+
+         August, 2018
+
+                                                                Abstract
+
+            This paper provides an improved inference for predictive quantile regressions with persis-
+        tent predictors and conditionally heteroskedastic errors. The confidence intervals based on
+        conventional quantile regression techniques are not valid when predictors are highly persistent.
+        Moreover, the conditional heteroskedasticity introduces rather complicated nuisance parameters
+        in the limit theory, whose estimation errors can be another source of distortion. We propose
+        a size-corrected bootstrap inference thereby avoiding the nuisance parameter estimation. The
+        bootstrap consistency is shown even with the nonstationary predictors and conditionally het-
+        eroskedastic innovations. Monte Carlo simulation confirms the significantly better test size per-
+        formances of the new methods. The empirical exercises on stock return quantile predictability
+        are revisited.
+
+        Keywords: -mixing process, Conditional heteroskedasticity, Moving block bootstrap, Predic-
+        tive regression, Quantile regression.
+
+         JEL classification: C22
+
+1 Introduction
+
+Predictive regression models have been popular in empirical economics. A common example is to
+infer the predictive relation between financial returns and economic state variables. Nonstationary
+predictors in predictive regressions typically lead to a spurious inference. The conventional t-test
+based approaches are not able to correct this type of nonstationary distortion. Extensive studies
+have been devoted to correct the inflated test size, see e.g., Campbell and Yogo (2006), Kostakis
+et al. (2014), Phillips and Lee (2013) and more recently, Choi et al. (2016) and Liao et al. (2018).
+
+    Quantile regression (QR henceforth; Koenker and Bassett (1978)) is an appealing technique in
+predictive regressions. We can potentially detect greater predictability at conditional quantiles of
+
+    Department of Economics, Rensselaer Polytechnic Institute, Russell Sage Laboratory 4307, 110 8th Street, Troy,
+NY 12180. Email: fanr09@gmail.com
+
+    Department of Economics, University of Illinois, 1407 W. Gregory Dr., 214 David Kinley Hall, Urbana, IL 61801.
+Email: jihyung@illinois.edu
+
+                                                                1
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+financial returns than at the mean. The standard QR techniques are, however, subject to the same
+issue of size distortion when predictors are highly persistent. In addition to the predictor persis-
+tence, another important issue in predictive regression models is the conditional heteroskedasticity
+(CHE). We commonly observe the time varying volatility in financial return data so it is important
+to allow a reasonable form of CHE in the predictive regression errors. The CHE effect, however,
+has received much less attention in either predictive regression or QR models.
+
+    There have been a few studies on QR with persistent regressors. Xiao (2009) developed a novel
+cointegration framework in nonstationary QR models. In predictive QR models, Maynard et al.
+(2011, 2018) and Lee (2016) considered Bonferroni-based and IVX-based methods to correct the
+nonstationary distortion, respectively. The last paper adopts the IVX-filtration idea (Magdalinos
+and Phillips, 2009) into QR framework and proposed the so-called IVX-QR methods; see Section
+2 below for a quick review.
+
+    In the nonstationary QR literature, the regression innovation has been typically assumed to be
+conditionally homoskedastic1. The validity of standard error estimation in QR inference crucially
+depends on the assumed regression innovation structure, and the availability of observations near
+the quantile of interest (Koenker (2005), Ch.3). Under the homoskedastic error assumption, the
+nuisance parameters in the nonstationary QR limit theory have simpler forms, so we may employ
+a density estimation using the QR residuals. Oftentimes we may even cancel out the nuisance
+parameters using some proper normalization. The density estimation is however difficult when
+observations are sparse in the neighborhood of the quantile of interest. Moreover, when the ho-
+moskedastic error assumption does not hold, the corresponding standard error estimation is no
+longer valid, either by estimation or cancellation.
+
+    This paper provides a valid and easy-to-use inference procedure in predictive QR framework
+with CHE innovations. We use the moving block bootstrap (MBB; Ku¨nsch (1989), Liu and Singh
+(1992) and Fitzenberger (1997) in stationary QR framework) to resample the pairs of the depen-
+dent variable and the IVX-filtered predictors. The reduced predictor persistence by IVX filtering
+enables us to correct the nonstationary distortion in QR. The pairwise MBB then circumvents the
+issue of nuisance parameter estimation, while preserving the validity via its inherent robustness to
+heteroskedasticity. The asymptotic validity of this new QR inference is established in the presence
+of persistent predictor and CHE errors. This MBB IVX-QR method therefore provides a convenient
+size-corrected inference.
+
+    Our Monte Carlo study shows that when predictor variables follow various forms of nonsta-
+tionary processes, the MBB IVX-QR approach not only maintains the good properties of IVX-QR,
+but also further reduces the inferential errors by avoiding variance estimations, especially at tail
+quantiles. The results also show that the MBB IVX-QR method provides better finite sample
+size control under conditional heteroskedasticity. The empirical implication of this improvement is
+that we can provide a more conservative test for financial return quantile predictability. This is
+
+    1Lee (2016, Remark 2.1) addressed this issue by including a proxy of error variance as a QR predictor; see Section
+1.3.3 of the online supplement (Lee, 2014).
+
+                                                                2
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+confirmed through the empirical exercises.
+    The paper is organized as follows. Section 2 introduces the model and the econometric issues
+
+associated with the QR models with persistent predictors. The section also provides a brief intro-
+duction of Lee (2016)'s IVX-QR method. Section 3 studies QR and IVX-QR limit theory under
+CHE errors, motivating the bootstrap-based inference. Section 4 presents the theory of MBB IVX-
+QR approach. Section 5 provides a Monte Carlo study to illustrate the improved finite-sample
+performance of the new methods. Section 6 reinvestigates the empirical exercises on stock re-
+turn quantile predictability, and Section 7 concludes. All the technical details are relegated to the
+Appendix, and selected proofs are contained in the Online Appendix.
+
+Notation We use standard notation. = and p represent convergence in distribution and in
+probability, respectively. All limit theory assumes n   so we sometimes omit this condition. 
+signifies "being distributed as" either exactly or asymptotically depending on the contexts. O (1)
+and o(1) (Op (1) and op(1)) are (stochastically) asymptotically bounded or negligible quantities.
+
+2 Model and Review of Existing Results
+
+We introduce the model and review the econometrics issue and limit theory in nonstationary pre-
+dictive QR models. Consider the linear predictive QR model:
+
+yt = 0 + 1 xt-1 + ut =  Xt-1 + ut ,                                                                   (1)
+
+where the conditional moment restriction Pr (yt <  Xt-1|Ft-1) = Pr (ut < 0|Ft-1) =  defines
+the QR parameters  = (0 , 1 ) of (K + 1) × 1 vector. Motivated by the stylized fact of CHE
+of financial asset returns (yt), we impose CHE to the mean regression innovation ut = yt - µXt-1
+(equals to yt under the null hypothesis of no predictability) where µ = 0µ, 1µ . Then the
+relation ut = ut + (µ -  ) Xt-1 clearly indicates the QR innovation ut is also subject to the
+CHE effects. Without loss of generality, we assume µ = 0 (no predictability at the mean)2 and
+focus on the significance test H0 : 1 = 0 for a given   (0, 1). These tests can detect some
+quantile specific predictors for financial returns so they are of primary importance in practice. The
+
+implied relation between mean and quantile regression innovations is now
+
+ut = ut - 0 - 1 xt-1.                                                                                 (2)
+
+Assumption 2.1 The specification of predictor xt-1 follows the autoregressive form
+
+xt = Rnxt-1 + uxt,                                                                                    (3)
+
+                   C
+Rn = IK + n , for some  > 0,
+
+2When µ = 0, simply redefining b = µ -  justifies all the following theory with minor modifications.
+
+3
+
+Electronic copy available at: https://ssrn.com/abstract=3016449
+where n is the sample size and C = diag (c1, c2, ..., cK). The predictor innovation uxt satisfies
+the conditions in Assumption 3.1 below. The pair of (, C) represents persistences in the multiple
+predictors of unknown degree, and xt can belong to any of the following persistence categories3:
+
+ I(0) stationary:  = 0 and |1 + ci| < 1, i,
+
+ MI mildly integrated:   (0, 1) and ci  (-, 0), i,
+
+ I(1) local to unity and unit root:  = 1 and ci  (-, ), i.
+
+2.1 Review: nonstationary QR distortion
+
+The ordinary QR estimators of parameters are:
+
+                    n
+
+                  ^ = argmin  (yt -  Xt-1),                                             (4)
+
+                     t=1
+
+where  (u) = u( - 1(u < 0)),   (0, 1) is the conventional QR loss function.
+
+    As shown in Lee (2016), persistence in xt-1 can lead to a nonstandard distortion in t-ratio for
+testing 1 = 0 depending on nonlinear dependence between ut and uxt, that is:
+
+       ^1 - 1       1 -  ( )2                  1/2    +  ( ) LUR(c)
+        s.e(^1 )                                                                     ,
+                                                   Z
+                                                      nonstandard distortion
+t^1 =                                                                                   (5)
+
+                    standard inference
+
+where Z and LUR(c) stand for a standard normal distribution and a local to unit root t-statistic,
+respectively, and ( ) = -cor(1(ut < 0)uxt) = cor(ut , uxt).
+
+    As the analytical expression (5) shows, the nonstandard distortion becomes greater with (i)
+
+smaller |c| and (ii) larger | ( )|. Condition (i) is well known from the mean predictive regression
+
+literature where the distortion from the highly left-skewed feature of LUR(c) with small |c| has
+been studied. Condition (ii) is a special feature of QR with persistent regressors.
+
+    Therefore, when ^ ( ) is large in its absolute value (a plug-in estimation is suggested in Lee
+
+(2014)) and xt is highly persistent (smaller c; suspected from unit root-like behavior), the t^1 can
+be large even though the true value 1 is zero, resulting a spurious QR result. Including a spurious
+predictor can be detrimental in empirical analysis and forecasting.
+
+    3Lee (2016) also considered the mildly explosive case. When the regressor is mildly explosive (the signal is
+extremely strong), the IVX filtration does not alter the stochastic property so the regressor still remains mildly
+explosive. IVX-QR limit theory for this case comes from the limit theory of mildly explosive process itself, please see
+Lemma A.1 and A.4 in Lee (2016). MBB IVX-QR Limit theory for this case therefore involves bootstrapping mildly
+explosive processes. The theory of bootstrap with mildly explosive data is technically demanding (if possible) and
+seems beyond the scope of this paper.
+
+                                      4
+Electronic copy available at: https://ssrn.com/abstract=3016449
+2.2 Review: IVX filtration and existing limit theory
+
+The IVX method suggested by Magdalinos and Phillips (2009) filters xt to generate z~t with MI
+persistence - intermediate between first differencing and the use of levels data. In particular, we
+choose F = Rnz as follows:
+
+                           z~t = Rnzz~t-1 +         xt,  Rnz     =   IK  +  Cz  ,                       (6)
+                                                                            n
+
+                           where   (0, 1) , Cz = czIK , cz < 0 and z~0 = 0.
+
+The parameters   (0, 1) and cz < 0 are specified by the researcher, and some practical suggestions
+to use in predictive QR is given in Section 4.1 of Lee (2016).
+
+    We define the normalized random variables of z~t-1 and xt-1 by
+
+                           Zt-1 := kn-1/2z~t-1 and Xt-1 := kn-1/2xt-1,                                  (7)
+
+where
+
+                           kn =              IK             for I(0),                                   (8)
+
+                                          nIK for MI and I(1).
+
+Following Lee (2016), we also unify the different asymptotic moment matrices for the MI and
+
+I(1) cases :
+
+              Vcxz :=      Vzxz =         erCz    xx  erCz  dr,   when   (0,   1) ,                     (9)
+                                       0
+                                       
+                           Vxx =       0     erC  xx  erC  dr,       when   (0, ) .
+
+and
+
+                                 -Cz-1       xx +        dJxcJxc     ,   if  = 1,
+                           
+
+                           
+
+              cxz :=               -Cz-1 {xx + CVxx} , if   (, 1) ,                                     (10)
+
+                                             Vcxz = Vxx                  if   (0, ) .
+
+                           
+
+where xx = E [uxtuxt] and Jxc(r) =        r  e(r-s)C dBx(s)      is  Ornstein-Uhlenbeck  (OU)  process  with
+                                          0
+
+Bx(·) being Brownian Motion BM (xx). In order to test H0 : 1 = 0, Lee (2016) proposed to use
+
+QR with z~t-1 from (6) 4:
+
+                                                      n
+
+                           ^1IV  X QR  =  arg  min          yt - 1z~t-1 .                               (11)
+
+                                                    t=1
+
+    We have the following asymptotics of null test statistics under homoskedastic mds regression
+
+errors.
+
+    4We use ^1IV XQR of Theorem 3.2 in Lee (2016) but still write it as ^1IV XQR in this paper for expositional conve-
+nience.
+
+                                                    5
+              Electronic copy available at: https://ssrn.com/abstract=3016449
+Theorem 2.1 (Theorem 3.2 of Lee (2016)) Under H0 : 1 = 0,
+
+            (nkn)1/2 ^1IV XQR - 1                        0,   (1- )   -xx1         for I(0),
+                                                             fu (0)2
+                                                N                                                     .
+                                           =             0,   (1- )   Vc-xz1  for MI and I(1),
+                                                             fu (0)2
+                                                N
+
+Remark 2.1 The homoskedasticity of regression errors allows the convenient form of variance-
+covariance matrix in the limit with a separated sparsity fu (0), which can be either cancelled by
+a proper normalization or estimated. The stylized facts of financial time series, however, strongly
+suggest CHE innovations. As we see below, asymptotic theory under heteroskedasticity is quite
+different, which calls for a new method of statistical inference. The IVX methods with CHE are
+studied in the mean regression framework (Phillips and Lee (2016) and Kostakis et al (2014)) but
+the nonstationary QR with CHE has not been addressed in the literature.
+
+3 Limit Theory under Conditional Heteroskedasticity
+
+We study the QR and IVX-QR limit theory with persistent predictors and CHE innovations in
+this Section. Under CHE errors, the limit theory becomes more involved with complicated forms
+of nuisance parameters, introducing another potential source of distortion in statistical inference.
+
+3.1 Heuristics
+
+To see the source of the distortion quickly, we assume a univariate I(1) predictor xt = (1 + c/n) xt-1+
+uxt, with uxt  mds (0, xx). Also assume ut = tt where t's are iid mean-zero random sequences,
+as given in Assumption 3.1 below.
+
+    Under H0 : 1 = 0, from (2), we have ut = ut - 0 . From (4) with the standard quadratic
+approximation argument (Pollard (1991) and Knight (1998)),
+
+                                                      1      n        (ut   )xt-1
+                                                             t=1            (0)xt2-1
+                                n ^1QR - 1          n                                 ,
+                                                  1         n    fut
+                                                            t=1       ,t-1
+                                                  n2
+
+where   (ut )  =    -  1(ut  <  0 ),  and  fut ,t-1(0)   =   1  f    F-1 ( ) .  Note         that  nt  =  (ut )   is  still
+                                                             t                                                 n
+
+mds with the quadratic variation of  (1 -  ) in spite of CHE ut . The standard invariance principle
+
+and the convergence results to the stochastic integrals deliver the limit theory of the numerator,
+
+n-1    n     (ut )xt-1  =       J¯xcdB , where J¯xc = Jxc(r) -        1  Jxc(r)dr  is    the  demeaned    OU  process,
+       t=1                                                            0
+
+and B  BM (0,  (1 -  )). The denominator, however, shows somewhat different asymptotic
+
+behavior under a reasonable assumption on t (Assumption 3.1), n-2                             n    fut  ,t-1(0)xt2-1  =
+                                                                                              t=1
+
+f  F-1 ( )  E  1        J¯xc 2 dr, leading to
+               t
+
+                        n ^1QR - 1                          1                 J¯xcdB      .
+                                                                               J¯xc 2 dr
+                                               f  F-1 ( )         E   1
+                                                                      t
+
+                                                          6
+                    Electronic copy available at: https://ssrn.com/abstract=3016449
+Following Lee (2016), use the decomposition dB = dB . x +  xx-x1dBx to have
+
+            n ^1QR - 1                   1                 J¯xcdB .    x  +   x             J¯xcdBx   .
+                                                               J¯xc 2        xx               J¯xc 2
+                               f    F-1 ( )  E    1
+                                                  t
+
+In addition to the nonstationary distortion arising from             J¯xc 2 dr -1 J¯xcdBx when  x is not
+
+negligible, we also have an additional nuisance parameter f               F-1 ( ) E      1  which is harder to
+                                                                                         t
+
+estimate than in the case with conditional homoskedastic errors. Estimation of this nuisance param-
+
+eter is not easy unless we have both (i) a simple form of DGP of t and (ii) plenty of observations
+
+around the quantile of interest. As we see below, the complication of nuisance parameters in the
+
+limit theory becomes even worse for MI-I(0) cases, clearly motivating the usage of a time series
+
+bootstrap procedure combined with the IVX filtration.
+
+3.2 Limit Theory
+
+To lay out the nonstationary QR limit theory under CHE, let us impose a reasonable weak depen-
+dence and moment conditions for the error processes and their conditional variances. Following
+standard notation, let F[-,m] = (..., xm-1, xm) and F[m+j,] = (xm+j, xm+j+1, ...), j > 0,
+denoting for the -algebras generated by {xt}. The mixing coefficients (j) are defined as:
+
+                    (j) = sup                sup           |P (A)P (B) - P (AB)|.
+
+                               m AF[-,m],BF[m+j,]
+
+Recall when (j)  0 as j  , we denote {xt}t=1,...,n as an -mixing process. Let t2 =
+E(ut2|Ft-1), x2t = E(ux2t|Ft-1), ut = (ut, uxt) and t2 = t2, x2t .
+
+Assumption 3.1 1. t2  Ft-1 and E(ut|Ft-1) = 0. In particular, ut = tt where t's are iid
+       mean-zero random sequences with CDF F and pdf f.
+
+2.  The  processes  {ut,  t}   are  -mixing     sequences  of  size  -r   for  r  >  2,  i.e.,  the   mixing  coeffi-
+                                                                     r-2
+
+    cients  (j)  =  O(j)  for    <  -r   <  0.
+                                    r-2
+
+3. E|uxt|2r+ < C1 for all t = 1, ..., n and some small  > 0.
+
+4. E|x2t|r <  for all t = 1, ..., n.
+
+Remark 3.1 As in Carrasco and Chen (2002) or Lindner (2009), various GARCH and Stochastic
+Volatility models have -mixing (hence -mixing) properties with exponential decay rates. Indeed,
+-mixing processes are bigger classes than just CHE processes, and thus are general enough to
+include many practical nonlinear time series innovations. To accommodate CHE in the mean
+predictive regressions, Phillips and Lee (2016) allowed a rather different nonlinear process based
+on Wu (2005), whereas Kostakis et al. (2014) used of vec-GARCH(p,q) models. The mixing
+condition imposes a reasonable weak dependence structure for the conditional volatility processes
+
+                                                     7
+
+                    Electronic copy available at: https://ssrn.com/abstract=3016449
+t but allows their DGP to remain unspecified. A related paper, Portnoy (1991), allowed another
+form of heteroskedastic and potentially nonstationary (m-decomposable) error process in QR, and
+derived a Bahadur representation.
+
+Theorem 3.1 (QR limit theory under CHE) Define the normalizing matrices
+
+                                              nIK              for I(0),
+                                                               for MI,
+                                                   +1          for I(1).
+                                
+                                                       1+
+                             Dn = diag( n, n 2 )
+                                               
+                                
+                                 diag( n, nIK)
+
+Under Assumptions 2.1 and 3.1, and H0 : 1 = 0,
+
+            
+
+                                           N      0,       (1- )                                     for I(0),
+                                                                                                     for MI,
+                                                      f(F-1( ))2                                     for I(1),
+
+            
+
+            
+
+            
+
+            
+
+                                                                   1        0
+                                                                   0
+                                                   (1- )                  Vx-x1
+
+Dn ^QR -                        N      0,  ( f F-1( ))E     1  2          -1
+            =                                              t
+
+            
+
+            
+
+                                           1               Jxc(r)                 B (1)
+                                                                                 Jxc(r)dB
+            
+
+                             1
+            
+
+            
+
+                   f(F-1( ))E    1         Jxc(r) Jxc(r)Jxc(r)
+                                t
+
+where  = E  Xt-1 Xt-1  -1       Xt-1Xt-1   E   Xt-1 Xt-1   -1                       erC  xxerC  dr.
+                 t                                  t                            0
+                          E                                    and Vxx =
+
+Remark 3.2 The signal strength of the CHE effect from t and that of I(0) regressor xt are
+
+comparable, so the nuisance parameter  shows some interaction between them. As the regressor
+
+persistence increases to MI-I(1), the signal strength of t is dominated by the regressor persistence
+
+so the average CHE effect E  1  is separated out in the limit. In all cases, the direct estimation of
+                             t
+
+the standard error is not feasible unless we assume the exact (and convenient) form of CHE (see
+
+Koenker and Zhao (1996) and Xiao and Koenker (2009) for ARCH/GARCH specifications). Even
+
+with a convenient CHE specification, the tail inference may not be reliable due to the difficulty of
+
+density estimation. All these aspects, again, motivate the bootstrap inference in the next Section.
+
+Remark 3.3 From the above argument we confirm that the CHE effect can potentially lead to a
+
+severe size distortion, in addition to the nonstationary QR distortion. Roughly speaking, when there
+
+is a substantial amount of heteroskedasticity, E  1   will shrink thereby inflating the dispersion of
+                                                  t
+
+the asymptotic distribution in Theorem (3.1).
+
+To remove the nonstationary distortion, we can employ IVX-QR from (11):
+
+Theorem 3.2 (IVX-QR limit theory under CHE) Under H0 : 1 = 0,
+
+                                
+
+                                           N      0,       (1- )                      for I(0),
+                                     
+(nkn)1/2 ^1IV XQR - 1                                 f(F-1( ))2                                         .
+                                                                                 for MI and I(1),
+
+                                =
+
+                                       N   0,          (1- )       2 Vc-xz1
+                                
+
+                                                  f(F-1( ))E    1
+                                                               t
+                                
+
+                                                  8
+
+            Electronic copy available at: https://ssrn.com/abstract=3016449
+where  = E  Xt-1 Xt-1  -1    Xt-1Xt-1  E  Xt-1 Xt-1    -1
+                 t                             t
+                          E                                and
+
+            Vcxz :=    Vzxz =     erCz  xxerCz    dr,  when   (0,   1) ,
+                               0                                                   .
+                                
+                       Vxx =    0  erC  xxerC   dr,      when   (0, ) .
+
+Remark 3.4 IVX-filtration is used to achieve asymptotic normality for all I(0)-I(1) parameter
+
+spaces. The asymptotic standard error of this IVX-QR estimator under CHE innovation is still
+hard to estimate. Using the estimated f^u (0) under iid limit theory severely distorts the inference5,
+see Table 1 below. Therefore, we study a moving block bootstrap (MBB) based approach instead.
+
+4 Bootstrap-based Inference: MBB IVX-QR
+
+As we explained above, estimating the nuisance parameters in Theorem (3.2) directly is not easy
+under practical scenarios. We study the moving block bootstrap (MBB) inference6 in this Section,
+and prove the validity of the proposed test.
+
+    Let b be an integer block length and let B(t) = (wt, wt+1,...,wt+b-1) denote a data block with
+starting point t  {1, ..., n - b + 1}, where wt = (yt, z~t) and z~t denotes the IVX-filtered regressors
+from (6). The total number of possible blocks and the number of blocks in one bootstrapped
+sample are denoted by q and m, respectively. The letters n and indicate the sample size and the
+bootstrapped sample size, respectively. Therefore, n = q +b-1 and = mb. The MBB procedure is
+sampling m number of blocks randomly with replacement from {B(t) : t = 1, ..., n - b + 1} yielding
+MBB sample. This MBB sample w1, ..., w is defined as (B(I1), ..., B(Im)) where Iis are iid discrete
+uniform variables on {1, ..., n - b + 1}. Let P , E and V ar denote probability, expectation and
+variance of the bootstrap distribution conditional on the original sample.
+
+    Based on MBB sample (w1, ..., w), we estimate
+
+                       ^IV XQR  =  arg min         yt -  z~t-1 ,                      (12)
+
+                                             t=1
+
+which we denote as MBB IVX-QR estimator. We prove the first-order asymptotic validity of the
+MBB IVX-QR under the following rate conditions:
+
+Assumption 4.1 (a) = O(n) for n  , (b) kn = o(n), and (c) b = O (kn) and b  .
+
+    5Under the iid error assumption, Koenker and Bassett (1982) estimated the sparsity parameters using the his-
+tospline methods of Boneva, Kendall, and Stefanov (1971). Welsh (1987) developed a kernel approach estimating
+the same quantity as a weighted average of Siddiqui estimates (Siddiqui (1960)). In a more general setting of non-iid
+errors, Hendricks and Koenker (1992) suggested estimating the asymptotic covariance matrix by an extension of the
+sparsity estimation methods in iid setting. Powell (1991) proposed an estimation method following the idea of kernel
+density estimation. Although these methods help estimating standard errors for statistical inference, the performance
+of produced statistics are affected by the precision of estimated nuisance parameters and the imposed error structures.
+
+    6The moving block bootstrap (MBB) are independently formulated by Ku¨nsch (1989) and Liu and Singh (1992).
+Existing literature provides several variants such as the non-overlapping block bootstrap (NBB) by Carlstein (1986),
+the circular block bootstrap (CBB) and the stationary bootstrap (SB) of Politis and Romano (1992, 1994). We
+mainly focus on the overlapping block bootstrap method, which we continue to denote as MBB.
+
+                                             9
+
+            Electronic copy available at: https://ssrn.com/abstract=3016449
+Remark 4.1 The rate condition in (a) is standard in MBB literature. In (b), kn = o(n) is valid
+by IVX construction (8). (c) b = O (kn) is a technical condition to derive Lemma A.4 below which
+is essential to prove Theorem 4.2. This last condition is a sufficient condition, used to bound the
+various cross-products of higher moments of IVX variables (see Proof of Lemma A.4). Intuitively,
+the degree of dependence in MBB sample (block length: b) needs to be balanced with the persistence
+of IVX-filtered data (kn).
+
+Recall       that  Zt-1  =   kn-1/2z~t-1  and    Xt-1  = kn-1/2xt-1.         Define  mt  =  z~t-1   (ut )  =  Zt-1 (ut ),
+                                                                                              kn
+
+and mt  is similarly defined using MBB sample. We have the following result on the sample mean
+
+of mt and mt .
+
+Theorem 4.1 (First-order asymptotic validity of the bootstrap score functions). Under Assump-
+tions 2.1, 3.1 and 4.1,
+
+             sup P   (m¯  - m¯ n )  x - P n(m¯ n - Emt)  x p 0, as n  ,                                       (13)
+
+             xR
+
+where  m¯ n  =  1  n     mt  and  m¯      =   1      t=1 mt .
+                n  t=1
+
+Remark 4.2 To the best of our knowledge, there exist no bootstrap consistency results for this type
+of nonlinear statistics of mildly integrated processes. Kim and Nordman (2011) studied the mean
+of long memory processes, but the relation between mild integration and long memory property has
+not yet been clearly understood. See Lee (2014, Section 1.7) for a related discussion.
+
+    We now state the main theorem of this paper, enabling the MBB percentile methods as discussed
+in, for example, by Efron and Tibshirani (1993, Ch 13).
+
+Theorem 4.2 (MBB IVX-QR consistency) Under H0 : 1 = 0, ( kn)1/2(^1IV XQR - ^1IV XQR)
+under P  and (nkn)1/2(^1IV XQR - 1 ) under P have the same limit distribution H , where
+
+                             
+
+                                          N      0,       (1- )                   for I(0),
+                                                                             for MI and I(1),
+                                                     f(F-1( ))2
+                             
+
+                   H                                                                                          (14)
+
+                                  N       0,          (1- )        2 Vc-xz1
+                             
+
+                                                 f(F-1( ))E     1
+                                                               t
+                             
+
+whose nuisance parameters are defined in Theorem 3.2.
+
+Remark 4.3 One common intuition in the bootstrap literature is that if we have asymptotic nor-
+mality of the original test statistics, the bootstrap consistency will be achieved since the (blockwise)
+iid resampling easily attains CLT. The reduced persistence of IVX-filtered regressors (z~t) is therefore
+essential to achieve MBB IVX-QR validity. Without this filtration MBB will not be valid, which is
+illustrated in the Simulation Section below.
+
+                                                        10
+                   Electronic copy available at: https://ssrn.com/abstract=3016449
+5 Monte Carlo Simulation
+
+This section compares the finite sample performances of (a) conventional t-tests (using estimated
+
+density), (b) MBB (without IVX correction), (c) IVX-QR of Lee (2016), (d) IVX-QR-HAC, and
+
+(e) MBB IVX-QR. The IVX-QR-HAC is a IVX-QR method using the HAC type robust standard
+                                          
+error estimator. That is, var(1/ n          n    xt (ut))  is  estimated   using  the   -weighted  signs  of  the
+                                            t=1
+
+qauntile regression residuals (see Fitzenberger (1997, Section 4)):
+
+                            1(u^t > 0) - (1 -  )1(u^t < 0).
+
+For convenience, our setup and notation follow Lee (2016).
+   The samples are generated from a predictive QR model:
+
+                           yt = 0 + 1 xt-1 + ut ,                                                         (15)
+                           xt = µx + rnxt-1 + uxt,                                                        (16)
+
+where 0 , 1 , µx, and rn are scalars. Let 0 = Fu-t1 ( ), 1 = 0, and µx = 0. Since parameter
+rn = 1 + c/n controls the degree of persistence in predictor xt, we allow the value of c  C to vary
+from -70 to 0, and C=(0, -2, -5, -7, -70), where c = 0 indicates the exact unit-root process. The
+
+larger the value of |c| is, the less persistent the variable xt is.
+    We consider two scenarios for the regression errors, ut  ut - Fu-t1 ( ):
+
+1. ut  iid Gaussian:
+
+                           ut uxt  iid Fu 02×1, 2×2 ,
+
+where Fu is a bivariate normal distribution. The correlation matrix  is standardized as
+
+                                            =    1         ,  = -0.95.
+
+                                                 1
+
+2. ut  ARCH(1):
+
+                                                 
+
+                                                  0            for t = 0,
+                                            ut =
+
+                                                 t t for t  1,
+
+where t2 = 0 + 1u2t-1. Let 0 = 1 and 1 = 0.9. The errors t and uxt are jointly generated
+
+by
+
+                        t   iid Fu               0 1                       ,  = -0.9.
+                                                     ,
+                      uxt
+                                                 0 1
+
+    To apply the IVX-QR technique, we obtain instruments from (6): z~t = Rnzz~t-1 + xt, Rnz =
+IK + n-Cz, where   (0, 1), Cz = czIK , cz < 0 and z~0 = 0. We choose values of (Cz, ) by the
+practical rule in section 4.1 of Lee (2016). The essential idea is to choose c(, n) = n1-cz such that
+
+the nonstandard local unit root t-statistics LUR(c(, n)) (Phillips, 1987) behaves like Z  N (0, 1)
+
+                                                   11
+
+    Electronic copy available at: https://ssrn.com/abstract=3016449
+for a given n. Inference on ^1 can therefore be based on critical values from the standard normal
+distribution.
+
+    We test H0 : 1 = 0 versus the local alternatives H1 : 1 = b/n. Each test is investigated at
+eleven quantiles from  = 0.05 to 0.95 with a nominal size of 5%. In each experiment, 1000 samples
+are randomly generated for n = 200 and 700.
+
+    The inferential methods could be classified into two categories: (1) Tests without IVX correction;
+these include t test and percentile method using MBB technique (Efron and Tibshirani (1993),
+Koenker (2005)). These types of tests are commonly used in the literature of QR. If xt is not
+persistent, the regular QR asymptotics works for t test. Also, the percentile bootstrap method is
+often employed when the covariance matrix cannot be computed easily. For the block length of
+MBB, we adopt the form of constant×n1/4 suggested in Hall, Horowitz and Jing (1995) and Lahiri
+(1999, 2005)7. (2) Tests with IVX correction; these types of tests includes IVX-QR, IVX-QR-HAC,
+and MBB IVX-QR. These tests aim to correct the size distortion caused by persistence in xt and
+nonlinear dependence of ut and uxt. We expect that MBB IVX-QR can have better size control
+than IVX-QR and IVX-QR-HAC, especially when (i) we are interested in inference at tails, and
+(ii) the covariance matrix is hard to compute, for example, with conditional heteroskedastic errors.
+Note that although IVX-QR-HAC uses a HAC type robust estimator, the issue of sparsity function
+estimation, discussed in Theorem 3.2 and Remark 3.4, remains unresolved. Thus we expect better
+performance of MBB IVX-QR, which is confirmed through the simulation results below.
+
+    The MBB IVX-QR test here is conducted as follows:
+
+Procedure of MBB IVX-QR
+
+1. Given data (yt, xt), for t = 1, ..., n, we choose values of (Cz, ) by the practical rule of Lee
+   (2016). Then construct instruments z~t following (6).
+
+2. Set block length b = n1/4 , 8 where a denotes the least integer that is greater or equal
+   to a. Let m = n/b . Randomly sample m data blocks from (B(1), ..., B(q)), where B(t) =
+   (wt, wt+1, ..., wt+b-1) with w(t) = (yt, z~t), q = n - b + 1. Denote the sampled data blocks by
+   (B(1), ..., B(m)) and obtain a resampled data (w1, ..., w), = mb and wt = (yt, z~t).
+
+3. Estimate
+
+                         ^  =  arg  min        (yt -  z~t-1).                 (17)
+
+                                         t=1
+
+   4. Repeat step 2 and 3 for N times and obtain (^(1), ..., ^(N)).
+
+    7Hall et al. (1995) studied optimal block size of bootstrap for strictly stationary dependent data, suggesting n1/3,
+n1/4, and n1/5 under the different contexts. Lahiri (1999, 2005) suggested a nonparametric plug-in method. There is
+no known result for the block length choice for bootstrapping mildly integrated processes to the best of our knowledge.
+Thus we follow the standard suggestion.
+
+    8Under Assumption 4.1, a rate condition b = O(kn) is required, where kn := nIK for MI and I(1) processes.
+In our simulated sample and also in empirical Section, we observe  to be around 0.45, so the choice b = n1/4 does
+not conflict the rate condition.
+
+                                    12
+
+             Electronic copy available at: https://ssrn.com/abstract=3016449
+   5. The (1 - )100% percentile interval is [G^-1(/2), G^-1((1 - )/2)], where G^ is the empirical
+       CDF of ^ from step 4.
+
+5.1 Results of Simulation Study 1 - IID Errors
+
+We first examine the size performance under iid settings. The test methods are t test, percentile
+method using MBB technique, IVX-QR, IVX-QR-HAC, and MBB IVX-QR. Each test is conducted
+at various quantiles with varying degrees of persistent predictors. In particular, we compare the
+size of MBB IVX-QR to those of IVX-QR and IVX-QR-HAC at the upper and lower quantiles.
+Although all these tests are designed to have robust size performance across quantiles, our results
+suggest that MBB IVX-QR significantly outperforms IVX-QR and IVX-QR-HAC at the tails.
+
+    Figure 1 shows the results. We summarize the results as follows. First, among these five
+methods, t test has the largest size distortion regardless of I(1) (c = 0), MI (c = -2, -5, -7) or I(0)
+(c = -70) predictor. This confirms the theory in Lee (2016) that asymptotic distribution of the
+standard QR t-statistics is nonstandard. It suffers from distortion depending on the persistence of
+predictor and nonlinear dependence. In our simulation for both n = 200 and 700, we observe that
+as |c| approaches 0, the distortion of t test grows, reaching its highest level around 20%. Second,
+our results illustrate that IVX-QR technique can help to correct the nonstandard distortion under
+I(1), MI and I(0) settings. IVX-QR, IVX-QR-HAC, and MBB IVX-QR exhibit very similar results
+between  = 0.2 and  = 0.8. However, by moving towards tails ( = 0.05, 0.1, 0.2, 0.8, 0.9, 0.95),
+the test sizes of IVX-QR and IVX-QR-HAC are inflated. For a fixed quantile at the tails, these
+size distortions significantly increase as |c| decreases. Similar quantitative results of IVX-QR are
+also observed in Lee (2016). We suspect that under iid settings the size distortion of IVX-QR and
+IVX-QR-HAC at the tails is a result of inaccurate estimation of the sparsity function. This issue
+often happens at the lower and upper quantiles when the sample size is small (see Koenker (2005,
+Section 3.9)). The results of the t test also exhibit the same pattern of over-rejections because it
+involves sparsity function estimation. However, these over-rejections of t test and IVX-QR at the
+tails are dampened when the sample size increases from 200 to 700. Third, in comparison to t test
+and IVX-QR, the tests using MBB can be conservative at tails. Based on our results, both MBB
+and MBB IVX-QR improve over their corresponding non-bootstrap counterparts by reducing more
+than 30% of size distortion at tails. Lastly, the MBB IVX-QR approach performs well across all
+quantiles. This confirms that MBB IVX-QR improves over IVX-QR at tail quantiles, even under
+an iid-error scenario.
+
+5.2 Results of Simulation Study 2 - CHE Errors
+
+We now consider the predictive QR scenario with ARCH(1) errors. This scenario is closely related
+to many empirical practices where CHE asset returns are often observed. According to previous
+asymptotic theory under CHE, the covariance matrix cannot be easily estimated. Therefore, in this
+simulation study we illustrate that test results can be adversely affected when the estimation of
+
+                                                               13
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+the covariance matrix is involved. Moreover, we show MBB IVX-QR is robust across all quantiles,
+substantially improving inference accuracy over all the other methods.
+
+    The results are shown in Figure 2, and summarized here. First, we observe that t tests exhibit
+a U-shaped empirical rejection frequencies and the worst size distortion among all tests. Although
+these size patterns under CHE settings are similar to the iid settings, they are different in terms of
+scale. In Figure 2a, the size of t tests reaches 0.3 in most of the cases of c's. Second, unlike the iid
+settings, the tail performances of t test, IVX-QR, and IVX-QR-HAC do not improve as the sample
+size increases. This may imply that the negative impact of the sparsity function estimation errors
+is exacerbated at the tails by the CHE errors. Thus, increasing sample size makes the inaccurate
+estimation issue worse. Third, due to the different asymptotic distribution under CHE, IVX-QR
+and IVX-QR-HAC do not perform well even at the median. In the figures, for n = 200 and 700, the
+smallest sizes of IVX-QR and IVX-QR-HAC are around 0.1 for  = 0.5. The largest size is 0.215
+at  = 0.95. Finally, MBB IVX-QR has the best size control among all tests. The performance of
+this test is stable across quantiles for all I(1), MI and I(0) scenarios, confirming the robust property
+of MBB IVX-QR to CHE effects.
+
+    In the Online Appendix, for a robustness check of the size performance over a different block
+length, we conduct a simulation study for b = n1/5. The results of using different block lengths are
+very similar, showing a considerable size improvement of MBB IVX-QR over the existing methods.
+The power comparison of MBB IVX-QR to the other methods is also provided. In general, MBB
+IVX-QR has slightly smaller power than t test and MBB in iid case but loses more power in
+CHE case. On the other hand, MBB IVX-QR is comparable to IVX-QR. In particular, for a local
+deviation of  from 0, their powers are close to each other. As || increases, the power of MBB
+IVX-QR converges to 1 at a slower rate than IVX-QR.
+
+6 Empirical Illustration: Stock Return Quantile Predictability
+
+We illustrate an improved predictive QR inference for stock market index returns (S&P 500) using
+the MBB IVX-QR approach. The univariate predictive mean regression model
+
+Stock Return(t) =  +  × Economic V ariable(t - 1) + (t),         (18)
+
+has been considerably discussed in the economics and finance literature; Goyal and Welch (2003),
+Campbell and Yogo (2006) and Welch and Goyal (2008), to name a few. However, there is no
+consensus on which economic variables have significant predictive ability for the mean of stock
+returns. To provide some different insight, Lee (2016) and Maynard et al. (2011) employed a
+QR-version of this predictive model. In this Section, we discuss the same predictive QR framework
+and compare the test results using IVX-QR and MBB IVX-QR.
+
+    The same data as in Lee (2016) is employed, ranging from 1927 to 20059. Excess stock returns
+
+    9The data is available from: https://sites.google.com/site/jihyung412/research.
+
+                                     14
+Electronic copy available at: https://ssrn.com/abstract=3016449
+(called Stock Return(t)) are calculated as:
+
+Stock Return(t) = log                        P (t) + D(t)  - log (Rf ree(t) + 1) ,
+
+                                             P (t - 1)
+
+where P (t) and D(t) indicate the S&P 500 index and dividends at time t, respectively. Rf ree(t)
+is the 1-month treasury bill rate at time t. The eight persistent predictors are dividend price
+ratio (dp), dividend payout ratio (de), earnings price ratio (ep), book to market ratio (bm), net
+equity expansion (ntis), treasury bills (tbl), term spread (tms), and default yield spread (df y). The
+definition of these variables follows Welch and Goyal (2008). Figure 3 plots these variables from
+January 1927 to December 2005, signifying highly persistent patterns over time.
+
+    As shown in Table 1, inference results of predictors using IVX-QR and MBB IVX-QR are
+different for some variables at certain quantiles. The results shown with "" imply the rejection of
+the null hypothesis of no predictability at 5% level. We observe that at several lower and upper
+tail quantiles, IVX-QR tends to reject the null hypothesis more often than MBB IVX-QR. For
+example, when dividend payout ratio (de) is the predictor, p-value of IVX-QR is smaller than 0.05
+when  = 0.05, 0.1, 0.2, 0.3, 0.4 and  = 0.8, 0.9, 0.95, while 95% confidence intervals of MBB IVX-
+QR reject none of the null hypothesis  = 0 at all quantiles. The similar conflicting results can also
+be found, for example, at dp when  = 0.05, 0.2, 0.7, 0.95, bm when  = 0.05, 0.1, 0.2, 0.3, 0.9, 0.95.
+
+    The contradictory results between IVX-QR and MBB IVX-QR at lower and upper tail quantiles
+may indicate some level of over-rejections using IVX-QR, which was already conjectured from the
+simulation results in Lee (2016) and Section 5 above. Under both iid and CHE errors, MBB IVX-
+QR can have better size controls especially at lower and upper tail quantiles. In finding significant
+economic and financial variables to predict excess stock return quantiles, MBB IVX-QR can be a
+safer inferential tool for applied researchers since it provides a more conservative test.
+
+7 Summary and Concluding Remarks
+
+Stock return predictability has been an important topic in economics and finance but the empir-
+ical conclusion is still controversial. Meanwhile, valid econometric inferential methods have been
+carefully developed in the predictive mean and quantile regression literature.
+
+    In this paper, we study the predictive quantile regression models with a particular emphasis
+on two important stylized facts; the predictor persistence and the conditional heteroskedasticity.
+A valid and easy-to-use inference procedure is proposed and labeled as MBB IVX-QR. As its
+name indicates, the main development is to combine two techniques, (i) IVX filtering and (ii) the
+moving block bootstrap. In essence, IVX-filtering removes the nonstationary distortion, while the
+block bootstrap accommodates the conditional heteroskedasticity. Simulation and empirical results
+confirm the benefit of the new methods, guarding against the type-I errors arising from persistence
+and conditional heteroskedasticity, two universal stylized facts in financial data. Therefore MBB
+IVX-QR is well-suited to empirical exercises in the predictive regression literature.
+
+                                     15
+Electronic copy available at: https://ssrn.com/abstract=3016449
+Acknowledgement
+
+This paper is based on Rui Fan's Ph.D. dissertation at the University of Illinois at Urbana-
+Champaign. We thank the Committee members Anil Bera, Roger Koenker and Xiaofeng Shao
+who provided insight and expertise that greatly improved the research. We would also like to show
+our gratitude to Dan Bernhardt, Zongwu Cai, Thomas Fomby, Antonio Galvao, S´ilvia Gonc¸alves,
+Daniel Millimet, and seminar participants at UIUC, University of Iowa, Seoul National University,
+Peking University, Southern Methodist University, Binghamton University and Rensselaer Poly-
+technic Institute. We are also immensely grateful to two anonymous referees and editor for their
+constructive comments and suggestions.
+
+                                                               16
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+        17                                                       size c=0                                                                   test           size c=-2                                                                  test                c=0size                                                               test                c=-2size                                                              test
+Electronic copy available at: https://ssrn.com/abstract=3016449                                                                                MBB IVX-QR                                                                                MBB IVX-QR                                                                                MBB IVX-QR                                                                                MBB IVX-QR
+                                                                                 00..0150.25                                                   t test                      00..0150.25                                                   t test      0.20            00..015                                                       t test      0.20            00..015                                                       t test
+                                                                                          0.20.20                                              MBB                                  0.20.20                                              MBB         0.15                     0.2                                                  MBB         0.15                     0.2                                                  MBB
+                                                                                                0.30.15                                        IVX-QR                                     0.30.15                                        IVX-QR      0.10                           0.3                                            IVX-QR      0.10                           0.3                                            IVX-QR
+                                                                                                      0.40.10                                  IVX-QR-HAC                                       0.40.10                                  IVX-QR-HAC  0.05                                 0.4                                      IVX-QR-HAC  0.05                                 0.4                                      IVX-QR-HAC
+                                                                                                            0.50.05                                                                                   0.50.05                                        0.00                                       0.5                                            0.00                                       0.5
+                                                                                                                 0.60.00                                                                                   0.60.00                    test                                                           0.6                                                                                       0.6                        test
+                                                                                                                       0.7                                                                                       0.7                     MBB IVX-QR                                                        0.7                                                                                       0.7                     MBB IVX-QR
+                                                                                                                             0.8                                                                                       0.8               t test                                                                  0.8                                                                                       0.8               t test
+                                                                                                                                   00..995                                                                                   00..995     MBB              c=-5                                                         00..995                                                                                   00..995     MBB
+                                                                      c=-5                                                                                                                                                               IVX-QR                                                                                                                                                                              IVX-QR
+                                                                                                                                                                                                                                         IVX-QR-HAC  0.20                                                                                                                                                                    IVX-QR-HAC
+                                                                 0.25                                                                                                                                                                                0.15
+                                                                 0.20                                                                                           c=-7                                                                                 0.10                                                                                                         c=-7
+                                                                 0.15                                                                                                                                                                                0.05
+                                                                 0.10                                                                                      0.25                                                                                      0.00
+                                                                 0.05
+                                                                 0.00                                                                       test           0.20                                                                                                                                                                                             0.20
+                                                                                                                                                                                                                                                                                                                                test
+                                                                                                                                                                                                                                                          c=-70
+                                                                                                                                            MBB IVX-QR     0.15                                                                                                                                                                 MBB IVX-QR 0.15
+                                                                      c=-70                                                                                                                                                                          0.20
+                                                                 size                                                                       t test         size                                                                                      size0.15                                                                   t test         size
+                                                                 0.25                                                                                                                                                                                0.10
+                                                                                 00..0150.20                                                MBB                            00..0150.10                                                                               00..0150.05                                                MBB            0.10            00..015
+                                                                                          0.20.15                                                                                   0.2                                                                                       0.20.00                                                                                   0.2
+                                                                                                0.30.10                                     IVX-QR                                        0.3                                                                                       0.3                                         IVX-QR                                        0.3
+                                                                                                      0.40.05                                                                                   0.4                                                                                       0.4                                   IVX-QR-HAC 0.05                                     0.4
+                                                                                                            0.50.00                         IVX-QR-HAC 0.05                                           0.5                                                                                       0.5                                                                                       0.5
+                                                                                                                 0.6                                                                                       0.6                                                                                       0.6                                                                                       0.6
+                                                                                                                       0.7                                                                                       0.7                                                                                       0.7                                                                                       0.7
+                                                                                                                             0.8                                                                                       0.8                                                                                       0.8                                                                                       0.8
+                                                                                                                                   00..995                                                                                   00..995                                                                                   00..995                                                                                   00..995
+                                                                                                                                                           0.00                                                                                                                                                                                0.00
+
+                                                                                                                                                                                                                                                                                                                                                                  
+
+                                                                 size                                                                       test                                                                                                     size                                                                       test
+                                                                                                                                               MBB IVX-QR                                                                                                                                                                          MBB IVX-QR
+                                                                                 00..015                                                       t test                                                                                                                00..015                                                       t test
+                                                                                          0.2                                                  MBB                                                                                                                            0.2                                                  MBB
+                                                                                                0.3                                            IVX-QR                                                                                                                               0.3                                            IVX-QR
+                                                                                                      0.4                                      IVX-QR-HAC                                                                                                                                 0.4                                      IVX-QR-HAC
+                                                                                                            0.5                                                                                                                                                                                 0.5
+                                                                                                                 0.6                                                                                                                                                                                 0.6
+                                                                                                                       0.7                                                                                                                                                                                 0.7
+                                                                                                                             0.8                                                                                                                                                                                 0.8
+                                                                                                                                   00..995                                                                                                                                                                             00..995
+
+                                                                                           (a) Small sample: N = 200                                                                                                                                                           (b) Large sample: N = 700
+
+                                                                                                                                                                                     Figure 1: Size performance: I.I.D. errors
+                                                                     c=0                                                                                        c=-2                                                                                     c=0                                                                                       c=-2
+
+        18                                                       0.3                                                                        test           0.3                                                                        test           0.3                                                                        test           0.3                                                                        test
+Electronic copy available at: https://ssrn.com/abstract=3016449  0.2                                                                                                                                                                     MBB IVX-QR                                                                                MBB IVX-QR                                                                                MBB IVX-QR
+                                                                 0.1                                                                        MBB IVX-QR                                                                                   t test      0.2                                                                           t test      0.2                                                                           t test
+                                                                 0.0                                                                                                                                                                     MBB                                                                                       MBB                                                                                       MBB
+                                                                                                                                            t test         0.2                                                                           IVX-QR      0.1                                                                           IVX-QR      0.1                                                                           IVX-QR
+                                                                                        size                                                               size                                                                          IVX-QR-HAC  size                                                                          IVX-QR-HAC  size                                                                          IVX-QR-HAC
+                                                                                                                                            MBB                                                                                                      0.0                                                                                       0.0
+                                                                     c=-5     00..015                                                                                   00..015                                                       test                                  00..015                                                                         00..015                                                       test
+                                                                                        0.2                                                 IVX-QR         0.1                    0.2                                                    MBB IVX-QR                         0.2                                                                                       0.2                                                    MBB IVX-QR
+                                                                 0.3                          0.3                                                                                       0.3                                              t test          c=-5                     0.3                                                                                       0.3                                              t test
+                                                                 0.2                                0.4                                     IVX-QR-HAC                                        0.4                                        MBB                                            0.4                                                                                       0.4                                        MBB
+                                                                 0.1                                      0.5                                                                                       0.5                                  IVX-QR      0.3                                      0.5                                                                                       0.5                                  IVX-QR
+                                                                 0.0                                            0.6                                        0.0                                            0.6                            IVX-QR-HAC                                                 0.6                                                                                       0.6                            IVX-QR-HAC
+                                                                                                                       0.7                                                                                       0.7                                 0.2                                                   0.7                                                                                       0.7
+                                                                                                                             0.8                                                                                       0.8                                                                                       0.8                                                                                       0.8
+                                                                                                                                   00..995                                                                                   00..995                 0.1                                                               00..995                                                                                   00..995
+                                                                     c=-70
+                                                                                                                                                                                                                                                     0.0                                                                                                              
+                                                                 0.3                                                                                                                                                                                                        
+                                                                 0.2                                                                                            c=-7                                                                                                                                                                               c=-7
+                                                                 0.1                                                                                                                                                                                     c=-70
+                                                                 0.0                                                                                                                                                                                                                                                                           0.3
+                                                                                                                                                                                                                                                     0.3
+                                                                                                                                            test           0.3                                                                                                                                                                  test
+                                                                                                                                                                                                                                                     0.2
+                                                                                                                                            MBB IVX-QR                                                                                                                                                                          MBB IVX-QR 0.2
+                                                                                                                                                                                                                                                     0.1
+                                                                                                                                            t test         0.2                                                                                                                                                                  t test
+                                                                 size                                                                                      size                                                                                      0.0size                                                                                   size
+                                                                                                                                            MBB                                                                                                                                                                                 MBB
+                                                                              00..015                                                                                   00..015                                                                                   00..015                                                                                   00..015
+                                                                                        0.2                                                 IVX-QR         0.1                    0.2                                                                                       0.2                                                 IVX-QR         0.1                    0.2
+                                                                                              0.3                                                                                       0.3                                                                                       0.3                                                                                       0.3
+                                                                                                    0.4                                     IVX-QR-HAC                                        0.4                                                                                       0.4                                     IVX-QR-HAC                                        0.4
+                                                                                                          0.5                                                                                       0.5                                                                                       0.5                                                                                       0.5
+                                                                                                                0.6                                        0.0                                            0.6                                                                                       0.6                                                                                       0.60.0
+                                                                                                                       0.7                                                                                       0.7                                                                                       0.7                                                                                       0.7
+                                                                                                                             0.8                                                                                       0.8                                                                                       0.8                                                                                       0.8
+                                                                                                                                   00..995                                                                                   00..995                                                                                   00..995                                                                                   00..995
+
+                                                                                                                                                                                                                                                                                                                                                         
+
+                                                                 size                                                                       test                                                                                                     size                                                                       test
+                                                                                                                                               MBB IVX-QR                                                                                                                                                                          MBB IVX-QR
+                                                                              00..015                                                          t test                                                                                                             00..015                                                          t test
+                                                                                        0.2                                                    MBB                                                                                                                          0.2                                                    MBB
+                                                                                              0.3                                              IVX-QR                                                                                                                             0.3                                              IVX-QR
+                                                                                                    0.4                                        IVX-QR-HAC                                                                                                                               0.4                                        IVX-QR-HAC
+                                                                                                          0.5                                                                                                                                                                                 0.5
+                                                                                                                0.6                                                                                                                                                                                 0.6
+                                                                                                                       0.7                                                                                                                                                                                 0.7
+                                                                                                                             0.8                                                                                                                                                                                 0.8
+                                                                                                                                   00..995                                                                                                                                                                             00..995
+
+                                                                                          (a) Small sample: N = 200                                                                                                                                                           (b) Large sample: N = 700
+
+                                                                                                                                                                                    Figure 2: Size performance: CHE errors
+                                 Figure 3: Predictors: 1927:01 - 2005:12
+
+     -2.5                                    0.05
+
+dp                                           dfy
+
+        -3.5                                         0.03
+
+     -4.5                                    0.01
+
+     0.0                                     ep
+
+de                                                   -3.5 -3.0 -2.5 -2.0
+
+        -0.5
+
+     2.0 -1.0                                ntis
+
+     1.5                                             0.00 0.05 0.10 0.15
+
+bm   1.0
+
+     0.5
+
+     0.15                                    tms
+
+tbl  0.10                                            -0.02 0.00 0.02 0.04
+
+     0.05
+
+     0.00
+
+               1940  1960        1980  2000                                1940  1960        1980  2000
+
+                           Time                                                        Time
+
+                                                          19
+                     Electronic copy available at: https://ssrn.com/abstract=3016449
+                                                                              Table 1: Tests for stock returns (S&P500) quantile predictability: 1927:01 - 2005:12
+
+                                                                              dp                         de                       bm                                tbl
+
+        20                                                        IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR
+Electronic copy available at: https://ssrn.com/abstract=3016449
+                                                                 0.05 0.003*  (-0.125, 0.006) 0.000*     (-0.137, 0.007) 0.001*   (-0.252, 0.030) 0.604             (-0.598, 0.301)
+                                                                  0.1 0.000*  (-0.131, -0.000)* 0.000*   (-0.116, 0.004) 0.000*   (-0.278, 0.004) 0.689             (-0.467, 0.206)
+                                                                  0.2 0.002*  (-0.089, 0.001) 0.000*     (-0.073, 0.016) 0.001*   (-0.239, 0.007) 0.060             (-0.334, 0.005)
+
+                                                                 0.3 0.123 (-0.072, -0.003)* 0.000* (-0.045, 0.005) 0.005* (-0.146, 0.008) 0.006* (-0.372, 0.023)
+
+                                                                 0.4 0.749 (-0.052, -0.000)* 0.015* (-0.039, 0.011) 0.511 (-0.093, 0.025) 0.003* (-0.355, -0.055)*
+
+                                                                 0.5 0.605    (-0.039, 0.012)    0.375   (-0.035, 0.007)  0.792   (-0.065, 0.045)  0.011*           (-0.282, -0.022)*
+                                                                 0.6 0.157    (-0.022, 0.022)    0.534   (-0.026, 0.005)  0.125   (-0.027, 0.088)  0.007*           (-0.351, 0.036)
+                                                                 0.7 0.004*   (-0.018, 0.033)    0.096   (-0.034, 0.007)  0.001*  (0.002, 0.097)*  0.097            (-0.328, 0.052)
+                                                                 0.8 0.059    (-0.015, 0.033)    0.027*  (-0.030, 0.012)  0.023*  (0.008, 0.118)*  0.016*           (-0.249, 0.054)
+
+                                                                 0.9 0.057 (-0.021, 0.054) 0.000* (-0.034, 0.038) 0.009* (-0.014, 0.216) 0.001* (-0.371, 0.13)
+
+                                                                 0.95 0.004* (-0.035, 0.074) 0.000* (-0.016, 0.086) 0.008* (-0.001, 0.214) 0.146 (-0.501, 0.381)
+
+                                                                              dfy                        ep                       ntis                              tms
+
+                                                                  IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR IVX-QR MBB IVX-QR
+
+                                                                 0.05 0.000* (-6.179, -3.229)* 0.917 (-0.084, 0.035) 0.056 (-0.887, 0.470) 0.175 (-1.746, 0.140)
+
+                                                                 0.1 0.000* (-4.489, -2.063)* 0.903 (-0.063, 0.045) 0.003* (-0.701, 0.281) 0.063 (-1.181, 0.483)
+
+                                                                 0.2 0.000* (-3.434, -0.802)* 0.579 (-0.038, 0.014) 0.003* (-0.576, 0.143) 0.219 (-0.626, 0.471)
+
+                                                                 0.3 0.000*   (-2.325, -0.296)*  0.759   (-0.04, 0.012)   0.270   (-0.433, 0.074)  0.612            (-0.358, 0.346)
+                                                                 0.4 0.030*   (-1.691, 0.272)    0.801   (-0.035, 0.019)  0.186   (-0.267, 0.117)  0.229            (-0.230, 0.385)
+                                                                 0.5 0.747    (-0.763, 0.82)     0.821   (-0.027, 0.018)  0.826   (-0.255, 0.106)  0.352            (-0.130, 0.334)
+                                                                 0.6 0.025*   (-0.319, 1.193)    0.975   (-0.021, 0.019)  0.741   (-0.300, 0.060)  0.242            (-0.210, 0.383)
+                                                                 0.7 0.000*   (0.118, 1.957)*    0.534   (-0.015, 0.021)  0.582   (-0.218, 0.157)  0.703            (-0.227, 0.507)
+
+                                                                 0.8 0.000* (0.44, 2.879)* 0.500 (-0.018, 0.027) 0.834 (-0.237, 0.124) 0.170 (-0.029, 0.566)
+
+                                                                  0.9 0.000*  (1.514, 4.463)* 0.288      (-0.012, 0.044) 0.934    (-0.271, 0.244) 0.000*            (0.219, 1.169)*
+                                                                 0.95 0.000*  (1.968, 5.047)* 0.260      (-0.029, 0.042) 0.966    (-0.462, 0.321) 0.000*            (0.354, 1.707)*
+A Technical Appendix
+
+A.1 Supporting Lemmas
+
+I(0) xt case is covered by Fitzenberger (1997, Theorem 3.3) so in this Section, we provide MBB
+
+lemmas for MI-I(1) cases where the IVX variables are less persistent than the predictors, i.e.,
+
+ < min(, 1). All the proofs for the supporting lemmas are provided in the online Appendix.
+
+Let   Y~i  =   1    i+b-1  mj        denote      the   normalized      average  of     the  ith  resampled    block     under    the
+                 b  j=i
+
+MBB,  and  Bi  =    1    i+b-1  mt      denote     the    normalized      average   of  the    block  (mi ,  ...,  mi+b-1),  i    1.
+                      b  t=i
+
+Each of the normalized block sums, after the IVX-filtration, will satisfy CLT as b  . However, to
+
+provide MBB consistency, the cross-product of some higher moments should be reasonably bounded
+
+(see the proof of Lemma A.4). One sufficient condition for this is b = O(kn), which is given in
+
+Assumption 4.1.
+
+Lemma A.1 The second moment of the normalized instruments, Zt, is bounded for all t:
+
+                                                        E(Zt2) = O(1).                                                          (19)
+
+Lemma A.2 Let q = n - b + 1 and q = O(n), then
+
+                                     1  q         i+b-1                n               
+                                     q        1                   1                      b
+                                              b          mj    =  n       mt  + Op(        ).                                   (20)
+
+                                        i=1 j=i                      t=1                n
+
+Corollary A.1 Let m¯ n := n-1                 n    mt.    From    Lemma   A.2,     if  P (Y~1    =  Bj)  =   1/q,  1    j    q,
+                                              t=1
+
+                         EY~1   =    1   q    Bi   =   1   q   1     i+b-1      =                   b                           (21)
+                                     q  i=1            q  i=1    b                   bm¯ n  + Op( n ).
+                                                                            mt
+
+                                                                       t=i
+
+Lemma A.3 Let zt :=             t    Rnt-z i uxi   be  a  mildly    integrated  instrument       that  satisfies
+                                i=1
+
+                                zt = Rnzzt-1 + uxt, t  {1, ..., n}, z0 = 0.
+
+Suppose Assumption 3.1 holds, for 1  j  b, 1  t  n,
+
+1. E(zt2+j|Ft)           t      Rn(tz+j-i)+(t+j-h)uxiuxh            +  Op(b).
+                         i,h=1
+
+2. E(zt+jnt+j|Ft)               t       t+1        h-1    Rn(tz+j -i)+(t+j -h) Rnh-1-k uxi uxk      +  Op(b2).
+                                i=1     h=1        k=0
+
+3. E(2nt+j|Ft)           t+1            i-1      h-1   Rn(tz+j-i)+(t+j-h)Rn(i-1-f )+(h-1-k)uxf           uxk  +    Op(b3).
+                         i,h=1          f =0     k=0
+
+                                                              21
+                         Electronic copy available at: https://ssrn.com/abstract=3016449
+Lemma A.4 Under Assumption 2.1, 3.1 and 4.1,,
+
+            1       q
+            q
+                                 Bi2 p  (1 -  )Vcxz.                      (22)
+
+                    i=1
+
+Lemma A.5 The long-run variance of mt satisfies:
+
+                              n
+
+            (1/n)                Cov(mt, ms) = Op(1).                     (23)
+
+                    s,t=1
+
+Definition A.1 (Uniform Integrability) (Serfling (1980, page 13))
+A sequence of random variable {Yn} is uniformly integrable if
+
+            lim     sup          E{|Yn|1(|Yn|        >  c)}  =  0.
+
+            c         n
+
+Lemma A.6 (Lemma B of Serfling (1980, page 15))
+Suppose that Xn d X and limnE|Xn|r = E|X|r <  for r > 0. Then the sequence {Xnr} is
+uniformly integrable.
+
+Lemma A.7 Define the QR estimator ~ under P  conditional on data following Gregory, Lahiri
+and Nordman (2018, GLN hereafter) as:
+
+            ~ = arg min                     E yt -  z~t-1 .
+
+                                 t=1
+
+Then,
+
+            ( kn)1/2 ^IV XQR - ~ = op(1).                                 (24)
+
+A.2 Proofs for Main Theorems
+
+Proof of Theorem 3.1. For I(0) xt, we have
+
+                                      1         n
+         n                              n
+            ^QR -      =         1-1                  (ut )Xt-1 + op(1),
+
+                                                t=1
+
+where                                                Xt-1Xt-1
+                                                          t
+            1 = f             F-1 ( ) E                             ,
+
+                                            22
+
+       Electronic copy available at: https://ssrn.com/abstract=3016449
+and, by MGCLT,
+
+                    1n
+                                  (ut )xt-1 = N 0,  (1 -  ) E Xt-1Xt-1 .
+                      n
+                         t=1
+
+Thus
+
+       ^QR -                        (1 -  )            Xt-1Xt-1  -1                           Xt-1Xt-1 -1
+  n                 = N      0,       F-1 ( ) 2 E           t              Xt-1Xt-1   E            t              .
+                                f                                   E
+
+In a similar way, for (MI) xt
+
+                    nkn ^QR -               = N         0,     (1 -  )     2 V~x-x1VxxV~x-x1
+                                                            f F-1 ( )
+
+with Vxx =     erC  xx  erC  dr  and  V~xx  =  E  1    Vxx. See also Kostakis et al (2014, Theorem B.4).
+            0                                     t
+
+I(1) case is already discussed in Section 3.1, so is omitted.
+
+Proof of Theorem 3.2. Following the proof of Lee (2016) but using CHE innovation specification
+
+we have                                                                -1
+
+                    (nkn)1/2 ^1IV XQR - 1,              =   M~  ,n        G,n + op(1),
+
+where
+
+                                                  n
+
+                                 M~  ,n :=             f~ut ,t-1 (0) Z~t-1,nZ~t-1,n,
+
+                                                  t=1
+
+                             f~ut ,t-1 (0)  =     f    F-1 ( )  1
+                                                                   ,
+
+                                                                t
+
+hence       M~  ,n       M~           f     F-1 ( ) E       Xt-1 Xt-1   ,        for (I0),
+Moreover,                                                        t         for (MI) and (I1),
+                    p               
+                                      f        F-1 ( )  E   1   Vcxz .
+                                                            t
+                                    
+
+                n                                 N 0,  (1 -  )E Xt-1Xt-1                   for (I0),
+                                                        N (0,  (1 -  )Vcxz)                                    .
+G,n := Z~t-1,n (ut ) = G 
+                                                                                      for (MI) and (I1),
+              t=1
+
+Thus, the desired result follows.
+
+Theorem A.2 (Stability Condition) Let m¯  denote the average of resampled data under the
+MBB, m¯  = (1/ ) t=1 mt. Under the assumptions 2.1, 3.1 and 4.1,
+
+                                 V ar(m¯ ) p  (1 -  )Vcxz, as n  .                                         (25)
+
+                                                         23
+                    Electronic copy available at: https://ssrn.com/abstract=3016449
+Proof of Theorem A.2. Using the fact that Y~i are iid under P , we can observe
+
+                        V ar(m¯ ) =          V ar         1         m    Y~i      = V ar(Y~1).
+                                                                   i=1
+
+                                                           m
+
+By Corollary A.1 and the fact that P (Y~1 = Bj) = 1/q, 1  j  q,
+
+V ar(Y~1)  =            1  q                                                                                              (26)
+                        q                                                                                                 (27)
+                             (Bi - EY~1)2                                                                                 (28)
+
+                           i=1
+
+                1q                                           b           2
+           =                               bm¯ n             n
+                                 Bi   -              -  Op
+                q
+                           i=1
+
+                1q                                   22         q                                      b              b2
+           =                               bm¯ n      -                             bm¯ n              n              n
+                                 Bi   -                   q           Bi       -            Op            + Op
+                q
+                           i=1                               i=1
+
+Providing that bm¯ n =     b  ·  n-1/2     n      mt    = Op(            b  ),  and  that     b  =  o(n),
+                           n               t=1                           n
+
+                                               1  q                               2
+                                               q                     bm¯ n
+                           V     ar(Y~1)  =             Bi   -                     + op(1).                               (29)
+
+                                                  i=1
+
+In order to prove 25, it suffices to show
+
+                                 1q   Bi - b1/2m¯ n          2                                                            (30)
+                                 q
+                                                               p  (1 -  )Vcxz.
+
+                                 i=1
+
+This can be decomposed further as:
+
+1q                                 2         1    q             2     q     Bibm¯ n           1     q              2
+q                         bm¯ n              q                  q                             q             bm¯ n
+           Bi  -                      =                Bi2   -                             +
+
+i=1                                               i=1              i=1                           i=1
+
+                                       An - 2Cn + Dn.
+
+Next we will show: (a) An p  (1 -  )Vcxz; (b) Cn p 0; (c) Dn p 0.
+    (a) This result is obtained by Lemma A.4.
+    (b)
+
+                                                  b
+
+               Cn =                bm¯ n + Op( n ) · bm¯ n
+                   =
+                   =               b1          n                   b              b1          n
+                                     ·                             n                ·
+                                                  mt    +   Op(       )     ·                    mt
+                                   nn                                             nn
+                                             t=1                                            t=1
+
+                                 b · 1    n                     b               · 1    n
+                                 nn                             n                   n
+                                                mt   +  Op((       )3/2)                    mt
+
+                                          t=1                                          t=1
+
+                           = op(1) · Op(1)
+
+                                                24
+           Electronic copy available at: https://ssrn.com/abstract=3016449
+                               = op(1).
+
+(c)
+
+                                   1        q             b      1       n
+                           Dn = q                         n     
+                                               bm¯ 2n  =                     mt 2 = op(1)Op(1) = op(1).
+                                                                  n
+                                          i=1                          t=1
+
+Proof of Theorem 4.1. Since n(m¯ n - Emt )  G (Lee (2016), Lemma A.2), where
+
+                                            
+
+                                      N (0,  (1 -  )E                    Xt-1Xt-1       ),       for (I0),
+                               G =
+
+                                            N (0,  (1 -  )Vcxz), for (MI) and (I1),
+
+and G is a continuous distribution, by Polya¯'s Theorem,
+
+                           sup P n(m¯ n - Emt)  x - G (x) p 0, as n  .                                                         (31)
+
+                           xR
+
+Hence, it is suffices to show that
+
+                           sup P   (m¯  - m¯ n)  x - G (x) p 0, as n  .                                                        (32)
+
+                           xR
+
+Recall  that  Y~i  =  1    i+b-1      mt       .  We   can   obtain
+                        b  j=i
+
+                                                                          1     m
+                                                                         
+                                                             m¯    =        m        Y~i.                                      (33)
+
+                                                                                i=1
+
+Let  ^ n()  :=  1     m    E   Y~i - EY~i                 2        |Y~i  -  EY~i|    >                  , for  > 0. Using the fact that
+                m     i=1                                                               m
+                                                           1
+
+Y~i, i = 1, 2, ..., m are iid under P , and that P (Y~1 = Bj) = 1/q, 1  j  q, for any > 0,
+
+P r(^ n() > )  -1E(^ n())
+
+                   = -1E E                  Y~1 - EY~1       2         Y~1 - EY~1           
+                                                                                        > m
+                                                              1
+
+                   = -1E 1 q                           1     q           2              1     q                
+                               q                       q                                q                  > m
+                                               Bi  -               Bj     1     Bi   -              Bj
+                                       i=1
+                                                          j=1                              j=1
+
+                                     q                    1     q           2              1     q              
+                                                          q                                q                > m
+                   = (q )-1 E                     Bi   -           Bj        1  Bi   -              Bj
+
+                                   i=1                       j=1                              j=1
+
+                                       q                                                            1   q          1  q                  
+                                                                   > (/2) m                         q              q           > (/2) m
+                    4(q )-1                 E Bi 21          Bi                         +E                  Bj 21          Bj
+                                            E Bi 21
+                                     i=1                                                               j=1            j=1
+                                       q
+                                                                                                    1   q
+                    4(q )-1                                        > (/2) m                         q
+                                                             Bi                         +E                  Bj 2
+                                     i=1
+                                                                                                       j=1
+
+                                                                         25
+
+                      Electronic copy available at: https://ssrn.com/abstract=3016449
+                   = o(1),
+
+since                                                                          
+                                                                     > (/2) m
+                                        lim E       (Bi)21       Bi                     = 0,                          (34)
+
+                                        n
+
+and by Lemma A.2, b = o(n), q = O(1), and E(mt )2 = O(1), for 1  t  n, E(mi mj) = 0, for
+i = j, 1  i, j  n,
+
+   1   q           2             n              1     b-1                                 2
+   q                        b   t=1            qb
+E           Bj       =E    q          mt    -             (b - j) mj + mn-j+1
+
+       j=1                                            j=1
+
+                              1    n        2 2b         n  b-1                             b  b-1
+                   E b                       - q2                                       + q2
+                                        mt                      mt mj + mn-j+1                       mj + mn -j+1  2
+                              n
+                                   t=1                  t=1 j=1                                j=1
+
+                       b     n                 2b   b-1                 2b   b-1                  b     b-1
+                   = n2                        n2                       n2                        n2 E
+                                E(mt )2     -           E (mj )2     -           E(mn-j+1)2    +             mj + mn -j+1   2
+
+                          t=1                       j=1                      j=1                        j=1
+
+                          b             b2          b2           b2
+                   = O( n ) + O( n2 ) + O( n2 ) + O( n2 )
+
+                   = o(1).
+
+   In order to prove (34), we define the triangular array {Vn,i : i = 1, ..., n - b + 1} as
+
+                                               Vn,i     =   Bi2  =   1   i+b-1  mt)2.
+                                                                     b
+                                                                        (
+
+                                                                        i=1
+
+   For fixed i = 1, ..., q, E(mt)2 < , we observe that
+
+                                                1   i+b-1   mt       N  (0,  E(mt )2),
+                                                     i=1
+
+                                                 b
+
+and
+
+                                                 1    i+b-1  mt )2]  =  E(mt )2   <    .
+                                            E[(        i=1
+
+                                                   b
+
+    Hence, by Serfling (1980, page 15, Lemma B), the sequences {Vn,i}n=n1, ..., {Vn,i} n=nq is uni-
+formly integrable, which implies that, for  > 0:
+
+               E   Vn,i1  Vn,i     >  (  )2m       =E       Bi 21       Bi   2 > (  )2m        0, as m  ,
+                                       2                                           2
+
+Using this result yields                                                       
+                                                                     > (/2) m
+                                        lim E      (Bi)21        Bi                     = 0,
+
+                                        n
+
+where  m    =   n    ,    as    n       .
+                b
+
+                                                               26
+                          Electronic copy available at: https://ssrn.com/abstract=3016449
+Therefore, we conclude that ^ n() = op(1), which implies the Lindeberg's condition:
+
+     1 E     mt  - Emt    2       mt - Emt                      = op(1), as n  .     (35)
+                                                >
+        t=1                1
+
+Next, by Lindeberg's Central Limit Theorem, using Theorem A.2, along with the Lindeberg's
+condition (35), yields that the conditional distribution of  (m¯ -m¯ n) given (m1, ..., mn) converges
+to G , as n  . Hence, by P olya¯'s Theorem, (32) follows.
+
+Proof of Theorem 4.2. We combine the proof of Lee (2016) and some argument from GLN
+(2018). Recall that the QR estimator ~ under P  conditional on data as in LemmaA.7:
+
+                       ~ = arg min              E yt -  z~t-1 ,
+
+                                           t=1
+
+and let ut := yt - z~t-1~ , then E (ut ) = 0 by construction.
+    Recall that (we use ^ instead of ^IV XQR within this proof for exposition)
+
+                       ^  =  arg  min            yt -  z~t-1 .
+
+                                           t=1
+
+We obtain the approximate FOC (Koenker and Bassett, 1982):
+
+     -1/2 Zt-1[ - 1(yt  z~t-1^)] = -1/2 Zt-1[ (yt - z~t-1^)] = op(1),                (36)
+
+     t=1                                        t=1
+
+and
+
+     -1/2 EZt-1[ - 1(yt  z~t-1~ )] = -1/2 EZt-1[ (yt - z~t-1~ ] = op(1),
+
+     t=1                                        t=1
+
+respectively. Following the proof of Lee (2016, Theorem 3.1), we have
+
+     op(1) = -1/2 Zt-1 (ut - z~t-1(^ - ~ ))                                          (37)
+
+                            t=1
+
+     = -1/2            Zt-1 (ut - z~t-1(^ - ~ )) - EZt-1 (ut - z~t-1(^ - ~ ))
+
+                  t=1
+
+     + EZt-1 (ut - z~t-1(^ - ~ )) - Et-1EZt-1 (ut - z~t-1(^ - ~ ))
+
+     - Zt-1 (ut ) - Zt-1E (ut ) - Zt-1E (ut ) - Zt-1Et-1E (ut )
+
+     + -1/2            Et-1EZt-1 (ut - z~t-1(^ - ~ ))
+
+             t=1
+
+                                                  27
+             Electronic copy available at: https://ssrn.com/abstract=3016449
+              - Zt-1Et-1E (ut ) + Zt-1 (ut )                                                     (38)
+
+         = 1/2~ (^) + -1/2 Zt-1 (ut ) + op(1),                                                   (39)
+
+                                             t=1
+
+where
+
+                             ~ (^) := -1 Et-1EZt-1 (ut - z~t-1(^ - ~ )),
+
+                                                                 t=1
+
+and op(1) terms are smaller orders than (39) under either P or P , see GLN (Lemma 2-(vi) and
+Lemma 3-(vi), 2018) and Lee (2016). Please also see the proof of Theorems 1-2 (equations (8.3) and
+(8.5)) in GLN. These additional rounds of approximations in order to avoid the non-differentiability
+under E is from GLN, which we modify into our proof. For more details, see the proof of Lemma
+A.7 in the online Appendix.
+
+    By the Taylor expansion of ~ (^) around ~ :
+
+         ~ (^)  =  ~  (~ ) +     ~ ( )          (^    - ~ ) + op(^  - ~ )
+                                   
+                                              ~
+
+                =  -1      Et-1EZt-1 (ut ) +           ~ ( )          (^   - ~ ) + op(^  - ~ ).
+                                                         
+                       t=1                                          ~
+
+Thus, (39) can be written as
+
+1/2  -1       Et-1EZt-1 (ut )    +    ~ ()        (^ - ~ ) + op(^ - ~ )    +  -1/2 Zt-1 (ut ) = op(1).
+                                        
+         t=1                                    ~                                     t=1
+
+                                                                                                 (40)
+
+Using our MBB lemmas,
+
+              ~ () = -1 Et-1E Zt-1 (ut - z~t-1( - ~ ))
+
+                                    t=1
+
+                   = Et-1E -1 Zt-1 (ut - z~t-1( - ~ ))
+
+                                       t=1
+
+                                                                              
+
+                                    1      m  i+b-1
+                                 
+                   =  Et-1 E                         Zj- 1 (uj - z~j-1( - ~ ))
+                                   mb
+                                       i=1 j=1
+
+                                                                    
+
+                              11       m           1   i+b-1
+                   =  Et-1            i=1  E      
+                              m    b                          mj ()
+
+                                                    b   j=1
+
+                              11 m 
+                   =  Et-1                      bm¯ n () + Op(b/n) (by Corollary A.1)
+                              m    b
+                                      i=1
+
+                                                     28
+                Electronic copy available at: https://ssrn.com/abstract=3016449
+                                            n                                            
+                                                                                  + Op( b/n)
+                         = Et-1     n-1          Zt-1 (ut - z~t-1( - ~ ))
+
+                                         t=1
+
+                                 n                                                    
+                                                                                  Op( b/n).
+                         = n-1       Zt-1Et-1 (ut          -  z~t-1(  -  ~ ))  +
+
+                                t=1
+
+So the partial derivative of ~ () evaluated at ~ is
+
+                         ~ ()               =  -kn1/2n-1    n   Zt-1Zt-1  f~ut ,t-1 (0) ,
+                                                           t=1
+                                     ~
+
+where f~ut ,t-1 (0) = f  F-1 ( )     1   .
+                                     t
+
+Plug this result in (40), we have
+
+                                                                n
+
+op(1) = 1/2 -1 Et-1EZt-1 (ut ) - kn1/2n-1 Zt-1Zt-1 f~ut ,t-1 (0) (^ - ~ ) + op(^ - ~ )
+
+              t=1                                               t=1
+
++ -1/2             Zt-1 (ut )
+
+              t=1
+
+                         n
+
+= -( kn)1/2n-1 Zt-1Zt-1 f~ut ,t-1(0)(^ - ~ )
+
+                         t=1
+
++ 1/2op(^ - ~ ) + -1/2 Zt-1 (ut ) + -1/2 Et-1EZt-1 (ut )
+
+                                            t=1                          t=1
+
+                                            n
+
+= -( kn)1/2(^ - ~ ) · n-1 Zt-1Zt-1 f~ut ,t-1(0) + ( kn)1/2(^ - ~ )op((kn)-1/2)
+
+                                            t=1
+
++ 1/2 -1                 Zt-1 (ut ) + -1/2                 Et-1EZt-1 (ut ).
+
+              t=1                                     t=1
+
+    Then                                              n
+and we know,
+              ( kn)1/2(^ - ~ ) ·                 n-1       Zt-1Zt-1 f~ut ,t-1(0) + op((kn)-1/2)
+
+                                                      t=1
+
+              = 1/2 1                Zt-1 (ut ) + 1             Et-1EZt-1 (ut ) ,
+
+                                t=1                        t=1
+
+                                                                          Xt-1 Xt-1
+                                                                               t
+n-1 n Zt-1Zt-1f~ut ,t-1(0) p M~   f                        F-1 ( )    E                , for (I0)
+                                                      f    F-1 ( )    E   1    Vcxz ,   for (MI) and (I1).
+t=1                                                                       t
+
+                                                   29
+              Electronic copy available at: https://ssrn.com/abstract=3016449
+Note that
+
+            1       Et-1EZt-1 (ut ) = Et-1E 1                          Zt-1 (ut )
+
+               t=1                                                t=1
+
+                                                                   1   m    i+b-1
+                                                                  mb
+                                 =                     Et-1E                       Zj- 1 (uj )
+
+                                                                       i=1 j=1
+
+                                                             11 m 
+                                 =                     Et-1                   bm¯ n
+                                                             m      b
+                                                                       i=1
+
+                                                             n
+
+                                 = n-1 Zt-1Et-1 (ut ) ,
+
+                                                       t=1
+
+and from Theorem 4.1,
+
+                                                                            
+
+1/2 1       Zt-1 (ut ) + 1       Et-1EZt-1 (ut )                          N (0,  (1 -  )E       Xt-1Xt-1  ),  for (I0),
+                                                             = G =
+
+       t=1                  t=1                                             N (0,  (1 -  )Vcxz), for (MI) and (I1).
+
+                                                       ~ - ^IV XQR          = op(1), from Lemma A.7.
+Theorem 4.2 now follows, together with kn
+
+References
+
+ [1] L. I. Boneva, D. Kendall, and I. Stefanov. Spline transformations: Three new diagnostic aids for
+      the statistical data-analyst. Journal of the Royal Statistical Society. Series B (Methodological),
+      33(1):1­71, 1971.
+
+ [2] Z. W. Cai, X. S. Liao, and H. Q. Chen. A weighted variable addition approach to test
+      predictability in quantile regression with persistent predictors. XiamenUniversity, Working
+      Paper, 2017.
+
+ [3] J. Y. Campbell and M. Yogo. Efficient tests of stock return predictability. Journal of Financial
+      Economics, 81(1):27­60, 2006.
+
+ [4] E. Carlstein. The use of subseries values for estimating the variance of a general statistic from
+      a stationary sequence. The Annals of Statistics, 14(3):1171­1179, 1986.
+
+ [5] M. Carrasco and X. Chen. Mixing and moment properties of various GARCH and stochastic
+      volatility models. Econometric Theory, 18(1):17­39, 2002.
+
+ [6] Y. Choi, S. Jacewitz, and J. Y. Park. A reexamination of stock return predictability. Journal
+      of Econometrics, 192(1):168­189, 2016.
+
+ [7] B. Efron and R. J. Tibshirani. An introduction to the bootstrap. Chapman & Hall, 1993.
+
+                                                               30
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+ [8] J. Fan and Q. Yao. Nonlinear Time Series: Nonparametric and Parametric Methods. Springer,
+      New York, 2003.
+
+ [9] B. Fitzenberger. The moving blocks bootstrap and robust inference for linear least squares
+      and quantile regressions. Journal of Econometrics, 82(2):235­287, 1997.
+
+[10] A. Goyal and I. Welch. Predicting the equity premium with dividend ratios. Management
+      Science, 49(5):639­654, 2003.
+
+[11] K. B. Gregory, S. N. Lahiri, and D. J. Nordman. A smooth block bootstrap for quantile
+      regression with time series. The Annals of Statistics, 46(3):1138­1166, 2018.
+
+[12] P. Hall, J. L. Horowitz, and B.-Y. Jing. On blocking rules for the bootstrap with dependent
+      data. Biometrika, 82(3):561­574, 1995.
+
+[13] W. Hendricks and R. Koenker. Hierarchical spline models for conditional quantiles and the
+      demand for electricity. Journal of the American Statistical Association, 87(417):58­68, 1992.
+
+[14] Y. M. Kim and D. J. Nordman. Properties of a block bootstrap under long-range dependence.
+      Sankhy¯a Series A, 73(1):79­109, 2011.
+
+[15] K. Knight. Limiting distributions for L1 regression estimators under general conditions. The
+      Annals of Statistics, 26(2):755­770, 1998.
+
+[16] R. Koenker. Quantile regression. Cambridge University Press, 2005.
+
+[17] R. Koenker and G. Bassett Jr. Regression quantiles. Econometrica, 46(1).
+
+[18] R. Koenker and G. Bassett Jr. Robust tests for heteroscedasticity based on regression quantiles.
+      Econometrica, 50(1):43­61, 1982.
+
+[19] R. Koenker and Q. Zhao. Conditional quantile estimation and inference for ARCH models.
+      Econometric Theory, 12(5):793­813, 1996.
+
+[20] A. Kostakis, T. Magdalinos, and M. P. Stamatogiannis. Robust econometric inference for stock
+      return predictability. The Review of Financial Studies, 28(5):1506­1553, 2014.
+
+[21] H. R. Ku¨nsch. The jackknife and the bootstrap for general stationary observations. The Annals
+      of Statistics, 17(3):1217­1241, 1989.
+
+[22] S. Lahiri. On second-order properties of the stationary bootstrap method for studentized
+      statistics. In S. Ghosh, editor, Asymptotics, Nonparametrics, and Time Series, pages 683­711.
+      Marcel Dekker, New York, 1999.
+
+[23] S. Lahiri. Consistency of the jackknife-after-bootstrap variance estimator for the bootstrap
+      quantiles of a studentized statistic. The Annals of Statistics, 33(5):2475­2506, 2005.
+
+                                                               31
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+[24] J. H. Lee. Online supplement to "predictive quantile regression with persistent covariates:
+      IVX-QR approach". Available at https://sites.google.com/site/jihyung412/research. 2014.
+
+[25] J. H. Lee. Predictive quantile regression with persistent covariates: IVX-QR approach. Journal
+      of Econometrics, 192(1):105­118, 2016.
+
+[26] X. S. Liao, Z. W. Cai, and H. Q. Chen. A perspective on recent methods on testing predictabil-
+      ity of asset returns. Applied Mathematics-A Journal of Chinese Universities, 33(2):127­144,
+      2018.
+
+[27] A. M. Lindner. Continuous time approximations to GARCH and stochastic volatility models.
+      In T. Andersen, R. Davis, J.-P. Kreiss, and T. Mikosch, editors, Handbook of Financial Time
+      Series, pages 481­496. Springer, New York, 2009.
+
+[28] R. Y. Liu and K. Singh. Moving blocks jackknife and bootstrap capture weak dependence. In
+      R. Lepage and L. Billard, editors, Exploring The Limits of Bootstrap, pages 225­248. Wiley,
+      New York, 1992.
+
+[29] T. Magdalinos and P. C. Phillips. Econometric inference in the vicinity of unity. Singapore
+      Management University, CoFie Working Paper, 7, 2009.
+
+[30] A. Maynard, K. Shimotsu, and N. Kuriyama. Inference in predictive quantile regressions.
+      Unpublished Manuscript, 2018.
+
+[31] A. Maynard, K. Shimotsu, and Y. Wang. Inference in predictive quantile regressions. Unpub-
+      lished Manuscript, 2011.
+
+[32] P. C. Phillips. Towards a unified asymptotic theory for autoregression. Biometrika, 74(3):535­
+      547, 1987.
+
+[33] P. C. Phillips and J. H. Lee. Predictive regression under various degrees of persistence and
+      robust long-horizon regression. Journal of Econometrics, 177(2):250­264, 2013.
+
+[34] P. C. Phillips and J. H. Lee. Robust econometric inference with mixed integrated and mildly
+      explosive regressors. Journal of Econometrics, 192(2):433­450, 2016.
+
+[35] P. C. Phillips and T. Magdalinos. Limit theory for moderate deviations from a unit root.
+      Journal of Econometrics, 136(1):115­130, 2007.
+
+[36] D. N. Politis and J. P. Romano. A circular block-resampling procedure for stationary data. In
+      R. Lepage and L. Billard, editors, Exploring The Limits of Bootstrap, pages 263­270. Wiley,
+      New York, 1992.
+
+[37] D. N. Politis and J. P. Romano. The stationary bootstrap. Journal of the American Statistical
+      Association, 89(428):1303­1313, 1994.
+
+                                                               32
+
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+[38] D. Pollard. Asymptotics for least absolute deviation regression estimators. Econometric The-
+      ory, 7(2):186­199, 1991.
+
+[39] S. Portnoy. Asymptotic behavior of regression quantiles in non-stationary, dependent cases.
+      Journal of Multivariate Analysis, 38(1):100­113, 1991.
+
+[40] R. J. Serfling. Approximation theorems of mathematical statistics. Wiley, New York, 1980.
+[41] M. M. Siddiqui. Distribution of quantiles in samples from a bivariate population. J. Res. Nat.
+
+      Bur. Standards, 64B:145­150, 1960.
+[42] I. Welch and A. Goyal. A comprehensive look at the empirical performance of equity premium
+
+      prediction. The Review of Financial Studies, 21(4):1455­1508, 2008.
+[43] A. Welsh. Kernel estimates of the sparsity function. In Y. Dodge, editor, Statistical Data
+
+      Analsyis Based on the L1-Norm and Related Methods, pages 369­377. Elsevier, New York,
+      1987.
+[44] W. B. Wu. Nonlinear system theory: Another look at dependence. Proceedings of the National
+      Academy of Sciences of the United States of America, 102(40):14150­14154, 2005.
+[45] Z. Xiao. Quantile cointegrating regression. Journal of Econometrics, 150(2):248­260, 2009.
+[46] Z. Xiao and R. Koenker. Conditional quantile estimation for generalized autoregressive
+      conditional heteroscedasticity models. Journal of the American Statistical Association,
+      104(488):1696­1712, 2009.
+
+                                                               33
+                            Electronic copy available at: https://ssrn.com/abstract=3016449
+

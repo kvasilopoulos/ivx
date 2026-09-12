@@ -1,0 +1,2463 @@
+                                                       Journal of Econometrics 229 (2022) 322­349
+
+                                                   Contents lists available at ScienceDirect
+
+                                               Journal of Econometrics
+
+                                          journal homepage: www.elsevier.com/locate/jeconom
+
+On LASSO for predictive regression
+
+Ji Hyung Lee a, Zhentao Shi b,, Zhan Gao c
+
+a Department of Economics, University of Illinois, 1407 W. Gregory Dr., 214 David Kinley Hall, Urbana, IL 61801, USA
+b Department of Economics, The Chinese University of Hong Kong, Sha Tin, New Territories, Hong Kong Special Administrative
+Region of China
+c Department of Economics, University of Southern California, Kaprielian Hall, 3620 South Vermont Avenue, Los
+Angeles, CA 90089, USA
+
+article info                              abstract
+
+Article history:                          Explanatory variables in a predictive regression typically exhibit low signal strength and
+Received 3 January 2020                   various degrees of persistence. Variable selection in such a context is of great importance.
+Received in revised form 6 February 2021  In this paper, we explore the pitfalls and possibilities of the LASSO methods in this
+Accepted 15 February 2021                 predictive regression framework. In the presence of stationary, local unit root, and coin-
+Available online 10 March 2021            tegrated predictors, we show that the adaptive LASSO cannot asymptotically eliminate
+                                          all cointegrating variables with zero regression coefficients. This new finding motivates
+JEL classification:                       a novel post-selection adaptive LASSO, which we call the twin adaptive LASSO (TAlasso),
+C22                                       to restore variable selection consistency. Accommodating the system of heterogeneous
+C53                                       regressors, TAlasso achieves the well-known oracle property. In contrast, conventional
+C61                                       LASSO fails to attain coefficient estimation consistency and variable screening in all
+                                          components simultaneously. We apply these LASSO methods to evaluate the short- and
+Keywords:                                 long-horizon predictability of S&P 500 excess returns.
+Cointegration
+Nonstationary time series                                                                                    © 2021 Elsevier B.V. All rights reserved.
+Machine learning
+Shrinkage estimation
+Variable selection
+
+1. Introduction
+
+    Predictive regressions are used extensively in empirical finance. A leading example is the stock return regression, for
+which predictability has long been a primary goal. We focus on this type of predictive regression in this paper. The first
+central econometric issue in these models is severe test size distortion in the presence of highly persistent predictors
+coupled with regression endogeneity. When persistence and endogeneity are high, the conventional inferential apparatus
+designed for stationary data can be misleading. Another major challenge in predictive regressions is the low signal-to-
+noise ratio (SNR). One explanation is that the noise in short-term predictive models may obscure the signal given by
+slow-moving (persistent) predictors.
+
+    Even though certain predictors have been suggested based on economic theory, there is no consensus regarding the
+predictive ability of any predictor. A researcher may use ex ante a pool of candidate regressors, hoping to identify a
+few important regressors. However, the more variables the researcher includes, the greater is the need for a data-driven
+routine for variable selection as many of these variables ex post demonstrate little or no predictive ability because of the
+competitive nature of the market. A low SNR naturally calls for variable selection.
+
+    Advancements in machine learning techniques, driven by an unprecedented abundance of data sources from many
+disciplines, offer valuable opportunities for economic data analysis. In the era of big data, shrinkage methods are becoming
+
+   Corresponding author.
+
+      E-mail addresses: jihyung@illinois.edu (J. Lee), zhentao.shi@cuhk.edu.hk (Z. Shi), zhangao@usc.edu (Z. Gao).
+
+https://doi.org/10.1016/j.jeconom.2021.02.002
+0304-4076/© 2021 Elsevier B.V. All rights reserved.
+J. Lee, Z. Shi and Z. Gao  Journal of Econometrics 229 (2022) 322­349
+
+increasingly popular in econometric inference and prediction because of their variable selection and regularization
+properties. In particular, the least absolute shrinkage and selection operator (LASSO; Tibshirani, 1996) has received intensive
+study in the past two decades.
+
+    This paper investigates LASSO methods in predictive regressions. The LASSO methods are attractive in predictive
+regressions because they enable researchers to identify pertinent and exclude irrelevant predictors. However, time series
+predictors in predictive regressions carry heterogeneous degrees of persistence, which we call mixed roots. Some may
+exhibit short memory (e.g., Treasury bills), whereas others may be highly persistent (e.g., most financial/macro predictors).
+Moreover, a multitude of persistent predictors can be cointegrated. For example, the dividend price (DP) ratio is essentially
+a cointegrating residual between dividend and price, and the so-called cay data (Lettau and Ludvigson, 2001) is another
+cointegrating residual between consumption, asset holdings, and labor income.
+
+    Given the difficulty of classifying time series predictors, we take an agnostic view of the types of the regressors and
+examine whether the LASSO methods can cope with heterogeneous regressors. We consider a predictive regression with
+three categories of predictors: short memory (I(0)) regressors, cointegrated local-to-unity persistent regressors, and non-
+cointegrated persistent regressors. Our focus is on variable selection. It is well known that in cross-sectional regressions,
+the adaptive LASSO (Alasso; Zou, 2006) enjoys variable selection consistency, which means that the estimated zeros exactly
+coincide with the true zero coefficients when the sample size is sufficiently large. The heterogeneous time series regressors
+challenge the conventional wisdom.
+
+    The main contribution of this paper is its study and refinement of Alasso in the time series context. As we consider
+a fixed number of regressors, we use OLS as Alasso's initial estimator. Alasso, with a proper choice of tuning parameter,
+consistently selects the non-cointegrating stationary and persistent variables, but it may over-select inactive cointegrating
+variables, where ``inactive'' means that these variables have zero regression coefficients, so they are excluded in the
+
+                                                                                                           
+
+true data-generating process (DGP). The convergence rate of the OLS estimator is n for the cointegrated variables,
+and the resulting Alasso penalty weight is too small to eliminate the true inactive cointegrated groups because each
+cointegrating time series behaves as a local unit root process. Nevertheless, as is formally stated in Theorem 3, with
+probability approaching one (wpa1), variables forming an inactive cointegrating group cannot all survive Alasso's selection.
+
+    This finding suggests a straightforward method of reclaiming the desirable oracle property: simply run a second-
+round Alasso on the variables selected by the first-round Alasso. As the first-round Alasso has broken the cointegration
+relationship between inactive cointegrating variables, the over-selected variables become non-cointegrated local-to-unity
+regressors in the second-round regression. In the post-selection OLS, the speed of convergence of these variables is boosted
+
+                   
+
+from the slow n rate to the fast n rate. Then, the second-round Alasso can successfully suppress all of the inactive
+coefficients wpa1. We call this post-selection Alasso procedure twin adaptive LASSO and abbreviate it as TAlasso.
+
+    TAlasso achieves the oracle property (Fan and Li, 2001), which implies that the rate of convergence is the same as the
+OLS when the relevant variables are known in advance and that the variable selection is consistent in the presence of
+a mixture of heterogeneous regressors. To the best of our knowledge, this paper is the first to establish these desirable
+properties in a nonstationary time series context. Note that the name TAlasso distinguishes it from the post-selection double
+LASSO (Belloni et al., 2014). Double LASSO is named for the double inclusion of selected variables in cross-sectional data
+to correct for LASSO's shrinkage bias in order to achieve uniform statistical inference. In contrast, our TAlasso features
+double exclusion in predictive regressions with mixed roots.
+
+    In developing asymptotic theory, we consider a linear process of time series innovations that encompasses a general
+ARMA structure arising in many practical applications, such as long-horizon return prediction. To focus on the distinctive
+feature of nonstationary time series, we adopt a simple asymptotic framework in which the number of regressors p is fixed
+and the number of time periods n passes to infinity. Our exploration in this paper is a stepping stone toward automated
+variable selection in high-dimensional predictive regressions.
+
+    We also explore the plain LASSO (Plasso henceforth; Tibshirani, 1996), the standardized LASSO (Slasso, in which the
+l1-penalty is multiplied by the sample standard deviation of each regressor) in the predictive regression with hetero-
+geneous regressors. We call the phenomenon variable screening effect whereby an estimator coerces some coefficients
+to exactly zero (Fan and Lv, 2008). We find that neither Plasso nor Slasso maintains variable screening and consistent
+coefficient estimation in all of the components simultaneously, as Plasso imposes equal penalty weight regardless of the
+nature of the regressor, whereas Slasso's penalty only changes according to the scale variation of individual regressors
+and ignores their connection via cointegration.
+
+    In Monte Carlo simulations, we use various DGPs to examine the finite sample performance of Alasso/TAlasso compared
+with Plasso/Slasso, assessing their mean squared prediction errors and variable selection success rates. TAlasso is much
+more capable in selecting the correct model, thus improving prediction accuracy. These LASSO methods are further
+evaluated in a real data application. We use the 12 predictors from Welch and Goyal (2008) to predict the S&P 500
+returns. These 12 predictors exemplify the necessity of considering the three types of heterogeneous regressors. Please
+see Section 6 for the details. Alasso and TAlasso attain better forecasting performance than their competitors and are
+robust in various estimation windows and prediction horizons.
+
+Literature review. Since the original LASSO paper by Tibshirani (1996) and the basis pursuit of Chen et al. (2001), a variety
+of important extensions of LASSO have been proposed, such as Alasso (Zou, 2006) and the elastic net (Zou and Hastie,
+2005). In econometrics, Caner (2009), Caner and Zhang (2014), Shi (2016), Su et al. (2016), and Kock and Tang (2019)
+use LASSO-type procedures in cross-sectional and panel data models. Belloni and Chernozhukov (2011), Belloni et al.
+
+                                                                                                        323
+J. Lee, Z. Shi and Z. Gao                                               Journal of Econometrics 229 (2022) 322­349
+
+(2012), Belloni et al. (2014), and Belloni et al. (2015) develop methodologies and inferential theories in a variety of
+microeconometric settings.
+
+    Ng (2013) surveys the variable selection methods in predictive regressions. Unlike the extensive literature on cross-
+sectional environments, the theoretical properties of shrinkage methods have received relatively little attention in time
+series models despite great empirical interest in macro and financial applications (Giannone et al., 2018; Gu et al., 2020;
+Chinco et al., 2019; Rapach et al., 2019; Freyberger et al., 2020). Medeiros and Mendes (2016) study Alasso in high-
+dimensional stationary time series, and Kock and Callot (2015) discuss LASSO in a vector autoregression (VAR) system. In
+time series forecasting, Inoue and Kilian (2008) apply various model selection and model averaging methods to forecast
+U.S. consumer price inflation. Sun et al. (2020) study model averaging methods under structural changes, and Hirano and
+Wright (2017) develop a local asymptotic framework with independently and identically distributed (iid) orthonormalized
+predictors to study the risk properties of several machine learning estimators. There are even fewer papers on LASSO with
+nonstationary data. Caner and Knight (2013) discuss the bridge estimator, a generalization of LASSO, for the augmented
+Dickey­Fuller test in autoregressions, and Kock (2016) studies Alasso under the same setup. Earlier works on variable
+selection in the I(1) case utilize the different stochastic limit of penalty functions with stochastically trending regressors,
+such as Phillips and Ploberger (1994) and Ng and Perron (2001). For example, the stochastic limit of penalty factors is
+different with integrated regressors compared with the stationary case (Ng and Perron, 2001, pp. 1529­1530).
+
+    In predictive regressions, Kostakis et al. (2014), Lee (2016), and Phillips and Lee (2013, 2016) provide inferential
+procedures in the presence of multiple predictors with various degrees of persistence. Xu (2018) studies variable selection
+and inference with possible cointegration between the I(1) predictors. In a vector error correction model (VECM), Liao
+and Phillips (2015) use Alasso for cointegration rank selection. Under a similar setting with high-dimensional I(0) and
+I(1) regressors and one cointegration group, Koo et al. (2020) investigate Plasso's variable estimation consistency and
+non-standard asymptotic distribution. We differ from Koo et al. (2020) in two aspects. (i) In an asymptotic framework
+that accommodates high-dimensional regressors, they focus on the rate of convergence of Plasso. In contrast, our focus
+is the oracle property in the mixed root model with three types of regressors. (ii) The unit root variables enter their
+model via the cointegrating groups only, so they do not deal with the balance of the predictive regression, whereas in
+our analysis, we allow local-to-unity persistent variables and local-to-zero small coefficients. Finally, Smeekes and Wijler
+(2018) demonstrate LASSO's numerical performance via simulations and empirical examples, while we are the first to
+systematically explore the theory concerning variable selection under mixed regressor persistence.
+
+Notation. We use standard notation. We define ·1 and · as the usual vector l1- and l2-norms, respectively. The arrows
+                   p
+  and  represent weak convergence and convergence in probability, respectively.  indicates ``of the same asymptotic
+
+order, '' and  signifies ``being distributed as'' either exactly or asymptotically, depending on the context. · is the floor
+function. a  b = min{a, b}. The symbols O (1) and o(1) (Op (1) and op(1)) denote (stochastically) asymptotically bounded
+or negligible quantities. For a generic set M, let |M| be its cardinality. For a generic vector  = (j)pj=1 with p  |M|, let
+M = (j)jM be the subvector of  associated with the index set M. Ip is the p × p identity matrix, 1p is a column of p
+ones, and I (·) is the indicator function.
+
+    The rest of this paper is organized as follows. Section 2 introduces unit root regressors into a simple LASSO framework
+to fix ideas of Alasso. This model is substantially generalized in Section 3 to include I(0), local-to-unity, and cointegrated
+regressors, and the asymptotic properties of Alasso and TAlasso are established. The mixed root model is carried over into
+Section 4 to explore the behaviors of Plasso and Slasso. The theoretical results are confirmed through a set of empirically
+motivated simulation designs in Section 5. Finally, we examine stock return predictions via these LASSO methods in
+Section 6.
+
+2. Adaptive LASSO with unit roots
+
+    In this section, we study LASSO with p unit root regressors. To fix ideas, we investigate the asymptotic behavior of
+Alasso under a simple nonstationary regression model to better understand the technical issues arising from nonstationary
+predictors. Section 3 generalizes the model to include the I(0), (local) unit roots, and cointegrated predictors.
+
+2.1. Model
+
+Assume that the dependent variable yi is generated from a linear model
+
+            p
+
+            
+yi = xijjn + ui = xi·n + ui, i = 1, . . . , n,
+                                                                        (1)
+
+            j=1
+
+where n is the sample size. The p × 1 true coefficient is n = (jn = j0/nj )pj=1, where j0  R is a fixed constant
+
+independent of the sample size and j  (0, 1) is the local-to-zero rate, following Phillips and Lee (2013) and Timmermann
+and Zhu (2017). If j0 = 0, then jn remains zero regardless of the sample size; if j0 = 0, then it varies with n. This type
+
+of local-to-zero coefficient is designed to balance the I(0)­I(1) relation between the stock return and unit root predictors,
+
+                                                324
+J. Lee, Z. Shi and Z. Gao                                                                                              Journal of Econometrics 229 (2022) 322­349
+
+and to model the weak SNR in predictive regressions (Phillips, 2015). The 1 × p regressor vector xi· = (xi1, . . . , xip) follows
+
+a pure unit root process
+
+                                        i
+
+                                            ek·,
+
+xi· = x(i-1)· + ei· =                                                                                                                                                  (2)
+
+                                    k=1
+
+where ek· = (ek1, . . . , ekp) is the innovation. For simplicity, we assume the initial value e0· = 0. We use the following iid
+
+assumption on the innovations.
+
+Assumption 1. The innovations ei· and ui are generated from
+
+(ei·, ui)  iid (0, ) ,
+
+where    =    (ee          eu)          is  positive-definite.
+                eu         u2
+
+The regression equation (1) can be equivalently written as
+
+            p
+
+            
+y = xjjn + u = X n + u,
+                                                                                                                                                                       (3)
+
+            j=1
+
+where y = (y1, . . . , yn) is the n × 1 response vector, u = (u1, . . . , un), xj = (x1j, . . . , xnj), and X = (x1, . . . , xp) is the
+n × p predictor matrix. This pure I(1) regressor model in (3) is a direct extension of the common predictive regression
+
+application with a single unit root predictor (e.g., DP ratio). The mixed roots case in Section 3 has multiple predictors and
+
+is more realistic in practice.
+
+The literature focuses on the non-standard statistical inference caused by persistent regressors and weak signals. The
+
+asymptotic theory is usually confined to a small number of candidate predictors. Following the literature on predictive
+
+regressions, we consider the asymptotic framework in which p is fixed and the sample size n  . This simple asymptotic
+
+framework allows us to concentrate on the contrast between the standard iid setting and the predictive regression
+
+involving nonstationary regressors.
+
+   In this model, the unknown coefficients n can be obtained from the data by running OLS
+
+^ ols       =  arg min     y      -     X      2  ,
+
+                                             
+
+                       
+
+whose asymptotic behavior is well understood (Phillips, 1987). Assumption 1 implies the following functional central
+limit theorem:
+
+        1   nr   (ek ·)             (Be (r ))                    ( )  .
+
+                   uk                 Bu (r )
+
+         n                                                   BM                                                                                                        (4)
+
+            k=1
+
+To represent the asymptotic distribution of the OLS estimator,                               define    ui+  =  ui   -  eu e-e 1 ei· ,  and  then  n-1/2  nr       u+i  
+
+Bu+ (r). By definition, cov (eij, ui+) = 0 for all j so that                                                                                                 i=1
+
+       Xu                  1                                 1
+        n
+              := Be(r)dBu+ (r) + Be(r)eue-e1dBe(r),
+
+                               0                                 0
+
+which is the sum of a (mixed) normal random vector and a non-standard random vector. The OLS limit distribution is
+
+  (                    )          ( X X     )-1      Xu
+n ^ ols             n                                 n
+                -          =         n2                       -1 ,                                                                                                     (5)
+
+where       :=   1     Be  (r  )Be  (r  )dr  .  This    result      implies  that  when      we   inflate   ^ jols  by the factor nj        so that its magnitude is
+
+                   0
+comparable to the constant j0, we attain consistency in that
+
+nj       (     ols        )         nj ^jols            j0   = Op(nj-1)         op (1)  for  all  j    p.
+          ^j           jn
+                    -          =                  -                          =                       
+
+   Even if j0 = 0, when j is close to 1, the signal of xj is weak, and therefore the rate of convergence is slow. However,
+some true coefficients j0 in (3) could be exactly zero, where the associated predictors would be redundant (inactive)
+in the regression. Let M = {j : j0 = 0} be the index set of regressors relevant to the regression, p = |M|, and
+Mc = {1, . . . , p} \M be the set of redundant regressors. For simplicity, we refer to M as the active set, meaning that it
+
+plays an active role in the regression, and we call Mc the inactive set. If we had knowledge about M, ideally, we would
+
+estimate the unknown parameters by OLS in the active set M only. Define ^ora = (^Mora, ^Morac ), where
+
+^Mora                                                j    2
+
+            =   arg min        y  -             xj      
+
+                                        jM 
+
+                                                                                        325
+J. Lee, Z. Shi and Z. Gao                                                                                             Journal of Econometrics 229 (2022) 322­349
+
+and ^Morac = 0. We call ^ora the oracle estimator, which is based on the infeasible ``oracle'' information of M. Eq. (5)
+
+implies that its asymptotic distribution is
+
+       (                    )
+       n ^ ora - n M  M-1M ,
+
+where  M        is     the  p   ×  p    submatrix       (jj  )     M     and  M  is  the  p  ×1  subvector        (j  )      .
+
+                                                              j,j                                                      jM
+
+2.2. Adaptive LASSO
+
+    We study the asymptotic behavior of Alasso in predictive regressions with these pure unit root regressors. Alasso for
+(1) is defined as
+
+                            {                           p          }
+
+       ^ A = arg min                           2     n       ^j|j|    ,
+
+                                y    -  X         +                                                                                                                    (6)
+
+                                                        j=1
+
+where  the weight           ^j  =  |^ jinit   -   for  some  initial estimator ^jinit,    and n  and         are  the two tuning parameters.       In practice,
+
+                                             |
+
+ is often fixed at either 1 or 2, and n is selected as the primary tuning parameter. Thus, we discuss the case of a fixed
+  1 and the initial estimator ^init = ^ols because of the fixed p setting.
+
+    Alasso enjoys the oracle property in regressions with weakly dependent regressors (Medeiros and Mendes, 2016). The
+
+following Theorem 1 confirms that Alasso maintains the oracle property in regressions with unit root regressors. Let
+
+M^A = {j : ^jA = 0} be Alasso's estimated active set, and ¯ = max{(j)pj=1} be the fastest speed such that jn shrinks to 0.
+
+Theorem 1. Suppose that the linear model (1) satisfies Assumption 1. If the tuning parameters n and  are chosen such that
+
+        n               1   0                                                                                                                                          (7)
+
+       n1-¯         + n
+
+and ¯ < 1, then
+
+    (a) Variable selection consistency: P(M^A = M)  1.
+    (b) Asymptotic distribution: n(^ A - n)M  M-1M .
+
+    As shown in Theorem 1(a), the estimated active set M^A coincides with the true active set M wpa1; in other words,
+
+^jA = 0 if j  M and ^jA = 0 if j  Mc . (b) indicates that Alasso's asymptotic distribution in the true active set is as if the
+
+oracle M is known. In this nonstationary regression, Alasso's adaptiveness is maintained through the proper choice of
+                 -
+^j  =  |^ jols      .  When     the  true coefficient        is nonzero,  ^j  delivers    a  penalty  of  a  negligible    order n/n1-j    0, recovering
+                |
+
+the OLS limit theory. When the true coefficient is zero, ^j imposes a heavier penalty of the order n/n1-  , thereby
+
+achieving consistent variable selection. The intuition in Zou (2006, Remark 2) under deterministic design is generalized
+
+in our proof of the setting with nonstationary regressors.
+
+    Both ¯ and  appear in the rate condition (7) for generality. In practice, because ¯ is an unknown feature of the DGP and
+
+ can be controlled by the user, we recommend setting  = 1, which simplifies (7) as n/n1-¯ +1/n  0. A conservative
+choice of n diverging more slowly than polynomial orders of n, say, n  log log n, satisfies the above condition for all
+¯ > 0. The practical choice of the tuning parameter in the numerical simulations and the empirical application will be
+
+discussed in the corresponding sections.
+
+3. Adaptive LASSO with mixed roots
+
+    In practice, we often encounter a multitude of candidate predictors that exhibit various dynamic patterns. Some
+are stationary, whereas others can be highly persistent and/or cointegrated. In this section, we discuss the theoretical
+properties of Alasso under a mixed persistence environment. We extend the model in Section 2 to accommodate I(0) and
+(local) unit root regressors, with possible cointegration in the latter. The theory in this section provides general guidance
+for multivariate predictive regressions.
+
+3.1. Model
+
+    We introduce three               types of predictors into the model. A 1 × pc cointegrated system                           xci· =   (xic1, .  ..,  (xxcip1cci·),  has
+cointegration rank p1, so            that p2 = pc - p1 is the number of local unit roots in this cointegration                                     =                   x2c i·)
+                                                                                                                                system.  Let xic·
+
+admit a triangular representation
+
+       x1ci· - A1 x2ci· = v1 i· ,                                                                                                                                      (8)
+
+       p1×1 p1×p2p2×1 p1×1
+
+       (Ip2 - R2L)xc2i· = v2 i·,
+
+                                                                                 326
+J. Lee, Z. Shi and Z. Gao                                                                        Journal of Econometrics 229 (2022) 322­349
+
+where R2 = Ip2 + c2/n with c2 = diag (c1, . . . , cp2 ), L is the lag operator, and the vector v1i· is the cointegrating residual,
+whose initialization is an Op(1) stationary variable. Each local-to-unity parameter cl is finite, thus including both stationary
+
+and nonstationary local unit root regions. This local-to-unity specification includes the unit root process as a special case
+
+when cl = 0. The triangular representation (Phillips, 1991; Elliott, 1998) is a convenient and general form of cointegrated
+
+systems. Xu (2018) also adopts this structure in predictive regressions.
+
+    Assume that yi is generated from the linear model
+
+               pz                p1            px
+
+                    zill +           v1il1l +       xill + ui = zi· + v1i·1 + xi· + ui.
+
+        yi =                                                                                                                                (9)
+
+               l=1             l=1             l=1
+
+Each time series zl = (z1l, . . . , znl) is a stationary regressor. Each xl = (x1l, . . . , xnl) is a local-to-unity process (initialized
+from Op(1) stationary process) such that xi· = (xi1, . . . , xipx ) satisfies (Ipx - RxL)xi· = ei·, where Rx = Ipx + cx/n with
+cx = diag (c~1, . . . , c~px ) for finite c~l.
+
+   Eq. (9) is infeasible because the cointegrating residual v1i· is unobservable without a priori knowledge about the
+
+cointegration relationship. What we observe is the vector xic· that contains cointegration groups. Substituting (8) into
+(9), we obtain a feasible regression equation
+
+        yi = zi· + x1c i·1 + xc2i·2 + xi· + ui = zi· + xic· + xi· + ui,                                                                     (10)
+
+where 2 = -A11 and  = (1, 2). Stacking the sample of n observations, the infeasible and feasible regressions
+
+can be written as
+
+        y = Z  + V11 + X  + u                                                                                                               (11)
+
+        = Z  + X1c 1 + X2c 2 + X  + u
+
+        = Z  + X c  + X  + u,                                                                                                               (12)
+
+where the variable V1 is the n × p1 matrix that stacks (v1i·)in=1, and X1c , X2c , X c , Z , and X are defined similarly. We
+explicitly define  = 0 and  = 0 as two coefficients independent of the sample size, which are associated
+
+with Z and X c , respectively. As in Section 2, the coefficients associated with X are specified as local-to-zero sequences
+
+ = n = (l0/nj )pl=x 1, where l0 is invariant to the sample size.
+
+    We assume a linear process for the innovation and cointegrating residual vectors. In contrast to the simplistic iid
+
+assumption in Section 2, the linear process assumption is fairly general, including as special cases many practical
+
+dependent processes such as the stationary autoregressive and moving average processes. Let vi· = (v1i·, v2i·) and
+p = pz + pc + px.
+
+Assumption 2 (Linear Process). The vector of stacked innovation and stationary predictors follows the linear process:
+
+                                                       
+
+                                                     
+            i := (zi·, vi·, ei·, ui) = F (L)i = Fki-k,
+
+        (p+1)×1                                        k=0
+
+                        i(·z)                                                
+
+                                                         zz zv ze 0
+
+                        i(·v)                          zv      vv   ve       
+                                       iid 0,                  v e  ee   0 ,
+where     i         =   i(·e)                       =                          F0  =     Ip+1 ,           k  Fk    <  ,  F (x)  =           Fk xk
+                                          
+        (p+1)×1                                          ze              eu                          k=0                               k=0
+                                                                             
+
+                           i(u)                             0  0 eu uu
+
+and  F (1)  =           Fk  >    0.
+
+                   k=0
+
+Remark 1. Following the cointegration and predictive regression literature, we allow the correlation between the inno-
+
+vation of the regression error i(u) and the innovation of nonstationary predictors i(e). However, to ensure identification,
+we rule out the correlation between i(u) and the innovation of the stationary or cointegrated predictors.
+
+3.2. OLS
+
+    As Alasso attaches a penalty term to the OLS criterion function, we first study the asymptotic distribution of the OLS
+estimator
+
+        ^ ols = (W W )-1W y
+
+under the mixed roots, where W = (Z , X c , X ) is the observed predictor matrix. To state the result, we define the true coef-
+ficients n = (0, 10, 20, n), where 20 = -A110, a diagonal normalizing matrix Rn = diag ((n1p z +p1 , n1p 2+px )),
+                                     Ipz 0 0 0 
+
+and  a  rotation    matrix  Q    =     0    Ip1 0        0  .
+                                       0    A1 Ip2       0  
+
+                                       0 0 0 Ipx
+
+                                                                    327
+J. Lee, Z. Shi and Z. Gao                                                                                                    Journal of Econometrics 229 (2022) 322­349
+
+Theorem 2. If the linear model (10) satisfies Assumption 2, then
+
+                                    n(ols                    
+                                        ^
+                                                 -  0)
+
+     RnQ   (^ ols     n)            n(^1ols      -  10    )       (+)-1  +.                                                                                          (13)
+                                                 +           
+
+                   -           =                             
+
+                                  n(A1^1ols         ^2ols  )
+                                                           
+
+                                      n(^ols - n)
+
+where + is the weak limit of Rn-1Q -1W WQ -1Rn-1 and  + is the weak limit of R-n 1Q -1W u, whose explicit expressions are
+
+spelled out in (A.14) and (A.15) in Appendix A.2, respectively.
+
+Remark 2. To see the effect of rotation matrix Q , note that the definitions of + and  + include the transformation
+
+Q -1W = (Z +, X +), where Z + = (Z , V1) is the ``extended'' stationary regressors and X + = (X2c , X ) is the ``extended''
+                                                                                                           Q -1                                       (Z              )
+nonstationary  regressors.          The  feasible     regressors       in    W   are     mapped        by        into   the  infeasible  regressors         +  ,  X      in
+                                                                                                                                                                     +
+
+which the stationary and nonstationary components are separated. Then, the scaling factor R-n 1 sends the building blocks
+
+of the regression analysis to their respective asymptotic weak limits as n  , in which + is the weak limit of the
+
+Gram matrix and  + is the weak limit of the empirical process.
+
+Remark 3. Because we keep an agnostic view about the identities of the stationary, local unit root, and cointegrated
+
+regressors, Theorem 2 is not useful for statistical inference, as we do not know which coefficients converge at the
+
+          and  which       at  the  n-rate.   (13)   shows       that  with      the  help    of  the  rotation     Q,  the  estimators  ^1ols  and  ^2ols  are   tightly
+  n-rate
+
+connected  in  the  sense      that   A1^1ols +^2ols  =      Op  (n-1).    Without       the  rotation     that is  unknown  in  practice,  the  OLS  components
+
+                                                                                                              
+associated with the stationary and cointegration systems converge at the n rate, whereas only those associated with
+                                                                                                                  
+the  non-cointegration         local  unit    roots  converge          at  the   n  rate.  Let    Rnf  =   diag(( n1p-px , n1p x ))  be  the    normalizing       matrix
+
+for the feasible components; then,
+
+     Rfn (^ ols - n)              (      Rfn Q          )    ( + )-1         +,
+
+                                    lim          -1R-n 1
+
+                                    n
+
+or, more explicitly,
+
+     n(^ols                                                            
+                           0)
+                   -                          Ipz 0 0 0
+
+     n(^1ols - 10)                            0      Ip1 0          0  
+                                         
+                                                    -A1 0                    (   +  )-1    +  .                                                                      (14)
+                                                                       
+     n(^2ols                         
+
+                   -       20  )         0                          0
+                                                                      
+
+          n(^ols - n)                         0      0 0 Ipx
+
+Although each variable in the cointegration system appears as a local-to-unity process, as a group they are extremely
+
+                                                                    
+
+comoving, reducing their rate of convergence from n to n. This effect is analogous to the deterioration of the convergence
+rate of the OLS estimator for nearly perfectly collinear regressors.
+
+3.3. Adaptive LASSO
+
+Similar to Section 2.2, Alasso for model (12) is estimated as
+
+                           {                          p          }
+
+     ^ A = arg min                         2     n           ^j|j|  ,
+
+                              y  -  W         +                                                                                                                      (15)
+
+                                                     j=1
+
+where ^j = |^jols|- . The literature on Alasso has established the oracle property in many models. Caner and Knight (2013)
+
+and Kock (2016) study Alasso's rate adaptiveness in a pure autoregressive setting with iid error processes. In their cases,
+the potential nonstationary regressor is the first-order lagged dependent variable, and the other regressors are stationary.
+Therefore, the components of different convergence rates are known in advance. We complement this line of nonstationary
+LASSO literature by allowing a general regression framework with mixed degrees of persistence. We also generalize the
+error processes to the commonly used dependent processes, which is important in practice. For example, the long-horizon
+return regression in Section 6 requires this type of dependence in its error structure because of the overlapping return
+construction.
+
+    Surprisingly, Theorem 3 shows that in the mixed root model, Alasso's oracle property holds partially, but not for all
+regressors. To discuss variable selection in this context, we introduce the following notations. We partition the index
+
+set of all regressors M = {1, . . . , p} into four components: I0 (I(0) variables associated with Z ), C1 (associated with
+X1c ), C2 (associated with X2c ), and I1 (nonstationary variables associated with X ). Let C = C1  C2 and I = I0  I1.
+Let M = {j : j0 = 0} be the true active set for the feasible representation, and let M^A = {j : ^jA = 0} be Alasso's
+estimated active set. Next, let MQ = I  C1 be the set of coordinates that are invariant to the rotation in Q . Similarly, let
+
+                                                                                      328
+J. Lee, Z. Shi and Z. Gao                                                                            Journal of Econometrics 229 (2022) 322­349
+
+                                  Table 1
+                                  Diagram of a cointegrating system in predictors.
+
+                                  (10, 20) a b 0                       0    0    f    g 0       0    coint.
+
+                                  (C1, C2)            xac  xbc    xcc  xcd  xec  xcf  xcg  xch  xqc  resid. 10
+
+                                                      1    0      0 0 0 fa            ga 0      0    va      a
+
+                                                      0 1 0000                        gb 0      0    vb      b
+
+                                  (Ip1 , -A1) 0            0      1000                0    hc 0      vc      0
+
+                                                      0    0      0 1 0 fd            0    hd qd vd          0
+
+                                                      0 0 0010                        ge 0      0    ve      0
+
+                                  Note: The diagram represents a cointegration system of 9 variables xac , xbc , . . . of cointe-
+                                  grating rank 5. The last column represents the coefficients in 10, with  as a nonzero
+                                  entry. In the matrix -A1 ,  is nonzero, and the coefficients in gray cells are irrelevant
+                                  to the value 20 = -A110 no matter zero or nonzero. The first row displays the
+                                  coefficients 10 (the same as in the last column, with  for non-zeros) and 20 ( for
+                                  non-zeros). In this example, (xac , xbc , xfc , xcg ) are in the active set M. There are two active
+
+                                  cointegration groups, (xac , xfc , xgc ) and (xbc , xgc ), and three inactive cointegration groups,
+
+                                  (xcc , xch), (xdc , xfc , xgc , xcq), and (xce , xcg ).
+
+MQ = M  MQ be the active set in the infeasible regression equation (9), and let MQc = M\MQ be the corresponding
+
+inactive set. The DGP (11) obviously implies C2  MQ =  and C2  MQc . For a generic index set M  M, let CoRk (M) be
+
+the cointegration rank of the variables in M.
+
+Theorem 3. Suppose that the linear model (10) satisfies Assumption 2 and that for all of the coefficients in the set C2, we
+have
+
+                           p1
+
+20l = 0                        A1sj  10s          0.
+                                            
+            if                                =                                                                                        (16)
+
+                s=1
+
+If the tuning parameters n and  are chosen such that
+
+     n          +              1         0                                                                                             (17)
+n(1-¯ )0.5
+                               n
+
+and ¯ < 1, then we have the following results:
+
+(a) Consistency and asymptotic distribution:
+
+(RnQ (^ A - n))MQ  (M+Q )-1M+Q                                                                                                         (18)
+                                                                                                                                       (19)
+(RnQ (^ A                      - n))MQc        p   0.
+
+                                              
+
+(b) Partial variable selection consistency:
+
+                P          (M         I  =    M^A       )     1,                                                                       (20)
+
+                                                       I
+
+         P  ((M                    )        (M^A      C))     1,                                                                       (21)
+
+                                  C
+
+P (CoRk(M) = CoRk(M^A))  1.                                                                                                            (22)
+
+Remark 4. Condition (16) is an extra assumption that rules out the pathological case that some nonzero elements in
+
+A1s10s, s = 1, . . . , p1, happen to exactly cancel out one another and render 20l inactive. In other words, it ensures that if
+
+an xlc is involved in more than one active cointegration group, it must be active in (10). This condition holds in general, as
+
+it is violated only under very specific configurations of 10 and A1. For instance, in the demonstrative example in Table 1,
+the condition breaks down if xcg 's true coefficient ga × a + gb × b = 0.
+
+    Were we informed of the oracle about the true active variables in M and the cointegration matrix A1, we would
+transform the cointegrated variables into cointegrating residuals, discard the inactive variables, and then run OLS. Ideally,
+we would conduct an estimation with variables in MQ only. Such an oracle OLS shares the same asymptotic distribution
+as its Alasso counterpart in (18). Outside of the active set MQ , (19) shows that all of the other (transformed) variables in
+MQc consistently converge to zero.
+
+    The variable selection results in Theorem 3 are novel and interesting. (20) shows that variable selection is consistent for
+the pure I(0) and local unit root variables, which is in line with the well-known oracle property of Alasso. However, instead
+
+of confirming the oracle property, (21) indicates that in the cointegration set C, the selected M^A asymptotically contains
+
+the true active variables in M but Alasso may over-select inactive variables. The inconsistency stems from the mismatch
+
+                                                                                                        329
+J. Lee, Z. Shi and Z. Gao                                                                                                 Journal of Econometrics 229 (2022) 322­349
+
+between the convergence rate of the initial estimator and the marginal behavior of a cointegrated variable viewed in
+
+isolation. Consider a pair of inactive cointegrating variables, such as (xcc , xhc ) in Table 1. The unknown cointegration
+                                                                                                                  vc .
+relationship      precludes              transforming        this    pair  into   the    cointegrating  residual        Without  the  rotation,  OLS  associated  with
+
+                                                  
+the pair can only achieve the n rate according to (14). The resulting penalty weights are insufficient to remove these
+
+variables that individually appear as nonstationary. In consequence, Alasso fails to eliminate both xcc and xhc wpa1. To the
+
+best of our knowledge, this is the first case of Alasso's variable selection inconsistency in an important empirical model.
+
+    Under condition (16) all variables in the active cointegration groups have nonzero coefficients, and Alasso selects
+
+them asymptotically according to (21). Despite potential variable over-selection in C, (22) brings relief: in the limit, the
+
+cointegration rank in Alasso's selected set, CoRk(M^A), must equal the active cointegration rank CoRk(M). Note that under
+
+our agnostic perspective, we do not need to know or use testing procedures to determine the value of CoRk(M). Let
+
+C c = Mc C be the index set of the inactive variables in C. (21) implies that the variables in C c M^A--Alasso's mistakenly
+selected inactive variables--cannot form cointegration groups. In mathematical expression, P (CoRk (C c  M^A) = 0)  1.
+
+Example 1. Let us again take (xcc , xch) in Table 1 as an example. (22) indicates that Alasso is at least partially effective
+in that it prevents the inactive xcc and xhc from entering M^A simultaneously, as it kills at least one variable in the pair
+to break the cointegration relationship. The intuition is as follows. Suppose that (xcc , xhc ) are both selected. Because of
+
+coefficient estimation consistency, in the predictive regression these two variables together behave like the cointegrating
+
+residual vc , which is an I(0). In the limit Alasso will not tolerate this inactive vc , because these coefficients associated
+with the underlying xc and xh are subject to a penalty weight ^j = 1/Op (n-1/2), which is of the same order as the pure
+I(0) variables. Recall that Alasso removes all inactive pure I(0) variables when n   under the same level of penalty
+
+weight.
+
+Example 2. Similar reasoning applies in another inactive cointegration group (xec,, xgc ). In the regression, xce is inactive
+but xcg is active, as it is involved in the active cointegration groups (xca, xfc , xcg ) and (xcb, xgc ). Clearly xcg is selected wpa1, but
+
+let us suppose that xec is also selected. If so, xec 's contribution to the predictive regression would be equivalent to the I(0)
+
+cointegrating residual ve. Its corresponding penalty is of the order 1/Op (n-1/2), which is sufficient to remove the inactive
+ve. Therefore, xe cannot survive Alasso's variable selection.
+
+    The intuition gleaned in these examples can be generalized to cointegration relationships involving more than two
+variables and multiple cointegrated groups. The proof of Theorem 3 formalizes this argument by inspecting a linear
+combination of the corresponding Karush­Kuhn­Tucker (KKT) condition for the selected variables.
+
+    In the literature, Alasso achieved the oracle property in a single implementation, so there was no need to run it twice.
+In our predictive regression with mixed roots, it is possible that a single run of Alasso over-selects inactive variables in
+the cointegration system. Given that the cointegrating ties are all shattered wpa1 in (22), further action can help fulfill
+the oracle property.
+
+3.4. Twin adaptive LASSO
+
+    When the sample size is sufficiently large, with high probability, the mistakenly selected inactive variables have no
+
+cointegration relationship, so they behave as isolated local-to-unity processes in the post-selection regression equation
+
+of  y  on  (wj  )      ,   where         wj   =    (w1j, . . .    , wnj)   is  the  jth  time  series  regressors.  This  observation  suggests  the  need  to  run  a
+
+                 jM^A
+
+post-selection Alasso. We first obtain the post-Alasso initial OLS estimator
+
+       ^ po       (W          WM^A       )-1  W         y.
+
+               =       M^  A                     M^  A
+
+The post-selection OLS estimator ^jpo = Op (n-1) for the over-selected inactive cointegrated variables j  C c  M^A,
+rather than Op (n-1/2), as for the first-around initial ^jols. The resulting post-selection penalty level ^jpo = |^jpo|- is
+
+sufficiently heavy to wipe out these redundant variables in another round of Alasso. We call this procedure TAlasso,
+
+                          (                        )
+
+for which ^ TA =              ^M^TAA  ,  ^ TA   A       ,  where  ^ TA     A   =  0  and
+
+                                          M\M^                     M\M^
+
+                              {                                                          }
+
+       ^M^TAA                                           wjj    2     n         ^jpo|j|    .
+
+               =  arg min             y  -                        +                                                                                               (23)
+
+                                              jM^A                      jM^A
+
+TAlasso asymptotically reclaims variable selection consistency for all types of variables. Let M^TA be the active set for
+
+TAlasso.
+
+Theorem 4. Under the same assumptions and the same rate for n as in Theorem 3, the estimator ^ TA satisfies
+
+   (a) Asymptotic distribution: (RnQ (^ TA - n))MQ  (M+Q )-1M+Q ;
+   (b) Variable selection consistency: P(M^TA = M)  1.
+
+                                                                                               330
+J. Lee, Z. Shi and Z. Gao                                                                                                          Journal of Econometrics 229 (2022) 322­349
+
+    Faced with a variety of potential predictors with unknown orders of integration, we may not be able to sort them into
+different persistence categories in predictive regressions without potential testing errors (Smeekes and Wijler, 2020). Our
+research provides a valuable practical algorithm to address this problem. TAlasso is the first estimator that achieves the
+desirable oracle property without requiring prior knowledge on the persistence of multivariate regressors. Despite the
+intensive study of LASSO in recent years, Theorems 3 and 4 are novel and important. With the cointegration system
+in the predictors, the former shows that Alasso does not automatically adapt to the behavior of a system of regressors.
+Nevertheless, it at least breaks all redundant cointegration groups so that its defects can be easily addressed by another
+round of Alasso. This solution echoes the repeated implementation of a machine learning procedure as in Phillips and Shi
+(2021).
+
+4. Conventional LASSO with mixed roots
+
+    Originally, LASSO was proposed as a plain l1-penalized regression without a sophisticated weighting scheme, motivated
+by the optimization problem's variable screening effect: some coefficients are estimated as exactly zeros in finite samples
+under a wide range of the tuning parameter (Tibshirani, 1996). As mentioned in the introduction, in this paper, we call
+this original estimator
+
+         ^ P  =  arg min     {y     -  W      2  +   n        }                                                                                                     (24)
+                                                            1
+                                            
+
+Plasso. However, Plasso is scale-variant in the sense that if we change the unit of wj by multiplying it by a nonzero constant
+
+c, such a change is not reflected in the penalty term in (24), so the Plasso estimator does not change proportionally to
+
+^jP/c. To keep the estimation scale-invariant to the choice of the unit of xj, researchers often scale-standardize LASSO as
+
+                             {                           p            }
+
+         ^ S = arg min                        2      n        ^j  j      .
+                                                                      
+                             y      -  W         +                                                                                                                  (25)
+
+                                                         j=1
+
+                                             w¯ j)2
+
+where ^j =         n-1   n          (wij  -          is  the  sample        standard  deviation    of  wj  and        w¯ j  is  the  sample  average.  In  this  paper,  we
+
+                             i=1
+
+call (25) Slasso. Such standardization is the default option for LASSO in many statistical packages, such as the R package
+
+glmnet. Note that Alasso is also scale-invariant with ^ init = ^ ols and  = 1.
+                                                                                                      p
+Both          Plasso  and    Slasso    are   special     cases    of  min   {y  -     X      2  +  n           ^j  |j  |},  where    the  former  uses  ^j  =    1  and  the
+                                                                                                          j=1
+                                                                                           2
+latter specifies ^j = ^j. When Slasso's scale standardization is carried out with stationary and weakly dependent regressors,
+
+each ^j2 converges in probability to its finite population variance. In the literature, the difference between the asymptotic
+
+properties of Plasso and Slasso are not of interest because Slasso uses another set of constant configurations for the penalty
+
+levels.
+
+In sharp contrast, for those wj associated with C  I1 that are individually nonstationary, by (4), we have
+
+                   
+
+         ^j           1      n         - w¯ j)2       dj,                                                                                                           (26)
+                   
+                            (wij
+           n    =  
+
+                      n2     i=1
+
+where dj is a non-degenerate                 random variable (whose expression can be found in the proof of Corollary 2), so that                                        the
+                                                                                                                                                                         the
+sample standard deviation ^j                 = Op (n) diverges in the limit. As a result, it imposes a much heavier penalty on
+
+associated coefficients than the stationary time series does.
+
+Adopting a standard argument for LASSO as in Knight and Fu (2000), we derive the following results characterizing
+
+Plasso's asymptotic behavior with various choices of n. For exposition, we define a function D : R3  R as D (s, v, b) =
+s [v · sgn(b)I(b = 0) + |v|I(b = 0)], where sgn(b) = I(b > 0) - I(b < 0) is the sign function.
+
+Corollary 1. Suppose that the linear model (10) satisfies Assumption 2.
+
+(a)      If  n          and                      0,  then   RnQ (^ P - n)    (+)-1  +.
+                                  n/ n
+
+(b) If n/ n  c  (0, ), then
+
+                                                                 {                                                              }
+
+                 RnQ (^ P - n)                                    v+v - 2v + + c                       D (1, vj, j0)            .
+
+                                                     arg min
+
+                                                              v                                 jI0 C
+
+           
+(c) If n/ n   and n/n  0, then
+
+                   1                                                 {                                         }
+
+                   n         (^  P     n)                               v+v +              D (1, vj, j0)           .
+
+                      RnQ           -                    arg min
+
+                                                                  v             jI0 C
+
+    In Corollary 1(a), the tuning parameter is small and the limit distribution of Plasso is equivalent to that of OLS, so
+there is no variable screening effect. Similar to Plasso in the cross-sectional setting, there is no guarantee of consistent
+
+                                                                                      331
+J. Lee, Z. Shi and Z. Gao                                                                                   Journal of Econometrics 229 (2022) 322­349
+
+variable  selection.       The   screening  effect  occurs  when    the   tuning     parameter  n  becomes  larger.   In   view  of  the  OLS  rate  of
+
+                                                                                                                      
+convergence in (14), we can call those j associated with I0  C the slow coefficients (at rate n) and those associated
+
+with I1 the fast coefficients (at rate n). When n is raised to the magnitude in (b), the term D(1, vj, j0) causes variable
+screening among the slow coefficients but not the fast coefficients. If we further increase n to the level of (c), then the
+
+convergence rate of the slow coefficients is dragged down by the large penalty, but there is still no variable screening
+
+effect for the fast coefficients. The local-to-zero coefficient l for those in I1 plays no role in these asymptotic results
+
+because ^l converges to ln at the fast rate n regardless of l.
+
+    Corollary 1 reveals a major drawback of Plasso in the mixed root model. Because it has one uniform penalty level
+
+for all variables, it is not adaptive to these various types of predictors. To induce variable screening in ^IP1 , the tuning
+parameter must be ballooned to /n  c  (0, ], but the consistency of the slow coefficients would collapse under
+such a disproportionately heavy n.
+
+Remark 5. When nonstationary regressors are present, the results in Zou (2006, Section 2) are no longer applicable.
+
+Consider the simple case W = X such that all of the regressors are non-cointegrating local unit roots. Recall that the
+
+random matrix , defined in the line following (5), is the weak limit of n-2X X . Corollary 1(c) implies that in this case,
+                                                           p
+the  limiting  distribution      of  arg  minv  {v   v  +           D(1,  vj,  j0)}  is  non-degenerate  because  of  the  randomness     of  .  This
+                                                               j=1
+
+differs from Lemma 3 of Zou (2006), in which the Plasso estimator degenerates to a constant. The distinction arises because
+
+in our context  is random, whereas in Zou's (2006) iid setting the counterpart of  degenerates to a non-random matrix.
+
+    We now turn to Slasso. Unlike the behavior of the slow coefficients in Plasso, the penalty scheme of Slasso makes the
+
+cointegration components in ^ S susceptible to variable screening at much smaller scales of the tuning parameter.
+
+Corollary 2. Suppose that the linear model (10) satisfies Assumption 2.
+
+(a) If n  0, then RnQ (^ S - n)  (+)-1  +.
+(b) If n  c  (0, ), then
+
+                                                        {                                          }
+
+               RnQ (^ S - n)                arg min        v+v - 2v + + c  D (dj, vj, j0)                .
+
+                                                     v                               jC
+
+                                 
+(c) When n   and n/ n  0, then
+
+               1                                            {                            }
+
+               n  RnQ      (^ S  -  n)          arg min     v+v +  D (dj, vj, j0)               .
+
+                                                         v                jC
+
+                                                                          
+Remark 6. The tuning parameter n in Corollary 2 is an n order smaller than that in Corollary 1. Part(a) produces
+
+the same asymptotic distribution as OLS. The distinction of Plasso and Slasso arises from the coefficients in the set C.
+
+Their corresponding penalty terms have the multipliers ^j = Op (n) rather than the desirable Op (1) that is suitable
+
+for their slow convergence rate under OLS. In other words, the penalty level is overly heavy for these parameters. The
+
+overwhelming penalty level causes a variable screening effect in (b) as soon as n  c  (0, ). While the first
+argument of D(·, vj, j0) in Plasso is 1, it is replaced in Slasso by the random variable dj, which introduces an extra
+source of uncertainty in variable screening. Moreover, (c) implies that for the consistency of ^S, the tuning parameter
+
+                                                     
+n must be small enough in the sense n/ n  0; otherwise, they will be inconsistent. In both (b) and (c) the penalty
+term D(dj, vj, j0) screens those variables in C only. Again, the local-to-zero coefficient l for those in I1 are irrelevant
+
+asymptotically.
+
+    To summarize this section, neither Plasso nor Slasso induces consistent parameter estimation and variable screening
+
+effect simultaneously for all components of the mixed regressors. The weight ^j is a constant for Plasso, while it exploits
+only the marginal variation of wj for Slasso. Plasso uses a single tuning parameter and does not adapt to the different orders
+
+of magnitude of the slow and fast coefficients. Slasso suffers from overwhelming penalties for coefficients associated with
+the cointegration groups. Because the cointegrated regressors are individually local unit root processes, they can only
+form a linear combination to produce a stationary time series when classified into a system. In contrast, the penalty of
+Alasso/TAlasso reflects the cointegration system via the initial/post-selection OLS.
+
+5. Simulations
+
+    In this section, we examine via simulations the performance of the LASSO methods in forecasting and variable
+screening. We consider different sample sizes to demonstrate the quality of the asymptotic approximation in finite
+samples. Comparison is based on the one-period-ahead out-of-sample forecast.
+
+                                                                                                        332
+J. Lee, Z. Shi and Z. Gao                                                                                             Journal of Econometrics 229 (2022) 322­349
+
+5.1. Simulation design
+
+Following the settings in Sections 2, 3, and 4, we consider four DGPs. Each DGP starts after a burn-in of 1000 periods
+
+for the innovations to mimic stationary Op (1) realizations.
+
+    DGP 1 (Pure unit roots). This DGP corresponds to the pure unit root model in Section 2. Consider a linear model
+
+with 9 unit root predictors, the same number as the persistent regressions in Section 6. Each regressor xij is drawn from
+
+the random      walk xij   =     xi-1,j + eij, and         the dependent          variable yi    is  generated from yi     =         +  xi· n   +  ui,  where    the
+
+                                                                                                                                                          
+innovations (ei·, ui)  iid N (0, ). The intercept   = 0.25, the slope coefficient n = (1, 1, 1, 0, 0, 0, 0, 0, 0) / n, and
+the covariance matrix  is estimated from the data of Welch and Goyal (2008), as detailed in Supplement S1.
+
+DGP 2 (Mixed roots and cointegration). This DGP is designed for the mixed root model in Section 3, which emulates
+
+the kitchen-sink approach in Section 6. The dependent variable
+
+                      3                4                  5
+
+                                            l xcil             ln xil     ui,
+                       l zil
+       yi  =    +                +                  +                  +                                                                                       (27)
+
+                      l=1              l=1                l=1
+
+where        =  0.3,       =     (0.4, 0, 0),          =  (0.5, -0.5, 0, 0),         and  n  =   (1/n,         0,     0,   0).  The  vector  i  =  (zi·, vi·, ei·, ui)
+                                                                                                        1/ n,
+
+follows a VAR(1) process i = i-1 + i, where i  iid N (0, ) in which  and  are empirically estimated using the
+                                                                                          xic·   R4 is
+data of Welch and Goyal (2008), as detailed in Supplement S1.                                     0)    a vector I(1)  process       with  cointegration rank 2
+                                                                                            0                            10                are the cointegrating
+based  on  the  VECM,      xci·  =     xci-1,· +vi·,         where        =    (1    -1          -1     and       (0     00           0)
+                                                                                            1                  =0
+                                                                                 0    0                                                1
+
+matrix and the loading matrix, respectively. (xil)5l=1 are non-cointegrating random walks generated by xil = xi-1,l + eil.
+
+    DGP 3 (Mixed roots with local-to-unity predictors) The coefficients and the innovation processes are the same as
+
+those in DGP 2, but we replace the I(1) processes in DGP 2 with local-to-unity processes. xci· is a vector of a local-to-unity
+process with cointegration rank 2 based on the triangular representation
+
+                                 (1       -1        0     -01)xci·  =  (vi2)
+                                                    1                    vi4
+                                   0       0
+
+       (             ((          4.8386         ))      )  (xci1)      (vi1    )
+                                                                         vi3
+         I2  -  diag 1     -        n       ,  1       L     xic3   =             .
+
+(xil)5l=1 are non-cointegrating local-to-unity processes generated by xil = (1 - cl/n) xi-1,l + eil, l = 1, 2, . . . , 5, and
+(c1, c2, . . . , c5) = (7.4934, 5.9152, 8.9277, 0, 0), where these local-unity coefficients are also estimated following Xu
+
+(2018). With some local-to-unity parameters being zero, DGP 3 incorporates a mixture of I(0), I(1), and local-to-unity
+processes.
+
+    DGP 4 (Stationary autoregression). The autoregressive distributed lag (ARDL) model is a classical specification for
+time series regressions. In addition to including lags of yi, it is common to accommodate lags of predictors in predictive
+regressions, such as in Medeiros and Mendes (2016). The stationary dependent variable in the following equation is
+generated from the ARDL model
+
+                                    4                                     5                             3
+
+       yi =   + yi-1 +  (l1xicl + l2xci-1,l) +  (l1nxil + l2nxi-1,l) +  (l1zil + l2zi-1,l) + ui,
+
+                                 l=1                                      l=1                           l=1
+
+where         = 0.3,  =              0.4,   1   = (0.75, -0.75, 0, 0),               2 =        (0, 0, 0, 0),  1n      =   (1.5/n,   1,    0,           0),  2n  =
+(0, -1, 0,   0, 0), 1 = (0.6,       0.4),   2  = (0.8, 0), and 3 = (0,               0). The                                                   1/ n,
+                                                                                               predictors xci  , xi,  and
+                                                                                                                           zi are generated in the same way
+
+as in DGP 3.
+
+Remark 7. Our theory allows the local-to-zero coefficients for I1 to be ln = l0/nl for any l  (0, 1). In the simulations,
+we fix l = 0.5 for all l  I1, which is the knife-edge rate for the balance of the predictive regression. When l0 = 0, an
+
+active pure local unit root variable contributes to the dependent variable with
+
+       lnxnr,l = l0 (xnr,l/n)  l0Jcxl (r ) = Op (1) ,
+
+for r  [0,    1], where    Jcxl  (r) is an  Ornstein­Uhlenbeck process.              The limit process is of the same stochastic order of the active
+              variables    in
+stationary                       Z +, and   so is y. In contrast, when l              (0.5, 1), we have lnxnr,l = (l0/nl-0.5) (xnr,l/n) =
+
+op (1), and it is asymptotically dominated by the active stationary variables and the innovation ui. Alasso/TAlasso would
+
+require a very large sample size to detect such weak signal in reality. When l  (0, 0.5), the active stationary variables
+in Z + are dominated by lnxnr,l = Op (n0.5-l ). In this case, the stochastic order of y is determined by the active variable
+in I1 of the largest order, and therefore yn = Op (n0.5-)  , where  = min{(l)lI1 }. This violates the consensus that
+stock returns in most predictive regressions are stochastically bounded. Thus, we only consider l = 0.5 in the simulations.
+
+    As we develop our theory with regressors of fixed dimension, OLS is a natural benchmark. Another benchmark is the
+
+oracle OLS estimator under infeasible information. The sample sizes in our exercise are n = 80, 120, 200, 400, and 800.
+
+We run 10,000 replications for each sample size and each DGP.
+
+                                                                                     333
+J. Lee, Z. Shi and Z. Gao                                                                                     Journal of Econometrics 229 (2022) 322­349
+
+   Each shrinkage estimator relies on its tuning parameter n, which is the appropriate rate multiplied by a constant c.
+
+We use fivefold cross validation (CV), where the sample is temporally ordered and then partitioned into five consecutive
+
+blocks, to guide the choice of c. To ensure that the tuning parameter changes according to the rate specified in the
+
+asymptotic theory, we set n = 100 and run an exploratory simulation 100 times for each method that requires a tuning
+parameter. In each replication, we use the fivefold CV to obtain c(1), . . . , c(100). We then fix c = median(c(1), . . . , c(100))
+
+in  the  full-scale  10,000      replications.     To     specify  the    tuning  parameters      for  other  sample  sizes,  we  multiply     the  constant  c
+
+      we  have   calibrated                               by  the  rates  suggested  by           asymptotic  theory.  We  multiply       c     
+that                             from     n     100                                         our                                              by     n for Plasso
+                                             =
+
+and Slasso, and by n/(log log n) for Alasso and TAlasso.
+
+5.2. Performance comparison
+
+    Table 2(a) reports the out-of-sample prediction accuracy in terms of the mean prediction squared error (MPSE)
+
+E[(yn - y^n)2]. By the simulation design, unpredictable variation arises from the variance of the idiosyncratic error ui,
+
+which is 1.
+    Plasso and Slasso achieve variable screening and consistent estimation, as the predictors are unit root processes in
+
+DGP 1. They are slightly better in forecasting than Alasso/TAlasso when the sample size is small; however, as the sample
+
+size increases to n = 800, TAlasso surpasses the conventional LASSO estimators, which suggests that variable selection is
+
+conducive to forecasting in a large sample. In DGPs 2­4 of mixed roots and cointegrated regressors, the settings are more
+difficult for the conventional LASSO to navigate. TAlasso is the best performer, followed by Alasso, which also outperforms
+the conventional LASSO methods by a non-trivial margin.
+
+   Table 2(b) summarizes the variable screening performance. Recall that M = {j : j = 0} is the set of relevant
+regressors and M^ = {j : ^j = 0} is the estimated active set. We define two success rates for variable screening:
+
+         SR1  =  M    -1   E  [M          M^]   ,  SR2       =  M  c  -1  E  [M c    M^  c  ]  .                                                         (28)
+                                                                                            
+
+Here, SR1 is the percentage of correct selections from the active set, and SR2 is the percentage of correct removals from
+the inactive set. We also report the overall success rate of classification into zero or nonzero coefficients, defined as
+
+         SR = p-1E   [                                          ]
+
+                     {j       :  I (j  =  0)  =    I (^j  =   0)}  .                                                                                     (29)
+                                                                 
+
+These expectations in SR, SR1, and SR2 are computed by the average across the simulation replications.
+    In terms of the overall selection measure SR, TAlasso is the most effective and Alasso takes the second place. As the
+
+sample size increases, TAlasso's success rates approach 100% in all DGPs, which supports variable selection consistency.
+
+While    the  difference   in    SR1   among       these      methods     becomes  negligible     when  the sample     size   is  large,  the  gain  of  TAlasso
+
+                                                                                                           
+and Alasso stems largely from SR2. The asymptotic theory suggests that n  n is too small for Plasso to eliminate 0
+
+coefficients corresponding to the nonstationary regressors. Plasso and Slasso achieve high SR1 at the cost of low SR2. In
+
+view of the results in Table 2, the advantage of TAlasso's variable screening capability helps with forecast accuracy in the
+
+context of predictive regressions where many included regressors actually exhibit no predictive power.1
+
+   Finally, as shown in Table 3, we check the variable screening of the inactive cointegration group (xci3, xci4) in DGPs 2­4,
+where the true coefficients 30 = 40 = 0. Alasso is effective in preventing both redundant variables from remaining in
+
+the regression according to the third column, while in the second column the chance of omitting one variable is around
+
+40%­50%, indicating that it breaks the cointegration pair but cannot screen out both inactive regressors simultaneously.
+
+In contrast, TAlasso successfully identifies both redundant variables with significantly higher probabilities, as in the first
+
+column. Plasso and Slasso break down in variable selection consistency, as our theory suggests.
+
+6. Empirical application
+
+6.1. Data
+
+    We apply the LASSO methods to Welch and Goyal (2008)'s dataset to predict stock returns. We focus on the
+improvement in terms of prediction error and variable screening.
+
+    The dataset of Welch and Goyal (2008) is one of the most widely used in predictive regressions. Koo et al. (2020)
+update this monthly data from January 1945 to December 2012, and we use the same time span. The dependent variable
+is excess return (ExReturn), defined as the difference between the continuously compounded return on the S&P 500 index
+and the three-month Treasury bill rate. The estimated AR(1) coefficient of the excess return is 0.149, indicating weak
+
+  1 In Table 2(b) Slasso has lower SR2 than Plasso in a few instances. However, due to the presence of ^j = ^j = Op (n) in the penalty term,
+
+in asymptotics it imposes a heavier penalty on coefficients of I(1) regressors than Plasso does. The reason is that in our simulations we fix cP (for
+Plasso) and cS (for Slasso) by CV separately. CV selects the tuning parameter c favoring lower MPSE and adjusts c in finite sample. For example,
+in DGP 2, cP = 0.6576 is much larger than cS = 0.1676. If we fixed cP by CV and set cS = cP, Slasso would have a much higher SR2.
+
+                                                                                                        334
+J. Lee, Z. Shi and Z. Gao                                                                 Journal of Econometrics 229 (2022) 322­349
+
+Table 2
+MPSE and variable screening in simulations.
+
+(a) MPSE (Relative to OLS)
+
+            n                            Oracle  OLS                Alas.          TAlas.         Plas.          Slas.
+
+DGP 1       80                           0.8614  1.0000             0.9256         0.9450         0.8945         0.8953
+                                                 1.0000             0.9622         0.9657         0.9347         0.9390
+            120                          0.9090  1.0000             0.9900         0.9896         0.9604         0.9652
+                                                 1.0000             0.9976         0.9905         0.9861         0.9862
+            200                          0.9425  1.0000             0.9977         0.9912         0.9935         0.9931
+
+            400                          0.9699  1.0000             0.9351         0.9295         0.9467         0.9651
+                                                 1.0000             0.9514         0.9447         0.9663         0.9831
+            800                          0.9841  1.0000             0.9649         0.9615         0.9775         0.9985
+                                                 1.0000             0.9900         0.9854         0.9952         1.0145
+DGP 2       80                           0.8537  1.0000             0.9932         0.9906         0.9986         1.0238
+
+            120                          0.8955  1.0000             0.9247         0.9183         0.9457         0.9519
+                                                 1.0000             0.9562         0.9521         0.9746         0.9820
+            200                          0.9344  1.0000             0.9705         0.9678         0.9826         0.9951
+                                                 1.0000             0.9887         0.9831         0.9954         1.0097
+            400                          0.9717  1.0000             0.9927         0.9904         0.9990         1.0205
+
+            800                          0.9875  1.0000             0.8896         0.8766         0.9237         0.9229
+                                                 1.0000             0.9244         0.9129         0.9590         0.9765
+DGP 3       80                           0.8452  1.0000             0.9497         0.9423         0.9818         1.0225
+                                                 1.0000             0.9727         0.9686         0.9921         1.0431
+            120                          0.9046  1.0000             0.9897         0.9866         0.9997         1.0593
+
+            200                          0.9373
+
+            400                          0.9701
+
+            800                          0.9874
+
+DGP 4       80                           0.7188
+
+            120                          0.8223
+
+            200                          0.8914
+
+            400                          0.9513
+
+            800                          0.9796
+
+(b) Variable screening success rates
+
+       n    SR                                          SR1                                SR2
+
+            Alas.                TAlas.  Plas.   Slas.  Alas.       TAlas.  Plas.  Slas.   Alas.  TAlas.  Plas.  Slas.
+
+       80   0.729 0.733                  0.697   0.714  0.613       0.577   0.790  0.808   0.787  0.812   0.651  0.667
+                                         0.688   0.731  0.674       0.644   0.862  0.863   0.809  0.831   0.602  0.664
+       120  0.764                0.769   0.667   0.747  0.762       0.741   0.928  0.926   0.841  0.862   0.536  0.658
+                                         0.623   0.763  0.865       0.856   0.976  0.974   0.886  0.903   0.446  0.658
+DGP 1  200  0.815                0.822   0.566   0.770  0.944       0.942   0.995  0.994   0.932  0.947   0.352  0.658
+
+       400  0.879                0.887   0.643   0.572  0.853       0.840   0.934  0.943   0.726  0.779   0.435  0.308
+                                         0.634   0.584  0.897       0.889   0.967  0.968   0.765  0.816   0.397  0.309
+       800  0.936                0.945   0.617   0.593  0.939       0.934   0.988  0.986   0.805  0.858   0.351  0.313
+                                         0.593   0.601  0.977       0.976   0.998  0.997   0.853  0.908   0.303  0.318
+       80   0.779 0.804                  0.576   0.606  0.996       0.995   1.000  1.000   0.896  0.952   0.273  0.324
+
+       120  0.820                0.846   0.642   0.601  0.827       0.815   0.903  0.923   0.735  0.783   0.455  0.371
+                                         0.637   0.614  0.872       0.864   0.947  0.952   0.768  0.816   0.416  0.373
+DGP 2  200  0.861                0.890   0.624   0.622  0.918       0.913   0.978  0.974   0.808  0.856   0.372  0.370
+                                         0.605   0.633  0.967       0.965   0.996  0.994   0.854  0.907   0.326  0.375
+       400  0.905                0.936   0.588   0.632  0.992       0.992   1.000  0.999   0.894  0.949   0.294  0.369
+
+       800  0.937                0.970   0.587   0.599  0.867       0.845   0.925  0.907   0.666  0.775   0.362  0.395
+                                         0.587   0.616  0.903       0.890   0.950  0.924   0.701  0.815   0.344  0.411
+       80   0.773 0.796                  0.582   0.633  0.921       0.913   0.960  0.932   0.738  0.855   0.330  0.433
+                                         0.576   0.648  0.933       0.930   0.966  0.927   0.772  0.892   0.316  0.463
+       120  0.812                0.836   0.565   0.655  0.937       0.936   0.969  0.912   0.799  0.922   0.296  0.484
+
+DGP 3  200  0.854                0.880
+
+       400  0.901                0.931
+
+       800  0.935                0.967
+
+       80   0.746 0.803
+
+       120  0.782                0.845
+
+DGP 4  200  0.811                0.878
+
+       400  0.836                0.908
+
+       800  0.854                0.927
+
+Note: Panel (a) compares the out-of-sample prediction accuracy in terms of MPSE E[(yn - y^n)2], where that of OLS is normalized to be 1. Panel (b)
+
+compares the variable screening performance in terms of the success rates SR, SR1, and SR2 defined in (28) and (29). Bold numbers indicate the best
+performance in each category of measurement.
+
+persistence. The 12 financial and macroeconomic predictors are introduced and depicted in Fig. 1. Three variables, namely
+
+ltr, infl, and svar, oscillate around the mean, and nine variables are highly persistent with estimated AR(1) coefficients
+greater than 0.95. The pairs (tms, dfr) and (dp, dy) are visibly moving in a synchronized pattern that suggests potential
+cointegration, and it is difficult to determine whether cointegration holds among (dp, dy, ep). ep fluctuates with dy before
+
+2000, but the link dissolves after 2000, and the two series diverge in opposite directions during the Great Recession. The
+presence of stationary and persistent predictors fits the mixed roots environment studied in this paper, and our agnostic
+approach avoids decision errors resulting from hypothesis testing.
+
+    As recognized in the literature, the signal of persistent predictors may become stronger in long-horizon return
+predictions (Cochrane, 2009). In addition to the one-month-ahead short-horizon forecast, we construct the long-horizon
+excess return as the sum of the continuous compounded monthly excess return on the S&P 500 index
+
+                           i+12h-1
+
+                                    ExReturnk,
+
+LongReturni =
+
+                            k=i
+
+                                                               335
+J. Lee, Z. Shi and Z. Gao                                                                                Journal of Econometrics 229 (2022) 322­349
+
+Table 3
+Variable screening in DGPs 2­4 for the inactive cointegrated group 30 = 40 = 0.
+
+          n     Both ^ 3, ^ 4 = 0                            One and only one of ^ 3, ^ 4 = 0                  Neither ^ 3, ^ 4 = 0
+
+                Alas.             TAlas. Plas.        Slas.  Alas.  TAlas. Plas.               Slas.              Alas.  TAlas.         Plas.    Slas.
+
+              80 0.443            0.597  0.182        0.181  0.480  0.344          0.572       0.541              0.077  0.059          0.246    0.277
+              120 0.485           0.665  0.150        0.194  0.459  0.292          0.578       0.566              0.055  0.043          0.272    0.240
+DGP 2 200 0.529                   0.738  0.112        0.214  0.436  0.234          0.566       0.581              0.036  0.028          0.322    0.205
+              400 0.557           0.827  0.070        0.232  0.425  0.160          0.561       0.636              0.018  0.014          0.369    0.132
+              800 0.603           0.907  0.050        0.273  0.392  0.090          0.551       0.645              0.006  0.004          0.399    0.082
+
+              80 0.424            0.596  0.144        0.241  0.491  0.338          0.624       0.604              0.085  0.066          0.232    0.156
+              120 0.461           0.663  0.120        0.258  0.483  0.294          0.622       0.619              0.057  0.043          0.258    0.123
+DGP 3 200 0.499                   0.734  0.089        0.262  0.467  0.239          0.602       0.637              0.034  0.028          0.309    0.102
+              400 0.532           0.823  0.059        0.287  0.451  0.163          0.606       0.649              0.017  0.014          0.335    0.064
+              800 0.568           0.907  0.042        0.314  0.427  0.089          0.591       0.634              0.005  0.004          0.368    0.052
+
+              80 0.326            0.561  0.156        0.343  0.526  0.366          0.510       0.510              0.149  0.073          0.334    0.148
+              120 0.381           0.658  0.151        0.390  0.514  0.305          0.503       0.495              0.105  0.037          0.347    0.115
+DGP 4 200 0.418                   0.740  0.134        0.409  0.506  0.240          0.496       0.508              0.076  0.020          0.371    0.083
+              400 0.465           0.838  0.117        0.475  0.490  0.155          0.483       0.473              0.045  0.007          0.400    0.051
+              800 0.499           0.903  0.099        0.509  0.476  0.096          0.457       0.459              0.025  0.002          0.444    0.032
+
+Note: The numbers report the proportion of occurrences, over the replications, of eliminating both inactive variables (the first column, desirable
+outcome), eliminating only one variable (the second column), and eliminating neither variable (the third column).
+
+where h is the length of the forecasting horizon, and h = 1 indicates one year. We use h = 1/12 (one month), 1/4 (three
+
+months), 1/2 (half a year), 1, 2, and 3 in our empirical exercises.
+
+6.2. Performance
+
+We forecast short- and long-horizon stock returns recursively with either a 10-year or 15-year rolling window. All 12
+
+variables are made available in the predictive regression, which Welch and Goyal (2008) call the kitchen sink model. The
+
+tuning parameters for the shrinkage estimators are determined by a 10-fold CV on MPSE with consecutive partitions in
+
+each estimation window. The CV method is a preferred choice for prediction purposes. As a robustness check, we also
+use the Bayesian information criterion (BIC) to decide the tuning parameters for Alasso and TAlasso.2
+
+The forecast returns of the LASSO methods are shown in Fig. 2 along with the true realized return in gray for
+
+h = 1/12 = 0.083 (short horizon), 1 (median horizon), and 3 (long horizon). When h = 0.083, the realized excess
+
+return resembles white noise that is extremely difficult to forecast. When the horizon is extended to h = 3, the dynamics
+
+of the long-run aggregated return become clearer. For most of the time, Alasso and TAlasso track the realized return
+
+closely.
+
+Table 4 quantifies the forecast error in terms of the out-of-sample RMPSE (root MPSE) and mean predicted absolute
+
+error (MPAE) E [yn - y^n]. In addition to OLS, which includes all of the variables without any screening, we include
+
+random    walk  with       drift  (RWwD),  i.e., the  historical  average  of the  excess      returns,  y^ n  =  (n  -  1)-1  n-1      yi,  as  another
+
+                                                                                                                                   i=1
+
+benchmark that utilizes no information from regressors. The results show that OLS loses in the short horizon, whereas
+
+RWwD suffers in the long horizon, indicating the ineffectiveness of the all-in and all-out approaches. Variable screening is
+
+essential for balanced performance in this empirical example. Alasso/TAlasso forecasts are more precise than Plasso/Slasso
+
+in general. When the horizon is h = 2 or h = 3, TAlasso can achieve the smallest RMPSE, and Alasso is stronger than
+
+Plasso and Slasso by a substantial margin. The results are robust when the tuning parameters are chosen by either CV or
+
+BIC.
+
+There is an exceptional case of h = 1 with a 15-year rolling window. In this particular instance, Alasso fails to foresee
+
+the recovery trend after the financial crisis in 2008, and another round of Alasso further worsens TAlasso. As shown in
+
+Fig. 2, when h = 1, Plasso's forecast coincides with the movement of the realization during the recovery period after 2008,
+
+whereas Alasso/TAlasso moves in the opposite direction. Whereas large deviation exacerbates RMPSE, under MPAE, the
+
+gap between Plasso and Alasso/TAlasso in this case is narrowed or even reversed. Under the 10-year rolling window, all of
+
+the methods encounter difficulty around the financial crisis, and the difference between TAlasso and Slasso is negligible.
+
+Thus, we view the unsatisfactory RMPSE of Alasso/TAlasso here as an adverse case under the specific rolling window.
+
+In terms of prediction performance, it is known that eliminating irrelevant predictors is more important than including
+
+relevant predictors; see, for example, Ploberger and Phillips (2003). The inclusion of the irrelevant predictors could
+
+be detrimental in forecasting contexts, and including irrelevant nonstationary predictors in predictive regression can
+
+be harmful because stock returns are stationary. In this sense, Alasso and TAlasso provide more conservative variable
+
+selection in predictive regressions. In Fig. 3, the instance with h = 1/2 and the 15-year rolling window is used to illustrate
+
+  2 BIC is a popular choice geared toward variable selection, but in our context, it is incompatible with the Plasso/Slasso, which cannot cope with
+variable screening and consistent estimation simultaneously.
+
+                                                                                                        336
+J. Lee, Z. Shi and Z. Gao  Journal of Econometrics 229 (2022) 322­349
+
+Fig. 1. Time plots of the 12 predictors from the dataset of Welch and Goyal (2008). Note: The persistent regressors include the dividend price ratio
+
+(dp), dividend yield (dy), earning price ratio (ep), term spread (tms), default yield spread (dfy), default return spread (dfr), book-to-market ratio
+(bm), net equity expansion (ntis), and treasury bill rates (tbl), whose estimated AR(1) coefficients are greater than 0.95. The stationary predictors
+are the long-term return of government bonds (ltr), stock variance (svar), and inflation (infl).
+
+                                                                                                        337
+J. Lee, Z. Shi and Z. Gao  Journal of Econometrics 229 (2022) 322­349
+
+   Fig. 2. Realized return versus predicted returns. h is selected as 1/12, 1, and 3 to present the short, medium, and long horizons, respectively.
+
+the estimated coefficients under CV. The shrinkage methods select different variables over the estimation windows,
+indicating the evolution of the predictive models across time. Alasso and TAlasso throw out more variables than Plasso
+
+                                                                                                        338
+J. Lee, Z. Shi and Z. Gao                                                                           Journal of Econometrics 229 (2022) 322­349
+
+Table 4
+RMPSE and MPAE for predicting S&P 500 excess return.
+
+Tuning para.               OLS          RWwD          Plas.  Slas.  Alas.                                    TAlas.            Alas.         TAlas.
+                                                      CV     CV     CV                                       CV                BIC           BIC
+                           NA           NA
+                                                      0.944  0.947  0.932                                    0.952             0.949         0.950
+              h            RMPSE × 100                0.945  0.900  0.806                                    0.821             0.835         0.839
+                                                      0.937  0.914  0.862                                    0.883             0.919         0.916
+10-year       1/12         1.000        0.950         0.953  0.933  0.958                                    0.947             0.943         0.912
+rolling       1/4          1.000        0.842         0.962  0.904  0.898                                    0.905             0.893         0.865
+window        1/2          1.000        0.946         0.892  0.941  0.854                                    0.806             0.855         0.774
+              1            1.000        1.123
+              2            1.000        1.297
+              3            1.000        1.173
+
+15-year       1/12         1.000        0.982         0.956  0.960  0.952                                    0.963             0.980         0.984
+rolling       1/4          1.000        0.915         0.891  0.889  0.871                                    0.874             0.921         0.924
+window        1/2          1.000        0.924         0.958  0.919  0.882                                    0.917             0.903         0.918
+              1            1.000        1.055         0.859  0.961  0.917                                    1.029             0.934         0.962
+10-year       2            1.000        1.518         0.940  0.952  0.860                                    0.818             0.865         0.820
+rolling       3            1.000        1.617         0.974  1.002  0.953                                    0.890             0.843         0.824
+window
+              h            MPAE × 100                 0.948  0.938  0.928                                    0.951             0.942         0.947
+                                                      0.933  0.907  0.862                                    0.876             0.903         0.920
+              1/12         1.000        0.944         0.922  0.909  0.851                                    0.863             0.915         0.917
+              1/4          1.000        0.925         0.957  0.944  0.929                                    0.939             0.925         0.895
+              1/2          1.000        0.955         0.903  0.886  0.824                                    0.834             0.831         0.807
+              1            1.000        1.140         0.940  0.960  0.912                                    0.836             0.896         0.814
+              2            1.000        1.356
+              3            1.000        1.391
+
+15-year       1/12         1.000        0.979         0.971  0.969  0.970                                    0.984             0.979         0.989
+rolling       1/4          1.000        0.932         0.905  0.906  0.875                                    0.884             0.926         0.925
+window        1/2          1.000        0.983         0.962  0.942  0.893                                    0.934             0.903         0.928
+              1            1.000        1.107         0.921  0.970  0.853                                    0.933             0.879         0.878
+              2            1.000        1.705         0.916  0.893  0.812                                    0.805             0.804         0.777
+              3            1.000        1.907         1.010  1.015  1.040                                    0.966             0.897         0.882
+
+                                                                                           
+
+Note: The upper panel compares the root mean prediction squared error (RMPSE), defined as      [       y^ n  )2  ]   and  the  lower  panel  compares  the
+                                                                                             E (yn
+                                                                                                    -             ,
+
+mean prediction absolute error E [yn - y^n]. The RMPSE and MPAE of OLS are normalized to be 1. Bold numbers indicate the best performance in
+
+each row, and italic numbers indicate the worst.
+
+or Slasso and hence deliver more parsimonious models. For example, they completely eliminate the variables ltr and
+infl.
+
+   To highlight the potentially cointegrated variables, Fig. 4(a) presents the Alasso and TAlasso estimates of (dp, dy) and
+(dfr, tms) by CV, and in Fig. 4(b), BIC decides the tuning parameters and then produces the estimates. The table ahead of
+
+the subfigures lists the fraction of the active Alasso estimates annihilated by TAlasso over the rolling windows. In more
+
+than a quarter of the cases when Alasso selects dy or tms, TAlasso further penalizes the corresponding coefficient to be 0
+in the second round. In general, BIC tends to freeze out more variables than CV, especially for dy and tms. Although the
+
+numbers vary, similar patterns are found in other combinations of forecast horizons and rolling window lengths.
+
+7. Conclusion
+
+    We explore LASSO procedures in the presence of stationary, nonstationary, and cointegrated predictors. Although
+it does not enjoy the well-known oracle property, Alasso breaks the links between inactive cointegration groups, and
+its repeated implementation TAlasso recovers the oracle property because of the differentiated penalty on the zero and
+nonzero coefficients. TAlasso is adaptive to a system of multiple predictors with various degrees of persistence, unlike
+Plasso's uniform penalty or Slasso's penalty based only on the marginal variation of each predictor. Moreover, TAlasso
+saves the effort of sorting the predictors according to their degrees of persistence, so we can be agnostic regarding the time
+series properties of the predictors. The automatic penalty adjustment of TAlasso guarantees consistent model selection
+and the optimal rate of convergence. Such desirable properties may improve the out-of-sample prediction in practice
+under complex predictive environments with a mixture of regressors.
+
+   To focus on the mixed root setting, we adopt the simplest asymptotic framework with a fixed p and n   to
+
+demonstrate the clear contrast between OLS, Alasso, TAlasso, Plasso, and Slasso. This asymptotic framework is in line
+with the state of the art of the predictive regression studies in financial econometrics (Kostakis et al., 2014; Phillips and
+Lee, 2016; Xu, 2018). However, the large number of potential regressors available in the era of big data indicate the
+need for a theoretical extension to allow for an infinite number of regressors in the limit. As the restricted eigenvalue
+condition (Bickel et al., 2009) is unsuitable in our context, in which the nonstationary part of the Gram matrix does not
+degenerate, a few papers (Onatski and Wang, 2018, 2020; Zhang et al., 2019; Bykhovskaya and Gorin, 2020) point to the
+spectral analysis of a large random matrix (Bai and Silverstein, 2010) as the foundation of asymptotic analysis. In future
+
+                                                                                                        339
+J. Lee, Z. Shi and Z. Gao  Journal of Econometrics 229 (2022) 322­349
+
+                                        Fig. 3. Estimated coefficients for all 12 variables (15-year rolling window, h = 1/2).
+
+research, we will apply the new technical apparatus to deal with the minimal eigenvalue of the Gram matrix to generalize
+the insight gleaned from low-dimensional asymptotics to high-dimensional asymptotics.
+
+                                                                                                        340
+J. Lee, Z. Shi and Z. Gao                                                                             Journal of Econometrics 229 (2022) 322­349
+
+                           Fig. 4. Estimated coefficient of potentially cointegrated variables (15-year rolling window, h = 1/2).
+
+    Another line of related literature concerns uniformly valid inference and forecasting after LASSO model selection;
+see Belloni et al. (2018b,a) or Hirano and Wright (2017), for example. These papers allow for model selection error by
+LASSO and provide valid inference or prediction by introducing local limit theory with only small departures from the
+true models. Combining these recent developments with our current LASSO theory is another exciting direction for future
+research.
+
+Acknowledgments
+
+    We would like to thank the Editor, Serena Ng, the Associate Editor, and two anonymous referees for their thoughtful
+comments, which substantially improved this paper. We thank Mehmet Caner, Zongwu Cai, Yoosoon Chang, Changjin Kim,
+Bonsoo Koo, Zhipeng Liao, Tassos Magdalinos, Joon Park, Hashem Pesaran, Peter Phillips, Kevin Song, Jing Tao, Keli Xu, Jun
+Yu, and the seminar participants at Kansas, Indiana, Purdue, UBC, UW, Duke, KAEA, IPDC, AMES, and IAAE conferences for
+helpful comments. We also thank Bonsoo Koo for sharing the data for the empirical application. Shi acknowledges the
+financial support of the the Research Grants Council of Hong Kong No. 24614817 and No. 14500118. All remaining errors
+are ours.
+
+Appendix. Technical appendix
+A.1. Proofs in Section 2
+
+Proof of Theorem 1. Since only Alasso is considered in this proof , we denote ^ = ^A and M^ = M^A for conciseness. Let
+n = n + n-1v be a perturbation around the true parameter n, and let
+
+n(v)   =  Y  -               p        +   vj  )2  +  n    p        +   vj |.
+
+                                          n                            n
+                               xj(jn                        ^j|jn
+
+                           j=1                          j=1
+
+Define v^ (n) = n(^ - n). The fact that ^ minimizes (6) implies v^ (n) = arg minv n(v). Let
+
+                                                  Xv 2                  (p               vj      p    )
+                                                                                           |
+Vn(v)     n(v)                n(0)                         u2        n         ^j|jn             
+                                                   n                                     n           ^j|jn|
+       =                   -          =   u   -         -         +                   +       -
+
+                                                                          j=1                    j=1
+
+       =      XX           )v   -    u X  v  +  n    p         +  vj   -  |jn|).                                                   (A.1)
+                                   2                                |
+          v(                                       
+                                      n                ^j(|jn     n
+               n2
+                                                   j=1
+
+                                                                          341
+J. Lee, Z. Shi and Z. Gao                                                                                                       Journal of Econometrics 229 (2022) 322­349
+
+The first and the second terms on the right-hand side of (A.1) converge in distribution, as n-2X X   and n-1X u =
+     n
+n-1           xi· ui           , by the functional central limit theorem (FCLT) and the                          continuous mapping theorem.  The third  term
+         i=1                                                                                                                                  have
+                               ^j = |^jols|- for each j. Since the OLS estimator n (^ols                         - n)  -1 = Op(1), we
+involves the weight
+
+     ^j  = jn            Op    (n-1   )-        = |j0/nj          Op   (n-1  )   -     .                                                                 (A.2)
+                                       
+                      +                                        +                |
+
+If j0 = 0, then jn dominates n-1vj for a large n and
+
+     |jn      +  vj   |  -  |jn|   =     n-1vjsgn(jn)       =  n-1vjsgn(j0).                                                                             (A.3)
+
+                 n
+
+Now (A.2) and (A.3) imply
+
+     n^j      · (|jn        vj        |jn|)                        n                      vjsgn(j0)         nnj -1              vjsgn(j0)
+                              |
+                         +         -            =  n|j0/nj                 (n-1  )                       =  |j0         (1)   
+                            n
+                                                                  +    Op           |                            +  op       |
+
+                                                = Op (nnj -1) = op (1)                                                                                   (A.4)
+
+by the given rate of n. On the other hand, if j0 = 0, then (|jn + n-1vj| - |jn|) = n-1|vj|. For any fixed vj = 0,
+
+     n^j · (|j +            vj        |j|)               n     vj          nn -1          vj       nn -1    vj                                           (A.5)
+                                                                                                   Op (1)
+                            n   |  -            =  n|^jols             =   |n^jols              =
+
+                                                            |                       |
+
+since n  ,   1 and the OLS estimator is asymptotically non-degenerate. Thus we have Vn(v)  V (v) for every
+fixed v, where
+
+     V   (v)          {v   v    -  2v    ,      if vMc = 0|Mc |
+                       ,                        otherwise.
+              =
+
+Both Vn (v) and V (v) are strictly convex in v, and V (v) is uniquely minimized at
+
+     ( vM        )       (M-1 M          )
+       vM c
+                      =         0            .
+
+Applying the Convexity Lemma (Pollard, 1991), we have
+
+     v^M(n) = n(^ M - M  )  M-1M and v^M(n)c  0.                                                                                                         (A.6)
+
+The first part of the above result establishes Theorem 1(b) about the asymptotic distribution for the coefficients in M.
+
+   Next, we show variable selection consistency. The result P(M  M^)  1 immediately follows by the first part of
+(A.6), since v^M(n) converges in distribution to a non-degenerate continuous random variable. For those j  Mc , if the event
+{j  M^} occurs, then the KKT condition entails
+
+     1   xj (y   -    X^ )  =     sgn(^ j )  n^j   .                                                                                                     (A.7)
+     n
+                                              2n
+
+Notice that the order on the right-hand side is governed by
+
+     n^j                 n            nn -1              nn -1                                                                                           (A.8)
+
+         n    =       n|^jols      =  |n^jols         =  Op (1)      
+
+                               |                |
+
+given the rate of n. However, using y = X n + u and (A.6), the left-hand side of (A.7) is
+
+     1                      =      1            - X^     + u)  =   xjX     · n(n     - ^ ) +       xj u
+                                                                   n2                               n
+     n xj(y - X ^ )                n xj(X n
+
+                            =        xj  (      v^ M(n)  +  XMc^vM(n)c )   +    xju
+                                                                                 n
+                                  - n2    XM 
+
+                                -j,M M-1M - j,Mc op(1) + j = Op (1) ,                                                                                    (A.9)
+
+where j,M = [j,l]lM and j,Mc is defined similarly. In other words, the left-hand side of (A.7) remains a non-
+degenerate continuous random variable in the limit. For any j  Mc , the disparity of the two sides of the KKT condition
+
+implies
+
+                                (  1                                   n^j  )
+                                   n
+     P   (j      M^n)    =  P         xj(y   -  X^ )     =  sgn(^ j )   2n             0.
+
+That is, P(Mc  M^)  0 or equivalently P(M^  M)  1. We thus conclude the variable selection consistency in
+
+Theorem 1(a) 
+
+                                                                                              342
+J. Lee, Z. Shi and Z. Gao                                                                                                Journal of Econometrics 229 (2022) 322­349
+
+A.2. Proofs in Section 3
+
+To express the OLS asymptotic distribution, we need some extra notations. Define                                                 =                  E  (ii-h)     as   the
+
+long-run covariance matrix associated with the innovation vector. It can be written as is                                                    h=-
+
+                                                   zz zv ze 0 
+
+                         =  F (1)F (1)          =  zv           vv       ve       0
+                                                    ze          v e      ee
+      (p+1)×(p+1)                                                                    
+                                                                                 eu 
+
+                                                     0          0 eu uu
+
+according to the explicit form of , where F (1) = (Fz (1) , Fv (1) , Fe (1) , Fu (1)). Moreover, define the sum of one-sided
+                                               (ii-h),                            (ii).
+autocovariance        as       =            E             and         =     +  E           We      use  the  functional  law     (Phillips  and     Solo,  1992)  under
+                                      h=1
+Assumption 2 to derive
+
+        1    nr       i     (Bz n(r), Bv n   (r) , Be n  (r) ,  Bun (r ))
+
+             
+
+         n               =
+
+               i=1
+
+                            (Bz (r), Bv (r) , Be (r) , Bu(r)) := B (r)  BM () ,
+
+where B (r) is a vector Brownian motion whose covariance kernel is . Define the corresponding vector Ornstein
+Uhlenbeck process Jc2 (r) associated with Bv2 (r), which is a subvector of Bv (r) = (Bv 1 (r) , Bv 2 (r)) in the standard way:
+
+      dJc2 (r) = c2Jc2 (r) dr + dBv2 (r) , Jc2 (0) = 0.
+
+Similarly, define Jcx (r) as dJcx (r) = cxJcx (r) dr + dBe (r) , Jcx (0) = 0.
+
+Lemma 1. If the linear model (10) satisfies Assumption 2, then (uZ +/n, uX +/n) converges in distribution to a
+
+non-degenerate stable law.
+
+Proof of Lemma 1. The left-top p × p submatrix of  can be represented in a conformable manner as
+
+      (zz             zv       ze )                  z+z                    z+x        
+        zv            vv
+        ze            v e      ve       =      (pz +p1)×(pz +p1)                       .                                                                          (A.10)
+                               ee
+                                                     z+x                    x+x
+
+                                                                      (p2 +px )×(p2 +px )
+
+The Beveridge­Nelson (BN) decomposition and central limit theorem lead to
+
+                              z+  N (0, uuz+z ) .                                                                                                                 (A.11)
+      Z +u/ n
+
+The columns in X + are local unit root processes with no cointegration relationship. Let the ith row of X + be Xi+ =
+(X2ci· , Xi·), a (p2 + px)-by-1 vector. Using the component-wise BN decomposition, the scalar ui = i × Fu(1) - ~ui, where
+
+~ui   is  the  last   (p   +   1)-th    scalar  component         of  the  vector  ~i      =   ~i  -  ~i-1  and  ~i  =           F~ji-j  with  F~j  =             Fk.  Thus
+
+we have                                                                                                                     j=0                            k=j+1
+
+                               n               (      n         )                   n
+
+          1              1                       1                             1  
+                                                          Xi+i Fu(1) - n                   Xi+~ui.
+          n  X +u =      n        Xi+ui = n
+
+      (p2 +px )×1            i=1                     i=1                          i=1
+
+                                                                                                                            Jx+ (r) = (Jc2 (r) , Jcx (r)), and
+Functional CLT combined with the stationary Op(1) initial condition provides Xi+/ n
+                                   1
+thus  n-1    n        Xi+ i             Jx+ (r)dB(r).        The  summation       by       parts  now   implies
+                                     0
+                 i=1
+
+       1       n               =     1    n               +  op(1)     p   +u
+       n
+                                  -                                   
+                 Xi+~ui                     u+xi ~ui-1
+                                     n
+             i=1                        i=1
+
+where     +u      =            E[u~ iui-h]  is  the  corresponding         submatrix       of  the  one-sided    long-run  covariance          and  u+xi  =  Xi+  -    Xi+-1 .
+
+                          h=0
+Combining these results, we have
+
+       X +u                       1
+
+          n          x+  Jx+ (r)dB(r)Fu(1) + +u.                                                                                                                  (A.12)
+
+                                          0
+
+Since the marginal limit distributions are non-degenerate in (A.11) and (A.12), so does the joint limiting distribution. 
+
+Proof of Theorem 2. We transform and scale-normalize the OLS estimator as                                                                                         (A.13)
+
+       RnQ (^ ols - n) = RnQ (W W )-1 W u
+                          = RnQ (W W )-1 Q Rn (Q Rn)-1 W u
+                          = [Rn-1Q -1W WQ -1R-n 1]-1 Rn-1Q -1W u.
+
+                                                                                                        343
+J. Lee, Z. Shi and Z. Gao                                                                                                              Journal of Econometrics 229 (2022) 322­349
+
+The first factor
+
+                                           ( Z+Z+         ) Z + X +          (z+z                            0              )
+                                                                          0
+   R-n 1Q -1W WQ -1R-n 1 =                     n            n3/2                              1    Jx+   (r  )Jx+  (r ) dr     =: +                                                                      (A.14)
+                                           Z +X +         X + X +                                                                                                                                        (A.15)
+                                                                                                0
+                                              n3/2           n2
+
+where z+z is defined in (A.10), and Jx+ (r) = (Jc2 (r) , Jcx (r)). The second factor
+
+   R-n 1Q   -1 W  u        =  (Z +u/n)               +,
+                                 X +u/n
+
+where the marginal distributions of  + can be found in (A.11) and (A.12). Thus the stated conclusion follows by the
+
+continuous mapping theorem. 
+
+Remark 8. In the rotated coordinate system, (13) in Theorem 2 and the definition of x+ imply that an asymptotic
+bias term +u appears in the limit distribution of OLS with nonstationary predictors. This asymptotic bias arises from
+
+the serial dependence in the innovations. However, the asymptotic bias does not affect the rate of convergence as
+
+Q (^ ols - n) = Op(diag(R-n 1)).
+
+Remark 9. The OLS estimator will serve as the initial estimator for Alasso. In principle either the fully-modified
+OLS (Phillips and Hansen, 1990) or the canonical cointegrating regression estimator (Park, 1992) can be an initial estimator
+as well, because their rates of convergence are the same as those of OLS.
+
+   To simplify notation, define Rjn as the jth diagonal element of Rn, ^C = M^A  C and C  = M  C. Recall C c = Mc  C.
+
+Proof of Theorem 3. Again, we use ^ = ^ A and M^ = M^A for conciseness in this proof. For a constant nonzero vector
+
+   v~ = (v~z , v~1 , 0p2 , v~x ) = 0                                                                                                                                                                     (A.16)
+
+where the elements associated with C2 are suppressed as 0, we add a local perturbation
+
+                                 ( v~z     v~1         v~1 A1     v~x  )
+                                                       
+   vn  =    Q -1Rn-1v~        =      n  ,     n  ,  -     n    ,  n
+
+to n so that the perturbed coefficient n = n + vn. Let
+
+                                                               p
+
+   n(v~ )   =     Y  -     W     (n  +  vn)     2   +  n               jn    +   vjn ,
+                                                              ^j
+                                              
+
+                                                          j=1
+
+and then define
+
+                                                                                           p
+
+   Vn(v~ )  =     n(v~ )   -     n(0)   =  u      -    W  vn    2  -   u2        +  n              (|jn  +      vjn|  -  |jn   )
+                                                                                             ^j                                |
+                                                              
+
+                                                                                         j=1
+
+                                                               p
+
+            =     vn W W vn      -   2vn W u        +  n               (|jn    +   vjn|  -    |jn  )  .
+                                                              ^j                                   |
+
+                                                          j=1
+
+We have shown in the proof of Theorem 2 that the first term
+
+   vn W W vn = v~ Rn-1Q -1W -1Rn-1v~  v~ +v~                                                                                                                                                             (A.17)
+
+by (A.14), and the second term
+
+   2vn W u = 2v~ R-n 1Q -1W u  2v~  +                                                                                                                                                                    (A.18)
+
+by (A.15).
+
+   We focus on the third term. Theorem 2 has shown that the OLS estimator ^jols - jn = Op (Rj-n1) for each j  MQ . Given
+any fixed v~j = 0 and a sufficiently large n:
+
+·  For  j     n+-I10v~/j2/v~jsCng1|n,-(bjy0|j)0t,h|ae)n=ddeftihnnnui0ts.i5o(nn-^1oj)(f|v~vj0je/+aOcpvh~(j1/)el=enm|Oe-pn(t|nvj0njn(|)-=1=)/2v)~Oj/p(nn. nI-wf 1h/2je0)n   = 0, we have                     
+                                                                                                                                                                                                |j + v~j/ n| -
+   |j|   =                                                                                                                                                               = op (1). If j0        = 0, we have
+   n^j  (|j0                                                                                                                                                             v~j = 0.
+
+· For j  I1, the true coefficient jn = j0/nj depends on n while the perturbation vjn = v~j/n. If j0 = 0,
+
+   then jn dominates v~j/n in the limit and (|jn + v~j/n| - |jn|) = sgn(j0)v~j/n. By the same derivation in (A.4),
+
+                                                    (   n(j       -1)  )
+                                                     n
+   n^j(|jn    +   n-1v~j|     -  |jn|)  =     Op                          =    op  (1)   given     the   condition          (17).  If  j0                                     =  0,  according  to  the  derivation
+
+   in  (A.5)  n^j(|jn         +  n-1v~j|   -  |jn|)    =  nn -1           v~j    /Op  (1)  =  Op   (nn -1)                     when                                      v~j  =  0.
+                                                                               
+
+                                                                                           344
+J. Lee, Z. Shi and Z. Gao                                                                  Journal of Econometrics 229 (2022) 322­349
+
+The above analysis indicates Vn(v~ )  V (v~ ) for every fixed v~ in (A.16), where
+
+           {
+V (v~ ) = v~ +v~ - 2v~  +, if v~MQc = 0
+           ,                             otherwise.
+
+Let v^ (n) = ^ - n. The same argument about the strict convexity of Vn (v~ ) and V (v~ ) implies
+
+(RnQ v^ (n))MQ              (M+Q )-1M+Q                                                                                (A.19)
+(RnQ v^ (n))MQc            0                                                                                           (A.20)
+
+We have established Theorem 3(a).
+
+   Next, we move on to discuss the effect of variable selection. Consider any j  M^. The KKT condition with respect to j
+
+entails
+
+Wj(y - W ^ ) = sgn(^j)n^j/2.                                                                                           (A.21)
+
+We will invoke similar argument as in (A.8) and (A.9) to show the disparity of the two sides of the KKT condition. The
+
+left-hand side of (A.21) is the jth element of the p × 1 vector W (y - W ^ ). Pre-multiply the diagonal matrix R-n 1Q -1 to
+
+the vector:
+
+                                                         (          )
+Rn-1Q -1W (y - W ^ ) = Rn-1Q -1W  W (n - ^ ) + u
+
+                                      = (Rn-1Q -1W WQ -1Rn-1) RnQ (n - ^ ) + R-n 1Q -1W u                              (A.22)
+                                      = Rn-1Q -1W WQ -1R-n 1Op (1) + R-n 1Q -1W u
+                                      = (+ + op (1)) Op (1) + ( + + op (1)) = Op (1)
+
+where the third equality follows by (A.19) and (A.20), and the fourth equality by (A.14) and (A.15). Notice that (A.22)
+
+gives the biggest order of the left-hand side, while some components of this p × 1 vector may be degenerate (of order
+
+op(1)).
+
+   Suppose j  Mc . For j  I, the rotation Q does not change these variables so the order of the left-hand side of (A.21)
+is the same as (A.22). If j  I0, multiply n-1/2 to the right-hand side of (A.21):
+
+sgn(^j  )  n  ^j           sgn(^j  )       n             sgn(^j)  nn0.5( -1)  = sgn(^j)Op (nn0.5( -1))   or
+                                      2n|^jols                    2|n^jols|
+                  =                                 =                                                        -
+ 2n
+                                                 |
+
+as   1 and n  . Similarly, if j  I1 we multiply n-1 to the right-hand side of (A.21):
+
+sgn(^j  )  n  ^j           sgn(^j  )  nn( -1)    = sgn(^j)Op (nn( -1))   or        - .
+                                      2|n^jols|
+  2n              =
+
+We have verified that for j  I the right-hand side of (A.21) is of bigger order than its left-hand side. It immediately follows
+
+that given the specified rate of n, for any j  Mc I we have (20) since P(j  M^Mc I)  P (Op (1) =                or  -     )  =  0.
+                                                                                                                       
+
+We have established (20).
+
+    Estimation consistency (18) immediately implies (21). On the other hand, it is possible that variables in C are wrongly
+
+selected into M^. If the event {j  M^} occurs for some j  Cc , the KKT condition may still hold in the limit. To see this,
+pre-multiply n-1 to the left-hand side of (A.21) and it is of order Op (1) according to (A.22), and it can be degenerate. On
+
+the other hand, the right-hand side becomes
+
+sgn(^j  )  n  ^j           sgn(^j)    nn(0.5 -1)         sgn(^j)  nn(0.5 -1)  0
+
+  2n              =                   2|n^jols      =                Op(1)
+
+                                                 |
+
+and we cannot rule out the possibility that the two sides of (A.21) being equal.
+
+   Finally, to show (22) we argue by contraposition. For those j  ^C , the counterpart of (A.21) is the following KKT
+
+condition
+
+xjc(y - W ^ ) = sgn(^j)n^j/2,  j  ^C .                                                                                 (A.23)
+
+(21) already rules out CoRk(M) > CoRk(M^) in the limit. Now suppose CoRk(M) < CoRk(M^). If so, for any M^ there exists
+a constant cointegrating vector   Rpc such that   = 1 (scale normalization), Cc ^C = 0 (must involve wrongly
+selected inactive variables) and the linear combination xci· is an I(0). Although  is not unique in general, we use  to
+represent any one of them. Such a  linearly combines the multiple equations in (A.23) to generate a single equation
+
+ 1    jxcj (y - W ^ )                 =   n                                                                            (A.24)
+                                                     sgn(^j)^ j^j,
+
+     j^C                                 2n         j^C
+  n
+
+                                                                              345
+J. Lee, Z. Shi and Z. Gao                                                                                              Journal of Econometrics 229 (2022) 322­349
+
+where a scaling factor n-1/2 is multiplied on both sides to facilitate the derivation of the rate, and we define ^ j = sgn(^j)j
+
+to  simplify  notation.    The     left-hand       side  of  (A.24)   is  Op  (1)  since            j xji  =  Op  (1)  due  to  cointegration.    The  right-hand
+
+                                                                                               j^C
+
+side of (A.24) can be decomposed into two terms:
+
+    n                                   n              sgn(^j)^ j^j       n               sgn(^j)^ j^j =: I1 + I2.
+                sgn(^j)^ j^j                                              
+                                   =                                  +
+      n                                   n                                 n
+              j^C                            j^C C                             j^C C c
+
+The first term
+
+              n                              n                       n                     n
+                                                                                           
+    I1                     ^ j     ^j                        ^j                ^j      =        Op  (1)  =  op (1)
+                n                              n                       n                     n
+
+                   j^C C                           j^C C                  jC 
+
+as ^j = Op (1) for j  C, whereas the second term
+
+    I2 = nn0.5( -1)                     sgn(^j)^ j       or
+
+                               j^C C c  |n^jols                      -
+
+                                                   |
+
+as n^jols = Op (1) for j  C c , j is a constant with nonzero elements, and nn0.5( -1)   given the specified rate
+for n   and   1. Whether the right-hand side diverges to + or - depends on the configuration of ^ j's and
+
+the values of the sign functions. Eq. (A.24) holds with probability approaching 0 when n is sufficiently large. That is, no
+
+inactive cointegrating residuals can be formed within the selected variables wpa1. Otherwise, a redundant cointegration
+
+group would induce a cointegration vector  that sends the right-hand side of (A.24) to either  or - in the limit. 
+
+Proof of Theorem 4. In Eq. (10) we have separated the cointegrated variables into the active ones and the inactive ones
+
+    y = Z  + X  + u = Z  +  Xlc l +  Xlc l + X  + u.                                                                                                     (A.25)
+
+                                             lC              lC c
+
+We proceed our argument conditioning on the three events
+
+    S1 = {M  I = M^  I}, S2 = {C   ^C }, S3 = {CoRk(M) = CoRk(M^)}.
+
+According to Theorem 3, these events occur wpa1, given a sufficiently large sample size.
+    Under these three events, the regression equation (A.25) is reduced to
+
+    y = ZM M +  Xlc l + (  Xlc l + XM M ) + u,                                                                                                           (A.26)
+
+                           lC                lCc ^C
+
+where on the right-hand side of the above equation the first and the fourth terms are present by the event S1, the second
+and the third terms by S2. Due to event S3, there is no cointegration group in the third term, so we can re-write (A.26)
+as
+
+    y = ZM M +  Xlc l + X~ +~ + + u,                                                                                                                     (A.27)
+
+                              lC
+
+where X~ +         ((Xlc   )            ,  XM   )  is  the   collection   of   augmented        non-cointegrating        local  unit    root  processes  in   the
+
+              =             lC  c  ^C
+
+post-selection     regression      equation        (A.26)   and  ~ +  =   ((j  )    c  ^C  ,  M )   is   the  corresponding     coefficient   vector.
+
+                                                                                lC
+    For l  C c  ^C , the true coefficients are 0. Now these variables appear as non-cointegrating local unit root processes
+
+in (A.27), for which Theorem 3 gives variable selection consistency. We implement the post-selection Alasso in (A.27),
+
+or  equivalently   TAlasso      as     in  (23).   Among     the   variables       in  X~  TAlasso      will  eliminate  (Xlc   )    c  ^C  wpa1  while  the  true
+
+                                                                                                                                 lC
+active variables in M will be maintained. In the mean time, all variables in the first and second terms in (A.27) are
+
+active and Theorem 3's (21) guarantees their survival wpa1. The asymptotic distribution immediately follows by applying
+
+Theorem 3(a) to (A.26). 
+
+A.3. Proofs in Section 4
+
+    In the following proofs concerning Plasso and Slasso, we use a compact notation
+
+                                 dim( )
+
+       D (s, v,  ) =  sj [vjsgn(j)I(j = 0) + |vj|I(j = 0)]
+
+                                   j=1
+
+for three generic vectors s, v, and  of the same dimension. It takes the scalar-based symbol D (·, ·, ·) in the main text as
+
+a special case.
+
+                                                                                                        346
+J. Lee, Z. Shi and Z. Gao                                                                                                                          Journal of Econometrics 229 (2022) 322­349
+
+Proof of Corollary 1. For Part (a) and (b), we start with the local perturbation v = (vz , v1 , v2 , vx ), vn = Q -1Rn-1v and
+n = n + vn. Notice that v is different from v~ in Theorem 3 as we do not impose v2 = 0. Define
+
+                                                                               p                                                                                                         (A.28)
+
+                                                 
+       Vn(v ) = vn W W vn - 2vn W u + n (|jn + vn| - |jn|).
+
+                                                                     j=1
+
+In view of (A.17) and (A.18),
+
+                                                                                       p
+
+       Vn(v )                (v )     v +v            2v                     n            R-jn1D(1,         v~j,  j0).
+
+                          V        =               -          +  +  lim
+
+                                                                    n
+
+                                                                                    j=1
+
+Notice for j  I1 with the local-to-zero true coefficient jn = j0/nj , if j0 = 0, then jn dominates vj/n in the
+
+limit  and  n (|jn           +  n-1 v j   |  -  |jn   )   =    (n/n)sgn(j0) · vj                            0 for any n/n                          0. Similarly, if j0         =    0, we have
+                                                      |
+
+n(|jn  +    n-1vj|        -  |jn|)  =     (n    /n)   vj         0  when        vj  =     0.   Thus    j    is    irrelevant        in  the  limit    for  all  parts   (a),   (b)  and  (c).
+                                                          
+
+We invoke the Convexity Lemma. For Part (a), n/Rjn                                                          0 for all j so the penalty vanishes in the limit and the
+
+                                                                                                                                                        
+asymptotic distribution is equivalent to that of OLS. For Part (b), the tuning parameter's rate is n/ n  c  (0, ) so
+
+that only the penalty term associated with                            I1  vanishes in the                limit.                        and  n      =  n    + vn .   Define
+
+   Part (c) needs more elaboration. Let vn                            =   (n/n)Q -1R-n 1                           
+                                                                                                         v = (n/ n)vn
+
+                                                                                      p
+
+                                                     
+       Vn (v ) = v n W W v n - 2v n W u + n (|jn + vn,j| - |jn|),
+
+                                                                           j=1
+
+and multiply n/2n on both sides,
+
+       (n)                                                                          n    p
+
+                                                              n                        
+                  Vn (v ) = vn W W vn - 2                        vn W u +                    (|jn + vn,j| - |jn|).
+       2n                                                   n                   n
+                                                                                          j=1
+
+                                                           
+By the rate condition of n, the second term 2( n/n)vn W u = op(1). Given v~j = 0 and n large enough:
+
+· If j  I0  C, the coefficients jn = j0 are invariant with n so that
+
+                  n                n      vj                        n(              n                 )
+                                                                       D 1,
+                  n  (|j0    +                  |  -  |j0|)    =                    n     vj  ,  j0      =  D (1, vj, j0) .                                                              (A.29)
+                                     n      n                       n
+
+· If j  I1, the reverse triangular inequality ||a + b| - |a||  |b| for any a, b  R guarantees
+
+                  n          +     n      vj|  -   |jn         n      n             =     O (n-1/2) ,                                                                                    (A.30)
+                     |jn                                            
+                  n                n3/2                  |     n      n3/2   vj
+                                                                               
+
+       which is dominated by D (1, vj, j0) in the limit if vj = 0 and j0 = 0.
+
+Thus we conclude Part (c) 
+
+Proof of Corollary 2. We first express the limit distributions of the sample standard deviation.
+
+· For a nonstationary variable xl associated with I1, we have its limit distribution
+
+                                                      ( 1                    )2
+                            1
+
+               dl               Jc2x,l (r )dr -                Jcx,l (r) dr .
+
+                             0                              0
+
+                                                                                                                                  )2
+                                                                                                                            (r) dr .
+· For x2c,l associated with C2, similarly dl                                    1      Jc22,l (r )dr        (     1  Jc2,l
+                                                                                                             
+                                                                                  0
+                                                                                                      -           0
+
+·      For  xc1l  =  p2         A1,ls xc2s   + v1l    associated      with      C1,       for    each    i  we       have    xc1il  =   A1,l xc2i  + v1il  where    A1 ,l  is  the  lth  row   of  A1
+
+                         s=1
+       matrix, for l  (1, . . . , p1). Note that, for each i = nr with r  [0, 1],
+
+                  x1c il     A1,l  x2c i        v1il      A1,l Jc2  (r )     Op(       1  )
+                                                
+                          =               +                               +         
+                                                  n
+                    n                n                                                n
+
+       so that after some simple algebra,
+
+                                                                                       )2                                                                           )2
+
+                  ^l                           n                 1  (        n                                n      (       x2c i  )2      (        n        xc2i
+                                1                                n                                1
+                                              (xc1il)2                1    xc1il                                       A1,l                   1               
+                    n
+                          =        n2                       -         n                        =     n                         n        -     n         A1,l    n       +  op(1)
+
+                                             i=1                          i=1                               i=1                                    i=1
+
+                                                                                                  347
+J. Lee, Z. Shi and Z. Gao                                                                                                                 Journal of Econometrics 229 (2022) 322­349
+
+                                                                              ) (                                       )2
+                                           (
+
+                   dl  A1 ,l                          Jc2 (r) Jc2 (r) dr A1,l - A1,l Jc2 (r) dr .
+
+   Now we start the proof. Set the same local perturbation v = (vz , v1 , v2 , vx ), vn = Q -1Rn-1v and n = n + vn as in the
+
+proof of Corollary 1. We focus on the counterpart of the terms in (A.28).
+
+· If j  I0, we have ^j = Op (1) and the coefficient j0 is independent of n so that
+
+           (                  vj              )              (        vj          )            (                     (   1   )         )
+             |j0              |          |j0|              D ^j,      
+       ^j                  +          -                 =                  ,  j0      =      D Op      (1)  ,   O               ,  j0       p  0;
+                                n                                       n
+                                                                                                                          n                
+
+· If j  C, again j0 is independent of n and
+
+           (                  vj              )              (        vj          )             (  ^j                 )
+             |j0              |          |j0|              D ^j,                                                   j0
+       ^j                  +          -                 =                  ,  j0      =      D          ,   vj  ,             D (dj, vj, j0) = Op (1) ,
+                                n                                       n                            n
+
+since  these     indices           are  associated         with    a  local   unit    root      process         xjc  and  therefore                     dj is non-degenerate;
+                                                                                                                                           ^j/ n
+
+· If j  I1, similarly we have
+
+                              vj                               vj ,                   (  ^j        vj          )          (                vj          )
+                                |                                                                           j0                             
+       ^j  (               +       -      )     =      (       n         )    =  D           n  ,  n   ,             =  D Op       (1)  ,       ,  j0      p  0.
+            |jn               n       |jn|           D ^j,            j0                                                                     n
+                                                                                                                                                          
+
+The above analysis implies
+
+Vn(v )  V (v ) = v +v - 2v  + + c  D (dj, vj, j0) ,                                                                                                               (A.31)
+
+                                                                        jC
+
+and Part (a) and (b) follow.
+
+   For Part (c), let R~ n = Rn/n and n = n + R~ n-1v~ . Define
+
+                                                                                  p
+
+V~n(v )      v   (                       )      v       2v R~ -n 1W           n          ^j(|jn        R~ -jn1vj|       |jn|).
+                  R~ n-1W        W R~ n-1
+         =                                         -                  u  +                         +                 -
+
+                                                                                 j=1
+
+Multiply 1/2n on both sides,
+
+V~n(v )  =    v  (R-n 1W WRn-1) v -                     2                     1     p
+ n2
+                                                        n v RnW u +           n    ^j(|jn + R~ -jn1vj| - |jn|)
+
+                                                                                  j=1
+
+         =    v   (R-n 1W WR-n 1) v                +    op(1)  +   1       p             +      R~ -jn1vj|  -   |jn|).
+
+                                                                   n     
+                                                                             ^j(|jn
+
+                                                                         j=1
+
+by the rate condition of n. Again we study the last term. For vj = 0 and a sufficiently large n:
+
+· For j  I0,
+
+         1       (                 n                    )          1(            n                 )          (         vj          )
+                   |j0                             |j0|                                         j0          D ^j,       
+         n  ^j                +          vj  |  -          =         D      ^j,          vj  ,         =                     ,  j0         p   0;
+                                     n                                             n                                      n
+                                                                  n                                                                       
+
+· For j  C,
+
+         1  ^j   (                 n     vj             )          1(       ^j,  n       vj  ,     )
+                   |j0                             |j0|              D                          j0
+         n                    +              |  -          =
+                                     n                            n                n
+
+                                                                      (  ^j              )
+                                                                                      j0
+                                                           =   D              ,  vj,            =  D   (dj,     vj,  j0)     =  Op  (1)    ;
+                                                                           n
+
+· For j  I1, the reverse triangular inequality ||a + b| - |a||  |b| implies
+
+         1  ^j                +  n  vj|  -      |jn        1   ^j  |  n  vj|  =   ^j     vj         p  0.
+                 |jn                                                                     
+         n                       n                   |     n          n                            
+                                                                                    n      n
+
+We obtain n-2V~ (v )               v +v         +          D   (dj,   vj,  j0)   and     the       conclusion        follows.           
+
+                                                       jC
+
+Appendix B. Supplementary data
+
+Supplementary material related to this article can be found online at https://doi.org/10.1016/j.jeconom.2021.02.002.
+
+                                                                                                  348
+J. Lee, Z. Shi and Z. Gao       Journal of Econometrics 229 (2022) 322­349
+
+References
+
+Bai, Z., Silverstein, J.W., 2010. Spectral Analysis of Large Dimensional Random Matrices, Vol. 20. Springer.
+Belloni, A., Chen, D., Chernozhukov, V., Hansen, C., 2012. Sparse models and methods for optimal instruments with an application to eminent domain.
+
+     Econometrica 80 (6), 2369­2429.
+Belloni, A., Chernozhukov, V., 2011. L1-Penalized quantile regression in high-dimensional sparse models. Ann. Statist. 39 (1), 82­130.
+Belloni, A., Chernozhukov, V., Chetverikov, D., Wei, Y., 2018a. Uniformly valid post-regularization confidence regions for many functional parameters
+
+     in Z-estimation framework. Ann. Statist. 46 (6B), 3643­3675.
+Belloni, A., Chernozhukov, V., Hansen, C., 2014. Inference on treatment effects after selection among high-dimensional controls. Rev. Econom. Stud.
+
+     81 (2), 608­650.
+Belloni, A., Chernozhukov, V., Kato, K., 2015. Uniform post-selection inference for least absolute deviation regression and other Z-estimation problems.
+
+     Biometrika 102 (1), 77­94.
+Belloni, A., Chernozhukov, V., Kato, K., 2018b. Valid post-selection inference in high-dimensional approximately sparse quantile regression models. J.
+
+     Amer. Statist. Assoc. 114 (526), 749­758.
+Bickel, P.J., Ritov, Y., Tsybakov, A.B., 2009. Simultaneous analysis of Lasso and dantzig selector. Ann. Statist. 37 (4), 1705­1732.
+Bykhovskaya, A., Gorin, V., 2020. Cointegration in large VARs. arXiv preprint arXiv:2006.14179.
+Caner, M., 2009. Lasso-type GMM estimator. Econometric Theory 25 (1), 270­290.
+Caner, M., Knight, K., 2013. An alternative to unit root tests: Bridge estimators differentiate between nonstationary versus stationary models and
+
+     select optimal lag. J. Statist. Plann. Inference 143 (4), 691­715.
+Caner, M., Zhang, H.H., 2014. Adaptive elastic net for generalized methods of moments. J. Bus. Econom. Statist. 32 (1), 30­47.
+Chen, S.S., Donoho, D.L., Saunders, M.A., 2001. Atomic decomposition by basis pursuit. SIAM Rev. 43 (1), 129­159.
+Chinco, A., Clark-Joseph, A.D., Ye, M., 2019. Sparse signals in the cross-section of returns. J. Finance 74 (1), 449­492.
+Cochrane, J.H., 2009. Asset Pricing, revised ed. Princeton university press.
+Elliott, G., 1998. On the robustness of cointegration methods when regressors almost have unit roots. Econometrica 66 (1), 149­158.
+Fan, J., Li, R., 2001. Variable selection via nonconcave penalized likelihood and its oracle properties. J. Amer. Statist. Assoc. 96 (456), 1348­1360.
+Fan, J., Lv, J., 2008. Sure independence screening for ultrahigh dimensional feature space. J. R. Stat. Soc. Ser. B Stat. Methodol. 70 (5), 849­911.
+Freyberger, J., Neuhierl, A., Weber, M., 2020. Dissecting characteristics nonparametrically. Rev. Financ. Stud. 33 (5), 2326­2377.
+Giannone, D., Lenza, M., Primiceri, G.E., 2018. Economic Predictions with Big Data: the Illusion of Sparsity. Technical Report, Federal Reserve Bank
+
+     of New York Staff Reports.
+Gu, S., Kelly, B., Xiu, D., 2020. Empirical asset pricing via machine learning. Rev. Financ. Stud. 33 (5), 2223­2273.
+Hirano, K., Wright, J.H., 2017. Forecasting with model uncertainty: Representations and risk reduction. Econometrica 85 (2), 617­643.
+Inoue, A., Kilian, L., 2008. How useful is bagging in forecasting economic time series? A case study of US consumer price inflation. J. Amer. Statist.
+
+     Assoc. 103 (482), 511­522.
+Knight, K., Fu, W., 2000. Asymptotics for Lasso-type estimators. Ann. Statist. 28 (5), 1356­1378.
+Kock, A.B., 2016. Consistent and conservative model selection with the adaptive LASSO in stationary and nonstationary autoregressions. Econometric
+
+     Theory 32 (1), 243­259.
+Kock, A.B., Callot, L., 2015. Oracle inequalities for high dimensional vector autoregressions. J. Econometrics 186 (2), 325­344.
+Kock, A.B., Tang, H., 2019. Inference in high-dimensional dynamic panel data models. Econometric Theory 35 (2), 295­359.
+Koo, B., Anderson, H.M., Seo, M.H., Yao, W., 2020. High-dimensional predictive regression in the presence of cointegration. J. Econometrics 219 (2),
+
+     456­477.
+Kostakis, A., Magdalinos, T., Stamatogiannis, M.P., 2014. Robust econometric inference for stock return predictability. Rev. Financ. Stud. 28 (5),
+
+     1506­1553.
+Lee, J.H., 2016. Predictive quantile regression with persistent covariates: IVX-QR approach. J. Econometrics 192 (1), 105­118.
+Lettau, M., Ludvigson, S., 2001. Consumption, aggregate wealth, and expected stock returns. J. Finance 56 (3), 815­849.
+Liao, Z., Phillips, P.C., 2015. Automated estimation of vector error correction models. Econometric Theory 31 (3), 581­646.
+Medeiros, M.C., Mendes, E.F., 2016. L1-Regularization of high-dimensional time-series models with non-Gaussian and heteroskedastic errors. J.
+
+     Econometrics 191 (1), 255­271.
+Ng, S., 2013. Variable selection in predictive regressions. In: Handbook of Economic Forecasting, Vol. 2. Elsevier, pp. 752­789.
+Ng, S., Perron, P., 2001. Lag length selection and the construction of unit root tests with good size and power. Econometrica 69 (6), 1519­1554.
+Onatski, A., Wang, C., 2018. Alternative asymptotics for cointegration tests in large vars. Econometrica 86 (4), 1465­1478.
+Onatski, A., Wang, C., 2020. Spurious Factor Analysis. Faculty of Economics, University of Cambridge.
+Park, J.Y., 1992. Canonical cointegrating regressions. Econometrica 60 (1), 119­143.
+Phillips, P.C., 1987. Time series regression with a unit root. Econometrica 55 (2), 277­301.
+Phillips, P.C., 1991. Optimal inference in cointegrated systems. Econometrica 59 (2), 283­306.
+Phillips, P.C., 2015. Pitfalls and possibilities in predictive regression. J. Financ. Econom. 13 (3), 521­555.
+Phillips, P.C.B., Hansen, B.E., 1990. Statistical inference in instrumental variables regression with i(1) processes. Rev. Econom. Stud. 57 (1), 99­125.
+Phillips, P.C.B., Lee, J.H., 2013. Predictive regression under various degrees of persistence and robust long-horizon regression. J. Econometrics 177 (2),
+
+     250­264.
+Phillips, P.C.B., Lee, J.H., 2016. Robust econometric inference with mixed integrated and mildly explosive regressors. J. Econometrics 192 (2), 433­450.
+Phillips, P.C.B., Ploberger, W., 1994. Posterior odds testing for a unit root with data-based model selection. Econometric Theory 774­808.
+Phillips, P.C.B., Shi, Z., 2021. Boosting: Why you can use the hp filter. Internat. Econom. Rev. http://dx.doi.org/10.1111/iere.12495, in press.
+Phillips, P.C., Solo, V., 1992. Asymptotics for linear processes. Ann. Statist. 20 (2), 971­1001.
+Ploberger, W., Phillips, P.C., 2003. Empirical limits for time series econometric models. Econometrica 71 (2), 627­673.
+Pollard, D., 1991. Asymptotics for least absolute deviation regression estimators. Econometric Theory 7 (2), 186­199.
+Rapach, D.E., Strauss, J.K., Tu, J., Zhou, G., 2019. Industry return predictability: A machine learning approach. J. Financ. Data Sci. 1 (3), 9­28.
+Shi, Z., 2016. Estimation of sparse structural parameters with many endogenous variables. Econometric Rev. 35 (8­10), 1582­1608.
+Smeekes, S., Wijler, E., 2018. Macroeconomic forecasting using penalized regression methods. Int. J. Forecast. 34 (3), 408­430.
+Smeekes, S., Wijler, E., 2020. Unit roots and cointegration. In: Macroeconomic Forecasting in the Era of Big Data. Springer, pp. 541­584.
+Su, L., Shi, Z., Phillips, P.C., 2016. Identifying latent structures in panel data. Econometrica 84 (6), 2215­2264.
+Sun, Y., Hong, Y., Lee, T.-H., Wang, S., Zhang, X., 2020. Time-varying model averaging. J. Econometrics.
+Tibshirani, R., 1996. Regression shrinkage and selection via the Lasso. J. R. Stat. Soc. Ser. B Stat. Methodol. 58 (1), 267­288.
+Timmermann, A., Zhu, Y., 2017. Monitoring Forecasting Performance. UCSD Working Paper.
+Welch, I., Goyal, A., 2008. A comprehensive look at the empirical performance of equity premium prediction. Rev. Financ. Stud. 21 (4), 1455­1508.
+Xu, K.-L., 2018. Testing for return predictability with co-moving predictors of unknown form. Available at SSRN 3177313.
+Zhang, R., Robinson, P., Yao, Q., 2019. Identifying cointegration by eigenanalysis. J. Amer. Statist. Assoc. 114 (526), 916­927.
+Zou, H., 2006. The adaptive Lasso and its oracle properties. J. Amer. Statist. Assoc. 101 (476), 1418­1429.
+Zou, H., Hastie, T., 2005. Regularization and variable selection via the elastic net. J. R. Stat. Soc. Ser. B Stat. Methodol. 67 (2), 301­320.
+
+                           349
+

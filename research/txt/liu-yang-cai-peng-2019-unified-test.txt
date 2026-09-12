@@ -1,0 +1,2201 @@
+                                               Journal of Econometrics 208 (2019) 141­159
+
+                                           Contents lists available at ScienceDirect
+
+                                      Journal of Econometrics
+
+                                 journal homepage: www.elsevier.com/locate/jeconom
+
+A unified test for predictability of asset returns regardless of
+
+properties of predicting variables
+
+Xiaohui Liu a, Bingduo Yang b,c,, Zongwu Cai d,e, Liang Peng f
+
+a School of Statistics, Jiangxi University of Finance and Economics, Nanchang, Jiangxi 330013, China
+b Lingnan (University) College, Sun Yat-sen University, Guangzhou, Guangdong 510275, China
+c School of Finance, Jiangxi University of Finance and Economics, Nanchang, Jiangxi 330013, China
+d Department of Economics, University of Kansas, Lawrence, KS 66045, USA
+e The Wang Yanan Institute for Studies in Economics and Fujian Provincial Key Lab of Statistical Sciences, Xiamen
+University, Xiamen, Fujian 361005, China
+f Department of Risk Management and Insurance, Georgia State University, Atlanta, GA 30303, USA
+
+article info                     abstract
+
+Article history:                     Some unified tests have been proposed recently in the literature for testing pre-
+Available online 9 October 2018  dictability of asset returns based on a simple linear predictive regression model, which
+                                 has a drawback that predicted variable cannot be stationary if the predicting variable
+JEL classification:              is nonstationary. To solve this issue, this paper includes the difference of the predicting
+C12                              variable into the simple linear predictive regression. Furthermore, a unified empirical
+C22                              likelihood inference is developed to test the predictability regardless of the properties of
+Keywords:                        the predicting variable. A simulation study is conducted to confirm the efficiency of the
+Empirical likelihood             proposed methods before applying to a real example.
+Predictive regression
+Weighted score                                                                                      © 2018 Elsevier B.V. All rights reserved.
+
+1. Introduction
+
+    Recently, predictive regression models have gained much attention in economics and finance as well as actuarial science;
+see the monograph by Frees et al. (2014). Indeed, testing predictability of asset returns based on a simple predictive
+regression model has been studied for decades with many financial applications such as the mutual fund performance, the
+conditional capital asset pricing, and the optimal asset allocations. A simple linear predictive regression model assumes the
+following structural model:
+
+Yt =  + Xt-1 + Ut , Xt =  + Xt-1 + Vt , 2  t  n,                                                                   (1)
+
+where {(Ut , Vt )T } is a sequence of independent and identically distributed random vectors with means zero and finite
+
+variances. Here AT denotes the transpose of matrix or vector A. It is well documented in the literature that the least
+
+squares estimator for  based on the first equation in (1) is biased in finite sample behavior due to the correlation between
+Ut and Vt , and hence several bias-corrected estimators and tests for both stationary (e.g., || < 1) and nonstationary
+(e.g.,  = 1 - /n for some ) for model (1) have been proposed in the literature; see, for example, Cavanagh et al.
+
+(1995), Stambaugh (1999), Amihud and Hurvich (2004), Chen and Deo (2009), Amihud et al. (2009), and references
+
+therein.
+
+   Corresponding author.
+
+      E-mail address: bdyang2006@sina.com (B. Yang).
+
+https://doi.org/10.1016/j.jeconom.2018.09.009
+0304-4076/© 2018 Elsevier B.V. All rights reserved.
+142                          X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+   An issue related to the inference of  in model (1) is that the asymptotic distribution of an estimator or a test statistic
+depends heavily on whether Xt is stationary or nearly integrated or unit root, and  is zero or nonzero. In practice, it is
+
+extremely challenging to distinguish between stationary and nearly integrated, and between nearly integrated and unit root
+
+since the level of persistence cannot be estimated consistently. Therefore, it is of importance to have a unified inference
+
+approach to avoid making a mistake in characterizing the predicting variable; see Campbell and Yogo (2006), Chen et al.
+
+(2013), Zhu et al. (2014), and the references therein. Recently, Choi et al. (2016) proposed a test for testing predictability
+
+(e.g., H0 :  = 0) based on a so-called Cauchy estimation, which unifies the cases of nearly integrated and unit root,
+
+whereas Phillips and Lee (2013) and Kostakis et al. (2015) developed a new test for testing predictability by using an extended
+
+instrumental variable (dubbed as IVX) based inference. However, the construction of instrumental variables depends heavily
+
+on the persistence level of the predicting variable and the IVX approach reduces the convergence rate of the proposed
+
+estimator so that it might lose the power of the proposed test.
+
+   When (Ut , Vt )T has a bivariate normal distribution, one can write Ut = Vt +  Vt for some  (a linear projection), where
+
+Vt and Vt are independent. Therefore, model (1) can be written as
+
+     Yt =  + Xt-1 +  Vt + Vt, Xt =  + Xt-1 + Vt .                                        (2)
+
+Now, Vt and Vt become independent so that one could expect an inference based on the first equation in (2) with Vt replaced
+
+by V^t = Xt - ^ - ^ Xt-1 is preferred to that based on the first equation in (1); see Amihud and Hurvich (2004) and Cai and
+Wang (2014) for details. Extension to modeling  and  as a smooth function of t is available in Cai et al. (2015). Some recent
+
+developments on nonparametric inferences for predictive regressions, when Xt is nonstationary, include, but not limited to,
+the papers by Juhl (2014) and Kasparis et al. (2015).
+
+    Although model (1) has been studied and applied to testing predictability of asset returns, a common drawback with
+
+model (1) is that Yt cannot be stationary if Xt is nonstationary. In such a case, it might lose the economic interpretation if Yt
+is an asset return which is commonly assumed to be stationary. To overcome this issue, we propose including the difference
+
+of the predicting variable into the simple linear predictive regression. That is, we consider the following model
+
+     Yt =  + 1Xt-1 + 2Xt-2 + Ut , Xt =  + Xt-1 + Vt ,                                    (3)
+
+where Xt-1 = Xt-1 - Xt-2. Clearly, when Xt is a unit root process, Xt-1 is stationary and Yt in (3) can be stationary if
+2 = 0. Under model (3), Yt is predictable by not only the difference of Xt-1's but also the series Xt-1's itself. Note that despite
+the fact that the difference Xt-1 =  + Vt-1 + ( - 1)Xt-2 =  + Vt-1 -  Xt-2/n, where  = 1 - /n for some , is not
+an innovation unless the regressor belongs to the class of integrated processes (i.e.,  = 0), it behaves asymptotically as an
+innovation for  = 0. To answer the important question on whether Xt-1 and/or Xt-2 can be used to directly predict Yt , one
+may be interested in testing the null hypothesis H0 : 1 = 0 or H0 : 2 = 0 or H0 : 1 = 2 = 0 under model (3).
+
+    Model (3) is different from the existing literature in the following ways. First, although model (3) can be viewed as a
+
+special case of multiple-predictor regressions in the literature such as Amihud et al. (2009) for the stationary case, there
+
+exists no unified test for testing predictability; that is, a test does not require knowing whether Xt is stationary or nearly
+integrated or unit root. Also, it does not need to estimate Vt as in model (2). Secondly, we remark that model (3) is different
+from that in Amihud and Hurvich (2004) and Cai and Wang (2014) since the predicting variables in (3) are Xt-1 and Xt-2
+and we allow errors Ut and Vt to be correlated, while the predicting variables in (2) are Xt and Xt-1 essentially and errors
+Vt and Vt are uncorrelated. Moreover, model (3) is different from that in Zhu et al. (2014) which is model (1) without the
+difference term. Finally, it is worth pointing out that the idea of adding the difference Xt-1 directly into (3) as a regressor
+is different from that in Kostakis et al. (2015) for using Xt to construct the IVX instrument to obtain the two-stage least
+
+squares estimator of 2 although both use the differencing idea.
+   To obtain a unified test for testing predictability in model (3) without knowing the properties of {Xt }, this paper
+
+investigates the possibility of extending the unified empirical likelihood inference in Zhu et al. (2014) for model (1). We
+
+refer to the book by Owen (2001) for an overview of empirical likelihood methods.
+
+    The paper is organized as follows. Section 2 presents the methodologies and main asymptotic results. A simulation study
+
+is conducted to illustrate the finite sample performance of the proposed robust test in Section 3. Section 4 reports a real data
+
+analysis. All proofs are relegated to Section 5.
+
+2. Methodologies and asymptotic results
+
+   For testing predictability under model (3), we consider the testing hypothesis H0 : 1 = 0 or H0 : 2 = 0 or
+H0 : 1 = 2 = 0 and propose a unified empirical likelihood test regardless of Xt being stationary or nearly integrated
+
+or unit root. More generally, the proposed empirical likelihood method can be employed to construct a unified confidence
+
+interval for 1 or 2 and a unified confidence region for (1, 2)T without knowing the properties of {Xt }.
+
+2.1. With a known intercept
+
+   To better appreciate the proposed unified test, we first consider the simple case of having a known intercept  = 0,
+which may have an independent interest as well. That is to assume that observations Y1, . . . , Yn and X1, . . . , Xn-1 follow
+                                                                X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                                                                        143
+
+from the model
+
+                                                                                                         
+
+                                                                                                         
+          Yt = 0 + 1 Xt-1 + 2Xt-2 + Ut , Xt =  + Xt-1 + jVt-j,
+                                                                                                                                                                                                  (4)
+
+                                                                                                         j=0
+
+where,    in    what    follows,      the   linear   process                    j Vt -j   is  assumed         to  be    strictly  stationary,1           and  {(Ut ,  Vt )T  }  is  a  sequence   of
+
+                                                                          j=0
+
+independent and identically distributed random vectors with means zero and finite variances.
+
+   It is known that a test statistic for testing predictability based on the least square estimators for 1 and 2 has an
+asymptotic distribution depending on the properties of {Xt }. Therefore, a direct application of the empirical likelihood
+
+method in Qin and Lawless (1994) fails, i.e., the so-called Wilks theorem does not hold. Motivated by the unified empirical
+
+likelihood inference idea in Zhu et al. (2014) for model (1), the following score equations are considered:
+
+          {tn=3{Yt - 0 - 1 Xt-1 - 2Xt-2}Xt-1 = 0,                                                                                                                                                 (5)
+
+             tn=3{Yt        -    0    -  1     Xt-1        -                              +   Xt2-2   =     0,
+                                                               2Xt-2}Xt-2/ 1
+
+which lead to the following empirical likelihood method. Clearly, the weight is only added to the second equation in (5)
+
+                            n                     
+
+to    ensure    that    1       t =3  {Xt  -2  /     1+    Xt2-2   2   converges          in  probability         to    a  positive    constant          for  {Xt }  being      both     stationary
+                        n
+                                                                  }
+
+and nonstationary. Unlike the second equation, we do not need to add a weight to the first equation in (5) because
+   n
+1            {Xt    -1   2  always    converges            in  probability      to     a  positive    constant.         Now,    define
+n      t =3
+                        }
+
+          { Zt1(1, 2) = {Yt - 0 - 1 Xt-1 - 2Xt-2}Xt-1,
+
+                                                                         
+            Zt2(1, 2) = {Yt - 0 - 1 Xt-1 - 2Xt-2}Xt-2/ 1 + Xt2-2,
+
+and let Zt (1, 2) = (Zt1(1, 2), Zt2(1, 2))T for t = 3, . . . , n. Like Qin and Lawless (1994), we define the empirical
+likelihood function for (1, 2)T via estimating equations as
+
+                                 {n                                                           n                   n                                 }
+
+          L(1, 2) = sup                     (npt ) : p3  0, . . . , pn  0,                        pt = 1,               pt Zt (1, 2) = 0 .
+
+                                      t =3                                                t =3                    t =3
+
+Note that the supremum is taken with respect to pt 's. It follows from the Lagrange multiplier method that the empirical
+
+likelihood ratio for 1 and 2 is
+
+                                                     n
+
+          -2 log L(1, 2) = 2  log (1 + T Zt (1, 2)) ,
+
+                                            t =3
+
+where  = (1, 2) satisfies
+
+          1    n        Zt (1, 2)                 =  0.
+          n         1 + T Zt (1, 2)
+             
+
+             t =3
+
+   If one is interested in testing H0 : 1 = 0 or constructing a unified confidence interval for 1, then the profile empirical
+likelihood function LP1(1) = max2 L(1, 2) is considered. On the other hand, one considers LP2(2) = max1 L(1, 2) for
+testing H0 : 2 = 0 or constructing a unified interval for 2.
+
+    To prove the Wilks theorem for the aforementioned empirical likelihood method, we assume the following regularity
+conditions:
+
+    C1.   E (U1 )   =   0, E(V1)      =     0,    E  (|U1   2+  + |V1|2+)           <         for     some        >     0  and  {(Ut , Vt )T } is a      sequence of         independent          and
+
+                                                           |
+
+          identically distributed random vectors.
+
+Theorem 1.          Suppose         model       (4)  holds     with    known        0     and     coefficients    js       satisfying   that        the  linear  process                 j Vt -j  is  a
+
+                                                                                                                                                                                    j=0
+strictly stationary process, and either (i) || < 1 independent of n (stationary case), or (ii)  = 1 - /n for some  = 0
+
+(near unit root case), or (iii)                      =     1 (unit root case). Then, under Condition C1, we have -2 log L(1,0, 2,0)                                                       d   2(2),
+
+                                                                                                                                                                                       -
+
+-2 log LP1(1,0)            d      2(1)      and      -2 log LP2(2,0)               d    2(1)      as  n         ,     where     (1,0, 2,0)T         denotes   the     true      value  of  (1, 2)T
+
+                        -                                                       -
+
+and      d   denotes        the  convergence         in    distribution.
+
+      -
+
+   It follows from Theorem 1 that a unified empirical likelihood test rejects the null hypothesis H0 : 1 = 2 = 0 at the
+significance level a if -2 log L(0, 0) > 22,1-a, where 22,1-a denotes the (1 - a)th quantile of a chi-squared distribution with
+two degrees of freedom. Similarly, unified empirical likelihood tests can be obtained for testing H0 : 1 = 0 and H0 : 2 = 0
+based on -2 log LP1(0) and -2 log LP2(0), respectively. A unified interval/region can be obtained as well by Theorem 1.
+
+   1  If  {j }  in  model   (4)  satisfies  some     condition,   say           |j  |  <  ,   it  is  easy  to  show    that           j Vt -j  is  strictly  stationary;  see  Brockwell  and  Davis
+
+                                                                           j=0                                                    j=0
+
+(1991) on Page 89 for details.
+144                                                   X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+Remark 1. When {Ut } in (4) is a strictly stationary AR(p) model, Theorem 1 fails due to correlated errors. In this case, we can
+
+follow the idea in Li et al. (2017) to develop some unified empirical likelihood tests and unified jackknife empirical likelihood
+tests by taking the structure of Uts into account.
+
+2.2. With an unknown intercept
+
+     This section is devoted to considering the model with an unknown intercept , i.e.,
+
+                                                                                       
+
+                                                                                   
+       Yt =  + 1 Xt-1 + 2Xt-2 + Ut , Xt =  + Xt-1 + jVt-j
+                                                                                                                                                                    (6)
+
+                                                                                   j=0
+
+where  coefficients  js     are  assumed    to  satisfy     some   condition       so  that           j Vt -j  is  a  strictly    stationary  process  as  before.  By
+
+                                                                                                 j=0
+
+the same token, one may simply apply the empirical likelihood method to some weighted score equations. However, when
+
+Xt is nearly integrated and  = 0, the joint asymptotic distribution of the score equation with respect to  and the weighted
+score equation with respect to 2 is no longer a bivariate normal distribution, which makes the Wilks theorem invalid. To
+
+solve this degenerate issue, Zhu et al. (2014) proposed splitting the data into two parts and then using the differencing idea
+
+with a big lag to get rid of the intercept before formulating an empirical likelihood function for model (1). Here, we generalize
+
+their idea for model (1) to the above model in (6).
+
+   Let m = [n/2] and define Y~t = Yt+m - Yt , X~t = Xt+m - Xt , U~ t = Ut+m - Ut and V~t = Vt+m - Vt , where [·] denotes the
+
+floor function. Then, model (6) implies that
+
+                                                                        
+
+                                                                   
+       Y~t = 1 X~t-1 + 2X~t-2 + U~ t , X~t = X~t-1 + jV~t-j,
+                                                                                                                                                                    (7)
+
+                                                                        j=0
+
+where  X~t-1  =    X~ t -1  -  X~t-2.  The  reason    of  using  difference     with   a  big  lag   is  to  ensure   |X~t |   p    when  |Xt |   p    as  t    .
+
+                                                                                                                                                 
+
+Like the proposed unified empirical likelihood tests given in Section 2.1, we define the empirical likelihood function for 1
+
+and 2 in the above model (7) as follows:
+
+                            {m                                               m                    m                           }
+
+       L~(1, 2) = sup                (mpt ) : p3  0, . . . , pm  0,                pt = 1,           pt Z~t (1, 2) = 0 ,
+
+                               t =3                                          t =3              t =3
+
+                            (                               )T
+
+where Z~t (1, 2) = Z~t1(1, 2), Z~t2(1, 2) with Z~t1(1, 2) = {Y~t - 1 X~t-1 - 2X~t-2}X~t-1 and Z~t2(1, 2) =
+
+                                     
+
+{Y~t - 1 X~t-1 - 2X~t-2}X~t-2/ 1 + X~t2-2.
+   When the interest is in testing H0 : 1 = 0 or H0 : 2 = 0, one considers the profile empirical likelihood function
+
+L~P1(1) = max2 L~(1, 2) or L~P2(2) = max1 L~(1, 2), respectively. The following result shows that the Wilks theorem
+
+holds for the above proposed empirical likelihood method.
+
+Theorem 2. Under model (6), Condition C1 and the same conditions on  and js as in Theorem 1, we have that -2 log L~
+
+(1,0,  2,0)     d   2(2),   -2   log   L~ P 1 (1,0 )     d   2(1)  and  -2   log   L~ P 2 (2,0 )     d    2(1)  as  n         .
+
+             -                                        -                                           -
+
+   In view of Theorem 2, a unified empirical likelihood test rejects the null hypothesis H0 : 1 = 2 = 0 at the significance
+level a for model (6) if -2 log L~(0, 0) > 22,1-a. Similarly, unified empirical likelihood tests can be obtained for testing
+H0 : 1 = 0 and H0 : 2 = 0 for model (6) based on -2 log L~P1(0) and -2 log L~P2(0), respectively. Again, a unified
+
+interval/region can be obtained as well by Theorem 2.
+
+2.3. An extension to multiple regressors
+
+     When Xt in (4) is a multivariate vector, in which one of variables may be nonstationary and the rest of the variables are
+                                                                                                         
+
+surely stationary, we could simply replace the weight 1 + Xt2-2 in (5) by 1 + XtT-2Xt-2 and show that Theorem 1 still
+
+holds. However, this is not true when more than one variables in Xt may be nonstationary. Here, we propose an easy but
+
+inefficient way to extend the model in (4) to the case of a bivariate predicting vector by splitting the data into two parts and
+
+using each part to derive the score equations with respect to each variable in Xt . Therefore, the idea of splitting data here is
+different from the previous one, which uses differences to get rid of the intercept before formulating an empirical likelihood
+
+function.
+
+     Consider the following model
+
+                                                                                       
+
+       Yt = 0 + 1T Xt-1 + 2T Xt-2 + Ut ,                                                                                                                            (8)
+                                                            Xt =  + Xt-1 + jVt-j,
+
+                                                                                       j=0
+                                                             X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                                                         145
+
+where 1, 2, Xt and  are 2 × 1 vector,  and  are 2 × 2 matrix, and 0 is known. Note that we always write i = (i,1, i,2)T .
+
+Similar to the empirical likelihood function formulated in Section 2.1, one may use the following weighted score equations:
+
+     n
+
+                         0      1T Xt-1             2T Xt-2}Xt-1                   0,
+
+               {Yt    -     -                 -                              =
+     
+     
+
+     
+
+        t  =3
+     
+     
+
+           n                                                             Xt -2,1
+     
+     
+
+                      - 0   - 1T Xt-1         - 2T Xt-2}                                 = 0,
+      {Yt
+                                                                                                                                                                                (9)
+                                                                      1 + Xt2-2,1
+      t=3
+     
+
+     
+
+           n                                                             Xt -2,2
+     
+
+     {Yt              - 0   - 1T Xt-1         - 2T Xt-2}                                 = 0.
+
+                                                                      1 + Xt2-2,2
+      t=3
+
+As before, the added weights ensure that
+
+               1     n   {                                   }2          1     n   {                           }2
+               n          Xt-2,1/ 1                                      n                     /1
+                                              Xt2-2,1                                Xt               Xt2-2,2
+
+     both                                 +                      and                     -2,2      +
+
+                   t =3                                                      t =3
+
+converge in probability. However, the normalized product of the right sides of the second and third equations in (9) does
+not converge in probability in all cases. More specifically,
+
+     1    n              0      1(0)T Xt-1                2(0)T  Xt       2        Xt -2,1         Xt -2,2
+     n
+                    -       -                       -                -2  }                     
+            {Yt                                                                                  1 + Xt2-2,2
+                                                                                1 + Xt2-2,1
+        t =3
+
+converges in distribution to a nondegenerate random variable rather than in probability to a constant when Xt is nonsta-
+
+tionary and  = 0 in (8), where i(0) to denote the true value of i. That is, the joint distribution of the normalized right sides
+
+of the score equations in (9) cannot be normal for all cases. Hence, a direct application of the empirical likelihood inference
+
+to the estimating equations in (9) fails to have a chi-squared limit for all cases.
+
+   In order to derive a unified inference when  is known, we propose to first splitting the data into two parts and then
+applying each part to the score equations with respect to each predicting variable. More specifically, let m = [n/2] and
+define for t = 1, . . . , m
+
+     Z¯t   ,1  (1  ,  2)    =   {Yt  -   0  -    1T Xt-1         -    2T Xt-2}Xt-1,1,
+     
+
+                            =   {Yt  -   0  -    1T Xt-1         -    2T Xt-2}  Xt-2,1               ,
+                                                                                  1 + Xt2-2,1
+     
+     Z¯t,2(1, 2)
+     
+     
+     
+     
+     
+
+     
+
+        Z¯t,3(1, 2) = {Yt+m - 0 - 1T Xt+m-1 - 2T Xt+m-2}Xt+m-1,2,
+
+                      2)    =   {Yt+m    -  0    -     1T    Xt +m-1         -  2T  Xt +m-2 }        Xt +m-2,2     ,
+     
+     Z¯t,4(1,                                                                                    
+                                                                                                   1 + Xt2+m-2,2
+     
+     
+     
+
+     
+
+           (1,     2)    =  (Z¯t,1(1,     2),    .  .  .  ,  Z¯t,4(1,    2))T   .
+     Z¯t
+
+It is clear that the first part of data is used to derive scores with respect to 1,1 and 2,1, while the second part of data
+                                                                                                                                                         m         Z¯t,2(1(0),  2(0) )
+constructs  scores       with   respect   to  1,2         and    2,2.    Now    due    to   the  independence      of    Ut  and  Ut +m ,  we  have   1
+                                                                                                                                                      m      t =3
+                    p
+Z¯t,4(1(0), 2(0))        0  as  n        ,  which            is  necessary      to  ensure     that  Wilks     theorem       holds  for   the  application  of     the  empirical
+                   
+
+likelihood method to the above Z¯t (1, 2), t = 3, . . . , m.
+
+Define the empirical likelihood function for 1 and 2 as
+
+                                {m                                                       m               m                             }
+
+     L¯(1, 2) = sup                      (mpt ) : p3  0, . . . , pm  0,                        pt = 1,         pt Z¯t (1, 2) = 0 .
+
+                                   t =3                                                  t =3            t =3
+
+To prove the Wilks theorem, we need the following regularity conditions:
+
+D1.  E (|U1 |2+     +    |V1,1   2+  +    |V1,2   2+      )   <   for some               >     0 and {(Ut , Vt )T } is a sequence of independent and identically
+
+                                |                |
+
+     distributed random vector with means zero.
+
+D2.  {t }  satisfies     that             jVt    -j    }  is  a  strictly    stationary process.
+                                { j=0
+D3. Either  given in (8) satisfies that |I2 -  | = 0 for all | |  1 (stationary), or  = I2 - /n, where I2 denotes the
+
+     2 × 2 identity matrix and  is a 2 × 2 matrix (unit root or nearly integrated).
+
+Theorem 3.        Under     model    (8)  and    Conditions          D1­D3,        we    have  that  -2  log   L¯(1(0),  2(0) )     d   2(4)   as  n     .
+
+                                                                                                                                 -
+146                                                    X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+   The consequence of Theorem 3 is that a unified empirical likelihood test rejects the null hypothesis H0 : (1T , 2T )T = 0
+at the significance level a for model (8) if -2 log L¯(0, 0) > 42,1-a. If one is interested in testing H0 : 1,1 = 0, then a
+unified empirical likelihood test is based on the profile empirical likelihood ratio -2 log(max1,2,2 L¯(1, 2)), which has a
+
+chi-squared distribution with one degree of freedom under the null hypothesis. Similarly, a unified empirical likelihood test
+
+can be obtained for testing other null hypotheses such as H0 : 1 = 0 or H0 : 2 = 0.
+
+Remark 2. When Xt is a d-dimensional vector, which may be nonstationary for each variable, the above proposed unified
+test has to split the data into d parts and use each part to construct score equations with respect to each variable in Xt , which
+
+becomes quite inefficient. Moreover, when the intercept  is unknown, getting rid of the intercept via differencing is needed
+
+too. Therefore, developing an efficient unified predictability test for a multivariate predictive regression is challenging and
+
+is believed to be beyond the scope of this paper. This will be one of our future research projects.
+
+3. A simulation study
+
+     In this section, we investigate the finite sample performance of the proposed unified tests for predictive regressions using
+
+simulated data sets.
+
+     Let  {(Ut ,  Vt )T   n     be  a  random     sample  from     a  bivariate  Gaussian  Copula       C (F1(Ut  ),   F2(Vt ),  ),  where  the    marginal    distribu-
+
+                         }t =1
+tion Fi is a Student's t distribution with degrees of freedom i for i = 1,2. The dependence parameter is set to be  = -0.5,
+
+which captures the correlation between two innovations. The negative sign is based on a real example of predicting the stock
+
+return by the log dividend-price or the log earning-price in Cai and Wang (2014). For copula models and their applications,
+
+we refer to the books by Joe (1997), Jaworski et al. (2013, 2010). We take 1 = 5 and 2 = 4 and choose j = 1 for
+
+j  =  0, . . . , q - 1   and    j   =  0  for  j    q  with  q  =  1  or  5  in           jVt-j,    =  0,    =  1,     =   0.9   or  1  - 2/n  or  1 with n    =  200  or
+
+                                                                                     j=0
+500 or 2,000 in either model (4) or (6). For testing H0 : 1 = 0 in either model (4) or model (6), we consider 2 = 0.5 and
+
+1     =  d/n0.5   for    d  =   0, ±1, ±2, ±3, ±4.        On    the   other  hand,  for   testing   H0  :  2  =     0  in  either    model  (4)  or  (6),  we  consider
+                                 
+1 = 0.5 and 2 = d/ n for d = 0, ±1, ±2, ±3, ±4 when  = 0.9, and 1 = 0.5 and 2 = d/n for d = 0, ±2, ±4, ±6, ±8
+
+when  = 1 - 2/n and 1. Therefore, results for d = 0 and d = 0 represent the empirical sizes and empirical powers of the
+
+proposed unified tests, respectively.
+
+     By drawing 10,000 random samples from either model (4) or model (6) under the above settings, we compute the unified
+
+profile empirical likelihood functions for testing H0 : 1 = 0 and H0 : 2 = 0 in Theorems 1 and 2 by using the package
+
+``emplik" in the statistical software R, and report the empirical sizes and powers in Tables 1­8. From these tables, we could
+
+summarize our observations as follows. Firstly, the test for H0 : 2 = 0 has an accurate size for all sample sizes considered,
+but the test for H0 : 1 = 0 does not have an accurate size when n = 200, which is because 2 is estimated at the rate of
+n-1 while 1 is estimated at the rate of n-1/2. Secondly, tests based on Theorem 1 are more powerful than those based on
+
+Theorem 2 due to the employed technique of splitting data into two parts to get rid of the intercept. Thirdly, the proposed
+
+unified tests have an overall satisfactory power and their powers become larger as the alternative hypothesis is far away
+
+from the null hypothesis. Furthermore, for testing H0 : 2 = 0, the test for the case of unit root is more powerful than that
+for the nearly integrated case. Finally, results for q = 1 and q = 5 show that our method is robust against the dependent or
+
+independent errors in modeling the predicting variable.
+
+4. A real example
+
+    This section is devoted to applying the proposed unified tests to testing the predictability of the asset returns with some
+U.S. equity data, where the sample period is January 1927 to December 2012 with monthly data as in Kostakis et al. (2015).
+The predicted variable is the CRSP value-weighted excess returns and some predicting variables are the difference between
+the log of dividends and the log of earnings (dividend payout ratio), the long-term US government bond yield (long-term
+yield), the difference between the log of dividends and the log of the lagged prices (dividend yield), the difference between
+the log of dividends and the log of stock prices (dividend price ratio), the 3-month US Treasury bill rate (T-bill rate), the
+difference between the log of earnings and the log of prices (earnings price ratio), the ratio of book value to market value for
+the Dow Jones Industrial Average (book-to-Market value ratio), the difference between the BAA and AAA-rated corporate
+bond yields (default yield spread), the ratio of 12-month moving sum of net equity issues by NYSE listed stocks divided by
+the total end-of-year market capitalization of these stocks (net equity expansion), and the difference between the long-term
+yield and the T-bill rate (term spread).
+
+    Before applying the proposed unified tests to the above data, we examine whether both Uts and Vts in models (4) and (6)
+are uncorrelated. By fitting model (6) with the least squares estimate, we plot the autocorrelation functions of the estimated
+Uts for the period 1/1927­12/2012 and the period 1/1952­12/2012, which suggest that the assumption of uncorrelated Uts
+in model (6) is reasonable for the period 1/1952­12/2012. Therefore our study will focus on the period 1/1952­12/2012.
+
+Plots of the autocorrelation functions also show that the assumption of uncorrelated Uts in model (4) with known 0 = 0
+                                             X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                              147
+
+Table 1
+
+Empirical sizes and powers for the test based on Theorem 1 and model (4) with  = 0 and known  = 1 for
+
+testing     H0     :  1     =  0  vs  Ha  :  1  =  0.  We  take  0  =  1  and  j  =  0  for  j      1  in           j Vt -j .
+
+                                                                                                               j=0
+
+(1, )                                     n = 200                              n = 500                              n = 2000
+
+                                      10%              5%                 10%                   5%                  10%        5%
+
+(0, 0.9)                              0.12             0.07               0.11                  0.06                0.10       0.05
+                                      0.30             0.21
+(-      1   ,  0.9)                   0.33             0.23               0.30                  0.21                0.30       0.19
+                                      0.69             0.58
+                                      0.71             0.60
+         n                            0.92             0.86
+                                      0.92             0.88
+(   1   ,  0.9)                       0.98             0.97               0.31                  0.21                0.30       0.20
+                                      0.99             0.90
+                                      0.12             0.06
+     n                                0.30             0.21
+                                      0.33             0.23
+(-      2   ,  0.9)                   0.69             0.58               0.69                  0.57                0.70       0.57
+                                      0.71             0.60
+                                      0.92             0.86
+         n                            0.93             0.88
+                                      0.98             0.97
+(   2   ,  0.9)                       0.99             0.97               0.70                  0.58                0.70       0.58
+                                      0.12             0.06
+                                      0.30             0.21
+     n                                0.33             0.23
+                                      0.69             0.58
+(-      3   ,  0.9)                   0.72             0.61               0.93                  0.87                0.94       0.90
+                                      0.92             0.86
+                                      0.93             0.88
+         n                            0.98             0.97
+                                      0.99             0.97
+(   3   ,  0.9)                                                           0.93                  0.88                0.94       0.90
+   
+
+     n
+
+(-      4   ,  0.9)                                                       0.99                  0.98                0.99       0.99
+       
+
+         n
+
+(   4   ,  0.9)                                                           0.99                  0.98                0.99       0.99
+   
+
+     n
+
+(0, 1      -   2   )                                                      0.11                  0.06                0.10       0.05
+               n
+
+(-      1   ,  1  -   2  )                                                0.30                  0.20                0.30       0.20
+                      n
+
+         n
+
+(   1   ,  1   -   2  )                                                   0.32                  0.21                0.30       0.21
+                   n
+
+     n
+
+(-      2   ,  1  -   2  )                                                0.69                  0.58                0.70       0.58
+                      n
+
+         n
+
+(   2   ,  1   -   2  )                                                   0.70                  0.59                0.70       0.59
+                   n
+
+     n
+
+(-      3   ,  1  -   2  )                                                0.93                  0.88                0.94       0.90
+                      n
+
+         n
+
+(   3   ,1     -   2  )                                                   0.94                  0.89                0.94       0.90
+                   n
+   n
+
+(-      4   ,  1  -   2  )                                                0.99                  0.98                1.00       0.99
+                      n
+
+         n
+
+(   4   ,  1   -   2  )                                                   0.99                  0.98                0.99       0.99
+                   n
+
+     n
+
+(0, 1)                                                                    0.11                  0.06                0.10       0.05
+
+(-      1   ,  1)                                                         0.30                  0.20                0.30       0.19
+       
+
+         n
+
+(   1   ,  1)                                                             0.32                  0.22                0.30       0.21
+   
+
+     n
+
+(-      2   ,  1)                                                         0.69                  0.58                0.70       0.58
+       
+
+         n
+
+(   2   ,  1)                                                             0.70                  0.60                0.70       0.59
+   
+
+     n
+
+(-      3   ,  1)                                                         0.93                  0.88                0.94       0.90
+       
+
+         n
+
+(   3   ,  1)                                                             0.94                  0.89                0.94       0.90
+   
+
+     n
+
+(-      4   ,  1)                                                         0.99                  0.98                0.99       0.99
+       
+
+         n
+
+(   4   ,  1)                                                             0.99                  0.98                0.99       0.99
+   
+
+     n
+
+is reasonable, and confirms the setting for the considered predicting variables is suitable. To save space as suggested by a
+reviewer, we only report the autocorrelation function for the predicting variable, dividend payout ratio in Fig. 1. Other plots
+are available upon request.
+
+   Next, we employ our proposed unified tests to model (4) with known 0 = 0 and to model (6) with unknown  for
+the period 1/1952­12/2012. P-values for testing H0 : 1 = 0, H0 : 2 = 0 and H0 : 1 = 2 = 0 are reported in
+
+Tables 9 and 10, respectively. Results in Table 9 show predictability for each predicting variable, while results in Table 10
+show no predictability except the difference of the long-term yield. This finding shows that a small intercept can change the
+predictability dramatically when the predicting variable is nearly integrated. This may be due to the drawback of our method
+in Theorem 2, which requires splitting the data into two parts so that efficiency is reduced. Without doubt, it is important and
+challenging to derive a unified test for testing zero intercept regardless of the predicting variable being stationary or nearly
+integrated or unit root, which is warranted as one of future research projects. On the other hand, results in Table 10 are in line
+with the conclusion of no predictability at level 5% for the considered predicting variables in Table 6 of Kostakis et al. (2015),
+which studies model (6) without the term Xt-1. However, they found predictability for the predicting variables of T-bill
+rate and term spread at level 10%. Therefore, it remains interesting to extend the IVX-based test in Kostakis et al. (2015) to
+the larger model (6) and to see whether the predictability for these two predicting variables at level 10% will disappear due to
+the fact that an additional parameter has to be estimated. Since the IVX method involves the construction of an instrumental
+148                                                     X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+           Table 2
+
+           Empirical sizes and powers for the test based on Theorem 1 and model (4) with  = 0 and known  = 1 for
+
+           testing     H0     :  1     =  0  vs  Ha  :  1  =  0.  We  take  0  =  ···  =  4  =  1  and  j  =  0  for  j    5  in           j Vt -j .
+
+                                                                                                                                      j=0
+
+           (1, )                                     n = 200                              n = 500                             n = 2000
+
+                                                 10%              5%                   10%         5%                         10%          5%
+
+           (0, 0.9)                              0.12             0.07                 0.12        0.06                       0.10         0.05
+                                                 0.31             0.21
+           (-      1   ,  0.9)                   0.32             0.22                 0.30        0.20                       0.30         0.19
+                                                 0.68             0.57
+                                                 0.70             0.59
+                    n                            0.91             0.86
+                                                 0.92             0.87
+           (   1   ,  0.9)                       0.98             0.97                 0.31        0.21                       0.30         0.20
+                                                 0.98             0.97
+                                                 0.12             0.07
+                n                                0.31             0.21
+                                                 0.33             0.22
+           (-      2   ,  0.9)                   0.69             0.58                 0.69        0.58                       0.70         0.58
+                                                 0.70             0.55
+                                                 0.92             0.86
+                    n                            0.93             0.88
+                                                 0.98             0.97
+           (   2   ,  0.9)                       0.99             0.97                 0.69        0.58                       0.70         0.58
+                                                 0.12             0.07
+                                                 0.31             0.21
+                n                                0.33             0.22
+                                                 0.68             0.57
+           (-      3   ,  0.9)                   0.71             0.60                 0.93        0.88                       0.94         0.89
+                                                 0.92             0.86
+                                                 0.93             0.88
+                    n                            0.99             0.97
+                                                 0.99             0.97
+           (   3   ,  0.9)                                                             0.93        0.88                       0.94         0.89
+              
+
+                n
+
+           (-      4   ,  0.9)                                                         0.99        0.98                       0.99         0.98
+                  
+
+                    n
+
+           (   4   ,  0.9)                                                             0.99        0.98                       0.99         0.99
+              
+
+                n
+
+           (0, 1 -        2   )                                                        0.11        0.06                       0.10         0.05
+                          n
+                   1             2
+           (-          ,  1  -   n  )                                                  0.30        0.20                       0.30         0.20
+
+                    n
+
+           (   1   ,  1   -   2  )                                                     0.31        0.22                       0.31         0.20
+                              n
+
+                n
+
+           (-      2   ,  1  -   2  )                                                  0.69        0.58                       0.70         0.59
+                                 n
+
+                    n
+
+           (   2   ,1     -   2  )                                                     0.70        0.59                       0.71         0.59
+                              n
+              n
+
+           (-      3   ,  1  -   2  )                                                  0.93        0.88                       0.95         0.90
+                                 n
+
+                    n
+
+           (   3   ,  1   -   2  )                                                     0.94        0.88                       0.94         0.90
+                              n
+
+                n
+
+           (-      4   ,  1  -   2  )                                                  0.99        0.98                       0.99         0.99
+                                 n
+
+                    n
+
+           (   4   ,  1   -   2  )                                                     0.99        0.98                       0.99         0.99
+                              n
+
+                n
+
+           (0, 1)                                                                      0.11        0.06                       0.10         0.05
+
+           (-      1   ,  1)                                                           0.30        0.20                       0.30         0.20
+                  
+
+                    n
+
+           (   1   ,  1)                                                               0.32        0.22                       0.31         0.20
+              
+
+                n
+
+           (-      2   ,  1)                                                           0.69        0.58                       0.70         0.59
+                  
+
+                    n
+
+           (   2   ,  1)                                                               0.71        0.59                       0.71         0.59
+              
+
+                n
+
+           (-      3   ,  1)                                                           0.93        0.88                       0.94         0.90
+                  
+
+                    n
+
+           (   3   ,  1)                                                               0.94        0.89                       0.94         0.90
+              
+
+                n
+
+           (-      4   ,  1)                                                           0.99        0.98                       0.99         0.99
+                  
+
+                    n
+
+           (   4   ,  1)                                                               0.99        0.98                       0.99         0.99
+              
+
+                n
+
+variable, such an extension to the larger model (6) is non-trivial at all although we expect the power of the IVX-based test
+might be reduced because of the larger model.
+
+    To compare with results in Campbell and Yogo (2006), we also apply our unified tests to the period 1/1952­12/2002,
+and report P-values in Tables 11 and 12. Again, when intercept is assumed to be known zero, results in Table 11 show
+predictability for each predicting variable. When the intercept is assumed to be unknown, unlike Table 10 for the longer
+period 1/1952­12/2012, results in Table 12 show that the CRSP value-weighted excess return can be predicted by the T-bill
+rate and its difference, the term spread and its difference, the difference of the long-term yield, and the difference of the
+net equity expansion. For model (1), Campbell and Yogo (2006) found predictability for T-bill rate and no predictability
+for dividend price ratio and earnings price ratio, which are in line with corresponding results in Table 12. On the other
+hand, they found predictability for the default yield spread while the corresponding result in Table 12 does not lead to this
+predictability.
+
+5. Proofs
+
+     We provide only the proof of Theorem 1 under the following setting:
+
+      = 0,  = 1 - /n for some   R                                                                                                                     (10)
+                                                            X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                              149
+
+                Table 3
+
+                Empirical sizes and powers for the test based on Theorem 2 and model (6) with  = 0 and unknown  for
+
+                testing    H0     :  1     =  0  vs  Ha  :  1  =  0.  We  take  0  =  1  and  j  =  0  for  j      1  in           j Vt -j .
+
+                                                                                                                              j=0
+
+                (1, )                                      n = 200                            n = 500                              n = 2000
+
+                                                     10%              5%                 10%                   5%                  10%        5%
+
+                (0, 0.9)                             0.13             0.07               0.11                  0.06                0.11       0.06
+                                                     0.22             0.14
+                (-   1     ,  0.9)                   0.24             0.15               0.21                  0.13                0.20       0.12
+                                                     0.47             0.35
+                                                     0.49             0.38
+                      n                              0.72             0.61
+                                                     0.74             0.63
+                (   1   ,  0.9)                      0.89             0.82               0.22                  0.14                0.21       0.13
+                                                     0.90             0.84
+                                                     0.13             0.07
+                     n                               0.22             0.14
+                                                     0.24             0.15
+                (-   2     ,  0.9)                   0.47             0.35               0.47                  0.35                0.45       0.33
+                                                     0.50             0.38
+                                                     0.72             0.62
+                      n                              0.74             0.64
+                                                     0.89             0.83
+                (   2   ,  0.9)                      0.91             0.85               0.48                  0.35                0.47       0.34
+                                                     0.13             0.07
+                                                     0.21             0.13
+                     n                               0.24             0.16
+                                                     0.46             0.34
+                (-   3     ,  0.9)                   0.51             0.39               0.73                  0.62                0.74       0.62
+                                                     0.71             0.61
+                                                     0.75             0.65
+                      n                              0.89             0.82
+                                                     0.85             0.96
+                (   3   ,  0.9)                                                          0.74                  0.63                0.75       0.64
+                   
+
+                     n
+
+                (-   4     ,  0.9)                                                       0.90                  0.84                0.91       0.85
+                    
+
+                      n
+
+                (   4   ,  0.9)                                                          0.91                  0.85                0.91       0.85
+                   
+
+                     n
+
+                (0, 1      -   2  )                                                      0.11                  0.06                0.11       0.05
+                               n
+                     1               2
+                (-         ,  1   -  n  )                                                0.21                  0.13                0.20       0.12
+
+                      n
+
+                (   1   ,  1  -   2  )                                                   0.22                  0.14                0.21       0.13
+                                  n
+
+                     n
+
+                (-   2     ,  1   -  2  )                                                0.47                  0.35                0.46       0.33
+                                     n
+
+                      n
+
+                (   2   ,  1  -   2  )                                                   0.49                  0.36                0.47       0.35
+                                  n
+
+                     n
+
+                (-   3     ,  1   -  2  )                                                0.73                  0.62                0.74       0.63
+                                     n
+
+                      n
+
+                (   3   ,  1  -   2  )                                                   0.75                  0.64                0.75       0.65
+                                  n
+
+                     n
+
+                (-   4     ,  1   -  2  )                                                0.90                  0.84                0.91       0.85
+                                     n
+
+                      n
+
+                (   4   ,  1  -   2  )                                                   0.91                  0.85                0.92       0.86
+                                  n
+
+                     n
+
+                (0, 1)                                                                   0.11                  0.06                0.11       0.05
+
+                (-   1     ,  1)                                                         0.20                  0.13                0.20       0.12
+                    
+
+                      n
+
+                (   1   ,  1)                                                            0.22                  0.14                0.21       0.13
+                   
+
+                     n
+
+                (-   2     ,  1)                                                         0.46                  0.35                0.45       0.33
+                    
+
+                      n
+
+                (   2   ,  1)                                                            0.50                  0.37                0.48       0.35
+                   
+
+                     n
+
+                (-   3     ,  1)                                                         0.73                  0.62                0.74       0.63
+                    
+
+                      n
+
+                (   3   ,  1)                                                            0.75                  0.65                0.76       0.65
+                   
+
+                     n
+
+                (-   4     ,  1)                                                         0.90                  0.84                0.91       0.85
+                    
+
+                      n
+
+                (   4   ,  1)                                                            0.91                  0.86                0.92       0.86
+                   
+
+                     n
+
+since proofs for other cases are similar and sometimes simpler. For example, when {Xt } is stationary, Theorems 1 and 2 can
+
+be shown easily by using the weak law of large numbers and central limit theorem for martingales in Hall and Heyde (1980)
+and the standard arguments in proving the profile empirical likelihood method based on estimating equations in Qin and
+Lawless (1994). Before proving Theorem 1, we need some lemmas.
+
+Lemma 1. Under conditions of Theorem 1 and (10), we have that
+
+     1      n   Zt1(1,0, 2,0)                 1    n            
+
+                                                               
+                                                            Ut { jVt-1-j} + op(1)
+                                     =     
+
+       n  t =3                               n       t =3      j=0
+
+and
+
+      1     n                                 1        n              Xn-2         + op(1).
+
+                                     =     {         
+              Zt2(1,0, 2,0)                              Ut } 
+       n                                       n
+          t =3                                       t =3             1 + Xn2-2
+150                                                                      X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+                         Table 4
+
+                         Empirical sizes and powers for the test based on Theorem 2 and model (6) with  = 0 and unknown  for
+
+                         testing        H0     :  1     =  0  vs  Ha  :  1  =     0.  We  take  0  =  ···  =  4  =  1  and  j  =  0  for  j    5  in           j Vt -j .
+
+                                                                                                                                                          j=0
+
+                         (1, )                                        n = 200                                 n = 500                              n = 2000
+
+                                                                  10%                 5%                   10%          5%                        10%          5%
+
+                         (0, 0.9)                                 0.12                0.07                 0.11         0.06                      0.10         0.05
+                                                                  0.22                0.14
+                         (-         1   ,  0.9)                   0.24                0.16                 0.20         0.13                      0.20         0.12
+                                                                  0.46                0.35
+                                                                  0.49                0.37
+                                     n                            0.72                0.62
+                                                                  0.74                0.63
+                         (      1   ,  0.9)                       0.89                0.83                 0.22         0.14                      0.21         0.13
+                                                                  0.90                0.84
+                                                                  0.12                0.07
+                                 n                                0.22                0.14
+                                                                  0.24                0.16
+                         (-         2   ,  0.9)                   0.47                0.35                 0.46         0.34                      0.46         0.33
+                                                                  0.49                0.38
+                                                                  0.73                0.62
+                                     n                            0.75                0.65
+                                                                  0.89                0.83
+                         (      2   ,  0.9)                       0.91                0.85                 0.47         0.36                      0.46         0.33
+                                                                  0.12                0.07
+                                                                  0.22                0.14
+                                 n                                0.25                0.17
+                                                                  0.45                0.34
+                         (-         3   ,  0.9)                   0.50                0.39                 0.72         0.61                      0.74         0.63
+                                                                  0.72                0.61
+                                                                  0.76                0.65
+                                     n                            0.89                0.82
+                                                                  0.91                0.85
+                         (      3   ,  0.9)                                                                0.74         0.63                      0.74         0.63
+                               
+
+                                 n
+
+                         (-         4   ,  0.9)                                                            0.90         0.84                      0.91         0.85
+                                   
+
+                                     n
+
+                         (      4   ,  0.9)                                                                0.91         0.85                      0.92         0.85
+                               
+
+                                 n
+
+                         (0, 1 -           2   )                                                           0.11         0.06                      0.10         0.05
+                                           n
+                                    1             2
+                         (-             ,  1  -   n  )                                                     0.20         0.13                      0.20         0.12
+
+                                     n
+
+                         (      1   ,  1   -   2  )                                                        0.22         0.14                      0.22         0.13
+                                               n
+
+                                 n
+
+                         (-         2   ,  1  -   2  )                                                     0.46         0.35                      0.46         0.34
+                                                  n
+
+                                     n
+
+                         (      2   ,1     -   2  )                                                        0.48         0.36                      0.47         0.35
+                                               n
+                               n
+
+                         (-         3   ,  1  -   2  )                                                     0.73         0.62                      0.75         0.64
+                                                  n
+
+                                     n
+
+                         (      3   ,  1   -   2  )                                                        0.75         0.64                      0.75         0.64
+                                               n
+
+                                 n
+
+                         (-         4   ,  1  -   2  )                                                     0.91         0.84                      0.92         0.86
+                                                  n
+
+                                     n
+
+                         (      4   ,  1   -   2  )                                                        0.91         0.85                      0.92         0.86
+                                               n
+
+                                 n
+
+                         (0, 1)                                                                            0.11         0.06                      0.10         0.05
+
+                         (-         1   ,  1)                                                              0.20         0.12                      0.20         0.12
+                                   
+
+                                     n
+
+                         (      1   ,  1)                                                                  0.22         0.14                      0.21         0.13
+                               
+
+                                 n
+
+                         (-         2   ,  1)                                                              0.46         0.34                      0.45         0.33
+                                   
+
+                                     n
+
+                         (      2   ,  1)                                                                  0.49         0.37                      0.47         0.35
+                               
+
+                                 n
+
+                         (-         3   ,  1)                                                              0.72         0.61                      0.74         0.63
+                                   
+
+                                     n
+
+                         (      3   ,  1)                                                                  0.75         0.65                      0.75         0.64
+                               
+
+                                 n
+
+                         (-         4   ,  1)                                                              0.90         0.84                      0.92         0.85
+                                   
+
+                                     n
+
+                         (      4   ,  1)                                                                  0.91         0.86                      0.92         0.86
+                               
+
+                                 n
+
+Proof. It follows from Phillips (1987) that under (10),
+
+       1    X[nr ]       J (r)             in the space D[0, 1],                                                                                                                              (11)
+
+                    
+
+         n
+
+where  J (r)  =     r    e-(r-s) dW               (s)   and   W   (s)      is  a  centered      Brownian      process.  Indeed,      J (·)     is  a  geometric           Brownian  process.  Here,
+
+                      0
+
+``" denotes the weak convergence and the space D[0, 1] is the collection of real-valued functions on [0, 1] which are right
+
+continuous with left limits; see Billingsley (1999) for details. By (11), we can write that
+
+              1       n        Zt1(1,0, 2,0)                          1      n
+
+                                                                           
+
+                                                              =                   Ut (Xt-1 - Xt-2)
+
+                n        t =3                                       n       t =3
+
+              1       n                                                  
+                                                  jVt-1-j - n Xt-2}
+                                       
+
+       =                       Ut {                                                                                                                                                           (12)
+
+                n        t =3           j=0
+
+              1       n                 
+
+                                       
+                               Ut { jVt-1-j} + op(1)
+       =
+                         t =3           j=0
+                n
+                                                               X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                             151
+
+                Table 5                                                                                                                              (13)
+                                                                                                                                                     (14)
+                Empirical sizes and powers for the test based on Theorem 1 and model (4) with  = 0 and known  = 1 for
+
+                testing        H0    :  2     =  0  vs  Ha  :  2  =  0.  We  take  0  =  1  and  j  =  0  for  j    1  in           j Vt -j .
+
+                                                                                                                               j=0
+
+                (2, )                                       n = 200                              n = 500                            n = 2000
+
+                                                        10%              5%                  10%               5%                   10%        5%
+
+                (0, 0.9)                                0.10             0.05                0.10              0.05                 0.10       0.05
+                                                        0.64             0.53
+                (-       1     ,  0.9)                  0.68             0.55                0.66              0.55                 0.67       0.55
+                                                        0.96             0.93
+                                                        0.99             0.98
+                          n                             1.00             0.99
+                                                        1.00             1.00
+                (     1    ,  0.9)                      1.00             1.00                0.69              0.57                 0.69       0.57
+                                                        1.00             1.00
+                                                        0.10             0.05
+                       n                                0.24             0.16
+                                                        0.19             0.11
+                (-       2     ,  0.9)                  0.44             0.35                0.98              0.96                 0.99       0.98
+                                                        0.46             0.33
+                                                        0.62             0.54
+                          n                             0.73             0.62
+                                                        0.76             0.69
+                (     2    ,  0.9)                      0.88             0.81                1.00              0.99                 1.00       0.99
+                                                        0.10             0.05
+                                                        0.36             0.28
+                       n                                0.32             0.22
+                                                        0.60             0.53
+                (-       3     ,  0.9)                  0.70             0.59                1.00              1.00                 1.00       1.00
+                                                        0.76             0.70
+                                                        0.89             0.83
+                          n                             0.86             0.81
+                                                        0.96             0.92
+                (     3    ,  0.9)                                                           1.00              1.00                 1.00       1.00
+                     
+
+                       n
+
+                (-       4     ,  0.9)                                                       1.00              1.00                 1.00       1.00
+                        
+
+                          n
+
+                (     4    ,  0.9)                                                           1.00              1.00                 1.00       1.00
+                     
+
+                       n
+
+                (0, 1         -   2  )                                                       0.10              0.05                 0.10       0.05
+                                  n
+                        2               2
+                (-      n  ,  1   -     n  )                                                 0.24              0.16                 0.23       0.16
+
+                (    2  ,  1  -   2  )                                                       0.18              0.10                 0.17       0.10
+                     n            n
+
+                (-      4  ,  1   -     2  )                                                 0.45              0.36                 0.44       0.35
+                        n               n
+
+                (    4  ,  1  -   2  )                                                       0.45              0.33                 0.44       0.31
+                     n            n
+
+                (-      6  ,  1   -     2  )                                                 0.64              0.55                 0.62       0.54
+                        n               n
+
+                (    6  ,  1  -   2  )                                                       0.72              0.61                 0.72       0.60
+                     n            n
+
+                (-      8  ,  1   -     2  )                                                 0.75              0.69                 0.76       0.69
+                        n               n
+
+                (    8  ,  1  -   2  )                                                       0.88              0.81                 0.88       0.80
+                     n            n
+
+                (0, 1)                                                                       0.10              0.05                 0.10       0.05
+
+                (-      2  ,  1)                                                             0.37              0.29                 0.36       0.28
+                        n
+
+                (    2  ,  1)                                                                0.32              0.21                 0.32       0.21
+                     n
+
+                (-      4  ,  1)                                                             0.61              0.53                 0.61       0.53
+                        n
+
+                (    4  ,  1)                                                                0.70              0.60                 0.69       0.58
+                     n
+
+                (-      6  ,  1)                                                             0.76              0.70                 0.75       0.70
+                        n
+
+                (    6  ,  1)                                                                0.88              0.82                 0.88       0.82
+                     n
+
+                (-      8  ,  1)                                                             0.85              0.80                 0.85       0.81
+                        n
+
+                (    8  ,  1)                                                                0.95              0.92                 0.96       0.93
+                     n
+
+and
+
+         1        n                                      1       nt                t -1             Xt -2
+
+                                                    =                            
+                    Zt2(1,0, 2,0)                                  { Uj        - Uj} 
+          n                                               n
+                t =3                                           t=3 j=1             j=1           1 + Xt2-2
+
+         1        n               Xn-2                   1     n-1 t                  Xt -2             1        n t-1              Xt -2
+
+     =                                              +                                             -            
+                    Uj                                             { Uj}                                           { Uj} 
+          n                                               n                                              n
+                j=1               1 + Xn2-2                       t=3 j=1          1 + Xt2-2                   t=3 j=1              1 + Xt2-2
+
+           1      n                     Xn-2                    1   n-1 t                Xt -2                 Xt -1         } + op(1).
+
+     =  {                                               +                                              -   
+                    Ut }                                                { Uj}{ 
+            n                                                    n
+                t =3                 1 + Xn2-2                      t=3 j=1              1 + Xt2-2                1 + Xt2-1
+
+It follows from Taylor expansion that
+
+         Xt -2          Xt -1                    = (1 + t2)-3/2(Xt-2 - Xt-1),
+
+                -
+
+     1 + Xt2-2             1 + Xt2-1
+152                                                                X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+                    Table 6
+
+                    Empirical sizes and powers for the test based on Theorem 1 and model (4) with  = 0 and known  = 1 for
+
+                    testing        H0    :  2     =  0  vs  Ha  :  2  =  0.  We  take  0  =  ···  =  4  =   1  and  j  =  0  for  j     5  in           j Vt -j .
+
+                                                                                                                                                   j=0
+
+                      (2, )                                     n = 200                              n = 500                               n = 2000
+
+                                                            10%              5%                   10%            5%                        10%          5%
+
+                      (0, 0.9)                              0.10             0.05                 0.10           0.05                      0.10         0.05
+                                                            0.64             0.53
+                      (-     1     ,  0.9)                  0.68             0.55                 0.66           0.55                      0.66         0.55
+                                                            0.95             0.93
+                                                            0.99             0.98
+                              n                             1.00             1.00
+                                                            1.00             1.00
+                      (   1    ,  0.9)                      1.00             1.00                 0.60           0.57                      0.69         0.57
+                                                            1.00             1.00
+                                                            0.10             0.05
+                           n                                0.24             0.16
+                                                            0.18             0.11
+                      (-     2     ,  0.9)                  0.46             0.37                 0.98           0.96                      0.99         0.98
+                                                            0.47             0.34
+                                                            0.63             0.55
+                              n                             0.73             0.62
+                                                            0.76             0.70
+                      (   2    ,  0.9)                      0.88             0.81                 1.00           0.99                      1.00         0.99
+                                                            0.10             0.05
+                                                            0.36             0.28
+                           n                                0.33             0.22
+                                                            0.61             0.53
+                      (-     3     ,  0.9)                  0.71             0.60                 1.00           1.00                      1.00         1.00
+                                                            0.76             0.70
+                                                            0.89             0.83
+                              n                             0.86             0.82
+                                                            0.96             0.93
+                      (   3    ,  0.9)                                                            1.00           1.00                      1.00         1.00
+                         
+
+                           n
+
+                      (-     4     ,  0.9)                                                        1.00           1.00                      1.00         1.00
+                            
+
+                              n
+
+                      (   4    ,  0.9)                                                            1.00           1.00                      1.00         1.00
+                         
+
+                           n
+
+                      (0, 1 -         2  )                                                        0.11           0.06                      0.10         0.05
+                                      n
+                            2               2
+                      (-    n  ,  1   -     n  )                                                  0.23           0.16                      0.24         0.16
+
+                      (  2  ,  1  -   2  )                                                        0.18           0.10                      0.18         0.11
+                         n            n
+
+                      (-    4  ,  1   -     2  )                                                  0.45           0.35                      0.44         0.35
+                            n               n
+
+                      (  4  ,  1  -   2  )                                                        0.45           0.32                      0.44         0.31
+                         n            n
+
+                      (-    6  ,  1   -     2  )                                                  0.63           0.54                      0.62         0.54
+                            n               n
+
+                      (  6  ,  1  -   2  )                                                        0.72           0.60                      0.72         0.61
+                         n            n
+
+                      (-    8  ,  1   -     2  )                                                  0.76           0.69                      0.76         0.69
+                            n               n
+
+                      (  8  ,  1  -   2  )                                                        0.89           0.82                      0.88         0.81
+                         n            n
+
+                      (0, 1)                                                                      0.11           0.05                      0.10         0.05
+
+                      (-    2  ,  1)                                                              0.36           0.28                      0.36         0.28
+                            n
+
+                      (  2  ,  1)                                                                 0.32           0.21                      0.32         0.21
+                         n
+
+                      (-    4  ,  1)                                                              0.60           0.53                      0.60         0.53
+                            n
+
+                      (  4  ,  1)                                                                 0.70           0.60                      0.69         0.59
+                         n
+
+                      (-    6  ,  1)                                                              0.76           0.70                      0.76         0.70
+                            n
+
+                      (  6  ,  1)                                                                 0.88           0.82                      0.88         0.82
+                         n
+
+                      (-    8  ,  1)                                                              0.86           0.81                      0.85         0.81
+                            n
+
+                      (  8  ,  1)                                                                 0.96           0.93                      0.96         0.93
+                         n
+
+where  t  lies  between Xt-2                and Xt-1. By (11),               we  have   |Xt -2 |/t a     p  ,    |Xt -1 |/t a      p     and |Xt-2                 - Xt-1|/ta   p  0 for  any
+
+                                                                                                                                                                               
+
+a  (0, 1/2) as t  , which imply that
+
+     |t |/ta     p          for any               a  (0, 1/2)                as    t  .                                                                                                   (15)
+
+                
+
+By (11), (13)­(15), we have
+
+        1     n                                      1        n              Xn-2         + op(1).                                                                                        (16)
+
+                                               =  {         
+                Zt2(1,0, 2,0)                                   Ut } 
+         n                                            n
+            t =3                                            t =3             1 + Xn2-2
+
+Hence, the lemma follows from (12) and (16). 
+
+Lemma 2. Under conditions of Theorem 1 and (10), we have that as n  
+
+       1    n                                                      p         =   (E (U12 )E ( j=0     j  V-j )2          0    )      ,
+       n                                                                                                                (U12
+           Zt (1,0, 2,0)ZtT (1,0, 2,0)                          -                                0                   E        )
+
+          t =3
+
+                p
+
+where - denotes the convergence in probability.
+                                                                     X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                                153
+
+                       Table 7
+
+                       Empirical sizes and powers for the test based on Theorem 2 and model (6) with  = 0 and unknown  for
+
+                       testing      H0    :  2     =  0  vs  Ha   :  2  =  0.  We  take  0     =  1  and  j  =  0   for  j    1  in           j Vt -j .
+
+                                                                                                                                         j=0
+
+                       (2, )                                     n = 200                                  n = 500                             n = 2000
+
+                                                               10%             5%                    10%                 5%                   10%        5%
+
+                       (0, 0.9)                                0.11            0.06                  0.10                0.05                 0.10       0.05
+                                                               0.43            0.32
+                       (-     1     ,  0.9)                    0.43            0.30                  0.43                0.33                 0.43       0.31
+                                                               0.81            0.74
+                                                               0.89            0.81
+                               n                               0.95            0.92
+                                                               0.99            0.98
+                       (   1    ,  0.9)                        0.99            0.98                  0.44                0.31                 0.43       0.31
+                                                               1.00            1.00
+                                                               0.10            0.05
+                            n                                  0.14            0.07
+                                                               0.15            0.08
+                       (-     2     ,  0.9)                    0.25            0.17                  0.84                0.77                 0.88       0.81
+                                                               0.29            0.18
+                                                               0.38            0.29
+                               n                               0.45            0.33
+                                                               0.51            0.42
+                       (   2    ,  0.9)                        0.63            0.51                  0.92                0.85                 0.92       0.86
+                                                               0.11            0.06
+                                                               0.15            0.08
+                            n                                  0.23            0.14
+                                                               0.30            0.22
+                       (-     3     ,  0.9)                    0.45            0.33                  0.98                0.96                 0.99       0.98
+                                                               0.46            0.37
+                                                               0.64            0.53
+                               n                               0.60            0.52
+                                                               0.78            0.69
+                       (   3    ,  0.9)                                                              1.00                0.99                 1.00       1.00
+                          
+
+                            n
+
+                       (-     4     ,  0.9)                                                          1.00                1.00                 1.00       1.00
+                             
+
+                               n
+
+                       (   4    ,  0.9)                                                              1.00                1.00                 1.00       1.00
+                          
+
+                            n
+
+                       (0, 1       -   2  )                                                          0.09                0.05                 0.09       0.05
+                                       n
+                             2               2
+                       (-    n  ,  1   -     n  )                                                    0.13                0.07                 0.13       0.07
+
+                       (  2  ,  1  -   2  )                                                          0.15                0.08                 0.13       0.07
+                          n            n
+
+                       (-    4  ,  1   -     2  )                                                    0.24                0.15                 0.24       0.16
+                             n               n
+
+                       (  4  ,  1  -   2  )                                                          0.28                0.17                 0.27       0.17
+                          n            n
+
+                       (-    6  ,  1   -     2  )                                                    0.38                0.29                 0.36       0.27
+                             n               n
+
+                       (  6  ,  1  -   2  )                                                          0.45                0.33                 0.45       0.32
+                          n            n
+
+                       (-    8  ,  1   -     2  )                                                    0.50                0.42                 0.50       0.41
+                             n               n
+
+                       (  8  ,  1  -   2  )                                                          0.63                0.51                 0.61       0.49
+                          n            n
+
+                       (0, 1)                                                                        0.10                0.05                 0.11       0.06
+
+                       (-    2  ,  1)                                                                0.15                0.08                 0.14       0.08
+                             n
+
+                       (  2  ,  1)                                                                   0.22                0.14                 0.22       0.13
+                          n
+
+                       (-    4  ,  1)                                                                0.30                0.21                 0.30       0.21
+                             n
+
+                       (  4  ,  1)                                                                   0.44                0.32                 0.44       0.32
+                          n
+
+                       (-    6  ,  1)                                                                0.47                0.38                 0.46       0.37
+                             n
+
+                       (  6  ,  1)                                                                   0.65                0.54                 0.64       0.53
+                          n
+
+                       (-    8  ,  1)                                                                0.59                0.52                 0.60       0.50
+                             n
+
+                       (  8  ,  1)                                                                   0.79                0.70                 0.78       0.69
+                          n
+
+Proof. Let Dt = Ut2(Xt-1 - Xt-2). Using (11), (14) and (15), we can show that
+
+              1    n                                        1     n                                  
+              n                                             n
+                  Zt21(1,0, 2,0)                      =         Ut2( jVt-1-j                   -     n  Xt  -2  )2
+
+                 t =3                                          t =3        j=0
+
+              1    n                                                                        
+              n
+                       Ut2             j Vt -1-j )2                            E (U12             jV-j)2            op(1),
+
+     =                       (                                 +  op(1)    =            )E  (                   +
+
+                 t =3           j=0                                                         j=0
+
+and
+
+     1    n   Zt22 (1,0 ,    2,0)                  1    n   Ut2      Xt2-2           1    n    Ut2                     E (U12 )      op(1),
+     n                                             n                                 n
+                                                                     + Xt2-2            
+
+                                          =           t =3       1              =                    +  op(1)       =            +
+
+        t =3                                                                             t =3
+
+as well as    1    n   Zt1(1,0, 2,0)Zt2(1,0, 2,0)
+
+         =       
+
+              n  t =3
+
+              1    n   Ut2 (Xt -1         -     Xt-2)  Xt-2
+              n                                          1 + Xt2-2
+                 
+
+                 t =3
+154                                                          X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+                Table 8
+
+                Empirical sizes and powers for the test based on Theorem 2 and model (6) with  = 0 and unknown  for
+
+                testing      H0    :  2     =  0  vs  Ha  :  2  =  0.  We  take  0  =  ···  =  4  =  1  and  j  =  0  for  j    5  in           j Vt -j .
+
+                                                                                                                                           j=0
+
+                (2, )                                     n = 200                              n = 500                             n = 2000
+
+                                                      10%              5%                   10%         5%                         10%          5%
+
+                (0, 0.9)                              0.11             0.06                 0.10        0.05                       0.10         0.05
+                                                      0.42             0.33
+                (-     1     ,  0.9)                  0.43             0.30                 0.44        0.33                       0.44         0.32
+                                                      0.81             0.73
+                                                      0.89             0.81
+                        n                             0.95             0.92
+                                                      0.99             0.98
+                (   1    ,  0.9)                      0.99             0.98                 0.43        0.31                       0.43         0.31
+                                                      1.00             1.00
+                                                      0.10             0.05
+                     n                                0.14             0.08
+                                                      0.15             0.09
+                (-     2     ,  0.9)                  0.24             0.16                 0.84        0.77                       0.88         0.81
+                                                      0.28             0.18
+                                                      0.38             0.29
+                        n                             0.46             0.34
+                                                      0.51             0.42
+                (   2    ,  0.9)                      0.63             0.51                 0.92        0.85                       0.92         0.85
+                                                      0.11             0.06
+                                                      0.15             0.08
+                     n                                0.23             0.15
+                                                      0.30             0.22
+                (-     3     ,  0.9)                  0.45             0.33                 0.98        0.96                       0.99         0.98
+                                                      0.46             0.38
+                                                      0.63             0.53
+                        n                             0.60             0.52
+                                                      0.78             0.69
+                (   3    ,  0.9)                                                            1.00        0.99                       1.00         1.00
+                   
+
+                     n
+
+                (-     4     ,  0.9)                                                        1.00        1.00                       1.00         1.00
+                      
+
+                        n
+
+                (   4    ,  0.9)                                                            1.00        1.00                       1.00         1.00
+                   
+
+                     n
+
+                (0, 1 -         2  )                                                        0.10        0.05                       0.09         0.05
+                                n
+                      2               2
+                (-    n  ,  1   -     n  )                                                  0.13        0.07                       0.14         0.08
+
+                (  2  ,  1  -   2  )                                                        0.14        0.08                       0.14         0.07
+                   n            n
+
+                (-    4  ,  1   -     2  )                                                  0.23        0.15                       0.25         0.16
+                      n               n
+
+                (  4  ,  1  -   2  )                                                        0.27        0.17                       0.26         0.17
+                   n            n
+
+                (-    6  ,  1   -     2  )                                                  0.38        0.28                       0.37         0.28
+                      n               n
+
+                (  6  ,  1  -   2  )                                                        0.46        0.33                       0.45         0.32
+                   n            n
+
+                (-    8  ,  1   -     2  )                                                  0.51        0.42                       0.50         0.41
+                      n               n
+
+                (  8  ,  1  -   2  )                                                        0.63        0.51                       0.61         0.49
+                   n            n
+
+                (0, 1)                                                                      0.10        0.05                       0.11         0.06
+
+                (-    2  ,  1)                                                              0.15        0.08                       0.15         0.08
+                      n
+
+                (  2  ,  1)                                                                 0.22        0.14                       0.22         0.14
+                   n
+
+                (-    4  ,  1)                                                              0.29        0.21                       0.30         0.21
+                      n
+
+                (  4  ,  1)                                                                 0.44        0.33                       0.43         0.31
+                   n
+
+                (-    6  ,  1)                                                              0.46        0.38                       0.46         0.38
+                      n
+
+                (  6  ,  1)                                                                 0.64        0.53                       0.64         0.53
+                   n
+
+                (-    8  ,  1)                                                              0.60        0.52                       0.60         0.52
+                      n
+
+                (  8  ,  1)                                                                 0.79        0.70                       0.78         0.69
+                   n
+
+                             Table 9
+
+                             P-values for testing H0 : 1 = 0, H0 : 2 = 0 and H0 : 1 = 2 = 0 for model (4) with known
+                             0 = 0 for the period 1/1952­12/2012.
+
+                                Regressor                                    H0 : 1 = 0              H0 : 2 = 0               H0 : 1 = 2 = 0
+
+                                Dividend payout ratio                        0.1316                  0.0049                   0.0097
+                                Long-term yield                              0.0155                  0.0085                   0.0013
+                                Dividend yield                               0.5236                  0.0007                   0.0032
+                                Dividend price ratio                         0.2418                  0.0010                   0.0002
+                                T-bill rate                                  0.0090                  0.0608                   0.0053
+                                Earnings price ratio                         0.6748                  0.0008                   0.0035
+                                Book-to-Market value ratio                   0.2458                  0.0006                   0.0002
+                                Default yield spread                         0.6182                  0.0032                   0.0129
+                                Net equity expansion                         0.0956                  0.0477                   0.0301
+                                Term spread                                  0.1459                  0.0007                   0.0026
+
+     =  1    nt          Dj     -     t -1  Dj}  Xt-2
+        n                                         1 + Xt2-2
+                                      
+               {
+                                      j=2
+           t=3 j=2
+
+        1    n              Xn-2                  1   n-1 t                  Xt -2
+        n                                         n
+     =                                         +      
+               Dj                                         { Dj} 
+
+           j=2           1 + Xn2-2                    t=3 j=2                1 + Xj2-2
+                                                 X. Liu et al. / Journal of Econometrics 208 (2019) 141­159  155
+
+Fig. 1. (a) Upper left panel: autocorrelation function of U^ t = Yt - ^ - ^1(Xt-1 - Xt-2) - ^2Xt-2 for the period 1/1927­12/2012, where (^ , ^1, ^2)T is the
+
+least squares estimate. (b) Upper right panel: autocorrelation function of U^ t = Yt - ^ - ^1(Xt-1 - Xt-2) - ^2Xt-2 for the period 1/1952­12/2012, where
+
+(^ , ^1, ^2)T is the least squares estimate. (c) Lower left panel: autocorrelation function of U^ t = Yt -^1(Xt-1 -Xt-2)-^2Xt-2 for the period 1/1952­12/2012,
+
+where (^ , ^1, ^2)T is the least squares estimate. (d) Lower right panel: autocorrelation function of the estimated Vts for the period 1/1952­12/2012 based
+
+on the ARMA(1,15) model, i.e., Xt  =    + Xt-1   + Vt    15    j Vt -j .
+                                                       - j=1
+
+   -   1    n t-1  Dj}  Xt-2
+       n                 1 + Xt2-2
+          
+              {
+
+          t=3 j=2
+
+    1     n                                                        Xn-2
+
+   {         Ut2                   jVt           n             
+                                                                 1 + Xt2-2
+=   n             (                     -1-j  -     Xt -2  )}
+
+       t =2       j=0
+
+       1  n-1 t                         Xt -2              Xt -1          } + op(1)
+       n
+   +                                                -  
+              { Dj}{ 
+
+          t=3 j=2                       1 + Xt2-2          1 + Xt2-1
+156                                            X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+                          Table 10
+
+                          P-values for testing H0 : 1 = 0, H0 : 2 = 0 and H0 : 1 = 2 = 0 for model (6) with
+                          unknown  for the period 1/1952­12/2012.
+
+                           Regressor                      H0 : 1 = 0         H0 : 2 = 0  H0 : 1 = 2 = 0
+
+                           Dividend payout ratio          0.2921             0.6481      0.5674
+                           Long-term yield                0.0866             0.2758      0.1623
+                           Dividend yield                 0.2631             0.8195      0.5064
+                           Dividend price ratio           0.6891             0.8703      0.8965
+                           T-bill rate                    0.1292             0.1328      0.1268
+                           Earnings price ratio           0.5483             0.9997      0.8293
+                           Book-to-Market value ratio     0.6159             0.8268      0.8694
+                           Default yield spread           0.6675             0.6552      0.8641
+                           Net equity expansion           0.1182             0.5829      0.2559
+                           Term spread                    0.7083             0.1631      0.3477
+
+                          Table 11
+
+                          P-values for testing H0 : 1 = 0, H0 : 2 = 0 and H0 : 1 = 2 = 0 for model (4) with known
+                          0 = 0 for the period 1/1952­12/2002.
+
+                           Regressor                      H0 : 1 = 0         H0 : 2 = 0  H0 : 1 = 2 = 0
+
+                           Dividend payout ratio          0.7029             0.0039      0.0145
+                           Long-term yield                0.0184             0.0148      0.0026
+                           Dividend yield                 0.5365             0.0019      0.0079
+                           Dividend price ratio           0.7253             0.0025      0.0036
+                           T-bill rate                    0.0051             0.0682      0.0034
+                           Earnings price ratio           0.6481             0.0025      0.0036
+                           Book-to-Market value ratio     0.5214             0.0016      0.0014
+                           Default yield spread           0.0235             0.0021      0.0015
+                           Net equity expansion           0.0937             0.1459      0.0889
+                           Term spread                    0.0488             0.0016      0.0030
+
+                          Table 12
+
+                          P-values for testing H0 : 1 = 0, H0 : 2 = 0 and H0 : 1 = 2 = 0 for model (6) with
+                          unknown  for the period 1/1952­12/2002.
+
+                           Regressor                      H0 : 1 = 0         H0 : 2 = 0  H0 : 1 = 2 = 0
+
+                           Dividend payout ratio          0.7281             0.6122      0.8451
+                           Long-term yield                0.0297             0.4013      0.0804
+                           Dividend yield                 0.7425             0.6885      0.8778
+                           Dividend price ratio           0.9720             0.6550      0.8853
+                           T-bill rate                    0.0046             0.0683      0.0074
+                           Earnings price ratio           0.8708             0.8010      0.9389
+                           Book-to-Market value ratio     0.5021             0.7541      0.7957
+                           Default yield spread           0.1966             0.7089      0.4129
+                           Net equity expansion           0.0223             0.1918      0.0241
+                           Term spread                    0.0751             0.0025      0.0059
+
+           1    n                                          Xn-2
+           n
+     =  {           Ut2        j Vt -1-j )  +  op(1)}  
+                                                         1 + Xn2-2
+              t =2       (
+
+                         j=0
+
+        +     1  n-1 t    Dj}(1  +  t2 )-3/2 (Xt -2    -  Xt -1 )  +  op(1)
+              n
+                 
+
+                     {
+
+                 t=3 j=2
+
+     = op(1),
+
+where t lies between Xt-2 and Xt-1. Hence, the lemma follows from the above equations. 
+
+Lemma 3. Under conditions of Theorem 1 and (10), L(1, 2,0) attains its maximum value with probability tending to one at
+some point ¯1 such that |¯1 - 1,0| < n-1/0 for some 0  (2, 2 + ) as n  , and ¯1 and ¯ satisfy Q1n(¯1, ¯ ) = 0 and
+
+Q2n(¯1, ¯ ) = 0, where
+
+     Q1n(1, )    :=  1     n       Zt (1, 2,0) ,
+                     n         1 + T Zt (1, 2,0)
+                         
+
+                         t =3
+                                                         X. Liu et al. / Journal of Econometrics 208 (2019) 141­159                                               157
+
+       Q2n(1, )      =        1    n              1              ( Zt (1, 2,0) )T          .
+                              n                                          1
+                                       1 + T Zt (1, 2,0)
+
+                                 t =3
+
+Proof. Like the proof of Lemma 1 of Qin and Lawless (1994), the lemma follows from Lemmas 1 and 2. 
+
+Lemma 4. Under conditions of Theorem 1 and (10), L(1,0, 2) attains its maximum value with probability tending to one at some
+                                      
+point  ¯ 2  such     that  | n¯2   - n2,0|            <  n-1/0      for  some     0     (2, 2    +  )  as n    ,    and  ¯ 2  and  ¯  satisfy  Q1n(¯2, ¯ )  =  0  and
+
+Q2n(¯2, ¯ ) = 0, where
+
+       Q1n(2, )      :=       1    n   1   Zt (1,0, 2)     2  )  ,
+                              n           + T Zt (1,0,
+                                 
+
+                                 t =3
+
+       Q2n(2, )      =        1    n              1              ( Zt (1,0, 2) )T          .
+                              n                                         
+                                       1 + T Zt (1,0, 2)
+                                                                     ( n2)
+                                 t =3
+
+                                                                                        
+Proof. Since Xt = Op( n), we write 2Xt-2 = ( n2)(Xt-2/ n). Hence, following the proof of Lemma 1 of Qin and Lawless
+
+(1994), the lemma can be shown by using Lemmas 1 and 2. 
+
+Proof of Theorem 1. We only prove the case of (10) since other cases can be proved in a similar way. First, it follows easily
+from (11) and Condition C1 that
+
+       max Zt (1,0, 2,0) = op(n1/2).                                                                                                                              (17)
+
+       3t n
+
+Hence, using Lemmas 1 and 2, (17) and the same arguments in the proof of Theorem 1 in Owen (1990), we can show that
+
+-2 log L(1,0, 2,0)          d     2(2) as    n        . Let et      =             jVt-j.  By (11), (14) and (15), we have
+
+                                                                             j=0
+
+       1      n                           1       n                               
+       n                                  n
+                           - Xt-2)2    =         e2t-1   + op(1)       =  E          j  V-j  )2  + op(1),
+
+                (Xt -1                                                       (
+
+            t =3                                t =3                         j=0
+
+and
+
+                  1    n         -     Xt-2)  Xt-2          =       1    n   et -1      Xt -2       + op(1)
+                  n                             1 + Xt2-2           n
+                                                                                    
+                                                                                      1 + Xt2-2
+                         (Xt -1                                        t =3
+
+                     t =3
+
+                  1  n-1         Xt -1          + op(1)     1    n-1 t               t -1           Xt -1    + op(1)
+                  n                                         n
+       =                                                 =                        -  
+                         et                                          { ej                ej} 
+
+                     t =2        1 + Xt2-1                       t=2 j=1             j=1         1 + Xt2-1
+
+                  1  n-1         Xn-2              1  n-1 t                  Xt -1               Xt  Xt2 } + op(1)
+                  n                                n
+       =                                        +                                       -    
+                         ej                               { ej}{                               1+
+
+                     j=1         1 + Xn2-2             t=2 j=1            1 + Xt2-1
+
+       =          op(1)    +  1  n-1 t    ej}(1       +  t2 )-3/2 (Xt -1  -  Xt )    +  op(1)
+                              n
+                                 
+
+                                     {
+
+                                 t=2 j=1
+
+       = op(1),
+
+where t lies between Xt-1 and Xt . Hence, we have
+
+                                            n   (      -(Xt-1 - Xt-2)2               )
+
+          Q1n(1,0, 0)                  1                                    Xt -2
+                1                                                        
+                                 =                 -(Xt-1  -  Xt -2 )
+                                                                           1+Xt2-2
+                                     n                                                                                                                            (18)
+
+                                          t =3
+
+                                 =     (-E ( j=0       jV-j)2)      +    op(1)
+
+                                                    0
+
+                                 = S1 + op(1).
+
+Furthermore, we have
+
+       Q1n(1,0, 0)            =        + op(1),       Q2n(1,0, 0)        =   0,      Q2n(1,0, 0)       =   Q1n(1,0, 0) ,                                          (19)
+                                                            1                              T                     1
+158                                                    X. Liu et al. / Journal of Econometrics 208 (2019) 141­159
+
+where  is given in Lemma 2. Using Lemma 3 and expanding Q1n(¯1, ¯ ) and Q2n(¯1, ¯ ) around (1,0, 0)T , we have
+
+         0        Q1n(1,0, 0)           Q1n (1,0    ,  0)  (¯ 1     1,0)         Q1n(1,0, 0) ¯           op (|¯ 1     1,0|     ¯ )
+                                            1                                          
+              =                    +                             -         +                          +            -        +
+
+                                                                                                                                                            (20)
+
+              = Q1n(1,0, 0) + S1(¯1 - 1,0) -  ¯ + op(|¯1 - 1,0| + ¯ )
+
+and
+
+         0        Q2n(1,0, 0)           Q2n (1,0    ,  0)  (¯ 1     1,0)         Q2n(1,0, 0) ¯           op (|¯ 1     1,0|     ¯ )
+                                            1                                          
+              =                    +                             -         +                          +            -        +
+
+                                                                                                                                                            (21)
+
+              = S1T  + op(|¯1 - 1,0| + ¯ ).
+
+By (20) and (21), we have
+
+       S1T    -1               -  1,0)  =  -S1T        -1           (1,0   ,  0)  +   op(1)                                                                 (22)
+                  S1 n(¯1
+                                                             nQ1n
+
+and
+
+              =     -1             (1,0,  0)  +     -1                  -  1,0)   +   op(1),                                                                (23)
+         n¯                                             S1 n(¯1
+                           nQ1n
+
+which imply that
+
+              =   { -1   -      -1S1S-1S1T     -1}nQ1n(1,0,                0)  +  op(1),                                                                    (24)
+         n¯                                                                                                                                                 (25)
+
+where S = S1T  -1S1. Since  = diag{12, 22} and S1T = (-12, 0), we have S = 12 and
+
+       M =  -1 -  -1S1S-1S1T  -1 = diag{0, 2-2}.
+
+It follows from Lemmas 1, 3, (23)­(25) and Taylor expansion that
+
+                  -2 log LP2(2,0) = -2 log L(¯1, 2,0)
+
+                  n                              n
+
+         = 2  ¯ T Zt (¯1, 2,0) -  ¯ T Zt (¯1, 2,0)ZtT (¯1, 2,0)¯ + op(1)
+
+                  t =3                        t =3
+
+         = 2n¯ T Q1n(¯1, 0) - n¯ T   + op(1)
+
+                  2n¯ T  Q1n(1,0,  0)      2n¯ T     Q1n(1,0,       0)  (¯ 1      1,0)       n¯ T   ¯     op(1)
+                                                          1
+         =                              +                                     -          -             +
+
+         = 2n¯ T ¯ - n¯ T ¯ + op(1)
+
+         =                         0)}T  M                              0)}   +   op(1)
+                  { nQ1n(1,0,                 M{ nQ1n(1,0,
+
+                     1     n   Zt2(1,0,  2,0)}2/22
+
+                  {      
+
+         =            n                                    +  op(1)
+
+                         t =3
+
+          d        2(1)
+
+         
+
+as  n    .    Similarly,       we  can  show  that     -2  log   LP 1 (1,0 )       d   2(1)  as    n       by      using  Lemma  4  instead  of  Lemma  3.  Hence
+
+                                                                                  
+
+the theorem follows. 
+
+Proof of Theorem 2. It can be shown in the same way as in Theorem 1. 
+
+Proof of Theorem 3.            Note that a key fact in proving Theorems 1 and 2 is that |Xt |                       p   in case of nonstationary, which still
+
+                                                                                                                   
+
+holds under conditions of Theorem 3. Also, due to the independence of Ut and Ut+m, it is clear that
+
+       1      m   Z¯t,2(1(0), 2(0))Z¯t,4(1(0), 2(0))     p                 n  .
+       m
+                                                        
+
+                                                              0     as
+
+            t =3
+
+Therefore Theorem 3 can be shown by following the arguments in proving Theorem 1. 
+
+Acknowledgments
+
+    We thank the editor, Professor Oliver Linton, an associate editor and three reviewers for their constructive and helpful
+comments and suggestions that improved the paper significantly. Liu's research was supported by the National Natural
+Science Foundation of China (11601197, 11461029), China Postdoctoral Science Foundation funded project (2016M600511,
+2017T100475), NSF of Jiangxi Province (2018ACB21002, 20171ACB21030). Yang's research was partly supported by NSF
+of Jiangxi Province (20171BAA208002) and the science and technology project of Jiangxi Province Education Department
+(GJJ170329). Cai's research was, in part, supported by the National Natural Science Foundation of China (71131008,
+71631004). Peng's research was partly supported by Simons Foundation.
+            X. Liu et al. / Journal of Econometrics 208 (2019) 141­159  159
+
+References
+
+Amihud, Y., Hurvich, C.M., 2004. Predictive regressions: a reduced-bias estimation method. J. Financ. Quant. Anal. 39, 813­841.
+Amihud, Y., Hurvich, C.M., Wang, Y., 2009. Multiple-predictor regressions: hypothesis testing. Rev. Financ. Stud. 22, 413­434.
+Billingsley, P., 1999. Convergence of Probability Measures, second ed. Wiley, New York.
+Brockwell, P.J., Davis, R.A., 1991. Time Series: Theory and Methods, second ed. Springer, New York.
+Cai, Z., Wang, Y., 2014. Testing predictive regression models with nonstationary regressors. J. Econometrics 178, 4­14.
+Cai, Z., Wang, Y., Wang, Y., 2015. Testing instability in a predictive regression model with nonstationary regressors. Econom. Theory 31, 953­980.
+Campbell, J.Y., Yogo, M., 2006. Efficient tests of stock return predictability. J. Financ. Econ. 81, 27­60.
+Cavanagh, C.L., Elliott, G., Stock, J.H., 1995. Inference in models with nearly integrated regressors. Econom. Theory 11, 1131­1147.
+Chen, W.W., Deo, R.S., 2009. Bias reduction and likelihood-based almost exactly sized hypothesis testing in predictive regressions using the restricted
+
+     likelihood. Econom. Theory 25, 1143­1179.
+Chen, W.W., Deo, R.S., Yi, Y., 2013. Uniform inference in predictive regression models. J. Bus. Econom. Statist. 31, 525­533.
+Choi, Y., Jacewitz, S., Park, J.Y., 2016. A reexamination of stock return predictability. J. Econometrics 192, 168­189.
+Frees, E.W., Derrig, R.A., Meyers, G., 2014. Predictive Modeling Applications in Actuarial Science. Cambridge University Press.
+Hall, P., Heyde, C., 1980. Martingale Limit Theory and Its Applications. Academic Press, New York.
+Jaworski, P., Durante, F., Härdle, W.K. (Eds.), 2013. Copulae in Mathematical and Quantitative Finance. In: Lecture Notes in Statistics-Proceedings, Springer-
+
+     Verlag Berlin Heidelberg.
+Jaworski, P., Durante, F., Härdle, W.K., Rychlik, T. (Eds.), 2010. Copula Theory and Its Application. In: Lecture Notes in Statistics-Proceedings, Springer-Verlag
+
+     Berlin Heidelberg.
+Joe, H., 1997. Dependence Modeling with Copulas. Chapman & Hall/CRC.
+Juhl, T., 2014. A nonparametric test for the predictive regression model. J. Bus. Econom. Statist. 32, 387­394.
+Kasparis, I., Andreou, E., Phillips, P.C.B., 2015. Nonparametric predictive regression. J. Econometrics 185, 468­494.
+Kostakis, A., Magdalinos, T., Stamatogiannis, M.P., 2015. Robust econometric inference for stock return predictability. Rev. Financ. Stud. 28, 1506­1553.
+Li, C., Li, D., Peng, L., 2017. Uniform test for predictive regression with AR errors. J. Bus. Econom. Statist. 35, 29­39.
+Owen, A., 1990. Empirical likelihood ratio confidence regions. Ann. Statist. 18, 90­120.
+Owen, A., 2001. EMpirical Likelihood. Chapman and Hall, New York.
+Phillips, P.C.B., 1987. Towards a unified asymptotic theory for autoregression. Biometrika 74, 535­547.
+Phillips, P.C.M., Lee, J.H., 2013. Predictive regression under various degrees of persistence and robust long-horizon regression. J. Econometrics 177, 250­264.
+Qin, J., Lawless, J., 1994. Empirical likelihood and general estimating functions. Ann. Statist. 22, 300­325.
+Stambaugh, R.F., 1999. Predictive regressions. J. Financ. Econ. 54, 375­421.
+Zhu, F., Cai, Z., Peng, L., 2014. Predictive regressions for macroeconomic data. Ann. Appl. Stat. 8, 577­594.
+

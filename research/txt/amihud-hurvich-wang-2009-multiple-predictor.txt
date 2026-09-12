@@ -1,0 +1,1381 @@
+Multiple-Predictor Regressions:                                                                              Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+Hypothesis Testing
+
+Yakov Amihud
+New York University
+
+Clifford M. Hurvich
+New York University
+
+Yi Wang
+New York University
+
+We propose a new hypothesis-testing method for multipredictor regressions in small
+samples, where the dependent variable is regressed on lagged variables that are au-
+toregressive. The new test is based on the augmented regression method (Amihud and
+Hurvich, 2004), which produces reduced-bias coefficients and is easy to implement.
+The method's usefulness is demonstrated by simulations and by testing a model where
+stock returns are predicted by two variables, income-to-consumption and dividend yield.
+(JEL C32, G12)
+
+1. Introduction
+
+   In a class of predictive regressions analyzed by Stambaugh (1999), a variable
+   is regressed on the lagged value of a predictor variable, which is autoregressive
+   with errors that are correlated with the errors of the regression model. In small
+   samples, the ordinary least-squares (OLS) estimated predictive slope coefficient
+   is biased, potentially leading to an incorrect conclusion that the lagged variable
+   has predictive power while in fact it does not. Stambaugh (1999) derived
+   the bias expression for the OLS estimate, which was subsequently used in
+   empirical studies to obtain a reduced-bias point estimate of the predictive
+   coefficient. Subsequent papers developed methods for hypothesis testing of
+   single-predictor models.1
+
+      In this paper, we propose a new method for hypothesis testing in pre-
+   dictive regressions for multiple-predictor models. It is based on the multi-
+   predictor augmented regression method (mARM, a multipredictor extension of
+
+  The authors thank James Stock, the Editor and the Referee for helpful comments and suggestions. Send cor-
+  respondence to Ira Leon Rennert, Professor of Finance, Stern School of Business, New York University, New
+  York, NY 10012; telephone: 212-998-0720; fax: 212-995-4220; E-mail: yamihud@stern.nyu.edu.
+
+1 See Kothari and Shanken (1997); Amihud and Hurvich (2004); Lewellen (2004); Campbell and Yogo (2005);
+  Polk et al. (2005).
+
+C The Author 2008. Published by Oxford University Press on behalf of The Society for Financial Studies.
+
+All rights reserved. For permissions, please e-mail: journals.permissions@oxfordjournals.org.
+
+doi:10.1093/rfs/hhn056  Advance Access publication June 13, 2008
+The Review of Financial Studies / v 22 n 1 2009                                      Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+the single-predictor ARM methodology considered in Amihud and Hurvich,
+2004). An attractive feature of the ARM-based hypothesis-testing method is
+that it also generates parameter estimates--the predictor variable's estimated
+coefficients--thus providing a unified multipredictor regression platform for
+estimation, testing, and forecasting.
+
+   In what follows, we first present the theory underlying mARM-based hypoth-
+esis testing, and then perform simulations of two-predictor models with three
+different autoregressive matrices (one based on estimates from a relevant data
+set), to compare the actual size obtained under our test with the nominal size.
+We find that the actual test sizes are quite close to nominal sizes. We compare
+our mARM-based results with two other methods: The OLS and bootstrapping,
+the latter being used in some recent papers that use multipredictor models. We
+find that our mARM-based hypothesis test performs better than either of the
+alternatives.
+
+   Finally, we apply mARM to test the two-predictor model of Santos and
+Veronesi (2006), where stock returns are predicted by labor income to con-
+sumption and by dividend yield. Santos and Veronesi employ multiple-horizon
+OLS regressions while we employ single-horizon predictive regressions with
+bias correction, using mARM, following the proposition of Boudoukh et al.
+(2006) on the relationship between short and long horizon predictions. We find
+that the evidence for predictability of these economic ratios is weaker than that
+reported by Santos and Veronesi (2006).
+
+   Stock and Watson (1993) propose regressions that are augmented by the
+errors {vt } of the regressors {xt } in a dynamic OLS method (DOLS) with a
+single predictor (see also Hamilton, 1994). Their model assumes that the au-
+toregressive process is I (1), meaning--in our context--that the autoregressive
+parameter of the predictor series is known to be 1. In our model, the autore-
+gressive coefficient matrix of {xt }, , is not known and the estimation problem
+arises from the fact that its OLS estimates are biased in small samples, which
+in turn creates a bias in the estimated OLS coefficients of the predictive model.
+This problem does not exist in DOLS.
+
+   The mARM methodology does assume that the {xt } process is stationary. This
+assumption is reasonable for a variety of applications of predictive regressions
+in Finance. For example, Santos and Veronesi (2006) argued that "the restriction
+that [the log income/consumption ratio] is stationary rests on solid economic
+intuition: it is not reasonable to assume that consumption can grow to be
+infinitely larger than labor income, or, alternatively, that labor income can grow
+to be several times higher than consumption." For a given sample size, the
+performance of the mARM method deteriorates as the autoregressive parameter
+matrix approaches the nonstationarity boundary. However, our simulations
+indicate that this deterioration is far less for the mARM method than it is for the
+existing methods for multipredictor hypothesis testing, namely bootstrapping
+and OLS. Since the mARM test may be somewhat oversized, a predictor
+found to be statistically significant by mARM-based hypothesis testing should
+
+414
+Multiple-Predictor Regressions: Hypothesis Testing                                            Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+ideally be subjected to further scrutiny before being declared to have predictive
+power. On the other hand, since an mARM-based p-value may be somewhat
+understated, a finding based on the mARM test that a predictor is insignificant
+can be considered trustworthy. (This occurs in several cases in the application
+we study here.)
+
+   Empirical research in finance and economics often deals with multipredictor,
+small-sample models where the predictor variables are autoregressive and may
+thus be subject to the estimation problem pointed out by Stambaugh (1999).
+For example, Keim and Stambaugh (1986); Fama and French (1988); Pontiff
+and Schall (1998); and Keim and Madhavan (2000) estimate models where the
+excess stock return is regressed on the lagged values variables including divi-
+dend yield, book-to-market ratio, default yield premium, term yield premium,
+and short interest rate, all being autoregressive and some are correlated with
+others. Also, Keim and Madhavan (2000) estimate the number of transactions
+in the exchange seat market as a function of the lagged seat prices, lagged
+change in the seat's quoted bid-ask spread, and lagged absolute seat return,
+variables that are autocorrelated. Campbell et al. (2001) estimate the prediction
+of GDP growth by three measures of stock market volatility and find that they
+are jointly significant. In addition to these predictor variables being autoregres-
+sive, they are also contemporaneously negatively correlated with GDP growth,
+characteristics that are related to those in Stambaugh's (1999) model.
+
+   Some multipredictor studies use bootstrapping estimation with the predic-
+tors' coefficients set to zero (as under the null). Examples include Lettau and
+Ludvigson (2001) who predict stock returns by consumption in excess of la-
+bor income and asset wealth (CAY ), dividend yield, dividend payment, bond
+yield spreads (term and default), and real interest rate. Baker and Stein (2004)
+estimate the equity share of firms financing as a function of stock turnover
+and dividend yield, both being serially correlated, as well as lagged stock re-
+turns. Baker and Wurgler (2004) estimate a multipredictor model of dividend
+initiation as a function of three lagged variables, which are autoregressive: the
+dividend premium (the difference between the market-to-book ratios for div-
+idend payers and nonpayers), the Citizen Utility dividend premium (the ratio
+of stock prices of the dividend paying and nonpaying class of this company's
+stock), and the abnormal stock return at dividend announcements. Another
+model uses as predictors market-to-book ratio, dividend yield, and tax rates.
+Other studies run diagnostics to check for potential bias and conclude that it is
+insignificant. For example, Baker, Greenwood, and Wurgler (2003) estimate a
+two-predictor model of excess bond return as a function of the lagged values
+of new issues of short- and long-term debt, both of which are autocorrelated.
+Guo and Savickas (2006) predict stock returns by both market and idiosyn-
+cratic volatility series, which are autoregressive and their errors are correlated
+with those of the predictive model. Ang and Bekaert (2005) show, using boot-
+strapping estimation with zero coefficients of their model where stock returns
+are predicted by lagged dividend yield and the short rate, that their estimated
+
+                                                                                         415
+The Review of Financial Studies / v 22 n 1 2009
+
+coefficients are indeed biased but they conclude that the bias strengthens their                               Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+empirical evidence. Goyenko's (2005) prediction of stock and bond returns by
+illiquidity of both stocks and bonds, which are autocorrelated and related, cor-
+rects for the estimation bias using the Amihud-Hurvich (2004) method under
+the assumption of diagonal covariance matrix between the predictors.
+
+   Our paper proceeds as follows. Section 2 describes our proposed method
+of hypothesis testing in the multipredictor case, based on a newly proposed
+estimator of the covariance matrix of the estimated slope coefficients. We also
+present results of simulations that compare the performance of our proposed
+method with that of methods previously proposed in the literature. In Section 3,
+we apply mARM to data from Santos and Veronesi (2006),2 who examine the
+prediction of stock returns by ratio of labor income to consumption and by
+dividend yield. Section 4 presents our conclusions. Proofs of the theoretical
+results and some technical details are presented in the Appendix.
+
+2. Estimation and Testing for Multipredictor Regression
+
+   Assume a predictive model where the predictor variables constitute a p-
+   dimensional vector time series {xt }, which follows a stationary Gaussian vector
+   autoregressive VAR(1) model. The overall model is given for t = 1, . . . , n by
+
+                         yt =  +  xt-1 + ut ,
+                         xt = + xt-1 + vt ,
+
+where we define the ( p × 1) vectors,
+
+                                                                   
+              x1t                                        1            v1t
+                                    1
+     xt =  ...  ,                                 =  ...  ,  vt =  ...  ,
+                         =  ...  ,                       p           v pt
+
+     x pt                p
+
+and a ( p × p) matrix,3
+
+                                                   
+                                 11 · · ·
+                                                 1p
+                         =  ... . . .
+                                 p1 · · ·        ...  .
+
+                                                 pp
+
+   The quantities yt , , and ut are scalars. The vectors (ut , vt ) are i.i.d. multi-
+variate normal with mean zero. We allow ut and vt to be contemporaneously
+correlated and assume that the absolute values of the eigenvalues of are all
+
+less than 1 to ensure stationarity of {xt }.
+
+2 We thank Pietro Veronesi for kindly providing us with the data.
+
+3 For a diagonal , Amihud and Hurvich (2004) propose a simpler hypothesis testing method, which is similar to
+  the single-predictor testing method.
+
+416
+Multiple-Predictor Regressions: Hypothesis Testing
+
+   As shown in Amihud and Hurvich (2004), there exists a ( p × 1) vector 
+and a sequence {et }tn=1 such that
+
+                                      ut =  vt + et
+
+and we can write                                                                             Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+                  yt =  +  xt-1 +  vt + et ,                                            (1)
+
+where {et } are i.i.d. normal random variables with mean zero, independent
+of both {vt } and {xt }, with var(ut ) = u2, cov(vt ) = v, and var(et ) = e2 =
+u2 -  v.
+
+   If the true {vt } is used in the above regression (model (1)), the OLS estimate
+of  is unbiased. Since {vt } is unknown, it is replaced by the proxy {vtc}, the
+residuals from a fitted VAR(1) model for {xt } whose estimated coefficients have
+
+reduced bias. The need for bias correction arises because the OLS estimation
+
+of the matrix is biased in small samples (see Nicholls and Pope, 1988). The
+use of the residuals {vtc} produces a reduced-bias estimate of . The proposed
+reduced-bias estimator of the matrix uses a bias expression due to Nicholls
+and Pope (1988) and gives the following relationship: E(^ - ) = E[ ^ -
+
+  ] . The estimation procedure is summarized as follows:
+
+   (1) Use Nicholls and Pope's (1988) expression for the bias of the OLS
+estimator ^ ,
+
+                  E[ ^ - ] = -b/n + O(n-3/2),
+
+where                                                                       
+             
+                  )-1 +  (I -                       2)-1 +           (I -   )-1  -1  ,
+   b = v (I -                                                                    x
+
+                                                            Spec( )
+
+I is a p × p identity matrix, x = cov(xt ),  denotes an eigenvalue of , and
+the notation   Spec( ) means that the sum is for all p eigenvalues of
+with each term repeated as many times as the multiplicity of . We estimate
+
+the bias b iteratively by repeatedly plugging in preliminary estimates of and
+
+  v.
+   (2) The preliminary estimator of v is obtained as the sample covariance
+matrix of the residuals (xt - ^ - ^ xt-1), if ^ has all its eigenvalues smaller
+than 1 ( ^ and ^ are the OLS estimator of the respective matrices). Otherwise,
+
+we use the Yule-Walker estimator, which is guaranteed to satisfy the stationarity
+
+condition
+
+                                                                                     417
+The Review of Financial Studies / v 22 n 1 2009
+
+                           n                          n                              -1
+
+        ^ YW =                (xt - x )(xt-1 - x )                    (xt - x)(xt - x) ,
+
+                      t =1                            t =0
+
+where   x     =    1          n     xt  .
+                 n+1          t =0
+
+     (3) The bias b is estimated iteratively.4 In the kth iteration,                 ^ (k-1) and  ^  (k-1)  ,         Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                                                                                                     v
+which are the results from the previous iteration, are used to construct b^(k). Then
+
+b^ (k)  is used to calculate               ^ (k+1) =  ^ k + b^ (k)/n  and  ^  (k+1)  from the residuals
+                                                                              v
+of xt using ^ (k+1). This iteration process terminates if either the current ^ (k)
+
+corresponds to a nonstationary model or a preset maximum of K (in our case,
+
+K = 10) iterations is reached. We obtain from the last iteration
+
+                                                ^ c = ^ + b^/n.                                      (2)
+
+     (4) The corrected residual series {vtc} is constructed using
+
+                      vtc = xt - ( ^ c + ^ cxt-1), t = 1, . . . , n,                                 (3)
+
+where ^ c = x¯t - ^ cx¯t-1, the bar indicating sample mean.5
+   The reduced-bias (mARM) parameter estimates are ^ c, ^c, and ^ c, the OLS
+
+estimators from the multipredictor augmented regression of yt on a constant,
+
+all  x j,t-1  and  v  c    (j  =    1, . . . ,  p),   respectively.
+                      j,t
+
+2.1 Estimation of cov[^ c]
+
+For hypothesis testing in the multiple predictor case, we need a low-bias es-
+timator of the covariance matrix, cov[^c]. We cannot use the estimated OLS
+
+covariance matrix from the augmented regression, as there is no theoretical jus-
+
+tification for this, and indeed our simulations indicate that it produces extremely
+poor results. We thus construct an estimator of cov[^c] using the following
+
+result.
+
+Lemma 1.
+
+          E[(^c - )(^c - ) ] = E[( ^ c - ) ( )( ^ c - )] + E[B] (4)
+
+where ^c is the reduced-bias estimator of  obtained from the mARM,  is
+defined in the multipredictor model (1), ^ c is any estimator of based on
+x0, . . . , xn, p is the number of predictors, and B is a symmetric ( p × p) matrix
+
+4 Simulations (not shown here) demonstrate that iteration can reduce both the bias and the variance, hence the
+  mean-squared error, of the slope estimator, especially when the sample size is small. In theory, however, at least
+  for the single predictor case, the bias of the (Kendall) corrected estimator is O(1/n2), regardless of whether
+  iterations are employed.
+
+5 The OLS estimator ^ can be used without correction because the bias of ^c does not depend on the estimated
+  intercept.
+
+418
+Multiple-Predictor Regressions: Hypothesis Testing
+
+given by
+
+                                                                                                  (
+             B =                   (        n         r1t  et  )2                   ···             n     r1t  et  )(         n       r  ps  es  )
+                                            t =1                                    ...             t =1                      s=1
+                                                n                                                   n                         n
+                                         (      t =1     r12t  )2                                (  t =1     r12t  )(         s=1     r  2   )       .
+                                                                                                                                         ps
+
+                                                    ...                                                              ...
+
+                             (     n     r  pt  et  )(     n       r1s   es  )      ···             (          n     r    pt  et  )2                         Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                                   t =1                    s=1                                                 t =1
+                                   n                       n                                                   n
+                                (  t =1     r   2   )(     s=1     r12s  )                                (    t =1       r  2   )2
+                                                pt                                                                           pt
+
+Here, r jt ( j = 1, . . . , p) are the residuals from an OLS regression of the j th
+entry of xt-1 on all other ( p - 1) entries of xt-1 as well as all p entries of vtc
+and an intercept, with vtc = xt - ^ cxt-1 - ^ .
+
+Proof. See Appendix A.
+
+Lemma 2.
+
+          E [Bi, j ] = e2 E                                        n        rit  r  j  t         ,             i, j = 1, . . . , p,                     (5)
+                                                                   t =1
+
+                                                         n         ri2t          n        r  2
+                                                         t =1                    t =1        jt
+
+          E[B j, j ] = E S E ^cj ,                                               j = 1, . . . , p                                                       (6)
+
+where B, ^cj , and r jt are defined in Lemma 1, e2 is the variance of et in Equation
+
+(1), and S E(^cj ) is the estimated standard error of ^cj from the augmented
+OLS regression of yt on x1,t-1, . . . , x p,t-1 and v1ct , . . . , vcpt with intercept:
+
+S E(^cj ) =  ^ e2  r  2   ,  where              ^ e2     is    the       OLS        estimate        of       e2.
+                      jt
+             n
+             t =1
+
+Proof. See Appendix B.
+   A feasible approximation for cov[^c] is proposed in the next section.
+
+2.2 Implementation
+In the implementation, we make the approximation that E(b^) is b, which is
+reasonable since ^ c is a low-bias estimator of . Then, we can approximate
+cov[^c] by E[(^c - )(^c - ) ] and approximate E[( ^ c - ) ( )( ^ c - )]
+by cov[( ^ c) ] (see Equation (4)). Note that the left-hand side of Equation (4) is
+not cov[^c] = E[(^c - E(^c))(^c - E(^c)) ] because ^c is a biased estimator of
+ (although the bias of ^c is much smaller than that of ^). We use the following
+feasible estimate of cov[^c]:
+
+                           covc[^c] = cov[( ^ c) ^ ] + E[B],
+
+                                                                                                                                                        419
+The Review of Financial Studies / v 22 n 1 2009
+
+where cov[( ^ c) ^ ] and E[B] are estimates of cov[( ^ c) ^ ] and E[B], corre-
+sponding to the formulas
+
+                               p                                              pp
+
+               varc ^cj =            ^ ic 2var        ^c         +                         2^ ic^ kc cov  ^  c   ,  ^c
+                                                                                                             ij
+                                                        ij                                                            kj           Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+                               i =1                                       i=1 k=i
+
+                               + S E ^cj 2, ( j = 1, . . . , p),                                                              (7)
+
+                               pp
+
+          covc ^ic, ^cj =                  ^ kc ^ lccov       ^     c     ,   ^c
+                                                                    ki
+                                                                                lj
+
+                               k=1 l=1
+
+                               +     ^ e2        n     ri  t  r  j  t            ,            (i, j = 1, . . . , p)           (8)
+                                                 t =1
+
+                                     n        ri2t         n           r  2
+                                     t =1                  t =1           jt
+
+(Equation (7) is a special case of Equation (8) for i = j ). Here, {^ kc}kp=1 are
+the estimated coefficients of vcj,t ( j = 1, . . . , p) in the multipredictor aug-
+mented regression of yt on all x j,t-1( j = 1, . . . , p) and vcj,t ( j = 1, . . . , p),
+vtc = xt - ^ c - ^ cxt-1, ^ c is the reduced-bias VAR(1) coefficient matrix es-
+timated with iterations based on the bias expression due to Nicholls-Pope
+
+(1988) (see Equation (2)), and ^e2 is the estimated variance of the error et in
+                   ^ e2           RSS
+this regression,         =     n-(2 p+1)  ,  where     RSS             is the       residual     sum      of squares      of  the
+
+augmented regression, {r jt }nt=1 for ( j = 1, . . . , p) are the residuals as defined
+                                     ^    c                         ^   c     ,  ^  c
+in  Lemma      1.  The  terms  var(       ij  )  and   cov(             k  i        lj  )  are  read  from   the    estimated
+
+covariance matrix        ^  c     (X X )-1 (the covariance matrix of ^ c and ^ c), where
+                            v
+^  c
+   v  is  the  estimated    covariance           matrix       of       vt ,      and       X  =  (1,  X1, . . . , X p)    is  the
+
+(n × ( p + 1)) matrix of the regressors with a unit vector as the first column.
+
+    It is worth noting that for testing the significance of each  j , j = 1, . . . , p,
+
+formula (7) is sufficient. Formula (8) is necessary for joint tests involving all
+
+of the  j 's.
+
+    The following is a summary of the procedure for an example of a two-
+
+predictor model.
+
+(1) Regress xt on xt-1 (xt = (x1,t , x2,t ) ) to obtain ^ , which is used to con-
+      struct a reduced-bias estimator ^ c using Nicholls and Pope's (1988) bias
+
+      expression with iterations.
+(2) Construct the bivariate corrected residual series vtc = yt - ^ c - ^ cxt-1.
+
+      Denote vtc = (v1c,t , v2c,t ) . Then use vtc to estimate cov( ^ c), following the
+      procedure described above.
+(3) Obtain ^c1 and ^c2 as the coefficients of x1,t-1 and x2,t-1 in a regression
+      of yt on x1,t-1, x2,t-1, v1c,t , and v2c,t , with intercept. This regression also
+      produces ^ 1c and ^ 2c as the coefficients of v1c,t and v2c,t , and it produces the
+      (2 × 2) estimated covariance matrix cov[^c] whose diagonal elements are
+
+      used in Equation (7).
+
+420
+Multiple-Predictor Regressions: Hypothesis Testing
+
+(4) Apply formula (7) to obtain varc[^1c], varc[^c2] whose square roots are used
+      for testing a hypothesis on either 1 or 2.
+
+(5) For the joint test on (1, 2), calculate {r1t }, the residuals from a regression
+      of x1t on x2t and v1c,t , v2c,t , and {r2t } accordingly, and then apply formula
+      (8).
+
+2.3 Hypothesis testing                                                                  Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+Using mARM, we obtain the reduced-bias estimator ^c and an estimate of its
+
+covariance matrix, which we use in hypothesis testing. Tests of significance
+of individual coefficients--tests of the null hypothesis H0 :  j = 0--are per-
+
+formed using an ordinary t-statistic, with t = ^cj / varc[^cj ] as it would be done
+
+in OLS, except that the parameters are estimated in a different way.
+   For the joint test of H0 : all  j = 0, j = (1, . . . , p) against Ha : at least one
+
+ j = 0, j = (1, . . . , p), the Wald test is used, employing the matrix covc[^c]
+and the formula W ald(^c) = ^c(covc[^c])-1(^c) where ^c = (^c1, . . . , ^cp).
+
+2.4 Simulations
+We use simulations to evaluate the performance of the mARM. We first estimate
+the predictors' coefficients, showing the bias under the OLS and mARM. We
+show that the mARM produces a very small bias compared to that under the
+OLS. Next, we analyze the performance of hypothesis testing under mARM,
+comparing it with two commonly used methods: OLS and bootstrapping. We
+show that the size under mARM is very close to the nominal size, compared to
+the size under the competing test methods.
+
+   The analysis employs a two-predictor case with a nondiagonal matrix.
+^c is estimated by mARM as in Equation (1) with vt replaced by vtc, defined in
+Equation (3). In these simulations, we estimate the covariance matrix of ^c by
+Equations (7) and (8) and use it in hypothesis testing.
+
+   We use three nondiagonal choices of the AR(1) parameter matrix .
+
+Case 1.
+
+           1=  0.80                                    0.1   ,
+               0.1                                     0.85
+
+Case 2.
+
+           2=  0.80                                    0.1   ,
+               0.1                                     0.94
+
+both with
+
+           v=                                       2  1  .
+                                                    1  2
+
+                                                                421
+The Review of Financial Studies / v 22 n 1 2009
+
+Case 3.
+
+             3=                                0.9928  -0.0007  ,
+                                               0.0040   0.9779
+
+with
+
+         v=  5.8252 × 10-5                             4.3533 × 10-5  .                Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+             4.3533 × 10-5                             3.9841 × 10-3
+
+For all processes, we generated 1500 simulated replications.
+   In setting the parameter values of , we note that, in general, the closer
+
+the largest absolute eigenvalue of to 1, the more nearly nonstationary the
+multiple VAR(1) model. Here, the largest absolute eigenvalues in Cases 1, 2,
+and 3 are 0.928, 0.992, and 0.993, respectively. Case 2 is purposely designed
+to study a case that is close to nonstationarity. In Case 3, the parameter values
+are estimated from the data in Santos and Veronesi (2006), which we later use
+in the empirical section. In this model, quarterly stock returns are predicted by
+the ratio of labor income to disposable income and by the log-dividend yield
+over the period 1948­1994.
+
+2.4.1 Performance of parameter estimates. Consider first the results for
+
+  1 and 2 and recall that the coefficients' values are zero. For 1 and n = 50,
+the OLS regression generates biased average estimates, 6.47 for ^1 and 8.24 for
+^2. The mARM greatly reduces the average bias: 0.97 for ^c1 and 1.88 for ^c2,
+respectively. For 2 and n = 50, the bias is greater under both the OLS and the
+
+mARM, showing the effect of the near unit root. Still, the bias under mARM
+
+is much smaller than under OLS. Naturally, when the sample size increases to
+
+200, the average bias is smaller under both OLS and the mARM, with mARM
+
+being much better: For 1 and n = 200, the averages bias under OLS is 1.24
+for ^1 and 2.13 for ^2, while under mARM it is much closer to zero: -0.23
+for ^1c and 0.41 for ^c2. As expected, ^ 1c and ^ c2 are unbiased6 in all cases (true
+parameter values are  = (-80, -80)).
+
+   We also obtain that the our procedure of estimating the standard errors of
+
+the mARM coefficients, detailed in Sections 2.1 and 2.2, produces estimates
+
+that are close to the true standard deviations of the estimated coefficients. For
+example, under 1 and n = 50, the average of S Ec(^c1) is 17.49 compared to
+an estimated standard deviation of 18.22, a relative error of 4%. For 1 and
+n = 200, the mARM-estimated standard error of ^c1 is 7.83 while its actual
+standard deviation is 7.86, a difference of only 1%. For 2, where the VAR(1)
+process is close to nonstationary, the relative errors are 2.2% for n = 50 and
+1.0% for n = 200. For 2, the respective errors of the average of S Ec(^c2) under
+
+  1 are 6.3% and 0.2% for n = 50 and n = 200, respectively, and under 2, the
+
+6 This is shown in Amihud and Hurvich (2004).
+
+422
+Multiple-Predictor Regressions: Hypothesis Testing
+
+Table 1                                                                               (n = 200)                (n = 188)
+Results for the two-predictor models (9) and (10)
+
+                                                       (n = 50)
+
+                                            1                       2              1             2                  3
+
+OLS mean (^1)                                6.4672       6.9324                1.2433       1.2375                0.0128
+                                             0.9689       2.4161              -0.2314        0.0130                0.0024
+mARM mean (^c1)               (^ c1        18.2208      17.9288                              7.9086                0.2169      Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                                           17.4850      17.5278                 7.9149       7.8333
+simulated standard deviation         )       8.2419     10.1770                 7.8335       2.6111                0.2123
+mARM mean (S Ec(^1c ))                       1.8772       3.0356                2.1311       0.7155                0.0235
+OLS mean (^2)                              17.0641      14.5353                 0.41452      5.0569                0.0078
+                                           15.9910      12.7961                 6.9168       4.7442                0.0324
+mARM mean (^c2)               (^ 2c      -79.9978     -79.9984                  6.9304    -79.9977
+                                         -80.0008     -80.0002               -79.9978     -80.0025                 0.0300
+simulated standard deviation         )  -191.1199    -144.6155               -80.0025     -31.1995              -0.9321
+mARM mean (S Ec(^c2))                   -199.5683    -158.9612               -39.9533     -32.0820              -0.6847
+OLS mean (^ c1)                                                              -42.7049                       -4.1776 × 10-4
+mARM mean (^ 2c )                                                                                           -3.7616 × 10-4
+simulated cov(^1c , ^c2)
+mARM mean (covc(^c1, ^2c ))
+
+Simulation results: parameter estimates for a two-predictor model.
+     1500 replications are generated from the two-predictor models.
+
+                                            yt =  +  xt-1 + ut ,                                                          (9)
+
+                                            xt =  + xt-1 + vt ,                                                        (10)
+
+where , xt ,  and vt are (2 × 1) matrices. is a (2 × 2) matrix, i.e.,
+
+     yt =  + 1 x1,(t-1) + 2 x2,(t-1) + ut ,          x1,t           =     1  +     11     12     x1,(t -1)  +  v1t  .
+                                                     x2,t                 2        21     22     x2,(t -1)     v2t
+
+     Table 1 presents estimation results of the two-predictor model by OLS as well as by the multipredictor
+
+augmented regression method (mARM). The five-step estimation procedure is described in Section 2.2.
+     Three cases are considered. In Cases 1 and 2, the parameters are  = 0,  = (0, 0) , = (0, 0) , ut =
+
+ vt + et ; et is N (0, 1),  = (1, 2) = (-80, -80) , vt is N (0, v ). {et } and {vt } are mutually and serially
+independent. n = 50 or 200. The nondiagonal VAR(1) parameter matrices are
+
+                                               1=    0.80              0.1   ,
+                                                     0.1               0.85
+
+and
+
+                                               2=    0.80              0.1   ,
+                                                     0.1               0.94
+
+all with
+
+                                                     v=          2     1  .
+                                                                 1     2
+
+The eigenvalues of 1 are 0.722 and 0.928, and of 2 they are 0.748 and 0.992.
+     Case 3 uses parameters that are estimated from Santos and Veronesi's (2006) data. n = 188,  = 0,  =
+
+(0, 0) , = (0, 0) , the {ut } are generated as ut =  vt + et , where et is normal with mean zero and variance
+4.0161 × 10-3,  = (1, 2) = (-0.9307, -0.6824) , vt is N (0, v ), and {et }, {vt } are mutually and serially
+independent. The VAR(1) parameter matrix is
+
+                                            3=       0.9928         -0.0007     ,
+                                                     0.0040          0.9779
+
+and
+
+                                        v=  5.8252 × 10-5              4.3533 × 10-5   .
+                                            4.3533 × 10-5              3.9841 × 10-3
+
+The matrix 3 has eigenvalues of 0.978 and 0.993.
+   Estimates: ^ j and ^cj are, respectively, coefficients estimated by OLS and mARM; S E(^ j ) and S E(^cj ) are the
+
+corresponding estimated standard errors; ^ cj is the estimated coefficient of vtc, j from mARM (vtc, j is the residual
+of xt in the VAR(1) model, using the reduced-bias matrix ^ c); S Ec(^cj ) and covc(^ic, ^cj ) are the corrected
+variance and covariance estimates of ^c using Equations (7) and (8); the simulated standard deviations and
+
+covariance are based on 1500 realizations.
+
+                                                                                                                       423
+  The Review of Financial Studies / v 22 n 1 2009                                                                 Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+ respective errors are 8.8% and 6.2%, respectively. The estimates covc[^c1, ^c2],
+ which are used for the joint test, are also quite close to the actual cov[^c1, ^2c].
+ These estimates affect the hypothesis testing, to which we attend in the next
+ subsection.
+
+     Next, we consider Case 3, in which the parameter values are obtained from
+ estimates based on the data of Santos and Veronesi (2006). Here, the bias under
+ OLS is small. Still, mARM produces strong bias reduction, similar to that
+ obtained in Cases 1 and 2.
+
+ 2.4.2 Performance of hypothesis tests. We compare the performance of
+ mARM in hypothesis testing the OLS and the widely used bootstrapping pro-
+ cedure. The bootstrapping tests are done in two different ways. In one, we
+ bootstrap on the estimated coefficients, 1 and 2, and in the other, we simulate
+ on their t-statistics t1 and t2. We denote these two methods by B St1 and B St2 .
+ It is customary in the finance literature to bootstrap on the estimated predictive
+ coefficient, e.g. Kothari and Shanken (1997) and Baker and Stein (2004). How-
+ ever, we show that the performance of bootstrapping test is better when doing
+ it on the coefficient's t-statistic. Indeed, it is known that bootstrapping on the
+ corresponding t-statistic produces better sizes than bootstrapping on ^.7 (Our
+ bootstrap procedure used here is detailed in the Appendix C.) We also present
+ simulations of the joint Wald test. The null hypothesis in all tests is that the
+ values of the coefficients is zero.
+
+     The analysis examines the actual sizes that are obtained when the nominal
+ size is 5%, using the same model parameters in all methods.8 We present results
+ for individual coefficient tests--one (right)-tail test and two-tail tests--and for
+ the joint Wald test.
+
+     The results are presented in Table 2. For individual tests of each coefficient 1
+ and 2, the sizes under mARM tests are uniformly better--closer to nominal--
+ than under OLS and both bootstrap-based tests. Consider, for example, the
+ right-tailed test (panel A(1)) for 1. For 1 and n = 50, the sizes under mARM
+ is 6.4% (nominal size is 5%). For OLS, the respective size is 11.9% and, under
+ bootstrapping using OLS, it is 11.8% when doing the bootstrapping using the
+ estimate of beta1 and 7.6% when using its t-value. The size under bootstrapping
+ when using the reduced-bias ^c1 is 6.2% and when using its t-value, the size is
+ 6.3%, similar to that obtained under mARM with a standard t-test. It follows
+ that the mARM-based simple t-test performs as well as the more cumbersome
+ bootstrapping when using the estimated parameters from mARM, albeit with
+ much less effort. It surely outperforms bootstrapping using OLS estimates,
+ which produce inflated size. When the sample size increases, the sizes for
+ mARM are quite close to the nominal sizes. The sizes of the mARM tests are
+
+7 See Hall and LePage (1996).
+8 We also performed the hypothesis test for the nominal sizes 1% and 10%. The results are qualitatively similar.
+
+ 424
+Multiple-Predictor Regressions: Hypothesis Testing
+
+Table 2
+Simulation results: hypothesis testing size and power for two-predictor model
+
+Panel A: Size for nominal 5% test
+                                              (1) Right-tailed test and joint test
+
+OLS                             t(^1) (%)                                           t(^2) (%)        Wald (%)
+
+n = 50   1                                11.9                                      15.3                12.3   Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                                          12.9                                      23.3                21.8
+         2                                                                           8.9
+                                           7.3                                      14.6                 7.9
+n = 200  1                                 7.4                                      18.1                15.2
+                                           8.3
+         2                                                                                               8.9
+
+n = 188  3                                                                                           Wald (%)
+
+Bootstrap using OLS estimates   B S1 (%)            B St1 (%)  B S2 (%)                   B St2 (%)      9.5
+                                                                                                        17.7
+n = 50   1                        11.8                 7.6       21.5                       14.9
+                                  17.8                 7.9       30.5                       21.5         7.3
+         2                          5.3                4.5       15.9                       10.2        13.5
+                                    9.5                4.8       26.3                       18.8         8.8
+n = 200  1                        42.2                 7.9       14.7                       16.8
+                                                                                                     Wald (%)
+         2
+                                                                                                         8.0
+n = 188  3                                                                                              13.0
+                                                                                                         6.3
+Bootstrap using mARM estimates  B S1 (%)            B St1 (%)  B S2 (%)                   B St2 (%)     12.8
+                                                                                                         7.6
+n = 50   1                          6.2                6.3       24.2                       12.0
+                                    6.1                6.0       31.8                       20.2     Wald (%)
+         2                          5.4                4.6       18.7                         8.9
+                                    6.0                4.5       28.5                       18.7         9.1
+n = 200  1                        15.5                 5.1       37.3                       15.4         9.6
+                                                                                                         6.9
+         2                                                                                              10.5
+                                                                                                         6.0
+n = 188  3
+
+mARM                            t(^1c ) (%)                                         t(^c2) (%)
+
+n = 50   1                         6.4                                                 6.8
+                                   6.5                                                 9.8
+         2                         4.8                                                 5.5
+                                   5.1                                                 7.7
+n = 200  1                         5.1                                                 7.4
+
+         2
+
+n = 188  3
+
+                                (2) Two-tailed test
+
+OLS                             t(^1) (%)                                           t(^2) (%)
+
+n = 50   1                                9.2                                       10.6
+                                          9.2                                       16.1
+         2                                6.3
+                                          6.7                                        6.1
+n = 200  1                                7.5                                        9.7
+                                                                                    11.1
+         2
+
+n = 188  3
+
+Bootstrap using OLS estimates   B S1 (%)            B St1 (%)  B S2 (%)                   B St2 (%)
+
+n = 50   1                        25.6                 9.3       25.8                       10.4
+                                  36.5                 7.4       31.9                       14.3
+         2                        16.6                 6.7       16.7                         7.3
+                                  24.1                 7.0       26.2                       12.4
+n = 200  1                        79.8                 7.4                                    9.8
+                                                                   9.3
+         2
+
+n = 188  3
+
+Bootstrap using mARM estimates  B S1 (%)            B St1 (%)  B S2 (%)                   B St2 (%)
+
+n = 50   1                        19.4                12.2       17.8                         7.5
+                                  21.5                13.9       21.6                       12.3
+         2                        16.2                           13.9                         5.5
+                                  17.5                  8.1      21.9                       11.4
+n = 200  1                        29.9                  9.3      34.9                         9.2
+                                                        7.9
+         2
+
+n = 188  3
+
+mARM                            t(^c1) (%)                                          t(^c2) (%)
+
+n = 50   1                         6.3                                                 6.3
+                                   5.7                                                 8.3
+         2                         6.2                                                 5.4
+                                   6.0                                                 6.4
+n = 200  1                         5.5                                                 6.4
+
+         2
+
+n = 188  3
+
+                                                                                                     425
+The Review of Financial Studies / v 22 n 1 2009
+
+Table 2
+(Continued)
+
+Panel B: Size-controlled power comparison between mARM-based and bootstrap-based hypothesis tests
+                                         (1) Right-tailed tests and joint tests
+
+                                   Bootstrap                                    mARM
+
+VAR(1) matrix True  B St1 (%) B St2 (%) Wald (%) t(^c1) (%) t(^c2) (%) Wald (%)                                        Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+1              (0,0)    5.0                      5.0   5.0         5.0          5.0   5.0
+
+               (5,5)    13.8                     16.4  60.4        14.2         17.5  29.0
+
+               (10,10) 33.5                      40.7  100.0       36.0         42.1  100.0
+
+               (20,20) 79.7                      87.5  100.0       82.4         90.3  100.0
+
+2              (0,0)    5.0                      5.0   5.0         5.0          5.0   5.0
+
+               (5,5)    13.1                     28.4  100.0       13.7         26.6  96.1
+
+               (10,10) 30.0                      66.7  100.0       33.6         66.4  100.0
+
+               (20,20) 79.5                      97.7  100.0       82.9         98.8  100.0
+
+                                   (2) Two-tailed test
+
+                        Bootstrap                       mARM
+
+VAR(1) matrix  True     B St1 (%)  B St2 (%)           t(^c1) (%)  t(^2c ) (%)
+
+   1            (0,0)       5.0        5.0                 5.0         5.0
+                (5,5)       6.9      14.5                  8.0       10.7
+   2           (10,10)    16.8       37.2                21.3        30.7
+               (20,20)    62.5       85.8                70.1        83.8
+                (0,0)       5.0                            5.0         5.0
+                (5,5)       6.1        5.0                 7.4       19.4
+               (10,10)    15.9       27.1                20.1        56.5
+               (20,20)    60.3       65.6                70.4        97.7
+                                     97.7
+
+  The parameters are the same as in Table 1. Results are based on 1500 replications from the two-predictor
+  models. The results pertain to nominal size of 5%. The sizes obtained from the multipredictor augmented
+  regression method (mARM) are compared with OLS and bootstrapping.
+
+        B S denotes the bootstrap method and the subscripts "" or "t" imply that the test is based on the
+  empirical distribution of the slope coefficient or its t-statistic, respectively. Subscripts "1" or "2" are for the
+  first or the second slope coefficient. t1 and t2 are the t-statistics for coefficients 1 and 2 from the mARM.
+  The Wald test in the bootstrap method is based on the empirical distribution of the Wald-statistic and the
+  Wald test in mARM is calculated based on ^c1, ^2c and the corresponding estimated covariance matrix from
+  the augmented regression.
+
+        For conciseness, in panel B, we present the power comparison between methods only for n = 200 and
+  VAR(1) coefficient matrices 1 and 2. (The results are qualitatively similar for n = 50 or n = 188.)
+
+more inflated--though still closer to the nominal values than the bootstrapping-
+
+based tests--when the absolute eigenvalue of is very close to 1 and the sample
+
+size is small. The advantage of mARM over OLS and bootstrapping also holds
+
+under two-tailed tests (panel A(2)). The sizes under mARM are even closer to
+
+nominal than under the right-tailed tests, and they are closer to nominal value
+
+than under bootstrapping.
+   For the joint test of (1, 2) = (0, 0), the mARM-based test again improves
+
+on the bootstrap-based test. For 1 and n = 50, the size of the joint test under
+mARM is 9.1% while it is 12.3% under OLS and 9.5% under bootstrapping.
+
+Again, the sizes are closer to nominal when the largest absolute eigenvalue
+
+of matrix is not too close to 1 and when n is larger. Furthermore, the
+
+improvement of mARM over OLS and bootstrapping is greater under 2 and
+n = 50, i.e., when the potential bias problem is greater.
+
+   In Table 2, panel B, we present results on the power of the tests, com-
+
+paring the size-adjusted power of mARM with that under bootstrapping. By
+
+426
+     Multiple-Predictor Regressions: Hypothesis Testing                                                            Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+   construction, the power equals the nominal size at (1, 2) = (0, 0). The power
+   for individual coefficients tests are roughly comparable for the two methods
+   while the power is better under bootstrapping for the joint test. Of course, the
+   size-adjusted test is infeasible for practical implementation.
+
+      For Case 3, as in Cases 1 and 2, the mARM-based hypothesis test provides
+   far more accurate size than the OLS-based and both bootstrap-based tests.
+   The mARM-based bootstrap test generally performs better than the OLS-based
+   bootstrap test, but both are strongly outperformed by our proposed mARM test
+   based on straightforward t-values.
+
+3. Case Study: Santos and Veronesi Revisited
+
+   We apply our mARM to test the two-predictor model proposed by Santos and
+   Veronesi (2006). In their model, stock returns are predicted by two variables:
+   dividend yield and one of the following three ratios: (1) labor income to con-
+   sumption, stw,1 = wt /Ct , where wt is the labor income and Ct is the consump-
+   tion of nondurables plus services; (2) employee compensation to consumption,
+   stw,2 = wtce/Ct ; and (3) labor income to disposable income, stw,3 = wt /Yt . Using
+   quarterly data, Santos and Veronesi (2006) estimate long-horizon four to pre-
+   dictability by regressing the excess stock returns on lagged values of log(D/P)
+   and one of the predictors stw, j , ( j = 1, 2, 3), at lags of 4, 8, 12, and 16 quarters.
+   They do the estimation by OLS, which does not attend to the potential bias that
+   may arise in predictive regressions with persistent predictors and small samples
+   (Stambaugh, 1999). Indeed, in this case, all predictors are quite persistent: the
+   sample autocorrelations of stw, j , ( j = 1, 2, 3) and of log(D/P) are all greater
+   than 0.975 (see their Table 1).
+
+      Boudoukh et al. (2006) show that statistical significance in a long-horizon
+   predictive model can be obtained even under the null of no predictability.
+   This may arise from the combined effects of overlapping returns and the per-
+   sistence of the predictors. Then, the estimated OLS coefficients and R2 are
+   approximately proportional to the horizon. It may therefore be that a predic-
+   tor's coefficient that is insignificantly different from zero at a short horizon
+   becomes significant in a longer-horizon estimation. This holds even after the
+   standard errors are corrected for the overlapping returns.9 Indeed, in Santos
+   and Veronesi's (2006) Tables 2 and 3, the OLS estimates as well as the adjusted
+    R2s increase monotonically (and roughly proportionally) as the horizon in-
+   creases. Therefore, we estimate here one-quarter-ahead predictive regressions.
+   This may be regarded as a robustness check on the conclusions of Santos and
+   Veronesi (2006). In particular, our estimation attends to the potential bias that
+   may arise in small-sample multipredictor regressions.
+
+      The results are summarized in Table 3. We consider two-predictor re-
+   gressions, consisting of one of the ratios stw, j , j = 1, 2, 3 together with the
+
+  9 Boudoukh et al. (2006) show their results for a single-predictor model. A similar problem presumably holds in
+     long-horizon regressions with multiple predictors.
+
+                                                                                             427
+The Review of Financial Studies / v 22 n 1 2009
+
+Table 3
+Empirical tests: predicting excess stock returns by ratio of labor income to consumption and log-dividend
+yield
+
+                          1948­1994                                        1948­2001
+
+Variable Method Estimate t-stat (NW) p-value Estimate t-stat (NW) p-value
+
+stw,1     OLS   -0.2517   -1.37                  0.0853  -0.4035           -2.35           0.0094                                                                                                                                                                                                                                                                                                          Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+log(D P)  mARM  -0.2592   -1.40                          -0.3918           -2.26           0.0119
+stw,2     OLS                                    0.0808                                    0.0021
+log(D P)  mARM    0.0657    3.42                 0.0003    0.0444            2.86          0.0329
+stw,3     OLS     0.0467    2.41                 0.0080    0.0288            1.84          0.0024
+log(D P)  mARM  -0.2504   -1.73                  0.0418  -0.3879           -2.82           0.0039
+          OLS   -0.1353   -0.91                          -0.3715           -2.66           0.0026
+          mARM    0.0628    3.40                 0.1814    0.0428            2.79          0.0409
+          OLS     0.0590    3.17                 0.0003    0.0270            1.74          0.0465
+          mARM  -0.2803   -0.86                  0.0008  -0.5337           -1.68
+          OLS   -0.0534   -0.16                          -0.4136           -1.29           0.0986
+          mARM    0.0665    3.27                 0.1949    0.0315            2.14          0.0162
+                  0.0728    3.54                           0.0216            1.45
+                                                 0.4365                                    0.0735
+                                                 0.0005
+                                                 0.0002
+
+The table presents results for mARM regression using the following model:
+
+          Rt = 0 + 1stw-1, j + 2 log(D P) + 1vsc,t + 2vcD P,t ,            ( j = 1, 2, 3)
+
+where Rt is the value-weighted market excess return, stw, j is the ratio of labor income to consumption, and
+log(D P) is the log-dividend yield. {vsc,t } and {vcDP,t } are the residuals obtained from the multivariate estimation
+procedure of the autoregressive matrix of the two-predictor variables after using Nicholls and Pope's (1988)
+correction (see Equation (3)). The corresponding OLS model does not include vsc,t and vcDP,t .
+
+     Following Santos and Veronesi (2006), there are three labor income to consumption ratios, ( j = 1, 2, 3):
+dn(a1roies)npdlroIaiungsbrahotabhtrb-letleiaentiisaclnebopcdlmloeum,(esrteehstfl,eoersevtcwcp,io3t-civnne=asgslu;uwmt(eh2tspe/)tfYaieoolmtrtn.eps,rtwnlsoatwy,=t1ieve=wecthwo/ymCtp/potC,ethwtn,estcsaweet/ihsoCetnrote,totowhrcetwonintsus/lutlYh)mt.epaltraiaeobnnlode,rfsti-twn,t2acinio=ldemidwceaatcatneend/dsCtihgCt e;ntaipfinis-cdvata(nh3lceu)eeclsaaobtfnoo5srru%lmionagpcno(tidDmon/1e%Potof),
+
+respectively.
+
+log-dividend yield, and do the estimations for two sample periods, 1948­2001
+
+and 1948­1994, as do Santos and Veronesi. In the OLS regressions, we re-
+
+port both the ordinary t-statistic and the Newey-West adjusted t-statistic, as
+did Santos and Veronesi (2006).10 For mARM, we report test statistics using
+
+the adjusted standard error calculated by Lemmas 1 and 2. To account for
+
+potential error autocorrelation, we performed a simple further modification of
+
+the mARM standard errors, multiplying them by the ratio of the (OLS-based)
+
+Newey-West standard error to the OLS standard error. We refer to the resulting
+modified standard error as the Newey-West standard error for mARM.11
+
+   The p-values that we present for the tests of significance of the coefficients
+are left-tailed for stw, j , ( j = 1, 2, 3), since the alternative hypothesis to the null
+is that the coefficient of stw, j is negative. This follows from Santos and Veronesi
+(2006, p. 19) statement: "The main prediction of our model is that a high share
+of labor income to consumption . . . predicts low future returns." The predictive
+
+10 We do not use the Hodrick (1992) standard errors, which account for the overlapping-errors structure induced by
+   long-horizon regression (see Ang and Bekeart, 2005), since we perform only nonoverlapping one-quarter-ahead
+   predictive regressions.
+
+11 For the data set considered here, the Newey-West correction has little effect, and and it does not change any
+   conclusion.
+
+428
+     Multiple-Predictor Regressions: Hypothesis Testing                                           Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+   coefficient of log(D/P) is well known to be positive, so for this predictor the
+    p-value corresponds to a right-tailed test.
+
+      For the 5% benchmark of significance, there are two cases where the income-
+   to-consumption ratios are significant under OLS but insignificant under mARM.
+   In the 1948­1994 regression using the ratio stw,2 (employee compensation to
+   consumption), the OLS p-value is 0.0418 while under mARM, the p-value is
+   0.1814, indicating insignificance. Notably, the estimated OLS coefficient of
+   stw,2 is twice as large as the mARM reduced-bias coefficient. In the 1948­2001
+   regression, the coefficient of stw,3 (ratio of labor income to disposable income)
+   has p-value of 0.0465 under OLS but 0.0986 under mARM, insignificant. If
+   the benchmark of significance is 1%, the coefficient of stw,1 in the 1948­2001
+   regression is significant under OLS but insignificant under mARM. In five
+   of the six cases considered, the mARM-based p-values of the stw, j variables
+   are larger (indicating weaker significance) than the OLS-based p-value. The
+   log-dividend yield too appears to have weaker significance--lower p-values--
+   under mARM compared with OLS in five out of six cases. The coefficient
+   of the log-dividend yield fails to pass the 5% hurdle in the third regression
+   for 1948­2001 using mARM while it appears significant under OLS. Under
+   a 1% benchmark of significance, it is significant under OLS in the second
+   regression for the 1948­2001 period but insignificant under mARM. In five
+   out of the six cases, the p-values under mARM are larger (indicating weaker
+   significance) than under OLS. In summary, the case for predictability is weaker
+   in estimations that employ the mARM compared to OLS, and in some cases
+   significant coefficients become insignificant when employing mARM.
+
+4. Concluding Remarks
+
+   In this paper, we propose a hypothesis-testing method for multipredictor re-
+   gression models and have compared it to results obtained under the standard
+   OLS and bootstrap methods. Our method, denoted by mARM, provides for
+   both parameter estimation and hypothesis testing in a unified and convenient
+   way. We evaluate the performance of our method in a simulation study. The
+   individual t-tests, especially the right-tailed case, perform well in terms of size,
+   and have size closer to nominal than tests based on OLS or on the bootstrap
+   method. Our method also enables joint testing of all predictive coefficients
+   using the Wald test, which also produces size closer to nominal than OLS and
+   bootstrapping. The advantage of the mARM test is greater when the sample size
+   is small or when the matrix of the regressors' vector autoregressive coefficients
+   has eigenvalues close to 1.
+
+      Applying our methodology to estimate multipredictor models where stock
+   returns are predicted by variables employed in a previous study, log-dividend
+   yield together with an income/consumption ratio, we find that in some cases,
+   the null hypothesis of no predictive power is rejected based on OLS and boot-
+   strapping while it is not rejected when using mARM. This suggests that, in
+
+                                                                                             429
+The Review of Financial Studies / v 22 n 1 2009
+
+general, some previously reported conclusions about the predictive power of
+certain economic variables may need to be revisited.
+
+Appendix
+
+A. Proof of Lemma 1                                                                                                                                                Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+We can write
+
+                yt = ~ + { +  ( ^ c - )}xt-1 +  vtc + et ,                                                                                               (A1)
+
+where ~ =  +  ( ^ c - ) is a constant with respect to t. Next, define the p × 1 vectors {rt }tn=1
+by rt = (r1t , . . . , r pt ) where for j = 1, . . . , n, {r jt }tn=1 is the (row) vector of residuals from a
+2 p - 1-variable OLS regression of the j'th entry of xt-1 on all other entries of xt-1 as well as all p
+
+entries of vtc and an intercept. Correspondingly, define {r~t }nt=1 by r~t = (r1t /                                               r12t , . . . , r pt /  r  2   )
+                                                                                                                                                            pt
+and write xt = (x1t , . . . , x pt ) and vtc = (v1ct , . . . , vcpt ) . It follows that
+
+                                                                      n                                                                                  (A2)
+
+                                                           ^c = r~t yt ,
+
+                                                                    t =1
+
+and for all j, k  {1, . . . , p} with j = k,
+
+          n                         n                                   n                    n
+
+                r~ jt = r~ jt xk,t-1 = r~ jt vcjt = r~ jt vkct = 0,                                                                                      (A3)
+
+          t =1                   t =1                                   t =1              t =1
+
+and
+
+                                        n                                  n
+
+                                                 r~ jt x j,t-1 = r~ jt r jt = 1.                                                                         (A4)
+
+                                    t =1                                t =1
+
+Substituting yt from Equation (A1) in Equation (A2) and using Equations (A3) and (A4) yields
+
+                                                                              n                                                                          (A5)
+
+                                    ^c =  + ( ^ c - )  + r~t et .
+
+                                                                            t =1
+
+The lemma now follows, since et has mean 0 and is independent of r~t and ^ c.
+
+B. Proof of Lemma 2
+
+The matrix B is defined as in Lemma 1:
+
+                           (        n       r1t  et    )2                     (     n     r1t  et  )(       n      r   ps  es  )  
+                                    t =1                                            t =1                    s=1
+                                        n        r12t                   ···         n        r12t           n          2
+          B =                    (      t =1           )2               ...      (  t =1           )(       s=1     r  ps  )       .
+                                                                        ···
+                     (                      ...                                                    ...
+
+                           n     r  pt  et  )(   n         r1s   es  )              (        n     r    pt  et  )2
+                           t =1                  s=1                                         t =1
+                           n            2        n         r12s                                 n          2
+                        (  t =1     r   pt  )(   s=1             )                        (     t =1    r  pt  )2
+
+   First, we show the independence between {et } and {r jt }.
+   Because vtc = xt - ^ - ^ c and ^ , ^ c are all functions of xt , all entries of vtc must be functions
+of xt . But et is independent of xt and vt , so et must be independent of vtc and therefore independent
+of rit or r jt for any i, j = 1, . . . , p. Recall that et has mean zero.
+
+430
+Multiple-Predictor Regressions: Hypothesis Testing
+
+Therefore,
+
+E[Bi, j ] = E       n         ri  t  et                  n          r  j  s  es
+          =E        t =1                                 s=1
+          =E
+                    n           ri2t                         n         r  2
+                    t =1                                     s=1          js
+
+                    n           n        ri  t  r  j  s  et  es        =E              n     ri  t  r  j  t  et2                                      Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                    t =1        s=1                                                    t =1
+
+                    n         ri2t       n            r  2                       n     ri2t         n        r    2
+                    t =1                 s=1             js                      t =1               t =1          jt
+
+                    ri1r j1e12                               +···+ E                   rinr jn en2
+
+                    n     ri2t        n         r  2                                   n     ri2t            n     r   2
+                    t =1              t =1         jt                                  t =1                  t =1      jt
+
+            =E            ri1r j1                            E e12 + · · · + E                               rinr jn                     E en2
+
+                    n     ri2t        n         r  2                                                n        ri2t          n      r  2
+                    t =1              t =1         jt                                               t =1                   t =1      jt
+
+            =E            ri1r j1                            e2 + · · · + E                        rinr jn                           e2
+            = e2 E
+                    n     ri2t        n         r  2                                       n        ri2t          n        r  2
+                    t =1              t =1         jt                                      t =1                   t =1        jt
+
+                              n       ri t   r  j  t             ,
+                              t =1
+
+                    n           ri2t         n        r  2
+                    t =1                     t =1        jt
+
+which is formula (5).
+   As a special case, when i = j, formula (5) simplifies to
+
+                                                      n      r   j  t  et                                 1                   .
+                E[Bj,j ] = E                          t =1
+                                                                                 2
+                                                         n       r  2                                  n     r     2
+                                                         t =1       jt             = e2 E              t =1        jt
+
+It remains to be shown that,
+
+                          e2 E                        1                 =E       ^ e2               .                                           (B1)
+
+                                                   n     r   2                   n     r     2
+                                                   t =1      jt                  t =1        jt
+
+   Let H = X (X X )-1 X denote the hat matrix for the regression of yt on all x j,t-1 and vcjt ,
+( j = 1, . . . , p), where X = [1n , x1,t-1, . . . , x p,t-1, v1ct , . . . , vcpt ]. Let denote the residual vector
+and e the error vector from this regression, so that = (I - H )y = (I - H )e, where I denotes an
+
+n × n identity matrix. Conditionally on X , we have
+
+                              n
+
+                                      2  =         e     (I  -      H )e         e22n-(2 p+1),
+                                      t
+
+                          t =1
+
+and since the random variable on the right-hand side does not depend on X , the result is true
+unconditionally as well. Thus,
+
+                                         ^ e2   =               1                 n    2
+                                                         n - (2 p + 1)           t =1  t
+
+                                                                                                                                                431
+The Review of Financial Studies / v 22 n 1 2009
+
+is an unbiased estimator of e2, that is, E[^e2] = e2. Now, we have
+
+     E  ^ e2         |  X  =E           1                        e (I - H )e    |  X
+                                 n - (2 p + 1)
+        n     r  2                                               n     r  2
+        t =1     jt                                              t =1     jt
+
+                           =                     1                      1          E e22n-(2 p+1)
+                           = e2                                  n - (2 p + 1)
+                                 n                  r  2                                                             Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+                                 t =1                  jt
+
+                                                  1    r  2   .
+                                                          jt
+                                                 n
+                                                 t =1
+
+Taking expectations of both sides and using the double expectation theorem yields formula (B1).
+Thus formula (6) is proved.
+
+C. Multipredictor bootstrap procedure
+
+The following describes the procedure employed for the bootstrap method. We illustrate here
+the bootstrap test of the null hypothesis 1 = 0; the tests of 2 = 0 and of the joint hypothesis
+1 = 2 = 0 are analogous.12
+
+(1) Given the actual time series {yt , x1,t , x2,t }, obtain OLS estimates of ^ , ^, ^ , ^ , and t-statistic,
+       t(^1), as well as the residuals {u^ t }, {v^1,t }, {v^2,t }.
+
+(2) In each replication, we fix the first observations x1,0 and x2,0 from the data and construct
+       {yt , x1,t , x2,t } iteratively using the predictive regression model as well as the OLS estimates
+       ^ , ^2, ^ , and ^ , fixing 1 = 0. Simulated residuals (ut , v1,t , v2,t ) are drawn from a multi-
+       variate normal distribution whose covariance matrix is estimated from the actual residuals
+       {u^ t , v^1,t , v^2,t }. The bootstrap replication is denoted by {yt , x1,t , x2,t }tn=0.
+
+(3) Using the bootstrap replication {yt , x1,t , x2,t }, repeat Step (1) to obtain t(^1). Repeat Steps
+       (1) and (2) under the null M times under the null (we use M = 2500). From the M values
+       of t(^1) thus obtained, we generate the empirical bootstrap distribution of t(^1), which are
+       then ranked. The null hypothesis is tested by comparing t(^1) to the bootstrap distribution of
+       t(^1). For example, in a right-tailed nominal size  test of H0 : 1 = 0 against Ha : 1 > 0,
+       the null hypothesis is rejected if t(^1) is larger than the 1 -  quantile of t(^1). We then
+       calculate the size (the proportion of rejecting the null) by replicating the procedure 1500
+
+       times.
+
+   We also implemented the bootstrapping method using mARM-estimated parameter values, e.g.,
+using ^c instead of ^. In our simulations, we study the performance of both OLS- and mARM-based
+
+bootstrap methods.
+
+   References
+   Amihud, Y., and C. M. Hurvich. 2004. Predictive Regression: A Reduced-Bias Estimation Method. Journal of
+   Financial and Quantitative Analysis 39:813­41.
+
+   Ang, A., and G. Bekaert. 2007. Stock Return Predictability: Is It There? Review of Financial Studies 20:651­707.
+
+   Baker, M. P., R. Greenwood, and J. Wurgler. 2003. The Maturity of Debt Issues and Predictable Variation in
+   Bond Returns. Journal of Financial Economics 70:261­91.
+
+   Baker, M. P., and J. Stein. 2004. Market Liquidity as a Sentiment Indicator. Journal of Financial Markets
+   7:1125­65.
+
+   Baker, M. P., and J. Wurgler. 2004. A Catering Theory of Dividends. Journal of Finance 59:1125­65.
+
+12 A different bootstrapping method is in Polk, Thompson, and Vuolteenaho (2005).
+
+432
+Multiple-Predictor Regressions: Hypothesis Testing                                                                  Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+
+Boudoukh, J., M. Richardson, and R. Whitelaw. 2006. The Myth of Long-horizon Predictability. Review of
+Financial Studies, Advance Access published on October 25, 2006, 10.1093/rfs/hhn1042.
+
+Campbell, J. Y., M. Lettau, B. G. Malkiel, and Y. Xu. 2001. Have Individual Stocks Become More Volatile? An
+Empirical Exploration of Idiosyncratic Risk. Journal of Finance 56:1­43.
+
+Campbell, J. Y., and M. Yogo. 2005. Efficient Tests of Stock Return Predictability. Journal of Financial Economics
+81:27­60.
+
+Cavanagh, C. L., G. Elliott, and J. Stock. 1995. Inference in Models with Nearly Integrated Regressors. Econo-
+metric Theory 11:1131­47.
+
+Fama, E., and K. R. French. 1988. Dividend Yield and Expected Stock Returns. Journal of Financial Economics
+22:3­25.
+
+Fuller, W. A. 1996. Introduction to Statistical Time Series. New York: Wiley.
+
+Goyenko, R. 2005. Stock and Bond Pricing with Liquidity Risk. Working Paper, Indiana University.
+
+Greene, W. H. 2002. Econometric Analysis. Upper Saddle River, NJ: Prentice-Hall.
+
+Guo, H., and R. Savickas. 2008. Aggregate Idiosyncratic Volatility in G7 Countries. Review of Financial Studies
+21:1259­96 .
+
+Hall, P., and R. LePage. 1996. On Bootstrap Estimation of the Studentized Mean. Annals of the Institute of
+Statistical Mathematics 48:403­21.
+
+Hamilton, J. D. 1994. Time Series Analysis. Princeton, NJ: Princeton University Press.
+
+Hayashi, F. 2000. Econometrics. Princeton, NJ: Princeton University Press.
+
+Keim, D. B., and A. Madhavan. 2000. The Relation Between Stock Market Movement and NYSE Seat Price.
+Journal of Finance 55:2817­40.
+
+Keim, D. B., and R. F. Stambaugh. 1986. Predicting Returns in the Stock and Bond Market. Journal of Financial
+Economics 17:357­96.
+
+Kothari, S. P., and J. Shanken. 1997. Book-to-Market, Dividend Yield, and Expected Market Returns: A Time-
+Series Analysis. Journal of Financial Economics 2:169­203.
+
+Lettau, M., and S. Ludvigson. 2001. Consumption, Aggregate Wealth, and Expected Stock Returns. Journal of
+Finance 3:815­49.
+
+Lewellen, J. 2004. Predicting Returns with Financial Ratios. Journal of Financial Economics 74:209­35.
+
+MacKinnon, J., and A. Smith Jr. 1998. Approximate Bias Correction in Econometrics. Journal of Econometrics
+85:205­30.
+
+Nelson, C. R., and M. J. Kim. 1993. Predictable Stock Returns: The Role of Small Sample Bias. Journal of
+Finance 48:641­61.
+
+Nicholls, D. F., and A. L. Pope. 1988. Bias in the Estimation of Multiple Autoregressions. Australian Journal of
+Statistics 30A:296­309.
+
+Orcutt, G. H., and H. S. Winocur Jr. 1969. First Order Regression: Inference, Estimation and Prediction.
+Econometrica 37:1­14.
+
+Phillips, P. C. B., and M. Loretan. 1991. Estimating Long-Run Economic Equilibria. Review of Economic Studies
+58:407­36.
+
+Polk, C., S. Thompson, and T. Vuolteenaho. 2006. Cross-Sectional Forecasts of the Equity Premium. Journal of
+Financial Economics 81:101­41.
+
+Pontiff, J., and L. D. Schall. 1998. Book-to-Market Ratios as Predictors of Market Returns. Journal of Financial
+Economics 49:141­60.
+
+                                                                                         433
+The Review of Financial Studies / v 22 n 1 2009                                                               Downloaded from academic.oup.com/rfs/article/22/1/413/1586497 by Lancaster University user on 12 September 2026
+Saikkonen, P. 1991. Asymptotically Efficient Estimation of Cointegration Regressions. Econometric Theory
+7:1­21.
+Santos, T., and P. Veronesi. 2006. Labor Income and Predictable Stock Returns. Review of Financial Studies
+19:1­44.
+Stambaugh, R. F. 1999. Predictive Regressions. Journal of Financial Economics 54:375­421.
+Stock, J. H., and M. W. Watson. 1988. Testing for Common Trends. Journal of American Statistical Association
+83:1097­1107.
+Wooldridge, J. M. 1991. Notes on Regression with Difference-Stationary Data. Working Paper, Michigan State
+University.
+
+434
+
