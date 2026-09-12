@@ -34,6 +34,14 @@
 #' @param model logical. If `TRUE` the model.frame of the fit is returned.
 #' @param x logical. If `TRUE` the model.matrix of the fit is returned.
 #' @param y logical. If `TRUE` the response of the fit is returned.
+#' @param beta,cz tuning parameters of the IVX instrument
+#' \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+#' (`beta = 0.95`, `cz = 1`) follow Kostakis et al. (2015).
+#' @param bandwidth Newey-West bandwidth for the long-run covariance estimate.
+#' The default `NULL` uses \eqn{n^{1/3}} as in Kostakis et al. (2015).
+#' @param robust logical. If `TRUE` the Eicker-White (heteroskedasticity-robust)
+#' form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
+#' available for `horizon = 1`.
 #'
 #' @return an object of class "ivx".
 #'
@@ -43,6 +51,9 @@
 #' @references Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2014).
 #' Robust econometric inference for stock return predictability. The Review of
 #' Financial Studies, 28(5), 1506-1553.
+#' @references Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R.
+#' (2023). Extensions to IVX methods of inference for return predictability.
+#' Journal of Econometrics, 237(2), 105271.
 #'
 #' @aliases ivx
 #'
@@ -66,6 +77,7 @@
 #'
 ivx <- function(formula, data, horizon, na.action, weights,
                 contrasts = NULL, offset, model = TRUE, x = FALSE, y = FALSE,
+                beta = 0.95, cz = 1, bandwidth = NULL, robust = FALSE,
                 ...) {
   ret.x <- x
   ret.y <- y
@@ -128,9 +140,11 @@ ivx <- function(formula, data, horizon, na.action, weights,
   else {
     x <- model.matrix(mt, mf, contrasts)
     z <- if (is.null(w)) {
-      ivx_fit(y, x, horizon = horizon, offset = offset, ...)
+      ivx_fit(y, x, horizon = horizon, offset = offset, beta = beta, cz = cz,
+              bandwidth = bandwidth, robust = robust, ...)
     }else  {
-      ivx_wfit(y, x, w, horizon = horizon, offset = offset, ...)
+      ivx_wfit(y, x, w, horizon = horizon, offset = offset, beta = beta, cz = cz,
+               bandwidth = bandwidth, robust = robust, ...)
     }
   }
   class(z) <- "ivx"
@@ -165,7 +179,8 @@ ivx <- function(formula, data, horizon, na.action, weights,
 #' @export
 #' @examples
 #' ivx_fit(monthly$Ret, as.matrix(monthly$LTY))
-ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
+ivx_fit <- function(y, x, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
+                    bandwidth = NULL, robust = FALSE, ...) {
   n <- NROW(x)
   p <- NCOL(x)
 
@@ -189,7 +204,13 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 
   chkDots(...)
 
-  z <- ivx_fit_cpp(y, x, horizon)
+  z <- ivx_fit_cpp(y, x, horizon, beta, cz, bandwidth %||% -1L, robust)
+  ivx_out(z, x, horizon, beta, cz, robust)
+}
+
+# common post-processing of the C++ output for ivx_fit and ivx_wfit
+ivx_out <- function(z, x, horizon, beta, cz, robust) {
+  p <- NCOL(x)
 
   cnames <- colnames(x)
   if (is.null(cnames))
@@ -197,9 +218,9 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
 
   # stats IVX
   coef <- drop(z$Aivx)
-  names(coef) <- cnames
+  se <- sqrt(diag(z$varcov))
   wald_ind <- drop(z$wivxind)
-  names(wald_ind) <- cnames
+  names(coef) <- names(se) <- names(wald_ind) <- cnames
 
   # stats OlS
   lols <- list(
@@ -220,40 +241,41 @@ ivx_fit <- function(y, x, horizon = 1, offset = NULL, ...) {
   colnames(z$data$X) <- cnames
   colnames(z$datam$X) <- cnames
 
-  output <-
-    structure(
-      list(
-        coefficients = coef,
-        intercept = drop(z$intercept),
-        fitted = drop(z$fitted),
-        residuals = drop(z$residuals),
-        Wald_Joint = drop(z$wivx),
-        Wald_Ind = wald_ind,
-        rank = z$rank,
-        horizon = horizon,
-        df.residuals = z$df.residuals,
-        df = z$df,
-        assign = attr(x, "assign"),
-        cnames = cnames,
-        AR = data.frame(
-          Rn = z$Rn,
-          Rz = z$Rz,
-          row.names = cnames
-        ),
-        data = z$data,
-        datam = z$datam,
-        delta = z$delta,
-        vcov = z$varcov,
-        ols = lols,
-        initial = linitial
-      )
-    )
-  output
+  list(
+    coefficients = coef,
+    se = se,
+    tstat = coef / se,
+    intercept = drop(z$intercept),
+    fitted = drop(z$fitted),
+    residuals = drop(z$residuals),
+    Wald_Joint = drop(z$wivx),
+    Wald_Ind = wald_ind,
+    rank = z$rank,
+    horizon = horizon,
+    df.residuals = z$df.residuals,
+    df = z$df,
+    assign = attr(x, "assign"),
+    cnames = cnames,
+    AR = data.frame(
+      Rn = z$Rn,
+      Rz = z$Rz,
+      row.names = cnames
+    ),
+    data = z$data,
+    datam = z$datam,
+    delta = z$delta,
+    vcov = z$varcov,
+    robust = robust,
+    tuning = list(beta = beta, cz = cz, bandwidth = z$bandwidth),
+    ols = lols,
+    initial = linitial
+  )
 }
 
 
 #' @rdname ivx_fit
-ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
+ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
+                     bandwidth = NULL, robust = FALSE, ...) {
   n <- nrow(x)
   ny <- NCOL(x)
   if (is.null(n)) {
@@ -310,94 +332,37 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, ...) {
     ))
   }
   wts <- sqrt(w)
-  z <- ivx_fit_cpp(y * wts, x * wts, ...)
+  z <- ivx_fit_cpp(y * wts, x * wts, horizon, beta, cz, bandwidth %||% -1L, robust)
+  out <- ivx_out(z, x, horizon, beta, cz, robust)
 
-  cnames <- colnames(x)
-  if (is.null(cnames))
-    cnames <- paste0("x", 1L:p)
+  out$residuals <- out$residuals / wts[-(1:horizon)]
+  out$fitted <- y[-(1:horizon)] - out$residuals
 
-  # stats IVX
-  coef <- drop(z$Aivx)
-  names(coef) <- cnames
-  wald_ind <- drop(z$wivxind)
-  names(wald_ind) <- cnames
-
-  # stats OlS
-  lols <- list(
-    coefficients = drop(z$ols$Aols),
-    se = drop(z$ols$se),
-    tstat = drop(z$ols$tstat),
-    residuals = drop(z$ols$residuals)
-  )
-  names(lols$coefficients) <- names(lols$se) <- names(lols$tstat) <- c("Intercept", cnames)
-
-  # Iniitial
-  linitial <- list(
-    fitted = drop(z$initial$fitted),
-    intercept = drop(z$initial$intercept)
-  )
-
-  # data and datam
-  colnames(z$data$X) <- cnames
-  colnames(z$datam$X) <- cnames
-
-  z$coefficients <- coef
-  z$residuals <- z$residuals / wts[-(1:horizon)]
-  z$fitted <- y[-(1:horizon)] - z$residuals
-
-  z$weights <- w
+  out$weights <- w
   if (zero.weights) {
+    coef <- out$coefficients
     coef[is.na(coef)] <- 0
     f0 <- x0 %*% coef
     if (ny > 1) {
-      save.r[ok, ] <- z$residuals
+      save.r[ok, ] <- out$residuals
       save.r[nok, ] <- y0 - f0
-      save.f[ok, ] <- z$fitted
+      save.f[ok, ] <- out$fitted
       save.f[nok, ] <- f0
     }
     else {
-      save.r[ok] <- z$residuals
+      save.r[ok] <- out$residuals
       save.r[nok] <- y0 - f0
-      save.f[ok] <- z$fitted
+      save.f[ok] <- out$fitted
       save.f[nok] <- f0
     }
-    z$residuals <- save.r
-    z$fitted.values <- save.f
-    z$weights <- save.w
+    out$residuals <- save.r
+    out$fitted.values <- save.f
+    out$weights <- save.w
   }
   if (!is.null(offset)) {
-    z$fitted.values <- z$fitted + offset
+    out$fitted.values <- out$fitted + offset
   }
-
-  output <-
-    structure(
-      list(
-        coefficients = coef,
-        intercept = drop(z$intercept),
-        fitted = drop(z$fitted),
-        residuals = drop(z$residuals),
-        Wald_Joint = drop(z$wivx),
-        Wald_Ind = wald_ind,
-        rank = z$rank,
-        horizon = horizon,
-        df.residuals = z$df.residuals,
-        df = z$df,
-        assign = attr(x, "assign"),
-        cnames = cnames,
-        AR = data.frame(
-          Rn = z$Rn,
-          Rz = z$Rz,
-          row.names = cnames
-        ),
-        data = z$data,
-        datam = z$datam,
-        delta = z$delta,
-        vcov = z$varcov,
-        ols = lols,
-        initial = linitial
-      )
-    )
-  output
+  out
 }
 
 
@@ -451,8 +416,11 @@ summary.ivx <- function(object, ...) {
   ans$aliased <- is.na(z$coefficients)
 
   p_value_ivx <- 1 - pchisq(z$Wald_Ind, 1)
-  ans$coefficients <- cbind(z$coefficients, z$Wald_Ind, p_value_ivx)
-  dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind", "Pr(> chi)"))
+  ans$coefficients <- cbind(z$coefficients, z$se, z$tstat, z$Wald_Ind, p_value_ivx)
+  dimnames(ans$coefficients) <- list(
+    z$cnames, c("Estimate", "Std. Error", "t value", "Wald Ind", "Pr(> chi)")
+  )
+  ans$robust <- z$robust
 
   ans$vcov <- z$vcov
   dimnames(ans$vcov) <- dimnames(ans$coefficients)[c(1, 1)]
@@ -509,12 +477,13 @@ print.summary.ivx <- function(x,
 
     cat("Coefficients:\n")
 
-    printCoefmat(
-      coefs,
-      digits = digits, signif.stars = signif.stars,
+    printCoefmat(coefs,
+      digits = digits, signif.stars = signif.stars, cs.ind = 1:2, tst.ind = 3:4,
       signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
       na.print = "NA", ...
     )
+    if (isTRUE(x$robust)) cat("(Eicker-White standard errors)
+")
 
     cat(
       "\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),

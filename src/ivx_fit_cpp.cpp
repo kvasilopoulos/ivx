@@ -6,7 +6,11 @@ using namespace Rcpp;
 using namespace arma;
 
 // [[Rcpp::export]]
-List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
+List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1,
+                 double beta = 0.95, double cz = 1, int bandwidth = -1,
+                 bool robust = false) {
+
+  if (robust && K != 1) stop("robust = TRUE is only available for horizon = 1");
 
   int nr = X.n_rows;
 
@@ -60,7 +64,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   }
   covuhat = covuhat.t() / nn;
 
-  double m = floor(pow(nn, 0.3333333));
+  // Newey-West bandwidth: default n^(1/3) as in KMS (2015)
+  int m = bandwidth < 0 ? (int) floor(pow(nn, 0.3333333)) : bandwidth;
   arma::mat uu = zeros<mat>(l,l);
   for (int h = 1; h <= m; ++h) {
     arma::mat a = zeros<mat>(l,l);
@@ -68,7 +73,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
       a += u.row(t).t()*u.row(t-h);
     }
     // a.print("a:");
-    double con = as_scalar(1 - h/(1+m));
+    double con = 1 - (double) h/(1+m);
     uu += con*a;
   }
   uu = uu/nn;
@@ -80,7 +85,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     for (int t = h; t < nn; ++t){
       p.row(t-h) = u.row(t) * as_scalar(epshat.row(t-h)); //1x1 matrix reduce to scalar
     }
-    double con = as_scalar(1 - h/(1+m));
+    double con = 1 - (double) h/(1+m);
     q.row(h-1)= con*sum(p);
   }
   arma::mat residue = sum(q)/nn;
@@ -88,7 +93,8 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
 
   ////////// instrument construction ////////////
 
-  arma::mat Rz = (1-1/(pow(nn, 0.95)))*eye(l,l);
+  // instrument persistence: Rz = (1 - cz/n^beta) I, KMS use beta = 0.95, cz = 1
+  arma::mat Rz = (1-cz/(pow(nn, beta)))*eye(l,l);
   arma::mat diffx = xt - xlag;
   arma::mat z = zeros<mat>(nn,l);
   z.row(0) = diffx.row(0);
@@ -137,7 +143,11 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
   arma::colvec fittedm = as_scalar(interceptm) + xlag * trans(Aivx);
 
   arma::mat FM = covepshat - Omegaeu.t()*inv(Omegauu)*Omegaeu;
-  arma::mat M = ZK.t()*ZK*as_scalar(covepshat)-n*meanzK.t()*meanzK*as_scalar(FM);
+  // Eicker-White form (Demetrescu et al. 2023, Remarks 8-9): sigma^2 Z'Z -> sum z z' u^2
+  arma::mat ZZ;
+  if (robust) ZZ = ZK.t()*diagmat(square(epshat))*ZK;
+  else ZZ = ZK.t()*ZK*as_scalar(covepshat);
+  arma::mat M = ZZ - n*meanzK.t()*meanzK*as_scalar(FM);
   arma::mat H = eye<mat>(l,l);
   arma::mat Q = H*pinv(Z.t()*Xt)*M*pinv(Xt.t()*Z)*H.t();
 
@@ -187,6 +197,7 @@ List ivx_fit_cpp(const arma::vec & y, const arma::mat & X, int K = 1) {
     _("Rn") = diagvec(Rn),
     _("Rz") = diagvec(Rz),
     _("varcov") = Q,
+    _("bandwidth") = m,
     _("ols") = ols,
     _("data") = data,
     _("initial") = initial,

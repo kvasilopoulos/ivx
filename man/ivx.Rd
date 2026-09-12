@@ -16,6 +16,10 @@ ivx(
   model = TRUE,
   x = FALSE,
   y = FALSE,
+  beta = 0.95,
+  cz = 1,
+  bandwidth = NULL,
+  robust = FALSE,
   ...
 )
 
@@ -59,6 +63,17 @@ than one are specified their sum is used. See \link[stats:model.extract]{model.o
 
 \item{y}{logical. If \code{TRUE} the response of the fit is returned.}
 
+\item{beta, cz}{tuning parameters of the IVX instrument
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+(\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
+
+\item{bandwidth}{Newey-West bandwidth for the long-run covariance estimate.
+The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
+
+\item{robust}{logical. If \code{TRUE} the Eicker-White (heteroskedasticity-robust)
+form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
+available for \code{horizon = 1}.}
+
 \item{...}{additional arguments to be passed to the low level regression fitting
 functions (see \link[stats:lm]{lm}).}
 
@@ -96,4 +111,8 @@ Econometric Theory, 25(2), 482-526.
 Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2014).
 Robust econometric inference for stock return predictability. The Review of
 Financial Studies, 28(5), 1506-1553.
+
+Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R.
+(2023). Extensions to IVX methods of inference for return predictability.
+Journal of Econometrics, 237(2), 105271.
 }

@@ -5,9 +5,30 @@
 \alias{ivx_wfit}
 \title{Fitter Functions for IVX Models}
 \usage{
-ivx_fit(y, x, horizon = 1, offset = NULL, ...)
+ivx_fit(
+  y,
+  x,
+  horizon = 1,
+  offset = NULL,
+  beta = 0.95,
+  cz = 1,
+  bandwidth = NULL,
+  robust = FALSE,
+  ...
+)
 
-ivx_wfit(y, x, w, horizon = 1, offset = NULL, ...)
+ivx_wfit(
+  y,
+  x,
+  w,
+  horizon = 1,
+  offset = NULL,
+  beta = 0.95,
+  cz = 1,
+  bandwidth = NULL,
+  robust = FALSE,
+  ...
+)
 }
 \arguments{
 \item{y}{vector of observations of length \code{n}, or a matrix with
@@ -21,6 +42,17 @@ short-horizon regression).}
 \item{offset}{(numeric of length \code{n}).  This can be used to
     specify an \emph{a priori} known component to be included in the
     linear predictor during fitting.}
+
+\item{beta, cz}{tuning parameters of the IVX instrument
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+(\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
+
+\item{bandwidth}{Newey-West bandwidth for the long-run covariance estimate.
+The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
+
+\item{robust}{logical. If \code{TRUE} the Eicker-White (heteroskedasticity-robust)
+form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
+available for \code{horizon = 1}.}
 
 \item{...}{currently disregarded.}
 

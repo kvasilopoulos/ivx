@@ -12,21 +12,25 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // ivx_fit_cpp
-List ivx_fit_cpp(const arma::vec& y, const arma::mat& X, int K);
-RcppExport SEXP _ivx_ivx_fit_cpp(SEXP ySEXP, SEXP XSEXP, SEXP KSEXP) {
+List ivx_fit_cpp(const arma::vec& y, const arma::mat& X, int K, double beta, double cz, int bandwidth, bool robust);
+RcppExport SEXP _ivx_ivx_fit_cpp(SEXP ySEXP, SEXP XSEXP, SEXP KSEXP, SEXP betaSEXP, SEXP czSEXP, SEXP bandwidthSEXP, SEXP robustSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
-    rcpp_result_gen = Rcpp::wrap(ivx_fit_cpp(y, X, K));
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type cz(czSEXP);
+    Rcpp::traits::input_parameter< int >::type bandwidth(bandwidthSEXP);
+    Rcpp::traits::input_parameter< bool >::type robust(robustSEXP);
+    rcpp_result_gen = Rcpp::wrap(ivx_fit_cpp(y, X, K, beta, cz, bandwidth, robust));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_ivx_ivx_fit_cpp", (DL_FUNC) &_ivx_ivx_fit_cpp, 3},
+    {"_ivx_ivx_fit_cpp", (DL_FUNC) &_ivx_ivx_fit_cpp, 7},
     {NULL, NULL, 0}
 };
 

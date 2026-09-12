@@ -26,9 +26,9 @@ extract.ivx <- function(model,
   s <- summary(model)
 
   names <- rownames(s$coef)
-  co <- s$coef[, 1]
-  wald <- s$coef[, 2]
-  pval <- s$coef[, 3]
+  co <- s$coef[, "Estimate"]
+  se <- s$coef[, "Std. Error"]
+  pval <- s$coef[, "Pr(> chi)"]
 
   gof <- numeric()
   gof.names <- character()
@@ -78,7 +78,7 @@ extract.ivx <- function(model,
   texreg::createTexreg(
     coef.names = names,
     coef = co,
-    se = wald,
+    se = se,
     pvalues = pval,
     gof.names = gof.names,
     gof = gof,

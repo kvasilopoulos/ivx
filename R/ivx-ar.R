@@ -224,8 +224,11 @@ summary.ivx_ar <- function(object, ...) {
   ans$aliased <- is.na(z$coefficients)
 
   p_value_ivx <- 1 - pchisq(z$Wald_Ind, 1)
-  ans$coefficients <- cbind(z$coefficients, z$Wald_Ind, p_value_ivx)
-  dimnames(ans$coefficients) <- list(z$cnames, c("Estimate", "Wald Ind", "Pr(> chi)"))
+  ans$coefficients <- cbind(z$coefficients, z$se, z$tstat, z$Wald_Ind, p_value_ivx)
+  dimnames(ans$coefficients) <- list(
+    z$cnames, c("Estimate", "Std. Error", "t value", "Wald Ind", "Pr(> chi)")
+  )
+  ans$robust <- z$robust
 
   ans$vcov <- z$vcov
   dimnames(ans$vcov) <- dimnames(ans$coefficients)[c(1, 1)]
@@ -298,10 +301,12 @@ print.summary.ivx_ar <- function(x,
     cat("Coefficients:\n")
 
     printCoefmat(coefs,
-      digits = digits, signif.stars = signif.stars,
+      digits = digits, signif.stars = signif.stars, cs.ind = 1:2, tst.ind = 3:4,
       signif.legend = TRUE, has.Pvalue = TRUE, P.values = TRUE,
       na.print = "NA", ...
     )
+    if (isTRUE(x$robust)) cat("(Eicker-White standard errors)
+")
 
     cat(
       "\nJoint Wald statistic: ", formatC(x$Wald_Joint, digits = digits),

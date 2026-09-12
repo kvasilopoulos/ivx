@@ -23,6 +23,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Kostas Vasilopoulos \email{k.vasilopoulo@gmail.com}
   \item Efthymios Pavlidis \email{e.pavlidis@lancaster.ac.uk}
 }
 
