@@ -41,6 +41,7 @@ reference:
     contents:
       - arm
       - hlt_test
+      - el_test
 
   - title: Fitter functions
     desc: Low-level functions taking a response and a design matrix.

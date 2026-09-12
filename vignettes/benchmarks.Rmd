@@ -1,8 +1,8 @@
 ---
-title: "Non-IVX benchmarks: ARM and the hybrid t-test"
+title: "Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Non-IVX benchmarks: ARM and the hybrid t-test}
+  %\VignetteIndexEntry{Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,10 +15,11 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(ivx)
 ```
 
-Two non-IVX procedures are included as the benchmarks the IVX literature
+Three non-IVX procedures are included as the benchmarks the IVX literature
 compares against: the augmented regression method of Amihud, Hurvich & Wang
-(2009), `arm()`, and the hybrid switching t-test of Harvey, Leybourne & Taylor
-(2021), `hlt_test()`.
+(2009), `arm()`, the hybrid switching t-test of Harvey, Leybourne & Taylor
+(2021), `hlt_test()`, and the unified empirical likelihood test of Liu, Yang,
+Cai & Peng (2019), `el_test()`.
 
 # Augmented regression method
 
@@ -83,17 +84,23 @@ $0.894$ against an OLS mean of $0.857$. In the paper's two-predictor Case 1 the
 single predictor. It uses only regression t-ratios: the standard one, $T$,
 and $	ilde T$, in which the predictor is quasi-GLS demeaned with
 $ar c = 7$ as in Elliott et al. (1996). Under strong persistence their null
-distributions depend on $c$ and on $ho_{xy}$, so the paper tabulates
+distributions depend on $c$ and on $
+ho_{xy}$, so the paper tabulates
 *conservative* critical values — the maximum over $c$ of the $lpha$-level
-quantile — as response surfaces in $\hatho_{xy}$ (their Table 1), and
+quantile — as response surfaces in $\hat
+ho_{xy}$ (their Table 1), and
 switches:
 
 1. if the ADF normalised-bias statistic (lag length by MBIC) is below
    $-4\sqrt{T}$ the predictor is weakly persistent: $T$ with a normal
    critical value;
-2. otherwise, for an upper-tail test, $T$ with $cv(\hatho_{xy})$ when
-   $\hatho_{xy} > -0.1$ and $	ilde T$ with $	ilde{cv}(\hatho_{xy})$
-   when $\hatho_{xy} < -0.1$ (quasi-GLS demeaning pays off only when the
+2. otherwise, for an upper-tail test, $T$ with $cv(\hat
+ho_{xy})$ when
+   $\hat
+ho_{xy} > -0.1$ and $	ilde T$ with $	ilde{cv}(\hat
+ho_{xy})$
+   when $\hat
+ho_{xy} < -0.1$ (quasi-GLS demeaning pays off only when the
    endogeneity is strong); lower-tail tests mirror this.
 
 ```{r}
@@ -102,12 +109,42 @@ hlt_test(Ret ~ TBL, data = kms, alternative = "less", level = 0.1)
 ```
 
 In the paper's design ($T = 200$, upper-tail 5% test) the empirical size in
-1000 replications is 0.07/0.04/0.05 for $ho_{xy} = -0.9$ and
-$ho = 1, 0.95, 0.5$, and 0.00/0.02/0.04 for $ho_{xy} = 0.9$ — the
-"undersize for positive $ho_{xy}$ in the more persistent cases" the paper
+1000 replications is 0.07/0.04/0.05 for $
+ho_{xy} = -0.9$ and
+$
+ho = 1, 0.95, 0.5$, and 0.00/0.02/0.04 for $
+ho_{xy} = 0.9$ — the
+"undersize for positive $
+ho_{xy}$ in the more persistent cases" the paper
 notes is the price of the conservative critical values. The test is one-sided
 by construction and has no p-value; the object reports the selected test, its
 statistic and critical value.
+
+# Unified empirical likelihood test
+
+`el_test()` implements Liu, Yang, Cai & Peng (2019). Their model adds the
+lagged difference of the predictor,
+$$
+Y_t = lpha + eta_1 \Delta X_{t-1} + eta_2 X_{t-2} + U_t,
+$$
+so that $Y_t$ can be stationary whether or not $X_t$ is. The intercept is
+removed by differencing at lag $m = \lfloor n/2 floor$ (Zhu, Cai & Peng,
+2014), and the empirical likelihood is built on the two score equations, the
+second weighted by $1/\sqrt{1 + 	ilde X_{t-2}^2}$ so that its sample
+variance converges whatever the persistence. The profile EL ratios for
+$eta_2 = 0$ (no predictability), $eta_1 = 0$ and the joint null are then
+$\chi^2(1)$, $\chi^2(1)$, $\chi^2(2)$ with no tuning parameter and no
+persistence classification (Theorem 2). The price is efficiency: only $m - 2$
+differenced observations enter, and the paper reports that the test on
+$eta_1$ is oversized at $n = 200$.
+
+```{r}
+el_test(Ret ~ DP, data = kms)
+```
+
+The EL dual problem is solved by Newton's method with Owen's (2001)
+pseudo-logarithm; the profiles are minimised over the nuisance coefficient
+by BFGS from the OLS start.
 
 ## References
 
@@ -120,8 +157,12 @@ statistic and critical value.
 * Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple tests
   for stock return predictability with good size and power properties.
   *Journal of Econometrics*, 224(1), 198–214.
+* Liu, X., Yang, B., Cai, Z., & Peng, L. (2019). A unified test for
+  predictability of asset returns regardless of properties of predicting
+  variables. *Journal of Econometrics*, 208(1), 141–159.
 * Nicholls, D. F., & Pope, A. L. (1988). Bias in the estimation of
   multivariate autoregressions. *Australian Journal of Statistics*, 30A,
   296–309.
+* Owen, A. B. (2001). *Empirical Likelihood*. Chapman & Hall.
 * Stambaugh, R. F. (1999). Predictive regressions. *Journal of Financial
   Economics*, 54(3), 375–421.
