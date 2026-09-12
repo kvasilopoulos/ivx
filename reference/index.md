@@ -54,6 +54,10 @@ Reduced-bias OLS alternatives for stationary persistent predictors.
 - [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md)
   [`print(`*`<arm>`*`)`](https://kvasilopoulos.github.io/ivx/reference/arm.md)
   : Augmented Regression Method (Amihud, Hurvich & Wang)
+- [`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
+  [`hlt_test_fit()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
+  [`print(`*`<hlt_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
+  : Hybrid t-Test for Return Predictability (Harvey, Leybourne & Taylor)
 
 ## Fitter functions
 

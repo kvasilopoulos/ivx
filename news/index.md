@@ -92,6 +92,12 @@
   Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected VAR(1)
   residuals as control variables and the paper’s covariance estimator; a
   non-IVX benchmark for stationary persistent predictors.
+- New
+  [`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md):
+  the hybrid switching t-test of Harvey, Leybourne & Taylor
+  2021. - standard or quasi-GLS-demeaned t-ratio with the paper’s
+          conservative critical values under strong persistence, normal
+          critical values under weak persistence (ADF/MBIC switch).
 - Fixed: weighted fits ignored the `horizon` argument.
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in

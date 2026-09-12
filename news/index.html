@@ -31,8 +31,8 @@
     <li><a class="dropdown-item" href="../articles/ivx-ar.html">IVX-AR: serially correlated errors</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-ra.html">Residual-augmented IVX</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-qr.html">IVX quantile predictive regression</a></li>
-    <li><a class="dropdown-item" href="../articles/arm.html">Augmented regression method (non-IVX benchmark)</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-iv.html">IV tests with combined instruments</a></li>
+    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: ARM and the hybrid t-test</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Inference</h6></li>
     <li><a class="dropdown-item" href="../articles/robust-inference.html">Robust inference: Eicker-White and wild bootstrap</a></li>
@@ -73,6 +73,10 @@
 <li>New vignettes for each methodology (<code>ivx</code>, <code>ivx-sys</code>, <code>ivx-ar</code>, <code>ivx-ra</code>, <code>ivx-qr</code>, <code>robust-inference</code>, <code>ivx-episodic</code>) with the underlying statistics, replication results and caveats; pkgdown site reorganised (Bootstrap 5, MathJax rendering, grouped reference and articles).</li>
 <li>New <code><a href="../reference/ivx_iv.html">ivx_iv()</a></code> / <code><a href="../reference/ivx_iv_fit.html">ivx_iv_fit()</a></code>: the 2SLS predictability tests of Breitung &amp; Demetrescu (2015) with fractional-difference, long-difference and sine instruments and their recommended combination (<code>IVcomb</code>), Eicker-White standard errors.</li>
 <li>New <code><a href="../reference/arm.html">arm()</a></code> / <code><a href="../reference/arm_fit.html">arm_fit()</a></code>: the multipredictor augmented regression method of Amihud, Hurvich &amp; Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected VAR(1) residuals as control variables and the paper’s covariance estimator; a non-IVX benchmark for stationary persistent predictors.</li>
+<li>New <code><a href="../reference/hlt_test.html">hlt_test()</a></code>: the hybrid switching t-test of Harvey, Leybourne &amp; Taylor
+<ol start="2021" style="list-style-type: decimal"><li><ul><li>standard or quasi-GLS-demeaned t-ratio with the paper’s conservative critical values under strong persistence, normal critical values under weak persistence (ADF/MBIC switch).</li>
+</ul></li>
+</ol></li>
 <li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
 <li>
 <code><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract()</a></code> (texreg) now reports IVX standard errors instead of Wald statistics in the <code>se</code> slot.</li>
