@@ -1,0 +1,41 @@
+context("test-ivx-ra")
+
+test_that("ivx_ra fits and the ivx methods work on it", {
+  m <- ivx_ra(Ret ~ DP, data = kms)
+  expect_s3_class(m, c("ivx_ra", "ivx"))
+  expect_equal(m$Wald_Joint, unname(m$tstat^2))
+  expect_true(m$ar_order >= 1 && m$ar_order <= 5)
+  expect_error(capture.output(print(m)), NA)
+  s <- summary(m)
+  expect_equal(colnames(coef(s)), c("Estimate", "Std. Error", "t value", "Wald Ind", "Pr(> chi)"))
+  expect_equal(dim(vcov(m)), c(1, 1))
+  expect_length(delta(m), 1)
+
+  m2 <- ivx_ra(Ret ~ DP + TBL, data = kms, ar = 2, ar_ic = "bic")
+  expect_equal(m2$ar_order, 2)
+  expect_equal(m2$ar_method, "fixed")
+  expect_length(coef(m2), 2)
+  expect_length(m2$gamma, 2)
+  expect_equal(dim(vcov(m2)), c(2, 2))
+  expect_true(m2$Wald_Joint > 0)
+})
+
+test_that("ivx_ra validates ar and matches ivx_ra_fit", {
+  expect_error(ivx_ra(Ret ~ DP, data = kms, ar = 0), "positive integer")
+  expect_error(ivx_ra(Ret ~ DP, data = kms, ar = 1.5), "positive integer")
+  f <- ivx_ra_fit(kms$Ret, as.matrix(kms[, c("DP", "TBL")]), ar = 3)
+  m <- ivx_ra(Ret ~ DP + TBL, data = kms, ar = 3)
+  expect_equal(unname(coef(m)), unname(f$coefficients))
+})
+
+test_that("residual augmentation removes the endogeneity bias (true innovations)", {
+  # with the true innovations partialled out the estimator is unbiased; check the
+  # mechanics on one long simulated sample: gamma ~ -0.95 and |T beta| small
+  set.seed(11)
+  Tn <- 5000
+  e <- rnorm(Tn); u <- -0.95 * e + sqrt(1 - 0.95^2) * rnorm(Tn)
+  x <- cumsum(e); y <- c(0, u[-1])
+  f <- ivx_ra_fit(y, matrix(x), ar = 1)
+  expect_equal(unname(f$gamma), -0.95, tolerance = 0.02)
+  expect_lt(abs(f$tstat), 3)
+})

@@ -16,6 +16,9 @@
   the joint and individual Wald statistics and one-sided t-tests. Supports
   `cores > 1` via the \pkg{parallel} package; the regressor recursion of the
   residual wild bootstrap runs in C++.
+* New `ivx_ra()` / `ivx_ra_fit()`: the residual-augmented (bias-reduced) IVX
+  estimator of Demetrescu & Rodrigues (2022) with its heteroskedasticity-robust
+  standard errors; returns an `ivx` object so `summary()`, `vcov()` etc. apply.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

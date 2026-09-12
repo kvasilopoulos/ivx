@@ -188,25 +188,33 @@ print.ivx_boot <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   invisible(x)
 }
 
-# OLS VAR(q) with intercept on a common sample, q = 1..max_lag chosen by BIC.
+# OLS VAR(q) in levels (with intercept unless intercept = FALSE). `lag` is either the maximum order, with q
+# chosen by `ic` on a common sample, or the fixed order when `fixed = TRUE`.
 # Returns lag matrices A[[j]] (equation by row), q, and residuals for t = q+1..n.
-var_ols <- function(x, max_lag) {
+var_ols <- function(x, lag, ic = c("bic", "aic"), fixed = FALSE, intercept = TRUE) {
+  ic <- match.arg(ic)
   l <- NCOL(x)
-  e <- embed(x, max_lag + 1)
-  m <- nrow(e)
-  bic <- sapply(seq_len(max_lag), function(q) {
-    res <- lm.fit(
-      cbind(1, e[, l + seq_len(q * l), drop = FALSE]),
-      e[, seq_len(l)]
-    )$residuals
-    log(det(crossprod(res) / m)) + (1 + q * l) * l * log(m) / m
-  })
-  q <- which.min(bic)
+  X <- function(e, q) {
+    lags <- e[, l + seq_len(q * l), drop = FALSE]
+    if (intercept) cbind(1, lags) else lags
+  }
+  if (fixed) {
+    q <- lag
+  } else {
+    e <- embed(x, lag + 1)
+    m <- nrow(e)
+    pen <- if (ic == "bic") log(m) else 2
+    crit <- sapply(seq_len(lag), function(q) {
+      res <- lm.fit(X(e, q), e[, seq_len(l)])$residuals
+      log(det(crossprod(res) / m)) + (intercept + q * l) * l * pen / m
+    })
+    q <- which.min(crit)
+  }
   e <- embed(x, q + 1)
-  fit <- lm.fit(cbind(1, e[, -seq_len(l), drop = FALSE]), e[, seq_len(l)])
+  fit <- lm.fit(X(e, q), e[, seq_len(l)])
   coef <- as.matrix(fit$coefficients)
   A <- lapply(seq_len(q), function(j) {
-    t(coef[1 + (j - 1) * l + seq_len(l), , drop = FALSE])
+    t(coef[intercept + (j - 1) * l + seq_len(l), , drop = FALSE])
   })
   list(q = q, A = A, resid = as.matrix(fit$residuals))
 }
