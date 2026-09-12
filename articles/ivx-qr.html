@@ -177,6 +177,36 @@ correct; with <span class="math inline">\(\beta = 0.8\)</span>:</p>
 <span><span class="co">#&gt; [1] 0.005426976</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="block-bootstrap-under-conditional-heteroskedasticity">Block bootstrap under conditional heteroskedasticity<a class="anchor" aria-label="anchor" href="#block-bootstrap-under-conditional-heteroskedasticity"></a>
+</h2>
+<p>The asymptotic test needs the sparsity <span class="math inline">\(f_u(0)\)</span> and, with conditionally
+heteroskedastic errors, further nuisance parameters that enter the limit
+(Fan &amp; Lee, 2019, Theorem 3.2); their estimation error is what
+distorts the test in the tails. <code><a href="../reference/ivx_qr_boot.html">ivx_qr_boot()</a></code> implements
+the paper’s moving block bootstrap: blocks of the pairs <span class="math inline">\((y_t,   ilde z_{t-1})\)</span> of length <span class="math inline">\(\lceil n^{1/4}
+ceil\)</span> are resampled, the quantile regression is refitted, and
+percentile intervals and p-values are reported. No sparsity estimate is
+needed.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivx_qr.html">ivx_qr</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, tau <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ivx_qr_boot.html">ivx_qr_boot</a></span><span class="op">(</span><span class="va">m</span>, B <span class="op">=</span> <span class="fl">499</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; ivx_qr(formula = Ret ~ DP + TBL, data = kms, tau = 0.1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; IVX-QR at tau = 0.1, moving block bootstrap, B = 499, block length 6</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients (percentile intervals and p-values):</span></span>
+<span><span class="co">#&gt;     Estimate     2.5%    97.5% Pr(|b| &gt; 0)</span></span>
+<span><span class="co">#&gt; DP  -0.02831 -0.05947  0.01104       0.212</span></span>
+<span><span class="co">#&gt; TBL  0.18938 -0.13693  0.55822       0.257</span></span></code></pre></div>
+<p>In the paper’s ARCH(1) design (<span class="math inline">\(lpha_1 =
+0.9\)</span>, $ ho = -0.9$, <span class="math inline">\(c = 0\)</span>,
+<span class="math inline">\(n = 200\)</span>, $ au = 0.1$) the
+asymptotic test rejects a true null 18% of the time in 300 replications;
+the block bootstrap 7%.</p>
+</div>
+<div class="section level2">
 <h2 id="caveats">Caveats<a class="anchor" aria-label="anchor" href="#caveats"></a>
 </h2>
 <ul>
@@ -188,7 +218,8 @@ Proposition 3.2, not the full IVX-QR estimator of the paper’s equation
 (3.6), whose non-convex objective the paper itself avoids for testing
 <span class="math inline">\(\beta_\tau = 0\)</span>. The coefficients
 are therefore those of the regression on <span class="math inline">\(\tilde z_{t-1}\)</span>.</li>
-<li>Short horizon only; no bootstrap.</li>
+<li>Short horizon only. <code><a href="../reference/ivx_boot.html">ivx_boot()</a></code> does not apply; use
+<code><a href="../reference/ivx_qr_boot.html">ivx_qr_boot()</a></code>.</li>
 <li>The <code>rq</code> fit is stored in the result (<code>$rq</code>)
 for further quantreg methods.</li>
 </ul>
@@ -197,11 +228,14 @@ for further quantreg methods.</li>
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li>Lee, J. H. (2016). Predictive quantile regression with persistent
+<li><p>Fan, R., &amp; Lee, J. H. (2019). Predictive quantile regressions
+under persistence and conditional heteroskedasticity. <em>Journal of
+Econometrics</em>, 213(1), 261–280.</p></li>
+<li><p>Lee, J. H. (2016). Predictive quantile regression with persistent
 covariates: IVX-QR approach. <em>Journal of Econometrics</em>, 192(1),
-105–118.</li>
-<li>Koenker, R. (2005). <em>Quantile Regression</em>. Cambridge
-University Press.</li>
+105–118.</p></li>
+<li><p>Koenker, R. (2005). <em>Quantile Regression</em>. Cambridge
+University Press.</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

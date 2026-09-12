@@ -105,6 +105,38 @@ ivx_qr(Ret ~ DP, data = kms, tau = 0.5, beta = 0.8)$Wald_Joint
 #> [1] 0.005426976
 ```
 
+## Block bootstrap under conditional heteroskedasticity
+
+The asymptotic test needs the sparsity \\f_u(0)\\ and, with
+conditionally heteroskedastic errors, further nuisance parameters that
+enter the limit (Fan & Lee, 2019, Theorem 3.2); their estimation error
+is what distorts the test in the tails.
+[`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md)
+implements the paper’s moving block bootstrap: blocks of the pairs
+\\(y_t, ilde z\_{t-1})\\ of length \\\lceil n^{1/4} ceil\\ are
+resampled, the quantile regression is refitted, and percentile intervals
+and p-values are reported. No sparsity estimate is needed.
+
+``` r
+
+m <- ivx_qr(Ret ~ DP + TBL, data = kms, tau = 0.1)
+ivx_qr_boot(m, B = 499, seed = 1)
+#> 
+#> Call:
+#> ivx_qr(formula = Ret ~ DP + TBL, data = kms, tau = 0.1)
+#> 
+#> IVX-QR at tau = 0.1, moving block bootstrap, B = 499, block length 6
+#> 
+#> Coefficients (percentile intervals and p-values):
+#>     Estimate     2.5%    97.5% Pr(|b| > 0)
+#> DP  -0.02831 -0.05947  0.01104       0.212
+#> TBL  0.18938 -0.13693  0.55822       0.257
+```
+
+In the paper’s ARCH(1) design (\\lpha_1 = 0.9\\, \$ ho = -0.9\$, \\c =
+0\\, \\n = 200\\, \$ au = 0.1\$) the asymptotic test rejects a true null
+18% of the time in 300 replications; the block bootstrap 7%.
+
 ## Caveats
 
 - Tail quantiles need long samples for an accurate density estimate; the
@@ -115,13 +147,21 @@ ivx_qr(Ret ~ DP, data = kms, tau = 0.5, beta = 0.8)$Wald_Joint
   the paper itself avoids for testing \\\beta\_\tau = 0\\. The
   coefficients are therefore those of the regression on \\\tilde
   z\_{t-1}\\.
-- Short horizon only; no bootstrap.
+- Short horizon only.
+  [`ivx_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_boot.md)
+  does not apply; use
+  [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md).
 - The `rq` fit is stored in the result (`$rq`) for further quantreg
   methods.
 
 ## References
 
+- Fan, R., & Lee, J. H. (2019). Predictive quantile regressions under
+  persistence and conditional heteroskedasticity. *Journal of
+  Econometrics*, 213(1), 261–280.
+
 - Lee, J. H. (2016). Predictive quantile regression with persistent
   covariates: IVX-QR approach. *Journal of Econometrics*, 192(1),
   105–118.
+
 - Koenker, R. (2005). *Quantile Regression*. Cambridge University Press.

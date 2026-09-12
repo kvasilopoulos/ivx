@@ -54,6 +54,11 @@
   via (in Suggests); returns the estimated QR endogeneity `rho_tau` for
   the paper’s tuning rule.
 - New
+  [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md):
+  moving block bootstrap percentile intervals and p-values for IVX-QR
+  (Fan & Lee, 2019), robust to conditional heteroskedasticity and to the
+  sparsity estimate.
+- New
   [`ivx_episodic()`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md):
   subsample (rolling, forward and backward recursive) IVX tests for
   pockets of predictability with sup/inf functionals and wild bootstrap

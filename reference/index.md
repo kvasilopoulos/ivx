@@ -37,6 +37,9 @@ Wild bootstrap p-values and tests for pockets of predictability
 - [`ivx_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_boot.md)
   [`print(`*`<ivx_boot>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_boot.md)
   : Wild Bootstrap Inference for IVX Models
+- [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md)
+  [`print(`*`<ivx_qr_boot>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md)
+  : Moving Block Bootstrap for IVX-QR
 - [`ivx_episodic()`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md)
   [`print(`*`<ivx_episodic>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md)
   : Subsample IVX Tests for Episodic Predictability
