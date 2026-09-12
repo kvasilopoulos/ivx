@@ -83,6 +83,19 @@ ivx(Ret ~ DP + TBL, data = kms, horizon = 4) %>%
 ```
 
 
+## Robust inference (Demetrescu et al., 2023)
+
+Eicker-White standard errors, the IVX tuning parameters and wild-bootstrap
+p-values (residual or fixed-regressor wild bootstrap):
+
+```{r robust}
+ivx(Ret ~ DP + TBL, data = kms, robust = TRUE) %>%
+  summary()
+
+mod <- ivx(Ret ~ DP + TBL, data = kms, beta = 0.9, cz = 5)
+ivx_boot(mod, B = 999, type = "rwb", seed = 1)
+```
+
 ## Yang et al. (2020) IVX-AR methodology
 
 ```{r uni-ar}
