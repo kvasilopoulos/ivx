@@ -14,6 +14,12 @@
 - [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) gains
   `robust = TRUE` for Eicker-White (heteroskedasticity-robust) IVX
   standard errors (Demetrescu, Georgiev, Rodrigues & Taylor, 2023).
+- [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) and
+  [`ivx_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_fit.md)
+  gain `lag_y = TRUE`: the lag-augmented IVX regression of Demetrescu
+  (2014), which adds the lagged dependent variable (instrumented by
+  itself) to raise local power under strong persistence and endogeneity.
+  The joint Wald statistic tests the predictors only.
 - [`summary()`](https://rdrr.io/r/base/summary.html) coefficient tables
   now report `Std. Error` and `t value` next to the individual Wald
   statistics; the fitted object stores `se` and `tstat`. Breaking: the
@@ -35,6 +41,11 @@
   returns an `ivx` object so
   [`summary()`](https://rdrr.io/r/base/summary.html),
   [`vcov()`](https://rdrr.io/r/stats/vcov.html) etc. apply.
+  [`ivx_ra()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ra.md)
+  gains `horizon`: for `horizon > 1` it is the transformed-regression
+  long-horizon test of Demetrescu, Rodrigues & Taylor (2023), which
+  handles the overlap of the long-horizon regression without HAC
+  estimation.
 - New
   [`ivx_qr()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr.md)
   /

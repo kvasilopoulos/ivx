@@ -222,6 +222,30 @@ regression. The statistic keeps its <span class="math inline">\(\chi^2\)</span> 
 <span><span class="co">#&gt; Multiple R-squared:  0.05429,    Adjusted R-squared:  0.06255</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="lag-augmentation-for-power">Lag augmentation for power<a class="anchor" aria-label="anchor" href="#lag-augmentation-for-power"></a>
+</h2>
+<p>The IVX instrument is less persistent than <span class="math inline">\(x_t\)</span>, so the test loses local power
+against OLS exactly when <span class="math inline">\(x_t\)</span> is
+near-integrated and endogenous. Demetrescu (2014) shows that adding
+<span class="math inline">\(y_{t-1}\)</span> to the regression,
+instrumented by itself, <span class="math display">\[
+y_t = \phi\, y_{t-1} + eta' x_{t-1} + u_t, \qquad \phi = 0     ext{
+under the null},
+\]</span> feeds the signal back into the instrument and can raise power
+substantially when the instrument is weak (small <span class="math inline">\(\eta\)</span>), while being asymptotically
+equivalent to plain IVX otherwise. <code>lag_y = TRUE</code> does this;
+the joint Wald statistic still tests only <span class="math inline">\(eta\)</span>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, lag_y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; ivx(formula = Ret ~ DP + TBL, data = kms, lag_y = TRUE, horizon = 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;        DP        TBL      y_lag  </span></span>
+<span><span class="co">#&gt;  0.007248  -0.073288   0.091950</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="heteroskedasticity-robust-standard-errors">Heteroskedasticity-robust standard errors<a class="anchor" aria-label="anchor" href="#heteroskedasticity-robust-standard-errors"></a>
 </h2>
 <p>Demetrescu, Georgiev, Rodrigues &amp; Taylor (2023) show that the IVX
@@ -230,7 +254,7 @@ the innovations (unconditional and conditional heteroskedasticity) if
 Eicker–White standard errors are used, i.e. <span class="math inline">\(\hat\sigma_u^2 \sum z z'\)</span> is replaced
 by <span class="math inline">\(\sum z_{t-1} z_{t-1}' \hat
 u_t^2\)</span>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -256,7 +280,7 @@ bootstrap alternative.</p>
 published estimates (Table 6, p. 1531 and Table 8, p. 1537) are
 reproduced to the printed precision, and these values are asserted in
 the package tests.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DE</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>coef <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m6</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>, wald <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">m6</span><span class="op">$</span><span class="va">Wald_Ind</span>, <span class="fl">3</span><span class="op">)</span>, delta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="../reference/delta.html">delta</a></span><span class="op">(</span><span class="va">m6</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; coef.DE wald.DE   delta </span></span>
@@ -270,7 +294,7 @@ the package tests.</p>
 <span><span class="co"># paper: 0.0061, -0.0807, 3.644</span></span></code></pre></div>
 <p>Long-horizon Wald statistics for <code>Ret ~ EP + TBL</code> (Table
 13, p. 1547):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">12</span>, <span class="fl">24</span>, <span class="fl">36</span>, <span class="fl">48</span>, <span class="fl">60</span><span class="op">)</span></span>
 <span><span class="va">t13</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">h</span>, <span class="kw">function</span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivx.html">ivx</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">EP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, horizon <span class="op">=</span> <span class="va">k</span><span class="op">)</span></span>
@@ -307,21 +331,24 @@ appropriate for the theory.</li>
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li>Kostakis, A., Magdalinos, T., &amp; Stamatogiannis, M. P. (2015).
+<li><p>Demetrescu, M. (2014). Enhancing the local power of IVX-based
+tests in predictive regressions. <em>Economics Letters</em>, 124(2),
+269–273.</p></li>
+<li><p>Kostakis, A., Magdalinos, T., &amp; Stamatogiannis, M. P. (2015).
 Robust econometric inference for stock return predictability. <em>Review
-of Financial Studies</em>, 28(5), 1506–1553.</li>
-<li>Kostakis, A., Magdalinos, T., &amp; Stamatogiannis, M. P. (2023).
+of Financial Studies</em>, 28(5), 1506–1553.</p></li>
+<li><p>Kostakis, A., Magdalinos, T., &amp; Stamatogiannis, M. P. (2023).
 Taking stock of long-horizon predictability tests: Are factor returns
-predictable? <em>Journal of Econometrics</em>, 237(2), 105380.</li>
-<li>Magdalinos, T., &amp; Phillips, P. C. B. (2009). Limit theory for
+predictable? <em>Journal of Econometrics</em>, 237(2), 105380.</p></li>
+<li><p>Magdalinos, T., &amp; Phillips, P. C. B. (2009). Limit theory for
 cointegrated systems with moderately integrated and moderately explosive
-regressors. <em>Econometric Theory</em>, 25(2), 482–526.</li>
-<li>Phillips, P. C. B., &amp; Lee, J. H. (2013). Predictive regression
-under various degrees of persistence and robust long-horizon regression.
-<em>Journal of Econometrics</em>, 177(2), 250–264.</li>
-<li>Hosseinkouchack, M., &amp; Demetrescu, M. (2021). Finite-sample size
-control of IVX-based tests in predictive regressions. <em>Econometric
-Theory</em>, 37(4), 769–793.</li>
+regressors. <em>Econometric Theory</em>, 25(2), 482–526.</p></li>
+<li><p>Phillips, P. C. B., &amp; Lee, J. H. (2013). Predictive
+regression under various degrees of persistence and robust long-horizon
+regression. <em>Journal of Econometrics</em>, 177(2), 250–264.</p></li>
+<li><p>Hosseinkouchack, M., &amp; Demetrescu, M. (2021). Finite-sample
+size control of IVX-based tests in predictive regressions.
+<em>Econometric Theory</em>, 37(4), 769–793.</p></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

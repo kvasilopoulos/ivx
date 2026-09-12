@@ -11,13 +11,13 @@ the predictors, the predictive regression is augmented with its residuals
 (in the spirit of Amihud and Hurvich, 2004), and the slope on the lagged
 predictors is estimated by IVX. Inference uses the heteroskedasticity-robust
 standard errors of the paper (eq. 9 and 14), which are valid whether the
-predictors are stationary or near-integrated. Short horizon only."><meta property="og:description" content="ivx_ra implements the residual-augmented (bias-reduced) IVX estimator of
+predictors are stationary or near-integrated."><meta property="og:description" content="ivx_ra implements the residual-augmented (bias-reduced) IVX estimator of
 Demetrescu and Rodrigues (2022). An autoregression of order p is fitted to
 the predictors, the predictive regression is augmented with its residuals
 (in the spirit of Amihud and Hurvich, 2004), and the slope on the lagged
 predictors is estimated by IVX. Inference uses the heteroskedasticity-robust
 standard errors of the paper (eq. 9 and 14), which are valid whether the
-predictors are stationary or near-integrated. Short horizon only."><meta property="og:image" content="https://kvasilopoulos.github.io/ivx/logo.png"></head><body>
+predictors are stationary or near-integrated."><meta property="og:image" content="https://kvasilopoulos.github.io/ivx/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -70,7 +70,7 @@ the predictors, the predictive regression is augmented with its residuals
 (in the spirit of Amihud and Hurvich, 2004), and the slope on the lagged
 predictors is estimated by IVX. Inference uses the heteroskedasticity-robust
 standard errors of the paper (eq. 9 and 14), which are valid whether the
-predictors are stationary or near-integrated. Short horizon only.</p>
+predictors are stationary or near-integrated.</p>
     </div>
 
     <div class="section level2">
@@ -81,6 +81,7 @@ predictors are stationary or near-integrated. Short horizon only.</p>
 <span>  ar <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  ar_ic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"aic"</span>, <span class="st">"bic"</span><span class="op">)</span>,</span>
 <span>  ar_max <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  horizon <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  beta <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  cz <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  <span class="va">na.action</span>,</span>
@@ -123,6 +124,10 @@ integer for a fixed order.</p></dd>
 
 <dt id="arg-ar-max">ar_max<a class="anchor" aria-label="anchor" href="#arg-ar-max"></a></dt>
 <dd><p>maximum order considered when <code>ar = "auto"</code>.</p></dd>
+
+
+<dt id="arg-horizon">horizon<a class="anchor" aria-label="anchor" href="#arg-horizon"></a></dt>
+<dd><p>forecast horizon \(h\); see Details.</p></dd>
 
 
 <dt id="arg-beta-cz">beta, cz<a class="anchor" aria-label="anchor" href="#arg-beta-cz"></a></dt>
@@ -173,7 +178,16 @@ functions (see <a href="https://rdrr.io/r/stats/lm.html" class="external-link">l
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The autoregression of the predictors is fitted without an intercept and its
+    <p>For <code>horizon &gt; 1</code> the estimator is the transformed-regression residual-augmented
+IVX of Demetrescu, Rodrigues and Taylor (2023), eqs (4.9), (4.11) and (5.5)-(5.7):
+the single-period response is regressed on the \(h\)-period transformed
+instrument \(z_t^{trf,(h)} = \sum_{i=\max(1,t-h+1)}^{\min(t,T-h)} z_i\)
+(eq. 4.4), which accounts for the overlap of the long-horizon regression without
+HAC estimation. At <code>horizon = 1</code> it coincides with the short-horizon estimator.
+The coefficients estimate the \(h\)-period slope \(eta_h\); fitted values
+and residuals are those of the transformed (non-overlapping) regression, and
+the Kostakis et al. (2015) intercept correction is applied only at <code>horizon = 1</code>.</p>
+<p>The autoregression of the predictors is fitted without an intercept and its
 residuals are demeaned before augmentation, which is the paper's preferred
 \(\tilde t_{ivx}^{\mu_0}\) statistic (Sections 4-5); the standard errors
 include the finite-sample correction of Kostakis et al. (2015) as in the
@@ -183,6 +197,9 @@ paper's simulations.</p>
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Demetrescu, M., &amp; Rodrigues, P. M. M. (2022). Residual-augmented
 IVX predictive regression. Journal of Econometrics, 227(2), 429-460.</p>
+<p>Demetrescu, M., Rodrigues, P. M. M., &amp; Taylor, A. M. R. (2023).
+Transformed regression-based long-horizon predictability tests. Journal of
+Econometrics, 237(2), 105316.</p>
 <p>Amihud, Y., &amp; Hurvich, C. M. (2004). Predictive regressions: A
 reduced-bias estimation method. Journal of Financial and Quantitative
 Analysis, 39(4), 813-841.</p>
@@ -215,6 +232,19 @@ Analysis, 39(4), 813-841.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Joint Wald statistic:  1.654 on 2 DF, p-value 0.4374</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-squared:  0.02494,	Adjusted R-squared:  0.02304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># long horizon (Demetrescu, Rodrigues &amp; Taylor, 2023)</span></span></span>
+<span class="r-in"><span><span class="fu">ivx_ra</span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span>, horizon <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ivx_ra(formula = Ret ~ DP, data = kms, horizon = 12)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual-augmented IVX, AR order p = 5 (aic)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       DP  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.01775  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

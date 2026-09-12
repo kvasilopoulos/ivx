@@ -12,6 +12,7 @@ ivx_ra_fit(
   ar = "auto",
   ar_ic = "aic",
   ar_max = 5,
+  horizon = 1,
   beta = 0.95,
   cz = 1,
   ...
@@ -41,6 +42,10 @@ ivx_ra_fit(
 - ar_max:
 
   maximum order considered when `ar = "auto"`.
+
+- horizon:
+
+  forecast horizon \\h\\; see Details.
 
 - beta, cz:
 

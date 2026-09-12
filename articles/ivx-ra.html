@@ -243,6 +243,36 @@ so reflects a detail of the simulation design rather than the
 estimator.</p>
 </div>
 <div class="section level2">
+<h2 id="long-horizons-the-transformed-regression">Long horizons: the transformed regression<a class="anchor" aria-label="anchor" href="#long-horizons-the-transformed-regression"></a>
+</h2>
+<p>Demetrescu, Rodrigues &amp; Taylor (2023) extend the estimator to the
+<span class="math inline">\(h\)</span>-period regression without HAC
+estimation. Following Britten-Jones et al. (2011), the overlapping
+regression of <span class="math inline">\(\sum_{j=1}^h y_{t+j}\)</span>
+on <span class="math inline">\(x_t\)</span> is numerically the
+non-overlapping regression of <span class="math inline">\(y_{t+1}\)</span> on the transformed regressor
+<span class="math inline">\(A_h' x\)</span>, and the same trick
+applies to the instrument: <span class="math display">\[
+z_t^{trf,(h)} = \sum_{i=\max(1,\,t-h+1)}^{\min(t,\,T-h)} z_i, \qquad
+\hateta_h = \Big(\sum_{t=1}^{T-h} z_t ar x_t'\Big)^{-1}
+\sum_{t=p}^{T-1} z_t^{trf,(h)}\,(ar y_{t+1} -
+\hat\gamma'\hatarepsilon_{t+1}),
+\]</span> with the sandwich covariance of eq. (5.7), i.e. the
+short-horizon one with <span class="math inline">\(z_t\)</span> replaced
+by <span class="math inline">\(z_t^{trf,(h)}\)</span>.
+<code>horizon = h</code> does exactly this and reduces to the
+short-horizon estimator at <code>h = 1</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">h</span><span class="op">)</span> <span class="fu"><a href="../reference/ivx_ra.html">ivx_ra</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span>, horizon <span class="op">=</span> <span class="va">h</span><span class="op">)</span><span class="op">$</span><span class="va">tstat</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         DP         DP         DP </span></span>
+<span><span class="co">#&gt; -0.4642328 -0.3057244 -0.3139751</span></span></code></pre></div>
+<p>Under the null with a near-integrated, strongly endogenous predictor
+(<span class="math inline">\(c = 0\)</span>, <span class="math inline">\(\delta = -0.95\)</span>, <span class="math inline">\(T = 500\)</span>) the two-sided 5% test rejects at
+0.034 (<span class="math inline">\(h = 10\)</span>) and 0.040 (<span class="math inline">\(h = 20\)</span>) in 2000 replications, inside the
+[0.023, 0.058] range the paper reports for <span class="math inline">\(T
+= 500\)</span>.</p>
+</div>
+<div class="section level2">
 <h2 id="caveats-and-implementation-notes">Caveats and implementation notes<a class="anchor" aria-label="anchor" href="#caveats-and-implementation-notes"></a>
 </h2>
 <ul>
@@ -258,8 +288,11 @@ optional.</li>
 <li>The remaining bias is <span class="math inline">\(-\gamma\)</span>
 times the bias of the AR coefficients, so it grows with <span class="math inline">\(|\gamma|\)</span> and with the persistence of the
 predictor; it is much smaller than for plain IVX but not zero.</li>
-<li>Short horizon only, and no bootstrap: <code><a href="../reference/ivx_boot.html">ivx_boot()</a></code> does
-not accept <code>ivx_ra</code> objects.</li>
+<li>No bootstrap: <code><a href="../reference/ivx_boot.html">ivx_boot()</a></code> does not accept
+<code>ivx_ra</code> objects. For <code>horizon &gt; 1</code> the
+Kostakis et al. (2015) intercept correction is not applied (it is not
+derived for the transformed regression), and fitted values and residuals
+are those of the transformed regression.</li>
 <li>The AR order is selected by AIC in levels, which the authors argue
 copes with both the stationary and the integrated case; <code>ar</code>
 fixes it instead.</li>
@@ -272,6 +305,9 @@ fixes it instead.</li>
 <li>Demetrescu, M., &amp; Rodrigues, P. M. M. (2022). Residual-augmented
 IVX predictive regression. <em>Journal of Econometrics</em>, 227(2),
 429–460.</li>
+<li>Demetrescu, M., Rodrigues, P. M. M., &amp; Taylor, A. M. R. (2023).
+Transformed regression-based long-horizon predictability tests.
+<em>Journal of Econometrics</em>, 237(2), 105316.</li>
 <li>Amihud, Y., &amp; Hurvich, C. M. (2004). Predictive regressions: A
 reduced-bias estimation method. <em>Journal of Financial and
 Quantitative Analysis</em>, 39(4), 813–841.</li>

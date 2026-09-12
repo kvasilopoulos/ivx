@@ -3047,6 +3047,9 @@ ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY))
 #> $robust
 #> [1] FALSE
 #> 
+#> $lag_y
+#> [1] FALSE
+#> 
 #> $tuning
 #> $tuning$beta
 #> [1] 0.95
@@ -6476,6 +6479,9 @@ ivx_ar_fit(monthly$Ret, as.matrix(monthly$LTY), ar = 1)
 #> [1,] 0.004975002
 #> 
 #> $robust
+#> [1] FALSE
+#> 
+#> $lag_y
 #> [1] FALSE
 #> 
 #> $tuning

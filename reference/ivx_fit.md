@@ -15,6 +15,7 @@ ivx_fit(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 
@@ -28,6 +29,7 @@ ivx_wfit(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 ```
@@ -72,6 +74,15 @@ ivx_wfit(
   logical. If `TRUE` the Eicker-White (heteroskedasticity-robust) form
   of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
   available for `horizon = 1`.
+
+- lag_y:
+
+  logical. If `TRUE` the regression is augmented with the lagged
+  dependent variable (column `y_lag`), instrumented by itself, as in
+  Demetrescu (2014): this can raise the local power of the IVX test when
+  the predictors are highly persistent and endogenous, at no cost
+  otherwise. The joint Wald statistic still tests only the predictors.
+  Only for `horizon = 1`.
 
 - ...:
 
@@ -3050,6 +3061,9 @@ ivx_fit(monthly$Ret, as.matrix(monthly$LTY))
 #> [1,] 0.004156707
 #> 
 #> $robust
+#> [1] FALSE
+#> 
+#> $lag_y
 #> [1] FALSE
 #> 
 #> $tuning

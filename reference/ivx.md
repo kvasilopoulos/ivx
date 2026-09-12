@@ -23,6 +23,7 @@ ivx(
   cz = 1,
   bandwidth = NULL,
   robust = FALSE,
+  lag_y = FALSE,
   ...
 )
 
@@ -115,6 +116,15 @@ print(x, digits = max(3L, getOption("digits") - 3L), ...)
   of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
   available for `horizon = 1`.
 
+- lag_y:
+
+  logical. If `TRUE` the regression is augmented with the lagged
+  dependent variable (column `y_lag`), instrumented by itself, as in
+  Demetrescu (2014): this can raise the local power of the IVX test when
+  the predictors are highly persistent and endogenous, at no cost
+  otherwise. The joint Wald statistic still tests only the predictors.
+  Only for `horizon = 1`.
+
 - ...:
 
   additional arguments to be passed to the low level regression fitting
@@ -145,6 +155,9 @@ predictability. Journal of Econometrics, 237(2), 105271.
 Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2023). Taking
 stock of long-horizon predictability tests: Are factor returns
 predictable? Journal of Econometrics, 237(2), 105380.
+
+Demetrescu, M. (2014). Enhancing the local power of IVX-based tests in
+predictive regressions. Economics Letters, 124(2), 269-273.
 
 ## Examples
 
@@ -192,5 +205,16 @@ ivx(Ret ~ LTY, data = kms, weights = wt)
 #> Coefficients:
 #>     LTY  
 #> -0.0705  
+#> 
+
+# lag-augmented IVX (Demetrescu, 2014)
+ivx(Ret ~ DP, data = kms, lag_y = TRUE)
+#> 
+#> Call:
+#> ivx(formula = Ret ~ DP, data = kms, lag_y = TRUE, horizon = 1)
+#> 
+#> Coefficients:
+#>       DP     y_lag  
+#> 0.007587  0.094223  
 #> 
 ```

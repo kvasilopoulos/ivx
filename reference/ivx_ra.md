@@ -7,7 +7,7 @@ its residuals (in the spirit of Amihud and Hurvich, 2004), and the slope
 on the lagged predictors is estimated by IVX. Inference uses the
 heteroskedasticity-robust standard errors of the paper (eq. 9 and 14),
 which are valid whether the predictors are stationary or
-near-integrated. Short horizon only.
+near-integrated.
 
 ## Usage
 
@@ -18,6 +18,7 @@ ivx_ra(
   ar = "auto",
   ar_ic = c("aic", "bic"),
   ar_max = 5,
+  horizon = 1,
   beta = 0.95,
   cz = 1,
   na.action,
@@ -60,6 +61,10 @@ print(x, digits = max(3L, getOption("digits") - 3L), ...)
 - ar_max:
 
   maximum order considered when `ar = "auto"`.
+
+- horizon:
+
+  forecast horizon \\h\\; see Details.
 
 - beta, cz:
 
@@ -112,6 +117,18 @@ an object of class `c("ivx_ra", "ivx")`; the usual `ivx` methods
 
 ## Details
 
+For `horizon > 1` the estimator is the transformed-regression
+residual-augmented IVX of Demetrescu, Rodrigues and Taylor (2023), eqs
+(4.9), (4.11) and (5.5)-(5.7): the single-period response is regressed
+on the \\h\\-period transformed instrument \\z_t^{trf,(h)} =
+\sum\_{i=\max(1,t-h+1)}^{\min(t,T-h)} z_i\\ (eq. 4.4), which accounts
+for the overlap of the long-horizon regression without HAC estimation.
+At `horizon = 1` it coincides with the short-horizon estimator. The
+coefficients estimate the \\h\\-period slope \\eta_h\\; fitted values
+and residuals are those of the transformed (non-overlapping) regression,
+and the Kostakis et al. (2015) intercept correction is applied only at
+`horizon = 1`.
+
 The autoregression of the predictors is fitted without an intercept and
 its residuals are demeaned before augmentation, which is the paper's
 preferred \\\tilde t\_{ivx}^{\mu_0}\\ statistic (Sections 4-5); the
@@ -122,6 +139,10 @@ standard errors include the finite-sample correction of Kostakis et al.
 
 Demetrescu, M., & Rodrigues, P. M. M. (2022). Residual-augmented IVX
 predictive regression. Journal of Econometrics, 227(2), 429-460.
+
+Demetrescu, M., Rodrigues, P. M. M., & Taylor, A. M. R. (2023).
+Transformed regression-based long-horizon predictability tests. Journal
+of Econometrics, 237(2), 105316.
 
 Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A
 reduced-bias estimation method. Journal of Financial and Quantitative
@@ -155,5 +176,18 @@ summary(ivx_ra(Ret ~ DP + TBL, data = kms, ar = 2))
 #> 
 #> Joint Wald statistic:  1.654 on 2 DF, p-value 0.4374
 #> Multiple R-squared:  0.02494,    Adjusted R-squared:  0.02304
+#> 
+
+# long horizon (Demetrescu, Rodrigues & Taylor, 2023)
+ivx_ra(Ret ~ DP, data = kms, horizon = 12)
+#> 
+#> Call:
+#> ivx_ra(formula = Ret ~ DP, data = kms, horizon = 12)
+#> 
+#> Residual-augmented IVX, AR order p = 5 (aic)
+#> 
+#> Coefficients:
+#>       DP  
+#> -0.01775  
 #> 
 ```

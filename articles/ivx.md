@@ -137,6 +137,30 @@ summary(ivx(Ret ~ DP + TBL, data = kms, horizon = 12))
 #> Multiple R-squared:  0.05429,    Adjusted R-squared:  0.06255
 ```
 
+## Lag augmentation for power
+
+The IVX instrument is less persistent than \\x_t\\, so the test loses
+local power against OLS exactly when \\x_t\\ is near-integrated and
+endogenous. Demetrescu (2014) shows that adding \\y\_{t-1}\\ to the
+regression, instrumented by itself, \\ y_t = \phi\\ y\_{t-1} + eta'
+x\_{t-1} + u_t, \qquad \phi = 0 ext{ under the null}, \\ feeds the
+signal back into the instrument and can raise power substantially when
+the instrument is weak (small \\\eta\\), while being asymptotically
+equivalent to plain IVX otherwise. `lag_y = TRUE` does this; the joint
+Wald statistic still tests only \\eta\\.
+
+``` r
+
+ivx(Ret ~ DP + TBL, data = kms, lag_y = TRUE)
+#> 
+#> Call:
+#> ivx(formula = Ret ~ DP + TBL, data = kms, lag_y = TRUE, horizon = 1)
+#> 
+#> Coefficients:
+#>        DP        TBL      y_lag  
+#>  0.007248  -0.073288   0.091950
+```
+
 ## Heteroskedasticity-robust standard errors
 
 Demetrescu, Georgiev, Rodrigues & Taylor (2023) show that the IVX
@@ -231,18 +255,25 @@ round(cbind(horizon = h, t13), 3)
 
 ## References
 
+- Demetrescu, M. (2014). Enhancing the local power of IVX-based tests in
+  predictive regressions. *Economics Letters*, 124(2), 269–273.
+
 - Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2015). Robust
   econometric inference for stock return predictability. *Review of
   Financial Studies*, 28(5), 1506–1553.
+
 - Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2023). Taking
   stock of long-horizon predictability tests: Are factor returns
   predictable? *Journal of Econometrics*, 237(2), 105380.
+
 - Magdalinos, T., & Phillips, P. C. B. (2009). Limit theory for
   cointegrated systems with moderately integrated and moderately
   explosive regressors. *Econometric Theory*, 25(2), 482–526.
+
 - Phillips, P. C. B., & Lee, J. H. (2013). Predictive regression under
   various degrees of persistence and robust long-horizon regression.
   *Journal of Econometrics*, 177(2), 250–264.
+
 - Hosseinkouchack, M., & Demetrescu, M. (2021). Finite-sample size
   control of IVX-based tests in predictive regressions. *Econometric
   Theory*, 37(4), 769–793.
