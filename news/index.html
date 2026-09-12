@@ -32,6 +32,7 @@
     <li><a class="dropdown-item" href="../articles/ivx-ra.html">Residual-augmented IVX</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-qr.html">IVX quantile predictive regression</a></li>
     <li><a class="dropdown-item" href="../articles/arm.html">Augmented regression method (non-IVX benchmark)</a></li>
+    <li><a class="dropdown-item" href="../articles/ivx-iv.html">IV tests with combined instruments</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Inference</h6></li>
     <li><a class="dropdown-item" href="../articles/robust-inference.html">Robust inference: Eicker-White and wild bootstrap</a></li>
@@ -70,6 +71,7 @@
 <li>Documented that the long-horizon statistic (<code>horizon &gt; 1</code>) is the modified IVX-Wald of Kostakis, Magdalinos &amp; Stamatogiannis (2023), eqs (15)/(23), after auditing the implementation against the paper.</li>
 <li>New <code><a href="../reference/ivx_sys.html">ivx_sys()</a></code> / <code><a href="../reference/ivx_sys_fit.html">ivx_sys_fit()</a></code>: systems of predictive regressions with a matrix response (<code>cbind(y1, y2) ~ x</code>), short and long horizon, with the Kronecker-form IVX-Wald covariance of Kostakis et al. (2023); reports joint, per-equation and individual Wald statistics.</li>
 <li>New vignettes for each methodology (<code>ivx</code>, <code>ivx-sys</code>, <code>ivx-ar</code>, <code>ivx-ra</code>, <code>ivx-qr</code>, <code>robust-inference</code>, <code>ivx-episodic</code>) with the underlying statistics, replication results and caveats; pkgdown site reorganised (Bootstrap 5, MathJax rendering, grouped reference and articles).</li>
+<li>New <code><a href="../reference/ivx_iv.html">ivx_iv()</a></code> / <code><a href="../reference/ivx_iv_fit.html">ivx_iv_fit()</a></code>: the 2SLS predictability tests of Breitung &amp; Demetrescu (2015) with fractional-difference, long-difference and sine instruments and their recommended combination (<code>IVcomb</code>), Eicker-White standard errors.</li>
 <li>New <code><a href="../reference/arm.html">arm()</a></code> / <code><a href="../reference/arm_fit.html">arm_fit()</a></code>: the multipredictor augmented regression method of Amihud, Hurvich &amp; Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected VAR(1) residuals as control variables and the paper’s covariance estimator; a non-IVX benchmark for stationary persistent predictors.</li>
 <li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
 <li>

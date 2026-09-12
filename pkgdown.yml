@@ -5,13 +5,14 @@ articles:
   arm: arm.html
   ivx-ar: ivx-ar.html
   ivx-episodic: ivx-episodic.html
+  ivx-iv: ivx-iv.html
   ivx-qr: ivx-qr.html
   ivx-ra: ivx-ra.html
   ivx-sys: ivx-sys.html
   ivx: ivx.html
   robust-inference: robust-inference.html
   rolling-ivx: rolling-ivx.html
-last_built: 2026-09-12T21:27Z
+last_built: 2026-09-12T21:34Z
 urls:
   reference: https://kvasilopoulos.github.io/ivx/reference
   article: https://kvasilopoulos.github.io/ivx/articles

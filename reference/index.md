@@ -28,6 +28,9 @@ targets.
   [`print(`*`<ivx_qr>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr.md)
   [`summary(`*`<ivx_qr>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr.md)
   : Fitting IVX Quantile Predictive Regressions
+- [`ivx_iv()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv.md)
+  [`print(`*`<ivx_iv>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv.md)
+  : IV Predictability Tests with Combined Instruments
 
 ## Robust and subsample inference
 
@@ -67,6 +70,8 @@ Low-level functions taking a response and a design matrix.
   : Fitter Function for IVX-QR Models
 - [`arm_fit()`](https://kvasilopoulos.github.io/ivx/reference/arm_fit.md)
   : Fitter Function for the Augmented Regression Method
+- [`ivx_iv_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv_fit.md)
+  : Fitter Function for IV Predictability Tests
 - [`ivx_sys_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_sys_fit.md)
   : Fitter Function for Systems IVX Models
 

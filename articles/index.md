@@ -14,6 +14,8 @@
   regression](https://kvasilopoulos.github.io/ivx/articles/ivx-qr.md):
 - [Augmented regression method (non-IVX
   benchmark)](https://kvasilopoulos.github.io/ivx/articles/arm.md):
+- [IV tests with combined
+  instruments](https://kvasilopoulos.github.io/ivx/articles/ivx-iv.md):
 
 ### Inference
 

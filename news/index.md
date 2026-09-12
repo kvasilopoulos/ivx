@@ -79,6 +79,13 @@
   underlying statistics, replication results and caveats; pkgdown site
   reorganised (Bootstrap 5, MathJax rendering, grouped reference and
   articles).
+- New
+  [`ivx_iv()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv.md)
+  /
+  [`ivx_iv_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv_fit.md):
+  the 2SLS predictability tests of Breitung & Demetrescu (2015) with
+  fractional-difference, long-difference and sine instruments and their
+  recommended combination (`IVcomb`), Eicker-White standard errors.
 - New [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md) /
   [`arm_fit()`](https://kvasilopoulos.github.io/ivx/reference/arm_fit.md):
   the multipredictor augmented regression method of Amihud, Hurvich &
