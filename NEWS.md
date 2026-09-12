@@ -7,12 +7,16 @@
   standard errors (Demetrescu, Georgiev, Rodrigues & Taylor, 2023).
 * `summary()` coefficient tables now report `Std. Error` and `t value` next to the
   individual Wald statistics; the fitted object stores `se` and `tstat`.
+  Breaking: the table gains two columns, so code indexing `coef(summary(x))` by
+  position must use column names (`"Wald Ind"`, `"Pr(> chi)"`) instead.
 * New `ivx_boot()` implementing the residual wild bootstrap and fixed regressor
   wild bootstrap of Demetrescu et al. (2023), returning bootstrap p-values for
   the joint and individual Wald statistics and one-sided t-tests.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.
+* `ivx_ar()` does not yet accept `beta`, `cz`, `bandwidth` or `robust`; it uses the
+  defaults of `ivx()`.
 
 # ivx 1.1.1
 
