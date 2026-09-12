@@ -1,0 +1,129 @@
+---
+title: "Robust inference: Eicker-White and wild bootstrap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Robust inference: Eicker-White and wild bootstrap}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r setup, message = FALSE}
+library(ivx)
+```
+
+Demetrescu, Georgiev, Rodrigues & Taylor (2023, *DGRT*) extend the IVX tests
+of Kostakis et al. (2015) in two directions implemented here: validity under
+general heteroskedasticity through Eicker–White standard errors
+(`ivx(robust = TRUE)`, see `vignette("ivx")`), and bootstrap implementations
+that markedly improve finite-sample size, in particular for one-sided tests
+and with several predictors (`ivx_boot()`).
+
+## Why bootstrap
+
+Even with a valid $\chi^2$ limit, the IVX t-ratio is biased in finite
+samples when the predictor is strongly persistent and $\delta$ is large in
+absolute value: the estimate of the intercept interacts with the instrument,
+and the leading higher-order term shifts the statistic (Hosseinkouchack &
+Demetrescu 2021). With $T = 250$, $\delta = -0.95$ and a unit-root predictor,
+DGRT report empirical sizes of 10–17% for the right-tailed 5% test.
+
+## The two schemes
+
+Let $\hat u_t$ be the OLS residuals of the predictive regression and
+$R_t$ i.i.d. multipliers with mean zero and unit variance (Rademacher by
+default, `dist = "normal"` optional).
+
+**Fixed regressor wild bootstrap (FRWB)**, DGRT Algorithm 2. The bootstrap
+response imposes the null, $y_t^* = R_t \hat u_t$; the predictors and the
+instrument are kept fixed. The IVX statistics are recomputed on
+$(y_t^*, x_{t-1}, z_{t-1})$.
+
+**Residual wild bootstrap (RWB)**, DGRT Algorithm 1 and Remark 22. Fit an
+autoregression in levels to the predictors (a VAR with several predictors),
+
+$$
+x_t = \hat m + \sum_{j=1}^{p+1} \hat a_j x_{t-j} + \hat v_t,
+$$
+
+with the order chosen by BIC (Remark 24). Draw
+$(u_t^*, v_t^*) = (R_t \hat u_t, R_t \hat v_t)$ with the *same* $R_t$ so the
+endogeneity correlation is preserved, rebuild
+$x_t^* = \sum_j \hat a_j x_{t-j}^* + v_t^*$ from zero initial conditions and
+$z_t^*$ from $\Delta x_t^*$ with the original $\rho_n$, and recompute the
+statistics on $(y_t^*, x_{t-1}^*, z_{t-1}^*)$. RWB is the scheme that controls
+size under strong persistence; FRWB is simpler and needs no lag choice.
+
+The p-value is $1 - G^*(\text{stat})$, the bootstrap tail probability, for the
+joint and individual Wald statistics and for the t-ratios against
+$\beta < 0$, $\beta > 0$ and $\beta \ne 0$.
+
+```{r}
+mod <- ivx(Ret ~ DP + TBL, data = kms)
+ivx_boot(mod, B = 499, type = "rwb", seed = 1)
+```
+
+The asymptotic joint p-value is `r round(1 - pchisq(mod$Wald_Joint, 2), 3)`;
+the bootstrap moves it up, the direction DGRT document for persistent,
+endogenous predictors such as the dividend-price ratio.
+
+Use `cores` to parallelise (the VAR recursion runs in C++, so a replication
+costs a few milliseconds; $B = 9999$ takes seconds on a workstation). With
+`cores > 1` reproducibility for a given `seed` relies on the L'Ecuyer streams
+of the parallel package, so results differ from the serial run.
+
+## Replication of DGRT (2023), Table 4
+
+Table 4, Panel A, tests each Welch–Goyal predictor for the monthly equity
+premium, January 1927–December 2020, with asymptotic Eicker–White p-values
+and RWB p-values ($B = 9999$). The replication (in the `research/replication`
+folder of the source repository, with the data) reproduces the two-sided
+p-values for 12 of 14 predictors within bootstrap noise once the *ex-dividend*
+S&P return is used as the response; the table lists a selection.
+
+| predictor | EW paper | EW `ivx` | RWB paper | RWB `ivx_boot` |
+|---|---|---|---|---|
+| dp   | 0.510 | 0.536 | 0.612 | 0.641 |
+| ep   | 0.172 | 0.167 | 0.272 | 0.269 |
+| bm   | 0.594 | 0.529 | 0.453 | 0.425 |
+| tbl  | 0.073 | 0.068 | 0.087 | 0.091 |
+| lty  | 0.054 | 0.061 | 0.070 | 0.079 |
+| ntis | 0.234 | 0.208 | 0.161 | 0.147 |
+| dfy  | 0.996 | 0.985 | 0.994 | 0.979 |
+| dfr  | 0.394 | 0.398 | 0.374 | 0.423 |
+
+Two caveats from that exercise. First, the paper's text describes the
+response as the return *including* dividends, but the published values for the
+three strongly endogenous predictors (dp, ep, bm) are only reproduced with the
+ex-dividend series; dy behaves the other way round. Second, the Goyal–Welch
+data are revised over time (inflation and net issuance in particular), so
+exact agreement is not expected. An independent re-implementation of the
+Eicker–White statistic in plain R reproduces the package's C++ values exactly,
+so the statistics themselves are verified.
+
+## Caveats
+
+* Bootstrap requires a plain `ivx` fit with `horizon = 1` for the subsample
+  tests, but `ivx_boot()` itself accepts any horizon: the null is imposed on
+  the one-step response and the long-horizon statistic is recomputed.
+* Weighted fits and the `ivx_ar`, `ivx_ra`, `ivx_qr` classes are not supported.
+* RWB estimates the predictor's autoregression; under a near-unit root the
+  local-to-unity parameter is not consistently estimable, which DGRT show does
+  not affect first-order validity but explains why the two schemes differ in
+  finite samples.
+* On Windows, `cores > 1` starts PSOCK workers that need the package installed.
+
+## References
+
+* Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R. (2023).
+  Extensions to IVX methods of inference for return predictability. *Journal
+  of Econometrics*, 237(2), 105271.
+* Hosseinkouchack, M., & Demetrescu, M. (2021). Finite-sample size control of
+  IVX-based tests in predictive regressions. *Econometric Theory*, 37(4),
+  769–793.
+* Welch, I., & Goyal, A. (2008). A comprehensive look at the empirical
+  performance of equity premium prediction. *Review of Financial Studies*,
+  21(4), 1455–1508.

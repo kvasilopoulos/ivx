@@ -2,8 +2,9 @@ title: ivx
 url: https://kvasilopoulos.github.io/ivx/
 
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
+  bootswatch: cosmo
+  math-rendering: mathjax
 
 authors:
   Kostas Vasilopoulos:
@@ -12,17 +13,29 @@ authors:
     href: https://sites.google.com/site/etpavlidis/
 
 reference:
-  - title: Models
+  - title: IVX estimation
+    desc: >
+      Predictive regressions with persistent regressors, short and long
+      horizon (Kostakis, Magdalinos & Stamatogiannis 2015, 2023).
     contents:
       - ivx
+      - ivx_sys
+
+  - title: Extensions
+    desc: Modifications of the IVX estimator for specific error structures or targets.
+    contents:
       - ivx_ar
       - ivx_ra
       - ivx_qr
-      - ivx_sys
+
+  - title: Robust and subsample inference
+    desc: Wild bootstrap p-values and tests for pockets of predictability (Demetrescu et al. 2022, 2023).
+    contents:
       - ivx_boot
       - ivx_episodic
 
-  - title: Fitter Functions
+  - title: Fitter functions
+    desc: Low-level functions taking a response and a design matrix.
     contents:
       - ivx_fit
       - ivx_wfit
@@ -31,7 +44,7 @@ reference:
       - ivx_qr_fit
       - ivx_sys_fit
 
-  - title: Serial Corelation Test
+  - title: Serial correlation tests
     contents:
       - ac_test
       - ac_test_wald
@@ -56,9 +69,23 @@ reference:
       - quarterly
       - ylpc
 
+articles:
+  - title: Methodology
+    navbar: Methodology
+    contents:
+      - ivx
+      - ivx-sys
+      - ivx-ar
+      - ivx-ra
+      - ivx-qr
+  - title: Inference
+    navbar: Inference
+    contents:
+      - robust-inference
+      - ivx-episodic
+      - rolling-ivx
 
 navbar:
-  type: default
   structure:
     left:
     - home
@@ -74,9 +101,6 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
-    articles:
-      text: Articles
-      href: articles/index.html
     news:
       text: News
       href: news/index.html

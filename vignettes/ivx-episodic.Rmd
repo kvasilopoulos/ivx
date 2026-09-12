@@ -1,0 +1,105 @@
+---
+title: "Episodic predictability: subsample IVX tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Episodic predictability: subsample IVX tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 4)
+```
+
+```{r setup, message = FALSE}
+library(ivx)
+```
+
+Full-sample tests find little return predictability; a growing literature
+argues that predictability comes and goes in "pockets". `ivx_episodic()`
+implements the subsample IVX tests of Demetrescu, Georgiev, Rodrigues &
+Taylor (2023, Section 3.2), which formalise the rolling and recursive
+approaches of Demetrescu et al. (2022) and, for one-sided tests, of Pavlidis,
+Paya & Peel (2017) (see `vignette("rolling-ivx")` for the latter).
+
+## Subsample statistic
+
+For a window $t = \lfloor \tau_1 T \rfloor + 1, \dots, \lfloor \tau_2 T \rfloor$
+the IVX statistic is computed from the window's observations but with the
+**full-sample** instrument (DGRT eqs 15–17):
+
+$$
+\hat\beta_{zx}(\tau_1, \tau_2) =
+\frac{\sum_{t} z_{t-1}\,(y_t - \bar y(\tau_1,\tau_2))}
+     {\sum_{t} z_{t-1}\,(x_{t-1} - \bar x_{-1}(\tau_1,\tau_2))}, \qquad
+t_{zx}(\tau_1, \tau_2) = \frac{\hat\beta_{zx}(\tau_1,\tau_2)}{\mathrm{s.e.}(\hat\beta_{zx}(\tau_1,\tau_2))},
+$$
+
+with $\hat\sigma_u^2$ from the window's OLS residuals (or Eicker–White
+weights with `robust = TRUE`). Three agnostic sequences are considered:
+
+* **forward recursive**, $\{t_{zx}(0, \tau)\}$ for $\tau \in [\tau_L, 1]$ —
+  pockets that start at the beginning of the sample;
+* **backward recursive**, $\{t_{zx}(\tau, 1)\}$ for $\tau \in [0, \tau_U]$ —
+  end-of-sample pockets;
+* **rolling**, $\{t_{zx}(\tau, \tau + \Delta\tau)\}$ for a fixed window
+  fraction $\Delta\tau$.
+
+The tests are the maximum (right-tailed, $H_1: \beta > 0$), minimum
+(left-tailed) and maximum squared (two-sided) of the sequence; with several
+predictors, the maximum of the subsample Wald statistics (Remark 11). Their
+limits are functionals of Brownian motions, so critical values come from the
+wild bootstrap of `vignette("robust-inference")`: the same functional is
+computed on each bootstrap sample. The default is the fixed regressor wild
+bootstrap used by Demetrescu et al. (2022); `type = "rwb"` is available.
+
+```{r}
+mod <- ivx(Ret ~ DP, data = kms)
+e <- ivx_episodic(mod, scheme = "rolling", window = 0.2, B = 499, seed = 1)
+e
+```
+
+The sequence itself is returned, with the window bounds as row indices of
+the regression sample:
+
+```{r}
+head(e$sequence, 3)
+plot(kms$Date[e$sequence$end], e$sequence$t_DP, type = "l",
+     xlab = "window end", ylab = "subsample IVX t-ratio", main = "Rolling windows, 20% of the sample")
+abline(h = c(-1.96, 1.96), lty = 2)
+```
+
+Forward and backward recursive sequences:
+
+```{r}
+ivx_episodic(mod, scheme = "forward", window = 0.2, B = 199, seed = 1)$p.value
+ivx_episodic(mod, scheme = "backward", window = 0.8, B = 199, seed = 1)$p.value
+```
+
+## Interpretation and caveats
+
+* A rejection says that predictability of the given sign exists in at least
+  one window; the plot of the sequence locates it. The window(s) above the
+  pointwise $\pm 1.96$ line are not individually significant at 5% — that
+  ignores the multiplicity the sup-test accounts for.
+* `window` is a fraction of the regression sample; the paper uses window
+  fractions between 0.1 and 0.3 for rolling tests and warm-in fractions of
+  0.1–0.25 for recursive ones. Very short windows give noisy statistics and
+  low power.
+* The instrument is built once from the full sample. Refitting `ivx()` on
+  each window (as in `vignette("rolling-ivx")`) rebuilds the instrument inside
+  the window, which is a different statistic; the Bonferroni approach used
+  there is conservative, the bootstrap sup-test is not.
+* Short horizon only; the fit must be a plain `ivx` object without weights.
+
+## References
+
+* Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R. (2022).
+  Testing for episodic predictability in stock returns. *Journal of
+  Econometrics*, 227(1), 85–113.
+* Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R. (2023).
+  Extensions to IVX methods of inference for return predictability. *Journal
+  of Econometrics*, 237(2), 105271.
+* Pavlidis, E. G., Paya, I., & Peel, D. A. (2017). Testing for speculative
+  bubbles using spot and forward prices. *International Economic Review*,
+  58(4), 1191–1226.

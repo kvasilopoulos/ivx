@@ -1,0 +1,123 @@
+---
+title: "Residual-augmented IVX"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Residual-augmented IVX}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r setup, message = FALSE}
+library(ivx)
+```
+
+`ivx_ra()` implements the residual-augmented IVX estimator of Demetrescu &
+Rodrigues (2022), a bias-reduced version of IVX in the spirit of Amihud &
+Hurvich (2004).
+
+## Idea
+
+Write the innovations of the predictor's autoregression as $v_t$ and
+decompose the regression error as $u_t = \gamma' v_t + \eta_t$ with
+$\eta_t$ uncorrelated with $v_t$. The finite-sample bias of any estimator of
+$\beta$ comes from $\gamma \ne 0$. If $v_t$ were observed, adding it as a
+regressor,
+
+$$
+\tilde y_t = \beta' \tilde x_{t-1} + \gamma' v_t + \eta_t,
+$$
+
+would remove the problem. Amihud & Hurvich estimate $v_t$ from a
+bias-corrected autoregression; Demetrescu & Rodrigues show that augmenting the
+*IVX* regression with plain autoregressive residuals is enough to reduce the
+bias substantially while retaining the persistence-robust $\chi^2$ inference.
+
+## Procedure
+
+1. Fit an autoregression of order $p$ in levels to the predictors (a VAR
+   with several predictors), **without intercept**, $p$ chosen by AIC (the
+   paper's recommendation); keep the residuals $\hat\varepsilon_t$,
+   $t = p+1, \dots, n$, and demean them.
+2. Regress the demeaned response on $\hat\varepsilon_t$ by OLS and keep the
+   residuals $\tilde y_t = \tilde y_t^{\,0} - \hat\gamma' \hat\varepsilon_t$.
+3. Estimate $\beta$ by IVX of $\tilde y_t$ on $\tilde x_{t-1}$ with the KMS
+   instrument (not demeaned).
+
+Standard errors are the heteroskedasticity-robust form of the paper's
+eq. (9)/(14), which stay valid whether $x_t$ is stationary or near-integrated:
+
+$$
+\widehat{\mathrm{Cov}}(\tilde\beta_{ivx}) = B^{-1} M B^{-1\prime}, \quad
+B = \sum_t z_{t-1}\tilde x_{t-1}', \quad
+M = \sum_t z_{t-1} z_{t-1}' \tilde\varepsilon_t^2 + \hat Q_T - n \bar z \bar z' \hat\Sigma_{FM},
+$$
+
+where $\tilde\varepsilon_t$ are the OLS residuals of the augmented
+regression, $\hat Q_T = H_{zx} H_{xx}^{-1} \tilde H_{xx} H_{xx}^{-1} H_{zx}'$
+accounts for the estimation of $\hat\varepsilon_t$ (it matters only in the
+stationary case), and the last term is the Kostakis et al. (2015) intercept
+correction that the paper also uses in its simulations.
+
+```{r}
+m <- ivx_ra(Ret ~ DP + TBL, data = kms)
+m
+summary(m)
+```
+
+Compared with plain IVX the point estimate on the strongly endogenous
+predictor (`DP`, $\delta \approx -0.98$) shrinks and the standard error is
+smaller — the efficiency gain from removing the $\gamma' v_t$ component of the
+error.
+
+```{r}
+rbind(ivx = coef(ivx(Ret ~ DP + TBL, data = kms)), ivx_ra = coef(m))
+```
+
+## Replication: size in the paper's Monte Carlo
+
+The paper has no reproducible empirical application, so the check is against
+the size rows of its Table 3 (right-sided 5% tests, $T = 200$, DGP (24)–(25)
+with $\rho = 1 - c/T$, short-run AR parameter $-0.5$ and innovation
+correlation $-0.95$). With 10 000 replications:
+
+| $c$ | paper $t_{ivx}$ | `ivx` | paper $\tilde t_{ivx}^{\mu_0}$ | `ivx_ra` |
+|---|---|---|---|---|
+| 0  | 0.116 | 0.129 | 0.054 | 0.064 |
+| 10 | 0.088 | 0.089 | 0.055 | 0.064 |
+| 20 | 0.074 | 0.072 | 0.055 | 0.064 |
+| 30 | 0.066 | 0.057 | 0.053 | 0.055 |
+| 40 | 0.064 | 0.057 | 0.050 | 0.059 |
+| 50 | 0.061 | 0.051 | 0.050 | 0.056 |
+
+The over-rejection of plain IVX under strong endogeneity is largely removed;
+the residual offset of about 0.01 at small $c$ is shared by the plain IVX
+column and so reflects a detail of the simulation design rather than the
+estimator.
+
+## Caveats and implementation notes
+
+* Two details the paper leaves implicit are decisive: the autoregression must
+  be fitted **without** an intercept (the paper's $\mu_0$ variant; its
+  OLS-demeaned $\mu_1$ variant is much more biased and "not recommended for
+  testing"), and the residuals must be **demeaned** before augmentation —
+  without that the term $\gamma \bar{\hat\varepsilon}$ survives and the bias
+  reduction fails. Both are built in and neither is optional.
+* The remaining bias is $-\gamma$ times the bias of the AR coefficients, so
+  it grows with $|\gamma|$ and with the persistence of the predictor; it is
+  much smaller than for plain IVX but not zero.
+* Short horizon only, and no bootstrap: `ivx_boot()` does not accept
+  `ivx_ra` objects.
+* The AR order is selected by AIC in levels, which the authors argue copes
+  with both the stationary and the integrated case; `ar` fixes it instead.
+
+## References
+
+* Demetrescu, M., & Rodrigues, P. M. M. (2022). Residual-augmented IVX
+  predictive regression. *Journal of Econometrics*, 227(2), 429–460.
+* Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A reduced-bias
+  estimation method. *Journal of Financial and Quantitative Analysis*, 39(4),
+  813–841.

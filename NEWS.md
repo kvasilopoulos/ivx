@@ -32,6 +32,10 @@
   matrix response (`cbind(y1, y2) ~ x`), short and long horizon, with the
   Kronecker-form IVX-Wald covariance of Kostakis et al. (2023); reports joint,
   per-equation and individual Wald statistics.
+* New vignettes for each methodology (`ivx`, `ivx-sys`, `ivx-ar`, `ivx-ra`,
+  `ivx-qr`, `robust-inference`, `ivx-episodic`) with the underlying
+  statistics, replication results and caveats; pkgdown site reorganised
+  (Bootstrap 5, MathJax rendering, grouped reference and articles).
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.
