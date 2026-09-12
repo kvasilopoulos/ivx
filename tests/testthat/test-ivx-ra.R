@@ -39,3 +39,32 @@ test_that("residual augmentation removes the endogeneity bias (true innovations)
   expect_equal(unname(f$gamma), -0.95, tolerance = 0.02)
   expect_lt(abs(f$tstat), 3)
 })
+
+test_that("horizon > 1 is the transformed-regression estimator of DRT (2023)", {
+  # trf_sum is A_h' applied to z restricted to t <= n - h + 1
+  z <- rnorm(20); h <- 4; n <- 20
+  A <- matrix(0, n - h + 1, n)
+  for (i in 1:(n - h + 1)) A[i, i:(i + h - 1)] <- 1
+  expect_equal(trf_sum(z, h), drop(t(A) %*% z[1:(n - h + 1)]))
+  expect_equal(trf_sum(z, 1), z)
+
+  # scalar eq. (4.9) written out directly
+  x <- kms$DP; y <- kms$Ret; n <- length(y); h <- 6
+  rho <- 1 - 1 / (n - 1)^0.95
+  zf <- c(0, stats::filter(diff(x), rho, "recursive"))
+  eps <- lm.fit(cbind(x[-n]), x[-1])$residuals
+  eps <- eps - mean(eps)
+  idx <- 2:n; nn <- length(idx)
+  yd <- y[idx] - mean(y[idx]); xd <- x[idx - 1] - mean(x[idx - 1]); zl <- zf[idx - 1]
+  ytil <- yd - eps * lm.fit(cbind(eps), yd)$coefficients
+  ztr <- sapply(seq_len(nn), function(t) sum(zl[max(1, t - h + 1):min(t, nn - h + 1)]))
+  b <- sum(ztr * ytil) / sum((zl * xd)[1:(nn - h + 1)])
+  f <- ivx_ra_fit(y, matrix(x), ar = 1, horizon = h)
+  expect_equal(unname(coef(f)), b)
+  expect_equal(f$horizon, h)
+
+  # h = 1 is unchanged
+  expect_equal(coef(ivx_ra(Ret ~ DP, data = kms, ar = 1, horizon = 1)),
+               coef(ivx_ra(Ret ~ DP, data = kms, ar = 1)))
+  expect_error(ivx_ra(Ret ~ DP, data = kms, horizon = 0), "positive integer")
+})

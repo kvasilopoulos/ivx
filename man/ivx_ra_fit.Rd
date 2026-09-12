@@ -10,6 +10,7 @@ ivx_ra_fit(
   ar = "auto",
   ar_ic = "aic",
   ar_max = 5,
+  horizon = 1,
   beta = 0.95,
   cz = 1,
   ...
@@ -28,6 +29,8 @@ integer for a fixed order.}
 \item{ar_ic}{information criterion for \code{ar = "auto"}.}
 
 \item{ar_max}{maximum order considered when \code{ar = "auto"}.}
+
+\item{horizon}{forecast horizon \eqn{h}; see Details.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
 \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults

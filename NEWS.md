@@ -19,6 +19,9 @@
 * New `ivx_ra()` / `ivx_ra_fit()`: the residual-augmented (bias-reduced) IVX
   estimator of Demetrescu & Rodrigues (2022) with its heteroskedasticity-robust
   standard errors; returns an `ivx` object so `summary()`, `vcov()` etc. apply.
+  `ivx_ra()` gains `horizon`: for `horizon > 1` it is the transformed-regression
+  long-horizon test of Demetrescu, Rodrigues & Taylor (2023), which handles the
+  overlap of the long-horizon regression without HAC estimation.
 * New `ivx_qr()` / `ivx_qr_fit()`: the IVX-QR quantile predictability test of
   Lee (2016, Proposition 3.2) via \pkg{quantreg} (in Suggests); returns the
   estimated QR endogeneity `rho_tau` for the paper's tuning rule.

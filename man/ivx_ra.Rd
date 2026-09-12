@@ -11,6 +11,7 @@ ivx_ra(
   ar = "auto",
   ar_ic = c("aic", "bic"),
   ar_max = 5,
+  horizon = 1,
   beta = 0.95,
   cz = 1,
   na.action,
@@ -39,6 +40,8 @@ integer for a fixed order.}
 \item{ar_ic}{information criterion for \code{ar = "auto"}.}
 
 \item{ar_max}{maximum order considered when \code{ar = "auto"}.}
+
+\item{horizon}{forecast horizon \eqn{h}; see Details.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
 \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
@@ -76,9 +79,19 @@ the predictors, the predictive regression is augmented with its residuals
 (in the spirit of Amihud and Hurvich, 2004), and the slope on the lagged
 predictors is estimated by IVX. Inference uses the heteroskedasticity-robust
 standard errors of the paper (eq. 9 and 14), which are valid whether the
-predictors are stationary or near-integrated. Short horizon only.
+predictors are stationary or near-integrated.
 }
 \details{
+For \code{horizon > 1} the estimator is the transformed-regression residual-augmented
+IVX of Demetrescu, Rodrigues and Taylor (2023), eqs (4.9), (4.11) and (5.5)-(5.7):
+the single-period response is regressed on the \eqn{h}-period transformed
+instrument \eqn{z_t^{trf,(h)} = \sum_{i=\max(1,t-h+1)}^{\min(t,T-h)} z_i}
+(eq. 4.4), which accounts for the overlap of the long-horizon regression without
+HAC estimation. At \code{horizon = 1} it coincides with the short-horizon estimator.
+The coefficients estimate the \eqn{h}-period slope \eqn{eta_h}; fitted values
+and residuals are those of the transformed (non-overlapping) regression, and
+the Kostakis et al. (2015) intercept correction is applied only at \code{horizon = 1}.
+
 The autoregression of the predictors is fitted without an intercept and its
 residuals are demeaned before augmentation, which is the paper's preferred
 \eqn{\tilde t_{ivx}^{\mu_0}} statistic (Sections 4-5); the standard errors
@@ -89,10 +102,17 @@ paper's simulations.
 ivx_ra(Ret ~ DP, data = kms)
 
 summary(ivx_ra(Ret ~ DP + TBL, data = kms, ar = 2))
+
+# long horizon (Demetrescu, Rodrigues & Taylor, 2023)
+ivx_ra(Ret ~ DP, data = kms, horizon = 12)
 }
 \references{
 Demetrescu, M., & Rodrigues, P. M. M. (2022). Residual-augmented
 IVX predictive regression. Journal of Econometrics, 227(2), 429-460.
+
+Demetrescu, M., Rodrigues, P. M. M., & Taylor, A. M. R. (2023).
+Transformed regression-based long-horizon predictability tests. Journal of
+Econometrics, 237(2), 105316.
 
 Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A
 reduced-bias estimation method. Journal of Financial and Quantitative
