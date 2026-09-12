@@ -32,7 +32,7 @@
     <li><a class="dropdown-item" href="../articles/ivx-ra.html">Residual-augmented IVX</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-qr.html">IVX quantile predictive regression</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-iv.html">IV tests with combined instruments</a></li>
-    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: ARM and the hybrid t-test</a></li>
+    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Inference</h6></li>
     <li><a class="dropdown-item" href="../articles/robust-inference.html">Robust inference: Eicker-White and wild bootstrap</a></li>
@@ -77,6 +77,7 @@
 <ol start="2021" style="list-style-type: decimal"><li><ul><li>standard or quasi-GLS-demeaned t-ratio with the paper’s conservative critical values under strong persistence, normal critical values under weak persistence (ADF/MBIC switch).</li>
 </ul></li>
 </ol></li>
+<li>New <code><a href="../reference/el_test.html">el_test()</a></code>: the unified empirical likelihood test of Liu, Yang, Cai &amp; Peng (2019) for the predictive regression augmented with the lagged difference of the predictor; chi-square profile EL ratios whatever the persistence of the predictor, no tuning parameters.</li>
 <li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
 <li>
 <code><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract()</a></code> (texreg) now reports IVX standard errors instead of Wald statistics in the <code>se</code> slot.</li>

@@ -98,6 +98,12 @@
   2021. - standard or quasi-GLS-demeaned t-ratio with the paper’s
           conservative critical values under strong persistence, normal
           critical values under weak persistence (ADF/MBIC switch).
+- New
+  [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md):
+  the unified empirical likelihood test of Liu, Yang, Cai & Peng (2019)
+  for the predictive regression augmented with the lagged difference of
+  the predictor; chi-square profile EL ratios whatever the persistence
+  of the predictor, no tuning parameters.
 - Fixed: weighted fits ignored the `horizon` argument.
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in

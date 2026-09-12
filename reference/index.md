@@ -58,6 +58,11 @@ Reduced-bias OLS alternatives for stationary persistent predictors.
   [`hlt_test_fit()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
   [`print(`*`<hlt_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
   : Hybrid t-Test for Return Predictability (Harvey, Leybourne & Taylor)
+- [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
+  [`el_test_fit()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
+  [`print(`*`<el_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
+  : Unified Empirical Likelihood Test for Predictability (Liu, Yang, Cai
+  & Peng)
 
 ## Fitter functions
 

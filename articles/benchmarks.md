@@ -1,16 +1,19 @@
-# Non-IVX benchmarks: ARM and the hybrid t-test
+# Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood
 
 ``` r
 
 library(ivx)
 ```
 
-Two non-IVX procedures are included as the benchmarks the IVX literature
-compares against: the augmented regression method of Amihud, Hurvich &
-Wang (2009),
-[`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md), and the
+Three non-IVX procedures are included as the benchmarks the IVX
+literature compares against: the augmented regression method of Amihud,
+Hurvich & Wang (2009),
+[`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md), the
 hybrid switching t-test of Harvey, Leybourne & Taylor (2021),
-[`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md).
+[`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md),
+and the unified empirical likelihood test of Liu, Yang, Cai & Peng
+(2019),
+[`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md).
 
 ## Augmented regression method
 
@@ -148,6 +151,42 @@ paper notes is the price of the conservative critical values. The test
 is one-sided by construction and has no p-value; the object reports the
 selected test, its statistic and critical value.
 
+## Unified empirical likelihood test
+
+[`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
+implements Liu, Yang, Cai & Peng (2019). Their model adds the lagged
+difference of the predictor, \\ Y_t = lpha + eta_1 \Delta X\_{t-1} +
+eta_2 X\_{t-2} + U_t, \\ so that \\Y_t\\ can be stationary whether or
+not \\X_t\\ is. The intercept is removed by differencing at lag \\m =
+\lfloor n/2 floor\\ (Zhu, Cai & Peng, 2014), and the empirical
+likelihood is built on the two score equations, the second weighted by
+\\1/\sqrt{1 + ilde X\_{t-2}^2}\\ so that its sample variance converges
+whatever the persistence. The profile EL ratios for \\eta_2 = 0\\ (no
+predictability), \\eta_1 = 0\\ and the joint null are then
+\\\chi^2(1)\\, \\\chi^2(1)\\, \\\chi^2(2)\\ with no tuning parameter and
+no persistence classification (Theorem 2). The price is efficiency: only
+\\m - 2\\ differenced observations enter, and the paper reports that the
+test on \\eta_1\\ is oversized at \\n = 200\\.
+
+``` r
+
+el_test(Ret ~ DP, data = kms)
+#> 
+#> Call:
+#> el_test(formula = Ret ~ DP, data = kms)
+#> 
+#> Unified empirical likelihood test (Liu, Yang, Cai & Peng, 2019), m = 516
+#> 
+#>                  Estimate EL ratio    df Pr(> chi)
+#> beta1 (dX[t-1]) -0.133221    4.456 1.000    0.0348
+#> beta2 (X[t-2])   0.008196    2.404 1.000    0.1210
+#> joint                        7.250 2.000    0.0266
+```
+
+The EL dual problem is solved by Newton’s method with Owen’s (2001)
+pseudo-logarithm; the profiles are minimised over the nuisance
+coefficient by BFGS from the OLS start.
+
 ### References
 
 - Amihud, Y., Hurvich, C. M., & Wang, Y. (2009). Multiple-predictor
@@ -159,8 +198,12 @@ selected test, its statistic and critical value.
 - Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple
   tests for stock return predictability with good size and power
   properties. *Journal of Econometrics*, 224(1), 198–214.
+- Liu, X., Yang, B., Cai, Z., & Peng, L. (2019). A unified test for
+  predictability of asset returns regardless of properties of predicting
+  variables. *Journal of Econometrics*, 208(1), 141–159.
 - Nicholls, D. F., & Pope, A. L. (1988). Bias in the estimation of
   multivariate autoregressions. *Australian Journal of Statistics*, 30A,
   296–309.
+- Owen, A. B. (2001). *Empirical Likelihood*. Chapman & Hall.
 - Stambaugh, R. F. (1999). Predictive regressions. *Journal of Financial
   Economics*, 54(3), 375–421.

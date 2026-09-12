@@ -14,8 +14,8 @@
   regression](https://kvasilopoulos.github.io/ivx/articles/ivx-qr.md):
 - [IV tests with combined
   instruments](https://kvasilopoulos.github.io/ivx/articles/ivx-iv.md):
-- [Non-IVX benchmarks: ARM and the hybrid
-  t-test](https://kvasilopoulos.github.io/ivx/articles/benchmarks.md):
+- [Non-IVX benchmarks: ARM, hybrid t-test, empirical
+  likelihood](https://kvasilopoulos.github.io/ivx/articles/benchmarks.md):
 
 ### Inference
 
