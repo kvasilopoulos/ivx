@@ -27,6 +27,7 @@ reference:
       - ivx_ar
       - ivx_ra
       - ivx_qr
+      - ivx_iv
 
   - title: Robust and subsample inference
     desc: Wild bootstrap p-values and tests for pockets of predictability (Demetrescu et al. 2022, 2023).
@@ -49,6 +50,7 @@ reference:
       - ivx_ra_fit
       - ivx_qr_fit
       - arm_fit
+      - ivx_iv_fit
       - ivx_sys_fit
 
   - title: Serial correlation tests
@@ -86,6 +88,7 @@ articles:
       - ivx-ra
       - ivx-qr
       - arm
+      - ivx-iv
   - title: Inference
     navbar: Inference
     contents:

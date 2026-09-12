@@ -46,6 +46,10 @@
   `ivx-qr`, `robust-inference`, `ivx-episodic`) with the underlying
   statistics, replication results and caveats; pkgdown site reorganised
   (Bootstrap 5, MathJax rendering, grouped reference and articles).
+* New `ivx_iv()` / `ivx_iv_fit()`: the 2SLS predictability tests of Breitung &
+  Demetrescu (2015) with fractional-difference, long-difference and sine
+  instruments and their recommended combination (`IVcomb`), Eicker-White
+  standard errors.
 * New `arm()` / `arm_fit()`: the multipredictor augmented regression method of
   Amihud, Hurvich & Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected
   VAR(1) residuals as control variables and the paper's covariance estimator;
