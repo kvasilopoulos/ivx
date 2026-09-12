@@ -1,0 +1,877 @@
+      Journal of the American Statistical Association
+
+           ISSN: 0162-1459 (Print) 1537-274X (Online) Journal homepage: www.tandfonline.com/journals/uasa20
+
+A Unified Inference for Predictive Quantile
+Regression
+
+Xiaohui Liu, Wei Long, Liang Peng & Bingduo Yang
+
+To cite this article: Xiaohui Liu, Wei Long, Liang Peng & Bingduo Yang (2024) A Unified
+Inference for Predictive Quantile Regression, Journal of the American Statistical Association,
+119:546, 1526-1540, DOI: 10.1080/01621459.2023.2203354
+To link to this article: https://doi.org/10.1080/01621459.2023.2203354
+
+           Published online: 05 Jun 2023.
+           Submit your article to this journal
+           Article views: 1995
+           View related articles
+           View Crossmark data
+           Citing articles: 5 View citing articles
+
+                                 Full Terms & Conditions of access and use can be found at
+                   https://www.tandfonline.com/action/journalInformation?journalCode=uasa20
+JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION
+2024, VOL. 119, NO. 546, 1526­1540: Theory and Methods
+https://doi.org/10.1080/01621459.2023.2203354
+
+A Unified Inference for Predictive Quantile Regression
+
+Xiaohui Liua, Wei Longb, Liang Peng c, and Bingduo Yangd
+
+aSchool of Statistics and Data Science, and Key Laboratory of Data Science in Finance and Economics, Jiangxi University of Finance and Economics,
+Nanchang, China; bDepartment of Economics, Tulane University, New Orleans, LA; cDepartment of Risk Management and Insurance, Georgia State
+University, Atlanta, GA; dSchool of Finance, Guangdong University of Finance and Economics, Guangzhou, China
+
+ABSTRACT                                                                                                             ARTICLE HISTORY
+                                                                                                                     Received August 2022
+The asymptotic behavior of quantile regression inference becomes dramatically different when it involves a           Accepted April 2023
+persistent predictor with zero or nonzero intercept. Distinguishing various properties of a predictor is empir-
+ically challenging. In this article, we develop a unified predictability test for quantile regression regardless of  KEYWORDS
+the presence of intercept and persistence of a predictor. The developed test is a novel combination of data          Predictive quantile
+splitting, weighted inference, and a random weighted bootstrap method. Monte Carlo simulations show that             regression; Random
+the new approach displays significantly better size and power performance than other competing methods               weighted bootstrap; Test;
+in various scenarios, particularly when the predictive regressor contains a nonzero intercept. In an empirical       Weighted inference
+application, we revisit the quantile predictability of the monthly S&P 500 returns between 1980 and 2019.
+Supplementary materials for this article are available online.
+
+1. Introduction                                                          ing the predictability of return for various quantile positions
+                                                                         is also empirically meaningful. First, no predictability at the
+Predictive regression models are widely used in empirical eco-           mean does not necessarily imply no predictability at all quan-
+nomics and finance to investigate Granger causality, linear ratio-       tiles. For example, predictability might only exist for specific
+nal expectations, and market efficiency hypotheses. Due to the           quantiles and is thus obscured by the no predictability at the
+high degree of persistence existing in the regressor and the             mean. Also, the opposite sign of predictability for the lower
+high contemporary correlation between the innovations of asset           and upper quantiles could lead to no predictability at the mean.
+return and regressor, the standard t-test is invalid and inclined to     Second, the predictability of return for different quantiles could
+over reject the null hypothesis of no predictability (see, e.g., Ami-    be heterogeneous. For example, Gebka and Wohar (2013) report
+hud and Hurvich 2004; Campbell and Yogo 2006). Because con-              positive (negative) volume-return causality for high (low) return
+sistently estimating the persistent level is practically infeasible, it  quantiles. Ma, Xiao, and Ma (2018) find investor's sentiment
+becomes empirically important to develop unified predictabil-            predicts aggregate stock returns at lower quantiles. Third, the
+ity tests regardless of the properties of predictive regressors.         predictability of the tail risk, such as Value-at-Risk, is crucial
+One attractive approach is the instrumental variable (dubbed             for risk managers and policymakers who are particularly inter-
+as IVX) based inference, which was proposed by Magdalinos                ested in the predictability of return at tails. Fourth, predictive
+and Phillips (2009) and then extensively studied by Kostakis,            regressors which exhibit significant predicting power may vary
+Magdalinos, and Stamatogiannis (2015). This IVX-based Wald               among different quantiles (Cenesizoglu and Timmermann 2008;
+test is robust against various degrees of persistence of predictive      Gonzalo and Pitarakis 2012). These motivate researchers to
+regressors, ranging from purely stationary to purely nonstation-         investigate asset return predictability for different quantiles via
+ary processes, in the presence of endogenous and heteroscedas-           a predictive quantile regression.
+tic errors. Extensions of the IVX-based method are Phillips and
+Lee (2016), Yang et al. (2020), and Demetrescu and Rodrigues                Quantile regression (QR), first introduced by Koenker and
+(2022). Another branch of the unified approach employs the               Bassett (1978), has become a standard tool to model the
+weighted empirical likelihood method (Zhu, Cai, and Peng 2014;           conditional quantiles of a dependent variable as a function of
+Liu et al. 2019; Yang et al. 2021), which always yields a Chi-           regressors. By regressing the return on predictive regressors at
+squared limit regardless of the degree of persistence and embed-         a sequence of quantile points, predictive QR provides complete
+ded endogeneity in predictive regressors. Some recent devel-             information about the predictability of the return distribution
+opment in the unified testing procedures includes Gungor and             rather than at the mean. Prior studies try to investigate the
+Luger (2020), Harvey, Lebourne, and Taylor (2021), Demetrescu            predictability of conditional quantiles via QR when the degrees
+and Rodrigues (2022), and Georgiev et al. (2021).                        of persistence of regressors are known. For example, Xiao (2009)
+                                                                         studies the inference of quantile cointegrating regression in
+   The literature above exclusively concentrates on the pre-             the presence of unit root regressors. Maynard, Shimotsu, and
+dictability of mean regression models. On the other hand, test-          Wang (2011) use Bonferroni's method to conduct inference in
+
+CONTACT Bingduo Yang bdyang2006@sina.com School of Finance, Guangdong University of Finance and Economics, Guangzhou, China.
+    Supplementary materials for this article are available online. Please go to www.tandfonline.com/r/JASA.
+
+© 2023 American Statistical Association
+                                                                     JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION  1527
+
+predictive QR when the predictive regressor has a near unit          we employ a random weighted bootstrap method to estimate
+root. Recently, Xu (2021) shows that the inference of multi-         them in a unified way, leading to a unified predictability test
+horizon QR is more robust than the standard multi-horizon            via the square of a t-test statistic. We call this new method a
+mean regression when the predictive regressor is stationary.         random weighted bootstrap predictive QR (RWB-QR) method
+                                                                     and show that its test statistic achieves a Chi-squared limit under
+   Like unified tests for predictive mean regression with            the null hypothesis of no predictability regardless of intercept
+unknown persistence in predictive regressors, recent researchers     and persistence in the predictive regressor. As the test neither
+seek unified tests in predictive QR regardless of the persistence    infers the heteroscedastic errors nor generates samples from
+of the predictive regressor. A seminal work by Lee (2016) extends    the fitted model via resampling residuals like the residual-based
+the IVX-based statistic to QR and proposes the IVX-QR method         bootstrap methods, the proposed RWB-QR test is robust against
+for a unified inference. He argues that the proposed IVX-QR          heteroscedastic errors in the predictive QR model and compu-
+method is uniformly valid over various persistent levels, ranging    tationally convenient.1
+from stationarity to mild explosiveness, in the presence of mul-
+tiple persistent predictive regressors. Simulation results show         We conduct extensive Monte Carlo simulations to examine
+IVX-QR corrects the size distortion from persistent multivariate     the finite sample performance of the developed RWB-QR and
+predictive regressors while preserving discriminatory power.         find that our method yields robust inferential results under
+To accommodate the conditional heteroscedastic innovations           various scenarios. In particular, RWB-QR exhibits excellent
+in the predictive QR model, Fan and Lee (2019) adopt the             size control, especially when the predictive regressor contains
+moving block bootstrap (MBB) technology and propose an MBB           a nonzero intercept. At the same time, IVX-QR and IVX-
+based IVX-QR approach (MBB-QR hereafter) to assure valid             MBB have severe size distortion, and DW-QR becomes slightly
+inference at both tails. Simulation results show that this MBB-      oversized at tails. The power performance of our method
+based method not only maintains the good properties of IVX-          is also uniformly better than the three competing methods
+QR but also reduces the inferential errors by avoiding nuisance      under different scenarios when the predictive regressor is
+parameter estimation when conditional heteroscedasticity exists      highly persistent. In an empirical example, we revisit the
+in error terms. In a recent study, Cai, Chen, and Liao (2022)        monthly stock market return predictability in the United States
+develop an inferential theory based on a double-weighted             between 1980 and 2019 with the commonly used financial and
+method for predictive QR (DW-QR hereafter) and show the              macroeconomic predictors in the literature. The empirical result
+robustness of their method when the predictive regressors are        is broadly consistent with our findings in the simulation part. It
+either stationary or nearly integrated.                              shows that most predictors do not exhibit predicting power on
+                                                                     the stock return for all quantile positions by RWB-QR, except
+   A common assumption of the three aforementioned unified           for the earnings-price ratio and net equity expansion, which are
+predictive QR inferences is that predictors follow AR models         significant for the lower quantiles. This result is notably different
+with zero intercepts. However, when examining the eleven             from IVX-QR, which indicates that many predictors display
+financial and macroeconomic variables in the empirical exam-         significant predicting power. The lower and upper tail quantiles'
+ple, we find evidence that most predictors contain significant       predictability is substantially stronger than the middle quantiles.
+nonzero intercepts at the conventional levels. Moreover, as          MBB-QR and DW-QR also yield more significant predictors
+demonstrated in the simulation, IVX-QR and IVX-MBB suffer            than RWB-QR at the tails. Further analyses indicate that such
+severe size distortion when the predictive regressor has a           a different result between RWB-QR and the three competing
+nonzero intercept. At the same time, DW-QR becomes slightly          methods can be partly explained by the presence of nonzero
+oversized at tails when a nonzero intercept is present. Finally,     intercepts in most of these predictors.
+from the theoretical perspective, it is known that a unit root
+AR(1) sequence diverges with a faster divergence rate in the            The remaining structure of the article is as follows. Sec-
+case of a nonzero intercept than in the case of a zero intercept.    tion 2 introduces the proposed method and provides asymptotic
+Hence, the instrumental variables constructed by Lee (2016),         results. Section 3 reports the finite-sample simulation compar-
+Fan and Lee (2019), and Cai, Chen, and Liao (2022) for zero          ison results. Section 4 applies the proposed RWB-QR method
+intercepts in modeling predictors behave differently from the        to investigate the predictive ability of 11 economic and finan-
+case of nonzero intercepts. Consequently, it remains unknown         cial variables on the monthly S&P 500 return between 1980
+if these three unified inferences can unify the cases of zero and    and 2019. We conclude in Section 5. The technical proofs and
+nonzero intercepts in predictors.                                    additional simulation results are provided in the supplementary
+                                                                     appendix.
+   In this study, we develop a novel unified test in the predictive
+QR model regardless of the presence of intercept and persistence     2. Models, Methodologies, and Theoretical Results
+of a predictor. Specifically, we employ a technique of weighted
+estimation in the predictive QR model to handle the effect           Let yt denote a predicted variable such as stock return, and xt be
+of the nonstationary predictive regressor, as in Chan, Li, and       a predictive variable such as dividend-price ratio or treasury bill
+Peng (2012). Because the weighted QR equations would behave          rate. We consider the linear predictive QR model as
+asymptotically equivalently if using the full observations for the
+case of nonzero intercepts, we propose to use the idea of data       1It is worth mentioning that Zhu, Cai, and Peng (2014) also develop a data
+splitting to overcome this difficulty, which always results in a       splitting strategy, which can handle the intercept effect using the tech-
+normal limit after a random normalization. Since the random            nique of differencing over long-range observations for an ordinary pre-
+normalization and the variance in the normal limit depend              dictive regression model. However, their method can not be applied to
+on different cases, a direct inference is infeasible. Therefore,       heteroscedastic errors.
+1528  X. LIU ET AL.
+
+                                                                                       where  (u) =  - I(u < 0). Note that if we do not
+ yt =  +  xt-1 + t , t = ut - tQ( ),                                                   split the sample, the above two equations will be asymptotically
+                                                                                       equivalent when {xt} is nonstationary with nonzero intercepts,
+ ut = tt,               t2 = w +      q           aiu2t-i  +        r    bjt2-j,       leading to a degenerate limit of the weighted estimation.
+                                      i=1                           j=1
+                                                                                          We employ the following regularity conditions to derive the
+                                                                                  (1)  asymptotic limit of the above estimators.
+
+for t = 1, . . . , T, where P(t  Q( )) =  indicates
+
+P(t  0|Ft-1) =  with Ft being the sigma field generated by
+
+{(k, x,k)}kt, that is,  + xt-1 is the  th conditional quantile                         C1. The predictive variable xt, with the initial value of x0
+                                                                                       being constant, belongs to one of the following persistence
+of yt given xt-1. The predictive variable follows                                      classes:
+    xt =  + xt-1 + et,
+
+ et          =     i=0iq=x1ivat-x,iiv, t2-iv+t =  x,tx,t, x2,t      =   wx        (2)           Case (i): || < 1. That is, {xt} is a stationary AR(1) process.
+                                                                                                Case (ii):  = 0 and  = 1 - c/T for some constant c.
+                +                                 rx   bx,jx2,t-j,                              That is, {xt} is a nearly integrated AR(1) process with zero
+                                                  j=1                                           intercepts for some c = 0. When c = 0, {xt} is a unit root
+                                                                                                AR(1) process.
+where {(t, x,t)}Tt=1 is a sequence of independent and identi-                                   Case (iii):  = 0 and  = 1 - c/T for some constant
+cally distributed random vectors with means zero and variances                                  c. That is, {xt} is a nearly integrated AR(1) process with a
+                                                                                                nonzero intercept.
+one, and  ,  , w, ai, bj, , , i, wx, ax,i, and bx,j are unknown
+parameters. Because our developed method below does not infer
+
+the GARCH models, it could be naturally extended to other
+
+heteroscedastic error scenarios as those in Zhu and Ling (2015).
+
+The QR estimation for  and  minimizes                                                  C2. {t} and {x,t} are strictly stationary with finite variance,
+
+                     T                                                                 w and wx are positive, and ai, bj, ax,i, and bj,x are nonnegative.
+
+                           (yt -  -  xt-1),                                       (3)  C3. E |t|2+c0 + |x,t|2+c0 <  for some constant c0 > 0.
+                                                                                                                                          j2
+                     t=1                                                               C4. {et} is strictly stationary with          j=0      <  ,   that             is,  finite
+
+where  (u) = u( - I(u < 0)). It is known that the limit of                             variance, and 0 = 1.
+the QR estimation is normal for stationary {xt} and nonnormal
+for persistent {xt}; see Theorem 3.1 of Fan and Lee (2019).                            C5. The sequence of stationary probability density functions
+To unify these two cases, Lee (2016) and Fan and Lee (2019)
+                                                                                       {f,t-1(s)} of t conditional on Ft-1 satisfies a moment con-
+
+                                                                                       dition with a nondegenerate mean f(0) = E f,t-1(0) > 0
+
+replace xt-1 in (3) with a less persistent instrumental variable,                      and E fd,t0-1(0) <  for some d0 > 1.
+which sacrifices the rate of convergence in the persistent case
+                                                                                       C6. For each t and                (0,  1<),d|0f,fto-r1s(os)m| <e d0 >an0d.  f,t-1   (s)  <
+by comparing Theorems 3.1 and 3.2 in Fan and Lee (2019).                                almost surely for           all  |s|
+
+Alternatively, Cai, Chen, and Liao (2022) propose to replace                           These conditions are quite mild, and C4­C6 are also assumed
+ xt-1 in (3) by  (xt-1 - zt-1) +  zt-1, where the auxiliary
+variable zt-1 is a combination of Type-II instrumental variable                        in Cai, Chen, and Liao (2022). Note that {t} is strictly stationary,
+
+(simulated random walks) and xt-1/ 1 + xt2-1. All these three                          f(0) is independent of t. For convenience, hereafter we write
+predictability tests assume  = 0 in (2) and remain unknown if                                           [2ms]       and S[y2ms]           [2ms]
+                                                                                       Sx[2ms]  =  1    t=1     et                =  1    t=1        (t            )  for  some
+                                                                                                     m                                 m
+they unify the cases of zero and nonzero intercept in modeling
+                                                                                       s  (0, 1]. Then, for Case (ii), it follows from Cai, Chen, and Liao
+
+predictors.                                                                            (2022) that
+
+   To develop a unified predictability test for H0 :  = 0                                           Sx[2ms]     D W(s) :=         Wx(s)   ,                                (6)
+regardless of the properties of {xt}, we split the data into two                                    S[y2ms]                       Wy(s)
+parts and use one part to formulate the score function for  and
+the other part to construct a weighted score function for  . In                                    1    x[2ms]  D   Jcx(s)    =    s
+this way, the weighted estimator for  after a random normal-                                         m
+ization has a normal limit regardless of the properties of {xt}.                                                                    e(s-s1)c dWx(s1)
+Still, the asymptotic variance and the random normalization
+                                                                                                                                  0
+
+                                                                                                                                  in the space D[0, 1],                    (7)
+
+depend on the properties of {xt}, and the random normalization                         where (Wx(s), Wy(s)) is a bivariate Gaussian processes with
+does not have a constant sign. Hence, to construct a valid test, we                    covariance matrix
+
+use the square of the estimator for  to get rid of the sign issue                                    h= h-=-E{E(v(tvtt)+vht+) h}          E{     (t  )vt+h}
+and adopt a random weighted bootstrap method to estimate                                                                             h=-
+
+its asymptotic variance in a unified way. More specifically, let                       2×                                                  (1 -  )
+
+m = [T/2] with [·] being the integer operator and define
+
+                          wt = xt-1 .                                             (4)  and D[0, 1] is the space of real-valued functions on the interval
+                                                                                       [0, 1] that are right continuous with finite left limits. We refer to
+                                   1 + xt2-1                                           Phillips (1987) and Cai, Chen, and Liao (2022) for details. In the
+                                                                                       sequel, we denote "D ", "d ", "p " as the convergence in space, in
+   We estimate ^ and ^ by solving the following two score                              distribution, and in probability, respectively. Also, ,0 and ,0
+equations:                                                                             denote the true values of  and  , respectively.
+
+                m     (yt  -       -   xt-1)           =   0,                     (5)     For the weighted estimation above, we have the following
+                t=1                                                                    theorem.
+                2m
+                t=m+1      (yt  -     -            xt-1)wt     =    0,
+                                                                                   JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION            1529
+
+Theorem 1. Suppose models (1) and (2) satisfy conditions                         Theorem 1 above shows that ^ -,0 after a random normal-
+C1­C6.                                                                        ization with a sign function for Case (ii) can be approximated
+                                                                              by a normal distribution with mean zero. Because the random
+For Case (i), as T  ,                                                         normalization and the variance in the normal limit depend on
+                                                                              the properties of {xt}, we can not directly employ Theorem 1
+                     m       ^  -  ,0                                         to test predictability in a unified way. Therefore, we propose
+            D1,m             ^ -  ,0            d N(0, 1)                     to use the random weighted bootstrap method (Jin, Ying, and
+                                                                              Wei 2001; Zhu 2016) to estimate the asymptotic variance of
+                     m                                                        ^ in a unified way without any prior knowledge about the
+                                                                              properties of {xt}. Since the random weighted bootstrap method
+                      ^ -  ,0          d N 0,  1         1 1 , where          neither infers the heteroscedastic errors nor generates samples
+and A1,m × m                                                                  from the fitted model via resampling residuals like residual-
+                                                                              based bootstrap methods, the developed test is robust against
+                                             m                                conditional heteroscedasticity and computationally convenient.
+
+                         1             1  t=1   xt-1     
+                                       m
+                        2m
+D1,m  =  f (0)        t=m+1               2m                 ,
+
+                   1         wt     1  t=m+1    wt xt-1
+                   m                m
+
+     1 =  (1 -  )     10
+
+                      0E      x12         ,                                   Step (A1): Draw a random sample with sample size T from
+                             1+x12
+                                                                              a distribution function with mean one and variance one, say
+
+1 =         -E      x1       ,1 ,                                             the standard exponential distribution. Denote the generated
+                                                                              random sample by 1b, . . . , Tb .
+                      1+x12                                                   Step (A2): Solve the following two equations to get estimators
+
+A1,m =      1 2m                 -  1 2m 1               m           × f(0).  ^ b and ^b for  and  :
+                      xt-1   wt               wt        t=1   xt-1
+            m                       m               m
+               t=m+1                   t=m+1                                             m     tb (yt
+                                                                                         t=1           -       -   xt-1)  =  0,
+For Case (ii), as T  ,                                                                                                                        (8)
+                                                                                         2m         tb (yt  -     -   xt-1)wt    =  0.
+                  m ^  -  ,0                                                             t=m+1
+
+       D2,m m ^ -  ,0                                                         Step (A3): Repeat the above two steps B times to get
+
+                                                                                            B
+
+                                               1                              ^ b, ^b            .
+                                               2
+         d                            Wy                                                    b=1
+                                    (1) -    sgn
+                sgn(Jcx  (1))Wy                   Jcx   1       Wy   1           Since the random weighted bootstrap method does not gen-
+                                                        2            2        erate samples from the fitted model via resampling residuals, its
+                                                                              computational burden is relatively minimal, allowing a larger
+and                                                                           value of B. We employ B = 5000 in the simulation study below,
+                                                                              giving robust size and power.
+A2,m × m ^ -  ,0             d sgn(Jcx(1)) Wy(1) - 2Wy                  1  ,
+                                                                        2
+
+where sgn(·) denotes the sign function,                                          The theorem below derives the limit of ^ b - ^  , ^b - ^ ,
+                                                             
+                                               m  xt-1                        showing that |^b -^ | and |^ -,0| have the same limit, which
+         =          1       1              1        m                         leads to a unified predictability test.
+                                          m t=1
+D2,m        f (0)     m    2m                          xt-1     ,
+                         t=m+1              2m           m
+                                   wt  1          wt
+                                       m  t=m+1
+
+               1    2m    xt-1            1     2m         1     m   xt-1     Theorem 2. Suppose models (1) and (2) satisfy conditions
+               m  t=m+1     m             m                     t=1    m      C1­C6.
+A2,m =                             wt  -      t=m+1 wt m
+
+                                                                              For Case (i), as T  ,
+                                                                                                 
+            ×f (0).                                                                                 m  ^ b - ^       d N (0, 1)
+                                                                                                       ^b - ^
+For Case (iii), as T  ,                                                                  D1,m    
+                                                                                                   m
+                       m ^  -  ,0
+                                                d N (0, 3)                                          ^b - ^  d N 0,  1      1 1 .
+           D3,m m3/2 ^ -  ,0                                                  and A1,m × m
+
+and A3,m × m3/2 ^ - ,0 d N(0, 2 (1 -  )), where                               For Case (ii), as T  ,
+                                                                                         
+                                             1 m xt-1                              D2,m    m     ^ b - ^ 
+
+                            1                                                            m ^b - ^
+
+D3,m     =  f (0)   1      2m             m t=1    m   xt-1     ,                        d                       Wy  1
+                         t=m+1              2m          m                                                            2
+                      m            wt  1          wt                                           sgn(Jcx(1))Wy(1) - sgn Jcx    1    Wy    1
+                                       m  t=m+1                                                                              2          2
+
+      3=        (1 -  ) 0                 ,                                   and
+                   0  (1 -  )
+                                                                              A2,m × m ^b - ^       d sgn(Jcx(1)) Wy(1) - 2Wy              1  ,
+                                                                                                                                           2
+               1     2m      xt-1         1     2m           1   m   xt-1
+               m   t=m+1      m           m                     t=1   m
+A3,m =                             wt  -        t=m+1 wt m                    where Wy(s) is a Gaussian process having the same covari-
+                                                                              ance structure as that of Wy(s) but independent of both Wx(s)
+            ×f (0).
+                                                                              and Wy(s).
+1530       X. LIU ET AL.
+
+For Case (iii), as T  ,                                                             3. Simulation
+
+             D3,m                 ^ b - ^      d N(0, 3)                            In this section, we examine the finite sample size and power
+                              m                                                     performance of the proposed RWB-QR method. Specifically, we
+                                                                                    generate data from
+                          m3/2 ^b - ^
+
+and A3,m × m3/2 ^b - ^ d N(0, 2 (1 -  )).                                           yt =  +  xt-1 + ut , xt =  + (1 - c/T)xt-1 + uxt,
+
+Theorem 3. Under conditions of Theorem 1, we have                                   where the intercept  equals 0.08 for all  , and  equals
+                                                                                    either 0 (zero intercepts) or 0.05 (nonzero intercept), which
+                            ^ -  ,0 2          2 d 12                               are empirically relevant, as will be shown in the next section.2
+
+                    1       B     ^b - ^                                            To adjust the degree of persistence in predictor xt, we allow
+                    B       b=1                                                     c  {0, 2, 5, 10, 100}, where c = 0 indicates the exact unit
+                                                                                    root process. Increasing the value of |c| will lower the degree of
+as T   and B  , where 12 is a Chi-squared distribution                              persistence of the predictor xt. The sample size T  {500, 1000}.
+with one degree of freedom.                                                         As for the structure of the two error terms ut and uxt, similar to
+                                                                                    Fan and Lee (2019), we consider the following two scenarios.
+
+   Using the above theorem, our proposed random weighted                            (i). IID Case
+bootstrap based Wald statistic for testing H0 :  = 0 is
+                                                                                    ut    iid N(0,    ), where 0 =     0  and  =  1     .
+                                                                                    uxt                                0             1
+                                       ^2
+                 W=                                       2,                   (9)  (ii). Conditional Heteroscedasticity Case
+
+                           1      B      ^b - ^                                     ut follows a GARCH(1,1) process such that ut = tt and
+                           B      b=1
+                                                                                    t2 = 0 + 1ut2-1 + 2t2-1, and          t     iid N(0, )
+                                                                                                                          uxt
+and we reject the null hypothesis at level a  (0, 1) whenever
+                                                                                    with 0 =       0  and  =     1        . To render empirical
+W > 12,1-a, where 12,1-a is the (1 - a)th quantile of the Chi-                                     0                1
+squared distribution with one degree of freedom.
+                                                                                    relevance, we assume 0 = 0.1, 1 = 0.1, and 2 = 0.57
+
+Remark 1. As can be seen from the proofs of Theorems 1­                             throughout the simulations.
+3 in the supplementary appendix, the purpose of adding
+                                                                                    In both scenarios,  denotes the correlation coefficient that
+1/ 1 + xt2-1 into wt is to control the order of xt-1 and ensure                     determines the degree of endogeneity, and, similar to Fan and
+that wm p sgn(Jcx(1/2)), which is random, but |wm| p 1                              Lee (2019), we set  = -0.95 so that ut and uxt are highly
+in Case (ii). Because the two equations in (5) for a persistent                     correlated. Furthermore, we let ut  ut - F-1( ) where F(·)
+predictor would behave asymptotically equivalently without                          denotes the cumulative distribution function of N(0, t2). We
+data splitting in Case (iii), it is necessary to use this data-splitting            repeat each simulation 1000 times with B = 5000 bootstrapped
+strategy to ensure a nondegenerate limit. This data-splitting                       samplings in each simulation and then compare the size and
+method may lose efficiency but is still more efficient than the                     power performance of the proposed RWB-QR with that of IVX-
+IVX-based QR method, which has a slower convergence rate                            QR by Lee (2016), MBB-QR by Fan and Lee (2019), and DW-QR
+due to the employed less persistent instrumental variable.                          by Cai, Chen, and Liao (2022).3
+
+Remark 2. When the predictive QR has multiple predictors,                              We first compare the size performance of the four methods
+possible nonstationary {xt} and stationary {zt,i} for i = 1, . . . , p,             with varying degrees of persistent predictors for quantile levels
+in the following model:                                                               {0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95}. That is,
+                                                                                     = 0. Figure 1 presents the size performance under the
+                                              p                                     IID setting when the predictor does not contain an intercept
+                                                                                    (i.e.,  = 0), and the displayed values denote the estimated
+           yt =  +  xt-1 +  ,izt-1,i + t,                                           rejection rates over 1000 simulations. It shows that RWB-QR
+                                                                                    exhibits excellent size control across all quantiles and degrees of
+                                            i=1                                     persistence when T = 500 (upper panel) and T = 1000 (lower
+                                                                                    panel). On the contrary, IVX-QR is severely oversized at the tails
+where t takes the same form as in (1), one may use the following                    ( = 0.05, 0.1, 0.9, 0.95) when the predictor is highly persistent
+weighted score equations,                                                           (c = 0). However, increasing the sample size from 500 to 1000
+                                                                                    slightly improves the size control by alleviating the sparsity at the
+      m     (yt  -          -   xt-1  -        p      ,izt-1,i) = 0,
+      t=1                                      pi=1   ,izt-1,i)zt-1,i
+      m                                        i=1
+      t=1   (yt  -          -   xt-1  -                                 =  0,
+
+      i = 1, 2, . . . , p,                           p                              2We also examine the scenario, which allows  to vary at different quan-
+                                                     i=1                              tile levels and find similar results. The detailed results are available upon
+      2m      (yt   -          -   xt-1     -              ,izt-1,i)wt  =  0,
+      t=m+1                                                                           request. We thank one anonymous reviewer for suggesting this.
+
+to obtain a similar predictability test for the null hypothesis                     3To apply IVX-QR, we generate the instrument zt = Rnzzt-1 + xt where
+( , ,1, ,2, . . . , ,p) = 0. This test will have a Chi-squared                          xt = xt -xt-1, Rnz = Ik +nCz and Cz = czIk, with Ik being a k×k identity
+limit with p + 1 degrees of freedom under the null hypothesis of
+                                                                                      matrix, cz = -5 as suggested by Lee (2016), and  selected by the practical
+no predictability. A simulation study shows that this test has an                     rule in Lee (2016). To apply MBB-QR, we generate 1000 random samples in
+                                                                                      each simulation and set block length b = n1/4 where a denotes the
+accurate size and good powers.                                                        least integer that is greater or equal to a.
+                                                                       JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION  1531
+
+Figure 1. Comparison of size: IID and zero intercept ( = 0).
+NOTE: This figure displays the size performance of RWB (black), IVX (yellow), MBB (blue), and DW (red) for different  -quantiles under the IID setting with a zero intercept
+( = 0) in the predictor. The sample size T = 500 (upper panel) and 1000 (lower panel). For RWB, the number of bootstraps is 5000. Each simulation is repeated 1000 times.
+
+tails when the sample size is small. This finding is in line with Lee  and the sample size. At the same time, the oversizing exhibited
+(2016), who also documents the size distortion of IVX-QR at the        by IVX-QR becomes even more severe. In particular, the largest
+tails. MBB-QR and DW-QR display reasonably good size per-              rejection rate produced by IVX-QR is as large as 0.2 when c = 0
+formance across all quantiles and degrees of persistence. When         and  = 0.3. MBB-QR also exhibits slight oversizing at the
+a nonzero intercept (i.e.,  = 0.05) is added, Figure 2 compares        lower tail when the predictor is a unit root process, and the size
+the size performance of the four methods under IID. RWB-               distortion becomes more severe when T = 1000. DW-QR still
+QR still shows excellent size control throughout all quantile          displays good size control overall but is slightly oversized at the
+positions regardless of the degree of persistence of the predictor     tails when c = 0.
+1532  X. LIU ET AL.
+
+Figure 2. Comparison of size: IID and nonzero intercept ( = 0.05).
+NOTE: This figure displays the size performance of RWB (black), IVX (yellow), MBB (blue), and DW (red) for different  -quantiles under the IID setting with a nonzero intercept
+( = 0.05) in the predictor. The sample size T = 500 (upper panel) and 1000 (lower panel). For RWB, the number of bootstraps is 5000. Each simulation is repeated 1000
+times.
+
+   Next, we compare the four methods' size performance under         good, but it is slightly oversized when the predictor is highly
+the conditional heteroscedasticity setting. In Figure 3, which dis-  persistent. However, introducing a nonzero intercept notably
+plays the zero intercept case, we can observe excellent size con-    inflates the size distortion by IVX-QR and MBB-QR across all
+trol by RWB-QR and DW-QR across all quantiles and degrees of         quantiles when the predictor is highly persistent. At the same
+persistence of the predictor. At the same time, IVX-QR exhibits      time, RWB-QR and DW-QR still present excellent size controls,
+severe oversizing when the predictor is a pure unit root process     as displayed by both panels in Figure 4. Such deterioration is
+(c = 0). The size performance by MBB-QR is also reasonably           apparent when c = 0. For IVX-QR, the largest empirical size is
+                                                                   JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION  1533
+
+Figure 3. Comparison of size: Conditional heteroscedasticity and zero intercept ( = 0).
+NOTE: This figure displays the size performance of RWB (black), IVX (yellow), MBB (blue), and DW (red) for different  -quantiles under the conditional heteroscedasticity
+setting with a zero intercept ( = 0) in the predictor. The sample size T = 500 (upper panel) and 1000 (lower panel). For RWB, the number of bootstraps is 5000. Each
+simulation is repeated 1000 times.
+
+as large as 0.206 when  = 0.1, a 54% increase in rejection rate    space, here we only present the comparison of power curves
+compared with its counterpart when there is no intercept. Even     of the four methods when  = 0.05, c  {0, 2}, and  
+when  = 0.5, at which IVX-QR exhibits relatively good size         {0.05, 0.5, 0.95} which respectively represent the lower, middle,
+performance when c = 0, the inclusion of the nonzero intercept     and upper quantile positions.4 The two panels in Figure 5,
+makes the size distortion remarkably larger. For MBB-QR, we        respectively denote the IID and conditional heteroscedasticity
+
+also observe severe oversizing when c = 0 in both panels.          4The result for  = 0 is similar and documented by Figure A1 in the
+   In the final step, we investigate the local power of the RWB-     supplementary appendix.
+
+based Wald statistic and then sketch its power curve. To conserve
+1534  X. LIU ET AL.
+
+Figure 4. Comparison of size: Conditional heteroscedasticity and nonzero intercept ( = 0.05).
+NOTE: This figure displays the size performance of RWB (black), IVX (yellow), MBB (blue), and DW (red) for different  -quantiles under the conditional heteroscedasticity
+setting with a nonzero intercept ( = 0.05) in the predictor. The sample size T = 500 (upper panel) and 1000 (lower panel). For RWB, the number of bootstraps is 5000.
+Each simulation is repeated 1000 times.
+
+scenarios. As seen therein, in both cases, the power by RWB-        In the supplementary appendix, we consider two additional
+QR (black) is uniformly larger than that of the three competing  scenarios. First, Cai, Chen, and Liao (2022) further explore the
+methods and grows rapidly as the slope coefficient  increases    performance of DW-QR when the predictor is near unit root
+from 0 to 0.1 at all three quantile positions. IVX-QR and DW-    with c < 0, and find it works well in this mildly explosive case.
+QR also exhibit reasonably good power performance, especially    Such a scenario is also empirically relevant as many financial
+under the conditional heteroscedasticity scenario, but the for-  and economic variables indeed display exuberant behaviors, as
+mer displays severe size distortion at both tails when  = 0.     documented by Phillips, Shi, and Yu (2015) and the reference
+                                                               JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION  1535
+
+Figure 5. Comparison of power: IID and conditional heteroscedasticity with nonzero intercept ( = 0.05).
+NOTE: This figure displays the power performance of RWB (black), IVX (yellow), MBB (blue), and DW (red) for the lower ( = 0.05), middle ( = 0.5), and upper ( = 0.95)
+quantile positions under the IID (upper panel) and conditional heteroscedasticity (lower panel) scenarios with a nonzero intercept ( = 0.05) in the predictor and the slope
+coefficient  ranging between 0 and 0.1. The predictor is unit root (c = 0) and nearly integrated (c = 2). The sample size T = 500. For RWB, the number of bootstraps is
+
+5000. Each simulation is repeated 1000 times.
+
+therein. Following Cai, Chen, and Liao (2022), we investigate  shows that, regardless of the presence of an intercept in the
+the performance of RWB when the predictor is near unit root    mildly explosive predictor, both RWB-QR and DW-QR display
+with c = -2.5 when T = 500 and c = -5 when T = 1000 so         excellent size control, while IVX-QR and MBB-QR become
+that 1 - c/T = 1.005 in both scenarios. Appendix Figure A2     severely oversized. The size distortion exhibited by MBB-QR
+1536  X. LIU ET AL.
+
+Table 1. OLS estimates and unit root tests for eleven predictors.
+
+               Predictor              ^          t^                  ^          ADF    DF-GLS        PP    KPSS
+                                                                                                         0.087
+Dividend payout ratio (d/e)       -0.0118   -1.729                 0.9848   -3.989   -3.328     -3.703   0.727
+Long-term yield (lty)               0.0002    0.510                0.9942   -1.542     0.470    -1.138   1.481
+Dividend yield (d/y)                                               0.9907   -1.833              -1.920   1.469
+Dividend-price ratio (d/p)        -0.0368   -2.007                 0.9912   -1.661   -0.049     -1.825   0.448
+T-bill rate (tbl)                 -0.0350   -1.896                 0.9874   -3.177   -0.086     -2.246   0.795
+Earnings-price ratio (e/p)                                         0.9830   -3.826   -0.318     -3.106   1.585
+Book-to-market value ratio (b/m)    0.0003    0.978                0.9876   -2.140   -0.819     -2.625   0.759
+Default yield spread (dfy)        -0.0524   -2.434                 0.9636   -3.683              -3.561   0.483
+Net equity expansion (ntis)                                        0.9800   -2.932     0.332    -2.732   0.180
+Term spread (tms)                   0.0032    1.504                0.9434   -3.723   -2.721     -3.910   0.181
+Inflation rate (inf)                0.0004    2.674                0.5516  -12.697   -3.880    -11.502
+                                    0.0000    0.158                                  -1.556
+                                    0.0013    3.278                                  -0.085
+                                    0.0011    6.853
+
+NOTE: This table documents four unit root tests'results for 11 predictive variables sampled from January 1980 to December 2019: dividend payout ratio (d/e), long-term yield
+
+  (lty), dividend yield (d/y), dividend-price ratio (d/p), T-bill rate (tbl), earnings-price ratio (e/p), book-to-market value (b/m), default yield spread (dfy), net equity expansion
+  (ntis), term spread (tms) and inflation rate (inf). ^ and ^ are least squares estimates in the AR(1) process: xt =  + xt-1 + et. t^ is the corresponding t statistics for
+  ^ . ADF represents the statistic of the Augmented Dickey-Fuller test by Said and Dickey (1984) for the null that xt has a unit root. DF-GLS represents the statistic from an
+  ADF-type test by Elliott, Rothenberg, and Stock (1996) for the null that xt has a unit root. PP refers to the statistic from the Phillips-Perron test by Phillips and Perron (1988)
+  for the null that xt has a unit root. KPSS refers to the statistic from Kwiatkowski et al.'s (1992) unit root test for the null that xt is stationary. The optimal length of lag is
+  determined by the Bayesian information criterion (BIC) for the ADF and DF-GLS tests. , , and  indicate the rejection of the null hypothesis at 10%, 5%, and 1%,
+
+  respectively.
+
+is even more salient under the conditional heteroscedasticity              and Goyal (2008): Dividend payout ratio (d/e), long-term yield
+scenario. For power performance, Appendix Figures A3 and A4                (lty), dividend yield (d/y), dividend-price ratio (d/p), T-bill rate
+indicate that the power by RWB-QR still dominates the other                (tbl), earnings-price ratio (e/p), book-to-market value (b/m),
+three competing methods in both scenarios when the predictor               default yield spread (dfy), net equity expansion (ntis), term
+is mildly explosive, regardless of the presence of an intercept.           spread (tms), and inflation rate (inf).6 Detailed definitions of
+Second, we compare RWB-QR with DW-QR by considering a                      these predictors are available in Welch and Goyal (2008).
+bivariate QR model defined as yt =  +  xt-1 +  zt-1 +
+ut , where xt =  + (1 - c/T)xt-1 + uxt and zt =  +                            We first examine the least squares estimates of the 11 pre-
+0.5zt-1 + uzt, so that the persistent level of xt varies, while            dictors in an autoregressive regression xt =  + xt-1 +
+zt is stationary. To conserve space, here we only consider the             et. Table 1 documents the least squares estimates of the inter-
+conditional heteroscedasticity scenario. Specifically, we assume           cept and slope coefficient and reveals two observations. First,
+that ut follows a GARCH(1,1) process such that ut = tt and                 according to the t-statistics associated with these intercepts,
+t2 = 0 + 1ut2-1 + 2t2-1, and {(t, uxt, uzt) } is a sequence                of the 11 predictors, seven (d/e, d/y, d/p, e/p, dfy, tms, and
+of independent and identically distributed random vectors with             inf) are significant at the conventional levels, suggesting the
+a normal distribution with means zero and covariance matrix                presence of nonzero intercepts in these series. Second, except
+                                                                           for inf, the remaining 10 predictors are highly persistent with the
+             1 -0.78 0.4                                                   autoregressive coefficient  close to unity. To formally examine
+    = -0.78 1 0.21, which is the same as that of                           the existence of a unit root within these predictors, we apply
+                                                                           four widely used tests: the augmented Dickey-Fuller (ADF) test
+            0.4 0.21 1                                                     (Said and Dickey 1984), the DF-GLS test (Elliott, Rothenberg,
+Cai, Chen, and Liao (2022). Except for this, all other simulation          and Stock 1996), the Phillips-Perron (PP) test (Phillips and
+settings are the same as those in the univariate case (ii) above.          Perron 1988), and the Kwiatkowski, Phillips, Schmidt and Shin
+Appendix Figure A5 shows that, regardless of the persistent level          (KPSS) test (Kwiatkowski et al. 1992). ADF, DF-GLS, and PP
+of xt and the presence of an intercept, RWB-QR for multiple                tests have the null hypothesis that a unit root exists, while the
+in Remark 2 displays excellent size control under the null of              KPSS test has no unit root. For ADF and DF-GLS, the optimal
+H0 :  =  = 0. Furthermore, the power performance                           length of the lagged differenced terms is determined by the
+demonstrated by Appendix Figure A6 indicates that RWB-QR                   Bayesian information criterion (BIC). Results in Table 1 suggest
+still dominates DW-QR across all scenarios when both  and                  that the four tests agree on the existence of a unit root in lty,
+ increase from 0 to 0.1.5                                                  d/y, and d/p but yield inconsistent results for the remaining
+                                                                           predictors.
+4. Empirical Example
+                                                                              Table 2 documents some summary statistics of u^ t , the esti-
+In this section, we revisit the empirical results of stock return          mated residuals of the predictive QR model for the  th quantile,
+predictability for financial and macroeconomic variables by con-           and ^t, the estimated residuals of GARCH(1,1). For each  , the
+ducting the proposed RWB-QR method. Similar to the past                    first two rows display results of the Ljung-Box test (Ljung and
+literature, here we investigate the predictability of 1980­2019            Box 1978) with the null hypothesis of no serial autocorrelation
+monthly S&P 500 value-weighted log excess returns by examin-
+ing 11 financial and macroeconomic variables studied by Welch              6The data can be downloaded from a link given in the article titled "A
+                                                                             Comprehensive Look at the Empirical Performance of Equity Premium Pre-
+5We thank one anonymous reviewer for suggesting a comparison of the two      diction"at Professor Amit Goyal's homepage: https://sites.google.com/view/
+  methods under a bivariate predictive QR model.                             agoyal145.
+                                                                             JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION          1537
+
+Table 2. Summary statistics for estimated ut and t.
+
+                  d/e    lty     d/y                 d/p     tbl       e/p     b/m     dfy     ntis   tms                     inf
+
+      LB(u^t )    9.70     7.57    7.58                7.69    7.50      8.51    7.44    7.75   9.44    7.31                    7.87
+                           7.71                        8.68            11.00     8.13  15.57   10.71
+0.05   LB(u^2t )  21.29  -0.11     9.19              -0.99     7.76    -0.51   -0.67   -0.10    0.00    7.79                    8.09
+      (u^t , ^t)  -0.11          -0.03                       -0.07                                    -0.01                   -0.04
+
+      LB(u^t ) 11.85     7.29    8.68                  7.94    7.53    10.88     7.40    7.79   8.15    7.43                    8.06
+                                                     10.32   10.60     23.59     9.64  22.43   10.77
+0.1    LB(u^2t )  46.40    9.40  11.94               -0.99   -0.08     -0.51   -0.67   -0.10    0.00    8.89                    9.82
+      (u^t , ^t)  -0.11  -0.11   -0.03                                                                -0.01                   -0.04
+
+      LB(u^t )    7.28   7.88    7.33                  7.36    9.26      7.24    7.33    7.01   8.18    7.49                    7.17
+                                                     13.19   18.89     16.75   14.15   19.95   13.21
+0.2    LB(u^2t )  18.43  18.17   13.18               -0.99             -0.52   -0.67   -0.10    0.00  12.41                   14.70
+      (u^t , ^t)  -0.11  -0.11   -0.03                       -0.07                                    -0.01                   -0.04
+
+      LB(u^t )    7.22   8.74    7.33                  7.36    7.94      7.21    7.38    7.01   7.98    7.32                    7.16
+                                                     18.68   23.89     21.84   20.32   25.38   18.86  19.37                   23.84
+0.3    LB(u^t2 )  23.50  25.43   18.38               -0.99             -0.52   -0.67   -0.10
+      (u^t , ^t)  -0.11  -0.11   -0.03                       -0.08                              0.00  -0.01                   -0.04
+
+      LB(u^t )    7.30   8.38    7.28                7.30    8.64      7.23    7.86    7.01    7.35   7.32                    7.18
+
+0.4    LB(u^2t )  27.18  28.55   26.88               27.00   28.83     27.84   26.35   26.57   27.64 27.46 33.32
+      (u^t , ^t)  -0.11  -0.11   -0.03               -0.99   -0.07     -0.52   -0.66   -0.10
+                                                                                               0.00   -0.01                   -0.04
+
+      LB(u^t )    7.34   7.39    7.28                7.29    7.44      7.27    7.39    7.23    7.36   7.30                    7.18
+
+0.5    LB(u^2t )  29.32  29.68   29.37               29.45   30.19     29.48   28.95   28.89   30.17 29.47 31.94
+      (u^t , ^t)  -0.11  -0.12   -0.03               -0.99   -0.08     -0.52   -0.67   -0.11
+                                                                                               0.00   -0.01                   -0.04
+
+      LB(u^t )    7.72   7.31    7.29                7.31    7.32      7.25    7.30    7.36    7.32   7.30                    7.18
+
+0.6    LB(u^2t )  30.70  29.55   29.80               30.08   29.94     29.67   29.72   30.20   30.03 29.45 35.83
+      (u^t , ^t)  -0.11  -0.12   -0.03               -0.99   -0.08     -0.52   -0.67   -0.11
+                                                                                               0.00   -0.01                   -0.04
+
+      LB(u^t )    8.36   7.30    7.29                7.31    7.29      7.59    7.30    9.32    7.51   7.30                    7.26
+
+0.7    LB(u^2t )  31.53  27.90   28.28               28.57   27.80     28.31   28.10   37.29   30.51 27.93 28.39
+      (u^t , ^t)  -0.11  -0.11   -0.03               -0.99   -0.08     -0.51   -0.67   -0.10
+                                                                                               0.00   -0.01                   -0.04
+
+      LB(u^t )    9.57   7.37      7.31                7.34    7.34      7.41    7.32  16.98    7.62    7.32                    7.22
+                                 25.94               26.42   25.52     25.71   25.84   49.10   28.57  25.99                   26.09
+0.8    LB(u^t2 )  32.07  25.93   -0.03               -0.99   -0.08     -0.51   -0.67   -0.10    0.00  -0.01                   -0.04
+      (u^t , ^t)  -0.11  -0.11
+                                   7.32                8.53    7.60      7.93    7.39  25.92    7.58    7.36                    7.17
+      LB(u^t ) 12.25     8.29    20.93               23.98   21.78     22.66   21.33   54.63   23.04  21.32                   21.88
+                                 -0.03               -0.99   -0.07     -0.51   -0.67   -0.10    0.00  -0.01                   -0.04
+0.9    LB(u^2t )  32.22  23.34
+      (u^t , ^t)  -0.11  -0.11   18.73               23.63     7.31      8.61  36.54   43.00    8.25    7.44                    7.33
+                                 27.95               33.28             20.90   47.24   70.93   22.95  19.30
+      LB(u^t )    9.33     8.06  -0.03               -0.97   18.25     -0.51   -0.65   -0.10    0.00  -0.01                   18.13
+                         20.23                               -0.08                                                            -0.04
+0.95   LB(u^2t )  24.29  -0.11
+      (u^t , ^t)  -0.11
+
+NOTE: This table documents summary statistics for u^t , the least squares residual from the predictive regression at quantile  , and ^t, the residual of the GARCH(1,1) model.
+  LB denotes the test statistic of a serial correlation test proposed by Ljung and Box (1978) with 12 lags with the null hypothesis of no serial correlation. (u^t , ^t) represents
+  sample correlation coefficient between u^t and ^t. , , and  indicate the rejection of the null hypothesis at 10%, 5%, and 1%, respectively.
+
+within u^ t and u^ t2 based on 12 lags. The results indicate that the  percentile interval, we present the remaining three QR tests'
+residuals of the predictive QR model are not serially correlated       results by reporting their p-values with "", "", and ""
+in most cases but exhibit heteroscedasticity for most predictors       respectively, implying the rejection of the null hypothesis of no
+when  > 0.2. In the third row, we present the Pearson's                predictability at the 10%, 5%, and 1% levels. The result roughly
+correlation coefficients between u^ t and ^t, and the results of       echoes the findings in the simulation part and the conclusions of
+the correlation test with the null that the correlation coefficient    Fan and Lee (2019) and Cai, Chen, and Liao (2022). First, IVX-
+is zero. As can be seen therein, d/e, lty, d/p, e/p, b/m, and dfy      QR tends to reject the null hypothesis of no predictability more
+exhibit a significant nonzero correlation between u^ t and ^t for      often than the other three quantile methods on both tails. This
+all  , indicating the potential endogeneity in the predictive QR.      pattern is particularly salient for d/e, d/y, d/p, e/p, b/m, and dfy.
+                                                                       These results should not be surprising because all these highly
+   In summary, most predictors are highly persistent with              persistent predictors exhibit strong conditional heteroscedastic-
+autoregressive coefficients close to unity, and many are endoge-       ity and endogeneity, as demonstrated in Tables 1 and 2. Second,
+nous with heteroscedastic errors during the sample period. All         MBB-QR yields fewer significant predictors than the other three
+these characteristics are sources of size distortion under the         methods at conventional levels. In fact, except for d/p and b/m,
+ordinary QR framework and thus call for the adoption of the            which are significant at the 5% level when  = 0.95 and 0.05,
+IVX method. However, as shown by the simulation results, the           none of the remaining predictors is significant at the 5% or
+presence of intercepts in these highly persistent predictors would     better levels. This finding should be expected as it resonates
+inflate size distortion by IVX at all quantile positions and raise     with MBB's power performance in the simulations. Third, DW-
+concerns about MBB due to the potential over-rejection at the          QR and RWB-QR exhibit similar performance. However, we
+tails.                                                                 observe that DW-QR is more likely to reject the null of no
+                                                                       predictability for several lower and upper tail quantiles. For
+   Table 3 documents the inference results of the eleven pre-          example, DW-QR indicates that d/e is significant at the 5% level
+dictors using IVX-QR, MBB-QR, DW-QR, and RWB-QR for
+different quantiles. Except for MBB-QR, which reports the 95%
+1538        X. LIU ET AL.
+
+Table 3. Comparison of QR tests: S&P 500 (January 1980­December 2019).
+
+                         d/e                                                 lty                                   d/y
+
+      IVX         MBB                   DW    RWB  IVX                  MBB              DW     RWB    IVX    MBB              DW       RWB
+
+0.05 0.002  [-0.040, 0.020]          0.082  0.370  0.577                [-0.329, 0.324]  0.600  0.820  0.000  [-0.018, 0.019]  0.338  0.373
+0.1 0.005   [-0.042, 0.021]          0.044  0.618  0.448                [-0.243, 0.229]  0.760  0.572  0.000  [-0.014, 0.016]  0.048  0.341
+0.2 0.034   [-0.034, 0.014]          0.169  0.766  0.141                [-0.298, 0.091]  0.094  0.936  0.000  [-0.005, 0.013]  0.178  0.918
+0.3 0.375   [-0.025, 0.017]          0.300  0.464  0.004                [-0.239, 0.068]  0.043  0.747  0.000  [-0.002, 0.014]  0.787  0.809
+0.4 0.995   [-0.017, 0.018]          0.652  0.679  0.057                [-0.263, 0.049]  0.152  0.838  0.000  [-0.002, 0.012]  0.254  0.530
+0.5 0.620   [-0.017, 0.015]          0.977  0.331  0.093                [-0.230, 0.068]  0.456  0.670  0.004  [-0.003, 0.009]  0.520  0.765
+0.6 0.134   [-0.017, 0.015]          0.401  0.330  0.221                [-0.199, 0.093]  0.789  0.483  0.000  [-0.004, 0.007]  0.365  0.747
+0.7 0.064   [-0.021, 0.015]          0.400  0.174  0.846                [-0.193, 0.094]  0.743  0.990  0.008  [-0.008, 0.008]  0.726  0.343
+0.8 0.001   [-0.017, 0.022]          0.340  0.716  0.893                [-0.142, 0.169]  0.734  0.993  0.001  [-0.009, 0.005]  0.871  0.812
+0.9 0.122   [-0.028, 0.018]          0.029  0.815  0.874                [-0.198, 0.364]  0.314  0.998  0.006  [-0.015, 0.009]  0.021  0.869
+0.95 0.392  [-0.031, 0.018]          0.276  0.907  0.077                [-0.230, 0.516]  0.983  0.985  0.000  [-0.021, 0.011]  0.020  0.230
+
+                                d/p           RWB                            tbl                                   e/p                  RWB
+
+      IVX                  MBB       DW     0.372  IVX                  MBB              DW     RWB    IVX    MBB              DW     0.094
+                                            0.552                                                                                     0.118
+0.05 0.384  [-0.155, 0.028]          0.370  0.821  0.689                [-0.310, 0.294]  0.698  0.998  0.000  [-0.009, 0.034]  0.827  0.671
+0.1 0.006   [-0.176, 0.043]          0.785  0.820  0.438                [-0.246, 0.242]  0.577  0.698  0.000  [-0.018, 0.062]  0.884  0.810
+0.2 0.284   [-0.128, 0.054]          0.454  0.744  0.142                [-0.231, 0.091]  0.554  0.417  0.001  [-0.030, 0.061]  0.569  0.783
+0.3 0.626   [-0.089, 0.064]          0.256  0.767  0.053                [-0.252, 0.117]  0.064  0.673  0.069  [-0.025, 0.057]  0.420  0.954
+0.4 0.458   [-0.053, 0.058]          0.080  0.512  0.105                [-0.268, 0.069]  0.044  0.918  0.306  [-0.017, 0.050]  0.120  0.586
+0.5 0.175   [-0.031, 0.039]          0.686  0.217  0.156                [-0.188, 0.099]  0.096  0.498  0.240  [-0.002, 0.011]  0.681  0.980
+0.6 0.788   [-0.034, 0.054]          0.778  0.771  0.311                [-0.216, 0.089]  0.339  0.995  0.949  [-0.014, 0.029]  0.958  0.997
+0.7 0.493   [-0.045, 0.082]          0.802  0.674  0.773                [-0.249, 0.092]  0.790  0.999  0.533  [-0.025, 0.033]  0.829  0.470
+0.8 0.658   [-0.014, 0.106]          0.159  0.159  0.662                [-0.198, 0.090]  0.828  1.000  0.324  [-0.026, 0.027]  0.872  0.770
+0.9 0.240   [-0.008, 0.137]          0.059         0.791                [-0.211, 0.346]  0.683  0.636  0.292  [-0.032, 0.030]  0.484
+0.95 0.013  [0.003, 0.131]           0.583    RWB  0.999                [-0.275, 0.523]  0.235  1.000  0.800  [-0.023, 0.034]  0.990    RWB
+
+                                b/m         0.993                            dfy                                   ntis               0.802
+                                            0.967                                                                                     0.962
+      IVX                  MBB       DW     0.999  IVX                  MBB              DW     RWB    IVX    MBB              DW     0.948
+                                            0.996                                                                                     0.035
+0.05 0.039 [-0.339, -0.010] 0.155           0.917  0.001                [-4.314, 0.460]  0.199  0.514  0.136  [-0.356, 0.811]  0.120  0.376
+                                            0.959  0.000                [-3.099, 0.200]  0.039  0.779  0.195  [-0.468, 0.721]  0.281  0.451
+0.1 0.386   [-0.032, 0.024] 0.615           0.994  0.006                [-2.524, 0.433]  0.200  0.995  0.424  [-0.458, 0.319]  0.292  0.968
+0.2 0.001 [-0.252, 0.026] 0.363             0.996  0.002                [-1.889, 0.710]  0.061  0.995  0.614  [-0.390, 0.210]  0.474  0.995
+                                            0.212  0.001                [-1.640, 0.398]  0.036  0.968  0.931  [-0.270, 0.196]  0.616  0.992
+0.3 0.232   [-0.028, 0.022] 0.575           0.999  0.565                [-1.535, 0.560]  0.559  0.966  0.828  [-0.148, 0.131]  0.661  0.834
+                                            0.992  0.568                [-0.834, 0.801]  0.902  0.999  0.978  [-0.192, 0.163]  0.898  0.869
+0.4 0.483   [-0.149, 0.071] 0.141                  0.140                [-0.596, 1.375]  0.125  0.687  0.530  [-0.326, 0.267]  0.422
+                                              RWB  0.015                [-0.440, 2.658]  0.001  0.980  0.594  [-0.340, 0.221]  0.608
+0.5 0.263   [-0.031, 0.014] 0.371                  0.000                [-0.197, 2.670]  0.003  0.938  0.141  [-0.648, 0.311]  0.843
+                                                   0.000                [-0.174, 3.465]  0.000  0.714  0.347  [-0.645, 0.462]  0.408
+0.6 0.328   [-0.079, 0.091] 0.534
+
+0.7 0.354   [-0.081, 0.115] 0.908
+
+0.8 0.324   [-0.028, 0.098] 0.902
+
+0.9 0.305   [-0.020, 0.206] 0.637
+
+0.95 0.402  [-0.018, 0.248] 0.756
+
+                                tms                                          inf
+
+      IVX                  MBB       DW            IVX                  MBB              DW     RWB
+
+0.05 0.707  [-0.741, 0.773]          0.900  0.853  0.504                [-3.233, 2.535]  0.476  0.904
+0.1 0.563   [-0.834, 0.772]          0.539  0.966  0.103                [-2.534, 2.841]  0.339  0.953
+0.2 0.472   [-0.437, 0.419]          0.168  0.980  0.591                [-1.740, 1.885]  0.308  0.969
+0.3 0.748   [-0.494, 0.263]          0.547  0.899  0.202                [-2.355, 0.727]  0.057  0.949
+0.4 0.843   [-0.410, 0.223]          0.292  0.963  0.136                [-2.282, 0.572]  0.013  0.687
+0.5 0.779   [-0.226, 0.140]          0.724  0.928  0.328                [-2.212, 0.252]  0.392  0.843
+0.6 0.777   [-0.297, 0.186]          0.969  0.994  0.338                [-1.770, 0.587]  0.020  0.189
+0.7 0.978   [-0.324, 0.336]          0.990  0.852  0.807                [-1.943, 0.745]  0.748  0.909
+0.8 0.485   [-0.222, 0.472]          0.825  0.999  0.645                [-1.837, 0.851]  0.517  0.282
+0.9 0.237   [-0.269, 0.774]          0.686  1.000  0.441                [-2.644, 1.454]  0.723  0.344
+0.95 0.094  [-0.235, 0.950]          0.345  0.936  0.999                [-2.138, 2.760]  0.507  0.993
+
+NOTE: This table compares the predictive power of the eleven predictors based on IVX-QR, MBB-QR, DW-QR, and RWB-QR at different quantile positions. For MBB-QR, the
+  95% percentile intervals of the estimates are presented. The values denote the p-values rounded to the third decimal place for exposition for the remaining three methods.
+  , , and  indicate the rejection of the null hypothesis of no predictability at 10%, 5%, and 1%, respectively.
+
+on both tails, and dfy is significant at the 1% level on the upper           5. Conclusion
+tail. At the same time, none is significant at any conventional
+                                                                             This article develops a new unified inferential theory for predic-
+levels by RWB-QR. These conflicting results are in line with                 tive quantile regression regardless of zero or nonzero intercept
+the findings in the simulation part, which show that DW-QR                   in modeling predictors, while the existing methods require zero
+tends to be oversized at tails for highly persistent predictors with         intercepts. The test statistic is constructed using a weighted
+conditional heteroscedasticity. In sum, the proposed RWB-QR                  quantile regression estimation, resulting in a normal limit after
+procedure provides a reliable and conservative inferential tool              random normalization. Using the square of a t-statistic with
+for empirical researchers to test the predictability of financial            variance estimated by a random weighted bootstrap procedure,
+asset returns.                                                               we obtain a unified predictability test whose statistic follows
+                                                                              JOURNAL OF THE AMERICAN STATISTICAL ASSOCIATION  1539
+
+a Chi-squared distribution under the null of no predictability.               Demetrescu, M., and Rodrigues P. (2022), "Residual-Augmented IVX Pre-
+Compared with other competing approaches, our method offers                      dictive Regression," Journal of Econometrics, 227, 429­460. [1526]
+a robust inference regardless of the presence of intercept and
+persistence of a predictor. Monte Carlo simulation demonstrates               Elliott, G., Rothenberg, T., and Stock, J. (1996), "Efficient Tests for An
+that our method exhibits significantly better size and power                     Autoregressive Unit Root," Econometrica, 64, 813­836. [1536]
+performance than the competing methods in different scenarios,
+particularly when the predictor is highly persistent and contains             Fan, R., and Lee, J. H. (2019), "Predictive Quantile Regressions Under Per-
+a nonzero intercept. In the empirical application, our method                    sistence and Conditional Heteroskedasticity," Journal of Econometrics,
+shows that only net equity expansion (ntis) exhibits a significant               213, 261­280. [1527,1528,1530,1537]
+predictive capability when  = 0.3, suggesting that the proposed
+method is a conservative inferential tool for empirical research              Gebka, B., and Wohar, M. (2013), "Causality between Trading Volume and
+in predictive quantile regression.                                               Returns: Evidence from Quantile Regressions," International Review of
+                                                                                 Economics & Finance, 27, 144­159. [1526]
+Supplementary Materials
+                                                                              Georgiev, I., Harvey, D. I., Lebourne, S., and Taylor, A. (2021), "A Bootstrap
+The supplementary appendix provides the technical proofs of Theorems 1­          Stationarity Test for Predictive Regression Invalidity," Journal of Business
+2 in the main paper and some additional Monte Carlo simulation results.          & Economic Statistics, 37, 528­541. [1526]
+
+Acknowledgments                                                               Gonzalo, J., and Pitarakis, J. Y. (2012), "Regime-Specific Predictability in
+                                                                                 Predictive Regressions," Journal of Business & Economic Statistics, 30,
+The authors would like to thank Dr. Marina Vannucci (co-editor), an              229­241. [1526]
+associate editor, and three anonymous reviewers for helpful suggestions
+that remarkably improve the article. The authors also sincerely thank Dr.     Gungor, S., and Luger, R. (2020), "Small-Sample Tests for Stock Return
+Ji Hyung Lee and Dr. Xiaosai Liao for generously sharing the replication         Predictability with Possibly Non-stationary Regressors and GARCH-
+codes of the IVX-QR and DW-QR methods.                                           type Effects," Journal of Econometrics, 218, 750­770. [1526]
+
+Funding                                                                       Gungor, S., and Luger, R. (2021), "Exact Inference in Long-Horizon Predic-
+                                                                                 tive Quantile Regressions with An Application to Stock Returns," Journal
+Liu's research is supported by the NSF of China (Grant No.11971208),             of Financial Econometrics, 19, 746­788.
+the National Social Science Foundation of China (21&ZD152), and the
+Outstanding Youth Fund Project of the Science and Technology Depart-          Harvey, D., Lebourne, S., and Taylor, A. (2021), "Simple Tests for Stock
+ment of Jiangxi Province (No. 20224ACB211003). Long's research is partly         Return Predictability with Good Size and Power Properties," Journal of
+supported by the 2021 Murphy Seed Grant and the SLA Faculty Research             Econometrics, 224, 198­214. [1526]
+Award from Tulane University. Peng's research is partly supported by the
+Simons Foundation and the NSF grant of DMS-2012448. Yang's research           Hjalmarsson, E. (2011), "New Methods for Inference in Long-Horizon
+is partly supported by the National Natural Science Foundation of China          Regressions," Journal of Financial and Quantitative Analysis, 46, 815­
+(72173140, 71991474), Humanity and Social Science Youth Foundation of            839.
+the Ministry of Education of China (19YJC790166), Guangdong Basic and
+Applied Basic Research Foundation (2022A1515011793).                          Jin, Z., Ying, Z., and Wei, L. (2001), "A Simple Resampling Method by
+                                                                                 Perturbing the Minimand," Biometrika, 88, 381­390. [1529]
+ORCID
+                                                                              Koenker, R., and Bassett, G. (1978). "Regression Quantiles," Econometrica,
+Liang Peng https://orcid.org/0000-0002-2088-1904                                 46, 33­50. [1526]
+
+References                                                                    Kostakis, A., Magdalinos, T., and Stamatogiannis, M. (2015), "Robust
+                                                                                 Econometric Inference for Stock Return Predictability," The Review of
+Amihud, Y., and Hurvich, C. (2004), "Predictive Regressions: A Reduced-          Financial Studies, 28, 1506­1553. [1526]
+   Bias Estimation Method," Journal of Financial and Quantitative Analysis,
+   39, 813­841. [1526]                                                        Kwiatkowski, D., Phillips, P. C. B., Schmidt, P., and Shin, Y. (1992), "Testing
+                                                                                 the Null Hypothesis of Stationarity Against the Alternative of a Unit
+Campbell, J., and Yogo, M. (2006), "Efficient Tests of Stock Return Pre-         Root," Journal of Econometrics, 54, 159­178. [1536]
+   dictability," Journal of Financial Economics, 81, 27­60. [1526]
+                                                                              Lee, J. H. (2016), "Predictive Quantile Regression with Persistent Covari-
+Cai, Z., Chen, H., and Liao, X. (2022), "A New Robust Inference for              ates: IVX-QR Approach," Journal of Econometrics, 192, 105­118.
+   Predictive Quantile Regression," Journal of Econometrics, forthcoming.        [1527,1528,1530,1531]
+   [1527,1528,1530,1534,1535,1536,1537]
+                                                                              Liu, X., Yang, B., Cai, Z., and Peng, L. (2019), "A Unified Test for Predictabil-
+Cenesizoglu, T., and Timmermann, A. (2008), "Is the Distribution of Stock        ity of Asset Returns," Journal of Econometrics, 208, 141­159. [1526]
+   Returns Predictable?" Unpublished Manuscript, HEC Montreal and
+   UCSD. [1526]                                                               Ljung, G., and Box, G. (1978), "On a Measure of Lack of Fit in Time Series
+                                                                                 Models," Biometrika, 65, 297­303. [1536,1537]
+Chan, N., Li, D., and Peng, L. (2012), "Toward a Unified Interval Estimation
+   of Autoregression," Econometric Theory, 28, 705­717. [1527]                Ma, C., Xiao, S., and Ma, Z. (2018), "Investor Sentiment and the Prediction
+                                                                                 of Stock Returns: A Quantile Regression Approach," Applied Economics,
+Demetrescu, M., Georgiev, I., Rodrigues P., and Taylor, A. (2022), "Testing      50, 5401­5415. [1526]
+   for Episodic Predictability in Stock Returns," Journal of Econometrics,
+   227, 85­113. [1526]                                                        Magdalinos, T., and Phillips, P. C. B. (2009), "Limit Theory for Cointegrated
+                                                                                 Systems with Moderately Integrated and Moderately Explosive Regres-
+                                                                                 sors," Econometric Theory, 25, 482­526. [1526]
+
+                                                                              Maynard, A., Shimotsu, K., and Wang, Y. (2011). "Inference in Predictive
+                                                                                 Quantile Regressions," Unpublished manuscript. [1526]
+
+                                                                              Phillips, P. C. B. (1987), "Towards a Unified Asymptotic Theory for Autore-
+                                                                                 gression," Biometrika, 74, 535­547. [1528]
+
+                                                                              Phillips, P. C. B., and Lee, J. (2016), "Robust Econometric Inference with
+                                                                                 Mixed Integrated and Mildly Explosive Regressors," Journal of Economet-
+                                                                                 rics, 192, 433­450. [1526]
+
+                                                                              Phillips, P. C. B., and Perron, P. (1988), "Testing for a Unit Root in Time
+                                                                                 Series Regression," Biometrika, 75, 335­346. [1536]
+
+                                                                              Phillips, P. C. B., Shi, S., and Yu, J. (2015), "Testing for Multiple Bubbles:
+                                                                                 Limit Theory of Real Time Detectors," International Economic Review,
+                                                                                 56, 1079­1133. [1534]
+
+                                                                              Said, S., and Dickey, D. (1984), "Testing for Unit Roots in Autoregressive-
+                                                                                 Moving Average Models of Unknown Order," Biometrika, 71, 599­607.
+                                                                                 [1536]
+
+                                                                              Welch, I., and Goyal, A. (2008), "A Comprehensive Look at the Empirical
+                                                                                 Performance of Equity Premium Prediction," Review of Financial Studies,
+                                                                                 21, 1455­1508. [1536]
+
+                                                                              Xiao, Z. (2009), "Quantile Cointegrating Regression," Journal of Economet-
+                                                                                 rics, 150, 248­260. [1526]
+1540  X. LIU ET AL.
+
+Xu, K.-L. (2021), "On the Serial Correlation in Multi-Horizon Predictive        Zhu, F., Cai, Z., and Peng, L. (2014), "Predictive Regressions for Macroeco-
+   Quantile Regression," Economics Letters, 200, 109736. [1527]                    nomic Data," Annals of Applied Statistics 8, 577­594. [1526,1527]
+
+Yang, B., Liu, X., Cai, Z., and Peng, L. (2021). "Unified Tests for a Dynamic   Zhu, K. (2016), "Bootstrapping the Portmanteau Tests in Weak Autore-
+   Predictive Regression," Journal of Business & Economic Statistics, 39, 684­     gressive Moving Average Models," Journal of the Royal Statistical Society,
+   699. [1526]                                                                     Series B, 78, 463­485. [1529]
+
+Yang, B., Long, W., Peng, L., and Cai, Z. (2020), "Testing the Predictability   Zhu, K., and Ling, S. (2015), "LADE-based Inference for ARMA Models
+   of US Housing Price Index Returns based on an IVX-AR Model," Journal            with Unspecified and Heavy-Tailed Heteroscedastic Noises," Journal of
+   of American Statistical Association, 115, 1598­1619. [1526]                     the American Statistical Association, 110, 784­794. [1528]
+
