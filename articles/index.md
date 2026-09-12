@@ -12,6 +12,8 @@
   IVX](https://kvasilopoulos.github.io/ivx/articles/ivx-ra.md):
 - [IVX quantile predictive
   regression](https://kvasilopoulos.github.io/ivx/articles/ivx-qr.md):
+- [Augmented regression method (non-IVX
+  benchmark)](https://kvasilopoulos.github.io/ivx/articles/arm.md):
 
 ### Inference
 

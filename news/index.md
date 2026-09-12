@@ -79,6 +79,12 @@
   underlying statistics, replication results and caveats; pkgdown site
   reorganised (Bootstrap 5, MathJax rendering, grouped reference and
   articles).
+- New [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md) /
+  [`arm_fit()`](https://kvasilopoulos.github.io/ivx/reference/arm_fit.md):
+  the multipredictor augmented regression method of Amihud, Hurvich &
+  Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected VAR(1)
+  residuals as control variables and the paper’s covariance estimator; a
+  non-IVX benchmark for stationary persistent predictors.
 - Fixed: weighted fits ignored the `horizon` argument.
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in

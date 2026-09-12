@@ -44,6 +44,14 @@ Wild bootstrap p-values and tests for pockets of predictability
   [`print(`*`<ivx_episodic>`*`)`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md)
   : Subsample IVX Tests for Episodic Predictability
 
+## Non-IVX benchmarks
+
+Reduced-bias OLS alternatives for stationary persistent predictors.
+
+- [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md)
+  [`print(`*`<arm>`*`)`](https://kvasilopoulos.github.io/ivx/reference/arm.md)
+  : Augmented Regression Method (Amihud, Hurvich & Wang)
+
 ## Fitter functions
 
 Low-level functions taking a response and a design matrix.
@@ -57,6 +65,8 @@ Low-level functions taking a response and a design matrix.
   : Fitter Function for Residual-Augmented IVX Models
 - [`ivx_qr_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_fit.md)
   : Fitter Function for IVX-QR Models
+- [`arm_fit()`](https://kvasilopoulos.github.io/ivx/reference/arm_fit.md)
+  : Fitter Function for the Augmented Regression Method
 - [`ivx_sys_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_sys_fit.md)
   : Fitter Function for Systems IVX Models
 
