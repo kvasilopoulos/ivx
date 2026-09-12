@@ -59,19 +59,14 @@ None — all listed papers are in `pdf/`.
 
 Items already implemented are removed from this list and recorded in `NEWS.md`.
 
-Next, from the newly collected papers (ranked):
+Deferred from the collected papers:
 
-1. **Fan & Lee (2019)** — size-corrected bootstrap for `ivx_qr()` under conditional
-   heteroskedasticity. Reuses the `ivx_boot()` machinery.
-2. **Amihud, Hurvich & Wang (2009)** — `arm()` multivariate augmented-regression test;
-   closed-form OLS with bias-corrected VAR(1); pairs with the Elliott (2011) to-do.
-3. **Breitung & Demetrescu (2015)** — generic IV test with type-I/II instruments
-   (sign, fractional, sine, long-difference) and their 2SLS combination; `ivx_iv()`.
-4. **Harvey, Leybourne & Taylor (2021)** — switching t-test with quasi-GLS demeaning;
-   needs the paper's tabulated conservative critical values.
-5. **Liu, Yang, Cai & Peng (2019)** — empirical-likelihood unified test; companion to
-   `ivx_ar` but needs an EL optimiser.
-6. **Chen, Deo & Yi (2013)** — restricted-likelihood uniform test; simulated critical values.
+6. **Chen, Deo & Yi (2013)** — quasi-restricted-likelihood ratio test (WLSRL of the
+   bivariate VAR, sup-bound critical value at c = 0 depending on the estimated innovation
+   correlation). Deferred: the critical values are not tabulated in the paper and must be
+   simulated from the local-to-unity limit functional for each delta; Remark 3 shows the
+   right tail is close to chi-square(1) anyway, so the gain over `hlt_test()` / `ivx()` is
+   small for the effort.
 7. **Lee, Shi & Gao (2022)** — TAlasso variable selection; out of the package's scope
    (inference, not selection).
 

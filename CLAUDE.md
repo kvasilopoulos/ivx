@@ -5,14 +5,22 @@ persistent regressors. Rcpp/Armadillo backend.
 
 ## Map
 - `R/ivx.R` — `ivx()` / `ivx_fit()` (Kostakis, Magdalinos & Stamatogiannis 2015); core is
-  `src/ivx_fit_cpp.cpp`. Tuning via `beta`, `cz`, `bandwidth`; `robust = TRUE` for Eicker-White.
+  `src/ivx_fit_cpp.cpp`. Tuning via `beta`, `cz`, `bandwidth`; `robust = TRUE` for Eicker-White;
+  `lag_y = TRUE` lag-augmented (Demetrescu 2014).
 - `R/ivx-ar.R` — `ivx_ar()` IVX-AR (Yang, Long, Peng & Cai 2020).
-- `R/ivx-ra.R` — `ivx_ra()` residual-augmented IVX (Demetrescu & Rodrigues 2022).
-- `R/ivx-qr.R` — `ivx_qr()` IVX quantile regression (Lee 2016); uses `quantreg`.
+- `R/ivx-ra.R` — `ivx_ra()` residual-augmented IVX (Demetrescu & Rodrigues 2022);
+  `horizon > 1` is the transformed-regression test (Demetrescu, Rodrigues & Taylor 2023).
+- `R/ivx-qr.R` — `ivx_qr()` IVX quantile regression (Lee 2016), `ivx_qr_boot()` block
+  bootstrap (Fan & Lee 2019); uses `quantreg`.
 - `R/ivx-sys.R` — `ivx_sys()` systems IVX (Magdalinos 2022); `src/ivx_sys_fit_cpp.cpp`.
 - `R/ivx-boot.R` — `ivx_boot()` residual / fixed-regressor wild bootstrap (DGRT 2023);
   `src/var_sim.cpp` for the regressor recursion.
 - `R/ivx-episodic.R` — `ivx_episodic()` subsample sup/ave tests (DGRT 2022); `src/sub_ivx.cpp`.
+- `R/ivx-iv.R` — `ivx_iv()` 2SLS with sine/fractional/long-difference instruments
+  (Breitung & Demetrescu 2015).
+- Non-IVX benchmarks: `R/arm.R` (`arm()`, Amihud-Hurvich-Wang 2009), `R/hlt-test.R`
+  (`hlt_test()`, Harvey-Leybourne-Taylor 2021), `R/el-test.R` (`el_test()`, Liu-Yang-Cai-Peng
+  2019; `el_ratio()` is a generic Owen EL solver).
 - `R/ac_test.R` — serial-correlation diagnostics. `R/methods*.R`, `R/extract-texreg-methods.R` —
   S3 / texreg support. `R/auto-ar.R` — AR order selection helper.
 - `tests/testthat/test-<file>.R` mirrors each `R/` file.
