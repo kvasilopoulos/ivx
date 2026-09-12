@@ -35,6 +35,11 @@ reference:
       - ivx_qr_boot
       - ivx_episodic
 
+  - title: Non-IVX benchmarks
+    desc: Reduced-bias OLS alternatives for stationary persistent predictors.
+    contents:
+      - arm
+
   - title: Fitter functions
     desc: Low-level functions taking a response and a design matrix.
     contents:
@@ -43,6 +48,7 @@ reference:
       - ivx_ar_fit
       - ivx_ra_fit
       - ivx_qr_fit
+      - arm_fit
       - ivx_sys_fit
 
   - title: Serial correlation tests
@@ -79,6 +85,7 @@ articles:
       - ivx-ar
       - ivx-ra
       - ivx-qr
+      - arm
   - title: Inference
     navbar: Inference
     contents:
