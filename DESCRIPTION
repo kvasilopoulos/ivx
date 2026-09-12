@@ -29,9 +29,12 @@ Suggests:
     forecast (>= 8.12),
     spelling (>= 2.1),
     testthat (>= 2.1.1),
-    lmtest
+    lmtest,
+    knitr,
+    rmarkdown
 Enhances: 
     texreg
+VignetteBuilder: knitr
 LinkingTo: 
     Rcpp (>= 1.0.1),
     RcppArmadillo (>= 0.9.300.2.0)

@@ -1,5 +1,7 @@
 # ivx 1.2.0
 
+* New vignette "Rolling IVX tests for bubble detection" showing how to build the
+  rolling-window IVX test of Pavlidis, Paya & Peel (2017) from `ivx()` (#2).
 * `ivx()` and `ivx_fit()` gain `beta`, `cz` and `bandwidth` arguments that expose
   the IVX instrument tuning (previously hard-coded to the Kostakis et al. (2015)
   values) and the Newey-West bandwidth.

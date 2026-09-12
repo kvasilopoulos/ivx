@@ -4,3 +4,6 @@
 .Ruserdata
 /replication/*
 
+inst/doc
+/doc/
+/Meta/

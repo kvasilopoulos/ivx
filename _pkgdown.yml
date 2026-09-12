@@ -56,6 +56,7 @@ navbar:
     left:
     - home
     - reference
+    - articles
     right:
     - news
     - github
@@ -66,6 +67,9 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+    articles:
+      text: Articles
+      href: articles/index.html
     news:
       text: News
       href: news/index.html
