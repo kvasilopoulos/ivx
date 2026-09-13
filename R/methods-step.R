@@ -7,10 +7,28 @@ assert_ivx <- function(object) {
 }
 
 
+#' Deprecated single-term selection for IVX fits
+#'
+#' `drop1()`, `add1()` and hence `step()` on an `ivx` object compare residual
+#' sums of squares of refitted IVX models. IVX is an instrumental-variable
+#' estimator: its residual sum of squares is not minimised by the fitted
+#' coefficients, so RSS-based AIC/F/chi-square comparisons have no
+#' justification and the methods are deprecated. Use the IVX Wald tests in
+#' `summary()` (individual and joint) to decide which predictors to keep.
+#'
+#' @param object an object of class "ivx".
+#' @param scope,scale,all.cols,test,k,x,... as in [stats::drop1()] and [stats::add1()].
+#' @return as in `stats::drop1.lm()` / `stats::add1.lm()`, with a deprecation
+#' warning.
+#' @name step-ivx
+#' @keywords internal
+NULL
+
+#' @rdname step-ivx
 #' @export
 #' @importFrom stats model.frame drop.scope terms update.formula deviance formula
 drop1.ivx <- function (object, scope, scale = 0, all.cols = TRUE, test = c("none", "Chisq", "F"), k = 2, ...) {
-
+  .Deprecated(msg = "drop1()/add1()/step() on ivx objects are deprecated: RSS-based model selection is not meaningful for an IV estimator. Use the IVX Wald tests in summary() instead.")
   assert_ivx(object)
   check_exact(object)
   x <- model.matrix(object)
@@ -116,10 +134,12 @@ Fstat <- function(table, RSS, rdf) {
   list(Fs = Fs, P = P)
 }
 
+#' @rdname step-ivx
 #' @export
 #' @importFrom stats arima add.scope update.formula terms model.frame
-#' model.weights deviance formula
+#' @importFrom stats model.weights deviance formula
 add1.ivx <- function (object, scope, scale = 0, test = c("none", "Chisq", "F"), x = NULL, k = 2, ...) {
+  .Deprecated(msg = "drop1()/add1()/step() on ivx objects are deprecated: RSS-based model selection is not meaningful for an IV estimator. Use the IVX Wald tests in summary() instead.")
   assert_ivx(object)
   check_exact(object)
   if (missing(scope) || is.null(scope))

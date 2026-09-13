@@ -13,12 +13,20 @@ test_that("summary.ivx return the same with ivx", {
 })
 
 
-test_that("step-methods",{
-  expect_error(drop1(obj), NA)
-  expect_error(add1(obj, "DE"), NA)
-  expect_error(capture.output(step(obj)), NA)
+test_that("step-methods are deprecated but still run", {
+  expect_warning(d <- drop1(obj), "deprecated")
+  expect_s3_class(d, "anova")
+  expect_equal(nrow(d), 4)
+  expect_warning(a <- add1(obj, ~ . + DE), "deprecated")
+  expect_equal(nrow(a), 2)
+  expect_warning(dF <- drop1(obj, test = "F"), "deprecated")
+  expect_true("F value" %in% colnames(dF))
+  expect_warning(dC <- drop1(obj, test = "Chisq"), "deprecated")
+  expect_warning(aF <- add1(obj, ~ . + DE, test = "F"), "deprecated")
+  suppressWarnings(expect_error(capture.output(step(obj)), NA))
   expect_error(deviance(obj), NA)
   expect_error(logLik(obj), NA)
+  suppressWarnings(expect_error(drop1(obj_ar), "only supported"))
 })
 
 

@@ -93,30 +93,24 @@ model.frame.ivx <- function (formula, ...) {
 }
 
 #' @export
-logLik.ivx <- function (object, REML = FALSE, ...) {
+logLik.ivx <- function (object, ...) {
 
   res <- object$residuals
   p <- object$rank
-  N <- length(res)
   w <- object$weights
   if (is.null(w)) {
-    w <- rep.int(1, N)
+    w <- rep.int(1, length(res))
+  } else if (length(w) != length(res)) {
+    w <- w[-(1:(length(w) - length(res)))]   # the fit drops the first `horizon` rows
   }
-  else {
-    excl <- w == 0
-    if (any(excl)) {
-      res <- res[!excl]
-      N <- length(res)
-      w <- w[!excl]
-    }
-  }
-  N0 <- N
-  if (REML)
-    N <- N - p
+  # zero-weight rows and the lag-dropped rows (NA residuals) do not enter
+  keep <- w != 0 & !is.na(res)
+  res <- res[keep]
+  w <- w[keep]
+  N <- length(res)
+  # Gaussian log-likelihood at the IVX residuals (no REML: there is no QR of an IV fit)
   val <- 0.5 * (sum(log(w)) - N * (log(2 * pi) + 1 - log(N) + log(sum(w * res^2))))
-  if (REML)
-    val <- val - sum(log(abs(diag(object$qr$qr)[1L:p])))
-  attr(val, "nall") <- N0
+  attr(val, "nall") <- N
   attr(val, "nobs") <- N
   attr(val, "df") <- p + 1
   class(val) <- "logLik"

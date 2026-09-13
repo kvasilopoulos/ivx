@@ -77,6 +77,9 @@
   `ac_test_bp()` reported wrong p-values for non-consecutive `lag` vectors;
   the Breusch-Godfrey result now has the same `ac_test_` class and `pval`
   attribute as the other tests. `case.names()` no longer returns an empty vector.
+* Deprecated: `drop1()`, `add1()` and `step()` on `ivx` objects. They compare
+  residual sums of squares of an IV estimator, which is not a valid selection
+  criterion; use the IVX Wald tests in `summary()`.
 * All formula interfaces share one model-frame routine, so `- 1` in a formula
   warns consistently and a matrix response is rejected consistently.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
