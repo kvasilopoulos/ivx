@@ -48,7 +48,8 @@ persistent regressors. Rcpp/Armadillo backend.
 - Local toolchain for `R CMD build`/`check --as-cran`: pandoc from RStudio
   (`RSTUDIO_PANDOC="C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools"`, put it
   on PATH) and TinyTeX (`C:/Users/User/AppData/Roaming/TinyTeX/bin/windows`) for the PDF
-  manual. Build and check the tarball in a scratch directory, not in the repo.
+  manual (needs the `courier`, `psnfss`, `helvetic`, `times`, `makeindex` TeX packages; tlmgr
+  repository set to the texlive.info 2026 archive). Build and check the tarball in a scratch directory, not in the repo.
 - Never write R source or vignette text through Python string literals: `\b`, `\t`, `\r`,
   `\a`, `\v` in LaTeX macros (`\beta`, `\tilde`, `\rho`, `\alpha`, `\varepsilon`) become
   control characters and break the manual. Use Edit/Write, or raw strings.
