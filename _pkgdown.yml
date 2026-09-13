@@ -83,6 +83,10 @@ reference:
       - ylpc
 
 articles:
+  - title: Getting started
+    navbar: Getting started
+    contents:
+      - workflow
   - title: Methodology
     navbar: Methodology
     contents:
