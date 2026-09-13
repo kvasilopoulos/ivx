@@ -1,5 +1,10 @@
 # ivx 1.2.0
 
+* `print()` of `ac_test()` on a numeric vector no longer errors (it indexed a
+  Breusch-Godfrey column that only the `ivx` method computes).
+* `ac_test()` and `ac_test_*()` now stop with an informative error on `ivx_ar`,
+  `ivx_ra`, `ivx_qr`, `ivx_iv` and `arm` fits, which do not store the OLS
+  residuals the tests use; previously they failed with an obscure error.
 * New `nobs()` method for `ivx` objects (and the extensions inheriting the class).
 
 * New vignette "Rolling IVX tests for bubble detection" showing how to build the
