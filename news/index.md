@@ -104,6 +104,12 @@
   for the predictive regression augmented with the lagged difference of
   the predictor; chi-square profile EL ratios whatever the persistence
   of the predictor, no tuning parameters.
+- New
+  [`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md):
+  the Bonferroni Q-test of Campbell & Yogo (2006) (the feasible
+  Cavanagh, Elliott & Stock 1995 approach): DF-GLS confidence interval
+  for the largest root inverted from simulated local-to-unity quantiles,
+  Table 2 levels, Q-estimates with the AR(p) correction of Appendix A.
 - Fixed: weighted fits ignored the `horizon` argument.
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in

@@ -63,6 +63,10 @@ Reduced-bias OLS alternatives for stationary persistent predictors.
   [`print(`*`<el_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
   : Unified Empirical Likelihood Test for Predictability (Liu, Yang, Cai
   & Peng)
+- [`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
+  [`cy_test_fit()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
+  [`print(`*`<cy_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
+  : Bonferroni Q-Test of Campbell and Yogo (2006)
 
 ## Fitter functions
 
