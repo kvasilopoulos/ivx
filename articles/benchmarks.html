@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood • ivx</title>
+<title>Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood • ivx</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -21,7 +21,7 @@
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -52,7 +52,7 @@
     <li><a class="dropdown-item" href="../articles/ivx-ra.html">Residual-augmented IVX</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-qr.html">IVX quantile predictive regression</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-iv.html">IV tests with combined instruments</a></li>
-    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood</a></li>
+    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Inference</h6></li>
     <li><a class="dropdown-item" href="../articles/robust-inference.html">Robust inference: Eicker-White and wild bootstrap</a></li>
@@ -76,7 +76,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/kvasilopoulos/ivx/blob/master/vignettes/benchmarks.Rmd" class="external-link"><code>vignettes/benchmarks.Rmd</code></a></small>
@@ -87,12 +87,70 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kvasilopoulos.github.io/ivx/">ivx</a></span><span class="op">)</span></span></code></pre></div>
-<p>Three non-IVX procedures are included as the benchmarks the IVX
-literature compares against: the augmented regression method of Amihud,
-Hurvich &amp; Wang (2009), <code><a href="../reference/arm.html">arm()</a></code>, the hybrid switching
-t-test of Harvey, Leybourne &amp; Taylor (2021),
-<code><a href="../reference/hlt_test.html">hlt_test()</a></code>, and the unified empirical likelihood test of
-Liu, Yang, Cai &amp; Peng (2019), <code><a href="../reference/el_test.html">el_test()</a></code>.</p>
+<p>Five non-IVX procedures are included as the benchmarks the IVX
+literature compares against: the Bonferroni Q-test of Campbell &amp;
+Yogo (2006), <code><a href="../reference/cy_test.html">cy_test()</a></code>; the augmented regression method of
+Amihud, Hurvich &amp; Wang (2009), <code><a href="../reference/arm.html">arm()</a></code>; the
+control-function regression of Elliott (2011),
+<code><a href="../reference/elliott_cf.html">elliott_cf()</a></code>; the hybrid switching t-test of Harvey,
+Leybourne &amp; Taylor (2021), <code><a href="../reference/hlt_test.html">hlt_test()</a></code>; and the unified
+empirical likelihood test of Liu, Yang, Cai &amp; Peng (2019),
+<code><a href="../reference/el_test.html">el_test()</a></code>.</p>
+<div class="section level2">
+<h2 id="bonferroni-q-test">Bonferroni Q-test<a class="anchor" aria-label="anchor" href="#bonferroni-q-test"></a>
+</h2>
+<p><code><a href="../reference/cy_test.html">cy_test()</a></code> is the Campbell &amp; Yogo (2006) procedure,
+the feasible version of the sup-bound / Bonferroni idea of Cavanagh,
+Elliott &amp; Stock (1995). If <span class="math inline">\(\rho\)</span>
+were known, the UMP conditional test of <span class="math inline">\(\beta = 0\)</span> is the t-ratio of the
+regression augmented with <span class="math inline">\(x_t - \rho
+x_{t-1}\)</span> (the “Q-test”), whose estimate <span class="math display">\[
+\hat\beta(\rho) = \frac{\sum_t x^\mu_{t-1}\big(y_t -
+\tfrac{\sigma_{ue}}{\sigma_e\omega}(x_t - \rho x_{t-1})\big) -
+\tfrac{T}{2}\tfrac{\sigma_{ue}}{\sigma_e\omega}(\omega^2 -
+\sigma_v^2)}{\sum_t x^{\mu 2}_{t-1}}
+\]</span> (their eq. 25, with the AR(<span class="math inline">\(p\)</span>) correction of Appendix A) has standard
+error <span class="math inline">\(\sigma_u\sqrt{1-\delta^2}/(\sum x^{\mu
+2}_{t-1})^{1/2}\)</span>. Since <span class="math inline">\(\rho\)</span> is not consistently estimable, a
+confidence interval for it is obtained by inverting the DF-GLS statistic
+(Stock, 1991; Elliott, Rothenberg &amp; Stock, 1996) and the Bonferroni
+interval for <span class="math inline">\(\beta\)</span> runs from <span class="math inline">\(\hat\beta(\bar\rho) - 1.645\,se\)</span> to <span class="math inline">\(\hat\beta(\underline\rho) + 1.645\,se\)</span>.
+The levels of the interval for <span class="math inline">\(\rho\)</span>
+come from the paper’s Table 2, which tightens the plain Bonferroni bound
+so that the one-sided test has size exactly 5% for some <span class="math inline">\(c\)</span>.</p>
+<p>The DF-GLS null quantiles as a function of <span class="math inline">\(c\)</span> are simulated once
+(<code>data-raw/dfgls-quantiles.R</code>, <span class="math inline">\(c
+\in [-100, 10]\)</span>, 20 000 replications of a 600-step OU process)
+and shipped as internal data; the 5% quantile at <span class="math inline">\(c = 0\)</span> reproduces the <span class="math inline">\(-1.95\)</span> of Elliott et al. (1996).</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cy_test.html">cy_test</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; cy_test(formula = Ret ~ DP, data = kms)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Bonferroni Q-test (Campbell &amp; Yogo, 2006)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.044], rho: [0.991, 1.001]</span></span>
+<span><span class="co">#&gt; OLS slope = 0.006128; Q-estimates at the ends of the rho interval: 0.009069, 0.0004869</span></span>
+<span><span class="co">#&gt; 90% Bonferroni confidence interval for beta: [-0.0009783, 0.01053]</span></span>
+<span><span class="co">#&gt; 5% one-sided Q-tests: H1 beta &gt; 0 do not reject H0; H1 beta &lt; 0 do not reject H0</span></span>
+<span><span class="fu"><a href="../reference/cy_test.html">cy_test</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">EP</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; cy_test(formula = Ret ~ EP, data = kms)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Bonferroni Q-test (Campbell &amp; Yogo, 2006)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; delta = -0.7909, DF-GLS = -3.014 (p = 3), CI for c at levels (0.065, 0.17): [-29.24, -11.74], rho: [0.9717, 0.9886]</span></span>
+<span><span class="co">#&gt; OLS slope = 0.008698; Q-estimates at the ends of the rho interval: 0.02199, 0.0147</span></span>
+<span><span class="co">#&gt; 90% Bonferroni confidence interval for beta: [0.01057, 0.02612]</span></span>
+<span><span class="co">#&gt; 5% one-sided Q-tests: H1 beta &gt; 0 reject H0; H1 beta &lt; 0 do not reject H0</span></span></code></pre></div>
+<p>In a Monte Carlo with <span class="math inline">\(T = 200\)</span>
+and 500 replications, the right-tailed 5% Q-test rejects a true null
+4.4–5.8% of the time and the left-tailed one 1.2–3.6% for <span class="math inline">\(\delta \in \{-0.9, -0.5\}\)</span> and <span class="math inline">\(c \in \{0, -20\}\)</span> — the asymmetry the
+paper describes (Section 3.4: left-tailed probability “can be as small
+as 1.2%”).</p>
+</div>
 <div class="section level2">
 <h2 id="augmented-regression-method">Augmented regression method<a class="anchor" aria-label="anchor" href="#augmented-regression-method"></a>
 </h2>
@@ -128,7 +186,7 @@ of <span class="math inline">\(x_{j,t-1}\)</span> on the other
 regressors of the augmented regression. <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> reports
 <span class="math inline">\(t\)</span>-ratios and the joint Wald test
 from this matrix.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/arm.html">arm</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span> <span class="op">+</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -175,6 +233,46 @@ non-stationary. For near-unit-root predictors use <code><a href="../reference/iv
 </div>
 </div>
 <div class="section level2">
+<h2 id="control-function-regression">Control-function regression<a class="anchor" aria-label="anchor" href="#control-function-regression"></a>
+</h2>
+<p>Elliott (2011) shows that if stationary covariates <span class="math inline">\(z_t\)</span> are available that are
+contemporaneously correlated with the shocks to both the predictor and
+the response, the Wald test of <span class="math inline">\(eta =
+0\)</span> in <span class="math display">\[
+y_t = lpha + eta' x_{t-1} + \gamma' Z_t +     ilde u_t, \qquad
+Z_t = (z_t', z_{t-1}', \dots, z_{t-q}')',
+\]</span> is asymptotically <span class="math inline">\(\chi^2\)</span>
+whatever the persistence of <span class="math inline">\(x_t\)</span>,
+because the covariates “orthogonalise” the innovations (his Theorem 2
+versus the Elliott–Stock 1994 distribution of Theorem 1). The covariates
+are a modelling choice, not a data construction — <code><a href="../reference/arm.html">arm()</a></code> and
+<code><a href="../reference/ivx_ra.html">ivx_ra()</a></code> are the feasible versions where the control
+variable is built from the predictor’s own innovations.
+<code><a href="../reference/elliott_cf.html">elliott_cf()</a></code> runs the regression, reports the Wald test
+with Eicker-White standard errors and the correlation that remains
+between the regression residuals and the predictor innovations, which
+should be near zero.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/elliott_cf.html">elliott_cf</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, <span class="op">~</span> <span class="va">TBL</span>, data <span class="op">=</span> <span class="va">kms</span>, lags <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; elliott_cf(formula = Ret ~ DP, covariates = ~TBL, data = kms, </span></span>
+<span><span class="co">#&gt;     lags = 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Control-function predictive regression (Elliott, 2011), 1 covariate lag(s)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;    Estimate Std. Error t value Pr(&gt;|t|)</span></span>
+<span><span class="co">#&gt; DP 0.005605   0.005102   1.099    0.272</span></span>
+<span><span class="co">#&gt; (Eicker-White standard errors)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Wald statistic: 1.207 on 1 DF, p-value 0.2719</span></span>
+<span><span class="co">#&gt; Remaining innovation correlation: DP -0.977</span></span></code></pre></div>
+<p>With a covariate that does absorb the correlation ($z_t = v_t + $
+noise, <span class="math inline">\(\delta = -0.9\)</span>, <span class="math inline">\(c = 0\)</span>, <span class="math inline">\(T =
+200\)</span>) the 5% test rejects a true null 4% of the time against 23%
+for plain OLS (500 replications).</p>
+</div>
+<div class="section level2">
 <h2 id="hybrid-t-test">Hybrid t-test<a class="anchor" aria-label="anchor" href="#hybrid-t-test"></a>
 </h2>
 <p><code><a href="../reference/hlt_test.html">hlt_test()</a></code> implements <span class="math inline">\(T_{hyb}\)</span> of Harvey, Leybourne &amp; Taylor
@@ -197,7 +295,7 @@ ho_{xy} &gt; -0.1\)</span> and $ ilde T$ with $ ilde{cv}( ho_{xy})$ when
 ho_{xy} &lt; -0.1\)</span> (quasi-GLS demeaning pays off only when the
 endogeneity is strong); lower-tail tests mirror this.</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hlt_test.html">hlt_test</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -247,7 +345,7 @@ joint null are then <span class="math inline">\(\chi^2(1)\)</span>,
 persistence classification (Theorem 2). The price is efficiency: only
 <span class="math inline">\(m - 2\)</span> differenced observations
 enter, and the paper reports that the test on <span class="math inline">\(eta_1\)</span> is oversized at <span class="math inline">\(n = 200\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/el_test.html">el_test</a></span><span class="op">(</span><span class="va">Ret</span> <span class="op">~</span> <span class="va">DP</span>, data <span class="op">=</span> <span class="va">kms</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -272,6 +370,19 @@ Financial Studies</em>, 22(1), 413–434.</li>
 <li>Amihud, Y., &amp; Hurvich, C. M. (2004). Predictive regressions: A
 reduced-bias estimation method. <em>Journal of Financial and
 Quantitative Analysis</em>, 39(4), 813–841.</li>
+<li>Campbell, J. Y., &amp; Yogo, M. (2006). Efficient tests of stock
+return predictability. <em>Journal of Financial Economics</em>, 81(1),
+27–60.</li>
+<li>Cavanagh, C. L., Elliott, G., &amp; Stock, J. H. (1995). Inference
+in models with nearly integrated regressors. <em>Econometric
+Theory</em>, 11(5), 1131–1147.</li>
+<li>Elliott, G. (2011). A control function approach for testing the
+usefulness of trending variables in predictive regressions and
+econometric models. <em>Journal of Econometrics</em>, 164(1),
+79–91.</li>
+<li>Elliott, G., Rothenberg, T. J., &amp; Stock, J. H. (1996). Efficient
+tests for an autoregressive unit root. <em>Econometrica</em>, 64(4),
+813–836.</li>
 <li>Harvey, D. I., Leybourne, S. J., &amp; Taylor, A. M. R. (2021).
 Simple tests for stock return predictability with good size and power
 properties. <em>Journal of Econometrics</em>, 224(1), 198–214.</li>
@@ -284,6 +395,9 @@ multivariate autoregressions. <em>Australian Journal of Statistics</em>,
 30A, 296–309.</li>
 <li>Owen, A. B. (2001). <em>Empirical Likelihood</em>. Chapman &amp;
 Hall.</li>
+<li>Stock, J. H. (1991). Confidence intervals for the largest
+autoregressive root in U.S. macroeconomic time series. <em>Journal of
+Monetary Economics</em>, 28(3), 435–459.</li>
 <li>Stambaugh, R. F. (1999). Predictive regressions. <em>Journal of
 Financial Economics</em>, 54(3), 375–421.</li>
 </ul>

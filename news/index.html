@@ -32,7 +32,7 @@
     <li><a class="dropdown-item" href="../articles/ivx-ra.html">Residual-augmented IVX</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-qr.html">IVX quantile predictive regression</a></li>
     <li><a class="dropdown-item" href="../articles/ivx-iv.html">IV tests with combined instruments</a></li>
-    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood</a></li>
+    <li><a class="dropdown-item" href="../articles/benchmarks.html">Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><h6 class="dropdown-header" data-toc-skip>Inference</h6></li>
     <li><a class="dropdown-item" href="../articles/robust-inference.html">Robust inference: Eicker-White and wild bootstrap</a></li>
@@ -79,6 +79,9 @@
 </ol></li>
 <li>New <code><a href="../reference/el_test.html">el_test()</a></code>: the unified empirical likelihood test of Liu, Yang, Cai &amp; Peng (2019) for the predictive regression augmented with the lagged difference of the predictor; chi-square profile EL ratios whatever the persistence of the predictor, no tuning parameters.</li>
 <li>New <code><a href="../reference/cy_test.html">cy_test()</a></code>: the Bonferroni Q-test of Campbell &amp; Yogo (2006) (the feasible Cavanagh, Elliott &amp; Stock 1995 approach): DF-GLS confidence interval for the largest root inverted from simulated local-to-unity quantiles, Table 2 levels, Q-estimates with the AR(p) correction of Appendix A.</li>
+<li>New <code><a href="../reference/elliott_cf.html">elliott_cf()</a></code>: the control-function predictive regression of Elliott
+<ol start="2011" style="list-style-type: decimal"><li>with user-supplied orthogonalising covariates and their lags, Wald test with Eicker-White standard errors and the remaining innovation correlation as a diagnostic.</li>
+</ol></li>
 <li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
 <li>
 <code><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract()</a></code> (texreg) now reports IVX standard errors instead of Wald statistics in the <code>se</code> slot.</li>

@@ -246,6 +246,10 @@ Reduced-bias OLS alternatives for stationary persistent predictors.
   [`cy_test_fit()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
   [`print(`*`<cy_test>`*`)`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
   : Bonferroni Q-Test of Campbell and Yogo (2006)
+- [`elliott_cf()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md)
+  [`elliott_cf_fit()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md)
+  [`print(`*`<elliott_cf>`*`)`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md)
+  : Control-Function Predictability Test of Elliott (2011)
 
 ## Fitter functions
 
@@ -329,7 +333,7 @@ Low-level functions taking a response and a design matrix.
   regression](https://kvasilopoulos.github.io/ivx/articles/ivx-qr.md):
 - [IV tests with combined
   instruments](https://kvasilopoulos.github.io/ivx/articles/ivx-iv.md):
-- [Non-IVX benchmarks: ARM, hybrid t-test, empirical
+- [Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical
   likelihood](https://kvasilopoulos.github.io/ivx/articles/benchmarks.md):
 
 ### Inference

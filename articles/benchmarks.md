@@ -1,19 +1,84 @@
-# Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood
+# Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood
 
 ``` r
 
 library(ivx)
 ```
 
-Three non-IVX procedures are included as the benchmarks the IVX
-literature compares against: the augmented regression method of Amihud,
-Hurvich & Wang (2009),
-[`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md), the
-hybrid switching t-test of Harvey, Leybourne & Taylor (2021),
-[`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md),
+Five non-IVX procedures are included as the benchmarks the IVX
+literature compares against: the Bonferroni Q-test of Campbell & Yogo
+(2006),
+[`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md);
+the augmented regression method of Amihud, Hurvich & Wang (2009),
+[`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md); the
+control-function regression of Elliott (2011),
+[`elliott_cf()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md);
+the hybrid switching t-test of Harvey, Leybourne & Taylor (2021),
+[`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md);
 and the unified empirical likelihood test of Liu, Yang, Cai & Peng
 (2019),
 [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md).
+
+## Bonferroni Q-test
+
+[`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md)
+is the Campbell & Yogo (2006) procedure, the feasible version of the
+sup-bound / Bonferroni idea of Cavanagh, Elliott & Stock (1995). If
+\\\rho\\ were known, the UMP conditional test of \\\beta = 0\\ is the
+t-ratio of the regression augmented with \\x_t - \rho x\_{t-1}\\ (the
+“Q-test”), whose estimate \\ \hat\beta(\rho) = \frac{\sum_t
+x^\mu\_{t-1}\big(y_t - \tfrac{\sigma\_{ue}}{\sigma_e\omega}(x_t - \rho
+x\_{t-1})\big) -
+\tfrac{T}{2}\tfrac{\sigma\_{ue}}{\sigma_e\omega}(\omega^2 -
+\sigma_v^2)}{\sum_t x^{\mu 2}\_{t-1}} \\ (their eq. 25, with the
+AR(\\p\\) correction of Appendix A) has standard error
+\\\sigma_u\sqrt{1-\delta^2}/(\sum x^{\mu 2}\_{t-1})^{1/2}\\. Since
+\\\rho\\ is not consistently estimable, a confidence interval for it is
+obtained by inverting the DF-GLS statistic (Stock, 1991; Elliott,
+Rothenberg & Stock, 1996) and the Bonferroni interval for \\\beta\\ runs
+from \\\hat\beta(\bar\rho) - 1.645\\se\\ to
+\\\hat\beta(\underline\rho) + 1.645\\se\\. The levels of the interval
+for \\\rho\\ come from the paper’s Table 2, which tightens the plain
+Bonferroni bound so that the one-sided test has size exactly 5% for some
+\\c\\.
+
+The DF-GLS null quantiles as a function of \\c\\ are simulated once
+(`data-raw/dfgls-quantiles.R`, \\c \in \[-100, 10\]\\, 20 000
+replications of a 600-step OU process) and shipped as internal data; the
+5% quantile at \\c = 0\\ reproduces the \\-1.95\\ of Elliott et
+al. (1996).
+
+``` r
+
+cy_test(Ret ~ DP, data = kms)
+#> 
+#> Call:
+#> cy_test(formula = Ret ~ DP, data = kms)
+#> 
+#> Bonferroni Q-test (Campbell & Yogo, 2006)
+#> 
+#> delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.044], rho: [0.991, 1.001]
+#> OLS slope = 0.006128; Q-estimates at the ends of the rho interval: 0.009069, 0.0004869
+#> 90% Bonferroni confidence interval for beta: [-0.0009783, 0.01053]
+#> 5% one-sided Q-tests: H1 beta > 0 do not reject H0; H1 beta < 0 do not reject H0
+cy_test(Ret ~ EP, data = kms)
+#> 
+#> Call:
+#> cy_test(formula = Ret ~ EP, data = kms)
+#> 
+#> Bonferroni Q-test (Campbell & Yogo, 2006)
+#> 
+#> delta = -0.7909, DF-GLS = -3.014 (p = 3), CI for c at levels (0.065, 0.17): [-29.24, -11.74], rho: [0.9717, 0.9886]
+#> OLS slope = 0.008698; Q-estimates at the ends of the rho interval: 0.02199, 0.0147
+#> 90% Bonferroni confidence interval for beta: [0.01057, 0.02612]
+#> 5% one-sided Q-tests: H1 beta > 0 reject H0; H1 beta < 0 do not reject H0
+```
+
+In a Monte Carlo with \\T = 200\\ and 500 replications, the right-tailed
+5% Q-test rejects a true null 4.4–5.8% of the time and the left-tailed
+one 1.2–3.6% for \\\delta \in \\-0.9, -0.5\\\\ and \\c \in \\0, -20\\\\
+— the asymmetry the paper describes (Section 3.4: left-tailed
+probability “can be as small as 1.2%”).
 
 ## Augmented regression method
 
@@ -96,6 +161,48 @@ mean of \\0.857\\. In the paper’s two-predictor Case 1 the 5%
   use [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) or
   [`ivx_ra()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ra.md).
 - VAR(1) only, short horizon only, no bootstrap.
+
+## Control-function regression
+
+Elliott (2011) shows that if stationary covariates \\z_t\\ are available
+that are contemporaneously correlated with the shocks to both the
+predictor and the response, the Wald test of \\eta = 0\\ in \\ y_t =
+lpha + eta' x\_{t-1} + \gamma' Z_t + ilde u_t, \qquad Z_t = (z_t',
+z\_{t-1}', \dots, z\_{t-q}')', \\ is asymptotically \\\chi^2\\ whatever
+the persistence of \\x_t\\, because the covariates “orthogonalise” the
+innovations (his Theorem 2 versus the Elliott–Stock 1994 distribution of
+Theorem 1). The covariates are a modelling choice, not a data
+construction —
+[`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md) and
+[`ivx_ra()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ra.md)
+are the feasible versions where the control variable is built from the
+predictor’s own innovations.
+[`elliott_cf()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md)
+runs the regression, reports the Wald test with Eicker-White standard
+errors and the correlation that remains between the regression residuals
+and the predictor innovations, which should be near zero.
+
+``` r
+
+elliott_cf(Ret ~ DP, ~ TBL, data = kms, lags = 1)
+#> 
+#> Call:
+#> elliott_cf(formula = Ret ~ DP, covariates = ~TBL, data = kms, 
+#>     lags = 1)
+#> 
+#> Control-function predictive regression (Elliott, 2011), 1 covariate lag(s)
+#> 
+#>    Estimate Std. Error t value Pr(>|t|)
+#> DP 0.005605   0.005102   1.099    0.272
+#> (Eicker-White standard errors)
+#> 
+#> Wald statistic: 1.207 on 1 DF, p-value 0.2719
+#> Remaining innovation correlation: DP -0.977
+```
+
+With a covariate that does absorb the correlation (\$z_t = v_t + \$
+noise, \\\delta = -0.9\\, \\c = 0\\, \\T = 200\\) the 5% test rejects a
+true null 4% of the time against 23% for plain OLS (500 replications).
 
 ## Hybrid t-test
 
@@ -195,6 +302,16 @@ coefficient by BFGS from the OLS start.
 - Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A
   reduced-bias estimation method. *Journal of Financial and Quantitative
   Analysis*, 39(4), 813–841.
+- Campbell, J. Y., & Yogo, M. (2006). Efficient tests of stock return
+  predictability. *Journal of Financial Economics*, 81(1), 27–60.
+- Cavanagh, C. L., Elliott, G., & Stock, J. H. (1995). Inference in
+  models with nearly integrated regressors. *Econometric Theory*, 11(5),
+  1131–1147.
+- Elliott, G. (2011). A control function approach for testing the
+  usefulness of trending variables in predictive regressions and
+  econometric models. *Journal of Econometrics*, 164(1), 79–91.
+- Elliott, G., Rothenberg, T. J., & Stock, J. H. (1996). Efficient tests
+  for an autoregressive unit root. *Econometrica*, 64(4), 813–836.
 - Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple
   tests for stock return predictability with good size and power
   properties. *Journal of Econometrics*, 224(1), 198–214.
@@ -205,5 +322,8 @@ coefficient by BFGS from the OLS start.
   multivariate autoregressions. *Australian Journal of Statistics*, 30A,
   296–309.
 - Owen, A. B. (2001). *Empirical Likelihood*. Chapman & Hall.
+- Stock, J. H. (1991). Confidence intervals for the largest
+  autoregressive root in U.S. macroeconomic time series. *Journal of
+  Monetary Economics*, 28(3), 435–459.
 - Stambaugh, R. F. (1999). Predictive regressions. *Journal of Financial
   Economics*, 54(3), 375–421.
