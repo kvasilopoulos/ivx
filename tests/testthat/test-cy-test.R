@@ -38,7 +38,7 @@ test_that("Q-estimate reduces to OLS when delta = 0 and the rho interval is a po
   set.seed(3); n <- 300
   x <- cumsum(rnorm(n)); y <- rnorm(n)
   f <- cy_test_fit(y, x, lag_max = 1)
-  ols <- unname(coef(lm(y[-(1:2)] ~ x[-c(1, n)]))[2])
+  ols <- unname(coef(lm(y[-1] ~ x[-n]))[2])
   # beta(rho) = ols - k * cov(x_t - rho x_{t-1}, x^mu); |k| is small when delta ~ 0
   expect_equal(unname(f$beta_rho[1]), ols, tolerance = 0.2)
   expect_equal(f$estimate, ols)

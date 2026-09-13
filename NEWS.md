@@ -70,7 +70,15 @@
   (2011) with user-supplied orthogonalising covariates and their lags, Wald
   test with Eicker-White standard errors and the remaining innovation
   correlation as a diagnostic.
-* Fixed: weighted fits ignored the `horizon` argument.
+* Fixed: weighted fits ignored the `horizon` argument; zero weights made
+  `ivx()` fail (the dropped observations now get `NA` residuals and fitted
+  values, with the same coefficients as fitting on the kept rows).
+* Fixed: `ac_test_bg()` dispatched to the Box-Pierce method; `ac_test_lb()` and
+  `ac_test_bp()` reported wrong p-values for non-consecutive `lag` vectors;
+  the Breusch-Godfrey result now has the same `ac_test_` class and `pval`
+  attribute as the other tests. `case.names()` no longer returns an empty vector.
+* All formula interfaces share one model-frame routine, so `- 1` in a formula
+  warns consistently and a matrix response is rejected consistently.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.
 * `ivx_ar()` and `ivx_ar_fit()` accept the same `beta`, `cz`, `bandwidth` and

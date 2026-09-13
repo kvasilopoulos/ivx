@@ -19,3 +19,10 @@
 ^research$
 ^\.playwright-mcp$
 ^CITATION\.cff$
+^CLAUDE\.md$
+^\.env$
+^src/.*\.gcno$
+^src/.*\.gcda$
+^tests/testthat/_problems$
+^tests/testthat/testthat-problems\.rds$
+^Rplots\.pdf$

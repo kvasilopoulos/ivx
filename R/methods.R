@@ -92,22 +92,6 @@ model.frame.ivx <- function (formula, ...) {
   else formula$model
 }
 
-model_matrix <- function(object, raw = FALSE) {
-  data <- object$data
-  ret <- if(raw) data$X else data$Xm
-  rownames(ret) <- 1:NROW(ret)
-  ret
-}
-
-#' @importFrom stats model.frame
-model_frame <- function(object, raw = FALSE) {
-  data <- object$data
-  ret <- if(raw) cbind(data$y, data$X) else cbind(data$ym, data$Xm)
-  colnames(ret) <- colnames(model.frame(object))
-  rownames(ret) <- 1:NROW(ret)
-  ret
-}
-
 #' @export
 logLik.ivx <- function (object, REML = FALSE, ...) {
 
@@ -160,7 +144,7 @@ extractAIC.ivx <- function(fit, scale = 0, k = 2, ...) {
 #' @importFrom stats case.names weights
 case.names.ivx <- function (object, full = FALSE, ...) {
   w <- weights(object)
-  dn <- names(residuals(object))
+  dn <- names(residuals(object)) %||% as.character(seq_along(residuals(object)))
   if (full || is.null(w))
     dn
   else dn[w != 0]

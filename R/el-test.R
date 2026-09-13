@@ -35,20 +35,11 @@
 #' el_test(Ret ~ DP, data = kms)
 el_test <- function(formula, data, na.action) {
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  x <- model.matrix(mt, mf)
-  if (NCOL(x) != 1) stop("el_test() is defined for a single predictor", call. = FALSE)
-  out <- el_test_fit(y, drop(x))
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame())
+  if (NCOL(fr$x) != 1) stop("el_test() is defined for a single predictor", call. = FALSE)
+  out <- el_test_fit(fr$y, drop(fr$x))
   out$call <- cl
-  out$predictor <- colnames(x)
+  out$predictor <- colnames(fr$x)
   out
 }
 

@@ -49,20 +49,11 @@ hlt_test <- function(formula, data, alternative = c("greater", "less"), level = 
                      lag_max = NULL, na.action) {
   alternative <- match.arg(alternative)
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  x <- model.matrix(mt, mf)
-  if (NCOL(x) != 1) stop("hlt_test() is defined for a single predictor", call. = FALSE)
-  out <- hlt_test_fit(y, drop(x), alternative = alternative, level = level, lag_max = lag_max)
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame())
+  if (NCOL(fr$x) != 1) stop("hlt_test() is defined for a single predictor", call. = FALSE)
+  out <- hlt_test_fit(fr$y, drop(fr$x), alternative = alternative, level = level, lag_max = lag_max)
   out$call <- cl
-  out$predictor <- colnames(x)
+  out$predictor <- colnames(fr$x)
   out
 }
 
@@ -95,7 +86,7 @@ hlt_test_fit <- function(y, x, alternative = "greater", level = 0.05, lag_max = 
 
   # ADF regression with MBIC lag selection; normalised-bias statistic
   pmax <- if (is.null(lag_max)) floor(12 * (n / 100)^0.25) else as.integer(lag_max)
-  adf <- adf_mbic(x, pmax)
+  adf <- adf_lag(x, pmax, ic = "mbic")
   rho_xy <- cor(adf$resid, f1$residuals[(length(f1$residuals) - length(adf$resid) + 1):length(f1$residuals)])
 
   weak <- adf$stat < -4 * sqrt(n)
@@ -115,7 +106,7 @@ hlt_test_fit <- function(y, x, alternative = "greater", level = 0.05, lag_max = 
     list(
       test = test, statistic = stat, cv = cv, reject = reject, level = level,
       alternative = alternative, t = t_ols, t_gls = t_gls, adf = adf$stat,
-      adf_lag = adf$p, rho_xy = rho_xy, estimate = unname(f1$coefficients[2]), n = n
+      adf_lag = adf$k, rho_xy = rho_xy, estimate = unname(f1$coefficients[2]), n = n
     ),
     class = "hlt_test"
   )
@@ -140,33 +131,6 @@ hlt_rs <- list(
 hlt_cv <- function(rho, level, gls) {
   a <- hlt_rs[[if (gls) "gls" else "ols"]][, as.character(level)]
   sum(a * rho^(0:8))
-}
-
-# ADF regression dx_t = mu + rho x_{t-1} + sum psi_i dx_{t-i} + e_t, lag by the MBIC of
-# Ng & Perron (2001) on the common sample t = pmax + 2..n, OLS-demeaned data
-# (Perron & Qu, 2007). Returns the normalised bias T rho / (1 - sum psi), p, residuals.
-adf_mbic <- function(x, pmax) {
-  n <- length(x)
-  dx <- diff(x)
-  fit <- function(p, common) {
-    start <- if (common) pmax + 1 else p + 1          # index into dx
-    idx <- start:(n - 1)
-    X <- cbind(1, x[idx])
-    if (p > 0) X <- cbind(X, sapply(seq_len(p), function(i) dx[idx - i]))
-    f <- lm.fit(X, dx[idx])
-    list(coef = f$coefficients, resid = f$residuals, xl = x[idx])
-  }
-  ic <- sapply(0:pmax, function(p) {
-    f <- fit(p, common = TRUE)
-    Te <- length(f$resid)
-    s2 <- sum(f$resid^2) / Te
-    tau <- f$coef[2]^2 * sum(f$xl^2) / s2
-    log(s2) + log(Te) * (tau + p) / Te
-  })
-  p <- which.min(ic) - 1
-  f <- fit(p, common = FALSE)
-  psi <- if (p > 0) f$coef[-(1:2)] else 0
-  list(stat = unname(n * f$coef[2] / (1 - sum(psi))), p = p, resid = f$resid)
 }
 
 #' @rdname hlt_test

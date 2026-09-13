@@ -49,50 +49,17 @@ ivx_ar <- function(formula, data, horizon, ar = "auto", ar_ic = c("bic", "aic", 
       call. = FALSE
     )
   }
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "horizon", "na.action", "offset"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf["horizon"] <- NULL
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  if (attr(mt, "intercept") == 0) {
-    warning("ivx estimation does not include an intercept by construction",
-      call. = FALSE
-    )
-  }
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  if (is.matrix(y)) {
-    stop("multivariate model are not available", call. = FALSE)
-  }
-  ny <- length(y)
-  offset <- model.offset(mf)
-  x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_ar_fit(y, x,
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts, extra = "offset")
+  offset <- model.offset(fr$mf)
+  z <- ivx_ar_fit(fr$y, fr$x,
     horizon = horizon, ar = ar, ar_max = ar_max, ar_ic = ar_ic,
     ar_grid = ar_grid, offset = offset, beta = beta, cz = cz,
     bandwidth = bandwidth, robust = robust, ...
   )
   class(z) <- if (ar == 0) "ivx" else c("ivx_ar", "ivx")
-  z$na.action <- attr(mf, "na.action")
   z$offset <- offset
-  z$contrasts <- attr(x, "contrasts")
-  z$xlevels <- .getXlevels(mt, mf)
-  z$call <- cl
-  z$terms <- mt
-  z$assign <- attr(x, "assign")
-  if (model) {
-    z$model <- mf
-  }
-  if (ret.x) {
-    z$x <- x
-  }
-  if (ret.y) {
-    z$y <- y
-  }
-  z
+  z$assign <- attr(fr$x, "assign")
+  ivx_finish(z, fr, cl, model, ret.x, ret.y)
 }
 
 

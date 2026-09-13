@@ -45,20 +45,11 @@
 #' elliott_cf(Ret ~ DP, ~ TBL, data = kms)
 elliott_cf <- function(formula, covariates, data, lags = 0, robust = TRUE, na.action) {
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  x <- model.matrix(mt, mf)
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame())
   zf <- stats::update(covariates, ~ . - 1)
   z <- model.matrix(zf, if (missing(data)) environment(covariates) else data)
-  if (NROW(z) != NROW(x)) stop("covariates and predictors must have the same length", call. = FALSE)
-  out <- elliott_cf_fit(y, x, z, lags = lags, robust = robust)
+  if (NROW(z) != NROW(fr$x)) stop("covariates and predictors must have the same length", call. = FALSE)
+  out <- elliott_cf_fit(fr$y, fr$x, z, lags = lags, robust = robust)
   out$call <- cl
   out
 }

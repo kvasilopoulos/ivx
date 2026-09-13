@@ -16,7 +16,9 @@ Autocorrelation tests
 }
 \examples{
 obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
-lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+if (requireNamespace("lmtest", quietly = TRUE)) {
+  lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+}
 ac_test(obj, 5)
 
 }

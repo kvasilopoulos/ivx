@@ -35,7 +35,7 @@
 #'
 #' @inheritParams ivx
 #' @param lag_max maximum ADF lag order for the BIC search; the default is
-#' \eqn{\lfloor 12 (T/100)^{1/4} \rfloor}.
+#' \eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences.
 #'
 #' @return an object of class "cy_test": a list with `ci` (the 90\% Bonferroni
 #' interval for \eqn{\beta}), `reject` (named logical: `greater`, `less`),
@@ -58,20 +58,11 @@
 #' cy_test(Ret ~ DP, data = kms)
 cy_test <- function(formula, data, lag_max = NULL, na.action) {
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  x <- model.matrix(mt, mf)
-  if (NCOL(x) != 1) stop("cy_test() is defined for a single predictor", call. = FALSE)
-  out <- cy_test_fit(y, drop(x), lag_max = lag_max)
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame())
+  if (NCOL(fr$x) != 1) stop("cy_test() is defined for a single predictor", call. = FALSE)
+  out <- cy_test_fit(fr$y, drop(fr$x), lag_max = lag_max)
   out$call <- cl
-  out$predictor <- colnames(x)
+  out$predictor <- colnames(fr$x)
   out
 }
 
@@ -84,20 +75,20 @@ cy_test_fit <- function(y, x, lag_max = NULL) {
   if (length(y) != n) stop("incompatible dimensions")
   pmax <- if (is.null(lag_max)) floor(12 * (n / 100)^0.25) else as.integer(lag_max)
 
-  # ADF regression of the predictor, lag order by BIC on a common sample
-  adf <- adf_bic(x, pmax)
-  p <- adf$p
-  e <- adf$resid                                    # innovations e_t, t = p + 2..n
+  # ADF regression of the predictor, k = p - 1 lagged differences chosen by BIC
+  adf <- adf_lag(x, pmax, ic = "bic")
+  p <- adf$k + 1
+  e <- adf$resid                                    # innovations e_t, t = p + 1..n
   psi <- adf$psi
   # predictive regression on the same sample
-  idx <- (p + 2):n
+  idx <- (p + 1):n
   xl <- x[idx - 1]
   yt <- y[idx]
   ols <- lm.fit(cbind(1, xl), yt)
   u <- ols$residuals
   Tn <- length(idx)
   s2u <- sum(u^2) / (Tn - 2)
-  s2e <- sum(e^2) / (Tn - p - 1)
+  s2e <- sum(e^2) / (Tn - p - 1)   # p + 1 ADF coefficients
   sue <- sum(u * e) / Tn
   delta <- sue / sqrt(s2u * s2e)
   # long-run scale omega = sigma_e / b(1) and var(v_t), v_t the AR(p - 1) error
@@ -146,29 +137,6 @@ cy_test_fit <- function(y, x, lag_max = NULL) {
     ),
     class = "cy_test"
   )
-}
-
-# ADF regression dx_t = mu + theta x_{t-1} + sum_{i<p} psi_i dx_{t-i} + e_t with
-# p - 1 in 0..pmax - 1 lagged differences chosen by BIC on the common sample;
-# refitted on the full sample for the chosen order
-adf_bic <- function(x, pmax) {
-  n <- length(x)
-  dx <- diff(x)
-  fit <- function(k, start) {
-    idx <- start:(n - 1)
-    X <- cbind(1, x[idx])
-    if (k > 0) X <- cbind(X, sapply(seq_len(k), function(i) dx[idx - i]))
-    lm.fit(X, dx[idx])
-  }
-  bic <- sapply(0:(pmax - 1), function(k) {
-    f <- fit(k, pmax + 1)
-    Te <- length(f$residuals)
-    Te * log(sum(f$residuals^2) / Te) + (k + 2) * log(Te)
-  })
-  k <- which.min(bic) - 1
-  f <- fit(k, k + 2)
-  list(p = k + 1, psi = if (k > 0) unname(f$coefficients[-(1:2)]) else numeric(),
-       resid = f$residuals)
 }
 
 # DF-GLS statistic (ERS 1996): quasi-GLS demeaning with c_bar = -7, then the ADF

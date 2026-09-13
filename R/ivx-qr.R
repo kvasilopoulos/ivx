@@ -42,34 +42,13 @@ ivx_qr <- function(formula, data, tau = 0.5, beta = 0.95, cz = 5, na.action,
   ret.x <- x
   ret.y <- y
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  if (attr(mt, "intercept") == 0) {
-    warning("ivx estimation does not include an intercept by construction", call. = FALSE)
-  }
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  if (is.matrix(y)) stop("multivariate model is not available", call. = FALSE)
-  x <- model.matrix(mt, mf, contrasts)
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts)
 
   fits <- lapply(tau, function(tt) {
-    z <- ivx_qr_fit(y, x, tau = tt, beta = beta, cz = cz, ...)
+    z <- ivx_qr_fit(fr$y, fr$x, tau = tt, beta = beta, cz = cz, ...)
     class(z) <- c("ivx_qr", "ivx")
-    z$na.action <- attr(mf, "na.action")
-    z$contrasts <- attr(x, "contrasts")
-    z$xlevels <- .getXlevels(mt, mf)
-    z$call <- cl
-    z$call$tau <- tt
-    z$terms <- mt
-    if (model) z$model <- mf
-    if (ret.x) z$x <- x
-    if (ret.y) z$y <- y
-    z
+    cl$tau <- tt
+    ivx_finish(z, fr, cl, model, ret.x, ret.y)
   })
   if (length(tau) == 1) fits[[1]] else stats::setNames(fits, tau)
 }

@@ -57,7 +57,7 @@
 #' @references Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated
 #' Systems with Moderately Integrated and Moderately Explosive Regressors.
 #' Econometric Theory, 25(2), 482-526.
-#' @references Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2014).
+#' @references Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2015).
 #' Robust econometric inference for stock return predictability. The Review of
 #' Financial Studies, 28(5), 1506-1553.
 #' @references Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R.
@@ -72,7 +72,8 @@
 #' @aliases ivx
 #'
 #' @importFrom stats .getXlevels coef coefficients cor lm model.matrix pf
-#' model.offset model.response pchisq qnorm residuals symnum is.empty.model
+#' @importFrom stats model.offset model.response pchisq qnorm residuals symnum
+#' @importFrom stats is.empty.model model.weights
 #'
 #' @export
 #' @examples
@@ -102,35 +103,11 @@ ivx <- function(formula, data, horizon, na.action, weights,
   if (missing(horizon))
     horizon <- cl$horizon <- 1
 
-  ## keep only the arguments which should go into the model frame
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "horizon", "na.action", "weights", "offset"),
-             names(mf), 0)
-
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame) # was as.name("model.frame"), but
-  ##    need "stats:: ..." for non-standard evaluation
-  mf["horizon"] <- NULL
-
-  mf <- eval.parent(mf)
-  # mf <- eval(mf, parent.frame())
-
-  # if (method == "model.frame") return(mf)
-
-  ## 1) allow model.frame to update the terms object before saving it.
-  mt <- attr(mf, "terms")
-  if (attr(mt, "intercept") == 0) {
-    warning("ivx estimation does not include an intercept by construction",
-            call. = FALSE
-    )
-  }
-  attr(mt, "intercept") <- 0
-
-  y <- model.response(mf, "numeric")
-  if(is.matrix(y)) {  # Disable nultivariate model
-    stop("multivariate model is not available",call. = FALSE)
-  }
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts,
+                  extra = c("weights", "offset"))
+  mf <- fr$mf
+  mt <- fr$terms
+  y <- fr$y
   ny <- length(y)
   w <- as.vector(model.weights(mf))
   if (!is.null(w) && !is.numeric(w)) {
@@ -155,7 +132,7 @@ ivx <- function(formula, data, horizon, na.action, weights,
     }
   }
   else {
-    x <- model.matrix(mt, mf, contrasts)
+    x <- fr$x
     z <- if (is.null(w)) {
       ivx_fit(y, x, horizon = horizon, offset = offset, beta = beta, cz = cz,
               bandwidth = bandwidth, robust = robust, lag_y = lag_y, ...)
@@ -165,23 +142,10 @@ ivx <- function(formula, data, horizon, na.action, weights,
     }
   }
   class(z) <- "ivx"
-  z$na.action <- attr(mf, "na.action")
   z$offset <- offset
-  z$contrasts <- attr(x, "contrasts")
-  z$xlevels <- .getXlevels(mt, mf)
-  z$call <- cl
-  z$terms <- mt
   z$assign <- attr(x, "assign")
-  if (model) {
-    z$model <- mf
-  }
-  if (ret.x) {
-    z$x <- x
-  }
-  if (ret.y) {
-    z$y <- y
-  }
-  z
+  fr$x <- x
+  ivx_finish(z, fr, cl, model, ret.x, ret.y)
 }
 
 
@@ -306,7 +270,7 @@ ivx_out <- function(z, x, horizon, beta, cz, robust, lag_y = FALSE) {
 ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
                      bandwidth = NULL, robust = FALSE, lag_y = FALSE, ...) {
   n <- nrow(x)
-  ny <- NCOL(x)
+  ny <- NCOL(y)
   if (is.null(n)) {
     stop("'x' must be a matrix")
   }
@@ -374,24 +338,20 @@ ivx_wfit <- function(y, x, w, horizon = 1, offset = NULL, beta = 0.95, cz = 1,
     coef <- out$coefficients
     coef[is.na(coef)] <- 0
     f0 <- x0 %*% coef
-    if (ny > 1) {
-      save.r[ok, ] <- out$residuals
-      save.r[nok, ] <- y0 - f0
-      save.f[ok, ] <- out$fitted
-      save.f[nok, ] <- f0
-    }
-    else {
-      save.r[ok] <- out$residuals
-      save.r[nok] <- y0 - f0
-      save.f[ok] <- out$fitted
-      save.f[nok] <- f0
-    }
+    # the fit drops the first `horizon` kept observations: leave them NA
+    r_ok <- f_ok <- rep(NA_real_, n)
+    r_ok[-(1:horizon)] <- out$residuals
+    f_ok[-(1:horizon)] <- out$fitted
+    save.r[ok] <- r_ok
+    save.r[nok] <- y0 - f0
+    save.f[ok] <- f_ok
+    save.f[nok] <- f0
     out$residuals <- save.r
-    out$fitted.values <- save.f
+    out$fitted <- save.f
     out$weights <- save.w
   }
   if (!is.null(offset)) {
-    out$fitted.values <- out$fitted + offset
+    out$fitted <- out$fitted + offset
   }
   out
 }

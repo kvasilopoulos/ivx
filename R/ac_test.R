@@ -112,7 +112,7 @@ ac_test_lb.default <- function(x, lag = 1) {
   }
   out <- lb[lag]
   names(out) <- lag
-  attr(out, "pval") <-  1 - pchisq(out, 1:max_lag)
+  attr(out, "pval") <- 1 - pchisq(out, lag)
   class(out) <- "ac_test_"
   attr(out, "tname") <- "Ljung-Box"
   out
@@ -164,7 +164,7 @@ ac_test_bp.ivx <- function(x, lag = 1) {
 #' @rdname ac_test_
 #' @export
 ac_test_bg <- function(x, order, type, fill) {
-  UseMethod("ac_test_bp")
+  UseMethod("ac_test_bg")
 }
 
 
@@ -198,7 +198,7 @@ ac_test_bg.ivx <- function(x, order = 1, type = c("Chisq", "F"), fill = 0) {
       names(df) <- c("df1", "df2")
       p.val <- 1 - pf(bg, df1 = df[1], df2 = df[2])
     })
-  structure(bg, pvalue = p.val)
+  structure(bg, pval = p.val, pvalue = p.val, df = df, tname = "Breusch-Godfrey", class = "ac_test_")
 }
 
 #' @export
@@ -219,7 +219,9 @@ ac_test_bg.default <- function(x, order, type, fill) {
 #' @export
 #' @examples
 #' obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
-#' lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+#' if (requireNamespace("lmtest", quietly = TRUE)) {
+#'   lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+#' }
 #' ac_test(obj, 5)
 #'
 ac_test <- function(x, lag_max = 5) {
@@ -233,8 +235,8 @@ ac_test.ivx <- function(x, lag_max = 5) {
   bg <- pval <-  vector("numeric", lag_max)
   for(i in 1:lag_max) {
     temp <- ac_test_bg.ivx(x, order = i)
-    pval[i] <- attr(temp, "pvalue")
-    bg[i] <- temp
+    pval[i] <- attr(temp, "pval")
+    bg[i] <- unclass(temp)
   }
   stats$BreuschGodfrey <- bg
   attr(stats, "pvalue")$BreuschGodfrey  <- pval

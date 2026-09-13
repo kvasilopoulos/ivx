@@ -5,6 +5,7 @@
 
 # YLPC Table 1 p6
 test_that("ivx_ar univariate", {
+  skip_if_not_installed("forecast")
 
   spec <- ivx(hpi ~ inv, ylpc)
   expect_equal(unname(spec$ols$coefficients[2]), 0.0070, tol = 0.0001)
@@ -21,6 +22,7 @@ test_that("ivx_ar univariate", {
 })
 
 test_that("ar estimation is identical", {
+  skip_if_not_installed("forecast")
   ar_fixed <- ivx_ar(hpi ~ inv, ylpc, ar = 4)$coefficients_ar
   ar_forecast <- ivx_ar(hpi ~ inv, ylpc, ar = "forecast",
                        stepwise=FALSE, approximation  = FALSE)$coefficients_ar

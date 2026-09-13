@@ -63,34 +63,11 @@ ivx_ra <- function(formula, data, ar = "auto", ar_ic = c("aic", "bic"), ar_max =
   if (!identical(ar, "auto") && !(is.numeric(ar) && length(ar) == 1 && ar >= 1 && ar == trunc(ar))) {
     stop("`ar` should be either 'auto' or a positive integer.", call. = FALSE)
   }
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  if (attr(mt, "intercept") == 0) {
-    warning("ivx estimation does not include an intercept by construction", call. = FALSE)
-  }
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  if (is.matrix(y)) {
-    stop("multivariate model is not available", call. = FALSE)
-  }
-  x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_ra_fit(y, x, ar = ar, ar_ic = ar_ic, ar_max = ar_max, horizon = horizon,
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts)
+  z <- ivx_ra_fit(fr$y, fr$x, ar = ar, ar_ic = ar_ic, ar_max = ar_max, horizon = horizon,
                   beta = beta, cz = cz, ...)
   class(z) <- c("ivx_ra", "ivx")
-  z$na.action <- attr(mf, "na.action")
-  z$contrasts <- attr(x, "contrasts")
-  z$xlevels <- .getXlevels(mt, mf)
-  z$call <- cl
-  z$terms <- mt
-  if (model) z$model <- mf
-  if (ret.x) z$x <- x
-  if (ret.y) z$y <- y
-  z
+  ivx_finish(z, fr, cl, model, ret.x, ret.y)
 }
 
 #' Fitter Function for Residual-Augmented IVX Models

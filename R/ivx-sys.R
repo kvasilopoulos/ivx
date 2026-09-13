@@ -37,31 +37,12 @@ ivx_sys <- function(formula, data, horizon, na.action, contrasts = NULL,
   ret.y <- y
   cl <- match.call()
   if (missing(horizon)) horizon <- cl$horizon <- 1
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  if (attr(mt, "intercept") == 0) {
-    warning("ivx estimation does not include an intercept by construction", call. = FALSE)
-  }
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts, univariate = FALSE)
+  y <- fr$y
   if (!is.matrix(y)) y <- matrix(y, dimnames = list(NULL, deparse(formula[[2]])))
-  x <- model.matrix(mt, mf, contrasts)
-  z <- ivx_sys_fit(y, x, horizon = horizon, beta = beta, cz = cz, bandwidth = bandwidth, ...)
+  z <- ivx_sys_fit(y, fr$x, horizon = horizon, beta = beta, cz = cz, bandwidth = bandwidth, ...)
   class(z) <- "ivx_sys"
-  z$na.action <- attr(mf, "na.action")
-  z$contrasts <- attr(x, "contrasts")
-  z$xlevels <- .getXlevels(mt, mf)
-  z$call <- cl
-  z$terms <- mt
-  if (model) z$model <- mf
-  if (ret.x) z$x <- x
-  if (ret.y) z$y <- y
-  z
+  ivx_finish(z, fr, cl, model, ret.x, ret.y)
 }
 
 #' Fitter Function for Systems IVX Models

@@ -18,9 +18,14 @@ persistent regressors. Rcpp/Armadillo backend.
 - `R/ivx-episodic.R` — `ivx_episodic()` subsample sup/ave tests (DGRT 2022); `src/sub_ivx.cpp`.
 - `R/ivx-iv.R` — `ivx_iv()` 2SLS with sine/fractional/long-difference instruments
   (Breitung & Demetrescu 2015).
-- Non-IVX benchmarks: `R/arm.R` (`arm()`, Amihud-Hurvich-Wang 2009), `R/hlt-test.R`
-  (`hlt_test()`, Harvey-Leybourne-Taylor 2021), `R/el-test.R` (`el_test()`, Liu-Yang-Cai-Peng
-  2019; `el_ratio()` is a generic Owen EL solver).
+- Non-IVX benchmarks: `R/cy-test.R` (`cy_test()`, Campbell-Yogo 2006; DF-GLS quantile table
+  `dfgls_q` and CY Table 2 in `R/sysdata.rda`, built by `data-raw/dfgls-quantiles.R`),
+  `R/arm.R` (`arm()`, Amihud-Hurvich-Wang 2009), `R/elliott-cf.R` (`elliott_cf()`, Elliott 2011),
+  `R/hlt-test.R` (`hlt_test()`, Harvey-Leybourne-Taylor 2021), `R/el-test.R` (`el_test()`,
+  Liu-Yang-Cai-Peng 2019; `el_ratio()` is a generic Owen EL solver).
+- `R/utils.R` — `ivx_frame()` / `ivx_finish()` (model-frame boilerplate shared by every formula
+  interface; the intercept is always dropped from the terms), `adf_lag()` (ADF regression with
+  BIC/MBIC lag choice, used by `cy_test` and `hlt_test`).
 - `R/ac_test.R` — serial-correlation diagnostics. `R/methods*.R`, `R/extract-texreg-methods.R` —
   S3 / texreg support. `R/auto-ar.R` — AR order selection helper.
 - `tests/testthat/test-<file>.R` mirrors each `R/` file.

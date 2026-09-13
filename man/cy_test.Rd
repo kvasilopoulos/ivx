@@ -22,7 +22,7 @@ the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
 
 \item{lag_max}{maximum ADF lag order for the BIC search; the default is
-\eqn{\lfloor 12 (T/100)^{1/4} \rfloor}.}
+\eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences.}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},

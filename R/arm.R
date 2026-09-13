@@ -43,28 +43,10 @@ arm <- function(formula, data, iter = 10, na.action, contrasts = NULL,
   ret.x <- x
   ret.y <- y
   cl <- match.call()
-  mf <- match.call(expand.dots = FALSE)
-  m <- match(c("formula", "data", "na.action"), names(mf), 0)
-  mf <- mf[c(1, m)]
-  mf$drop.unused.levels <- TRUE
-  mf[[1]] <- quote(stats::model.frame)
-  mf <- eval.parent(mf)
-  mt <- attr(mf, "terms")
-  attr(mt, "intercept") <- 0
-  y <- model.response(mf, "numeric")
-  if (is.matrix(y)) stop("multivariate model is not available", call. = FALSE)
-  x <- model.matrix(mt, mf, contrasts)
-  z <- arm_fit(y, x, iter = iter, ...)
+  fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame(), contrasts)
+  z <- arm_fit(fr$y, fr$x, iter = iter, ...)
   class(z) <- c("arm", "ivx")
-  z$na.action <- attr(mf, "na.action")
-  z$contrasts <- attr(x, "contrasts")
-  z$xlevels <- .getXlevels(mt, mf)
-  z$call <- cl
-  z$terms <- mt
-  if (model) z$model <- mf
-  if (ret.x) z$x <- x
-  if (ret.y) z$y <- y
-  z
+  ivx_finish(z, fr, cl, model, ret.x, ret.y)
 }
 
 #' Fitter Function for the Augmented Regression Method
