@@ -124,6 +124,7 @@ logLik.ivx <- function(object, ...) {
 }
 
 #' @export
+#' @importFrom stats nobs logLik
 nobs.ivx <- function(object, ...) {
   attr(logLik(object), "nobs")
 }
