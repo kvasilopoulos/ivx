@@ -73,6 +73,12 @@ Deferred from the collected papers:
 7. **Lee, Shi & Gao (2022)** — TAlasso variable selection; out of the package's scope
    (inference, not selection).
 
+7b. **Jansson & Moreira (2006)** — conditional likelihood optimal test. Deferred: the
+   critical value functions are conditional quantiles of the joint distribution of
+   \(R_eta, R_\gamma, R_{etaeta}, R_{eta\gamma}, R_{\gamma\gamma}\) given by the
+   characteristic-function inversion of Theorem 7; needs the authors' numerical code to
+   implement faithfully, and Campbell & Yogo's Q-test (`cy_test()`) has higher finite-sample
+   power in their Tables I-II.
 8. **Liao-Li-Fan (2024) improved IVX** — `ivx(..., correction = "llf")` per Algorithm 1.
    Deferred: unpublished, and Algorithm 1 (sample-split weights, bias term with its own
    tuning, variance-enlargement correction, LM residuals) needs the authors' code or the

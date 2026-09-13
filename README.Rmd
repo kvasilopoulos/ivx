@@ -104,17 +104,32 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
 
 ```
 
-<!--
-#### To-do	
+## Other IVX-based methods
 
-* The Bonferroni method	
-  - Cavanagh et al (1995)	
-  - Campbell and Yogo (2006)	
-* A conditional likelihood approach	
-  - Jansson and Moreira (2006)	
-* A control function approach	
-  - Elliot (2001)
--->
+| function | method |
+|---|---|
+| `ivx_ra()` | residual-augmented IVX, short and long horizon (Demetrescu & Rodrigues 2022; Demetrescu, Rodrigues & Taylor 2023) |
+| `ivx_qr()`, `ivx_qr_boot()` | IVX quantile regression (Lee 2016) and its block bootstrap (Fan & Lee 2019) |
+| `ivx_sys()` | systems of predictive regressions (Kostakis et al. 2023) |
+| `ivx_episodic()` | subsample tests for pockets of predictability (Demetrescu et al. 2022) |
+| `ivx_iv()` | 2SLS with sine / fractional / long-difference instruments (Breitung & Demetrescu 2015) |
+| `ivx(..., lag_y = TRUE)` | lag-augmented IVX (Demetrescu 2014) |
+
+## Non-IVX benchmarks
+
+| function | method |
+|---|---|
+| `cy_test()` | Bonferroni Q-test (Campbell & Yogo 2006; Cavanagh, Elliott & Stock 1995) |
+| `arm()` | augmented regression method (Amihud, Hurvich & Wang 2009) |
+| `elliott_cf()` | control-function regression with user-supplied covariates (Elliott 2011) |
+| `hlt_test()` | hybrid switching t-test (Harvey, Leybourne & Taylor 2021) |
+| `el_test()` | unified empirical likelihood test (Liu, Yang, Cai & Peng 2019) |
+
+The conditional likelihood test of Jansson & Moreira (2006) is not
+implemented: its critical values are conditional quantiles of a nonstandard
+joint distribution that must be obtained by numerical Fourier inversion
+(their Theorem 7), and the Q-test has higher finite-sample power in their own
+comparisons.
 
 
 ---

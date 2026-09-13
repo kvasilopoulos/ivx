@@ -13,6 +13,7 @@ Kostakis, Magdalinos and Stamatogiannis (2015) DOI: 10.1093/rfs/hhu139.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://kvasilopoulos.github.io/ivx/}
   \item \url{https://github.com/kvasilopoulos/ivx}
   \item Report bugs at \url{https://github.com/kvasilopoulos/ivx/issues}
 }
