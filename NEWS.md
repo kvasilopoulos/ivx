@@ -1,4 +1,4 @@
-# ivx 1.2.0
+# ivx 2.0.0
 
 * New vignette "Choosing a test: a decision workflow" (`vignette("workflow")`)
   that walks from the plain `ivx()` fit through the diagnostics (`ac_test()`,
