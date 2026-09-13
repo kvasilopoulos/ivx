@@ -211,6 +211,9 @@ The EL dual problem is solved by Newton's method with Owen's (2001)
 pseudo-logarithm; the profiles are minimised over the nuisance coefficient
 by BFGS from the OLS start.
 
+The Monte Carlo figures quoted in this vignette are reproduced by
+`research/replication/extensions-2026/size-checks.R` in the source repository.
+
 ## References
 
 * Amihud, Y., Hurvich, C. M., & Wang, Y. (2009). Multiple-predictor
