@@ -21,9 +21,9 @@ NEWS.md.
 
 0 errors | 0 warnings | 0 notes
 
-(The local run shows one NOTE about 'ivx-manual.tex' in the check directory,
-an artefact of running R CMD check inside devtools' scratch directory, not of
-the package.)
+(The local Windows run shows one NOTE, "non-standard things in the check
+directory: 'NULL'", an artefact of the local check environment; it does not
+appear on the CI platforms.)
 
 ## Downstream dependencies
 
