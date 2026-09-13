@@ -66,6 +66,10 @@
   Cavanagh, Elliott & Stock 1995 approach): DF-GLS confidence interval for the
   largest root inverted from simulated local-to-unity quantiles, Table 2 levels,
   Q-estimates with the AR(p) correction of Appendix A.
+* New `elliott_cf()`: the control-function predictive regression of Elliott
+  (2011) with user-supplied orthogonalising covariates and their lags, Wald
+  test with Eicker-White standard errors and the remaining innovation
+  correlation as a diagnostic.
 * Fixed: weighted fits ignored the `horizon` argument.
 * `extract()` (texreg) now reports IVX standard errors instead of Wald statistics
   in the `se` slot.

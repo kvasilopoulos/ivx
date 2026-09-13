@@ -15,12 +15,12 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(ivx)
 ```
 
-Four non-IVX procedures are included as the benchmarks the IVX literature
+Five non-IVX procedures are included as the benchmarks the IVX literature
 compares against: the Bonferroni Q-test of Campbell & Yogo (2006), `cy_test()`;
-the augmented regression method of Amihud, Hurvich & Wang (2009), `arm()`; the
-hybrid switching t-test of Harvey, Leybourne & Taylor (2021), `hlt_test()`; and
-the unified empirical likelihood test of Liu, Yang, Cai & Peng (2019),
-`el_test()`.
+the augmented regression method of Amihud, Hurvich & Wang (2009), `arm()`;
+the control-function regression of Elliott (2011), `elliott_cf()`; the hybrid
+switching t-test of Harvey, Leybourne & Taylor (2021), `hlt_test()`; and the
+unified empirical likelihood test of Liu, Yang, Cai & Peng (2019), `el_test()`.
 
 # Bonferroni Q-test
 
@@ -116,6 +116,32 @@ $0.894$ against an OLS mean of $0.857$. In the paper's two-predictor Case 1 the
   `ivx()` or `ivx_ra()`.
 * VAR(1) only, short horizon only, no bootstrap.
 
+# Control-function regression
+
+Elliott (2011) shows that if stationary covariates $z_t$ are available that
+are contemporaneously correlated with the shocks to both the predictor and
+the response, the Wald test of $eta = 0$ in
+$$
+y_t = lpha + eta' x_{t-1} + \gamma' Z_t + 	ilde u_t, \qquad
+Z_t = (z_t', z_{t-1}', \dots, z_{t-q}')',
+$$
+is asymptotically $\chi^2$ whatever the persistence of $x_t$, because the
+covariates "orthogonalise" the innovations (his Theorem 2 versus the
+Elliott–Stock 1994 distribution of Theorem 1). The covariates are a modelling
+choice, not a data construction — `arm()` and `ivx_ra()` are the feasible
+versions where the control variable is built from the predictor's own
+innovations. `elliott_cf()` runs the regression, reports the Wald test with
+Eicker-White standard errors and the correlation that remains between the
+regression residuals and the predictor innovations, which should be near zero.
+
+```{r}
+elliott_cf(Ret ~ DP, ~ TBL, data = kms, lags = 1)
+```
+
+With a covariate that does absorb the correlation ($z_t = v_t + $ noise,
+$\delta = -0.9$, $c = 0$, $T = 200$) the 5% test rejects a true null 4% of the
+time against 23% for plain OLS (500 replications).
+
 # Hybrid t-test
 
 `hlt_test()` implements $T_{hyb}$ of Harvey, Leybourne & Taylor (2021) for a
@@ -197,6 +223,9 @@ by BFGS from the OLS start.
   predictability. *Journal of Financial Economics*, 81(1), 27–60.
 * Cavanagh, C. L., Elliott, G., & Stock, J. H. (1995). Inference in models
   with nearly integrated regressors. *Econometric Theory*, 11(5), 1131–1147.
+* Elliott, G. (2011). A control function approach for testing the usefulness
+  of trending variables in predictive regressions and econometric models.
+  *Journal of Econometrics*, 164(1), 79–91.
 * Elliott, G., Rothenberg, T. J., & Stock, J. H. (1996). Efficient tests for
   an autoregressive unit root. *Econometrica*, 64(4), 813–836.
 * Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple tests

@@ -43,6 +43,7 @@ reference:
       - hlt_test
       - el_test
       - cy_test
+      - elliott_cf
 
   - title: Fitter functions
     desc: Low-level functions taking a response and a design matrix.
