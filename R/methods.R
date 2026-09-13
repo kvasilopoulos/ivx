@@ -124,6 +124,11 @@ logLik.ivx <- function(object, ...) {
 }
 
 #' @export
+nobs.ivx <- function(object, ...) {
+  attr(logLik(object), "nobs")
+}
+
+#' @export
 #' @importFrom stats weighted.residuals
 deviance.ivx <- function(object, ...) {
   sum(weighted.residuals(object)^2, na.rm = TRUE)

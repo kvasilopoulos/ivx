@@ -26,6 +26,8 @@ test_that("step-methods are deprecated but still run", {
   suppressWarnings(expect_error(capture.output(step(obj)), NA))
   expect_error(deviance(obj), NA)
   expect_error(logLik(obj), NA)
+  expect_equal(nobs(obj), attr(logLik(obj), "nobs"))
+  expect_equal(nobs(obj_ar), length(residuals(obj_ar)))
   suppressWarnings(expect_error(drop1(obj_ar), "only supported"))
 })
 
