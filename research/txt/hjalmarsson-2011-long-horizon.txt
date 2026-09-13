@@ -1,0 +1,1559 @@
+JOURNAL OF FINANCIAL AND QUANTITATIVE ANALYSIS  Vol. 46, No. 3, June 2011, pp. 815­839             https://doi.org/10.1017/S0022109011000135
+
+COPYRIGHT 2011, MICHAEL G. FOSTER SCHOOL OF BUSINESS, UNIVERSITY OF WASHINGTON, SEATTLE, WA 98195
+
+doi:10.1017/S0022109011000135
+
+New Methods for Inference in Long-Horizon
+Regressions
+
+Erik Hjalmarsson
+
+Abstract
+
+I develop new results for long-horizon predictive regressions with overlapping observa-
+tions. I show that rather than using autocorrelation robust standard errors, the standard
+t-statistic can simply be divided by the square root of the forecasting horizon to correct
+for the effects of the overlap in the data. Further, when the regressors are persistent and
+endogenous, the long-run ordinary least squares (OLS) estimator suffers from the same
+problems as the short-run OLS estimator, and it is shown how similar corrections and test
+procedures as those proposed for the short-run case can also be implemented in the long
+run. An empirical application to stock return predictability shows that, contrary to many
+popular beliefs, evidence of predictability does not typically become stronger at longer
+forecasting horizons.
+
+I. Introduction
+
+      Predictive regressions are used frequently in empirical finance and eco-
+nomics. The underlying economic motivation is often the test of a rational expec-
+tations model, which implies that the innovations to the dependent variable should
+be orthogonal to all past information (i.e., the dependent variable should not be
+predictable using any lagged regressors). Although this orthogonality condition
+should hold at any time horizon, it is popular to test for predictability by regress-
+ing sums of future values of the dependent variable onto the current value of the
+regressor. A leading example is the question of stock return predictability, where
+regressions with 5- or 10-year returns are often used (e.g., Campbell and Shiller
+(1988), Fama and French (1988)). While stock return predictability also serves as
+
+   Hjalmarsson, e.hjalmarsson@qmul.ac.uk, Queen Mary, University of London, School of
+Economics and Finance, Mile End Road, London E1 4NS, UK. The paper has greatly
+benefited from advice by an anonymous referee. Other helpful comments have also been
+provided by Don Andrews, Hendrik Bessembinder (the editor), John Campbell, Dobrislav
+Dobrev, Ray Fair, Jon Faust, Lennart Hjalmarsson, Randi Hjalmarsson, Yuichi Kitamura,
+Taisuke Otsu, Peter Phillips, Robert Shiller, as well as participants in the econometrics semi-
+nar and workshop at Yale University, the international finance seminar at the Federal Reserve
+Board, the finance seminar at Go¨teborg University, the 2005 World meeting of the Econometric
+Society in London, and the 2007 Copenhagen Conference on Stock Return Predictability.
+
+                                                    815
+816 Journal of Financial and Quantitative Analysis                                                        https://doi.org/10.1017/S0022109011000135
+
+the motivating example in this paper, the results are applicable to a much wider
+range of empirical questions.1
+
+      The main inferential issue in long-horizon regressions has been the proper
+calculation of standard errors. Since overlapping observations are typically used,
+the regression residuals will exhibit strong serial correlation; standard errors fail-
+ing to account for this fact will lead to biased inference. Therefore, autocorrelation
+robust estimation of the standard errors (e.g., Hansen and Hodrick (1980), Newey
+and West (1987)) is typically used. However, these robust estimators tend to per-
+form poorly in finite samples, since the serial correlation induced in the error
+terms by overlapping data is often very strong.
+
+      The main contribution of this paper is the development of new results and
+methods for long-run regressions with overlapping observations. Using a frame-
+work where the predictors are highly persistent variables, as in Stambaugh (1999)
+and Campbell and Yogo (2006), I show how to obtain asymptotically correct test
+statistics, with good small sample properties, for the null hypothesis of no pre-
+dictability. Rather than using robust standard errors, I find that the standard t-
+statistic can simply be divided by the square root of the forecasting horizon to
+correct for the effects of the overlap in the data. Further, when the regressor is
+persistent and endogenous, the long-run ordinary least squares (OLS) estimator
+suffers from the same problems as the short-run OLS estimator, and similar cor-
+rections and test procedures as those proposed by Campbell and Yogo for the
+short-run case should also be used in the long run; again, the resulting test statis-
+tics should be scaled due to the overlap.2 Thus, these results lead to simple and
+more efficient inference in long-run regressions by obviating the need for robust
+standard error estimation methods and controlling for the endogeneity and persis-
+tence of the regressor.
+
+      The asymptotic results in this paper are derived under the assumption that
+the forecasting horizon remains fixed as the sample size increases and thus com-
+plement the results of Valkanov (2003), who relies on the assumption that the
+forecasting horizon grows with the sample size. Interestingly, both asymptotic ap-
+proaches lead to similar scaling results for the t-statistic. In relation to Valkanov's
+study, the current paper makes two important contributions. First, I show that with
+exogenous regressors, the scaled standard t-statistic will be normally distributed
+and standard inference can thus be performed. Second, when the regressors are
+endogenous, the inferential methods can be suitably modified to correct for the
+biasing endogeneity effects; this can be seen as an analogue of the inferential pro-
+cedures developed by Campbell and Yogo (2006) for short-run, 1-period-horizon
+
+    1Other applications of long-horizon regressions include tests of exchange rate predictability
+(Mark (1995), Berkowitz and Giorgianni (2001), and Rossi (2005)), the Fisher effect (Mishkin
+(1990), (1992), Boudoukh and Richardson (1993)), and the neutrality of money (Fisher and
+Seater (1993)).
+
+    2A predictive regressor is generally referred to as endogenous if the innovations to the returns
+are contemporaneously correlated with the innovations to the regressor. When the regressor is strictly
+stationary, such endogeneity has no impact on the properties of the estimator, but when the regressor
+is persistent in some manner, the properties of the estimator will be affected (e.g., Stambaugh (1999)).
+Nelson and Kim (1993) may be the first to raise the biasing problems of endogenous regressors in the
+long-horizon case.
+                                                                                   Hjalmarsson 817      https://doi.org/10.1017/S0022109011000135
+
+regressions. Importantly, the modified test statistic in the endogenous case is again
+normally distributed. In contrast, Valkanov's test statistics have highly nonstan-
+dard distributions, both for exogenous and endogenous regressors, which require
+simulation of the critical values for each specific case.
+
+      Asymptotic results are, of course, only useful to the extent that they provide
+relevant information regarding the finite sample properties of an econometric pro-
+cedure. As shown in Monte Carlo simulations, both the asymptotic results derived
+under the assumptions in this paper and those derived under the assumptions in
+Valkanov's (2003) paper provide good approximations of finite sample behavior.
+The simulations show that the asymptotic normal distribution of the test statistics
+derived in this paper provides a good approximation in finite samples, even when
+the forecasting horizon is large compared to the sample size, resulting in rejection
+rates that are very close to the nominal size of the test under the null hypothe-
+sis. In terms of power properties, the Monte Carlo simulations show that the tests
+proposed here are fairly similar to those of Valkanov, although there are typically
+some power advantages to the current procedures. This is especially true when
+the regressors are endogenous, in which case the test procedures derived here can
+be substantially more powerful than the test proposed by Valkanov.
+
+      The rest of the paper is organized as follows. Section II sets up the model and
+derives the theoretical results, and Section III discusses the practical implementa-
+tion of the methods in the paper. Section IV describes the Monte Carlo simulations
+that illustrate the finite sample properties of the methods. An empirical applica-
+tion to stock return predictability is given in Section V, where it is shown that,
+contrary to many popular beliefs, evidence of predictability does not typically be-
+come stronger at longer forecasting horizons. Section VI concludes, and technical
+proofs are found in the Appendix.
+
+II. Long-Run Estimation
+
+A. Model and Assumptions
+
+      Although the results derived in this paper are of general applicability, it is
+helpful to discuss the model and derivations in light of the specific question of
+stock return predictability. Thus, let the dependent variable be denoted rt, which
+would typically represent excess stock returns when analyzing return predictabil-
+ity, and the corresponding regressor, xt.3 In long-run regressions, the focus of
+interest is the fitted regression,
+
+(1)                 rt+q (q) = q + qxt + ut+q (q) ,
+
+where rt(q) =  q    rt-q+j,  and  long-run  future  returns  are  regressed  onto  a
+               j=1
+1-period predictor. The OLS estimator of q in equation (1), using overlapping
+
+observations, is denoted by ^q.
+
+    3The asymptotic results presented in Section II all generalize immediately to the case of multiple
+regressors. However, the Bonferroni methods described in Section III are currently only developed for
+the case of a single regressor.
+818 Journal of Financial and Quantitative Analysis                                                     https://doi.org/10.1017/S0022109011000135
+
+      It is important to stress that equation (1) is a fitted regression and should
+not be interpreted as the data-generating process (DGP). That is, the DGP more
+naturally describes the true model for rt, rather than rt(q), since the latter is just a
+sum of the former. In particular, the behavior of rt and xt are assumed to satisfy
+
+(2)  rt+1 =  + xt + ut+1,
+
+(3)  xt+1 =  + xt + vt+1,
+
+where  = 1 + c/T, t = 1, . . . , T, and T is the sample size; the demeaned versions
+of rt and xt will be denoted as rt and xt, respectively. Throughout the paper, the
+results are derived under the null hypothesis of no predictability, in which case
+equation (2) simplifies to rt+1 =  + ut+1 and immediately implies that q = 0 for
+all q. However, it will sometimes be useful to refer to a DGP that also allows for
+return predictability, such as in the power simulations, and equation (2) therefore
+allows for deviations from the null.
+
+      The joint error process, wt = (ut, vt) , is assumed to satisfy the usual martin-
+gale difference assumption and can be conditionally heteroskedastic, as long as
+it is covariance stationary; Assumption 1 in Appendix B states the formal con-
+ditions. The covariance matrix is denoted  = E[wtwt] = [(11, 12), (12, 22)].
+The error terms ut and vt are often highly correlated, and the regressor will be
+re1f2e/rred1t1oa2s2,einsdnoognezneorou.s whenever this correlation, which will be labeled  
+
+      The autoregressive root of the regressor is parameterized as being local-to-
+unity, which captures the near unit-root, or highly persistent, behavior of many
+predictor variables, but is less restrictive than a pure unit-root assumption. The
+near unit-root construction, where the autoregressive root drifts closer to unity as
+the sample size increases, is used as a tool to enable an asymptotic analysis where
+the persistence in the data remains large relative to the sample size, also as the
+sample size increases to infinity. That is, if  is treated as fixed and strictly less
+than unity, then as the sample size grows, the process xt will behave as a strictly
+stationary process asymptotically, and the standard 1st-order asymptotic results
+will not provide a good guide to the actual small sample properties of the model.
+For  = 1, the usual unit-root asymptotics apply to the model, but this is clearly
+a restrictive assumption for most potential predictor variables. Instead, by letting
+ = 1 + c/T, the effects from the high persistence in the regressor will appear
+also in the asymptotic results, but without imposing the strict assumption of a unit
+root.
+
+      The greatest problem in dealing with regressors that are near unit-root pro-
+cesses is the nuisance parameter c, which is generally unknown and not consis-
+tently estimable.4 It is nevertheless useful to first derive inferential methods under
+the assumption that c is known, and then use the arguments of Cavanagh, Elliot,
+and Stock (1995) to construct feasible tests. The remainder of this section derives
+and outlines the inferential methods used for estimating and performing tests on
+q in equation (1), treating c as known. Section III discusses how the methods of
+
+     4That is,  can be estimated consistently, but not with enough precision to identify c = T( - 1).
+                                                                                   Hjalmarsson 819  https://doi.org/10.1017/S0022109011000135
+
+Cavanagh et al. and Campbell and Yogo (2006) can be used to construct feasible
+tests with c unknown.
+
+B. The Limiting Distribution of the Long-Run OLS Estimator
+
+      The following theorem states the asymptotic distribution of the long-run
+OLS estimator of equation (1) and provides the key building block for the rest
+of the analysis.
+
+Theorem 1.  Under the null hypothesis of no predictability, for a fixed q as
+T  ,
+            T                          1           1          -1
+(4)         q
+               ^q - 0                    dB1Jc           J2c      ,
+
+                                      0         0
+
+where B(·) = (B1(·), B2(·)) denotes a 2-dimensional Brownian motion with
+                                      r                                     1
+variance-covariance matrix , Jc(r) =  0  e(r-s)cdB2(s),  and  Jc  =  Jc  -  0  Jc.
+
+      Theorem 1 shows that under the null of no predictability, the limiting distri-
+bution of ^q is identical to that of the standard short-run, 1-period, OLS estimator
+^ in equation (2), which is easily shown to converge to this distribution at a rate
+T (Cavanagh et al. (1995)), although ^q needs to be standardized by q-1. This
+additional standardization follows since the estimated parameter q is of an order
+q times larger than the short-run parameter , as discussed at length in Boudoukh,
+Richardson, and Whitelaw (2008).
+
+      The equality between the long-run asymptotic distribution under the null
+hypothesis, shown in Theorem 1, and that of the short-run OLS estimator may
+seem puzzling. The intuition behind this result stems from the persistent nature of
+the regressors. In a (near) unit-root process, the long-run movements dominate the
+behavior of the process. Therefore, regardless of whether one focuses on the long-
+run behavior, as is done in a long-horizon regression, or includes both the short-
+run and long-run information, as is done in a standard 1-period OLS estimation,
+the asymptotic result is the same since, asymptotically, the long-run movements
+are all that matter.
+
+      The limiting distribution of ^q is nonstandard and a function of the local-to-
+unity parameter c. Since c is not known, and not consistently estimable, the exact
+limiting distribution is not known in practice, which makes valid inference diffi-
+cult. Cavanagh et al. (1995) suggest putting bounds on c in some manner and then
+find the most conservative value of the limiting distribution for some value of c
+within these bounds. Campbell and Yogo (2006) suggest first modifying the esti-
+mator or, ultimately, the resulting test statistic, in an optimal manner for a known
+value of c, which results in more powerful tests. Again using a bounds procedure,
+the most conservative value of the modified test statistic can be chosen for a value
+of c within these bounds. I will pursue a long-run analogue of this latter approach
+here, since it leads to more efficient tests and because the relevant limiting dis-
+tribution is standard normal, which greatly simplifies practical inference. Before
+deriving the modified estimator and test statistic, however, it is instructive to con-
+sider the special case of exogenous regressors where no modifications are needed.
+820 Journal of Financial and Quantitative Analysis                                                      https://doi.org/10.1017/S0022109011000135
+
+C. The Special Case of Exogenous Regressors
+
+      Suppose the regressor xt is exogenous in the sense that ut is uncorrelated with
+vt and thus  = 12 = 0.5 In this case, the limiting processes B1 and Jc are orthog-
+onal to each other, and the limiting distribution in (4) simplifies. In particular, it
+
+follows that
+
+     T                 1                               1       -1
+     q
+(5)     ^q - 0           dB1Jc                            J2c
+
+                      0                             0
+                                                                   
+                                                               -1
+                                                    1
+
+                 MN 0, 11                              J2c  ,
+
+                                        0
+
+where MN(·) denotes a mixed normal distribution. That is, ^q is asymptotically
+distributed as a normal distribution with a random variance. Thus, conditional on
+this variance, ^q is asymptotically normally distributed. The practical implication
+of this result is that regular test statistics will have standard distributions. In fact,
+the following convenient result for the standard t-statistic now holds.
+
+Corollary 1. Let tq denote the standard t-statistic corresponding to ^q. That is,
+
+(6)  tq =                         ^q                                 ,
+
+                  1   T -q        (q)2              T -q  x2t  -1
+                T -q  t=1                           t=1
+                            u^ t
+
+where u^ t+q(q) = rt+q(q) - ^ q - ^qxt are the estimated residuals. Then, under the
+null hypothesis of no predictability and an exogenous regressor with  = 0, for a
+fixed q as T  ,
+
+(7)             tqq  N(0, 1).
+
+      Thus, by standardizing the t-statistic for ^q by the square root of the forecast-
+ing horizon, the effects of the overlap in the data are controlled for and a standard
+normal distribution is obtained.
+
+D. Endogeneity Corrections
+
+      As discussed previously, the long-run OLS estimator suffers from the same
+endogeneity problems as the short-run estimator; that is, when the regressor is en-
+dogenous, the limiting distribution is nonstandard and a function of the unknown
+parameter c. To address this issue, I consider a version of the augmented regres-
+sion of Phillips (1991), together with the Bonferroni methods of Campbell and
+
+    5Although hardly any regressors in a typical macro or finance regression will be completely exoge-
+nous, some are "sufficiently" exogenous for the bias in OLS inference to be of negligible importance.
+For instance, Campbell and Yogo (2006) show that OLS inference with interest-rate-based predictors
+in stock return regressions tends to be fairly accurate.
+                                                                       Hjalmarsson 821                                 https://doi.org/10.1017/S0022109011000135
+
+Yogo (2006). For now, I assume that , or equivalently c, is known and derive an
+estimator and test statistic under this assumption.
+
+      Note that, for a given , the innovations vt can be obtained from vt = xt -
+xt-1. Consider first the 1-period regression. Once the innovations vt are obtained,
+an implementation of the augmented regression equation of Phillips (1991), which
+
+he proposed for the pure unit-root case, is now possible:
+
+(8)                 rt+1 =  + xt + vt+1 + ut+1·v.
+
+Here  ut·v = ut - 122-21vt and    1=222-1221. 2-T2h1 e(Pihdielalipbse(h1in9d91e)q),uaantidonde(n8o)teisththeavtabriy-
+ance  of ut·v as 11·2 = 11 -
+
+including the innovations vt as a regressor, the part of ut that is correlated with vt
+
+is removed from the regression residuals, which are now denoted ut·v to empha-
+
+size this fact. The regressor xt therefore behaves as if it were exogenous. It follows
+that the OLS estimator of  in equation (8) will have an asymptotic mixed nor-
+
+mal distribution, with the same implications as discussed previously in the case
+
+of exogenous regressors.6
+
+      As discussed in Hjalmarsson (2007), there is a close relationship between
+
+inference based on the augmented regression equation (8) and the inferential
+
+procedures proposed by Campbell and Yogo (2006). To see this, suppose first
+
+that the covariance matrix for the innovation process, , is known, and hence
+also  = 122-21 and 11·2. The t-test for  = 0 in (8) is then asymptotically
+equivalent to
+
+(9) tAUG =          T -1   (rt+1  -  vt+1)   xt     =     T -1    rt+1 - 122-21vt+1     xt ,
+                    t=1                                   t=1
+
+                    11·2          T -1  xt2                       11·2  T -1     xt2
+                                  t=1                                   t=1
+
+which is, in fact, identical to Campbell and Yogo's Q-statistic. In practice,  is
+not known, but  will be consistently estimated by OLS estimation of equation (8)
+and 11·2 is estimated as the sample variance of the residuals.7
+
+      In the current context, the augmented regression equation is attractive, since
+
+it can easily be generalized to the long-horizon case. Thus, consider the aug-
+
+mented long-run regression equation
+
+(10)           rt+q (q) = q + qxt + qvt+q (q) + ut+q·v (q) ,
+
+where vt(q) =  q    vt-q+j.  The     idea  is  the  same  as  in  the  1-period  case,  only
+               j=1
+now the corresponding long-run innovations vt+q(q) are included as an additional
+
+    6Amihud and Hurvich (2004) also consider augmented predictive regressions in the 1-period case,
+although they do not explicitly analyze the case where the autoregressive root is local to unity.
+
+    7Campbell and Yogo (2006) derive their Q-statistic as the uniformly most powerful test (condi-
+tional on an ancillary statistic) in a Gaussian framework. Phillips (1991) shows that OLS estimation
+of  in equation (8) is identical to estimation of  via Gaussian full information maximum likelihood
+of the system described by equations (2) and (3). The OLS estimator of equation (8) is thus effectively
+Fisher efficient in the sense that it asymptotically achieves the maximum concentration. These opti-
+mality properties in the short-run case motivate the use of the corresponding long-run extensions later.
+However, this does not imply any optimality for the long-run procedures.
+822 Journal of Financial and Quantitative Analysis                                                                     https://doi.org/10.1017/S0022109011000135
+
+regressor. Under the null hypothesis of no predictability, equation (10) follows
+immediately from the specification of the short-run returns in equation (2). That
+is, under the null hypothesis,
+
+(11)                 rt+1 =  + ut+1 =  + vt+1 + ut+1·v,
+
+with  and ut·v as previously specified. Equation (10) now follows from summing
+up across q-periods on each side of equation (11), with q = q and q = .8 Let
+^q+ be the OLS estimator of q in equation (10), using overlapping observations.
+
+The following result now holds.
+
+Theorem 2.  Under the null hypothesis of no predictability, for a fixed q as
+T  ,
+            T        ^q+ - 0                                             1               
+(12)        q                          MN 0, 11·2
+                                                                           Jc2        -1
+
+                                                                        0                .
+
+      The only difference from the result for the exogenous regressor case is the
+variance 11·2, which reflects the fact that the variation in ut that is correlated with
+vt has been removed. As in the exogenous case, given the asymptotically mixed
+normal distribution of ^q+, standard test procedures can now be applied to test the
+null of no predictability. In particular, the scaled t-statistic corresponding to ^q+
+will be normally distributed, as shown in the following corollary.
+
+Corollary 2. Let tq+ denote the standard t-statistic corresponding to ^q+. That is,
+
+(13)        tq+ =                                        ^q+                                    ,
+
+                                1     T -q    u^ +t·v  (q)2    a        T -q      zt  zt  -1
+                              T -q    t=1                               t=1
+                                                                                             a
+
+where u^ +t·v(q) are the estimated residuals, zt = (xt, vt+q(q)), and a = (1, 0) . Then,
+under the null hypothesis of no predictability, for a fixed q as T  ,
+
+(14)                                  tq+  N (0, 1) .
+                                      q
+
+      Figure 1 illustrates the results of Theorem 2 and Corollary 2. In particu-
+lar, Figure 1 shows the density of the standardized long-run estimates ^q+/q for
+
+8Under the alternative of predictability given by equation (2), the long-run augmented regression
+
+equation does not strictly hold in the sense that one cannot write rt+q(q) = q + qxt + qvt+q(q) +
+
+ut+q·v(q), where vt+q(q) and ut+q·v(q) are orthogonal to each other. In order to do so, one would need to
+                     q                q
+replace qvt+q(q)  q  j=1  vt+j  by    j=1  j  vt+j  for  some  j  that  are  not  identical  for   each  j.  Equation
+
+(10) is, however, still valid under the alternative in the sense that including vt+q(q) will control for
+
+some of the noise in the error term. The long-horizon regression is a fitted regression, and complete
+
+endogeneity corrections will in general be functions of "short-run" parameters (e.g., ) in the DGP. To
+
+the extent that one does not wish to first impose and estimate some short-run predictive relationship
+
+in order to estimate the long-run relationship, full endogeneity corrections under the alternative will
+
+therefore typically not be possible.
+                                                                                        Hjalmarsson 823                                                      https://doi.org/10.1017/S0022109011000135
+
+q    /=1q,,  5, and  10,  as well  as the     density of the corresponding scaled t-statistics,
+tq+          which   are  plotted  along      with the standard normal density. The densities
+
+are obtained from simulating data generated by equations (2) and (3) with T =100,
+
+under the null of no predictability, and subsequently estimating equation (10).
+
+The normally distributed error terms ut and vt both have unit variance, and the
+correlation () between them is set equal to -0.9. The local-to-unity parameter c
+
+is set equal to -2.5. One million             arenpdettiq+t/ionsq        are performed  and the                  kernel  density
+estimates of the resulting ^q+/q                                         are shown in   Figure                   1. The  graphs
+
+clearly illustrate the previous results: The standardized long-run estimates, ^q+/q,
+
+all converge to approximately the same distribution for different values of q, and
+
+the scaled t-statistics from the augmented regression equation are very close to
+
+standard normally distributed.
+
+                                              FIGURE 1
+
+     Density  Plots  Socf athleedStc-SatleadtisEtisctsim, taq+t/es qo,f  the Long-Run Slope Coefficient, ^q+/q,  and     the
+                                                                         for q = 1, 5, and 10, with T = 100
+
+The standard normal density is plotted as a comparison to the densities of the scaled t-statistics in Graph B of Figure 1.
+The densities are obtained from simulating data generated by equations (2) and (3) under the null of no predictability and
+subsequently estimating equation (10). The error terms ut and vt both have unit variance and correlation  = -0.9. The
+lroecsaull-ttinog-uniq+ty/pqaaranmd et+qte/rcqisasreetsthoow-n2.in5.thOengerampihlliso.n repetitions are performed, and the kernel density estimates of the
+
+Graph A. Density of Scaled Slope Coefficient                             Graph B. Density of Scaled t-Statistic
+
+      Thus, for a given , inference becomes trivial also in the case with endoge-
+nous regressors, since the scaled t-statistic corresponding to the estimate of q
+from the augmented regression equation (10) is normally distributed. In practice, 
+is typically unknown, and the next section outlines methods for implementing a
+feasible test.
+
+      Before moving on, it should also be stressed that although the arguments
+leading up to equation (10) were motivated by a Gaussian setup (see footnote 7),
+the results in Theorem 2 and Corollary 2 hold under much more general condi-
+tions on the error terms (see Assumption 1 in Appendix B). This is an important
+point because, under the assumption of normality, one might conjecture that there
+are few gains from considering long-horizon returns, since these will also be nor-
+mally distributed and the likelihood of these aggregate long-run returns will not
+824 Journal of Financial and Quantitative Analysis                                                                                                                    https://doi.org/10.1017/S0022109011000135
+
+contain any additional information over the 1-period short-run returns. In contrast,
+long-run returns might be more useful in nonnormal cases. Although a formal
+analysis of the potential gains from long-horizon methods is outside the scope of
+this paper, I briefly return to this question in the simulation section, where results
+for t-distributed innovations are presented.9
+
+III. Feasible Methods
+
+        To implement the methods for endogenous regressors described in the pre-
+
+vious section, knowledge of the parameter c (or equivalently, for a given sample
+
+size, ) is required. Since c is typically unknown and not estimable in general, the
+
+bounds procedures of Cavanagh et al. (1995) and Campbell and Yogo (2006) can
+
+be used to obtain feasible tests.
+
+        Although c is not estimable, a confidence interval for c can be obtained,
+
+as described by Stock (1991). By evaluating the estimator and corresponding
+
+test statistic for each value of c in that confidence interval, a range of possi-
+
+ble estimates and values of the test statistic is obtained. A conservative test can
+
+then be formed by choosing the most conservative value of the test statistic,
+
+given the alternative hypothesis. If the confidence interval for c has a coverage
+
+rate of 100(1 - 1)% and the nominal size of the test is 2%, then by Bonfer-
+roni's inequality, the final conservative test will have a size no greater than  =
+
+1 + 2%.
+
+      Thus, suppose that one wants to test H0 : q = 0 versus H1 : q > 0. The first
+step is to obtain a confidence interval for c, with confidence level 100(1 - 1)%,
+which is denoted [c, c]. For all values of c~  [c, c], ^q+(c~ ) and the corresponding
+tq+(c~ ) are calculated, where the estimator and test statistic are written as functions
+of c~ to emphasize the fact that a different value is obtained for each c~  [c, c].
+
+Let tq+,min  minc~[c,c] tq+(c~ ) be the minimum value of tq+(c~ ) that is obtained for
+c~  [c, c] and tq+,max  maxc~[c,c] tq+(c~ ) be the maximum value. A conservative
+
+test of the  null  hypothesis                   tqo+,fminno/prqedaigcatainbsitlittyh,eagcraiitnicsat lavpaoluseitsivoefatlhteernsattainvde,arids
+then given   by    evaluating
+
+normal distribution; the null is rejected if tq+,min  z2 , where z2 denotes the
+
+9The previous results are derived under the assumption that the predictor variable has an autore-
+
+gressive root  that is local to unity. In ongoing research, the author has shown that a similar scaling
+
+result  for the test statistics also applies in        thestsrtircitcltylylesstastitohnanaruynciatys,etwheith1/fiqxesdcaalnindgstrruicletlyprloevssidtehsana
+unity.  In fact, it turns out that for a fixed
+
+conservative bound on the scaling factor, and the exact scaling factor in the strictly stationary case
+
+is a function of . That is, for a fixed  strictly less than unity, the t-statistics should be scaled by
+
+1au/thofr.(qT,he)1w/heqrescf a(qli,ng)is<thuqs  for    < 1 and lim1 f (q, ) = q; the proof is available                                                from the
+                                                valid  outside the near unit-root framework analyzed here,                                             although
+
+it will in general be conservative for strictly stationary predictors. Although the 1/ f (q, ) scaling
+
+potentially offers better-sized tests when  is strictly less than unity, its implementation requires an
+
+estimate of the autoregressive root , which can lead to size distortions in the resulting scaled test;
+
+this is particularly true for  close to unity where the f (q, ) function is most sensitive to the exact
+
+avpalpureoaocfha. pTpheuasr,sintopbraecttoiceu,sfeotrhpere1d/ictoqrsscwaliitnhgaudteorrivegedrepssrievveiorouosltys.fAairmlyocrleoseexhtoau1s,ttivhee  best feasible
+                                                                                                                                                       treatment of
+
+the testing problem in the stationary case is left for future research.
+                                                                                   Hjalmarsson 825        https://doi.org/10.1017/S0022109011000135
+
+1 - 2 quantile of the standard normal distribution. The resulting test of the null
+hypothesis will have a size no greater than  = 1 + 2. An analogous procedure
+can be used to test against a negative alternative.10
+
+      Campbell and Yogo (2006) use the Dickey­Fuller generalized least squares
+(DF-GLS) unit-root test of Elliot, Rothenberg, and Stock (1996) to obtain a con-
+fidence interval for c. Here, I instead rely on a new unit-root test developed by
+Chen and Deo (2009a), (2009b). The Chen and Deo test, which is based on the
+idea of restricted likelihood inference (Kalbfleisch and Sprott (1970)), is conve-
+nient to use because the test statistic is (approximately) 2 distributed both under
+the null of a unit root as well as for roots close to unity. It is therefore trivial to
+invert the test statistic to obtain confidence intervals for c. The implementation of
+this unit-root test is described in Appendix A.
+
+      In general, Bonferroni's inequality will be strict, and the overall size of the
+test just outlined will be less than . By shrinking the coverage rates of the confi-
+dence interval for c, a less conservative test can be achieved. Such procedures are
+discussed at length in Campbell and Yogo (2006), and I follow a similar approach
+here. Start with fixing 2 at 10%, so that the nominal size of the tests evaluated for
+each c~ is equal to 10%. Further, set the desired size of the overall Bonferroni test,
+labeled ~ , to 10% as well. The degree of endogeneity, and hence the size of the
+biasing effects, is a function of the correlation  between the innovations ut and vt.
+Thus, for each value of , one then searches over a grid of negative cs for values
+of 1 such that the overall size of the test will be no greater than ~ for any value
+of c.11 Since the asymptotic properties of the scaled estimators and corresponding
+test statistics derived here are identical for any q, one only needs to find values 1
+for q = 1. Table 1 gives the values of 1, which result in 1-sided Bonferroni tests
+with size no greater than ~ /2 equal to 5%, or, alternatively, 2-sided tests with size
+no greater than 10%.
+
+      As discussed later in conjunction with the Monte Carlo results, using these
+1 values, obtained for q = 1, in the long-run case appears to work well, although
+there is a tendency to underreject when the forecasting horizon is large relative to
+the sample size. Thus, there may be some scope for improving the procedure by
+size-adjusting the confidence interval for c differently for different combinations
+of q and T, but at the expense of much simplicity. Since the potential gains do
+not appear large, I do not pursue that here, although it would be relatively easy to
+implement on a case-by-case basis in applied work.
+
+      The practical implementation of the methods in this paper can be summa-
+rized as follows:
+
+   10An alternative approach is to invert the test statistics and form conservative confidence intervals
+instead. This approach will deliver qualitatively identical results, in terms of whether the null hy-
+pothesis is rejected or not. However, the distribution of the long-run estimator under the alternative
+hypothesis need not be the same as under the null hypothesis, in which case the confidence intervals
+are only valid under the null hypothesis. Presenting confidence intervals based on the distribution
+under the null hypothesis may therefore be misleading.
+
+   11Nonnegative cs are ruled out since, from an economic perspective, it is very unlikely that the
+predictor variables are truly nonstationary, even though they are highly persistent (see, e.g., Lewellen
+(2004), Baker, Taliaferro, and Wurgler (2006)).
+826 Journal of Financial and Quantitative Analysis                                                                                      https://doi.org/10.1017/S0022109011000135
+
+                                                   TABLE 1
+        Significance Levels for the Confidence Interval for c in the Bonferroni Test
+
+Table 1 reports the values of 1, for a given value of the correlation  between the innovations ut and vt, which result
+in a 1-sided Bonferroni test with size no greater than 5% when the confidence interval for c, obtained from inverting the
+Chen and Deo (2009a), (2009b) test, has a coverage rate of 100(1 - 1)%. Two separate 1s are reported: The first
+should be used when testing against a negative alternative, and the second when testing against a positive alternative.
+Only values for  < 0 are reported, since a regression with a negative  can always be achieved by changing the sign of
+the regressor.
+
+                    Test against H1:
+
+        <0    >0                                    <0                                >0
+
+        1     1                                     1                                 1
+
+­0.999  0.11  0.04  ­0.500                          0.68                              0.20
+                                                                                      0.21
+­0.975  0.19  0.06  ­0.475                          0.70                              0.21
+                                                                                      0.22
+­0.950  0.24  0.08  ­0.450                          0.72                              0.23
+                                                                                      0.24
+­0.925  0.28  0.09  ­0.425                          0.74                              0.24
+                                                                                      0.25
+­0.900  0.31  0.10  ­0.400                          0.75                              0.26
+                                                                                      0.27
+­0.875  0.34  0.11  ­0.375                          0.77                              0.28
+                                                                                      0.29
+­0.850  0.37  0.11  ­0.350                          0.79                              0.29
+                                                                                      0.30
+­0.825  0.40  0.12  ­0.325                          0.81                              0.31
+                                                                                      0.32
+­0.800  0.43  0.13  ­0.300                          0.82                              0.33
+                                                                                      0.34
+­0.775  0.45  0.13  ­0.275                          0.84                              0.35
+                                                                                      0.37
+­0.750  0.48  0.14  ­0.250                          0.86
+
+­0.725  0.50  0.14  ­0.225                          0.87
+
+­0.700  0.52  0.15  ­0.200                          0.89
+
+­0.675  0.54  0.16  ­0.175                          0.91
+
+­0.650  0.56  0.16  ­0.150                          0.92
+
+­0.625  0.58  0.17  ­0.125                          0.94
+
+­0.600  0.60  0.18  ­0.100                          0.96
+
+­0.575  0.62  0.18  ­0.075                          0.97
+
+­0.550  0.64  0.19  ­0.050                          0.99
+
+­0.525  0.66  0.19  ­0.025                          0.99
+
+ i) Using OLS estimation for each equation, obtain the estimated residuals from
+      equations (2) and (3). Calculate the correlation  from these residuals.12
+
+ii) Calculate the restricted likelihood ratio test (RLRT) statistic of Chen and
+      Deo (2009a), (2009b), described in Appendix A, and obtain c and c by in-
+      verting the test statistic, using the confidence level 1 in Table 1 correspond-
+      ing to the estimated value of . Note that a different 1 is used depending on
+      whether one is testing against a positive or a negative alternative.
+
+iii) For a grid of values c~  [c, c], calculate ^q+(c~ ) and tq+(c~ ), and find tq+,min 
+      minc~[c,c] tq+(c~ ) and tq+,max  maxc~[c,c] tq+(c~ ).
+
+iv) If the alternative hypothesis is q > 0, compare tq+,min/q to the 95% critical
+      hvaylpuoetshoesfitsheisstaqnd<ard0,ncoormmapladreisttrq+i,mbuaxt/ionq(i.teo.,th1e.654%5),carnitdiciaflthvealauletesrnoaf ttihvee
+      standard normal distribution.
+
+      The previous procedure results in a 1-sided test at the 5% level, or alterna-
+tively a 2-sided test at the 10% level.
+
+   12Alternatively, if one does not wish to use the short-run equation (2) to obtain estimates of the
+residuals ut, one could impose the null hypothesis of no predictability, in which case the residuals ut
+are simply equal to the demeaned returns.
+                                                                                   Hjalmarsson 827                                                                                                                   https://doi.org/10.1017/S0022109011000135
+
+IV. Monte Carlo Results
+
+      All of the previous asymptotic results are derived under the assumption that
+the forecasting horizon is fixed. Valkanov (2003) also studies long-run regres-
+sions with near-integrated regressors, but he derives his asymptotic results under
+the assumption that q/T    (0, 1) as q, T  . That is, he assumes that
+the forecasting horizon grows with the sample size. Under such conditions, the
+asymptotic results are, at least at first glance, quite different from those derived
+in this paper. There is, of course, no right or wrong way to perform the asymp-
+totic analysis; what matters in the end is how well the asymptotic distributions
+capture the actual finite sample properties of the test statistics. To this end, Monte
+Carlo simulations are therefore conducted. Since Valkanov's methods are known
+to have good size properties, I merely present power results for his tests.
+
+A. Size Properties
+
+I start by analyzing the size properties of the scaled t-statistics proposed ear-
+
+lier in the paper. Equations (2) and (3) are simulated, with ut and vt drawn from
+
+an independent and identically distributed (IID) bivariate normal distribution with
+
+mean 0, unit variance and correlations  = 0, -0.7, -0.90, -0.95, and -0.99.
+
+The sample size is either T = 100 or T = 500. The intercept  is set to 0, and the
+
+local-to-unity parameter c is set to either -2.5, -10, or -20 for T = 100 and to
+
+-1, -5, or -20 for T = 500. Since the sizes of the tests are evaluated, the slope
+
+coefficient  is set to 0, which implies that q = 0 as well. All results are based
+
+on 10,000 repetitions.
+
+tin-sgtattoTiswttihcoeddilefosfncegrrie-brnuetdntepOstrLesvStaioteiusssttilicyms a(aitr.eee.,c^oqtq+n,(smii.iden./e,retqdq/:).thAqe)l,sl cataenlsedtds ttha-resetasetcivasatlielcudactBoerodrneafsegpraorinondns-it
+a positive 1-sided alternative at the 5% level (i.e., the null is rejected if the scaled
+
+test statistic exceeds 1.645).
+
+The results are given in Table 2. The 1st set of columns shows the rejection
+
+rates for the scaled OLS t-statistic under the null hypothesis of no predictability.
+
+When the regressors are exogenous, such that  = 0, this test statistic should be
+
+asymptotically normally distributed. The normal distribution appears to work well
+
+in finite samples, with rejection rates close to the nominal 5% size. For larger
+
+negative cs, and for large q relative to T, the size drops and the test becomes
+
+somewhat   conservative; this is primarily true                           for forecasting horizons  t1h/at sqpaonf
+more than  10% of the sample size.13 Overall,                             however, the scaling by
+
+the standard t-test appears to work well in practice for exogenous regressors. As
+
+is expected from the previous asymptotic analysis, the scaled OLS t-test tends
+
+to overreject for endogenous regressors with  < 0, which highlights that the
+
+13As mentioned in footnote 9, for larger negative cs, the scale factor 1/q will overcontrol for the
+
+overlap in the data,  1a/nd tqheusdeidffehreernecienbcreetwaseeesnatshqe  scale factor 1/ f (q,  ) derived for the stationary
+case and the factor                                                       increases. As pointed  out previously, the practical
+implementation of the 1/ f (q, ) scaling is made difficult by the need to estimate , and the 1/q
+
+scaling therefore may still be the best feasible approach, despite being slightly conservative.
+828 Journal of Financial and Quantitative Analysis                                                                              https://doi.org/10.1017/S0022109011000135
+
+biasing effects of endogenous regressors are a great problem also in long-horizon
+regressions.
+
+                                                      TABLE 2
+  Finite Sample Sizes for the Scaled Long-Run OLS t-Test and the Scaled Bonferroni Test
+
+The first column of Table 2 gives the forecasting horizon q, and the top row below the labels gives the value of the parameter
+, the correlation between the innovation processes. The remaining entries present, for each combination of q and , the
+average rejection rates under the null hypothesis of no predictability for the corresponding test. The results are based
+
+on the Monte Carlo simulation described in the main text, and the average rejection rates are calculated over 10,000
+repetitions. Results for sample sizes T equal to 100 and 500 and for local-to-unity parameters c = -2.5, -10, -20, and
+c = -1, -5, -20, respectively, are given; for T = 100, these values of c correspond to autoregressive roots  = 0.975,
+0.9, and 0.8, respectively, and for T = 500, they correspond to  = 0.998, 0.99, and = 0.96, respectively.
+
+            Long-Run OLS t-Test                            Bonferroni Test
+
+     0.00   -0.7   -0.90  -0.95  -0.99  0.00        -0.7   -0.90            -0.95  -0.99
+
+q                                T = 100, c = -2.5
+
+  1  0.052  0.190  0.245  0.264  0.279  0.045       0.035  0.033            0.035  0.029
+                          0.271  0.285  0.041       0.032  0.026            0.028  0.025
+  5  0.048  0.187  0.253  0.274  0.293  0.040       0.029  0.021            0.019  0.018
+                          0.254  0.270  0.038       0.020  0.011            0.007  0.004
+10 0.046 0.185     0.254
+
+20 0.034 0.163     0.230
+
+q                                T = 500, c = -1
+
+  1  0.049  0.224  0.311  0.337  0.358  0.047       0.043  0.040            0.041  0.029
+                          0.353  0.380  0.044       0.044  0.036            0.035  0.025
+25   0.050  0.230  0.326  0.372  0.401  0.046       0.042  0.030            0.025  0.018
+                          0.363  0.399  0.049       0.035  0.022            0.015  0.007
+50   0.051  0.235  0.337
+
+100 0.046 0.216    0.322
+
+q                                T = 100, c = -10
+
+  1  0.054  0.114  0.139  0.143  0.147  0.047       0.024  0.023            0.026  0.021
+                          0.127  0.129  0.035       0.017  0.016            0.016  0.016
+  5  0.041  0.100  0.123  0.112  0.115  0.032       0.012  0.008            0.008  0.009
+                          0.071  0.072  0.020       0.007  0.003            0.002  0.002
+10 0.032 0.085     0.105
+
+20 0.015 0.052     0.068
+
+q                                T = 500, c = -5
+
+  1  0.048  0.142  0.176  0.187  0.195  0.045       0.029  0.034            0.038  0.031
+                          0.185  0.199  0.035       0.023  0.025            0.028  0.025
+25   0.040  0.133  0.174  0.186  0.196  0.034       0.018  0.016            0.017  0.015
+                          0.153  0.160  0.031       0.013  0.007            0.005  0.004
+50   0.037  0.126  0.172
+
+100 0.029 0.103    0.142
+
+q                                T = 100, c = -20
+
+  1  0.053  0.091  0.104  0.106  0.108  0.046       0.019  0.019            0.019  0.017
+                          0.072  0.074  0.026       0.011  0.008            0.010  0.011
+  5  0.030  0.060  0.069  0.047  0.048  0.018       0.007  0.003            0.003  0.004
+                          0.015  0.015  0.007       0.002  0.001            0.001  0.000
+10 0.017 0.037     0.045
+
+20 0.003 0.014     0.014
+
+q                                T = 500, c = -20
+
+  1  0.050  0.088  0.102  0.105  0.111  0.046       0.022  0.025            0.028  0.022
+                          0.075  0.080  0.025       0.011  0.010            0.012  0.014
+25 0.028 0.059     0.073  0.051  0.052  0.018       0.007  0.005            0.005  0.007
+                          0.019  0.020  0.009       0.001  0.001            0.001  0.001
+50 0.016 0.040     0.048
+
+100 0.004 0.013    0.018
+
+      The next set of columns shows the results for the scaled Bonferroni test. The
+rejection rates for all  are now typically close to and below 5%, indicating that
+the proposed correction in the augmented regression equation (10) works well in
+finite samples. When  is close to -1, the Bonferroni test tends to become more
+conservative. Since the coverage rates for c that are used in the Bonferroni test (see
+Table 1) are obtained by finding the largest 1 such that the Bonferroni test has
+size  5% across a grid of cs, the test will in general be conservative for a given c.
+As   -1, the outcome of the test statistic becomes much more sensitive to the
+exact value of c at which it is evaluated, reflected by the greater coverage rates
+(1-1) in Table 1, and the conservative nature of the test is therefore exacerbated.
+                                                                                   Hjalmarsson 829      https://doi.org/10.1017/S0022109011000135
+
+As in the OLS case, the Bonferroni test also has a tendency to underreject for large
+q relative to T.
+
+      To evaluate how the tests perform when the innovations are not normally
+distributed, the same simulation exercise as previously conducted is performed
+with ut and vt following t-distributions with 3 degrees of freedom, standardized
+to have unit population variances. Again, the innovations have correlations , and
+all other aspects of the simulations remain identical. The results are shown in
+Table 3 and are very similar to those for the normal case shown in Table 2. The
+proposed methods thus appear to work well also in nonnormal cases, and with
+fairly heavy-tailed distributions.14
+
+      In summary, the previous simulations confirm the main conclusions from
+the formal asymptotic analysis: i) When the regressor is exogenous, the standard
+t-statistic scaled by the square root of the forecasting horizon will be normally
+distributed, and ii) when the regressor is endogenous, the scaled t-statistic corre-
+sponding to the augmented regression equation will be normally distributed.
+
+B. Power Properties
+
+      Since the test procedures proposed in this paper appear to have good size
+properties and, if anything, underreject rather than overreject the null, the second
+important consideration is their power to reject the null when the alternative is
+in fact true. Again, the same simulation design is used, with the data generated
+by equations (2) and (3). Unless otherwise noted, the innovations are normally
+distributed. In order to assess the power of the tests, however, the slope coefficient
+ in equation (2) now varies between 0 and 0.2.
+
+      In addition to the scaled t-statistics considered in the size simulations, I now
+also study an additional test statistic based on Valkanov (2003). Valkanov derives
+his asymptotic results under the assumption that q/T    (0, 1) as q, T  ,
+and he shows that under this assumption, t/ T will have a well-defined distri-
+bution. That is, he proposes to scale the standard OLS t-statistic by the square
+root of the sample size, rather than by the square root of the forecasting horizon,
+as suggested in this paper. The scaled t-statistic in Valkanov's analysis is not nor-
+mally distributed. Its asymptotic distribution is a function of the parameters  (the
+degree of overlap), the local-to-unity parameter c, and the degree of endogeneity
+; critical values must be obtained by simulation for a given combination of these
+3 parameters. Since the critical values are a function of c, which is unknown,
+Valkanov's scaled t-test is generally infeasible. He therefore proposes a so-called
+sup-bound test, where the test is evaluated at some bound for c, outside of which
+it is assumed that c will not lie. Ruling out explosive processes, he suggests using
+c = 0 in the sup-bound test, which results in a conservative 1-sided test against
+ > 0 for  < 0.15 To avoid confusion, I will continue to refer to the tests pro-
+posed in this paper as scaled tests, whereas I will refer to the test suggested by
+
+   14As pointed out before, no normality assumptions are needed for the previous derivations, al-
+though the t-distribution with 3 degrees of freedom does violate the condition of finite 4th-order mo-
+ments in Assumption 1 in Appendix B. These results thus show that this is in general not a necessary
+condition for the proposed methods to work.
+
+   15Lewellen (2004) suggests a similar procedure in 1-period (short-run) regressions.
+830 Journal of Financial and Quantitative Analysis                                                                              https://doi.org/10.1017/S0022109011000135
+
+                                                      TABLE 3
+
+  Finite Sample Sizes for the Scaled Long-Run OLS t-Test and the Scaled Bonferroni Test
+                      with t-Distributed Innovations with 3 Degrees of Freedom
+
+The first column of Table 3 gives the forecasting horizon q, and the top row below the labels gives the value of the parameter
+, the correlation between the innovation processes. The remaining entries present, for each combination of q and , the
+average rejection rates under the null hypothesis of no predictability for the corresponding test. The results are based
+
+on the Monte Carlo simulation described in the main text, and the average rejection rates are calculated over 10,000
+repetitions. Results for sample sizes T equal to 100 and 500 and for local-to-unity parameters c = -2.5, -10, -20, and
+c = -1, -5, -20, respectively, are given; for T = 100, these values of c correspond to autoregressive roots  = 0.975,
+0.9, and 0.8, respectively, and for T = 500, they correspond to  = 0.998, 0.99, and = 0.96, respectively.
+
+            Long-Run OLS t-Test                            Bonferroni Test
+
+     0.00   -0.7   -0.90  -0.95  -0.99  0.00        -0.7   -0.90            -0.95  -0.99
+
+q                                T = 100, c = -2.5
+
+  1  0.051  0.181  0.231  0.248  0.255  0.043       0.032  0.031            0.029  0.027
+                          0.256  0.266  0.041       0.029  0.025            0.024  0.023
+  5  0.049  0.184  0.239  0.259  0.270  0.042       0.033  0.020            0.017  0.016
+                          0.243  0.256  0.033       0.021  0.010            0.007  0.005
+10 0.048 0.182     0.247
+
+20 0.036 0.160     0.221
+
+q                                T = 500, c = -1
+
+  1  0.049  0.228  0.311  0.334  0.358  0.047       0.045  0.042            0.041  0.029
+                          0.354  0.381  0.047       0.044  0.037            0.033  0.026
+25   0.053  0.234  0.327  0.366  0.398  0.046       0.045  0.032            0.025  0.018
+                          0.365  0.403  0.050       0.041  0.024            0.017  0.005
+50   0.053  0.234  0.331
+
+100 0.043 0.221    0.326
+
+q                                T = 100, c = -10
+
+  1  0.052  0.107  0.124  0.130  0.134  0.044       0.024  0.024            0.023  0.023
+                          0.118  0.120  0.033       0.020  0.016            0.016  0.018
+  5  0.040  0.094  0.111  0.101  0.104  0.031       0.014  0.010            0.009  0.011
+                          0.060  0.061  0.021       0.008  0.004            0.003  0.003
+10   0.035  0.078  0.096
+
+20   0.016  0.051  0.059
+
+q                                T = 500, c = -5
+
+  1  0.053  0.139  0.177  0.184  0.192  0.049       0.033  0.033            0.035  0.030
+                          0.184  0.192  0.039       0.026  0.024            0.026  0.023
+25   0.047  0.136  0.172  0.180  0.187  0.039       0.021  0.016            0.017  0.015
+                          0.151  0.158  0.035       0.014  0.008            0.006  0.004
+50   0.044  0.129  0.165
+
+100  0.031  0.108  0.140
+
+q                                T = 100, c = -20
+
+  1  0.052  0.082  0.090  0.094  0.099  0.044       0.018  0.017            0.019  0.018
+                          0.070  0.072  0.027       0.012  0.008            0.009  0.012
+  5  0.030  0.059  0.065  0.042  0.043  0.018       0.008  0.004            0.004  0.005
+                          0.016  0.015  0.007       0.003  0.001            0.000  0.001
+10   0.018  0.035  0.040
+
+20   0.003  0.012  0.015
+
+q                                T = 500, c = -20
+
+  1  0.053  0.090  0.100  0.101  0.101  0.050       0.025  0.024            0.025  0.021
+                          0.074  0.075  0.027       0.011  0.008            0.011  0.011
+25   0.031  0.060  0.071  0.048  0.049  0.018       0.007  0.004            0.004  0.006
+                          0.019  0.020  0.008       0.004  0.001            0.001  0.001
+50   0.017  0.037  0.045
+
+100 0.005 0.014    0.019
+
+Valkanov explicitly as Valkanov's (sup-bound) test. Following Valkanov's expo-
+sition, I focus on the case of q/T = 0.1. For simplicity, I only consider the cases
+of  = 0 and  = -0.9, and T = 100.
+
+      Figure 2 shows the power curves for the scaled OLS t-test proposed in this
+paper and the test suggested by Valkanov (2003) for  = 0, q = 10, and T = 100.
+For both c = -2.5 and c = -10, the scaled OLS t-test is marginally more powerful
+than Valkanov's sup-bound test. Overall, for the case of exogenous regressors,
+
+there appears to be no loss of power from using the simple scaled and normally
+
+distributed t-test suggested here, but, in fact, some marginal power gains.
+      Figure 3 shows the results for endogenous regressors with  = -0.9, q = 10,
+
+and T = 100. Since the scaled t-test based on the OLS estimator is known to be
+biased in this case, I only show the results for the scaled Bonferroni test, along
+                                     Hjalmarsson 831                                                                           https://doi.org/10.1017/S0022109011000135
+
+                                           FIGURE 2
+Power Curves for Exogenous Regressors with T = 100, q = 10, and  = 0.0
+
+Graphs A and B of Figure 2 show the average rejection rates for a 1-sided 5% test of the null hypothesis of  = 0 against a
+positive alternative. The x-axis shows the true value of the parameter , and the y-axis indicates the average rejection rate.
+Graph A shows the results for the case of c = -2.5 ( = 0.975), and Graph B shows the results for c = -10 ( = 0.9).
+The results for the scaled OLS t-test derived in this paper are indicated by the solid lines and the results for Valkanov's
+
+(2003) sup-bound test are indicated by the dashed lines. The results are based on the Monte Carlo simulations described
+
+in the main text, and the power is calculated as the average rejection rates over 10,000 repetitions.
+
+Graph A. c = -2.5  Graph B. c = -10
+
+with Valkanov's (2003) test. In this endogenous case, Valkanov's sup-bound test
+is clearly dominated by the scaled Bonferroni test.
+
+                                              FIGURE 3
+Power Curves for Endogenous Regressors with T = 100, q = 10, and  = -0.9
+
+Graphs A and B of Figure 3 show the average rejection rates for a 1-sided 5% test of the null hypothesis of  = 0 against a
+positive alternative. The x-axis shows the true value of the parameter , and the y-axis indicates the average rejection rate.
+Graph A shows the results for the case of c = -2.5 ( = 0.975), and Graph B shows the results for c = -10 ( = 0.9).
+The results for the scaled Bonferroni test are indicated by the solid lines and the results for Valkanov's (2003) sup-bound
+
+test are indicated by the dashed lines. The results are based on the Monte Carlo simulations described in the main text,
+
+and the power is calculated as the average rejection rates over 10,000 repetitions.
+
+Graph A. c = -2.5  Graph B. c = -10
+
+      To sum up, the simulations show that both the scaled OLS t-test and the
+scaled Bonferroni test have good power properties when compared to the test
+proposed by Valkanov (2003). This is especially true for the Bonferroni test used
+with endogenous regressors, which tends to dominate Valkanov's test.
+832 Journal of Financial and Quantitative Analysis                                                                               https://doi.org/10.1017/S0022109011000135
+
+C. Power across Different Horizons
+
+      Figure 4 compares power for the scaled Bonferroni test across different fore-
+casting horizons, including the 1-period horizon. Graph A shows the case with
+normal innovations, and Graph B shows the case with t-distributed innovations
+with 3 degrees of freedom; again, the t-distributed innovations are standardized
+to have unit population variances. The sample size is still T = 100 and c = -2.5.
+Only the case with endogenous regressors, letting  = -0.9, is shown.
+
+                             FIGURE 4
+
+Power Curves for Different Forecasting Horizons q with
+      T = 100,  = -0.9, and c = -2.5 ( = 0.975)
+
+Graphs A and B of Figure 4 show the average rejection rates for a 1-sided 5% test of the null hypothesis of  = 0 against a
+positive alternative. Only results for the scaled Bonferroni test are shown. The x-axis shows the true value of the parameter
+, and the y-axis indicates the average rejection rate. Graph A shows the results for the case with normal innovations, and
+Graph B shows the case with t-distributed innovations with 3 degrees of freedom, standardized to have unit population
+variances. The results for the 1-period short-horizon tests (q = 1) are indicated by the solid lines, the results for the long-
+horizon tests with q = 5 are indicated by the dashed lines, and the results for the long-horizon tests with q = 10 are
+indicated by the dotted lines. The results are based on the Monte Carlo simulations described in the main text, and the
+
+power is calculated as the average rejection rates over 10,000 repetitions.
+
+Graph A. Normal Innovations  Graph B. t-Distributed Innovations
+
+      Two conclusions are immediate from the study of Figure 4. First, power
+is decreasing in the forecasting horizon: The 1-period test is marginally more
+powerful than the long-horizon test with q = 5, which in turn is somewhat more
+powerful than the long-horizon test with q = 10. Second, this conclusion holds
+irrespective of whether the innovations are normal or not. In fact, the power curves
+are very similar for the normal case and the t-distributed case.
+
+      Overall, it thus seems difficult to achieve power gains for longer horizons
+when the model under the alternative hypothesis is given by equation (2), which
+is the standard model for evaluating long-horizon regressions (e.g., Campbell
+(2001), Nelson and Kim (1993)), both with normal and nonnormal innovations.16
+
+   16In the Gaussian case, this is certainly not surprising. As mentioned in footnote 7, when the true
+model is given by equation (2), the 1-period (q = 1) t-test based on the augmented regression equation
+is optimal in the Gaussian case when the persistence  is known. Although this does not imply that the
+corresponding feasible Bonferroni test is optimal for the case of unknown , it is not surprising if the
+Bonferroni test based on the short-run regression dominates similar feasible tests (e.g., the long-run
+Bonferroni tests).
+                                                                                   Hjalmarsson 833         https://doi.org/10.1017/S0022109011000135
+
+But, the reason for running long-horizon regressions is presumably that one
+believes the model is not as simple as that given by equation (2) under the alter-
+native, and other alternatives may exist where the long-horizon tests outperform
+the short-horizon tests.17
+
+      A more exhaustive discussion of power properties across different horizons
+is outside the scope of the current paper, which focuses on obtaining correctly
+sized tests under the null hypothesis of no predictability, a necessary start for
+analyzing power properties.
+
+V. Long-Run Stock Return Predictability
+
+      To illustrate the methods derived in this paper, I revisit the question of stock
+return predictability. I focus on the predictive ability of traditional valuation ratios,
+and use aggregate U.S. data for the dividend-price (DP) ratio, the earnings-price
+(EP) ratio, and the book-to-market (BM) ratio. The returns data consist of annual
+excess returns, over the T-Bill rate, on the Standard & Poor's (S&P) 500 index.
+These data are a subset of those used by Goyal and Welch (2008), although the
+series have been updated to include data up to and including 2007; a more detailed
+description of each series is provided in their paper.18 The return series, as well
+as the DP and EP ratios, are available from 1871 onward, and the BM ratio is
+available from 1921 onward. All data are on an annual frequency, and I consider
+forecast horizons from 1 to 10 years. All regressions are run using log-transformed
+variables with log excess returns as the dependent variable.
+
+      The 2 key data characteristics that define the properties of the regression es-
+timators analyzed in this paper are the near persistence and endogeneity of the
+regressors. Table 4 presents point estimates as well as confidence intervals for the
+autoregressive root , and the analogue intervals for the local-to-unity parameter
+c, calculated by inverting the Chen and Deo (2009a), (2009b) unit-root test (see
+Appendix A). Estimates of the correlation  between the innovations to returns
+and the innovations to the regressors are also provided. As is evident, there tends
+to be a large negative correlation between the innovations to the returns and the
+valuation ratios, although somewhat less so for the EP ratio. In addition, the pre-
+dictor variables show signs of having autoregressive roots that are close to unity.
+Standard OLS inference is thus likely to be biased for all 3 predictor variables,
+but probably less so for the EP ratio.
+
+      The scaled t-statistics from the long-run predictive regressions are presented
+in Table 5 for each horizon q = 1, . . . , 10. For each horizon and forecasting vari-
+able, 3 different t-statistics are presented: i) the scaled OLS t-statistic, ii) the
+scaled Bonferroni t-statistic, and iii) the nonscaled Newey and West (1987)
+t-statistic, calculated using q lags, which is often used instead of scaling.
+The Bonferroni test statistic is calculated in the same manner as described in
+
+   17For instance, Paye and Timmermann (2006) find evidence of coefficient instability in (short-run)
+predictive regressions for stock returns. In this case, equation (2) is no longer the correct model under
+the alternative, and it is possible that such DGPs may in some instances give power advantages to
+long-run tests in detecting deviations from the null of no predictability.
+
+   18The data were obtained from Amit Goyal's Web site (http://www.hec.unil.ch/agoyal/).
+834 Journal of Financial and Quantitative Analysis                                                                                                                                                                                                                                                                     https://doi.org/10.1017/S0022109011000135
+
+                                                 TABLE 4
+                            Characteristics of the Predictor Variables
+
+Table 4 reports the key time-series characteristics of the dividend-price (DP) ratio, the earnings-price (EP) ratio, and the
+book-to-market (BM) ratio. The first 3 columns indicate the predictor variable being used, the sample period, and the
+number of observations in that sample. All data are on an annual frequency. The column labeled  gives the estimated
+correlations between the innovations to the predictor variables and the innovations to the corresponding excess returns.
+The column labeled OLS gives the OLS estimates of the autoregressive root . The last 2 columns give the 95% confidence
+intervals for the autoregressive root  and the corresponding local-to-unity parameter c, obtained by inverting the Chen
+and Deo (2009a), (2009b) unit-root test statistic.
+
+Variable     Sample Period       Obs.                 OLS    95% CI for        95% CI for c
+
+DP           1872­2007           136          -0.836  0.882  [0.809, 0.986]    [-25.976, -1.904]
+
+EP           1872­2007           136          -0.436  0.731  [0.622, 0.859]    [-51.408, -19.176]
+
+BM           1921­2007           87           -0.864  0.906  [0.822, 1.000]    [-15.486, 0.000]
+
+Section III and should be approximately normally distributed for all predictor
+variables, whereas for the scaled OLS t-test, the normal approximation is unlikely
+to hold given the persistence and endogeneity of the predictors.
+
+                                                 TABLE 5
+                    Empirical Results for Tests of Long-Run Predictability
+
+Tsincaatbhlleeed15)stpt-trceeossltueumnstinsn.gtRhNeeesouwulettscyofaomnredthsWeoesf scthta(el1e9dlo8nO7g)L-sSrutant-ntetdesastrtd(steqta,rrOtiosLrtSsic/(stqa,qsN)Wf,ut)nhcaetriesocnpasrleeosdfetnBhtoeendffo.erTrerhocrnaeisetteidnsigftfe(hrtoe+qr,nimzt oipnnr/e(dqicq)t),o,gravivnaedrniathbineley(sneaoarnres-
+considered: the dividend-price (DP) ratio, the earnings-price (EP) ratio, and the book-to-market (BM) ratio. All data are on
+an annual frequency. The sample periods for the DP ratio and the EP ratio start in 1872, and the sample period for the BM
+ratio starts in 1921. All samples end in 2007.
+
+                        DP                            EP                       BM
+
+  Forecast   tq,OLS q t+q,min q tq,NW         tq,OLS q t+q,min q tq,NW  tq,OLS q tq+,min q tq,NW
+Horizon (q)
+             1.395      -0.399         1.331  1.583   1.117  1.698      1.884    0.365  1.817
+1            1.701        0.488        1.934  1.850   1.660  2.479      1.721    0.033  1.851
+2            1.498        0.828        1.902  1.616   1.550  2.118      1.634  -0.029   1.829
+3            1.578        1.096        2.246  1.351   1.309  1.889      1.584  -0.011   1.979
+4            1.745        1.441        2.749  1.304   1.307  2.027      1.469    0.021  2.215
+5            1.730        1.605        2.790  1.319   1.375  2.046      1.424    0.093  2.441
+6            1.644        1.584        2.677  1.282   1.326  1.949      1.352    0.279  2.314
+7            1.604        1.539        2.537  1.373   1.378  2.234      1.209    0.281  2.077
+8            1.391        1.398        2.151  1.530   1.519  2.868      1.050    0.202  1.807
+9            1.191        1.228        1.762  1.592   1.557  3.093      0.949    0.149  1.621
+10
+
+      The test results in Table 5 show that there is no robust evidence of return
+predictability using any of the 3 valuation ratios. The robust scaled Bonferroni
+t-statistic is virtually never significant, with only a single outcome (for the EP ra-
+tio at the 2-year horizon) greater than 1.645, which indicates the cutoff for signif-
+icance in the 1-sided 5% level test. Inference based on the scaled OLS t-statistics
+would lead to a somewhat more positive view of predictability, although the over-
+all evidence is still weak, with no outcomes greater than 1.9. Of course, the OLS
+results are not robust to the endogeneity and persistence of the regressors, and
+they are thus likely to be biased.
+
+      In general, the scaled t-statistics show no signs of systematically increasing
+with the horizon. In contrast, using the (nonscaled) t-statistics based on Newey
+and West (1987) standard errors, the results would suggest that predictability is
+                                                                                   Hjalmarsson 835      https://doi.org/10.1017/S0022109011000135
+
+much stronger, and often significant, at longer horizons. It is apparent that Newey-
+West standard errors can fail substantially in controlling the size of long-horizon
+tests, and the Newey-West t-statistics also clearly illustrate why long-run pre-
+dictability is often thought to be stronger than short-run predictability.
+
+      The results in Table 5 thus illustrate 2 key findings. First, and contrary to
+many popular beliefs, the evidence of predictability does not typically become
+stronger at longer forecasting horizons.19 There are some exceptions, such as the
+results for the Bonferroni t-statistics for the DP ratio, but overall there is little
+tendency for the results to look stronger at longer horizons. Second, these results
+show that it is also important to control for the biasing effect of persistent and
+endogenous regressors in long-horizon regressions, as seen from the sometimes
+large differences between the OLS and the Bonferroni test statistics.
+
+VI. Conclusion
+
+      I derive several new results for long-horizon regressions that use overlapping
+observations. In particular, I show how to properly correct for the overlap in the
+data in a simple manner that obviates the need for autocorrelation robust standard
+error methods in these regressions. Further, when the regressors are persistent and
+endogenous, I show how to correct the bias in the long-run test procedures, us-
+ing methods similar to those previously proposed for the short-run case. Since the
+proposed test statistics are asymptotically normally distributed, these new meth-
+ods lead to both more efficient and simpler inference in long-horizon regressions.
+Finally, the new procedures are shown to work well in finite samples, with av-
+erage rejection rates for the long-horizon tests that are close to the nominal size,
+even when the forecasting horizon is large relative to the sample size.
+
+Appendix A. Implementing the Chen and Deo Test
+
+The so-called restricted log-likelihood of equation (3) is given by
+
+L (x, , 22)  =  -T  -  1  log 22  +   1  log             1+          -                   1  Q  ()  ,
+                    2                 2          (T - 2) (1 - ) + 2                    222
+
+where
+
+       Q () =                                 T
+
+                    1 - 2 x12 + (xt - xt-1)2
+
+                                  t=2
+
+                -   (T    -   1-      )  +    2                                  T -1  .
+                             2) (1 -
+                                                 x1 + xT + (1 - ) xt
+
+                                                              t=2
+
+The RLRT for testing the null hypothesis H0 :  = 0 against H1 :   0 is given by
+
+                RT (0) = 2L (x,^, ^ 22) - 2L (x,0, ^ 22,0) ,
+
+   19This paper is not the first to make this comment. Torous, Valkanov, and Yan (2004) and Ang
+and Bekaert (2007) find that the evidence of predictability tends to be strongest at shorter horizons.
+Boudoukh et al. (2008) explicitly question the prevailing view of long-horizon predictability.
+836 Journal of Financial and Quantitative Analysis                                                                 https://doi.org/10.1017/S0022109011000135
+
+where L(·) is the restricted log-likelihood function given previously and (^, ^ 22) and
+(0, ^ 22,0) are the unconstrained and constrained restricted maximum likelihood (REML)
+estimates, respectively. The unconstrained REML estimate ^ is given by
+
+     ^    =  arg min           (T - 1) log Q () - log                         1+                     ,
+                   (-1,1]                                             (T - 2) (1 - ) + 2
+
+and
+
+             ^ 22    =      T  1   Q  (^)  ,        ^ 22,0        =      T  1  1  Q  (0)  .
+                               -  1                                         -
+
+      Chen and Deo (2009b) show that, for   1, the distribution of RT () is approxi-
+
+mately 2 with 1 degree of freedom, under the null hypothesis. A confidence interval for 
+can therefore be obtained by inverting the acceptance region of RT , using the 21 distribu-
+tion. A confidence interval for c is then given by the transformation c = T( - 1).
+
+Appendix B. Proofs
+
+      For ease of notation, the case with no intercept is treated. The results generalize im-
+mediately to regressions with fitted intercepts by replacing all variables by their demeaned
+versions. Throughout the proofs, q is treated as fixed, and thus qT-1 = o(1). The results
+below are derived under the following formal assumption for the error processes.
+
+Assumption 1. Let wt = (ut, vt) and Ft = {ws|s  t} be the filtration generated by wt.
+Then:
+
+      1. E[wt|Ft-1] = 0.
+      2. E[wtwt ] =  = [(11, 12), (12, 22)].
+      3. supt E[ut4] < , supt E[vt4] < , and E[x02] < .
+
+Proof of Theorem 1. Under the null hypothesis,
+
+                                              T -q                          T -q          -1
+
+             T  ^q - 0         =      1             ut+q (q) xt       1           xt2
+             q                        qT                              T2
+                                              t=1                           t=1
+                                                                  
+                                   1 T-q                                    T -q          -1
+                                     qT             q                 1
+                                                                      T2        xt2          .
+                               =                         ut+j xt 
+
+                                              t=1 j=1                       t=1
+
+By standard arguments, (1/(qT))       T -q          q    ut+j xt  =   (1/(qT ))           Tt=-1q(ut+1xt + . . . +
+                                      t=1           j=1
+
+ut+qxt)   1  dB1Jc,  as  T     ,  since for any h           >     0,  (1/T )      T -q    ut+h xt       1  dB1Jc
+          0                                                                       t=1                   0
+
+(Phillips (1987), (1988)). Therefore, (T/q)(^q - 0)  (                1  dB1  Jc)(     1  Jc2)-1.
+                                                                      0                0
+
+Proof of Theorem 2. Let r+qq = (r1+q(q), . . . , rT-q(q)) be the (T - q) × 1 vector of
+observations, and define x and v+qq analogously. Also, let Qvq =I-v+qq(v+qqv+qq)-1v+qq. The
+OLS estimator of q in equation (10) is now given by ^q+ = (rq+qQvq x)(x Qvq x)-1. Under
+the null hypothesis, Qvq r+qq = Qvq uq+q, and thus (T/q)(^q+-0) = (q-1T-1u+qqQvq x)(T-2x
+Qvq x)-1. First,
+
+     Qvq uq+q = u+qq - v+qq v+qqv+qq -1 v+qqu+qq
+
+                                      T -q                  -1              T -q
+
+             =       u+qq - v+qq  1           vt+q (q)2               1           ut+q (q) vt+q (q) .
+                                  qT                                  qT
+                                      t=1                                   t=1
+                                                                                                               Hjalmarsson 837                   https://doi.org/10.1017/S0022109011000135
+
+Let ^ vkv(h) = (1/T)       T -q  vt+k  vt+k+h      and     denote     ^ vv(h)        =     ^ v1v(h).  By    some     algebraic   manip-
+                           t=1
+ulations,
+
+                 1  T -q
+                 T
+                          vt+q(q)2 = ^ v1v (0) + ^ v2v (0) + · · · + ^ vqv-1 (0) + ^ vqv (0)
+
+                    t=1
+
+                                                   + ^ v2v (-1) + ^ v3v (-1) + · · · + ^ vqv (-1)
+
+                                                   ...
+
+                                                   + ^ vqv (- (q - 1))
+
+                                                   + ^ v1v (q - 1)
+
+                                                   ...
+                                                   + ^ v1v (1) + ^ v2v (1) + · · · + ^ vqv-1 (1) .
+
+Now, observe that ^ vv(h) = ^ v1v(h) = (1/T)                               T -q      vt+1  vt+h+1  and      ^ vkv(h)  =      (1/T )        T -q
+                                                                           t=1                                                             t=1
+                          T -q+k-1
+vt+kvt+k+h =(1/T)         t=k         vt+1    vt+h+1    .  So  ^ vkv  (h)  is  thus  an    identical        estimator        to  ^ vv(h),  but
+
+uses observations shifted k steps. Letting "=d " denote distributional equivalence, it follows
+
+that
+
+      1     T -q                =d         1  [q^ vv    (0)    +  (q  -    1)  ^ vv  (-1)     +    ·  ·  ·  +  ^ vv  (-  (q  -   1))
+      qT                                   q
+                vt+q (q)2
+
+            t=1
+
+                                           + ^ vv (q - 1) + · · · + (q - 1) ^ vv (1)]
+
+                                              q-1          1 - |h|
+                                                                 q
+                                =                                          ^ vv (h) ,
+
+                                      h=-q+1
+
+and as T  , (1/(qT))                       T    vt+q(q)2       =d     q-1            (1    -  (|h|/q))^ vv(h)            p       22,     since
+                                           t=1                        h=-q+1
+^vv(h) p 0 for h  0 by the martingale difference assumption. Similarly, as T  ,
+
+(1/(qT ))   T -q    ut+q(q)vt+q(q)            p    12,        and by       the same arguments                     used in    the previous
+            t=1
+                                                        T -q                         1
+proof, (1/(qT))v+qqx = (1/(qT))                         t=1   vt+q  (q)xt            0     dB2Jc.     Thus,
+
+q-1T-1uq+qQvq x = q-1T-1uq+qx
+
+                                      - q-1T -1u+qqv+qq q-1T-1v+qqv+qq -1 q-1T-1v+qqx
+
+                                           1                                      1                               1
+                                              dB1Jc - 122-21 dB2Jc =
+                                                                                                                     dB1·2Jc.
+
+                                      0                                        0                               0
+
+Finally, as T  , using the previous results, since qT-1 = o(1), it follows that,
+
+T-2x Qvq x = T-2x x - qT-1 q-1T-1x v+qq q-1T-1v+qqv+qq -1 q-1T-1v+qqx
+
+                             1
+
+                                Jc2.
+
+                          0
+
+Proof of Corollary 1. Observe that under the null hypothesis, as T  ,
+
+                         1       T -q                                      1               T -q                              q        2
+                    q (T - q)                                         q (T - q)                                              T
+      ^ 11  =                              u^ t+q (q)2         =                                      ut+q (q) + Op
+
+                                      t=1                                                  t=1
+
+                         1       T -q                                 q
+                    q (T - q)                                         T
+            =                              ut+q (q)2 + Op                      p 11,
+
+                                      t=1
+
+where the asymptotic limit follows by same argument as in the previous proof.
+838 Journal of Financial and Quantitative Analysis                                                       https://doi.org/10.1017/S0022109011000135
+
+Proof of Corollary 2. This follows in an identical manner, since, as T  ,
+
+                 1      T -q
+              (T -
+^ 11·2  =  q        q)              u^ t++q·v  (q)2
+
+                        t=1
+
+        =                     T -q  ut+q (q) - 122-21vt+q (q)  2      q  p 11·2.
+                                                                      T
+                1                                               + Op
+           q (T - q)
+                        t=1
+
+References
+
+Amihud, Y., and C. M. Hurvich. "Predictive Regressions: A Reduced-Bias Estimation Method."
+   Journal of Financial and Quantitative Analysis, 39 (2004), 813­841.
+
+Ang, A., and G. Bekaert. "Stock Return Predictability: Is It There?" Review of Financial Studies, 20
+   (2007), 651­707.
+
+Baker, M.; R. Taliaferro; and J. Wurgler. "Predicting Returns with Managerial Decision Variables: Is
+   There a Small-Sample Bias?" Journal of Finance, 61 (2006), 1711­1730.
+
+Berkowitz, J., and L. Giorgianni. "Long-Horizon Exchange Rate Predictability?" Review of Economics
+   and Statistics, 83 (2001), 81­91.
+
+Boudoukh J., and M. Richardson. "Stock Returns and Inflation: A Long-Horizon Perspective." Ameri-
+   can Economic Review, 83 (1993), 1346­1355.
+
+Boudoukh J.; M. Richardson; and R. F. Whitelaw. "The Myth of Long-Horizon Predictability." Review
+   of Financial Studies, 21 (2008), 1577­1605.
+
+Campbell, J. Y. "Why Long Horizons? A Study of Power Against Persistent Alternatives." Journal of
+   Empirical Finance, 8 (2001), 459­491.
+
+Campbell, J. Y., and R. Shiller. "Stock Prices, Earnings, and Expected Dividends." Journal of Finance,
+   43 (1988), 661­676.
+
+Campbell, J. Y., and M. Yogo. "Efficient Tests of Stock Return Predictability." Journal of Financial
+   Economics, 81 (2006), 27­60.
+
+Cavanagh, C. L.; G. Elliot; and J. H. Stock. "Inference in Models with Nearly Integrated Regressors."
+   Econometric Theory, 11 (1995), 1131­1147.
+
+Chen, W. W., and R. S. Deo. "Bias Reduction and Likelihood-Based Almost Exactly Sized Hypoth-
+   esis Testing in Predictive Regressions Using the Restricted Likelihood." Econometric Theory, 25
+   (2009a), 1143­1179.
+
+Chen, W. W., and R. S. Deo. "The Restricted Likelihood Ratio Test at the Boundary in Autoregressive
+   Series." Journal of Time Series Analysis, 30 (2009b), 618­630.
+
+Elliot G.; T. J. Rothenberg; and J. H. Stock. "Efficient Tests for an Autoregressive Unit Root." Econo-
+   metrica, 64 (1996), 813­836.
+
+Fama, E. F., and K. R. French. "Dividend Yields and Expected Stock Returns." Journal of Financial
+   Economics, 22 (1988), 3­25.
+
+Fisher, M. E., and J. J. Seater. "Long-Run Neutrality and Superneutrality in an ARIMA Framework."
+   American Economic Review, 83 (1993), 402­415.
+
+Goyal, A., and I. Welch. "A Comprehensive Look at the Empirical Performance of Equity Premium
+   Prediction." Review of Financial Studies, 21 (2008), 1455­1508.
+
+Hansen, L. P., and R. J. Hodrick. "Forward Exchange Rates as Optimal Predictors of Future Spot
+   Rates: An Econometric Analysis." Journal of Political Economy, 88 (1980), 829­853.
+
+Hjalmarsson, E. "Fully Modified Estimation with Nearly Integrated Regressors." Finance Research
+   Letters, 4 (2007), 92­94.
+
+Kalbfleisch, J. D., and D. A. Sprott. "Application of Likelihood Methods to Models Involving Large
+   Numbers of Parameters." Journal of the Royal Statistical Society B, 32 (1970), 175­194.
+
+Lewellen, J. "Predicting Returns with Financial Ratios." Journal of Financial Economics, 74 (2004),
+   209­235.
+
+Mark, N. C. "Exchange Rates and Fundamentals: Evidence on Long-Horizon Predictability." Ameri-
+   can Economic Review, 85 (1995), 201­218.
+
+Mishkin, F. S. "What Does the Term Structure Tell Us About Future Inflation?" Journal of Monetary
+   Economics, 25 (1990), 77­95.
+
+Mishkin, F. S. "Is the Fisher Effect for Real? A Reexamination of the Relationship between Inflation
+   and Interest Rates." Journal of Monetary Economics, 30 (1992), 195­215.
+
+Nelson, C. R., and M. J. Kim. "Predictable Stock Returns: The Role of Small Sample Bias." Journal
+   of Finance, 48 (1993), 641­661.
+                                                                                   Hjalmarsson 839     https://doi.org/10.1017/S0022109011000135
+
+Newey, W. K., and K. D. West. "A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorre-
+   lation Consistent Covariance Matrix." Econometrica, 55 (1987), 703­708.
+
+Paye, B. S., and A. Timmermann. "Instability of Return Prediction Models." Journal of Empirical
+   Finance, 13 (2006), 274­315.
+
+Phillips, P. C. B. "Towards a Unified Asymptotic Theory of Autoregression." Biometrika, 74 (1987),
+   535­547.
+
+Phillips, P. C. B. "Regression Theory for Near-Integrated Time Series." Econometrica, 56 (1988),
+   1021­1043.
+
+Phillips, P. C. B. "Optimal Inference in Cointegrated Systems." Econometrica, 59 (1991), 283­306.
+Rossi, B. "Testing Long-Horizon Predictive Ability with High Persistence, and the Meese-Rogoff
+
+   Puzzle." International Economic Review, 46 (2005), 61­92.
+Stambaugh, R. F. "Predictive Regressions." Journal of Financial Economics, 54 (1999), 375­421.
+Stock, J. H. "Confidence Intervals for the Largest Autoregressive Root in U.S. Economic Time Series."
+
+   Journal of Monetary Economics, 28 (1991), 435­459.
+Torous, W.; R. Valkanov; and S. Yan. "On Predicting Stock Returns with Nearly Integrated Explana-
+
+   tory Variables." Journal of Business, 77 (2004), 937­966.
+Valkanov, R. "Long-Horizon Regressions: Theoretical Results and Applications." Journal of Finan-
+
+   cial Economics, 68 (2003), 201­232.
+

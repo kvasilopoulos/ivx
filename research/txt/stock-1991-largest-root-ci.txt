@@ -1,0 +1,1282 @@
+Journal of Monetary Economics 28 (1991) 435-459. North-Holland
+
+Confidence intervals for the largest
+autoregressive root in
+U.S. macroeconomic time series
+
+James H. Stock*
+
+University of California - Berkeley, Berkeley, CA 94720, USA
+
+Received December 1990, final version received May 1991
+
+This paper provides asymptotic confidence intervals for the largest autoregressive root of a time
+series when this root is close to one. The intervals are readily constructed either graphically or
+using tables in the appendix. When applied to the Nelson-Plosser (1982) data set, the main
+conclusion is that the confidence intervals typically are wide. The conventional emphasis on
+testing for whether the largest root equals one fails to convey the substantial sampling variability
+associated with this measure of persistence.
+
+1. Introduction
+
+   A prominent problem in empirical macroeconomics during the past decade
+has been the measurement of the persistence of shocks to macroeconomic
+time series variables. Since Nelson and Plosser (19821, much of this literature
+has focused on the size of the largest autoregressive root (p) of a time series,
+and tests for whether p is one have played a central role in the empirical
+analysis. This emphasis on unit root tests, which in part is attributable to the
+availability of appropriate statistical theory, has been criticized on several
+grounds. While macroeconomic theories suggest substantial serial depen-
+dence in time series data, a unit root typically is predicted only as a special
+case. Moreover, reporting only unit root tests and point estimates of the
+largest root is unsatisfying as a description of the data: this fails to convey
+
+   *The author thanks Christopher Cavanagh, Thomas Rothenberg, and Mark Watson for
+helpful discussions and Allan Gregory and Robin Lumsdaine for comments on an earlier draft.
+Financial support by the National Science Foundation through grant no. SES-89-10601 is
+gratefully acknowledged.
+
+0304-3932/91/$03.500  1991-Elsevier Science Publishers B.V. Ah rights reserved
+436  J.H. Stock, `Umt root' confidence tnterllals
+
+information about the sampling uncertainty or, more precisely, the range of
+models (i.e., values of p) that are consistent with the observed data. While
+not new [see for example Campbell and Mankiw (1987) and Cochrane
+(1988)], these criticisms suggest that confidence intervals for p could provide
+a more useful summary measure of persistence than unit root tests alone.
+
+    This paper reports asymptotic confidence intervals for p, calculated for the
+fourteen historical U.S. annual macroeconomic time series studied by Nelson
+and Plosser (1982). The methodological contribution of the paper is to
+provide a set of figures and tables for use in constructing confidence intervals
+for p when p is large. Because the distribution of the t-statistic testing p is
+nonnormal and depends strongly on p when p is nearly one, the usual
+approach of constructing asymptotic confidence intervals as the point esti-
+mate *2 standard errors is not appropriate here. Moreover, as Cavanagh
+(19851, Sims (19881, and Sims and Uhlig (1988) emphasized, the first-order
+asymptotic theory does not provide a suitable framework for the construction
+of confidence intervals because it is discontinuous at p = 1. Instead, the
+confidence intervals reported here are constructed using the local-to-unity
+asymptotic theory developed by Bobkoski (19831, Cavanagh (19851, Phillips
+(1987), and Chan and Wei (1987). In this theory, the true value of p is
+modeled as being in a decreasing neighborhood of one, specifically p = 1 +
+c/T, where c is a fixed constant (the Pitman drift) and T is the sample size.
+This device - nesting p as a function of the sample size - is analogous to the
+usual approach used to study the asymptotic power of econometric tests
+against local alternatives, except that in the conventional case the alternatives
+are in a l/v? rather than a l/T neighborhood of the null value. Cavanagh
+(1985) originally described how to use this theory to construct confidence
+intervals based on the t-statistic testing p = 1 + c/T for first-order autore-
+gressions with no intercept in the regression. This paper extends his ap-
+proach to the empirically more relevant case of higher-order autoregressions
+with an intercept, or an intercept and a time trend. Two sets of confidence
+intervals are studied here: one based on the augmented Dickey-Fuller (1979)
+(ADF) t-statistic testing p = 1, and one based on a modification of Sargan
+and Bhargava's (1983) uniformly most powerful test statistic (the MSB
+statistic).
+
+   The main new empirical result in this paper is that the confidence intervals
+for p for many of the annual Nelson-Plosser series are wide. As Nelson and
+Plosser emphasized, the ADF statistic rejects p = 1 against p < 1 at the 5%
+level only for the unemployment rate, so unemployment is the only series for
+which the 90% central confidence interval for p (based on Nelson and
+Plosser's ADF statistics) falls below one. But these intervals also include
+values of p substantially different from one. The 90% intervals for real GNP
+and real per capita GNP, based on 62 years of data, are approximately
+(0.6,1.04) using the detrended ADF statistic. This provides additional empir-
+J. H. Stock, `lhr root' confidence inten'als       437
+
+ical content to the often-voiced view, recently expressed for example by
+Christian0 and Eichenbaum (1990), that either difference-stationary or
+trend-stationary models are capable of producing the autocorrelations ob-
+served in U.S. output data. Some series, however, have substantially tighter
+intervals than GNP. The series with the tightest interval estimates are
+industrial production, consumer prices, velocity, and stock prices - the series
+with the most observations - and the bond yield. For example, the 90% ADF
+interval for consumer prices, on which there are 111 annual observations, is
+(0.901,1.037) and it is (0.873,1.039) for stock prices (the S&P 500). These
+tighter intervals in part reflect the longer samples available for these series
+than for GNP. Reporting solely the results of unit root tests fails to convey
+the evident imprecision with which the largest root is estimated in many of
+these series, even with these long annual data.
+
+   The paper is organized as follows. The method for constructing these
+confidence intervals is summarized in section 2. Section 3 reports a Monte
+Carlo experiment that examines the finite-sample performance of the inter-
+vals. The empirical results are reported and discussed in section 4, and some
+conclusions are summarized in section 5. Tables of central confidence inter-
+vals as a function of the ADF statistics are provided in the appendix.
+
+2. Local-to-unity asymptotic confidence intervals
+2.1. The model and statistics
+
+   Let the univariate time series y, obey
+
+                                                                              (1)
+         a(L)q = Ed, a(L) =b(L)(l -PL),
+
+                                                   t= l,...,T,
+
+where b(L) = c;_objL', where b, = 1 and L is the lag operator [so that the
+lag polynomial a(L) has order k + 11, 6(l) z 0, u. = 0, and E, is a martingale
+difference sequence with EE: = a* and supI E&f < 03,with ~~ and pcLn1onzero
+in general. The factorization of a(L) is used to distinguish the largest root,
+p = 1 + c/T, from the fixed stable roots describing short-run dynamics in
+b(L).'
+
+   `An alternative nesting for p, used by Phillips (19871, is p = expk/T). Because exp(c/T) =
+1 + c/T + 0(Tm2), the asymptotic representations obtained in this section are the same for
+either nesting.
+438                     J.H. Stock, `Unit root' confidence rntervals
+
+   The representation (1) can be rearranged to yield the usual Dickey-Fuller
+regression,
+
+                                   k
+
+          ~,=&,+iGt+41)~~-1+       &$-~Y+,+E~,                        (2)
+
+                                   J=l
+
+where, with p = 1 + c/T, (Y(L) = L-`(1 - a(L)) SO ~(1) = 1 + &(1)/T, /.I0 =
+
+-cb(l&/T  - cb*(l)/.~t/T + pb(l)~~, fil = -cb(l)/~*,/T, 6: = - x:=1+16,,
+
+and (Y: = - Ck,_-I+I~j. The ADF f-statistic, denoted by P, is the r-statistic
+
+testing the hypothesis that ~41) = 1 in (2).
+
+Sargan and Bhargava (1983) proposed a different test statistic, motivated
+
+as the uniformly most powerful test statistic for testing p = 1 against the
+
+stationary alternative using an approximation to the Gaussian likelihood
+
+when p1 = 0. Bhargava (1986) extended these results to the case of nonzero
+
+p0 and pt, showing the Sargan-Bhargava statistic to be locally most powerful
+
+invariant when computed using detrended y,, where the detrended data are
+y,B = yt - (t - l)/(T - l)y, - (T - t)/(T - l)y, - (Y - $(yT + yl>>. Although
+
+the Sargan-Bhargava statistic has these optimality properties in the first-order
+
+Gaussian case, the test is not similar when b(1) # 1. As is shown in Stock
+
+(1988), however, it is readily modified to provide an asymptotically similar
+test statistic. Let the spectral density of (1 -pL)v, at frequency zero be
+
+w2/2rr, so that w = a/b(l), and estimate w* by G2 = G2/(1 - ~?*(l))~, where
+
+CJ and a*(L) are estimated from the regression (2). When @a and p1 are
+
+possibly nonzero, the modified Sargan-Bhargava statistic (in logarithms),
+
+computed using y,!, is
+
+          SA2T-* 5 (Y:)'                                              (3)
+
+                              1=1
+
+   The regression (2) includes t as a regressor, and the detrended series y: is
+
+used to construct the JvM? statistic in (3). This is appropriate if ~a and it
+are not restricted a priori, and this will be referred to as the `detrended' case.
+Alternatively it, but not necessarily pO, might be known to be zero. Then the
+appropriate ADF statistic is ? M,the t-statistic testing (~(1) = 1 in (2) exclud-
+ing the time trend, and the MSB statistic is computed using y,' = yI - jj
+(rather than yp> and is denoted MSBw. This will be referred to as the
+
+`demeaned' case.
+
+2.2. Asymptotic distributions
+
+   One approach to constructing confidence intervals for p would be to
+assume a distribution for Ed and to derive the exact finite-sample confidence
+J.H.Stock, `Umt roof' confidence lnrervals           439
+
+intervals based on an appropriate test statistic. Because any specific distribu-
+tional assumption typically would not be satisfied in practice, the justification
+for such an approach would be that, in large samples, it might nonetheless
+provide a good approximation under more general conditions. This suggests
+instead computing confidence intervals with an explicit asymptotic justifica-
+tion, which is the approach taken here.
+
+   Limiting representations for the statistics at hand are obtained using the
+local-to-unity asymptotic distribution theory given in Bobkoski (1983),
+Cavanagh (1985), Chan (1988), Chan and Wei (1987), and Phillips (1987) [for
+a different approach, see Ahtola and Tiao (198411. For a technical review of
+this literature, see Nabeya and Tanaka (1990, sect. 1). The basic result in this
+literature is that the process U, in (1) obeys a functional limit theorem, in
+which V,(h) = T-`/`v ITA1converges to a diffusion process as T -+ 00, where
+[ -1 is the greatest lesser integer function. Specifically, Vr( .> d wJ( *>, where
+J( - > satisfies dJ(s) = cJ(s) ds + dW(s), where W( *1 is a standard Brownian
+motion and ` 2 ' denotes weak convergence in D[O, 11. If c = 0 so p = 1, this
+specializes to the more familiar limit, Vr( - > - wW( - 1. These results are
+extended here to include additional regressors using the techniques of Sims,
+Stock, and Watson (1990).
+
+   For pa and pI possibly nonzero, the appropriate statistics involve detrend-
+ing. It is shown in appendix A that, when p = 1 + c/T and (2) includes a
+constant and a time trend,
+
+T(&(l) - 1) *6(l){ (~1~T(~)2ds)-1~1,T(s)dW(s)  +c),  (4)
+
++`a (/a1J'(s)2ds)i/2( ( k1JT(s)2 ds) -1/o11T(s) dW(s) + c}, (5)
+
+where .Y(A) =1(h) - /:(4 - 6sMs)ds - Ajd(l2s - 6)J(s)ds and JB(A) =
+J(A) - (A - +)J(l) - j,,?(s) ds.
+
+   The limiting representations (4)-(6) are the same in the demeaned case,
+except that J"(e) replaces Jr(.) and JB(*), where J"(A) =.l(A) - /,`J(s)ds.
+
+2.3. Construction of asymptotic confidence intervals
+
+   The distributions corresponding to (4H6) are nonnormal and the depen-
+dence on c is not a simple location shift, so confidence intervals for p cannot
+be formed using a simple `+2 standard error' rule. Still, because the
+440  J.H. Stock, `Umt root' confidence intervals
+
+representations (5) and (6) depend only on c and are continuous in c, the
+ADF and MSB test statistics can be used as the basis for interval estimation.
+
+   Recall that a lOO(1 - (~1% confidence set for c, S(y,, . . . , yT), is a set-val-
+ued function of the data with the property that Pr[c E NY,, . . . , yT)] = 1 - (Y
+for all values of c. In general, a confidence set can be constructed by
+`inverting' the acceptance region of a test statistic that has a distribution
+which depends on c but not on the nuisance parameters. To be concrete,
+consider confidence sets based on fl. If A,(c,) is the (l- or 2-sided)
+asymptotic acceptance region for a level cy test of the null of c = cO, then
+S(?`) = {c: ?' E AJc)) is a lOO(1 - (Y)% confidence set. Because f' is a
+scalar, a lOO(1 - (~1% closed confidence set can be constructed as SC?) = {c:
+f,;,,<c> I +' ~f,;,,(c>l, where f,,,,(c) and f,,,,(c) are respectively the lower
+and upper (Y, and 1 - (Y, percentiles of ?' as a function of c, where
+(Y,+ (Y,= (Y.If f,;,$c> and fUia,(c> are strictly monotone increasing in c, the
+critical values can be inverted to yield the more familiar representation,
+S(?) = (c: f&G'> -< c S&&W)}. H ere, we construct central confidence
+
+intervals, so that cy, = (Y, = &.
+   A simple way to construct these intervals is to use the graphical device
+
+described by Kendall and Stuart (1967, ch. 20). Asymptotic local-to-unity
+central confidence belts (the graph of (f,; t,(c), f,; ;,(cN> are plotted in figs.
+l-4 for, respectively, the demeaned ADF f-statistic ?, the detrended ADF
+t-statistic ?`, the demeaned MSB statistic MSBw, and the detrended MSB
+statistic MSBB. The computation of these belts by Monte Carlo simulation is
+described in appendix B. In each figure, the four bands describe the 95% (the
+widest band), 90%, 80%, and 70% confidence belts. The central line plots the
+median of the local-to-unity distribution of the test statistic. The lOO(1 - (~1%
+confidence set is given by those values of c falling within the 1 - a belt for a
+given value of the statistic. Each 1 - (Yconfidence belt has the property that,
+for a given value of c, the asymptotic probability of realizing a value of the
+statistic inside the belt is 1 - (Y. For any true value of c, the confidence
+intervals constructed using the belt will contain c if and only if the realized
+statistic falls within the belt. Thus, the asymptotic probability that the
+confidence interval contains the true value of c is 1 - (Y.*
+
+   As an example, suppose ?p = -3.0 is calculated from a series with
+T = 100. The 95% confidence interval is the c in the 95% belt in fig. 1, read
+
+   `The -iP and i' statistics used here are centered around one rather than p (the conventional
+approach). The reason for centering around one is to eliminate the dependence of the
+distribution of the t-statistic on the nuisance parameters in the higher-order case. Cavanagh
+(1985), who focused on the first-order case [so that b(l) = 11, described the construction of
+confidence intervals based on the r-statistic centered around (~(1) =p, that is, based on
+7(p) = c&(l) - p)/.SE(&(l)), where &cl) and X(&(l)) are computed using (2). In general the
+distribution of 7(p) depends not only on c but also on b(l), so its critical values cannot be
+inverted to obtain confidence intervals without adjusting for b(l).
+     J.H. Stock, `Unit root ' confidence interoals        441
+
+`-6  -5  -4  -3  -2  -I           0                 1  2
+
+         Value of test statistic
+
+Fig. 1. Confidence belt for local-to-unity parameter c based on demeaned ADF f-statistic; bands
+
+             in order of decreasing width: 95%. 90%, 80%, 70%, central line:median.
+
+vertically for P = - 3.0 (or alternatively taken from table A.l, part A), which
+is -27.9 s c I 0.8. The 95% confidence interval for p is (1 - 27.9/100,
+1 + 0.8/100) = (0.721,1.008). Because the medians in figs. 1 and 3 are mono-
+tone increasing in c, an asymptotically median-unbiased estimator is obtained
+using the central line in fig. 1 (or the final column of table A.l, part A).
+Because the median of 4' is -3.0 when c = - 14.9, ?med = - 14.9 is an
+asymptotically median-unbiased estimate of c, corresponding to bmed = 1 -
+14.9/100 = 0.851. Based on the level of numerical accuracy used to produce
+figs. l-4, it appears that the medians of ?' and MSBB bend backwards for c
+between zero and one, so estimators thus constructed using ?' and MSBB
+are not median unbiased. However, because the range of values of ? and
+MSBB over which these curves bend backwards is very small [specifically,
++' E ( - 1.346, - 1.334) and MSBB E (- 2.193, - 2.18411, the bias introduced
+by using this estimator with the detrended statistics appears to be negligible.
+442       J.H. Stock. `Umt root' confidence mleruals
+
+     I-6  -5  -4  -3  -2  -1           0              1  2
+
+              Value of test statistic
+
+Fig. 2. Confidence belt for local-to-unity parameter c based on detrended ADF t-statistic; bands
+                   in order of decreasing width: 95%, 90%, 80%, 70%, central line: median.
+
+2.4. Discussion
+
+   Six aspects of these results are noteworthy. First, the confidence belts are
+nonlinear, exhibiting a sharp bend for c just above zero. For positive values
+of ?' or ?' the confidence intervals are tight, for large negative values they
+are wide. Large positive values of P are unlikely to be realized unless c is
+positive, but negative values of i' are likely to be realized whether c is
+positive or negative. A simple calculation demonstrates how different are the
+widths of the interval estimates for different realizations of the test statistic:
+if, for example, ?' = 0, the sample must have T = 75 for the 95% interval to
+have width 0.05, but if 4' = -3.5 is observed, T must be 725 to produce this
+short an interval.
+
+   Second, the detrended belts do not increase monotonically, so for some
+values of +' the central confidence set will be disjoint. Cavanagh (1985)
+pointed out that disjoint sets are theoretically possible in the local-to-unity
+     .I&. Stock, `Unit root' confidence interuals     443
+
+i-3  -2  -1  0                                     1
+
+     Value of test statistic
+
+Fig. 3. Confidence belt for local-to-unity parameter c based on demeaned modified
+
+Sargan-Bhargava statistic; bands in order of decreasing width: 95%, 90%, 80%, TO%, central
+                                                       line: median.
+
+setting, but his computations did not uncover any in the nondemeaned
+first-order case. Sims (19881 found disjoint confidence sets for p in the
+nondemeaned first-order model using first-order asymptotic theory, which is
+discontinuous in p, and conjectured that exact finite-sample distributions
+(which are continuous in p> also might result in disjoint confidence sets.
+Using the asymptotic local-to-unity confidence intervals, the Cavanagh-Sims
+conjecture is not borne out in the demeaned case, although it is in the
+detrended case. This is, however, of little practical importance. The largest
+range of discoutinuities is for the 95% belt, in which case disjoint confidence
+sets obtain when 4' falls between C- 3.66, - 3.69) and (-0.66, -0.71). In
+table A.l, this issue is addressed by reporting only the outer bounds of the
+confidence intervals in these ranges, so that the intervals actually have
+asymptotic confidence coefficients slightly greater than 1 - a. Note that this
+444                   J.H. Stock, `Unrt root' confidence mtervals
+
+                 `-3  -2  -1                              0        1
+
+                      Value of test statistic
+
+Fig. 4. Confidence belt for local-to-unity parameter      c based on detrended modified
+                                                          width: 95%, 90%, 80%, 70%, central
+Sargan-Bhargava  statistic; bands in order of decreasing
+
+                                          line: median.
+
+results in a discontinuous jump in the confidence interval (as a function of
+?) in these regions.
+
+   Third, because the local-to-unity distribution of T(&(l) - 1) is skewed and
+moreover depends on the nuisance parameters b(l), the relation between
+6(l) and the confidence interval constructed by inverting the ADF t-statistic
+is complicated. The point estimate generally will not be at the center of the
+confidence interval.
+
+   Fourth, the confidence intervals based on the detrended statistics are
+larger than for the demeaned statistics. To be concrete, consider the median
+confidence interval, taken to be the confidence interval computed for the
+median value of the ADF statistic for a given value of c. For c between - 20
+and 2, the median 90% interval based on C' is uniformly longer than the
+median 90% interval based on P', assuming pI = 0. For example, for
+J.H Stock, `Unit root' confidence intervals  445
+
+c = -5, the median P is -2.06, with a 90% confidence interval for c of
+(- 13.6,2.4), whereas the median ?' is -2.45, with 90% confidence interval
+(- 16.2,3.4).
+
+   Fifth, the MSB confidence belts have the same general properties as the
+ADF confidence belts. Intervals are wider for large negative values of
+the statistic. Like the 7 intervals, there is a small range of MSBB for which
+the confidence set is disjoint.
+
+   Sixth, an alternative to the asymptotic approach used here is to construct
+confidence intervals and median-unbiased estimators for p using finite-sam-
+ple techniques. This approach has recently been adopted by Andrews
+(1990), who used exact distribution theory to construct confidence inter-
+vals and median-unbiased estimators in the Gaussian AR(l) model,
+and by Rudebusch (1990), who used Monte Carlo techniques to construct
+median-unbiased estimators in the Gaussian AR(k) model. The principal
+advantages of the asymptotic approach relative to the finite-sample ap-
+proaches are the simplifications that arise in handling the nuisance parame-
+ters and its validity under a wide range of assumptions on the distribution
+of Et.
+
+3. Monte Carlo analysis
+
+   The asymptotic analysis of section 2 serves two main purposes: to show
+that in large samples the local power functions of the ADF and MSB
+statistics depend only on c so that they can be used to construct asymptotic
+confidence intervals, and to provide large-sample approximations to the
+finite-sample distributions of these statistics when p is near one. It is well
+known [Schwert (1989)] that unit root tests statistics can have finite-sample
+distributions that differ markedly from their asymptotic approximations un-
+der the unit root null when there are nuisance parameters, specifically when
+there is a moving average error. A Monte Carlo analysis of the local-to-unity
+confidence intervals was therefore performed to assess the finite sample
+performance of these asymptotic approximations when p is near one. The
+probability model examined was the nearly-integrated moving average model,
+
+(1 -pL)y,= (1 +@L)E,, E, i.i.d. N(O,l),      (7)
+
+where p = 1 + c/T. The ADF and MSB statistics were computed in both the
+demeaned and detrended cases. For T = 100, k in (2) was set to 4, and for
+T = 200, k was set to 5. The experiment examined c = (2,0, - 2, - 5, - 10)
+and 8 = (0.5,0, -0.5). Note that, for 8 # 0, the finite-order autoregressive
+
+approximation is misspecified so that in these cases the experiment examines
+
+both specification error and the effect of having a finite sample.
+                 Table 1
+
+             Monte Carlo results:                                                                           $
+
+Finite-sample coverage probabilities for local-to-unity asymptotic confidence intervals with asymptotic confidence coefficients 0.95, 0.90, 0.80, and $
+
+                                                         0.70."
+                                                                                                                                                                                  _g
+
+             Model: (1 - pL)y, = (1 + BLk,, 6, i.i.d. N(O, 11, p = 1 + c/T
+
+         f'  ST                    MSB'  MSB B                                                              s
+
+                                                                                                            a
+
+0     c  0.95 0.90 0.80 0.70 0.95 0.90 0.80 0.70 0.95 0.90 0.80 0.70 0.95 0.90 0.80 0.70                    ?.
+
+                                                                                                            a
+
+             Part A. T = 100                                                                                S
+
+0.0      2 0.954 0.906 0.803 0.691 0.933 0.878 0.766 0.663 0.893 0.834 0.729 0.634 0.817 0.741 0.630 0.533  2%
+
+0.0      0 0.937 0.883 0.776 0.677 0.931 0.874 0.771 0.665 0.877 0.809 0.700 0.604 0.830 0.760 0.652 0.563 ;
+
+0.0 -2 0.926 0.867 0.764 0.665 0.926 0.870 0.767 0.667 0.867 0.803 0.698 0.601 0.826 0.753 0.645 0.550 ;F:
+
+0.0   -5 0.918 0.857 0.749 0.656 0.922 0.867 0.763 0.664 0.832 0.765 0.657 0.559 0.787 0.722 0.609 0.523 2
+
+0.0 - 10 0.896 0.834 0.722 0.625 0.913 0.849 0.734 0.628 0.775 0.698 0.586 0.502 0.731 0.655 0.551 0.461 E-
+
+0.5      2 0.958 0.908 0.804 0.691 0.933 0.875 0.766 0.660 0.895 0.839 0.722 0.624 0.807 0.726 0.613 0.517
+
+0.5      0 0.929 0.868 0.764 0.664 0.926 0.869 0.770 0.662 0.876 0.805 0.694 0.599 0.832 0.765 0.655 0.555
+
+0.5 -2 0.924 0.870 0.765 0.664 0.922 0.867 0.768 0.674 0.863 0.800 0.693 0.601 0.827 0.757 0.651 0.553
+
+0.5 -5 0.913 0.860 0.755 0.659 0.923 0.867 0.762 0.665 0.840 0.770 0.661 0.560 0.807 0.739 0.630 0.531
+
+0.5 - 10 0.885 0.820 0.699 0.601 0.904 0.837 0.719 0.619 0.770 0.695 0.582 0.499 0.749 0.667 0.561 0.471
+
+-0.5     2 0.948 0.899 0.805 0.703 0.934 0.873 0.765 0.656 0.922 0.869 0.764 0.671 0.852 0.779 0.670 0.572
+
+-0.5     0 0.939 0.881 0.775 0.675 0.926 0.870 0.767 0.662 0.914 0.855 0.750 0.651 0.870 0.804 0.701 0.611
+
+-0.5  -2 0.925 0.868 0.763 0.661 0.922 0.860 0.758 0.653 0.904 0.845 0.747 0.648 0.864 0.802 0.696 0.601
+
+-0.5  -5 0.925 0.866 0.752 0.652 0.924 0.870 0.764 0.661 0.880 0.814 0.711 0.608 0.840 0.779 0.670 0.574
+
+-0.5  - 10 0.915 0.852 0.741 0.646 0.914 0.855 0.746 0.641 0.828 0.757 0.640 0.535 0.776 0.697 0.588 0.495
+                                                               Part B. T = 200
+
+0.0    2 0.960 0.912 0.810 0.701 0.944 0.887 0.783 0.677 0.922 0.869 0.762 0.662 0.878 0.808 0.700 0.606
+
+       0 0.940 0.883 0.781 0.682 0.940 0.886 0.786 0.680 0.903 0.836 0.731 0.632 0.893 0.832 0.724 0.625
+
+i.8 -2 0.940 0.883 0.779 0.682 0.936 0.877 0.778 0.679 0.903 0.840 0.733 0.633 0.886 0.820 0.710 0.606
+
+0:o -5 0.927 0.872 0.765 0.664 0.930 0.876 0.775 0.673 0.885 0.821 0.707 0.609 0.866 0.798 0.682 0.583
+
+0.0 -10 0.919 0.860 0.748 0.650 0.926 0,872 0.762 0.651 0.855 0,780 0.665 0.564 0.832 0.757 0.64s 0.546
+
+0.5    2 0.9% 0.909 0.804 0.695 0.942 0.885 0.775 0.669 0.918 0.861 0.753 0.655 0.878 0.808 0.701 0.603
+
+0.5    0 0.941 0.888 0.778 0.682 0.936 0.880 0.780 0.678 0.903 0.840 0.731 0.633 0.881 0.815 0.708 0.609
+
+0.5 -2 0.939 0.885 0.782 0.680 0.937 0.882 0.784 0.680 0.898 0.839 0.731 0.629 0.875 0.809 0.104 0.607
+
+          -5 0.929 0.875 0.772 0.670 0.932 0.883 0.780 0.678 0.874 0.808 0.695 0.591 0.861 0.794 0.679 0.580  o$ l
+::: -10 0.915 0.855 0.743 0.645 0.925 0.866 0.754 0.650 0.831 0.762 0.657 0.565 0.822 0.749 0.634 0.540
+
+-0.5   2 0.951 0.905 0.806 0.703 0.941 0.883 0.776 0.666 0.930 0.881 0.771 0.672 0.905 0.841 0.733 0.633 g
+
+- 0.5  0 0.941 0.891 0.787 0.687 0.938 0.887 0.791 0.687 0.933 0.873 0.775 0.672 O-919 0.863 0.760 0.657 m=
+
+-0.5 -2 0.940 0.886 0.785 0.681 0.939 0.885 0.783 0.679 0.927 0.870 0.767 0.668 0.915 0.858 0.754 0.654 $
+
+- 0.5 -5 0.929 0.875 0.773 0.678 0.936 0.879 0.778 0.681 0.919 0.862 0.762 0.662 0.905 0.844 0.733 0.633 .
+
+-0.5 - 10 0.930 0.874 0.771 0.669 0.933 0.881 0.772 0.668 0.888 0.823 0.712 0.616 0.877 0.807 0.696 0.593 30
+
+   aThe entries are the fraction of Monte Carlo replications for which the asymptotic local-to-unity confidence intervals contained the true value of $"
+p, where p = 1 + c/T. The ADF statistics were computed using k = 4 for T = 100 and k = S for T = 200. The MSB statistics were computed using s
+
+Ij2 = ciz/(l - ai*(l))*, where 13 and a*(i) were estimated from (2) (including t as a regressor Far the MSBB statistic, excluding t for the MSBp %
+statistic), with k = 4 for T = 100 and k = 5 for T = 200. For each replication, ten initial observations were drawn. The coverage rates are based on 3
+10,0OOMonte Carlo replications for each (T, 6, c) experiment.
+                                                                                                              s
+                                                                                                              F
+                                                                                                              2
+
+                                                                                                              E-
+448  J.H. Srock, `Unit root' confidence mtervals
+
+   Table 1 reports the fraction of times that the calculated central confidence
+
+interval contains the true value of c for different experiments. Because this is
+
+just the fraction of times that the computed statistic falls within the upper
+
+and lower +(Ypercentiles for that value of c, the coverage rates in table 1
+
+were computed from the fraction of pseudo-random test statistics that reject
+the null hypothesis that p = 1 + c/T in a two-sided level (Y test, where the
+
+critical values for each c are those used to construct figs. 1-4.
+   For ADF intervals, the asymptotic approximations perform well. For both
+
+7"* and 7^@with T = 100, in all cases the empirical coverage rates of the
+
+asymptotic 90% confidence interval are between 82% and 91%. The perfor-
+mance of the ADF interval estimator is insensitive to 0 but deteriorates
+
+somewhat as c becomes large and negative. The performance of the MSB
+intervals, particularly the MSBB intervals, is less satisfactory than the ADF
+intervals. For example, for c = -5, 8 = 0, and T = 100, the Monte Carlo
+coverage rate of the asymptotic 90% MSBB interval is 72.2%, compared with
+86.7% for the corresponding ? interval; for T = 200, this MSBB coverage
+rate remains under 80%.3 Overall, these results suggest that the ADF
+
+intervals will be more reliable in empirical applications.
+
+4. Empirical results
+
+   Table 2 presents 90% and 80% confidence intervals for the largest autore-
+gressive root p for the fourteen annual series studied by Nelson and Plosser
+(1982). Because of the poor Monte Carlo performance of the MSB intervals,
+the empirical intervals were computed using the detrended ADF statistic.
+Panel A reports estimates based on Nelson and Plosser's choice of the
+number of lags (k) included in (2). The 90% central confidence interval for p
+(based on ?) is below one for the unemployment rate and above one for the
+bond yield, while p = 1 is included in all the other intervals.
+
+   The calculations were repeated using k = 5 for each of the series; the
+results are reported in panel B of table 2. The primary qualitative conclusion
+from panel A - the striking width of the confidence intervals - remains
+unchanged, although several estimated intervals shift. The main differences
+occur for the three GNP series, the unemployment rate, real wages, velocity,
+and the S&P 500; each of these intervals is shifted up.
+
+   As was noted in the introduction, the series with the tightest confidence
+intervals are the bond yield, industrial production, consumer prices, stock
+prices, and velocity. The confidence intervals for the bond yield are tight
+because the test statistics are relatively positive, suggesting a root greater
+
+   3Additional Monte Carlo experiments (not reported) suggest that the poor performance of the
+MSB intervals when t is included in (2) and for large negative c arises from the imprecision of
+O;*(l), which is used to construct &. This suggests investigating alternative spectral density
+estimators in the local-to-unity model, a topic left for future research.
+                       J.H. Smck, `Unit roof' confidence rntercals        449
+
+                                          Table 2
+Asymptotic confidence intervals for p for the Nelson-Plosser data seta
+
+Series                 N    k     ADF ;'                 90-%- intervals  80% intervals
+-
+                               -                    lag lengths           (0.646, 1.031)
+Real GNP                                                                  (0.793, 1.049)
+Nominal GNP                 Part A. Nelson-Plosser       (0.604, 1.042)   (0.634, 1.029)
+Real per capita GNP                                      (0.757, 1.060)   (0.857, 1.026)
+Industrial production  62   1     - 2.994                (0.591, 1.041)   (0.787, 1.032)
+Employment                        - 2.321                (0.836, 1.031)   (0.615, 0.893)
+Unemployment rate      62   1     - 3.045                (0.757, 1.039)   (0.815, 1.034)
+GNP deflator                      - 2.529                (0.577, 0.950)   (0.922, 1.031)
+Consumer prices        62   1     - 2.655                (0.787, 1.041)   (0.833, 1.045)
+Wages                             - 3.552                (0.901, 1.037)   (0.681, 1.025)
+Real wages             111        -2.516                 (0.800, 1.054)   (0.719, 1.020)
+Money stock                       - 1.972                (0.644, 1.035)   (0.950, 1.035)
+Velocity               81   :     - 2.236                (0.687, 1.030)   (1.034, 1.067)
+Bond yield                        - 3.049                (0.929, 1.042)   (0.896, 1.033)
+S&P 500                81   3     - 3.078                (1.032, 1.075)
+                                  - 1.663                (0.873, 1.039)
+                       82
+                                    0.686
+                       111  :     - 2.122
+
+                       71   2
+
+                       71   1
+
+                       82   1
+
+                       102  0
+
+                       71   2
+
+                       100  2
+
+                            Part B. Uniform lag lengths
+
+Real GNP               62         -2.123            (0.780, 1.068)        (0.820, 1.057)
+Nominal GNP                       - 1.788           (0.847, 1.074)        (0.886, 1.062)
+Real per capita GNP    62   :     - 2.222           (0.760, 1.066)        (0.800, 1.055)
+Industrial production             - 2.529           (0.836, 1.031)        (0.857, 1.026)
+Emplo~ent              62   5     - 2.565           (0.764, 1.043)        (0.794, 1.035)
+Unemployment rate                 - 2.835           (0.715, 1.037)        (0.746, 1.029)
+GNP deflator           111  5     - 2.466           (0.784, 1.044)        (0.813, 1.036)
+Consumer prices                   - 2.369           (0.855, 1.033)        (0.876, 1.028)
+Wage5                  81         -2.124            (0.811, 1.059)        (0.845, 1.049)
+Real wages                        - 2.564           (0.728, 1.049)        (0.762, 1.041)
+Money stock            81   :     - 3.005           (0.685, 1.033)        (0.718, 1.024)
+Velocity                          - 0.741           (1.015, 1.049)        (1.018, 1.042)
+Bond yield             82                           (1.033, 1.078)        (1.035, 1.069)
+S&P 500                             0.597           (0.982, 1.048)        (1.016, 1.042)
+                       111  :     - 1.062
+
+                       71
+
+                       71   :
+
+                       82
+
+                       102  :
+
+                       71
+
+                       100  :
+
+   `The detrended ADF statistic (ir) was obtained by estimating the regression (21, including a
+constant, a time tend, and k lags of Ay,. The data are annual, with all series ending in 1970. N
+
+denotes the total number of obsentations on each series, including observations used for initial
+conditions, so that, in the notation of the paper, T= N - k - 1. The 90% and 80% asymptotic
+
+confidence intervals were computed using appendix table A.l, linearly interpolated, as described
+
+in section 2.
+
+than one. As is evident from figs. 1-4, positive values of the test statistic
+produce much tighter intervals than do large negative values. The relatively
+tight intervaIs for industrial production, consumer prices, stock prices, and
+velocity arise from the greater number of observations on these series.
+
+   The width of the intervals in table 2 raises the question of whether tighter
+intervals could be obtained using more frequent observations over the same
+span of years, say quarterly rather than annual data were they availabie. A
+calculation, simplest for the MSB statistic, indicates that the answer is no.
+450  J.H. Stock, `Unrt root' confidence intervals
+
+Suppose that T years of data are used to compute the MSBB statistic, first
+using quarterly data, then using the quarterly data aggregated to the annual
+level. Also suppose a sufficient number of lags are included in the quarterly
+and annual regressions to yield consistent estimators of w. With a root local
+to unity, the quarterly and annual MSBB statistics will be equal asymptoti-
+cally, so the confidence intervals for c will be the same, say Cc,, c,). The
+confidence interval for the quarterly root computed using the quarterly data
+is (1 + c,/4T, 1 + c,/4T). But this quarterly interval converted to an annual
+basis is (1 + co/T, 1 + cl/T) to order O(T-*), the same as computed using
+the annual data.
+
+   Two caveats should be borne in mind when interpreting the width of these
+intervals. First, no attempt has been made to construct optimal inter-
+vals; rather only central intervals are given. Presumably, the reported
+intervals overstate somewhat the sampling variability relative to optimal
+intervals. Second, the finite-sample properties of these intervals have been
+studied only in the rarefied experimental design of section 3, and further
+simulation experiments are in order.
+
+5. Summary and discussion
+
+   These procedures provide asymptotic confidence intervals for the largest
+autoregressive root of a nearly nonstationary time series variable. Because of
+the nonstandard distribution theory, the relation between the observed
+t-statistic (or p-value) and the confidence interval for p is complicated. Thus
+substantial additional information beyond whether or not a unit root test
+rejects is revealed by formally constructing these interval estimates.
+
+   The classical confidence intervals developed here can be contrasted to
+recent Bayesian approaches to the unit root problem. In part in reaction to
+the discontinuity in the first-order asymptotic theory, Sims (1988) and Sims
+and Uhlig (1988) suggested computing Bayesian interval estimates for p.
+This has been implemented empirically by DeJong and Whiteman (1989),
+Schotman and van Dijk (1989), and Phillips (1990) using various priors.
+
+   The classical analysis here has several advantages over these Bayesian
+approaches. First, it sidesteps the debate over priors. As Phillips (1990)
+emphasizes, the flat and Jeffreys priors differ most in their treatment of roots
+near and greater than one, and not surprisingly the posteriors - and thus
+inferences about p - differ sharply depending on the choice of prior. The
+choice of prior is further complicated in this problem because it must be
+specified over the nuisance parameters as well as over the parameter of
+interest, p. Second, the classical approach does not require the additional
+conceptual device of treating the unknown parameters as random. Third, and
+most important, the classical confidence intervals are precise expressions of a
+common form of reasoning in the `unit roots' debate in empirical macroeco-
+                         J. H. Stock, ' Unrtroot ' confidence mteruals  451
+
+nomics: if a computed test statistic is a likely realization from some hypothe-
+sized model (value of p), then that model ought to be treated as possibly
+true. Christian0 and Eichenbaum (1990) can be interpreted as using this logic
+to argue that specific models of interest are within classical confidence sets of
+some reasonable but unspecified confidence coefficient. In contrast, the
+Bayesian posteriors can be interpreted only with reference to the priors, the
+appropriateness of which are inherently difficult to judge. Were econometri-
+cians able to agree on the best priors for reporting results to a general
+scientific readership, or were inferences on p framed as an explicit decision
+problem, then the Bayesian approach would have more appeal; but neither
+condition is satisfied here.
+
+   The main empirical message of table 2 is that the confidence intervals for p
+are wide. For all series except unemployment and the bond yield, the
+intervals contain one, but they also contain values that could be substantially
+different from one in terms of their implications for quantities of interest to
+macroeconomists. This sampling uncertainty is large despite having more
+than a century of observations on several of the series. A next step in this
+research is to calculate confidence intervals for the several-year-ahead im-
+pulse response function analyzed by Campbell and Mankiw (1987) and
+subsequent researchers, allowing for a root that is nearly, but not exactly,
+one. Although that calculation is beyond the scope of this paper, the findings
+here [and those in Christian0 and Eichenbaum (1990) and Rudebusch (1990)]
+suggest that the resulting confidence intervals would be wide relative to ones
+calculated under a maintained unit root assumption.
+
+Appendix A: Derivation of eqs. (4), (59, and (6)
+
+   The results provided here apply to the `detrended' case. The results for the
+`demeaned' statistics are obtained by dropping the deterministic time trend
+terms in these derivations. The approach used to derive (4)-(6) is to rewrite
+the regression (1) in `canonical form' as defined by Sims, Stock, and Watson
+(1990), in which the regressors are transformed so that their limiting moment
+matrix is nonsingular. The distribution of statistics from the canonical regres-
+sion is then used to obtain the distribution of the statistics of interest in the
+original regression (2).
+
+   Write the regression (2) as
+
+Yt=P'X+l  +c,,                                                          (A.1)
+
+where X,-r =(Ay,_,,...,  Ay,_,, 1, yr_ 1, t) and P = (Pi, P2, 6% Pd', where
+
+p1 = (a:, . . . , a;)), p2 = &, p3 = a(l), and p4 = br. Because a constant and I
+
+are included in the regression, without loss of generality set PO = PI = 0, so
+
+& = fi, = 0. Also set X0 = 0.
+452                 J.H. Stock, `Unrtroot' conjidence mtervals
+
+   The canonical regression is obtained by rewriting (A.l) so that all but three
+of the regressors have mean zero and are stationary. Let d = (1 - pL) and let
+U, = b(L)-r~,, so that hy, = U, and E dy, = 0. The canonical regression is
+
+        yr=&+&t-           k                                                      (A-2)
+
+                        Cb,dY,_,+PY,-1+&,,
+
+                        J=l
+
+where b(L) is defined in (1). Written more compactly, this is
+
+        yt=6'Z,_, +E*,                                                            (A-3)
+
+where Z,_l=(Z:I.l,Z:_l,Z)_l,Zp_,)l,              where Z:_,=(~"Y,_,,...,~Y,_,)`,
+
+z:_, = 1, 2:-r =y,_,, and Zp_., = t.
+   The transformation from the original regressors X,-r to the canonical
+
+regressors Z,_, is
+
+                         0                   -*  * 0 0 l-p         0 AY,-I
+                         p
+        -(l?p)                               * * * 0 0 l-p         0 AY,-2
+              *           .                                                   .
+              .     -(l-p)                   ... . .
+
+        -(I -P)          0                   ... . .            .  .  .
+             0           0
+z,_, =       0           0                   * * - p 0 l-p         0 AY,-,
+
+             0                               I-  -01            0  0  1
+
+                                             . . *0 0 1            0 y,_,
+
+                                             **  so0            0  1  t
+
+     = DX,_,.                                                                     (A4
+
+   Let T, = diag(T'/`Ik, T Ii2 T T3j2), where Z, is the k x k identity matrix,
+
+and let s^ be the OLS estimator of S, ~=(c~~lZ,-lZ:_I)-l(c~=lZI_I~,).
+The results of Bobkoski (1983), Chan and Wei (1987, lemma 2.1), and Phillips
+(1987, lemma l(a)) show that Vr(*)* WI(*), where o2 = ~`/b(l)`= 27r
+times the spectral density of U, at frequency zero, Y,(h) = T-"2uITAl and
+J(m) satisfies dJ(h) = cJ(h) + dW(h), where W(h) is a standard Brownian
+motion and J(0) = 0. This result, combined with Sims, Stock, and Watson
+(1990, theorem l), yields
+
+        r&-s)       * {(~ll'41y,(G_*~2)ljlr                                       (A.9
+
+where r,, = EZ:Z:' [so that (r,,),, = Eu,u,_~+,], $r is distributed
+
+N(0, rrr~`), d1 is independent of (rz2, +2), r,, is a symmetric 3 X 3 matrix
+
+with elements (rz2)r1 = 1, (I;,),, = w/,"J(s)ds, (fz2)r3 = f, (r22)22 =
+
+~`/dJ(s)' ds, (rz2>23 = w_/,`~(s)            ds, and (P;2)33 = f, and where cb2=
+
+?{W(l), oj$(s)dW(s), Jars dW(s))`. Note that p^= LI's^,so (A.5) implies that
+
+@-pZO.
+                         J.H. Stock, `Unrt rool' confidence intervals                         453
+
+A. 1. Derivation of (4)
+
+From p"= D's" and the definition of D in (A.4), p3 = (1 - p)c;= rs^r,, + &.
+
+Because & = i(l), T(&(l) - 1) = T(1 - p>Ck_ s^, j + T(i, - 1). Direct c&u-
+
+Iation shows that T(& - 6,) j (o/wX~~.d~)~ d~>-`(~,`.Ws)dW(~)>,                               where
+
+J' is defined in section 2. From (A.21 and (A.31, 6, = p and cf_,&, =
+
+- c;= 1bj = 1 - b(l). Thus,
+
+        T@(l)-l)=-~~6^~,,+T(g,-~,)+T(p-l)
+
+                                                          j=l
+
+A.2. Derivation of (5)
+
+   Using the device in Sims, Stock, and Watson (1990, theorem 2), one
+obtains
+
+                                                               -l/2          - 1) + o,(l),    (A-6)
+
+                                                                     T(G(l)
+
+wLh1ere y: is the residual from regressing yr on (1, t). Because E&f < 03 and
+p-pzo,  g2z:a `. The result (5) follows from (41, (A.6), and V;(* ) *
+
+wJ'(.), where V,`(A) = T-1/2y&~1.
+
+A.3. Derivation of (6)                                                       - (1 - p)c:=r(j  - 1)$1,1'
+
+   From p^= LYs^and (A.41, C:_,p^,,j =~C:,r6^r,j
+1 - b(1). Thus,
+
+        &2=&Z                2                                                                (A-7)
+
+                               1:a2/b(l)`=w2.
+
+Let V,B(A)= T-"2y,B,. Then V,"(e) = wJB(.), where Ja(A) = J(A) -
+(A - +)J(l) - @(s)d s 1th'1s fo11ows from Vr( - ) * oJ( - > and by straightfor-
+ward calculations]. The desired expression (6) obtains from these results and
+the definition of the MsBB statistic in (3).
+454  J.H. Stock, `Unit root' confidence mrervals
+
+Appendix B: Numerical issues in the tabulation and computation of the
+
+                      confidence belts
+
+    Table A.1 summarizes the central confidence intervals obtained by invert-
+ing the ADF statistic as discussed in section 2. The tables report the minimal
+and maximal limits of the confidence set, so in the small ranges for which the
+confidence set is disjoint, the tabulated interval joins the outer limits of the
+set. Confidence intervals for observed values of the statistics can be obtained
+by linear interpolation. (This introduces some numerical inaccuracy in the
+neighborhood of ?"s or MSBB's for which the confidence sets are disjoint.)
+In some cases bounds are omitted because the lower bound falls outside the
+range of c used for the calculations. If so, the confidence interval constructed
+from the table is a 1 - $LYopen interval.
+
+   Various procedures are available for the evaluation of the limiting distribu-
+tion of the ADF + and b statistics. The literature has focused on the case
+with no deterministic regressors (with p1 = t.+ = 0). Dickey and Fuller (1979)
+provide representations in terms of infinite sums of independent normal
+variates when c = 0; Cavanagh (1985) and Chan (1988) generalize these to
+nonzero c. Bobkoski (1983) and Perron (1989) numerically invert moment
+generating functions, and Nabeya and Tanaka (1990) compute limiting distri-
+butions using the theory of Fredholm determinants. Results in Chan (1988),
+Nabeya and Tanaka (19901, and Perron (1989) suggest that the asymptotic
+approximations work well for Gaussian AR(l) models in finite samples, even
+for T = 50 and certainly for T = 500. These latter results imply that suitable
+approximations to the limiting distribution can be obtained by Monte Carlo
+simulation with T = 500, where the number of replications is sufficiently large
+to provide the desired numerical accuracy. Indeed, Chan's (1988) comparison
+of several numerical procedures in the nondemeaned CL,= pz = 0 case led
+him to conclude that direct Monte Carlo simulation with T large produced
+the most reliable approximations.
+
+   Chan's (1988) recommendation is adopted here, and the limiting distribu-
+tions were evaluated by Monte Carlo simulation for T = 500 with 20,000
+replications. The pseudo-data were generated according to y, = py,_ 1 + et, E,
+i.i.d. N(0,11,with p = 1 + c/T and y0 = 0. The distributions were evaluated
+on a grid of 87 values of c for - 38 < c 5 6, with the grid most dense on
+c--5,6). For each c, the percentiles of ?", f', MSZ?"`,and M,SBB (computed
+with k = 0) were recorded. The 0.025, 0.05, 0.10, 0.15, 0.50, 0.85, 0.90, 0.95,
+and 0.975 percentiles are plotted in figs. l-4. The intervals in table A.1 were
+computed by linear interpolation of the ADF-based confidence belt as a
+function of the statistic, using the outer bounds of the belt in the disjoint
+cases. Computer procedures in RATS and GAUSS to calculate these inter-
+vals are available from the author on request.
+                            J.H. Stock, `Umt root' confidence interr~als                455
+
+                                                  Table A.1
+                      Confidence belts for p based on ADF statistics.
+
+             95%                90%                80%                        70%
+
+Stat     co       c1        co       c1        co       cl                co       Cl   Median
+
+                      Part A. Based on demeaned ADF t-statistic 7^*                         -
+                                                                                            -
+ -5.70      -     - 37.12      -       -          -        -         -          -          -
+ - 5.60           - 35.41      -       -          -        -         -          -           -
+ -5.50      -     - 33.70      -                  -       -                                -
+ - 5.40     -                  -     - 37.17                         -          -          -
+ - 5.30     -     - 32.04      -                  -        -         -          -          -
+            -     - 30.47      -     - 35.50      -                  -          -          -
+ -5.20      -                  -     - 33.84      -     - 37.57      -                     -
+ -5.10      -     - 28.88      -     - 32.17      -                           - 36.73      -
+                  - 27.30      -     - 30.60      -     - 35.87      -        - 35.05      -
+ - 5.00     -     - 25.81      -     - 28.98     -      -34.17       -        - 33.42      -
+ - 4.90     -     - 24.32            - 27.41     -      - 32.52     -         -31.77
+ -4.80      -     - 22.87      -                 -      - 30.88     -                    - 36.49
+ - 4.70     -     -21.35       -     - 25.94            - 29.26               -30.15     - 34.82
+                  - 19.93      -     - 24.46     -                  -         - 28.58    - 33.21
+ - 4.60     -     - 18.56            - 22.97     -      - 27.70     -         - 27.02    - 31.63
+ - 4.50     -     - 17.21      -     -21.53      -      - 26.19                          - 30.05
+ - 4.40     -     - 15.88      -     -20.11      -      - 24.71     -         - 25.55    - 28.52
+ - 4.30     -     - 14.51      -     - 18.72                        -         - 24.08    - 27.02
+ - 4.20    -      - 13.23      -     - 17.35     -      - 23.26     -                    - 25.53
+ -4.10     -      - 11.96     -      - 15.98     -      - 21.84               - 22.62    - 24.09
+ -4.00     -      - 10.70                        -      - 20.44     -         -21.19     - 22.67
+ - 3.90    -                - 36.79  - 14.68            - 19.09               - 19.83    -21.28
+           -       - 9.45   -35.11   - 13.39   - 37.43            - 37.07     - 18.49    - 19.93
+- 3.80     -       -8.19    - 33.47  - 12.10   - 35.72  - 17.78   - 35.38     - 17.17    - 18.63
+-3.70                       -31.86   - 10.89   - 34.06  - 16.48   - 33.74                - 17.35
+         - 37.46   - 7.00   - 30.27            - 32.44  - 15.19   -32.13      - 15.89    - 16.11
+- 3.60   - 35.79   - 5.87   - 28.72   - 9.74   - 30.86  - 13.97   - 30.55     - 14.63    - 14.90
+- 3.50   - 34.13   - 4.74   - 27.20   - 8.57   - 29.31            - 28.99     - 13.43    - 13.72
+- 3.40   - 32.51   -3.48    - 25.71   - 7.45   - 27.78  - 12.77   - 27.48     - 12.25    - 12.57
+- 3.30   - 30.93   - 1.57   - 24.25   -6.31    - 26.29  - 11.58   - 26.01     - 11.06    - 11.46
+- 3.20   - 29.39            - 22.85   -5.19    - 24.83  - 10.42   - 24.56                - 10.39
+-3.10    - 27.86      0.32  - 21.54   - 3.98   - 23.39            -23.15       - 9.96     - 9.33
+- 3.00   - 26.39      0.80  - 20.19   - 2.55   - 22.00   - 9.30   - 21.77      - 8.86     - 8.29
+- 2.90   - 24.86      1.09  - 18.86   - 0.71   - 20.64            - 20.45      - 7.78     - 7.29
+- 2.80   - 23.41      1.39  - 17.60            - 19.32   -8.15    - 19.13      - 6.67     - 6.32
+- 2.70   - 22.03      1.74  - 16.38      0.43  - 18.03   - 7.03   - 17.85                 - 5.35
+- 2.60   - 20.69      1.97  - 15.23      0.88  - 16.79   - 5.91   - 16.61      -5.61      - 4.38
+- 2.50   - 19.41      2.26  - 14.08      1.16  - 15.60   -4.77    - 15.41      - 4.54     - 3.37
+- 2.40   - 18.13      2.55  - 13.00      1.44  - 14.43   - 3.59   - 14.26                 - 2.29
+- 2.30   - 16.93      2.75  - 11.96      1.69  - 13.30   - 2.39   - 13.12      -3.36      - 1.15
+- 2.20   - 15.76      2.91  - 10.91      1.94  - 12.21            - 12.05      -2.10      - 0.24
+-2.10    - 14.65      3.08   - 9.91      2.16  - 11.15   - 0.56   - 11.00      - 0.30
+-2.00    - 13.52      3.28   - 8.96            - 10.15      0.40   - 9.99                    0.26
+- 1.90   - 12.43      3.51   - 8.05      2.35   -9.19       0.81   - 9.02         0.43       0.59
+- 1.80   - 11.37      3.67   - 7.21      2.56   - 8.24      1.12   - 8.06         0.79       0.80
+- 1.70   - 10.36      3.80   - 6.38      2.72   - 7.33      1.35   -7.14          1.06       0.96
+- 1.60    - 9.41     3.93    -5.61       2.87   - 6.46      1.55   - 6.25         1.30       1.09
+- 1.50    - 8.53     4.06    - 4.90      3.02   - 5.60      1.74   - 5.38         1.49       1.21
+- 1.40    - 7.71     4.18                3.13   - 4.82      1.92   - 4.55         1.64
+- 1.30    -6.91      4.28    -4.17       3.25   - 4.03      2.09   - 3.71         1.80
+- 1.20    - 6.13     4.35               3.36    - 3.30      2.24   - 2.86         1.92
+- 1.10    -5.43      4.42               3.45                2.38   - 2.06         2.05
+                                        3.54    - 2.61      2.49   - 1.37         2.17
+- 1.00               4.49               3.62                2.61                  2.26
+                                                            2.71                  2.35
+                                        3.69                2.80                  2.43
+                                                            2.87
+                                                                                  2.51
+                                                            2.94
+456                         J. H. Stock. `Unit root' confidence rnrervals
+
+Stat                               Table A.1 (continued)
+
+ - 0.90         95%                90%               80%                      70%
+- 0.80
+ - 0.70     co       cl        co       Cl       co       Cl                  CO   Cl       Median
+ -0.60
+ - 0.50  - 4.81      4.55   - 3.52      3.75  - 1.93      3.00             - 0.78  2.58       1.29
+ - 0.40
+ - 0.30  - 4.22      4.61   - 2.90      3.81  - 1.31      3.06             - 0.35  2.64       1.38
+- 0.20   - 3.66      4.68   - 2.35      3.87  - 0.78      3.12             - 0.05  2.70       1.46
+-0.10    - 3.12      4.74   - 1.81      3.92  - 0.42      3.18                     2.76       1.53
+         - 2.61      4.77   - 1.32      3.98  -0.13       3.24               0.19  2.82       1.61
+   0.00  -2.16       4.80   -0.89       4.03              3.28               0.38  2.87       1.67
+   0.10  - 1.59      4.83   - 0.55      4.07    0.10      3.33               0.54  2.92       1.73
+   0.20  - 1.18      4.86   - 0.28      4.12     0.29     3.38               0.68  2.98       1.79
+   0.30  - 0.85      4.89   - 0.05      4.17     0.44     3.43               0.80  3.02       1.84
+   0.40  - 0.54      4.92               4.21    0.58      3.47               0.89  3.07       1.89
+   0.50  - 0.28      4.95     0.15      4.26    0.70      3.51               0.98  3.11       1.94
+   0.60  - 0.06      4.98     0.32      4.30    0.81      3.56               1.06             1.99
+   0.70              5.01     0.46      4.34    0.90      3.60               1.14  3.16       2.03
+   0.80    0.12      5.04     0.59      4.38     1.oo     3.64               1.22  3.20       2.07
+   0.90    0.28      5.07     0.71      4.41     1.07                        1.28  3.24       2.12
+   1.00    0.42      5.10     0.82      4.45     1.15     3.68               1.34             2.16
+   1.10    0.56      5.13     0.91      4.49     1.22     3.72               1.40  3.27       2.20
+   1.20    0.68      5.16      1.00     4.52     1.28     3.76               1.45  3.31       2.24
+   1.30    0.79      5.19      1.07     4.55     1.34                        1.50  3.35       2.27
+   1.40    0.87      5.22      1.14     4.58    1.40      3.80               1.56  3.38       2.31
+   1so     0.96      5.25     1.21      4.61    1.44      3.84               1.61  3.42       2.35
+   1.60     1.03     5.28      1.27     4.64     1.49     3.87               1.65  3.45       2.38
+   1.70     1.10     5.31     1.32      4.67    1.54      3.91               1.69  3.49       2.42
+   1.80    1.16      5.34     1.38      4.70    1.59      3.94               1.72  3.52       2.45
+   1.90    1.22      5.36     1.43      4.73    1.63      3.98               1.76  3.56       2.48
+   2.00    1.28      5.39     1.47      4.76    1.66      4.01               1.80             2.51
+           1.33      5.42     1.51      4.78    1.70      4.04               1.84  3.59       2.54
+-5.90      1.38      5.45     1.56      4.81    1.74      4.07               1.87  3.62       2.57
+- 5.80     1.43      5.48     1.60      4.83    1.78      4.09               1.90  3.65       2.60
+-5.70      1.47      5.50     1.63      4.86    1.81      4.12               1.93  3.69       2.63
+- 5.60     1.51               1.67              1.84      4.15               1.97  3.72
+- 5.50                                                    4.18                     3.75
+- 5.40                                                                             3.78
+-5.30
+- 5.20                   Part B. Based on detrended ADF t-statistic ;'
+-5.10
+-5.00    -        -37.94    -           -     -           -                -       -
+- 4.90
+- 4.80   -        -36.20    -           -     -           -                -                -
+- 4.70
+-4.60    -        -34.42    -                 1           -                -       -        -
+- 4.50                                                    -                -       -        -
+- 4.40   -        -32.70    -        -36.30
+- 4.30                                                    -                -       -        -
+- 4.20   -        -31.00    -        -34.56   -
+-4.10                                                                      -       -        -
+         -        -29.25    -        -32.80   -        - 37.01
+                                                                                            -
+         -        -27.55    -        -31.08   -        - 35.25             -       - 37.89
+                                                                                            -
+         -        -25.86    -        -29.36   -        - 33.51             -       - 36.09
+                                                                                            -
+         -        -24.24    -        -27.72   -        - 31.78             -       - 34.36
+                                                                                            -
+         -        -22.62    -        -26.07   -        - 30.10             -       - 32.64
+                                                                                            -
+         -        -21.02    -        -24.53   -        - 28.45             -       - 30.91
+                                                                                            -
+         -        - 19.44   -        -22.95   -        - 26.77             -       - 29.24
+
+         -        - 17.91   -        -21.38   -        - 25.15             -       - 27.57 - 37.84
+
+         -        - 16.34   -        -19.81   -        - 23.59             -       - 25.99 - 36.07
+
+         -        -14.87    -        - 18.29  -        - 22.02             -       - 24.41 - 34.39
+
+         -        - 13.31   -        - 16.75  -        - 20.49             -       - 22.89 - 32.70
+
+         -        -11.73    -        - 15.22  -        - 18.97             -       - 21.37 -31.05
+
+         -        - 10.25   -        -13.75   -        - 17.51             -       - 19.86 - 29.41
+
+         -           -8.81  -        -12.26   -        - 16.07 36.82 - 18.41 - 27.81
+                            J.H. Stock, `Vnir root' confidence mtervals                      457
+
+                                      Table A.1 (continued)
+
+             95%                90%                 80%                      70%
+
+Stat     co        c1       co        cl        co           cl          co        cl        Median
+
+- 4.00      -      -7.17       -      - 10.81   - 37.08   - 14.62        - 35.10   - 16.97   - 26.25
+-3.90              -5.57       -       - 9.29   - 35.36   - 13.18        - 33.40   - 15.56   - 24.72
+-3.80       -      - 3.60   - 36.83    - 7.79   - 33.67   - 11.73        - 31.74   - 14.12   - 23.23
+-3.70       -               -35.11     - 6.31   - 32.03   - 10.32        -30.11    - 12.72   -21.73
+- 3.60   - 37.63      1.42  - 33.39    - 4.65   - 30.40                  - 28.49   - 11.36   - 20.27
+-3.50                 1.80  -31.71     - 2.85   - 28.81    - 8.86        - 26.90             - 18.87
+- 3.40   - 35.87     2.07                 1.49  - 27.25    - 7.39        - 25.37    - 9.99   - 17.50
+- 3.30   -34.13             - 30.08       1.87  - 25.75    -5.89         - 23.88             - 16.14
+- 3.20   - 32.44     2.32   - 28.48                        - 4.34        - 22.44    - 8.58   - 14.78
+-3.10    - 30.76      2.53  - 26.90       2.11  - 24.26                             -7.17    - 13.44
+- 3.00   - 29.15     2.72   - 25.35       2.34  - 22.77    - 2.37        - 21.00
+- 2.90   - 27.55     2.91                       -21.34        1.51       - 19.60    - 5.70   - 12.13
+- 2.80                      - 23.86       2.53  - 19.94       1.84       - 18.24    -4.11    - 10.83
+- 2.70   - 26.05     3.11   - 22.35       2.69  - 18.59       2.07       - 16.90
+- 2.60   - 24.54     3.36   - 20.90       2.85  - 17.24       2.26       - 15.56    - 2.28    - 9.56
+- 2.50               3.57   - 19.53       3.01                2.44                     1.50   - 8.30
+- 2.40   - 23.04     3.73                       - 15.93                  - 14.30       1.83
+- 2.30   - 21.64            - 18.18       3.16  - 14.62       2.59       - 13.04       2.03   - 7.01
+- 2.20   - 20.29     3.87   - 16.87       3.31  - 13.38       2.73       - 11.78              -5.70
+-2.10    - 18.93     4.01                 3.46  - 12.15       2.86       - 10.60       2.20
+- 2.00                      - 15.59       3.61  - 10.97       2.99                     2.36   - 4.35
+- 1.90   - 17.58     4.15   - 14.36       3.73                3.10        - 9.43              - 2.87
+- 1.80   - 16.26     4.27                 3.85   - 9.82       3.20        - 8.29       2.50   - 0.97
+- 1.70                      - 13.18       3.96   - 8.67       3.30        -7.17        2.63
+- 1.60   - 15.01     4.38   - 12.03       4.05   - 7.56       3.40        - 6.07       2.74      1.53
+- 1.50   - 13.79     4.49                 4.13   - 6.51       3.47        - 5.02       2.84      1.75
+- 1.40   - 12.61            - 10.91       4.20   - 5.48                   -3.86                  1.89
+- 1.30   - 11.49     4.57    - 9.77       4.27   - 4.44       3.55        - 2.73       2.94      2.01
+- 1.20   - 10.44     4.65    - 8.67       4.32   -3.44        3.62        - 1.47       3.03      2.09
+- 1.10               4.74    -7.61                            3.68                     3.11      2.18
+- 1.00    - 9.41     4.80    - 6.58       4.37   - 2.39       3.74           1.27      3.19      2.24
+- 0.90    - 8.38     4.85    - 5.61       4.42   - 1.14                      1.47                2.30
+- 0.80    - 7.38     4.90    - 4.66       4.47                3.80           1.61      3.25      2.36
+- 0.70    - 6.42     4.96    - 3.78       4.51      1.27      3.85           1.69      3.30      2.42
+- 0.60               5.01    - 2.85                 1.44     3.90            1.77      3.36     2.46
+- 0.50    - 5.50     5.05    - 2.00       4.56               3.95            1.83      3.41
+- 0.40    - 4.68     5.09    - 1.18       4.60      1.55      3.99           1.88                2.51
+- 0.30    - 3.85     5.14       1.22                1.64      4.03           1.94      3.46      2.55
+- 0.20    -3.10      5.18       1.40      4.64      1.71     4.07            1.99      3.51      2.60
+-0.10     - 2.36     5.22       1.50      4.68      1.78                     2.03               2.63
+          - 1.60     5.26       1.60      4.72      1.83     4.11            2.07      3.55     2.67
+   0.00   - 0.64     5.30       1.66      4.76      1.88     4.14            2.12      3.60     2.71
+   0.10              5.34       1.71     4.79       1.93     4.18            2.16      3.64     2.75
+   0.20      1.26    5.38       1.77     4.83       1.98     4.22            2.20      3.68     2.79
+   0.30      1.41    5.43       1.82     4.86       2.02                     2.23      3.72     2.82
+  0.40       1.50    5.47       1.86      4.89      2.06     4.25            2.27      3.76     2.85
+  0.50       1.58    5.51       1.90     4.92                4.29            2.30      3.80     2.88
+  0.60       1.64    5.54       1.95                2.10     4.32           2.33       3.83     2.91
+  0.70       1.69    5.58       1.99     4.96       2.13     4.35           2.37       3.87     2.95
+  0.80       1.74    5.61       2.02     4.99       2.17     4.38           2.40                2.98
+  0.90       1.79    5.65                5.02       2.21     4.41           2.43       3.90     3.01
+   1.00      1.83               2.06     5.04       2.24     4.44           2.46       3.94     3.04
+             1.87    5.68       2.09     5.07       2.27     4.47           2.49       3.97     3.07
+             1.91    5.72       2.13     5.09       2.30                    2.52       4.01     3.09
+             1.95   5.75        2.16     5.12       2.34     4.50           2.55      4.04      3.12
+             1.99    5.78       2.20                2.37     4.53                               3.15
+             2.02    5.81       2.23     5.15       2.40     4.56                     4.07      3.18
+             2.05    5.84      2.26      5.17      2.43      4.58                     4.10
+             2.08   5.86                 5.20                4.61                     4.13
+            2.12                                                                      4.16
+                                                                                      4.19
+                                                                                      4.22
+                                                                                      4.25
+458                          J.H. Stock, `Umt root' confidence mterclals
+
+Stat                                 Table A.1 (continued)
+
+   1.10           95%                90%              80%                       70%
+   1.20
+   1.30     CO         Cl      co         Cl    co          Cl            co         Cl    Median
+   1.40
+   1.50     2.15       5.89  2.28         5.23  2.46        4.64          2.51       4.27    3.21
+   1.60                                                                                      3.23
+   1.70     2.18       5.92  2.31         5.25  2.48        4.66          2.60       4.30    3.25
+   1.80                                                                                      3.28
+   1.90     2.21       5.95  2.34         5.28  2.51        4.69          2.63       4.32    3.30
+   2.00                                                                                      3.33
+            2.24       5.98  2.37         5.30  2.54        4.72          2.65       4.35    3.35
+                                                                                             3.38
+            2.27       -     2.40         5.32  2.57        4.14          2.68       4.37    3.40
+                                                                                             3.42
+            2.29       -     2.43         5.34  2.59        4.77          2.70       4.39
+
+            2.32       -     2.45         5.31  2.62        4.79          2.73       4.42
+
+            2.35       -     2.48         5.39  2.64        4.81          2.75       4.44
+
+            2.38       -     2.50         5.41  2.66        4.83          2.78       4.47
+
+            2.40       -     2.53         5.43  2.69        4.85          2.80       4.49
+
+References
+
+Andrews, D.W.K., 1990, Exact unbiased estimation of first order autoregressive/unit        root
+
+models, Manuscript (Cowles Foundation for Economic Research, Yale University, New
+
+Haven, CT).
+
+Ahtola, J. and G.C. Tiao, 1984, Parameter inference for a nearly nonstationary first order
+
+autoregressive model, Biometrika 71, 263-272.
+
+Bhargava, A., 1986, On the theory of testing for unit roots in observed time series, Review of
+
+Economic Studies 53, 369-384.
+
+Bobkoski, M.J., 1983, Hypothesis testing in nonstationary time series, Unpublished Ph.D. thesis
+
+(Department of Statistics, University of Wisconsin, Madison, WI).
+
+Campbell, J.C. and N.G. Mankiw, 1987, Are output fluctuations transitory?, Quarterly Journal of
+
+Economics 102, 857-880.
+
+Cavanagh, C., 1985, Roots local to unity, Manuscript (Department of Economics, Harvard
+
+University, Cambridge, MA).
+
+Chan. N.H., 1988, The parameter inference for nearly nonstationary time series, Journal of the
+
+American Statistical Association 83, 857-862.
+
+Chan, N.H. and C.Z. Wei, 1987, Asymptotic inference for nearly nonstationary AR(l) processes,
+
+Annals of Statistics 15, 1050-1063.
+
+Christiano, L.C. and M. Eichenbaum, 1990, Unit roots m GNP: Do we know and do we care?,
+
+Carnegie-Rochester        Conference Series on Public Policy 32, 7-62.
+
+Cochrane, J., 1988, How big is the random walk component in GNP?, Journal of Political
+
+Economy 96, 893-920.
+
+DeJong, D.N. and C.H. Whiteman, 1989, Trends and random walks in macroeconomic time
+
+series: A reconsideration based on the likelihood principle, Working paper no. 89-4 (Depart-
+
+ment of Economics, University of Iowa, Iowa City, IA).
+
+Dickey, D.A. and W.A. Fuller, 1979, Distribution of the estimates for autoregressive time series
+
+with a unit root, Journal of the American Statistical Association 74, 427-431.
+
+Kendall, M.G. and A. Stuart, 1967, The advanced theory of statistics, Vol. 2, 2nd ed. (Charles
+
+Griffin, London).
+
+Nabeya, S. and K. Tanaka, 1990, A general approach to the limiting distribution for estimators
+
+in time series regression with nonstable autoregressive errors, Econometrica 58, 145-163.
+
+Nelson, C.R. and C.I. Plosser, 1982, Trends and random walks in macroeconomic time series:
+
+Some evidence and implications, Journal of Monetary Economics 10, 129-162.
+
+Perron, P., 1989, The calculation of the limiting distribution of the least-squares estimator in a
+
+near-integrated model, Econometric Theory 5, 241-255.
+
+Phillips, P.C.B., 1987, Toward a unified asymptotic theory for autoregression, Biometrika 74,
+
+535-547.
+        J.H. Stock, `Unit root' confidence intervals  459
+
+Phillips, P.C.B., 1990, To crtticize the critics: An objective Bayesian analysis of stochastic trends,
+     Cowles Foundation discussion paper no. 950 (Yale University, New Haven, CT).
+
+Rudebusch, G., 1990, Trends and random walks in macroeconomic time series: A reexamination,
+     FEDS discussion paper no. 139 (Federal Reserve Board, Washington, DC).
+
+Sargan, D. and A. Bhargava, 1983, Testing for residuals from least squares regression for being
+     generated by the Gaussian random walk, Econometrica 51, 153-174.
+
+Schotman, P. and H.K. van Dijk, 1989, A Bayesian analysis of the unit root hypothesis,
+     Manuscript (Erasmus University, Rotterdam).
+
+Schwert, G.W., 1989, Tests for unit roots: A Monte Carlo investigation, Journal of Business and
+     Economic Statistics 7, 147-160.
+
+Sims, C.A., 1988, Bayesian skepticism on unit root econometrics, Journal of Economic Dynamics
+     and Control 12, 463-474.
+
+Sims, CA., J.H. Stock, and M.W. Watson, 1990, Inference in linear time series models with
+     some unit roots, Econometrica 58, 113-144.
+
+Sims, C.A. and H. Uhlig, 1988, Understanding unit rooters: A helicopter tour, Discussion paper
+     no. 4 (Institute for Empirical Macroeconomics, Federal Reserve Bank of Minneapolis, MN),
+     forthcoming in: Econometrica.
+
+Stock, J.H., 1988, A class of tests for integration and cointegration, Manuscript (Kennedy School
+     of Government, Harvard University, Cambridge, MA).
+
+I Mm-D
+

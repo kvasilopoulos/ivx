@@ -1,0 +1,1464 @@
+Efficient Tests for an Autoregressive Unit Root
+Author(s): Graham Elliott, Thomas J. Rothenberg and James H. Stock
+Source: Econometrica, Jul., 1996, Vol. 64, No. 4 (Jul., 1996), pp. 813-836
+Published by: The Econometric Society
+Stable URL: https://www.jstor.org/stable/2171846
+Accessibility support:
+If you experience accessibility issues with this file, report them here
+
+JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide
+range of content in a trusted digital archive. We use information technology and tools to increase productivity and
+.facilitate new forms of scholarship. For more information about JSTOR, please contact support@jstor.org
+Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at
+https://about.jstor.org/terms
+
+                 The Econometric Society is collaborating with JSTOR to digitize, preserve and extend access to Econometrica
+
+                                                                               This content downloaded from
+                                              176.58.197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                                                                  All use subject to https://about.jstor.org/terms
+                                           Econometrica, Vol. 64, No. 4 (July, 1996), 813-836
+
+        EFFICIENT TESTS FOR AN AUTOREGRESSIVE UNIT ROOT
+
+        BY GRAHwA ELLIOrr, THOMAS J. ROTHENBERG, AND JAMES H. STOCK1
+
+             The asymptotic power envelope is derived for point-optimal tests of a unit root in the
+        autoregressive representation of a Gaussian time series under various trend specifications.
+        We propose a family of tests whose asymptotic power functions are tangent to the power
+        envelope at one point and are never far below the envelope. When the series has no
+        deterministic component, some previously proposed tests are shown to be asymptotically
+        equivalent to members of this family. When the series has an unknown mean or linear
+        trend, commonly used tests are found to be dominated by members of the family of
+        point-optimal invariant tests. We propose a modified version of the Dickey-Fuller t test
+        which has substantially improved power when an unknown mean or trend is present. A
+        Monte Carlo experiment indicates that the modified test works well in small samples.
+
+             KEYWORDS: Power envelope, point optimal tests, nonstationarity, Ornstein-Uhlenbeck
+         processes.
+
+                                                              1. INTRODUCTION
+
+FOLLOWING THE SEMINAL WORK of Fuller (1976) and Dickey and Fuller (1979),
+econometricians have developed numerous alternative procedures for testing
+the hypothesis that a univariate time series is integrated of order one against the
+hypothesis that it is integrated of order zero. The procedures typically are based
+on second-order sample moments, but employ various testing principles and a
+variety ofmethods to eliminate nuisance parameters. Banerjee et al. (1993) and
+Stock (1994) survey many of the most popular of these tests. Although numerical
+calculations (e.g., Nabeya and Tanaka (1990)) suggest that the power functions
+for the tests can differ substantially, no general optimality theory has been
+developed. In particular, there are few general results (even asymptotic) con-
+cerning the relative merits of the competing testing principles and of the various
+methods for eliminating trend parameters.
+
+    Employing a model common in the previous literature, we assume that the
+data Yl1 ... , YT were generated as
+
+  (1) Yt dt + ut (t = 1, T),
+
+                 ut= aut1 + Vt
+
+where {dt} is a deterministic component and {vt} is an unobserved sta
+
+zero-mean error process whose spectral density function is positive at zero
+frequency. Our interest is in the null hypothesis a = 1 (which implies the yt
+integrated of order one) versus I a I < 1 (which implies the Yt are integrated of
+
+    1 The authors thank Jushan Bai, Maxwell King, Sastry Pantula, Pierre Perron, and Mark Watson
+for helpful discussions. This research was supported in part by National Science Foundation Grant
+
+SES-91-22463.
+
+                                                                                      813
+
+                                        This content downloaded from
+        176.5.8 197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+814 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+order zero). Standard asymptotic testing theory, as surveyed for example in
+Engle (1984), is inapplicable since the data do not give rise to a locally
+asymptotic normal likelihood.2 Nevertheless, it is possible to develop an asymp-
+totic framework for comparing alternative tests for a unit root in this model. If
+the distribution of the data were otherwise known, the Neyman-Pearson Lemma
+gives us the best test against any given point alternative c. The power of this
+optimal test at alternative -a, when plotted against -a, defines the power
+envelope which is an upper bound for the power function of any test based on
+the same likelihood. Using large-sample approximations to simplify the analysis,
+we can then compare the asymptotic power functions of existing tests with this
+asymptotic bound. In practice, of course, the likelihood function will depend on
+
+additional nuisance parameters determining dt, u0, and the distribution of {v,}.
+
+If there exist feasible tests with the same asymptotic power as the Neyman-Pear-
+son point-optimal tests, the comparison will be appropriate in the nuisance
+parameter case as well.
+
+    When the observed time series is Gaussian with constant or slowly evolving
+deterministic component, we find that, although no test uniformly attains the
+asymptotic power bound, there exist tests with asymptotic power functions very
+close to the bound. Furthermore, these tests can be constructed without knowl-
+edge of any nuisance parameters. When the deterministic component contains a
+polynomial trend, no feasible test comes close to attaining the power bound
+derived under the assumption the trend parameters are known. Nevertheless,
+the Neyman-Pearson Lemma can still be employed to derive an asymptotic
+power bound for the natural family of tests that are invariant to the trend
+parameters. Again, there exist feasible invariant tests with asymptotic power
+functions very close to this bound, even when there are additional nuisance
+parameters determining the autocovariances of the v,.
+
+    Our asymptotic power results have implications for tests commonly used in
+practice. In the case where there is no deterministic component, we find that the
+asymptotic power curve of the Dickey-Fuller t test virtually equals the bound
+when power is one-half and is never very far below. In the more relevant case
+where a deterministic mean or trend is present, power can be improved
+considerably over the standard Dickey-Fuller test by modifying the method
+employed to estimate the parameters characterizing the deterministic term.
+
+    Our approach is similar to that employed by Dufour and King (1991) in their
+analysis of exact point-optimal invariant tests in the normal AR(1) model.
+However, by employing local-to-unity asymptotic approximations, we are able to
+obtain simpler and more interpretable results that cover a much broader class of
+models. Saikkonen and Luukkonen (1993) apply a similar analysis in their study
+of asymptotically point-optimal invariant tests for a unit moving-average root.
+
+      2
+
+       Using a different maintained model, Robinson (1994) develops a "standard" asymptotic theory
+of efficient tests for a unit root. This requires dropping the familiar autoregression framework and
+assuming, for example, a fractionally differenced process for the data.
+
+                                         This content downloaded from
+        176.5.8 197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+                                                AUTOREGRESSIVE UNIT ROOT 815
+
+                             2. THE ASYMPTOTIC GAUSSIAN POWER ENVELOPE
+
+    In this section we derive an upper bound to the asymptotic power function for
+tests of the hypothesis a = 1 when the data are generated by (1) and the
+following condition is satisfied.
+
+    CONDITION A: The stationary sequence {v,} has a strictly positive spectral density
+function; it has a moving average representation v, = EJ_O 8j7m-j where the mt ar
+independent standard normal random variables and Ej%= oil j l < o. The initial u0 is
+0 and the 6's are known.
+
+    The unrealistic assumption of known u0, 5's and error distribution is made so
+we may employ the Neyman-Pearson theory; in Section 3 we show that it may be
+dropped without any essential change. Our results, however, are quite sensitive
+
+to the nature of the deterministic components dt. Section 2.1 considers the
+simplest case where the dt are known. Section 2.2 examines the case where the
+d are "slowly evolving" and Section 2.3 examines the case where dt is a linear
+
+combination of nonrandom trending regressors. Our purpose here is to derive
+the power bound; tests that might be used in practice are discussed later in the
+paper. All proofs are given in the Appendix.
+
+                                       2.1. Known Deterministic Component
+
+   When the dt are known, u, is observable and minus two times the log
+
+likelihood is (except for an additive constant) given by
+
+ (2) L(a) = [u-(ax-1)u_1 ]',-'[u-(a -1)u_
+
+where Au = (ul, U2 -U1, .. I UT - UT-1) X U-1 = (0, 1,.. ., UT-), an
+
+non-singular variance-covariance matrix for v1, .. ., VT. By the Neyman-Pearson
+Lemma, the most powerful test of the null hypothesis that a = 1 against the
+alternative that a = -a rejects for small values of the likelihood ratio statistic
+L(a) - L(1).
+
+    When the sample size is large, any reasonable test will have high power unless
+ a is close to one. Thus, in obtaining large-sample approximations, it is natural
+to employ local-to-unity asymptotics where the parameter space is a shrinking
+neighborhood of unity as the sample size grows. In our case the appropriate rate
+to get nondegenerate distributions is T-1 so we reparameterize the model
+writing c = T(a - 1) and take c to be a constant when making limiting argu-
+ments. Cf. Chan and Wei (1987), Phillips and Perron (1988). Setting c- T(a - 1),
+we can then write the likelihood ratio test statistic as
+
+ (3) L(cx)-L(1) =2T2u1, u1-2cT1uQ1Z1Au.
+
+For any given c-, rejecting when the linear combination (3) is small yields the
+most powerful test against the alternative that c = c.
+
+                                          This content downloaded from
+         176.5.8 197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+816 G. ELLIOTrI, T. J. ROTHENBERG, AND J. H. STOCK
+
+   Note that (T- 2uQ1 luX T lu,T l.-1 Au) is a pair of minimally sufficient
+statistics for inference about a when the nuisance parameters are known.
+Furthermore, since the pair has a nondegenerate joint limiting distribution
+under local alternatives, the asymptotic minimal sufficient statistic also has
+dimension two. As a consequence, there exists no uniformly most powerful test
+of a = 1 even in large samples. There is an infinite family of asymptotically
+admissible tests, indexed by c, no one dominating the others for all c.
+
+    The limiting power functions for the family of Neyman-Pearson tests can be
+
+expressed conveniently in terms of stochastic integrals. Let WO(O) represent
+standard Brownian motion defined on [0, 1] and let Wc(-) be the related diffusion
+process Wc(t) = fJoexp{c(t - s)} dWO(s) which satisfies the stochastic differentia
+equation dWc(t) = cWc(t) dt + dWO(t) with initial condition Wc(O) = 0. In the
+
+Appendix we show that the local asymptotic power function for the test indexed
+by c when the significance level is e is given by
+
+(4) 7T (c, c) = Pr c1c2 cW(1 < b(c)]
+
+where JJ'2 fJWc2(t) dt and b(c) satisfies Pr[c2fWo - CWo(1) <b(c)] = s. Be-
+cause the test indexed by c is optimal against the alternative c = c, the envelope
+power function for this family of point-optimal tests is H(c) = 7T(c, c).
+
+                              2.2. Slowly Evolving Deterministic Component
+
+    Suppose the deterministic components satisfy the following condition.
+
+   CONDITION B (Slowly evolving trend): The Adt are bounded with
+T-1tT 1(Adt)2 -O0 and T- 112maxIdt I> 0 as T-* oo.
+
+   This will automatically be satisfied if the dt are constant. It will also be
+satisfied by a variety of smooth functions of time. These include low frequency
+sinusoids (e.g., dt = cos(2ifkt/T) for finite k); slowly increasing time trends
+(e.g., dt = ln(t) or dt t '= for 8 < 1/2); and step functions with finitely many
+jumps (e.g., dt = 80 when t < to and dt = 81 when t ? to). In the slowly evolving
+trend case, the random component of Yt dominates the deterministic component
+
+when t is large. It is tempting therefore to ignore the deterministic term when
+constructing the test statistic. In the Appendix we show that, if the dt evolve
+slowly, replacing ut by Yt when forming (3) has no effect on the asymptotic size
+or power of the Neyman-Pearson tests. Under Condition B, there is no effi-
+ciency loss from dt being unknown.
+
+                                                2.3. Trending Regressors
+
+   The construction of a useful asymptotic power bound when the dt are
+unknown and not slowly evolving is more complicated. Suppose, for example, the
+
+                                         This content downloaded from
+        176.58.197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+                                                  AUTOREGRESSIVE UNIT ROOT 817
+
+dt are modeled as a linear combination of a set of nonrandom regressors so that
+dt =,B'zt where /3 is a q-dimensional unknown parameter vector and the zt are
+observed q-dimensional data vectors. Unless 3'zt happens to satisfy Condition
+B, the power functions r(c, 5) derived in Section 2.1 will not be attainable by
+any feasible critical region.
+
+    In most applications, /3 is unrelated to a and the testing problem would be
+
+unchanged if Yt were replaced by yt + 3'zt for arbitrary ,X. It is therefore
+
+natural to restrict attention to the family of tests which are themselves invariant
+to this group of transformations. This approach is taken by Dufour and King
+(1991) who build on previous results in King (1980, 1988). (Their additional
+restriction of scale invariance is ignored here since the tests proposed in Section
+3 satisfy this invariance automatically.) Defining the T-dimensional column
+vector Ya and the T x q matrix Za by
+
+(5) Ya = (Yl, Y2 - ayl, ..., YTaYT- 1)'a
+            Za = (Zl,Z2a-aZl, ZTaZTl) J
+
+we can rewrite (2) as
+
+             L(a,f,) = (ya _ Za/,)'YL- 1(Ya _ Za/,).
+
+From the development in Lehmann (1959, p. 249), the most powerful invariant
+test of a = 1 vs. a = - rejects for large values of f exp{ - 1/2L(-a, /)} d/3/
+f exp{ - 1/2L(1, /3 )} d,/. For our normal likelihood, this is equivalent to reject-
+ing for small values of
+
+(6) L* = minL(-a, /) - minL(1, /8).
+
+The test statistic is the difference in (weighted) sum of squared residuals from
+two constrained GLS regressions, one imposing a = -a and the other imposing
+a= 1.
+
+    Asymptotic representations in terms of stochastic integrals can be found for
+this family of statistics but they depend on the specific zt. When there is no
+
+deterministic term (z, = 0), LT is identical to the statistic defined in (3). So
+
+general results for polynomial trend are given in the Appendix. We present
+
+explicit formulas for a constant mean where Zt = 1 and a linear trend wh
+zt = (1, t)'. Let A = (1 - c)7(1 - c ? c2/3). Defining the process
+
+(7) vc(t, ) = Jy(t) -t[xWc (1) + 3(1 - x)fs Wc (s) dsj,
+
+we can summarize our results as follows.
+
+   THEOREM 1: Suppose {yt} is generated by the Gaussian model (1) under Condi-
+tion A. Consider unit-root tests of size e under local-to-unity asymptotics where both
+c = T(a - 1) and c- = T(a - 1) are fixed as T tends to infinity.
+
+                                         This content downloaded from
+        176.5.8 197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+818 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+    a. When dt is known or satisfies Condition B, the Neyman-Pearson most
+ful test against the alterative c = c has asymptotic power function ir(c, c)
+(4). An upper bound to the asymptotic power of any unit-root test is give
+power envelope H(c) -T(c, c).
+
+    b. When dt = IB3' the most powerful invariant test against the alternative c = c
+asymptotic power function wr(c, c). The asymptotic power envelope for this fam
+point-optimal invariant tests is H(c).
+
+    c. When dt = I30 + ,81t, the most powerful invariant test against the alternative
+c = c has asymptotic power function
+
+ (8) IT7(c, IC-) = Pr c| ZF(tC) dt + (1 -C-)C( - < bT()
+
+where b(c) satisfies Pr[A2fVJ(t c) + (1 - )Vc(1, c) <b(c)] = s. An upper
+
+bound to the asymptotic power of any unit-root test invariant to the trend parameters
+
+I30 and I31 is given by the power envelope Hl(c)-T(c, c).
+
+    Our primary interest is in alternatives c < 0, but the theorem is valid for
+positive c and c as well. There are no simple analytic expressions for the power
+envelopes H(c) and HT(c), but simulations indicate that they are monotonically
+increasing functions of Icl. Some plots and calculations are given in Section 4
+where a number of alternative tests are discussed.
+
+                                        3. FEASIBLE POINT-OPTIMAL TESTS
+
+    Although the point-optimal test statistics defined in (3) and (6) require V and
+u0 to be knowr;, it is possible to construct tests having the same large-sample
+properties even in the absence of this knowledge. Furthermore, the asymptotic
+theory is valid under less stringent assumptions than those made in Theorem 1.
+In this section, we continue to assume that equation (1) describes the data
+generating process but we drop Condition A and consider the properties of
+some feasible tests under weaker assumptions. For 0 < s < 1, let [sT] be the
+greatest integer less than or equal to sT and let > denote weak convergence of
+the underlying probability measures as T tends to infinity.
+
+    CONDITION C: The initial error uo has a distribution with bounded second
+moment for all a in a neighborhood of unity. The zero mean process {vt} is
+stationary and ergodic with finite autocovariances y(k) Evtvtvk such that
+
+   (a) wo2 = E'k= y(k) is finite and nonzero;
+   (b) the scaled partial-sum process T- '12 = 27Vt => wo(s).
+
+   The assumptions on {vt} are satisfied by stationary and invertible ARMA
+
+models under moment conditions and are standard in the literature. The
+stationary assumption can be relaxed at the cost of a more complex notation.
+
+Specific assumptions on vt which imply (b) are discussed in Phillips (1987) and
+
+                                           This content downloaded from
+          176.5.8 197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                              All use subject to https://about.jstor.org/terms
+                                                  AUTOREGRESSIVE UNIT ROOT 819
+
+Phillips and Solo (1992). When a = 1 + T-lc and Condition C is satisfied,
+T- 1/2U[tT] w> JW(t) and sample moments of the data have limiting represe
+tions in terms of stochastic integrals involving W,.
+
+    To generate a convenient family of tests, we note that, when uo = 0 and t
+are iid N(O, 1), the likelihood ratio statistic LT takes a very simple form
+S(a) be the sum of squared residuals from a least squares regression of Ya on
+Za, where Ya and Za are defined in (5). Then the test statistic is equal to
+S(ca) - S(1). If L is not in fact the identity matrix, this difference in sum of
+squared residuals will in general have a limiting distribution depending on the
+error variances and covariances and thus will not produce a test of the correct
+size. However, it is easy to construct a modified statistic that does produce a
+valid large-sample test. For the general problem of testing a = 1 vs. a = a
+where dt =/3'zt and the vt have unknown covariances, consider the feasible
+statistic
+
+  (9) PT [S() -O
+
+where co2 is an estimator for co2. If /3 is known, no regression is needed and
+
+S(a) is given by (Ya - Za P1Y(Ya - Za 3).
+
+    THEOREM 2: Suppose {Yt} is generated by (1) where dt is a (possibly consta
+
+polynomial time trend. Then, if Condition C is satisfied and c2 is a consistent
+estimator of co2 when c = T(ca - 1) is fixed, PT has the same limiting distribution
+under local-to-unity asymptotics as L*T- C. Specifically, PT converges in distribution
+to W2J'J-2 _-W 2(i) in the zero mean and constant mean cases and to c2J"c2(t, c) ?
+(1 - -)V2(1 -) in the linear trend case.
+
+    Thus the power functions ir(c, 5) and 7r'(c, 5) derived in Theorem 1 for
+point-optimal tests in the Gaussian model with L known can be attained by the
+simple PT family of statistics under the much weaker assumptions of this
+section. This is important, because, in practice, X will generally contain un-
+known parameters and there is often no compelling reason to believe that the
+data are normally distributed. If the errors are non-normal, tests exploiting the
+form of the actual likelihood and possessing power higher than HI(c) and HT(c)
+could be constructed. In the absence of such information, quasi-likelihood tests
+based on least-squares regressions are likely to be used in practice. The power
+bounds derived under normality are still valid when comparing such tests.
+
+    Although our analysis is based oil relatively weak assumptions, two interesting
+models considered elsewhere in the literature are ruled out. A problem closely
+
+related to ours is to test the null hypothesis that {ut} is an integrated proces
+
+against the alternative that it is a strictly stationary process. Under that
+
+alternative, uo will have a variance proportional to (1 - a 2)- , a violati
+
+Condition C. The tests studied in Section 2 are not point optimal under this
+specification and the asymptotic power bounds are no longer valid. Our PT
+statistics, however, still have simple local-to-unity limiting representations under
+
+                                         This content downloaded from
+        176.58.197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+820 G. ELLIOTIT, T. J. ROTHENBERG, AND J. H. STOCK
+
+the stationary alternative. Suppose, for example, u0 is normal with mean zero
+and variance (1 - a2)-1 and that the vt are serially uncorrelated with unit
+variance. Then T-'/2u[tT] =* W*(t) = Wc(t) + 7qoect where mo is a normal vari-
+
+ate, independent of WcJ(), with mean zero and variance (-2c)-1. The PT
+
+statistics can then be written as functionals of the WJ*(t) process. Further
+analysis of the stationary alternative testing problem can be found in Elliott
+(1993).
+
+   A second, closely related approach to modeling unit roots is also ruled out
+here. One way to avoid making an assumption about the initial error u0 is to
+base the entire statistical analysis on the conditional distribution of the data
+
+given the first observation Yl. When dt is known, there is no difference
+
+asymptotically between our analysis based on the full likelihood and analysis
+based on the conditional likelihood. But when dt is unknown, the point-optimal
+invariant test based on the full likelihood is not asymptotically equivalent to the
+point-optimal test based on the conditional likelihood. Invariance under the
+transformation Yt - Yt + f3'zt is often justified by the argument that adding a
+constant to the data should not change the analysis. But that argument is not
+compelling once one has conditioned on the first observation. There appears to
+be no convincing way to avoid making an assumption about the initial observa-
+tion when there are unknown nuisance parameters in dt.
+
+    Although our analysis has been based on local-to-unity asymptotics, our tests
+have good properties when judged by standard fixed parameter asymptotics as
+well. Specifically, since the power functions for the PT tests have nondegenerate
+limits under sequences of local alternatives a approaching unity, one would also
+expect power to approach one as T tends to infinity for any fixed a < 1. This is
+indeed the case if the estimate c2 is not only consistent for local alternatives
+but also well behaved globally.
+
+    THEOREM 3: Suppose the conditions of Theorem 2 hold except that a is fixed
+and less than one in absolute value. If Pr[ c22> , ] 1 for some positive constant
+,u, then the tests which reject for small values of PT (with c = T(-a - 1) held fixed)
+have power functions tending to one as T tends to infinity.
+
+    Estimators c2 that are consistent under local alternatives and have nonzero
+probability limits under fixed alternatives clearly satisfy this condition. Some
+examples of such estimators are given in Section 5.
+
+                                 4. SOME NEARLY EFFICIENT INVARIANT TESTS
+
+    Theorems 1 and 2 imply that, among tests based on second-order sample
+moments, those that reject for small values of [SGa) - wS(1)]/c2 are asymptoti-
+cally point optimal invariant; each has an asymptotic power curve tangent to the
+power envelope at one point. It will be convenient to index the test by its power
+rather than by the value ci. That is, by inverting the envelope power function
+
+                                         This content downloaded from
+        176.58.197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+                                                          AUTOREGRESSIVE UNIT ROOT 821
+
+= H[T(a - 1)] for a < 1, we can find that alternative c(s, T, s) which yields
+(approximate) power X when using the point optimal test of level e with a
+sample of size T. Then, for e < 7r < 1, the family of test statistics can be written
+
+as
+
+(10) PT(1(0l)) P=T(S'W[a)(A72r~,~T~~,~~e~~)~]~~-(1a (r,T, s)S(1)
+
+(We suppress the dependence of P on s.) Although every member of this family
+is admissible, past research suggests that values of XT near one-half often yield
+tests whose power functions lie close to the power envelope over a considerable
+range. Cf. King (1988).
+
+    For the remainder of the paper we restrict attention to the three standard
+
+cases discussed in the literature where dt is either zero, a constant, or a line
+trend. To distinguish the cases, we follow Dickey and Fuller (1979) and use a
+superscript ,u when dt is constant and a superscript T when it is a linear tren
+Since commonly used test statistics have distributions not depending on the
+parameters determining the dt, we shall also restrict attention to invariant tests.
+
+   When there is no deterministic term, our family of PT tests includes as special
+cases many tests previously proposed. Recall that PT(G) has the asymptotic
+representation c2Gr)Wc2 - c(r)W2(1) where j(0r) is a monotonically decreas-
+ing function taking the value zero when 7r is equal to e (the size of the test) and
+tending to minus infinity as 7r approaches one. Sargan and Bhargava (1983)
+suggest S(0)/S(1) as a test statistic when the vt are white noise; asymptotically it
+behaves like fWc2 and corresponds to PT(1). The locally most powerful test
+described by Dufour and King (1991) behaves asymptotically like WC2(1) and
+corresponds to PT(e). The Dickey-Fuller estimator test (based on their statistic
+p) is also a member, since its rejection region is determined, asymptotically, by a
+linear combination of fWc2 and WC2(1); computations indicate that it has the
+same limiting distribution as our PT(1 - e). The Dickey-Fuller t statistic (de-
+noted by T) is a nonlinear function of fWc2 and Wc2(1) Nonetheless, computa-
+tions indicate that the asymptotic power function of their t test is tangent to the
+power envelope when power is about one-half and behaves like the PT(O5) test.
+Likewise, the Za and Zt tests examined in Phillips (1987) and Phillips and
+Perron (1988) behave like members of the PT family since they are asymptoti-
+cally equivalent to the p and T tests, respectively.
+
+    Figure 1 graphs the asymptotic power functions of these tests along with the
+power envelope when the tests have size 0.05. These are based on 20,000 Monte
+Carlo replications where Wc was approximated by its discrete realization from a
+sample of size 500; simulation standard errors are less than 0.0013. The power
+envelope is monotonic and equals one-half when c = -7. With the exception of
+the locally most powerful test which puts all the weight on Jc4(1), all the tests
+have power functions very close to the power envelope. Indeed, it is hard to
+distinguish them without vastly changing the scale of the figure. Although none
+of these tests is uniformly most powerful even asymptotically, our numerical
+
+                                         This content downloaded from
+        176.58.197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+822 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+   0.9
+
+   0.8
+
+                                                               AIBIC
+
+   0.7
+
+    0.6 Solid line: Gaussian Power Envelope
+                                                                              A: PT(1.0); Sargan-Bhargava
+
+   0.5 - [ B: PT(-95); Dickey-Fuller 5
+
+                                                                  C: PT(-5); Dickey-Fuller i
+                                                                     D: PT(-05); Locally most powerful
+
+   0.4
+
+                                                                                               D
+
+   0.3
+
+       0.2 0
+
+       0.1 - '
+
+            0IIIIIIIIlI
+
+         0 1 2.5 5 7.5 10 125 15 17.5 20 225 25 27.5 30
+
+                                                                                                     -c
+
+    FIGURE 1-Asymptotic power functions of selected unit root tests: no deterministic component.
+
+calculations indicate that, for .25 < n- < .95, the PT(Or) tests are, for all practical
+purposes, equivalent in large samples and have power functions essentially
+identical to the power bound. Other calculations not reported here demonstrate
+that this conclusion carries over to tests at the 1% and 10% significance levels as
+
+well.
+
+   Things are rather different, however, when d, contains parameters that have
+to be estimated. The Sargan-Bhargava (1983) test for the constant mean case,
+Bhargava's (1986) extension for the linear trend case, the Dickey-Fuller estima-
+tor tests (based on their statistics j ' and p), the Dickey-Fuller t tests (based
+on their T '4 and T ), and the Phillips-Perron Z tests are no longer asymptoti-
+cally equivalent to members of the PT family since they employ OLS estimates
+of the 83's instead of constrained local-to-unity estimates. The power functions
+for the PT (1r) and PT(wr) tests remain very close to the relevant power
+envelopes H(c) and 17T(c) for a broad range of n- values. The power functions
+for the tests which use OLS estimates of /8 are well below the power envelopes.
+Some results for tests at the 5% level are presented in Figure 2 for the constant
+
+                                         This content downloaded from
+        176.58.197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+     AUTOREGRESSIVE UNIT ROOT 823
+
+0.9                                                                                                  .,
+
+0.8 /D
+
+     A,B '' ,
+
+0.7  '  /
+
+  0.6/
+                                                                                                 /E
+
+0.5. /
+
+0.4 .' I Solid line: Gaussian Power Envelope
+
+                                                     / A: PTu(5)
+0.3 .,~/B: DF-GLSuk.5)
+
+                                                                                                C: Sargan-Bhargava
+
+                                                                           D: Dickey-Fuller 3i
+0.2 Bo E: Dickey-Fullerir/l
+
+0.1--
+
+      0IIIIIIIIIII
+       0 1 2.5 5 7.5 10 12.5 15 17.5 20 22.5 25 27.5 30
+
+                                                                                                       -C
+
+FIGURE 2-Asymptotic power functions of selected unit root tests: constant mean (zt = 1)
+
+mean case and in Figure 3 for the linear trend case. The envelope power curve
+H1(c) has the same shape as H(c), but now takes the value one-half when
+c = - 13.5. The power loss of the commonly used tests is particularly dramatic in
+the constant mean case. The same pattern is found for tests at the 1% and 10%
+significance levels.
+
+   A measure of the difference between two tests is Pitman asymptotic relative
+efficiency (ARE), defined as the ratio of the values of c at which the tests
+achieve a specified power. Evaluating efficiency at power one-half and using 5%
+level tests, we find in the constant mean case the ARE's of the Sargan-Bhargava,
+P/ and T' tests relative to the power envelope are, respectively, 1.40, 1.53, and
+1.91. Since c is proportional to T, this implies that using the Dickey-Fuller t test
+instead of the Pt(.5) test is equivalent in large samples to discarding almost half
+of the observations. The corresponding ARE's for the linear trend case are 1.07,
+1.13, and 1.25.
+
+    Since the difficulties with the standard tests are associated with inefficient
+estimates of the trend parameters, it is reasonable to expect that modified
+
+                                This content downloaded from
+176.5.8 197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                    All use subject to https://about.jstor.org/terms
+824 G. ELLIOTr, T. J. ROTHENBERG, AND J. H. STOCK
+
+      I
+
+           ?~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~0 r ,
+
+   0.9
+
+   0.8
+
+   0.7
+
+        0.6-/ '
+
+   0.5
+
+   0.4
+
+    0.3 - " Solid line: Gaussian Power Envelope
+
+                                                 )z; / ~~A: PT'(-5)
+
+      0.2 B: DF-GLST(.5)
+                                                           / .#' ^C: Bhargava
+
+                                             -00 D: Dickey-Fuller p"
+
+      0.1 E: Dickey-Fullerirl
+
+          0 1 2.5 5 7.5 10 12.5 15 17.5 20 22.5 25 27.5 30
+
+                                                                                                             -C
+
+    FIGURE 3-Asymptotic power functions of selected unit root tests: linear trend (zt = (1, t').
+
+estimates could improve their performance. Because of their relatively good size
+properties found in small-sample Monte Carlo studies (e.g., Schwert (1989)),
+natural tests to modify are those based on the Dickey-Fuller t statistics T IL and
+T . Choosing c to be that alternative where maximal power is approximately
+one-half, we propose regressing y, on Z,, to obtain the estimate f8. Then one
+can perform the usual augmented Dickey-Fuller t test (without deterministic
+regressors) using the residual series yt -yt -,'zt in place of Yt. Thus the
+modified test statistic (denoted by DF-GLS(OT-) in the tables and figures) is the t
+statistic for testing ao = 0 in the regression
+( 1) Ay d = a0yd- 1 + al AYd- 1 + * * +a Ay d + error.
+
+   When dt =,8, the estimate ,80 is stochastically bounded and T- 12(Y[sT]-
+,80) wt Wc(s); the t statistic calculated from the demeaned data has the limiting
+representation O.5(fW2) 112[W2(1) - 1], which is identical to that of T^. Critical
+values and asymptotic power are those of the conventional Dickey-Fuller t
+
+statistic when there is no intercept. In the linear trend case, the detrended series
+
+                                         This content downloaded from
+        176.5.8 197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+                                                         AUTOREGRESSIVE UNIT ROOT 825
+
+                                                                                    TABLE I
+                                                                       CRITICAL VALUESa
+
+                                                                                                                         Level
+                                                        T 1% 2.5% 5% 10%
+
+                                                       A. Constant Mean: PT with c =-7
+
+                                         50 1.87 2.39 2.97 3.91
+                                       100 1.95 2.47 3.11 4.17
+                                        200 1.91 2.47 3.17 4.33
+
+                                        ?? 1.99 2.55 3.26 4.48
+
+                                                B. Linear Trend: PT with c = - 13.5
+
+                                         50 4.22 4.94 5.72 6.77
+                                         100 4.26 4.90 5.64 6.79
+                                       200 4.05 4.83 5.66 6.86
+
+                                         00 3.96 4.78 5.62 6.89
+
+                                                C. Linear Trend: DF-GLST with c =-13.5
+
+                                        50 -3.77 -3.46 -3.19 -2.89
+                                        100 - 3.58 - 3.29 - 3.03 -2.74
+                                      200 - 3.46 -3.18 - 2.93 - 2.64
+
+                                        00 -3.48 -3.15 - 2.89 - 2.57
+
+                                            a Entries are based on 20,000 Monte Carlo replications. Data were
+                                         generated by (1) with a = 1 and Gaussian white noise {v,}. The PT
+                                            statistic is given by (9) with 02 = S(1)/T; DF-GLS' is the t statistic
+                                      calculated from (11) with p = 0 and y =y - Z/3 where f3 is obtained
+                                          by regressing y, on Z,. In both cases, a = 1 + C/T. The line T - was
+                                                calculated using a discrete approximation to the relevant stochastic
+                                                 integrals.
+
+Yt/ 1-0- fl1t plays the role of yte. It is shown in the Appendix that
+T- 1/2 [T ] - JIV(s, C) when -a = 1 + c/T is used for the estimation of f8; the t
+
+statistic then has the limiting representation 0.5[ fV2(SC )] 1/2[V12(l, C) - 1].
+Figure 3 graphs the asymptotic power function of the locally detrended t test
+when c =-13.5. It is indistinguishable from the power envelope.
+
+   The -a that produces a given asymptotic power XT depends on the size of the
+test, so critical values for the PT(T) tests and for the Dickey-Fuller t test
+applied to locally detrended data depend on e. This is inconvenient as it
+requires an extensive set of tables and, if marginal significance levels are
+calculated, recomputing the test statistic for different e. Since the power curves
+of the tests are not sensitive to a(O-) in the range .25 < - < .95, a simpler
+approach is to fix -a = 1 + C/T independently of e. Our calculations indicate
+that, if c- = -7 is chosen for the constant mean case and c = - 13.5 for the
+linear trend case, the limiting power functions of the resulting PT tests and for
+the Dickey-Fuller t test applied to locally detrended data are within 0.01 of the
+power envelope for .01 < e < .10. Some critical values for this choice of c are
+given in Table I. Note that, although the small-sample values are valid only for
+
+                                        This content downloaded from
+       176.58.197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+826 G. ELLIOYr, T. J. ROTHENBERG, AND J. H. STOCK
+
+Gaussian white noise {v[}, the large-sample critical values do not depen
+
+or normality.
+
+                                           5. FINITE SAMPLE PERFORMANCE
+
+   A Monte Carlo experiment was conducted to see how well the asymptotic
+theory describes the small-sample properties of our tests. We investigated tests
+based on PT1(.5), the standard Dickey-Fuller t statistic (denoted DF-1 IL), and
+the modified Dickey-Fuller t statistic (denoted DF-GLS ) for the constant
+mean case and the corresponding three tests (based on PT(.5), DF-FT, and
+DF-GLST) in the linear trend case. Data generating processes considered
+elsewhere in the literature (e.g., Phillips and Perron (1988), Schwert (1989),
+DeJong et al. (1992), and Lumsdaine (1994)) were employed. Specifically, letting
+{m,q} be a set of independent standard normal variables, we used the following
+three models for the {vj process:
+
+    I . MA(1: Vt= 1t - 1t- 1 (O = .8,.59,0,-.5, -.8),
+
+    II. AR(1: vt= ovt- 1 + 71t (o .5' -5)'
+
+    III. GARCH MA(1: v = ~t-'Kt- 1 t = h12qt 71
+
+                                           ht = 1 + .65h_1 + .25 t2 1, ho = O
+
+                                                                                                                 (0 = .5, O, -.5).
+
+In each of these models the initial condition was u0 = 0. Although the null
+distribution of the test statistics considered here are invariant to the initial
+condition, small-sample power typically depends on u0. This dependence is
+investigated by considering a variant of the first model where the {utj are strictly
+stationary under the alternative hypothesis. That is, u0 is normal with mean zero
+ and variance equal to (1 + 02 - 20a)/(1 - a2), a = 1. This design violates our
+ Condition C and is intended to shed light on the importance of that assumpti
+
+    The autocorrelation structure of {vtj was assumed to be unknown to t
+ investigator, so two types of loosely parameterized estimators, autoregressiv
+ (AR) and sum-of-covariances (SC), were used for co2. The AR estimators are
+
+ given by
+
+                                              // p \2
+
+ (13) 2A = j(R ai-
+
+ where O2 and the ai are OLS estimates from the reg
+
+  (14) Ayt = aoyt-1 + al jYt-1 + *t +ap Ayt-p + ap+
+
+                                          This content downloaded from
+         176.58.197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+                                                             AUTOREGRESSIVE UNIT ROOT 827
+
+Two choices of lag length were employed: the AR(8) estimator used p = 8 and
+the AR(BIC) estimator used p chosen by the Schwarz (1978) Bayesian informa-
+tion criterion constrained so 3 ?p < 8. The SC estimators are given by
+
+                                        IT
+
+              A2= E K(m/ll)d(m)
+
+where K(*) is the Parzen kernel, A (m) = T- ET- metet+m, and et is the residual
+from an OLS regression of yt on (Yt z). Two variants were employed: SC(12)
+using 'T = 12 and SC(auto) using Andrews' (1991) optimal automatic procedure
+(his equations (6.2) and (6.4)).
+
+    The results are summarized in Table II for a constant mean and in Table III
+for a linear trend. Tests were at the 5% asymptotic significance level and the
+sample size T was 100. For a = 1, the tables report the observed rejection rates
+from 5000 Monte Carlo replications when critical values were based on the
+limiting distributions. For a < 1, the tables report size-adjusted power; this is the
+rejection rate when critical values are estimated from the a = 1 Monte Carlo
+trials.
+
+    The results suggest three conclusions. First, the predicted superiority of the
+tests using local-to-unity estimates of the mean and trend parameters is borne
+
+out by the Monte Carlo study. The PT and modified Dickey-Fuller tests have
+
+higher size-adjusted power than the standard Dickey-Fuller t test for almost all
+of the data generating processes and all choices of c22. The improvement is
+largest in the constant mean case. Although the observed power curves tend to
+be somewhat below the asymptotic power curves, the results are generally
+consistent with the predictions of the asymptotic theory. The main exception is
+the poor performance of the point-optimal tests using SC estimates of c2 when
+the MA parameter 0 is large.
+
+   Second, the choice of estimator for w 2 has a large effect on the size of the PT
+tests, with the AR estimator exhibiting much smaller distortions than the SC
+estimator. This mirrors similar results found for other unit-root statistics; see,
+for example, DeJong et al. (1992) and Perron (1996). The AR(8) and AR(BIC)
+tests have moderate size distortion except in the MA model with large 0. The
+modified Dickey-Fuller tests have notably smaller size distortions than those
+based on PT. In addition, the tests based on the AR(BIC) estimator have better
+size-adjusted power than those based on the AR(8) estimator, which typically
+estimates more nuisance parameters. Other experiments not reported in Tables
+II or III indicate that the AR(BIC) tests also dominate the ones based on the
+AR(4) estimator for w 2. Lag length selection based on sequential likelihood
+ratio statistics was also tried; no general improvement over AR(BIC) was found,
+although the LR selector appears to improve the size-adjusted power of the
+modified Dickey-Fuller test relative to BIC in the linear trend case, at least for
+small values of 0.
+
+    Third, the powers of the PT and modified Dickey-Fuller tests deteriorate
+substantially when the ut are stationary. Even so, in the linear trend case w
+
+                                         This content downloaded from
+        176.5.8 197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+      828 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+                                                                                                TABLE II
+                SIZE AND SIZE-ADJUSTED POWER OF SELECTED TESTS OF THE I(1) NULL: MONTE CARLO RESULTS
+
+                                                     5% LEVEL TESTS, CONSTANT MEAN (Zt = 1), T = 100
+
+      Test Asymptotic MA(1), 6= AR(1), 4 = GARCH MA(1), 6= Stationary MA(1), 6=
+
+       Statistic a Power -0.8 -0.5 0.0 0.5 0.8 0.5 -0.5 -0.5 0.0 0.5 -0.5 0.0 0.5
+
+P '1N.5) 1.00 .05 0.18 0.20 0.20 0.18 0.20 0.22 0.20 0.21 0.20 0.18 0.20 0.20 0.18
+   AR(8 .95 .32 0.18 0.18 0.19 0.18 0.15 0.18 0.17 0.18 0.18 0.17 0.13 0.13 0.13
+
+                              .90 .76 0.31 0.31 0.32 0.32 0.30 0.31 0.29 0.30 0.30 0.30 0.24 0.25 0.25
+                              .80 1.00 0.47 0.48 0.50 0.51 0.51 0.46 0.46 0.48 0.48 0.49 0.40 0.42 0.43
+                               .70 1.00 0.56 0.57 0.59 0.60 0.47 0.55 0.53 0.56 0.57 0.58 0.49 0.51 0.52
+
+P '1(.5) 1.00 .05 0.14 0.11 0.10 0.11 0.42 0.11 0.10 0.13 0.11 0.12 0.11 0.10 0.11
+   AR(BIC) .95 .32 0.24 0.27 0.28 0.28 0.19 0.26 0.27 0.26 0.26 0.27 0.17 0.17 0.17
+                              .90 .76 0.50 0.57 0.59 0.59 0.41 0.52 0.56 0.54 0.56 0.57 0.37 0.37 0.36
+                               .80 1.00 0.82 0.89 0.91 0.92 0.79 0.83 0.88 0.86 0.88 0.89 0.67 0.69 0.69
+                               .70 1.00 0.92 0.97 0.98 0.98 0.94 0.93 0.96 0.95 0.96 0.96 0.81 0.83 0.84
+
+P '1N.5) 1.00 .05 0.02 0.02 0.07 0.50 0.98 0.01 0.33 0.03 0.08 0.51 0.02 0.07 0.50
+   SC(12) .95 .32 0.29 0.29 0.29 0.27 0.15 0.29 0.29 0.29 0.30 0.28 0.17 0.17 0.15
+
+                              .90 .76 0.64 0.65 0.70 0.62 0.09 0.59 0.68 0.64 0.68 0.59 0.36 0.40 0.33
+                              .80 1.00 0.96 0.97 0.99 0.84 0.01 0.92 0.97 0.95 0.98 0.80 0.63 0.73 0.49
+                               .70 1.00 1.00 1.00 1.00 0.78 0.00 0.98 0.99 0.99 1.00 0.74 0.76 0.85 0.46
+
+P 'L(.5) 1.00 .05 0.04 0.04 0.06 0.31 0.88 0.03 0.18 0.04 0.07 0.34 0.04 0.06 0.31
+   SC(auto) .95 .32 0.30 0.30 0.32 0.31 0.30 0.29 0.31 0.30 0.31 0.31 0.17 0.19 0.18
+
+                                .90 .76 0.67 0.68 0.74 0.73 0.59 0.64 0.73 0.68 0.69 0.70 0.39 0.44 0.41
+                              .80 1.00 0.97 0.98 0.99 0.99 0.72 0.96 0.99 0.97 0.98 0.98 0.72 0.80 0.70
+                              .70 1.00 1.00 1.00 1.00 1.00 0.71 0.99 1.00 1.00 1.00 1.00 0.85 0.91 0.79
+
+DF-GLS 90C) 1.00 .05 0.05 0.06 0.06 0.06 0.12 0.06 0.06 0.06 0.06 0.07 0.06 0.06 0.06
+   AR(8 .95 .32 0.21 0.23 0.23 0.23 0.30 0.23 0.24 0.22 0.22 0.23 0.14 0.14 0.13
+                              .90 .75 0.42 0.43 0.45 0.47 0.62 0.42 0.46 0.43 0.44 0.47 0.25 0.25 0.24
+                              .80 1.00 0.68 0.70 0.72 0.79 0.92 0.66 0.74 0.69 0.71 0.78 0.40 0.40 0.37
+                              .70 1.00 0.80 0.82 0.84 0.91 0.98 0.77 0.87 0.82 0.83 0.90 0.46 0.47 0.42
+
+DF-GLS 9(.) 1.00 .05 0.10 0.08 0.07 0.11 0.45 0.07 0.08 0.09 0.08 0.11 0.08 0.07 0.11
+   AR(BIC) .95 .32 0.26 0.27 0.28 0.30 0.30 0.26 0.28 0.26 0.27 0.26 0.17 0.16 0.17
+                              .90 .75 0.56 0.59 0.60 0.67 0.68 0.54 0.62 0.57 0.59 0.61 0.37 0.37 0.37
+                              .80 1.00 0.87 0.92 0.93 0.97 0.98 0.86 0.95 0.90 0.92 0.95 0.66 0.68 0.68
+                              .70 1.00 0.96 0.98 0.99 1.00 1.00 0.95 1.00 0.98 0.98 1.00 0.79 0.80 0.76
+
+       DF -,r 1.00 .05 0.08 0.06 0.06 0.08 0.46 0.06 0.05 0.07 0.06 0.08 0.06 0.06 0.08
+   AR(BIC) .95 .12 0.11 0.10 0.10 0.13 0.13 0.10 0.11 0.10 0.10 0.13 0.11 0.11 0.13
+
+                             .90 .31 0.23 0.22 0.22 0.31 0.31 0.20 0.25 0.23 0.23 0.29 0.24 0.24 0.32
+                              .80 .85 0.55 0.56 0.59 0.77 0.78 0.46 0.65 0.54 0.58 0.73 0.57 0.60 0.77
+                              .70 1.00 0.76 0.79 0.83 0.96 0.96 0.67 0.89 0.77 0.82 0.93 0.80 0.84 0.96
+
+   Notes: For each statistic, entries in the first row are the empirical rejection rate
+size-adjusted power under the model described in the column heading. The column
+power for each statistic. The entry below the name of each statistic indicates the e
+in the final three columns, uo was drawn from its stationary distribution. Based o
+
+                                                  This content downloaded from
+                 176.58.197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                                     All use subject to https://about.jstor.org/terms
+                                                               AUTOREGRESSIVE UNIT ROOT 829
+
+                                                                                           TABLE III
+              SIZE AND SIZE-ADJUSTED POWER OF SELECTED TESTS OF THE I(1) NULL: MONTE CARL
+
+                                             5% LEVEL TESTS, LINEAR TREND (Zt = (1, t)'), T = 100
+
+      Test Asymptotic MA(1), = AR(1), 4= GARCH MA(1), 6= Stationary MA(1), 6=
+
+      Statistic a Power - 0.8 - 0.5 0.0 0.5 0.8 0.5 -0.5 - 0.5 0.0 0.5 - 0.5 0.0 0.5
+PT(.5) 1.00 .05 0.16 0.18 0.18 0.14 0.13 0.21 0.17 0.19 0.19 0.13 0.18 0.18 0.14
+
+   AR(8) .95 .10 0.15 0.16 0.16 0.16 0.13 0.15 0.15 0.14 0.15 0.15 0.13 0.13 0.13
+                             .90 .27 0.26 0.26 0.26 0.27 0.25 0.25 0.24 0.23 0.25 0.25 0.23 0.24 0.25
+                             .80 .81 0.40 0.41 0.41 0.44 0.45 0.38 0.38 0.37 0.40 0.42 0.38 0.39 0.42
+                             .70 .99 0.48 0.49 0.50 0.53 0.42 0.45 0.46 0.46 0.48 0.51 0.46 0.48 0.50
+
+PT(.5) 1.00 .05 0.13 0.10 0.07 0.05 0.29 0.10 0.05 0.11 0.08 0.06 0.10 0.07 0.05
+   AR(BIC) .95 .10 0.18 0.17 0.17 0.18 0.15 0.16 0.16 0.17 0.16 0.17 0.14 0.14 0.14
+                            .90 .27 0.36 0.36 0.36 0.39 0.32 0.31 0.35 0.34 0.34 0.37 0.29 0.30 0.32
+                            .80 .81 0.65 0.69 0.72 0.77 0.70 0.60 0.68 0.66 0.68 0.73 0.61 0.63 0.68
+                            .70 .99 0.82 0.86 0.88 0.92 0.90 0.76 0.84 0.83 0.84 0.89 0.78 0.81 0.86
+
+PT(-5) 1.00 .05 0.00 0.00 0.03 0.77 1.00 0.00 0.57 0.00 0.03 0.77 0.00 0.03 0.77
+   SC(12) .95 .10 0.10 0.11 0.12 0.11 0.05 0.11 0.11 0.11 0.12 0.11 0.09 0.10 0.09
+                            .90 .27 0.25 0.26 0.32 0.22 0.02 0.24 0.26 0.27 0.29 0.20 0.21 0.25 0.16
+                            .80 .81 0.65 0.69 0.81 0.35 0.00 0.57 0.61 0.68 0.74 0.31 0.51 0.64 0.25
+                             .70 .99 0.87 0.91 0.96 0.29 0.00 0.83 0.71 0.89 0.93 0.25 0.73 0.85 0.20
+
+PT(.5) 1.00 .05 0.01 0.01 0.04 0.49 0.99 0.00 0.26 0.01 0.05 0.51 0.01 0.04 0.49
+   SC(auto) .95 .10 0.12 0.11 0.12 0.12 0.10 0.11 0.12 0.11 0.11 0.11 0.10 0.10 0.10
+                             .90 .27 0.30 0.30 0.32 0.33 0.22 0.27 0.32 0.30 0.30 0.30 0.23 0.25 0.24
+                            .80 .81 0.77 0.79 0.85 0.85 0.41 0.69 0.86 0.76 0.81 0.80 0.62 0.70 0.63
+                            .70 .99 0.97 0.97 0.99 0.98 0.39 0.93 0.99 0.97 0.98 0.97 0.87 0.93 0.82
+
+DF-GLST(.5) 1.00 .05 0.04 0.05 0.05 0.04 0.09 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.04
+   AR(8) .95 .10 0.08 0.09 0.09 0.10 0.11 0.09 0.09 0.08 0.09 0.09 0.08 0.08 0.09
+                            .90 .27 0.16 0.17 0.17 0.20 0.25 0.15 0.18 0.15 0.16 0.18 0.13 0.13 0.15
+                            .80 .81 0.30 0.31 0.33 0.40 0.53 0.28 0.35 0.31 0.32 0.38 0.22 0.23 0.26
+                             .70 .99 0.41 0.42 0.45 0.56 0.68 0.37 0.48 0.43 0.45 0.53 0.30 0.31 0.33
+
+DF-GLST(.5) 1.00 .05 0.11 0.08 0.07 0.11 0.58 0.06 0.07 0.08 0.06 0.11 0.08 0.07 0.11
+     AR(BIC) .95 .10 0.11 0.10 0.10 0.11 0.12 0.10 0.10 0.10 0.10 0.11 0.09 0.09 0.09
+                            .90 .27 0.23 0.23 0.24 0.28 0.27 0.22 0.25 0.23 0.24 0.26 0.19 0.19 0.21
+                            .80 .81 0.53 0.57 0.61 0.72 0.70 0.48 0.63 0.56 0.59 0.69 0.46 0.49 0.54
+                            .70 .99 0.75 0.80 0.84 0.94 0.91 0.69 0.88 0.78 0.82 0.91 0.67 0.71 0.76
+
+DF-,r'r 1.00 .05 0.10 0.07 0.05 0.09 0.58 0.05 0.06 0.07 0.06 0.09 0.07 0.05 0.09
+   AR(BIC) .95 .09 0.09 0.08 0.08 0.09 0.08 0.08 0.08 0.08 0.08 0.09 0.08 0.08 0.09
+                            .90 .19 0.16 0.14 0.15 0.18 0.17 0.14 0.15 0.14 0.14 0.18 0.15 0.15 0.18
+                            .80 .61 0.36 0.36 0.39 0.51 0.50 0.30 0.42 0.34 0.37 0.48 0.36 0.39 0.52
+                            .70 .94 0.57 0.58 0.64 0.81 0.80 0.48 0.69 0.55 0.60 0.78 0.58 0.64 0.81
+
+  Notes: See the notes to Table II.
+
+                                                 This content downloaded from
+                176.5.8 197.13 on uS n, 13 Sep 2026 06:35:51 UTC
+
+                                     All use subject to https://about.jstor.org/terms
+830 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+0= 0, the size-adjusted powers of the tests using local detrending exceed that of
+DF-_T. In the constant mean case, the size-adjusted powers of tests using local
+demeaning exceed that of DF- I for close but not distant alternatives. The
+gains from employing local-to-unit estimates of the intercept appear to depend
+crucially on the assumption that, under both the null and the alternative
+hypotheses, only the early observations are informative about that parameter.
+
+                                                                        6. CONCLUSIONS
+
+   The PT and modified Dickey-Fuller t statistics are easily computed from least
+squares regressions. If the sample size is large enough so the effects of residual
+autocorrelation are captured by co2 and the asymptotic approximations are
+accurate, these tests are essentially optimal among tests based on second-order
+sample moments and should perform considerably better than tests which
+employ OLS estimates of the parameters determining d. Our Monte Carlo
+results suggest that the Dickey-Fuller t test applied to a locally demeaned or
+detrended time series, using a data-dependent lag length selection procedure,
+has the best overall performance in terms of small-sample size and power.
+
+    The numerical finding that, as a practical matter, the asymptotic power
+functions of the PT(O) and the modified Dickey-Fuller t tests effectively l
+the Gaussian power envelope indicates that, in large samples, there is little
+room for improvement under the stochastic specification made here. Of course,
+if the errors have a known non-normal distribution or if the initial error u0 is
+large compared to co, better tests could be constructed. Furthermore, the Monte
+Carlo evidence suggests that autocorrelation in the v, can have very substantial
+effects in small samples. Nevertheless, it appears that, when parameters in the
+deterministic component of a series have to be estimated, the proposed tests for
+a unit root dominate those currently in common use.
+
+   Dept. of Economics, University of Califomia-San Diego, 9500 Gilman Dr., La
+Jolla, CA 92093, U.S.A.,
+
+    Dept. of Economics, University of Califomia-Berkeley, Evans Hall, Berkeley,
+CA 94720, U.S.A.,
+
+                                                                     and
+    Kennedy School of Govemment, Harvard University, 79 John F. Kennedy St.,
+Cambridge, MA 02138, U.S.A.
+
+                          Manuscript received November, 1992; final revision received June, 1995.
+
+                                                         APPENDIX A: PRELIMINARY LEMMAS
+
+     Let y(k) be the autocovariance function and f(A) the spectral density function for the statio
+process {v,} satisfying Condition A. The rs element of the T x T covariance matrix X is '
+Jf ,r ei(r-s)Af(A) d A. We shall approximate 1 by the T x T matrix IF with rs element
+J- ei( )A[47r2f(A)L dA. The rs element of D - ITf- is given by Davies (1973) and Dzha-
+paridze (1985) as
+
+                              s-1-T X
+                  drs = , y(k)p(s - r - k) + E y(k)p(s - r - k).
+
+                                              k=-oo k=s
+
+                                         This content downloaded from
+        176.5.8 197.13 on uS n, 13 eS p 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+                                                          AUTOREGRESSIVE UNIT ROOT 831
+
+ For real p x q matrix B = [bij], let r(B) be the s
+let IIBIIJ =1E =1bj 1, and let IBI=tr 12(B'B). Then, r(B)<IBI<IIBII and, if B and C are
+conformable, Itr(BC)l < IBIICI and IBCI < lBlr(C). Cf. Davies (1973). Since Ej= - 1Ijil < oo implies
+
+      -k= jy (k)ki < o and (by Theorem 5.2 in Zygmund (1968, p. 245)) E'.= I p(i)l < 0, we find
+
+                                                      TT00
+
+(Al) IDII = E E Idrsl < 2 E Iy(k)lk E I p(j)l <-.
+
+                                             r=1 s=1 k=1 j=1-c
+
+As a consequence, we have the following four lemmas.
+
+    LEMMA Al: Let X and IF be T x T Toeplitz matrices formed from y(k) and p(k), the Fourier
+coefficients of 27rf(A) and [2rf( A)]-1, respectively. Let x be a T x 1 vector such that hiMT _ T- lxl =
+O. If the elements of the T x 1 vector z and of the T x T matrix A are bounded in absolute value, then,
+under Condition A,
+
+(A2) lim T-1x'(Y71 - l_f)z = lim T-2tr[A'(X1 - _IF)AI = 0.
+
+    PROOF: Since f(A) is continuous and positive on [- v-, - I, there exist positive m and M such that
+m f(A) M; hence, r(X) < 2vrM and r(YJ 1) < (2vm)- . For some constant K, ID'zI KIIDII,
+
+ID'AI ?KT112IID I, and IAl KT. Using (Al), we find
+                T- 1 1x'(-1 - IF)zI = T'1 x''- 'D'zI < T'1 x'$I- 1 D'zI < T'1 IxIr( -)KIIDII --.0,
+                 T- 2 Itr[A'(1-1 - I)AII= T-2Jtr[A'X-1D'AII < T-2r(X>-1)AIID'Aj
+                                                 < T 1'/2K2r(X 1)DII -. 0.
+
+    LEMMA A2: Suppose the data are generated by (1) under Condition A. Then w2 k= -y(k) is
+positive and, if c = T(a - 1) is fixed as T-- oo,
+
+                 T-2u1 1.u-1 2T-2u1u2 -O,
+
+                2T- 'u'1- Au + 1- c 2[2T- 'u'1 1 Au + y(0)] 0.
+
+    PROOF: Since 27Tf(A) = E-?y(k)eikA and [2Tf(A)]-1 = E7 p(k)eikA, we find that W2 = 2 f(O)
+
+ > 0 and EU . p(k)=c-2. As Au = v + cT-1u-1, it will suffice to show that S1 = T2u'1(Y-
+
+  r -2IU I)u p1p _ (X -.0 -2)an 2 d S2 2T- 1 u' -
+
+A = [ars] is a Tx T matrix with ars equal to a r-s-1 when r>s and zero otherwise. Note that
+
+larsil eli and, for nonrandom square matrix B, E(v'Bv) = tr(BX) and var(v'Bv) = tr(BVBV +
+BXB'X). Defining R = (c - 1/2 - c X 1S/2) we find
+
+IE(Sj)I = T-2c- 'Itr[A'R '112A ]I1 < T-l- lr( )r1/2( -1)e1c1jRAj,
+
+Var(Sd) = T 4c&-22tr[A'R '-112A IA'X-11/2RA p ] < 2T-2c-2r2( X)r(.-l )e21cilRA12,
+E(S2) = 2T- 1 [tr(A) - c-2 tr( XA)]
+
+         = -2w- 2T-lET_ ly(k)(T-k)ak- 1 -. 2y(o)-1,
+
+Var(S2) = T-2oY- 24 tr[ A'R X 1/2A'R X 1/2 + RAXATRI < 8T 22 r( )IRA12.
+
+To complete the proof, we need to show that T- 1 1RAI - 0 as T -. oo. Define
+
+                     T-k T T-k                                        E  a,
+
+aT(k) T
+
+                    t=1 s=1 r=1
+
+Note that, for fixe
+where the limits are
+
+                                This content downloaded from
+176.58.197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                    All use subject to https://about.jstor.org/terms
+832 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+y(k) and p(k) are absolutely summable. Since ST k T+ (k) 2 and rT-= k T+ 1 p(k)
+
+     -. 2, it follows that
+
+                                                                                            T- 1
+
+             T-2tr[A'(. -sTI)AI = 2 , y(k[ aT(k) - aT(O)] 0,
+
+                                                                                          k= 1
+                                                                                          T- 1
+
+              T-2tr[A'(1I- rTI)AI = 2 , p(k)[aT(k) - aT(O)I 0.
+
+                                                                                          k= 1
+
+Cf. Anderson (1971, 10.2.3). Using (A2), we have
+
+(A3) T-2IRAI2 = T-2trA'R2A = T-2tr[ w2A'-'A + c -2A'XA-2A'AI 0.
+
+    LEMMA A3: If the data are generated by (1) under Conditions A and B, then
+
+(A4) lim T-2d'_l X- ld< = lim T-1 Ad'.X- ld- 1 = 0,
+(A5) plim T-2dd' 1 1- lu 1 = plim T- ld' 11 Au = plim T- 1 AdY1u_1 = 0,
+where d-1 = (0,dl,...,dT l-Y and Ad = (dl,d2-dl,..,dT-dTl-Y -
+
+    PROOF: Under Condition B, T-2dd'1 1X- ld- 1 < r( - X)T-2d' ld- 1 < r( X-l)max, < TId/T-+ 0.
+By Lemmna Al, lim T-1 Ad'(7 S- _ ')d1 = 0. But, defining do 0, we have
+(A6) 12T-1 Ad'!d1I = T-1Id'Id-d'_1Id-1- Ad' !AdI
+
+                                                                                                          T
+
+                                      I p(O)T-1E [d 2- d 2 1]
+
+                                                                                                        t=1
+                                                                                    T-1 T-k
+
+                                           + 2 , p(k)T-1 , [dtdt+k-d dtdt,l+k]-T-7 Ad' d AdI
+
+                                                                               k=1 t=1
+
+                                        < max T-1d, 2 I p(k)I +r(')T-1Ad' Ad - 0.
+                                                     t?tT k=-oo
+
+Using the notation developed in the proof of Lemma A2, we have
+
+               E[T -2d' 1 lu-1] = T 4d'_ -1 A XA'y-dl < -e1c1r( X)r2 1-)jd-1
+
+which implies that plimT-2d'_1 S-1u1 =0. For the second part of (A5), note that Au = v +
+cT- 1 u_ so it suffices to verify that var[T- d' 1d - 1 v]= T-2d'11 d1 -p 0. Finally, T-1 Ad' A
+
+    0 and ID'AI < T /2elclllDll imply T- 1Ad'(1 - 'I')u1 0 since
+                 Var[ T-1 Ad'( 1 - _IP)u1] = T-2 Ad' - '1DA IA'DY-1 Ad
+
+                                                          < T-lr(.Y)r2(V- 1 )jAdj2IIDI112e2lcl 0.
+But T-1 Ad'Iu_1 u T- 1[d'"I'u - d'_ 1P'u T]- 71d'"IAu. The last term tends to zero by the same
+argument used for T- 1d'1 .- 1 Au. Since max T- 1/2ut is stochastically bounded, the algebra of (A6)
+
+shows that
+
+               T-1Id'"Iu-d'd11'u1I <T?1 maxldtlmaxlutI E l p(k) 1-0,
+                                                                                            ttT tcT t proof.
+
+thus completing the proof.
+
+                                         This content downloaded from
+        176.58.197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+                                                  AUTOREGRESSIVE UNIT ROOT 833
+
+     Define
+
+(A7) QT(a) = U'aZa[Z'ZaZ] Zau QT (a) = U' I-'Za[Z'a I-'Z I 1zY -ua
+
+where ua = (Ul, U2 - au,,. UT - auT- 1Y and Za is given in (5).
+    LEMMA A4: Suppose the data are generated by (1) under Condition A and dt = /3'zt, where
+
+z, = (1, t, t2,..., tq -1). Then QT(Zi) - QT(1) has a limiting distribution when c = T(a - 1) and c = Vc
+
+ - 1) are fixed as T tends to infinity. Furthermore,
+
+(A8) QT(W ? QT(1) T QT[Q( ? QTM Q(1)] O0.
+
+     PROOF: Define the q x q diagonal matrix NT = diag(T1/2, 1,T . T-q-2) and the TX q
+
+matrix Z=ZaNT. Then, setting 6=Au-ET-lu_1=v+(c-)T-lu_1 we have QT(O)=
+ 6'Z(Z'Z)- 1Z-' and Qm(7) = 6-1Z7(Z'- 1Z)- 1Z'5-.1. Write Z = [x, X], where x is the fir
+
+column of Z and X = [xtj] consists of the other q - 1 columns. Defining e1 to be the first column
+IT and t to be a vector of T ones, we can write x = (T1l2 + ET- 1/2)e1 - T- 1/2t; hence, T- 1x'x
+and T- 1 -2X, = U1 + op(1). For j = 1.q - 1, x1l = 1 and xt= T-J(TAtJ - etj) when t > 1. For
+t and j, IxtjI < q + e and hence T- 1X'x -O 0. Define the continuous function hj(s, c) = (j - cs)sj
+for 0 < s < 1. Then T-1X'X converges to the matrix G(c) = [gi] = [fo hi(s, E)hj(s, c) ds].
+
+     The identity X'u - X' 1 u - 1 = X' Au + AX'u - 1 implies
+
+ (A9) T- 112X' _ T- 1/2Xt (AU - ET _u1) = T- 1/2XTUT - T /2 (TAX+ eX)u1
+
+where XT is the last column of X'. Under Condition A, T- 1/2U[sTj c)WW(s). By the continuous
+
+mapping theorem and the Ito calculus,
+
+                 1T- 1T-X,62X' h(1, c)W1(1) - f1[H(s, c) + ch(s, c)]W,(s) ds = f h(c)[dW, - cW,
+                                                                                                          0
+
+where h(s, c) is the vector consisting of the q - 1 functions hj(s, e), H(s, c) is the vector of first
+derivatives dhj(s, c)/ds, and the time index is dropped in the final term for notational convenience.
+Since lim T- lZ'Z is block diagonal, we find that QT(O) Z uO + w2Q(C ) where
+
+(A10) Q() = fh(OWW,- eW,)] fh(F)h'(J) fth(E)(dW - EWc)]
+
+Setting cY to one, the same argument shows that QT(O) - QT(1) w )2[Q(E) - Q(O)].
+    The argument now follows the proof of Lemma A2. Because the elements :tj of Z are
+
+polynomials in t, for all k and for all (i, j) pairs except i =j = 1, the terms
+
+                                                             T-k
+
+              bAjk)=-1 [t,i2t+k,j +2t,j2t+k,i]
+                                                  t= 1
+
+are uniformly bounded and tend to constants independent of k. The ij element of T- 1(Z''Z -
+TZ'Z) is given by EIT- p(k)[b1.(k) - bTI(0)] and hence tends to zero except when i =j = 1. Since
+ T- 'X'(,V- - 1F)X -0 and T-1X'(V- - W)x -0 by Lemma Al, we conclude that T-1X'- lx
+ -0 and wi 2T- 1X'- 1X -G(c-). Similarly, T- 1(X',X- -w2X'X) O0, so T-1IRXI 2 -O0, where R
+ is defined in the proof of Lemma A2. It follows that
+
+  By teseaue,T'- 0 1e?T1p S3 = T- o -2I)U1 0, S4 = T-1/2X'( 0>1 _-2f)V 0,
+
+ since tr[E(S3S3)] = &) 2T 3tr[X'R 1/2A IA'- 1/22RX] < c&)-2T- lr(,)r( -)e21c11
+ tr[E(S4S4)] = oF -2T-ttr[X'R2X] = &2T-1RK12 0. This implies T-/2X'( S- o I)r O.
+By the same argument, T- 2tJXV \ -*>0, T- YV 'el -*>0, T- lti/V 16 -*>0, and T- 'e 1u< -0.
+
+                                         This content downloaded from
+        176.5.8 197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+ 834 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+ Defining the chi-square variate x2(v)=(e'1 - Iv)2/el-e1, we find that
+ x2(v) 0. Since lim T- 1zX- IZ is block diagonal, we have
+(All) QM(Zi) = C- 2QT(O) + X2(V) - ar2u2 + op(l).
+Since (All) holds for all ci in a neighborhood of unity and x2(v) - w -2u2 does not depend on cY,
+(A8) follows.
+
+                                                  APPENDIX B: PROOFS OF THEOREMS 1-3
+     The statistical theory underlying Theorem 1 can be found in Lehmann (1959, Chapter 6). The
+limiting representations for the test statistics are derived as follows:
+
+    (a) Under Condition A, T- 1/2U[T] =wW (s) and hence - 2(T-2u'_ lu 1, T- u2)
+
+(JWC2,J4'C2(1)). Lemma A2 implies that (T2uQ 1E1u1,2T1u11?Y1 au) converges in probability
+
+to or-2(T-2u'_1u_I,2T-1u'_ J1u + y(O)-w2). But
+ (Bl) 2T-1Lu' au a T- [UT - Au' Au] = T-1U -Ty(O) +op(l)
+since T-1 Au' Au = T- 1v'v + c2T3 1u- 1 + 2cT 2u 1v -. y(O). Thus,
+
+ (B2) 2T 2U-1 1- 1U - 2ET- 1uA- 1 Au C2f WC2 _ C-[WV2(l)-11.
+
+ If y is used in place of u in the slowly evolving trend case, we must add
+
+                -2 T-2 (d' ,V l-1d_+2d'_ -u)-cT (d -d+d_ - +' - _)
+
+ to the statistic on the left of (B2). But, from Lemma A3, these terms converge in probability to zero
+ under Condition B, so the limiting distribution is unchanged.
+
+     (b) From standard GLS projection theory and (A7)
+
+               minL(a,,6)=y'[ 1- S -lZa(a lZa iZa l]=1 lU -QTm(a).
+
+                                            f3
+
+Recalling that eT = min 0L(Z, ) -min 3L(O, ,3) and a = 1 + T- le, we find
+                eT = c2T 2U 2 T 1 u lU 12cT lu + 1 1 Au + QmM (Z)
+
+ For the polynomial trend of Lemma A4, we have from the continuous mapping theorem,
+
+  (B3) (T 2U'u1,T T,QT(Z)-QT0)) c c
+
+(B4 L*T L* = C2JWC2 _ EWC2(1) + Q(0)-_Q(c-) + E. where Q is defined in (A10). Thus, from (A8) and the argument le
+
+For polynomial trend, L* is a function of c, E and q; it does not depend on I at al . When q = 1 so
+zt = 1, Q(c) = 0 and the result is the same as in part (a).
+
+    (c) When Yt = /3o + 631t + ut, the function h(s, cF) in (A10) is given by (1 - Zs) so fh(0)2 = 1 - E +
+c2/3andJh(Z!XdWc-EWc)=(1-E)Wc(l)+E2fsWc(s).Afterconsiderable algebraicmanipulation,
+we find the fol owing alternative expres ions for (B4):
+
+(B5) L*-c = .E2f W2 + (1 -_ )W2(1) - (1 - + 2/3) [(1 - )Wc(l) + f2fsw(s)J
+
+                     =-c [ Af[w~ -c( sWc(l)]2 ds + (1 - A) [ Wc(s) -53 dsj
+
+                          = c-2f([Wc(s) - sb1 ]2 ds + (1- -)[Wc(l)-b ]2 = E2f V2(S, C) + (1 - E)V2(l, C)
+
+                                          This content downloaded from
+         176.5.8 197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+                                                        AUTOREGRESSIVE UNIT ROOT 835
+
+ where A = (1 - c)/(l - e + c2/3), b, = AWj(l) +
+ process Vc(s, e) has a simple interpretation. Let y
+
+               y,L Yt - ,81- 1It = ut (- , - 1-0)-( -
+
+ where 13M' and f3 M are the estimates that min
+ leading to (All), we find that 'm is stochastic
+ Vc(s,E) is the limiting representation of the stand
+A4, OLS estimates of f3 in the polynomial trend case are asymptotically equivalent to GLS
+estimates. Thus the same interpretation holds when detrending is done with OLS.
+
+    PROOF OF THEOREM 2: From (B1) and the fact that S(a) = u Ua - QT(a),
+
+(1B6) ~ 02pT = S(i _f )-(1)(1 + ET- 1)
+                             = 2T2U 1U 1-C 1T + QT (1)(1 + cT- l) -QT (Z)
+
+The limiting results (A10) and (B3) follow from the fact that T-1/2U[ST] oWc(s) and that
+                   p
+
+T- 1 v'v -_ y(O). Since these limits also follow from Condition C, we have
+
+(B7) P T --2w2 kJ w2 - EW2(l) + Q(O) - Q(C)].
+
+Comparing (B4) and (B7), we see that PT + C L* as long as plim Oi2 =
+
+    PROOF OF THEOREM 3: It suffices to show that W -_* 0 when T -. oo with I a I < 1 and fixed.
+Since the initial condition is asymptotically negligible, {ut) behaves like a stationary process. Cf.
+Anderson (1971, Section 5.5.2). Thus T- 2u'_ l_ 0 and T-1UJ 0. From (A9), T- 112X'=
+T- 12XTUT -T 32(TAX + CXY U_ 0, so both QT(1) and QT(c) converge to u1. It follows from
+(B6) that (A)PT 0.
+
+                                                                           REFERENCES
+
+ANDERSON, T. W. (1971): The Statistical Analysis of Time Series. New York: Wiley.
+ANDREWS, D. W. K. (1991): "Heteroskedasticity and Autocorrelation Consistent Covariance Matrix
+
+    Estimation," Econometrica, 59, 817-858.
+BANERJEE, A., J. J. DoLADo, J. W. GALBRAITH, AND D. F. HENDRY (1993): Co-integration, Error
+
+    Correction, and the Econometric Analysis of Non-stationary Data. Oxford: Oxford University Press.
+BHARGAVA, A. (1986): "On the Theory of Testing for Unit Roots in Observed Time Series," Review
+
+    of Economic Studies, 53, 369-384.
+CHAN, N. H., AND C. Z. WEI (1987): "Asymptotic Inference for Nearly Nonstationary AR(1)
+
+    Processes," Annals of Statistics, 15, 1050-1063.
+DAVIES, R. B. (1973): "Asymptotic Inference in Stationary Gaussian Time-Series," Advances in
+
+    Applied Probability, 5, 469-497.
+DEJONG, D. N., J. C. NANKERVIS, N. E. SAVIN, AND C. H. WHITEMAN (1992): "The Power Problems
+
+    of Unit Root Tests in Time Series with Autoregressive Errors," Joumal of Econometrics, 53,
+     323-343.
+DICKEY, D. A., AND W. A. FULLER (1979): "Distribution of the Estimators for Autoregressive Time
+    Series with a Unit Root," Journal of the American Statistical Association, 74, 427-431.
+DUFOUR, J.-M., AND M. L. KING (1991): "Optimal Invariant Tests for the Autocorrelation Coeffi-
+    cient in Linear Regressions with Stationary or Nonstationary AR(1) Errors," Journal of Economet-
+    rics, 47, 115-143.
+DZHAPARIDZE, K. (1985): Parameter Estimation and Hypothesis Testing in Spectral Analysis of Station
+    ary Time Series. New York: Springer-Verlag.
+
+                                        This content downloaded from
+       176.5.8 197.13 on Sun, 13 Sep 2026 06:35:51 UTC
+
+                            All use subject to https://about.jstor.org/terms
+836 G. ELLIOTT, T. J. ROTHENBERG, AND J. H. STOCK
+
+ELLIoTT, G. (1993): "Efficient Tests for a Unit Root when the Initial Observation is Drawn from its
+    Unconditional Distribution," unpublished manuscript.
+
+ENGLE, R. F. (1984): "Wald, Likelihood Ratio, and Lagrange Multiplier Tests in Econometrics," in
+    Handbook of Econometrics, Vol. II, ed. by Z. Griliches and M. Intriligator. New York: North
+    Holland.
+
+FULLER, W. A. (1976): Introduction to Statistical Time Series. New York: Wiley.
+KING, M. L. (1980): "Robust Tests for Spherical Symmetry and their Application to Least Squares
+
+    Regression," Annals of Statistics, 8, 1265-1271.
+            (1988): "Towards a Theory of Point Optimal Testing," Econometric Reviews, 6, 169-218.
+
+LEHMANN, E. (1959): Testing Statistical Hypotheses. New York: Wiley.
+LUMSDAINE, R. L. (1995): "Finite Sample Properties of the Maximum Likelihood Estimator in
+
+    GARCH(1, 1) and IGARCH(1, 1) Models: A Monte Carlo Investigation," Joumal of Business and
+    Economic Statistics, 13, 1-10.
+NABEYA, S., AND K. TANAKA (1990): "Limiting Power of Unit-Root Tests in Time-Series Regression,"
+    Joumal of Econometrics, 46, 247-271.
+PERRON, P. (1996): "The Adequacy of Asymptotic Approximations in the Near-Integrated Autore-
+    gressive Model with Dependent Errors," Joumal of Econometrics, 70, 317-350.
+PHILLIPS, P. C. B. (1987): "Time Series Regression with a Unit Root," Econometrica, 55, 277-301.
+PHILLIPS, P. C. B., AND P. PERRON (1988): "Testing for a Unit Root in a Time Series Regression,"
+    Biometrika, 75, 335-346.
+PHILLIPS, P. C. B., AND V. SOLO (1992): "Asymptotics for Linear Processes," Annals of Statistics, 20,
+    971-1001.
+ROBINSON, P. M. (1994): "Efficient Tests of Nonstationary Hypotheses," Joumal of the American
+    Statistical Association, 89, 1420-1437.
+SAIKKONEN, P., AND R. LUUKKONEN (1993): "Point Optimal Tests for Testing the Order to
+    Differencing in ARIMA Models," Econometric Theory, 9, 343-362.
+SARGAN, J. D., AND A. BHARGAVA (1983): "Testing Residuals from Least Squares Regression for
+    Being Generated by the Gaussian Random Walk," Econometrica, 51, 153-174.
+SCHWARZ, G. (1978): "Estimating the Dimension of a Model," Annals of Statistics, 6, 461-464.
+SCHWERT, G. W. (1989): "Tests for Unit Roots: A Monte Carlo Investigation," Joumal of Business
+    and Economic Statistics, 7, 147-159.
+STOCK, J. H. (1994): "Unit Roots and Trend Breaks in Econometrics," in Handbook of Econometrics,
+    Vol. 4, ed. by R. F. Engle and D. McFadden. New York: North Holland, pp. 2740-2841.
+ZYGMUND, A. (1968): Trigonometric Series, Vol. 1. Cambridge: Cambridge University Press.
+
+                                          This content downloaded from
+         176.5.8 197.13 on Sun, 13 eS p 2026 06:35:51 UTC
+
+                             All use subject to https://about.jstor.org/terms
+
