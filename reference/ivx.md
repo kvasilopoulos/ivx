@@ -144,7 +144,7 @@ Magdalinos, T., & Phillips, P. (2009). Limit Theory for Cointegrated
 Systems with Moderately Integrated and Moderately Explosive Regressors.
 Econometric Theory, 25(2), 482-526.
 
-Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2014). Robust
+Kostakis, A., Magdalinos, T., & Stamatogiannis, M. P. (2015). Robust
 econometric inference for stock return predictability. The Review of
 Financial Studies, 28(5), 1506-1553.
 

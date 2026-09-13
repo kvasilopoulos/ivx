@@ -73,7 +73,9 @@
 <code>R/ivx-episodic.R</code> — <code><a href="reference/ivx_episodic.html">ivx_episodic()</a></code> subsample sup/ave tests (DGRT 2022); <code>src/sub_ivx.cpp</code>.</li>
 <li>
 <code>R/ivx-iv.R</code> — <code><a href="reference/ivx_iv.html">ivx_iv()</a></code> 2SLS with sine/fractional/long-difference instruments (Breitung &amp; Demetrescu 2015).</li>
-<li>Non-IVX benchmarks: <code>R/arm.R</code> (<code><a href="reference/arm.html">arm()</a></code>, Amihud-Hurvich-Wang 2009), <code>R/hlt-test.R</code> (<code><a href="reference/hlt_test.html">hlt_test()</a></code>, Harvey-Leybourne-Taylor 2021), <code>R/el-test.R</code> (<code><a href="reference/el_test.html">el_test()</a></code>, Liu-Yang-Cai-Peng 2019; <code>el_ratio()</code> is a generic Owen EL solver).</li>
+<li>Non-IVX benchmarks: <code>R/cy-test.R</code> (<code><a href="reference/cy_test.html">cy_test()</a></code>, Campbell-Yogo 2006; DF-GLS quantile table <code>dfgls_q</code> and CY Table 2 in <code>R/sysdata.rda</code>, built by <code>data-raw/dfgls-quantiles.R</code>), <code>R/arm.R</code> (<code><a href="reference/arm.html">arm()</a></code>, Amihud-Hurvich-Wang 2009), <code>R/elliott-cf.R</code> (<code><a href="reference/elliott_cf.html">elliott_cf()</a></code>, Elliott 2011), <code>R/hlt-test.R</code> (<code><a href="reference/hlt_test.html">hlt_test()</a></code>, Harvey-Leybourne-Taylor 2021), <code>R/el-test.R</code> (<code><a href="reference/el_test.html">el_test()</a></code>, Liu-Yang-Cai-Peng 2019; <code>el_ratio()</code> is a generic Owen EL solver).</li>
+<li>
+<code>R/utils.R</code> — <code>ivx_frame()</code> / <code>ivx_finish()</code> (model-frame boilerplate shared by every formula interface; the intercept is always dropped from the terms), <code>adf_lag()</code> (ADF regression with BIC/MBIC lag choice, used by <code>cy_test</code> and <code>hlt_test</code>).</li>
 <li>
 <code>R/ac_test.R</code> — serial-correlation diagnostics. <code>R/methods*.R</code>, <code>R/extract-texreg-methods.R</code> — S3 / texreg support. <code>R/auto-ar.R</code> — AR order selection helper.</li>
 <li>

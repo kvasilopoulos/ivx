@@ -57,9 +57,9 @@ cy_test(Ret ~ DP, data = kms)
 #> 
 #> Bonferroni Q-test (Campbell & Yogo, 2006)
 #> 
-#> delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.044], rho: [0.991, 1.001]
-#> OLS slope = 0.006128; Q-estimates at the ends of the rho interval: 0.009069, 0.0004869
-#> 90% Bonferroni confidence interval for beta: [-0.0009783, 0.01053]
+#> delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.045], rho: [0.991, 1.001]
+#> OLS slope = 0.006193; Q-estimates at the ends of the rho interval: 0.009076, 0.0004903
+#> 90% Bonferroni confidence interval for beta: [-0.000973, 0.01054]
 #> 5% one-sided Q-tests: H1 beta > 0 do not reject H0; H1 beta < 0 do not reject H0
 cy_test(Ret ~ EP, data = kms)
 #> 
@@ -69,8 +69,8 @@ cy_test(Ret ~ EP, data = kms)
 #> Bonferroni Q-test (Campbell & Yogo, 2006)
 #> 
 #> delta = -0.7909, DF-GLS = -3.014 (p = 3), CI for c at levels (0.065, 0.17): [-29.24, -11.74], rho: [0.9717, 0.9886]
-#> OLS slope = 0.008698; Q-estimates at the ends of the rho interval: 0.02199, 0.0147
-#> 90% Bonferroni confidence interval for beta: [0.01057, 0.02612]
+#> OLS slope = 0.008694; Q-estimates at the ends of the rho interval: 0.02198, 0.01469
+#> 90% Bonferroni confidence interval for beta: [0.01056, 0.02611]
 #> 5% one-sided Q-tests: H1 beta > 0 reject H0; H1 beta < 0 do not reject H0
 ```
 
@@ -293,6 +293,10 @@ el_test(Ret ~ DP, data = kms)
 The EL dual problem is solved by Newton’s method with Owen’s (2001)
 pseudo-logarithm; the profiles are minimised over the nuisance
 coefficient by BFGS from the OLS start.
+
+The Monte Carlo figures quoted in this vignette are reproduced by
+`research/replication/extensions-2026/size-checks.R` in the source
+repository.
 
 ### References
 

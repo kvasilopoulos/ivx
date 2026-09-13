@@ -116,7 +116,24 @@
   2011. with user-supplied orthogonalising covariates and their lags,
         Wald test with Eicker-White standard errors and the remaining
         innovation correlation as a diagnostic.
-- Fixed: weighted fits ignored the `horizon` argument.
+- Fixed: weighted fits ignored the `horizon` argument; zero weights made
+  [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) fail
+  (the dropped observations now get `NA` residuals and fitted values,
+  with the same coefficients as fitting on the kept rows).
+- Fixed:
+  [`ac_test_bg()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  dispatched to the Box-Pierce method;
+  [`ac_test_lb()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  and
+  [`ac_test_bp()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  reported wrong p-values for non-consecutive `lag` vectors; the
+  Breusch-Godfrey result now has the same `ac_test_` class and `pval`
+  attribute as the other tests.
+  [`case.names()`](https://rdrr.io/r/stats/case.names.html) no longer
+  returns an empty vector.
+- All formula interfaces share one model-frame routine, so `- 1` in a
+  formula warns consistently and a matrix response is rejected
+  consistently.
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in
   the `se` slot.

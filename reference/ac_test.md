@@ -22,7 +22,9 @@ ac_test(x, lag_max = 5)
 
 ``` r
 obj <- ivx(hpi ~ cpi + def + int + log(res), data = ylpc)
-lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+if (requireNamespace("lmtest", quietly = TRUE)) {
+  lmtest::bgtest(hpi ~ cpi + def + int + log(res), data = ylpc)
+}
 #> 
 #>  Breusch-Godfrey test for serial correlation of order up to 1
 #> 

@@ -66,7 +66,7 @@ print(x, digits = max(3L, getOption("digits") - 3L), ...)
 - lag_max:
 
   maximum ADF lag order for the BIC search; the default is \\\lfloor 12
-  (T/100)^{1/4} \rfloor\\.
+  (T/100)^{1/4} \rfloor\\ lagged differences.
 
 - na.action:
 
@@ -128,9 +128,9 @@ cy_test(Ret ~ DP, data = kms)
 #> 
 #> Bonferroni Q-test (Campbell & Yogo, 2006)
 #> 
-#> delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.044], rho: [0.991, 1.001]
-#> OLS slope = 0.006128; Q-estimates at the ends of the rho interval: 0.009069, 0.0004869
-#> 90% Bonferroni confidence interval for beta: [-0.0009783, 0.01053]
+#> delta = -0.972, DF-GLS = -1.468 (p = 2), CI for c at levels (0.055, 0.082): [-9.319, 1.045], rho: [0.991, 1.001]
+#> OLS slope = 0.006193; Q-estimates at the ends of the rho interval: 0.009076, 0.0004903
+#> 90% Bonferroni confidence interval for beta: [-0.000973, 0.01054]
 #> 5% one-sided Q-tests: H1 beta > 0 do not reject H0; H1 beta < 0 do not reject H0
 #> 
 ```

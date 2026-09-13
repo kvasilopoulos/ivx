@@ -82,7 +82,9 @@
 <li>New <code><a href="../reference/elliott_cf.html">elliott_cf()</a></code>: the control-function predictive regression of Elliott
 <ol start="2011" style="list-style-type: decimal"><li>with user-supplied orthogonalising covariates and their lags, Wald test with Eicker-White standard errors and the remaining innovation correlation as a diagnostic.</li>
 </ol></li>
-<li>Fixed: weighted fits ignored the <code>horizon</code> argument.</li>
+<li>Fixed: weighted fits ignored the <code>horizon</code> argument; zero weights made <code><a href="../reference/ivx.html">ivx()</a></code> fail (the dropped observations now get <code>NA</code> residuals and fitted values, with the same coefficients as fitting on the kept rows).</li>
+<li>Fixed: <code><a href="../reference/ac_test_.html">ac_test_bg()</a></code> dispatched to the Box-Pierce method; <code><a href="../reference/ac_test_.html">ac_test_lb()</a></code> and <code><a href="../reference/ac_test_.html">ac_test_bp()</a></code> reported wrong p-values for non-consecutive <code>lag</code> vectors; the Breusch-Godfrey result now has the same <code>ac_test_</code> class and <code>pval</code> attribute as the other tests. <code><a href="https://rdrr.io/r/stats/case.names.html" class="external-link">case.names()</a></code> no longer returns an empty vector.</li>
+<li>All formula interfaces share one model-frame routine, so <code>- 1</code> in a formula warns consistently and a matrix response is rejected consistently.</li>
 <li>
 <code><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract()</a></code> (texreg) now reports IVX standard errors instead of Wald statistics in the <code>se</code> slot.</li>
 <li>
