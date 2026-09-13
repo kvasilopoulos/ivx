@@ -131,6 +131,12 @@
   attribute as the other tests.
   [`case.names()`](https://rdrr.io/r/stats/case.names.html) no longer
   returns an empty vector.
+- Deprecated: [`drop1()`](https://rdrr.io/r/stats/add1.html),
+  [`add1()`](https://rdrr.io/r/stats/add1.html) and
+  [`step()`](https://rdrr.io/r/stats/step.html) on `ivx` objects. They
+  compare residual sums of squares of an IV estimator, which is not a
+  valid selection criterion; use the IVX Wald tests in
+  [`summary()`](https://rdrr.io/r/base/summary.html).
 - All formula interfaces share one model-frame routine, so `- 1` in a
   formula warns consistently and a matrix response is rejected
   consistently.
