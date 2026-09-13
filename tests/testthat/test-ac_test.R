@@ -26,3 +26,10 @@ test_that("Ljung-Box and Box-Pierce match Box.test", {
   expect_equal(unname(unclass(ac_test_lb(r, lag = 2)))[1], unname(Box.test(r, 2, type = "Ljung-Box")$statistic))
   expect_equal(unname(unclass(ac_test_bp(r, lag = 2)))[1], unname(Box.test(r, 2, type = "Box-Pierce")$statistic))
 })
+
+test_that("ac_test rejects the extensions that do not store OLS residuals", {
+  for (m in list(ivx_ar(hpi ~ cpi + inv, data = ylpc), arm(hpi ~ cpi + inv, data = ylpc))) {
+    expect_error(ac_test(m), "fits only")
+    expect_error(ac_test_bg(m), "fits only")
+  }
+})
