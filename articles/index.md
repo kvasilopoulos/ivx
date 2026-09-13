@@ -1,5 +1,10 @@
 # Articles
 
+### Getting started
+
+- [Choosing a test: a decision
+  workflow](https://kvasilopoulos.github.io/ivx/articles/workflow.md):
+
 ### Methodology
 
 - [IVX predictive

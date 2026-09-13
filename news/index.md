@@ -2,29 +2,57 @@
 
 ## ivx 1.2.0
 
+- New vignette “Choosing a test: a decision workflow”
+  ([`vignette("workflow")`](https://kvasilopoulos.github.io/ivx/articles/workflow.md))
+  that walks from the plain
+  [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) fit
+  through the diagnostics
+  ([`ac_test()`](https://kvasilopoulos.github.io/ivx/reference/ac_test.md),
+  [`delta()`](https://kvasilopoulos.github.io/ivx/reference/delta.md),
+  ARCH check) to the extension each one calls for.
+
+- [`print()`](https://rdrr.io/r/base/print.html) of
+  [`ac_test()`](https://kvasilopoulos.github.io/ivx/reference/ac_test.md)
+  on a numeric vector no longer errors (it indexed a Breusch-Godfrey
+  column that only the `ivx` method computes).
+
+- [`ac_test()`](https://kvasilopoulos.github.io/ivx/reference/ac_test.md)
+  and `ac_test_*()` now stop with an informative error on `ivx_ar`,
+  `ivx_ra`, `ivx_qr`, `ivx_iv` and `arm` fits, which do not store the
+  OLS residuals the tests use; previously they failed with an obscure
+  error.
+
+- New [`nobs()`](https://rdrr.io/r/stats/nobs.html) method for `ivx`
+  objects (and the extensions inheriting the class).
+
 - New vignette “Rolling IVX tests for bubble detection” showing how to
   build the rolling-window IVX test of Pavlidis, Paya & Peel (2017) from
   [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md)
   ([\#2](https://github.com/kvasilopoulos/ivx/issues/2)).
+
 - [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) and
   [`ivx_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_fit.md)
   gain `beta`, `cz` and `bandwidth` arguments that expose the IVX
   instrument tuning (previously hard-coded to the Kostakis et al. (2015)
   values) and the Newey-West bandwidth.
+
 - [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) gains
   `robust = TRUE` for Eicker-White (heteroskedasticity-robust) IVX
   standard errors (Demetrescu, Georgiev, Rodrigues & Taylor, 2023).
+
 - [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) and
   [`ivx_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_fit.md)
   gain `lag_y = TRUE`: the lag-augmented IVX regression of Demetrescu
   (2014), which adds the lagged dependent variable (instrumented by
   itself) to raise local power under strong persistence and endogeneity.
   The joint Wald statistic tests the predictors only.
+
 - [`summary()`](https://rdrr.io/r/base/summary.html) coefficient tables
   now report `Std. Error` and `t value` next to the individual Wald
   statistics; the fitted object stores `se` and `tstat`. Breaking: the
   table gains two columns, so code indexing `coef(summary(x))` by
   position must use column names (`"Wald Ind"`, `"Pr(> chi)"`) instead.
+
 - New
   [`ivx_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_boot.md)
   implementing the residual wild bootstrap and fixed regressor wild
@@ -32,6 +60,7 @@
   for the joint and individual Wald statistics and one-sided t-tests.
   Supports `cores > 1` via the package; the regressor recursion of the
   residual wild bootstrap runs in C++.
+
 - New
   [`ivx_ra()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ra.md)
   /
@@ -46,6 +75,7 @@
   long-horizon test of Demetrescu, Rodrigues & Taylor (2023), which
   handles the overlap of the long-horizon regression without HAC
   estimation.
+
 - New
   [`ivx_qr()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr.md)
   /
@@ -53,19 +83,23 @@
   the IVX-QR quantile predictability test of Lee (2016, Proposition 3.2)
   via (in Suggests); returns the estimated QR endogeneity `rho_tau` for
   the paper’s tuning rule.
+
 - New
   [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md):
   moving block bootstrap percentile intervals and p-values for IVX-QR
   (Fan & Lee, 2019), robust to conditional heteroskedasticity and to the
   sparsity estimate.
+
 - New
   [`ivx_episodic()`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md):
   subsample (rolling, forward and backward recursive) IVX tests for
   pockets of predictability with sup/inf functionals and wild bootstrap
   p-values (Demetrescu et al. 2022, 2023 Section 3.2).
+
 - Documented that the long-horizon statistic (`horizon > 1`) is the
   modified IVX-Wald of Kostakis, Magdalinos & Stamatogiannis (2023), eqs
   (15)/(23), after auditing the implementation against the paper.
+
 - New
   [`ivx_sys()`](https://kvasilopoulos.github.io/ivx/reference/ivx_sys.md)
   /
@@ -74,11 +108,13 @@
   (`cbind(y1, y2) ~ x`), short and long horizon, with the Kronecker-form
   IVX-Wald covariance of Kostakis et al. (2023); reports joint,
   per-equation and individual Wald statistics.
+
 - New vignettes for each methodology (`ivx`, `ivx-sys`, `ivx-ar`,
   `ivx-ra`, `ivx-qr`, `robust-inference`, `ivx-episodic`) with the
   underlying statistics, replication results and caveats; pkgdown site
   reorganised (Bootstrap 5, MathJax rendering, grouped reference and
   articles).
+
 - New
   [`ivx_iv()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv.md)
   /
@@ -86,40 +122,49 @@
   the 2SLS predictability tests of Breitung & Demetrescu (2015) with
   fractional-difference, long-difference and sine instruments and their
   recommended combination (`IVcomb`), Eicker-White standard errors.
+
 - New [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md) /
   [`arm_fit()`](https://kvasilopoulos.github.io/ivx/reference/arm_fit.md):
   the multipredictor augmented regression method of Amihud, Hurvich &
   Wang (2009) - reduced-bias OLS with Nicholls-Pope corrected VAR(1)
   residuals as control variables and the paper’s covariance estimator; a
   non-IVX benchmark for stationary persistent predictors.
+
 - New
   [`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md):
   the hybrid switching t-test of Harvey, Leybourne & Taylor
+
   2021. - standard or quasi-GLS-demeaned t-ratio with the paper’s
           conservative critical values under strong persistence, normal
           critical values under weak persistence (ADF/MBIC switch).
+
 - New
   [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md):
   the unified empirical likelihood test of Liu, Yang, Cai & Peng (2019)
   for the predictive regression augmented with the lagged difference of
   the predictor; chi-square profile EL ratios whatever the persistence
   of the predictor, no tuning parameters.
+
 - New
   [`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md):
   the Bonferroni Q-test of Campbell & Yogo (2006) (the feasible
   Cavanagh, Elliott & Stock 1995 approach): DF-GLS confidence interval
   for the largest root inverted from simulated local-to-unity quantiles,
   Table 2 levels, Q-estimates with the AR(p) correction of Appendix A.
+
 - New
   [`elliott_cf()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md):
   the control-function predictive regression of Elliott
+
   2011. with user-supplied orthogonalising covariates and their lags,
         Wald test with Eicker-White standard errors and the remaining
         innovation correlation as a diagnostic.
+
 - Fixed: weighted fits ignored the `horizon` argument; zero weights made
   [`ivx()`](https://kvasilopoulos.github.io/ivx/reference/ivx.md) fail
   (the dropped observations now get `NA` residuals and fitted values,
   with the same coefficients as fitting on the kept rows).
+
 - Fixed:
   [`ac_test_bg()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
   dispatched to the Box-Pierce method;
@@ -131,18 +176,22 @@
   attribute as the other tests.
   [`case.names()`](https://rdrr.io/r/stats/case.names.html) no longer
   returns an empty vector.
+
 - Deprecated: [`drop1()`](https://rdrr.io/r/stats/add1.html),
   [`add1()`](https://rdrr.io/r/stats/add1.html) and
   [`step()`](https://rdrr.io/r/stats/step.html) on `ivx` objects. They
   compare residual sums of squares of an IV estimator, which is not a
   valid selection criterion; use the IVX Wald tests in
   [`summary()`](https://rdrr.io/r/base/summary.html).
+
 - All formula interfaces share one model-frame routine, so `- 1` in a
   formula warns consistently and a matrix response is rejected
   consistently.
+
 - [`extract()`](https://magrittr.tidyverse.org/reference/aliases.html)
   (texreg) now reports IVX standard errors instead of Wald statistics in
   the `se` slot.
+
 - [`ivx_ar()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ar.md)
   and
   [`ivx_ar_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ar_fit.md)
