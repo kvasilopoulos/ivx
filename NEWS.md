@@ -1,5 +1,8 @@
 # ivx 1.2.0
 
+* New vignette "Choosing a test: a decision workflow" (`vignette("workflow")`)
+  that walks from the plain `ivx()` fit through the diagnostics (`ac_test()`,
+  `delta()`, ARCH check) to the extension each one calls for.
 * `print()` of `ac_test()` on a numeric vector no longer errors (it indexed a
   Breusch-Godfrey column that only the `ivx` method computes).
 * `ac_test()` and `ac_test_*()` now stop with an informative error on `ivx_ar`,
