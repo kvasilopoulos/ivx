@@ -1,8 +1,8 @@
 ---
-title: "Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood"
+title: "Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Non-IVX benchmarks: ARM, hybrid t-test, empirical likelihood}
+  %\VignetteIndexEntry{Non-IVX benchmarks: Bonferroni Q, ARM, hybrid t, empirical likelihood}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,11 +15,49 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(ivx)
 ```
 
-Three non-IVX procedures are included as the benchmarks the IVX literature
-compares against: the augmented regression method of Amihud, Hurvich & Wang
-(2009), `arm()`, the hybrid switching t-test of Harvey, Leybourne & Taylor
-(2021), `hlt_test()`, and the unified empirical likelihood test of Liu, Yang,
-Cai & Peng (2019), `el_test()`.
+Four non-IVX procedures are included as the benchmarks the IVX literature
+compares against: the Bonferroni Q-test of Campbell & Yogo (2006), `cy_test()`;
+the augmented regression method of Amihud, Hurvich & Wang (2009), `arm()`; the
+hybrid switching t-test of Harvey, Leybourne & Taylor (2021), `hlt_test()`; and
+the unified empirical likelihood test of Liu, Yang, Cai & Peng (2019),
+`el_test()`.
+
+# Bonferroni Q-test
+
+`cy_test()` is the Campbell & Yogo (2006) procedure, the feasible version of
+the sup-bound / Bonferroni idea of Cavanagh, Elliott & Stock (1995). If
+$\rho$ were known, the UMP conditional test of $\beta = 0$ is the t-ratio of
+the regression augmented with $x_t - \rho x_{t-1}$ (the "Q-test"), whose
+estimate
+$$
+\hat\beta(\rho) = \frac{\sum_t x^\mu_{t-1}\big(y_t - \tfrac{\sigma_{ue}}{\sigma_e\omega}(x_t - \rho x_{t-1})\big) - \tfrac{T}{2}\tfrac{\sigma_{ue}}{\sigma_e\omega}(\omega^2 - \sigma_v^2)}{\sum_t x^{\mu 2}_{t-1}}
+$$
+(their eq. 25, with the AR($p$) correction of Appendix A) has standard error
+$\sigma_u\sqrt{1-\delta^2}/(\sum x^{\mu 2}_{t-1})^{1/2}$. Since $\rho$ is
+not consistently estimable, a confidence interval for it is obtained by
+inverting the DF-GLS statistic (Stock, 1991; Elliott, Rothenberg & Stock,
+1996) and the Bonferroni interval for $\beta$ runs from
+$\hat\beta(\bar\rho) - 1.645\,se$ to $\hat\beta(\underline\rho) + 1.645\,se$.
+The levels of the interval for $\rho$ come from the paper's Table 2, which
+tightens the plain Bonferroni bound so that the one-sided test has size
+exactly 5% for some $c$.
+
+The DF-GLS null quantiles as a function of $c$ are simulated once
+(`data-raw/dfgls-quantiles.R`, $c \in [-100, 10]$, 20 000 replications of a
+600-step OU process) and shipped as internal data; the 5% quantile at
+$c = 0$ reproduces the $-1.95$ of Elliott et al. (1996).
+
+```{r}
+cy_test(Ret ~ DP, data = kms)
+cy_test(Ret ~ EP, data = kms)
+```
+
+In a Monte Carlo with $T = 200$ and 500 replications, the right-tailed 5%
+Q-test rejects a true null 4.4–5.8% of the time and the left-tailed one
+1.2–3.6% for $\delta \in \{-0.9, -0.5\}$ and $c \in \{0, -20\}$ — the
+asymmetry the paper describes (Section 3.4: left-tailed probability "can be
+as small as 1.2%").
+
 
 # Augmented regression method
 
@@ -128,7 +166,8 @@ $$
 Y_t = lpha + eta_1 \Delta X_{t-1} + eta_2 X_{t-2} + U_t,
 $$
 so that $Y_t$ can be stationary whether or not $X_t$ is. The intercept is
-removed by differencing at lag $m = \lfloor n/2 floor$ (Zhu, Cai & Peng,
+removed by differencing at lag $m = \lfloor n/2 
+floor$ (Zhu, Cai & Peng,
 2014), and the empirical likelihood is built on the two score equations, the
 second weighted by $1/\sqrt{1 + 	ilde X_{t-2}^2}$ so that its sample
 variance converges whatever the persistence. The profile EL ratios for
@@ -154,6 +193,12 @@ by BFGS from the OLS start.
 * Amihud, Y., & Hurvich, C. M. (2004). Predictive regressions: A reduced-bias
   estimation method. *Journal of Financial and Quantitative Analysis*, 39(4),
   813–841.
+* Campbell, J. Y., & Yogo, M. (2006). Efficient tests of stock return
+  predictability. *Journal of Financial Economics*, 81(1), 27–60.
+* Cavanagh, C. L., Elliott, G., & Stock, J. H. (1995). Inference in models
+  with nearly integrated regressors. *Econometric Theory*, 11(5), 1131–1147.
+* Elliott, G., Rothenberg, T. J., & Stock, J. H. (1996). Efficient tests for
+  an autoregressive unit root. *Econometrica*, 64(4), 813–836.
 * Harvey, D. I., Leybourne, S. J., & Taylor, A. M. R. (2021). Simple tests
   for stock return predictability with good size and power properties.
   *Journal of Econometrics*, 224(1), 198–214.
@@ -164,5 +209,8 @@ by BFGS from the OLS start.
   multivariate autoregressions. *Australian Journal of Statistics*, 30A,
   296–309.
 * Owen, A. B. (2001). *Empirical Likelihood*. Chapman & Hall.
+* Stock, J. H. (1991). Confidence intervals for the largest autoregressive
+  root in U.S. macroeconomic time series. *Journal of Monetary Economics*,
+  28(3), 435–459.
 * Stambaugh, R. F. (1999). Predictive regressions. *Journal of Financial
   Economics*, 54(3), 375–421.
