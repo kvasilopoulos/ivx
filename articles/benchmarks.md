@@ -166,8 +166,8 @@ mean of \\0.857\\. In the paper’s two-predictor Case 1 the 5%
 
 Elliott (2011) shows that if stationary covariates \\z_t\\ are available
 that are contemporaneously correlated with the shocks to both the
-predictor and the response, the Wald test of \\eta = 0\\ in \\ y_t =
-lpha + eta' x\_{t-1} + \gamma' Z_t + ilde u_t, \qquad Z_t = (z_t',
+predictor and the response, the Wald test of \\\beta = 0\\ in \\ y_t =
+\alpha + \beta' x\_{t-1} + \gamma' Z_t + \tilde u_t, \qquad Z_t = (z_t',
 z\_{t-1}', \dots, z\_{t-q}')', \\ is asymptotically \\\chi^2\\ whatever
 the persistence of \\x_t\\, because the covariates “orthogonalise” the
 innovations (his Theorem 2 versus the Elliott–Stock 1994 distribution of
@@ -209,21 +209,21 @@ true null 4% of the time against 23% for plain OLS (500 replications).
 [`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md)
 implements \\T\_{hyb}\\ of Harvey, Leybourne & Taylor (2021) for a
 single predictor. It uses only regression t-ratios: the standard one,
-\\T\\, and \$ ilde T\\, in which the predictor is quasi-GLS demeaned
-with\\ar c = 7\$ as in Elliott et al. (1996). Under strong persistence
-their null distributions depend on \\c\\ and on \$ ho\_{xy}\$, so the
-paper tabulates *conservative* critical values — the maximum over \\c\\
-of the \\lpha\\-level quantile — as response surfaces in \\\hat
-ho\_{xy}\\ (their Table 1), and switches:
+\\T\\, and \\\tilde T\\, in which the predictor is quasi-GLS demeaned
+with \\\bar c = 7\\ as in Elliott et al. (1996). Under strong
+persistence their null distributions depend on \\c\\ and on
+\\\rho\_{xy}\\, so the paper tabulates *conservative* critical values —
+the maximum over \\c\\ of the \\\alpha\\-level quantile — as response
+surfaces in \\\hat\rho\_{xy}\\ (their Table 1), and switches:
 
 1.  if the ADF normalised-bias statistic (lag length by MBIC) is below
     \\-4\sqrt{T}\\ the predictor is weakly persistent: \\T\\ with a
     normal critical value;
-2.  otherwise, for an upper-tail test, \\T\\ with \\cv(\hat ho\_{xy})\\
-    when \\\hat ho\_{xy} \> -0.1\\ and \$ ilde T\$ with \$ ilde{cv}(
-    ho\_{xy})\$ when \\\hat ho\_{xy} \< -0.1\\ (quasi-GLS demeaning pays
-    off only when the endogeneity is strong); lower-tail tests mirror
-    this.
+2.  otherwise, for an upper-tail test, \\T\\ with \\cv(\hat\rho\_{xy})\\
+    when \\\hat\rho\_{xy} \> -0.1\\ and \\\tilde T\\ with
+    \\\tilde{cv}(\hat\rho\_{xy})\\ when \\\hat\rho\_{xy} \< -0.1\\
+    (quasi-GLS demeaning pays off only when the endogeneity is strong);
+    lower-tail tests mirror this.
 
 ``` r
 
@@ -251,29 +251,29 @@ hlt_test(Ret ~ TBL, data = kms, alternative = "less", level = 0.1)
 ```
 
 In the paper’s design (\\T = 200\\, upper-tail 5% test) the empirical
-size in 1000 replications is 0.07/0.04/0.05 for \$ ho\_{xy} = -0.9\$ and
-\$ ho = 1, 0.95, 0.5\$, and 0.00/0.02/0.04 for \$ ho\_{xy} = 0.9\$ — the
-“undersize for positive \$ ho\_{xy}\$ in the more persistent cases” the
-paper notes is the price of the conservative critical values. The test
-is one-sided by construction and has no p-value; the object reports the
-selected test, its statistic and critical value.
+size in 1000 replications is 0.07/0.04/0.05 for \\\rho\_{xy} = -0.9\\
+and \\\rho = 1, 0.95, 0.5\\, and 0.00/0.02/0.04 for \\\rho\_{xy} = 0.9\\
+— the “undersize for positive \\\rho\_{xy}\\ in the more persistent
+cases” the paper notes is the price of the conservative critical values.
+The test is one-sided by construction and has no p-value; the object
+reports the selected test, its statistic and critical value.
 
 ## Unified empirical likelihood test
 
 [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md)
 implements Liu, Yang, Cai & Peng (2019). Their model adds the lagged
-difference of the predictor, \\ Y_t = lpha + eta_1 \Delta X\_{t-1} +
-eta_2 X\_{t-2} + U_t, \\ so that \\Y_t\\ can be stationary whether or
+difference of the predictor, \\ Y_t = \alpha + \beta_1 \Delta X\_{t-1} +
+\beta_2 X\_{t-2} + U_t, \\ so that \\Y_t\\ can be stationary whether or
 not \\X_t\\ is. The intercept is removed by differencing at lag \\m =
 \lfloor n/2 floor\\ (Zhu, Cai & Peng, 2014), and the empirical
 likelihood is built on the two score equations, the second weighted by
-\\1/\sqrt{1 + ilde X\_{t-2}^2}\\ so that its sample variance converges
-whatever the persistence. The profile EL ratios for \\eta_2 = 0\\ (no
-predictability), \\eta_1 = 0\\ and the joint null are then
+\\1/\sqrt{1 + \tilde X\_{t-2}^2}\\ so that its sample variance converges
+whatever the persistence. The profile EL ratios for \\\beta_2 = 0\\ (no
+predictability), \\\beta_1 = 0\\ and the joint null are then
 \\\chi^2(1)\\, \\\chi^2(1)\\, \\\chi^2(2)\\ with no tuning parameter and
 no persistence classification (Theorem 2). The price is efficiency: only
 \\m - 2\\ differenced observations enter, and the paper reports that the
-test on \\eta_1\\ is oversized at \\n = 200\\.
+test on \\\beta_1\\ is oversized at \\n = 200\\.
 
 ``` r
 

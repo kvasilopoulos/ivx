@@ -69,7 +69,7 @@ print(x, digits = max(3L, getOption("digits") - 3L), ...)
 - beta, cz:
 
   tuning parameters of the IVX instrument \\z_t = \sum\_{j=0}^{t-1} (1 -
-  c_z/n^eta)^j \Delta x\_{t-j}\\. Defaults (`beta = 0.95`, `cz = 1`)
+  c_z/n^\beta)^j \Delta x\_{t-j}\\. Defaults (`beta = 0.95`, `cz = 1`)
   follow Kostakis et al. (2015).
 
 - na.action:
@@ -124,7 +124,7 @@ on the \\h\\-period transformed instrument \\z_t^{trf,(h)} =
 \sum\_{i=\max(1,t-h+1)}^{\min(t,T-h)} z_i\\ (eq. 4.4), which accounts
 for the overlap of the long-horizon regression without HAC estimation.
 At `horizon = 1` it coincides with the short-horizon estimator. The
-coefficients estimate the \\h\\-period slope \\eta_h\\; fitted values
+coefficients estimate the \\h\\-period slope \\\beta_h\\; fitted values
 and residuals are those of the transformed (non-overlapping) regression,
 and the Kostakis et al. (2015) intercept correction is applied only at
 `horizon = 1`.

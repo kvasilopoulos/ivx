@@ -113,7 +113,7 @@ enter the limit (Fan & Lee, 2019, Theorem 3.2); their estimation error
 is what distorts the test in the tails.
 [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md)
 implements the paper’s moving block bootstrap: blocks of the pairs
-\\(y_t, ilde z\_{t-1})\\ of length \\\lceil n^{1/4} ceil\\ are
+\\(y_t, \tilde z\_{t-1})\\ of length \\\lceil n^{1/4} \rceil\\ are
 resampled, the quantile regression is refitted, and percentile intervals
 and p-values are reported. No sparsity estimate is needed.
 
@@ -133,9 +133,9 @@ ivx_qr_boot(m, B = 499, seed = 1)
 #> TBL  0.18938 -0.13693  0.55822       0.257
 ```
 
-In the paper’s ARCH(1) design (\\lpha_1 = 0.9\\, \$ ho = -0.9\$, \\c =
-0\\, \\n = 200\\, \$ au = 0.1\$) the asymptotic test rejects a true null
-18% of the time in 300 replications; the block bootstrap 7%.
+In the paper’s ARCH(1) design (\\\alpha_1 = 0.9\\, \\\rho = -0.9\\, \\c
+= 0\\, \\n = 200\\, \\\tau = 0.1\\) the asymptotic test rejects a true
+null 18% of the time in 300 replications; the block bootstrap 7%.
 
 ## Caveats
 

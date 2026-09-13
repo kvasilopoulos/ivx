@@ -26,7 +26,7 @@ ivx_qr_fit(y, x, tau = 0.5, beta = 0.95, cz = 5, ...)
 - beta, cz:
 
   tuning parameters of the IVX instrument \\z_t = \sum\_{j=0}^{t-1} (1 -
-  c_z/n^eta)^j \Delta x\_{t-j}\\. Defaults (`beta = 0.95`, `cz = 1`)
+  c_z/n^\beta)^j \Delta x\_{t-j}\\. Defaults (`beta = 0.95`, `cz = 1`)
   follow Kostakis et al. (2015).
 
 - ...:

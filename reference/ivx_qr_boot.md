@@ -2,7 +2,7 @@
 
 Percentile confidence intervals and p-values for the IVX-QR coefficients
 from the moving block bootstrap (MBB) of Fan and Lee (2019, Section 5).
-Blocks of the pairs \\(y_t, ilde z\_{t-1})\\ are resampled and the
+Blocks of the pairs \\(y_t, \tilde z\_{t-1})\\ are resampled and the
 quantile regression of Lee (2016) is refitted on each bootstrap sample.
 This avoids estimating the sparsity and the nuisance parameters that
 appear under conditional heteroskedasticity, which is where the
@@ -56,7 +56,7 @@ print(x, digits = max(3L, getOption("digits") - 3L), ...)
 
 an object of class "ivx_qr_boot": a list with the estimates, the
 percentile intervals `ci`, two-sided percentile p-values `p.value` for
-\\H_0: eta_j = 0\\, and the bootstrap draws `boot`.
+\\H_0: \beta_j = 0\\, and the bootstrap draws `boot`.
 
 ## References
 

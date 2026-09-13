@@ -124,12 +124,12 @@ et al. (2011), the overlapping regression of \\\sum\_{j=1}^h y\_{t+j}\\
 on \\x_t\\ is numerically the non-overlapping regression of \\y\_{t+1}\\
 on the transformed regressor \\A_h' x\\, and the same trick applies to
 the instrument: \\ z_t^{trf,(h)} =
-\sum\_{i=\max(1,\\t-h+1)}^{\min(t,\\T-h)} z_i, \qquad \hateta_h =
-\Big(\sum\_{t=1}^{T-h} z_t ar x_t'\Big)^{-1} \sum\_{t=p}^{T-1}
-z_t^{trf,(h)}\\(ar y\_{t+1} - \hat\gamma'\hatarepsilon\_{t+1}), \\ with
-the sandwich covariance of eq. (5.7), i.e. the short-horizon one with
-\\z_t\\ replaced by \\z_t^{trf,(h)}\\. `horizon = h` does exactly this
-and reduces to the short-horizon estimator at `h = 1`.
+\sum\_{i=\max(1,\\t-h+1)}^{\min(t,\\T-h)} z_i, \qquad \hat\beta_h =
+\Big(\sum\_{t=1}^{T-h} z_t \bar x_t'\Big)^{-1} \sum\_{t=p}^{T-1}
+z_t^{trf,(h)}\\(\bar y\_{t+1} - \hat\gamma'\hat\varepsilon\_{t+1}), \\
+with the sandwich covariance of eq. (5.7), i.e. the short-horizon one
+with \\z_t\\ replaced by \\z_t^{trf,(h)}\\. `horizon = h` does exactly
+this and reduces to the short-horizon estimator at `h = 1`.
 
 ``` r
 

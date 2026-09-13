@@ -278,6 +278,16 @@ Reduced-bias OLS alternatives for stationary persistent predictors.
   [`print(`*`<elliott_cf>`*`)`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md)
   : Control-Function Predictability Test of Elliott (2011)
 
+## Serial correlation tests
+
+- [`ac_test()`](https://kvasilopoulos.github.io/ivx/reference/ac_test.md)
+  : Autocorrelation tests
+- [`ac_test_wald()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  [`ac_test_lb()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  [`ac_test_bp()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  [`ac_test_bg()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
+  : Tests for autocorrelation
+
 ## Fitter functions
 
 Low-level functions taking a response and a design matrix.
@@ -297,16 +307,6 @@ Low-level functions taking a response and a design matrix.
   : Fitter Function for IV Predictability Tests
 - [`ivx_sys_fit()`](https://kvasilopoulos.github.io/ivx/reference/ivx_sys_fit.md)
   : Fitter Function for Systems IVX Models
-
-## Serial correlation tests
-
-- [`ac_test()`](https://kvasilopoulos.github.io/ivx/reference/ac_test.md)
-  : Autocorrelation tests
-- [`ac_test_wald()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
-  [`ac_test_lb()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
-  [`ac_test_bp()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
-  [`ac_test_bg()`](https://kvasilopoulos.github.io/ivx/reference/ac_test_.md)
-  : Tests for autocorrelation
 
 ## Methods
 

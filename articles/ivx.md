@@ -142,12 +142,12 @@ summary(ivx(Ret ~ DP + TBL, data = kms, horizon = 12))
 The IVX instrument is less persistent than \\x_t\\, so the test loses
 local power against OLS exactly when \\x_t\\ is near-integrated and
 endogenous. Demetrescu (2014) shows that adding \\y\_{t-1}\\ to the
-regression, instrumented by itself, \\ y_t = \phi\\ y\_{t-1} + eta'
-x\_{t-1} + u_t, \qquad \phi = 0 ext{ under the null}, \\ feeds the
+regression, instrumented by itself, \\ y_t = \phi\\ y\_{t-1} + \beta'
+x\_{t-1} + u_t, \qquad \phi = 0 \text{ under the null}, \\ feeds the
 signal back into the instrument and can raise power substantially when
 the instrument is weak (small \\\eta\\), while being asymptotically
 equivalent to plain IVX otherwise. `lag_y = TRUE` does this; the joint
-Wald statistic still tests only \\eta\\.
+Wald statistic still tests only \\\beta\\.
 
 ``` r
 
