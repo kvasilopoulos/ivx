@@ -230,17 +230,85 @@
 <span><span class="co">#&gt; Joint Wald statistic:  4.326 on 1 DF, p-value 0.03753</span></span>
 <span><span class="co">#&gt; Multiple R-squared:  0.02721,    Adjusted R-squared:  0.02142</span></span>
 <span><span class="co">#&gt; Wald AR statistic: 132.3 on 4 DF, p-value &lt; 2.2e-16</span></span></code></pre></div>
-<!--
-#### To-do
-
-* The Bonferroni method
-  - Cavanagh et al (1995)
-  - Campbell and Yogo (2006)
-* A conditional likelihood approach
-  - Jansson and Moreira (2006)
-* A control function approach
-  - Elliot (2001)
--->
+</div>
+<div class="section level2">
+<h2 id="other-ivx-based-methods">Other IVX-based methods<a class="anchor" aria-label="anchor" href="#other-ivx-based-methods"></a>
+</h2>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>function</th>
+<th>method</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code><a href="reference/ivx_ra.html">ivx_ra()</a></code></td>
+<td>residual-augmented IVX, short and long horizon (Demetrescu &amp; Rodrigues 2022; Demetrescu, Rodrigues &amp; Taylor 2023)</td>
+</tr>
+<tr>
+<td>
+<code><a href="reference/ivx_qr.html">ivx_qr()</a></code>, <code><a href="reference/ivx_qr_boot.html">ivx_qr_boot()</a></code>
+</td>
+<td>IVX quantile regression (Lee 2016) and its block bootstrap (Fan &amp; Lee 2019)</td>
+</tr>
+<tr>
+<td><code><a href="reference/ivx_sys.html">ivx_sys()</a></code></td>
+<td>systems of predictive regressions (Kostakis et al. 2023)</td>
+</tr>
+<tr>
+<td><code><a href="reference/ivx_episodic.html">ivx_episodic()</a></code></td>
+<td>subsample tests for pockets of predictability (Demetrescu et al. 2022)</td>
+</tr>
+<tr>
+<td><code><a href="reference/ivx_iv.html">ivx_iv()</a></code></td>
+<td>2SLS with sine / fractional / long-difference instruments (Breitung &amp; Demetrescu 2015)</td>
+</tr>
+<tr>
+<td><code>ivx(..., lag_y = TRUE)</code></td>
+<td>lag-augmented IVX (Demetrescu 2014)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="non-ivx-benchmarks">Non-IVX benchmarks<a class="anchor" aria-label="anchor" href="#non-ivx-benchmarks"></a>
+</h2>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>function</th>
+<th>method</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code><a href="reference/cy_test.html">cy_test()</a></code></td>
+<td>Bonferroni Q-test (Campbell &amp; Yogo 2006; Cavanagh, Elliott &amp; Stock 1995)</td>
+</tr>
+<tr>
+<td><code><a href="reference/arm.html">arm()</a></code></td>
+<td>augmented regression method (Amihud, Hurvich &amp; Wang 2009)</td>
+</tr>
+<tr>
+<td><code><a href="reference/elliott_cf.html">elliott_cf()</a></code></td>
+<td>control-function regression with user-supplied covariates (Elliott 2011)</td>
+</tr>
+<tr>
+<td><code><a href="reference/hlt_test.html">hlt_test()</a></code></td>
+<td>hybrid switching t-test (Harvey, Leybourne &amp; Taylor 2021)</td>
+</tr>
+<tr>
+<td><code><a href="reference/el_test.html">el_test()</a></code></td>
+<td>unified empirical likelihood test (Liu, Yang, Cai &amp; Peng 2019)</td>
+</tr>
+</tbody>
+</table>
+<p>The conditional likelihood test of Jansson &amp; Moreira (2006) is not implemented: its critical values are conditional quantiles of a nonstandard joint distribution that must be obtained by numerical Fourier inversion (their Theorem 7), and the Q-test has higher finite-sample power in their own comparisons.</p>
 <hr>
 <p>Please note that the ‘ivx’ project is released with a <a href="https://github.com/kvasilopoulos/ivx/blob/master/.github/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>

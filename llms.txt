@@ -170,6 +170,33 @@ ivx_ar(hpi ~ cpi, data = ylpc) %>%
 #> Wald AR statistic: 132.3 on 4 DF, p-value < 2.2e-16
 ```
 
+## Other IVX-based methods
+
+| function | method |
+|----|----|
+| [`ivx_ra()`](https://kvasilopoulos.github.io/ivx/reference/ivx_ra.md) | residual-augmented IVX, short and long horizon (Demetrescu & Rodrigues 2022; Demetrescu, Rodrigues & Taylor 2023) |
+| [`ivx_qr()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr.md), [`ivx_qr_boot()`](https://kvasilopoulos.github.io/ivx/reference/ivx_qr_boot.md) | IVX quantile regression (Lee 2016) and its block bootstrap (Fan & Lee 2019) |
+| [`ivx_sys()`](https://kvasilopoulos.github.io/ivx/reference/ivx_sys.md) | systems of predictive regressions (Kostakis et al. 2023) |
+| [`ivx_episodic()`](https://kvasilopoulos.github.io/ivx/reference/ivx_episodic.md) | subsample tests for pockets of predictability (Demetrescu et al. 2022) |
+| [`ivx_iv()`](https://kvasilopoulos.github.io/ivx/reference/ivx_iv.md) | 2SLS with sine / fractional / long-difference instruments (Breitung & Demetrescu 2015) |
+| `ivx(..., lag_y = TRUE)` | lag-augmented IVX (Demetrescu 2014) |
+
+## Non-IVX benchmarks
+
+| function | method |
+|----|----|
+| [`cy_test()`](https://kvasilopoulos.github.io/ivx/reference/cy_test.md) | Bonferroni Q-test (Campbell & Yogo 2006; Cavanagh, Elliott & Stock 1995) |
+| [`arm()`](https://kvasilopoulos.github.io/ivx/reference/arm.md) | augmented regression method (Amihud, Hurvich & Wang 2009) |
+| [`elliott_cf()`](https://kvasilopoulos.github.io/ivx/reference/elliott_cf.md) | control-function regression with user-supplied covariates (Elliott 2011) |
+| [`hlt_test()`](https://kvasilopoulos.github.io/ivx/reference/hlt_test.md) | hybrid switching t-test (Harvey, Leybourne & Taylor 2021) |
+| [`el_test()`](https://kvasilopoulos.github.io/ivx/reference/el_test.md) | unified empirical likelihood test (Liu, Yang, Cai & Peng 2019) |
+
+The conditional likelihood test of Jansson & Moreira (2006) is not
+implemented: its critical values are conditional quantiles of a
+nonstandard joint distribution that must be obtained by numerical
+Fourier inversion (their Theorem 7), and the Q-test has higher
+finite-sample power in their own comparisons.
+
 ------------------------------------------------------------------------
 
 Please note that the ‘ivx’ project is released with a [Contributor Code

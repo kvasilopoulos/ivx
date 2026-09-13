@@ -10,6 +10,8 @@ the IVX method of Magdalinos and Phillips (2009) DOI:
 
 Useful links:
 
+- <https://kvasilopoulos.github.io/ivx/>
+
 - <https://github.com/kvasilopoulos/ivx>
 
 - Report bugs at <https://github.com/kvasilopoulos/ivx/issues>
