@@ -38,3 +38,20 @@ persistent regressors. Rcpp/Armadillo backend.
 - Every user-visible change (new function/argument, changed output, bug fix,
   breaking change) gets a bullet in `NEWS.md` under the current development
   version, in the same commit as the change.
+
+## Release / CRAN
+- `cran-release.md` is the pre-submission checklist; `cran-comments.md` goes to CRAN.
+  Both are build-ignored.
+- `DESCRIPTION` Description stays short: the two founding IVX citations plus one
+  sentence on extensions — do not cite every implemented paper there (citations
+  belong in the Rd `@references` and vignettes).
+- Local toolchain for `R CMD build`/`check --as-cran`: pandoc from RStudio
+  (`RSTUDIO_PANDOC="C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools"`, put it
+  on PATH) and TinyTeX (`C:/Users/User/AppData/Roaming/TinyTeX/bin/windows`) for the PDF
+  manual. Build and check the tarball in a scratch directory, not in the repo.
+- Never write R source or vignette text through Python string literals: `\b`, `\t`, `\r`,
+  `\a`, `\v` in LaTeX macros (`\beta`, `\tilde`, `\rho`, `\alpha`, `\varepsilon`) become
+  control characters and break the manual. Use Edit/Write, or raw strings.
+- Language is en-GB (`spelling::spell_check_package()`, `inst/WORDLIST`).
+- Deprecated: `drop1()`/`add1()`/`step()` on ivx objects (RSS-based, not valid for an IV
+  estimator). Keep them warning; do not extend them.
