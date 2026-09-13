@@ -30,12 +30,12 @@ the paper.}
 \value{
 an object of class "ivx_qr_boot": a list with the estimates, the
 percentile intervals \code{ci}, two-sided percentile p-values \code{p.value} for
-\eqn{H_0: eta_j = 0}, and the bootstrap draws \code{boot}.
+\eqn{H_0: \beta_j = 0}, and the bootstrap draws \code{boot}.
 }
 \description{
 Percentile confidence intervals and p-values for the IVX-QR coefficients
 from the moving block bootstrap (MBB) of Fan and Lee (2019, Section 5).
-Blocks of the pairs \eqn{(y_t, 	ilde z_{t-1})} are resampled and the
+Blocks of the pairs \eqn{(y_t, \tilde z_{t-1})} are resampled and the
 quantile regression of Lee (2016) is refitted on each bootstrap sample. This
 avoids estimating the sparsity and the nuisance parameters that appear under
 conditional heteroskedasticity, which is where the asymptotic IVX-QR test is

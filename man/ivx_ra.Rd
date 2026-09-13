@@ -44,7 +44,7 @@ integer for a fixed order.}
 \item{horizon}{forecast horizon \eqn{h}; see Details.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
-\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults
 (\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
 
 \item{na.action}{a function which indicates what should happen when the data
@@ -88,7 +88,7 @@ the single-period response is regressed on the \eqn{h}-period transformed
 instrument \eqn{z_t^{trf,(h)} = \sum_{i=\max(1,t-h+1)}^{\min(t,T-h)} z_i}
 (eq. 4.4), which accounts for the overlap of the long-horizon regression without
 HAC estimation. At \code{horizon = 1} it coincides with the short-horizon estimator.
-The coefficients estimate the \eqn{h}-period slope \eqn{eta_h}; fitted values
+The coefficients estimate the \eqn{h}-period slope \eqn{\beta_h}; fitted values
 and residuals are those of the transformed (non-overlapping) regression, and
 the Kostakis et al. (2015) intercept correction is applied only at \code{horizon = 1}.
 

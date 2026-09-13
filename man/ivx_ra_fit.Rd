@@ -33,7 +33,7 @@ integer for a fixed order.}
 \item{horizon}{forecast horizon \eqn{h}; see Details.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
-\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults
 (\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
 
 \item{...}{currently unused.}

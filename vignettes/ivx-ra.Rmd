@@ -107,8 +107,8 @@ non-overlapping regression of $y_{t+1}$ on the transformed regressor
 $A_h' x$, and the same trick applies to the instrument:
 $$
 z_t^{trf,(h)} = \sum_{i=\max(1,\,t-h+1)}^{\min(t,\,T-h)} z_i, \qquad
-\hateta_h = \Big(\sum_{t=1}^{T-h} z_t ar x_t'\Big)^{-1}
-\sum_{t=p}^{T-1} z_t^{trf,(h)}\,(ar y_{t+1} - \hat\gamma'\hatarepsilon_{t+1}),
+\hat\beta_h = \Big(\sum_{t=1}^{T-h} z_t \bar x_t'\Big)^{-1}
+\sum_{t=p}^{T-1} z_t^{trf,(h)}\,(\bar y_{t+1} - \hat\gamma'\hat\varepsilon_{t+1}),
 $$
 with the sandwich covariance of eq. (5.7), i.e. the short-horizon one with
 $z_t$ replaced by $z_t^{trf,(h)}$. `horizon = h` does exactly this and reduces

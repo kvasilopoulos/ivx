@@ -40,7 +40,7 @@ LinkingTo:
     Rcpp (>= 1.0.1),
     RcppArmadillo (>= 0.9.300.2.0)
 Encoding: UTF-8
-Language: en-US
+Language: en-GB
 LazyData: true
 Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.1.0

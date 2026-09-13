@@ -45,6 +45,14 @@ reference:
       - cy_test
       - elliott_cf
 
+  - title: Serial correlation tests
+    contents:
+      - ac_test
+      - ac_test_wald
+      - ac_test_bp
+      - ac_test_bg
+      - ac_test_lb
+
   - title: Fitter functions
     desc: Low-level functions taking a response and a design matrix.
     contents:
@@ -56,14 +64,6 @@ reference:
       - arm_fit
       - ivx_iv_fit
       - ivx_sys_fit
-
-  - title: Serial correlation tests
-    contents:
-      - ac_test
-      - ac_test_wald
-      - ac_test_bp
-      - ac_test_bg
-      - ac_test_lb
 
   - title: Methods
     contents:

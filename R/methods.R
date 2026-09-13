@@ -1,4 +1,3 @@
-
 # New methods -------------------------------------------------------------
 
 #' Calculate the delta coefficient
@@ -51,33 +50,38 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
 }
 
 #' @export
-model.matrix.ivx <- function (object, ...) {
-  if (n_match <- match("x", names(object), 0L))
+model.matrix.ivx <- function(object, ...) {
+  if (n_match <- match("x", names(object), 0L)) {
     object[[n_match]]
-  else {
+  } else {
     data <- model.frame(object, xlev = object$xlevels, ...)
-    if (exists(".GenericCallEnv", inherits = FALSE))
+    if (exists(".GenericCallEnv", inherits = FALSE)) {
       NextMethod("model.matrix", data = data, contrasts.arg = object$contrasts)
-    else {
+    } else {
       dots <- list(...)
       dots$data <- dots$contrasts.arg <- NULL
-      do.call("model.matrix.default", c(list(object = object,
-                                             data = data, contrasts.arg = object$contrasts),
-                                        dots))
+      do.call(
+        "model.matrix.default",
+        c(
+          list(object = object, data = data, contrasts.arg = object$contrasts),
+          dots
+        )
+      )
     }
   }
 }
 
 #' @export
-model.frame.ivx <- function (formula, ...) {
+model.frame.ivx <- function(formula, ...) {
   dots <- list(...)
-  nargs <- dots[match(c("data", "na.action", "subset"),
-                      names(dots), 0)]
+  nargs <- dots[match(c("data", "na.action", "subset"), names(dots), 0)]
   if (length(nargs) || is.null(formula$model)) {
     fcall <- formula$call
-    m <- match(c("formula", "data", "subset",
-                 "weights", "na.action", "offset"),
-               names(fcall), 0L)
+    m <- match(
+      c("formula", "data", "subset", "weights", "na.action", "offset"),
+      names(fcall),
+      0L
+    )
     fcall <- fcall[c(1L, m)]
     fcall$drop.unused.levels <- TRUE
     fcall[[1L]] <- quote(stats::model.frame)
@@ -85,23 +89,24 @@ model.frame.ivx <- function (formula, ...) {
     fcall$formula <- terms(formula)
     fcall[names(nargs)] <- nargs
     env <- environment(formula$terms)
-    if (is.null(env))
+    if (is.null(env)) {
       env <- parent.frame()
+    }
     eval(fcall, env)
+  } else {
+    formula$model
   }
-  else formula$model
 }
 
 #' @export
-logLik.ivx <- function (object, ...) {
-
+logLik.ivx <- function(object, ...) {
   res <- object$residuals
   p <- object$rank
   w <- object$weights
   if (is.null(w)) {
     w <- rep.int(1, length(res))
   } else if (length(w) != length(res)) {
-    w <- w[-(1:(length(w) - length(res)))]   # the fit drops the first `horizon` rows
+    w <- w[-(1:(length(w) - length(res)))] # the fit drops the first `horizon` rows
   }
   # zero-weight rows and the lag-dropped rows (NA residuals) do not enter
   keep <- w != 0 & !is.na(res)
@@ -109,7 +114,8 @@ logLik.ivx <- function (object, ...) {
   w <- w[keep]
   N <- length(res)
   # Gaussian log-likelihood at the IVX residuals (no REML: there is no QR of an IV fit)
-  val <- 0.5 * (sum(log(w)) - N * (log(2 * pi) + 1 - log(N) + log(sum(w * res^2))))
+  val <- 0.5 *
+    (sum(log(w)) - N * (log(2 * pi) + 1 - log(N) + log(sum(w * res^2))))
   attr(val, "nall") <- N
   attr(val, "nobs") <- N
   attr(val, "df") <- p + 1
@@ -128,24 +134,22 @@ extractAIC.ivx <- function(fit, scale = 0, k = 2, ...) {
   n <- length(fit$residuals)
   edf <- n - fit$df.residual
   RSS <- deviance.ivx(fit)
-  dev <- if (scale > 0)
-    RSS/scale - n
-  else n * log(RSS/n)
+  dev <- if (scale > 0) {
+    RSS / scale - n
+  } else {
+    n * log(RSS / n)
+  }
   c(edf, dev + k * edf)
 }
 
 #' @export
 #' @importFrom stats case.names weights
-case.names.ivx <- function (object, full = FALSE, ...) {
+case.names.ivx <- function(object, full = FALSE, ...) {
   w <- weights(object)
   dn <- names(residuals(object)) %||% as.character(seq_along(residuals(object)))
-  if (full || is.null(w))
+  if (full || is.null(w)) {
     dn
-  else dn[w != 0]
+  } else {
+    dn[w != 0]
+  }
 }
-
-
-# Unfinished --------------------------------------------------------------
-
-# TODO predict.ivx <- function() {}
-# TODO simulate.ivx <- function() {}

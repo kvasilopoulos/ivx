@@ -36,7 +36,7 @@ from environment(formula), typically the environment from which lm is called.}
 \item{tau}{quantile level(s) in (0, 1). A vector fits one model per level.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
-\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults
 (\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
 
 \item{na.action}{a function which indicates what should happen when the data

@@ -280,17 +280,9 @@ stars_pval <- function (pval) {
 #' @export
 print.ac_test <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   pval <- attr(x, "pvalue")
-  lst <- list()
-  for(i in 2:5) {
-    stars <- stars_pval(pval[,i])
-    lst[[i]] <- paste0(formatC(x[,i], digits = digits), stars)
+  out <- data.frame(Lag = x$Lag)
+  for (nm in setdiff(names(x), "Lag")) {
+    out[[nm]] <- paste0(formatC(x[[nm]], digits = digits), stars_pval(pval[[nm]]))
   }
-  out <- data.frame(
-    Lag = 1:nrow(x),
-    Wald = lst[[2]],
-    LjungBox = lst[[3]],
-    BoxPierce = lst[[4]],
-    BreuschGodfrey = lst[[5]]
-  )
   print(out, row.names = FALSE)
 }

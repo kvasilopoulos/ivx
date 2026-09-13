@@ -39,7 +39,7 @@
 #' @param x logical. If `TRUE` the model.matrix of the fit is returned.
 #' @param y logical. If `TRUE` the response of the fit is returned.
 #' @param beta,cz tuning parameters of the IVX instrument
-#' \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+#' \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults
 #' (`beta = 0.95`, `cz = 1`) follow Kostakis et al. (2015).
 #' @param bandwidth Newey-West bandwidth for the long-run covariance estimate.
 #' The default `NULL` uses \eqn{n^{1/3}} as in Kostakis et al. (2015).

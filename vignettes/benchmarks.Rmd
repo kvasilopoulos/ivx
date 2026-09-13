@@ -120,9 +120,9 @@ $0.894$ against an OLS mean of $0.857$. In the paper's two-predictor Case 1 the
 
 Elliott (2011) shows that if stationary covariates $z_t$ are available that
 are contemporaneously correlated with the shocks to both the predictor and
-the response, the Wald test of $eta = 0$ in
+the response, the Wald test of $\beta = 0$ in
 $$
-y_t = lpha + eta' x_{t-1} + \gamma' Z_t + 	ilde u_t, \qquad
+y_t = \alpha + \beta' x_{t-1} + \gamma' Z_t + \tilde u_t, \qquad
 Z_t = (z_t', z_{t-1}', \dots, z_{t-q}')',
 $$
 is asymptotically $\chi^2$ whatever the persistence of $x_t$, because the
@@ -146,25 +146,19 @@ time against 23% for plain OLS (500 replications).
 
 `hlt_test()` implements $T_{hyb}$ of Harvey, Leybourne & Taylor (2021) for a
 single predictor. It uses only regression t-ratios: the standard one, $T$,
-and $	ilde T$, in which the predictor is quasi-GLS demeaned with
-$ar c = 7$ as in Elliott et al. (1996). Under strong persistence their null
-distributions depend on $c$ and on $
-ho_{xy}$, so the paper tabulates
-*conservative* critical values — the maximum over $c$ of the $lpha$-level
-quantile — as response surfaces in $\hat
-ho_{xy}$ (their Table 1), and
+and $\tilde T$, in which the predictor is quasi-GLS demeaned with
+$\bar c = 7$ as in Elliott et al. (1996). Under strong persistence their null
+distributions depend on $c$ and on $\rho_{xy}$, so the paper tabulates
+*conservative* critical values — the maximum over $c$ of the $\alpha$-level
+quantile — as response surfaces in $\hat\rho_{xy}$ (their Table 1), and
 switches:
 
 1. if the ADF normalised-bias statistic (lag length by MBIC) is below
    $-4\sqrt{T}$ the predictor is weakly persistent: $T$ with a normal
    critical value;
-2. otherwise, for an upper-tail test, $T$ with $cv(\hat
-ho_{xy})$ when
-   $\hat
-ho_{xy} > -0.1$ and $	ilde T$ with $	ilde{cv}(\hat
-ho_{xy})$
-   when $\hat
-ho_{xy} < -0.1$ (quasi-GLS demeaning pays off only when the
+2. otherwise, for an upper-tail test, $T$ with $cv(\hat\rho_{xy})$ when
+   $\hat\rho_{xy} > -0.1$ and $\tilde T$ with $\tilde{cv}(\hat\rho_{xy})$
+   when $\hat\rho_{xy} < -0.1$ (quasi-GLS demeaning pays off only when the
    endogeneity is strong); lower-tail tests mirror this.
 
 ```{r}
@@ -173,13 +167,9 @@ hlt_test(Ret ~ TBL, data = kms, alternative = "less", level = 0.1)
 ```
 
 In the paper's design ($T = 200$, upper-tail 5% test) the empirical size in
-1000 replications is 0.07/0.04/0.05 for $
-ho_{xy} = -0.9$ and
-$
-ho = 1, 0.95, 0.5$, and 0.00/0.02/0.04 for $
-ho_{xy} = 0.9$ — the
-"undersize for positive $
-ho_{xy}$ in the more persistent cases" the paper
+1000 replications is 0.07/0.04/0.05 for $\rho_{xy} = -0.9$ and
+$\rho = 1, 0.95, 0.5$, and 0.00/0.02/0.04 for $\rho_{xy} = 0.9$ — the
+"undersize for positive $\rho_{xy}$ in the more persistent cases" the paper
 notes is the price of the conservative critical values. The test is one-sided
 by construction and has no p-value; the object reports the selected test, its
 statistic and critical value.
@@ -189,19 +179,19 @@ statistic and critical value.
 `el_test()` implements Liu, Yang, Cai & Peng (2019). Their model adds the
 lagged difference of the predictor,
 $$
-Y_t = lpha + eta_1 \Delta X_{t-1} + eta_2 X_{t-2} + U_t,
+Y_t = \alpha + \beta_1 \Delta X_{t-1} + \beta_2 X_{t-2} + U_t,
 $$
 so that $Y_t$ can be stationary whether or not $X_t$ is. The intercept is
 removed by differencing at lag $m = \lfloor n/2 
 floor$ (Zhu, Cai & Peng,
 2014), and the empirical likelihood is built on the two score equations, the
-second weighted by $1/\sqrt{1 + 	ilde X_{t-2}^2}$ so that its sample
+second weighted by $1/\sqrt{1 + \tilde X_{t-2}^2}$ so that its sample
 variance converges whatever the persistence. The profile EL ratios for
-$eta_2 = 0$ (no predictability), $eta_1 = 0$ and the joint null are then
+$\beta_2 = 0$ (no predictability), $\beta_1 = 0$ and the joint null are then
 $\chi^2(1)$, $\chi^2(1)$, $\chi^2(2)$ with no tuning parameter and no
 persistence classification (Theorem 2). The price is efficiency: only $m - 2$
 differenced observations enter, and the paper reports that the test on
-$eta_1$ is oversized at $n = 200$.
+$\beta_1$ is oversized at $n = 200$.
 
 ```{r}
 el_test(Ret ~ DP, data = kms)

@@ -15,7 +15,7 @@ ivx_qr_fit(y, x, tau = 0.5, beta = 0.95, cz = 5, ...)
 \item{tau}{quantile level(s) in (0, 1). A vector fits one model per level.}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
-\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^eta)^j \Delta x_{t-j}}. Defaults
+\eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults
 (\code{beta = 0.95}, \code{cz = 1}) follow Kostakis et al. (2015).}
 
 \item{...}{currently disregarded.}
