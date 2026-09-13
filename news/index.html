@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ivx</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.0" id="ivx-120">ivx 1.2.0<a class="anchor" aria-label="anchor" href="#ivx-120"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.0.0" id="ivx-200">ivx 2.0.0<a class="anchor" aria-label="anchor" href="#ivx-200"></a></h2>
 <ul><li><p>New vignette “Choosing a test: a decision workflow” (<code><a href="../articles/workflow.html">vignette("workflow")</a></code>) that walks from the plain <code><a href="../reference/ivx.html">ivx()</a></code> fit through the diagnostics (<code><a href="../reference/ac_test.html">ac_test()</a></code>, <code><a href="../reference/delta.html">delta()</a></code>, ARCH check) to the extension each one calls for.</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> of <code><a href="../reference/ac_test.html">ac_test()</a></code> on a numeric vector no longer errors (it indexed a Breusch-Godfrey column that only the <code>ivx</code> method computes).</p></li>
 <li><p><code><a href="../reference/ac_test.html">ac_test()</a></code> and <code>ac_test_*()</code> now stop with an informative error on <code>ivx_ar</code>, <code>ivx_ra</code>, <code>ivx_qr</code>, <code>ivx_iv</code> and <code>arm</code> fits, which do not store the OLS residuals the tests use; previously they failed with an obscure error.</p></li>

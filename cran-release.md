@@ -1,4 +1,4 @@
-# CRAN release checklist — ivx 1.2.0 (update of 1.1.1)
+# CRAN release checklist — ivx 2.0.0 (update of 1.1.1)
 
 Compiled from the CRAN Repository Policy
 (<https://cran.r-project.org/web/packages/policies.html>), the CRAN
@@ -10,7 +10,7 @@ checks run locally on 2026-09-13; `[ ]` items are for the maintainer.
 
 ## Policy points that apply to this package
 
-- Update of an existing CRAN package (1.1.1 → 1.2.0, minor). CRAN asks
+- Update of an existing CRAN package (1.1.1 → 2.0.0, major). CRAN asks
   for updates “no more than every 1–2 months”; last release was long
   ago.
 - 0 reverse dependencies on CRAN
@@ -67,9 +67,9 @@ covers ubuntu (release, devel), windows, macOS
 
 Check the GitHub Actions run on the release commit is green
 
-`NEWS.md`: 1.2.0 section complete (it is; re-read once more)
+`NEWS.md`: 2.0.0 section complete (it is; re-read once more)
 
-`DESCRIPTION`: Version 1.2.0, `Date` field optional (omitted)
+`DESCRIPTION`: Version 2.0.0, `Date` field optional (omitted)
 
 `cran-comments.md` updated (done below)
 
@@ -91,8 +91,8 @@ changes)
 ## After acceptance
 
 - `usethis::use_github_release()` (release notes from NEWS.md), tag
-  `v1.2.0`
-- `usethis::use_dev_version(push = TRUE)` → 1.2.0.9000
+  `v2.0.0`
+- `usethis::use_dev_version(push = TRUE)` → 2.0.0.9000
 - Wait 48 h for the CRAN check page before submitting any correction
 
 ## Files that must NOT ship
@@ -101,4 +101,4 @@ Excluded via `.Rbuildignore`: `research/`, `data-raw/`, `docs/`,
 `pkgdown/`, `_pkgdown.yml`, `README.Rmd`, `CLAUDE.md`,
 `cran-release.md`, `cran-comments.md`, `CITATION.cff`, `.github/`,
 `.env`, gcov files, `Rplots.pdf`, `codecov.yml`. Verify with
-`tar tzf ivx_1.2.0.tar.gz`.
+`tar tzf ivx_2.0.0.tar.gz`.

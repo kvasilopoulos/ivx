@@ -1,6 +1,6 @@
 # Changelog
 
-## ivx 1.2.0
+## ivx 2.0.0
 
 - New vignette “Choosing a test: a decision workflow”
   ([`vignette("workflow")`](https://kvasilopoulos.github.io/ivx/articles/workflow.md))

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ivx</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,6 +93,17 @@
 <div class="section level2">
 <h2 id="changelog">Changelog<a class="anchor" aria-label="anchor" href="#changelog"></a></h2>
 <ul><li>Every user-visible change (new function/argument, changed output, bug fix, breaking change) gets a bullet in <code>NEWS.md</code> under the current development version, in the same commit as the change.</li>
+</ul></div>
+<div class="section level2">
+<h2 id="release--cran">Release / CRAN<a class="anchor" aria-label="anchor" href="#release--cran"></a></h2>
+<ul><li>
+<code>cran-release.md</code> is the pre-submission checklist; <code>cran-comments.md</code> goes to CRAN. Both are build-ignored.</li>
+<li>
+<code>DESCRIPTION</code> Description stays short: the two founding IVX citations plus one sentence on extensions — do not cite every implemented paper there (citations belong in the Rd <code>@references</code> and vignettes).</li>
+<li>Local toolchain for <code>R CMD build</code>/<code>check --as-cran</code>: pandoc from RStudio (<code>RSTUDIO_PANDOC="C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools"</code>, put it on PATH) and TinyTeX (<code>C:/Users/User/AppData/Roaming/TinyTeX/bin/windows</code>) for the PDF manual (needs the <code>courier</code>, <code>psnfss</code>, <code>helvetic</code>, <code>times</code>, <code>makeindex</code> TeX packages; tlmgr repository set to the texlive.info 2026 archive). Build and check the tarball in a scratch directory, not in the repo.</li>
+<li>Never write R source or vignette text through Python string literals: <code>\b</code>, <code>\t</code>, <code>\r</code>, <code>\a</code>, <code>\v</code> in LaTeX macros (<code>\beta</code>, <code>\tilde</code>, <code>\rho</code>, <code>\alpha</code>, <code>\varepsilon</code>) become control characters and break the manual. Use Edit/Write, or raw strings.</li>
+<li>Language is en-GB (<code><a href="https://docs.ropensci.org/spelling//reference/spell_check_package.html" class="external-link">spelling::spell_check_package()</a></code>, <code>inst/WORDLIST</code>).</li>
+<li>Deprecated: <code><a href="https://rdrr.io/r/stats/add1.html" class="external-link">drop1()</a></code>/<code><a href="https://rdrr.io/r/stats/add1.html" class="external-link">add1()</a></code>/<code><a href="https://rdrr.io/r/stats/step.html" class="external-link">step()</a></code> on ivx objects (RSS-based, not valid for an IV estimator). Keep them warning; do not extend them.</li>
 </ul></div>
 </div>
 
