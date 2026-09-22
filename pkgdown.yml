@@ -1,19 +1,8 @@
 pandoc: 3.8.3
 pkgdown: 2.2.1
 pkgdown_sha: ~
-articles:
-  benchmarks: benchmarks.html
-  ivx-ar: ivx-ar.html
-  ivx-episodic: ivx-episodic.html
-  ivx-iv: ivx-iv.html
-  ivx-qr: ivx-qr.html
-  ivx-ra: ivx-ra.html
-  ivx-sys: ivx-sys.html
-  ivx: ivx.html
-  robust-inference: robust-inference.html
-  rolling-ivx: rolling-ivx.html
-  workflow: workflow.html
-last_built: 2026-09-13T17:06Z
+articles: {}
+last_built: 2026-09-22T01:57Z
 urls:
   reference: https://kvasilopoulos.github.io/ivx/reference
   article: https://kvasilopoulos.github.io/ivx/articles
