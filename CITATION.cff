@@ -2,9 +2,14 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "ivx: Robust Econometric Inference"
-version: 1.2.0
-date-released: 2026-09-12
+version: 2.0.0
+date-released: 2026-09-22
 license: GPL-3.0
+doi: 10.5281/zenodo.3371391
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.3371391
+    description: "Concept DOI (resolves to the latest archived version)"
 url: "https://CRAN.R-project.org/package=ivx"
 repository-code: "https://github.com/kvasilopoulos/ivx"
 authors:
@@ -14,6 +19,7 @@ authors:
   - family-names: Pavlidis
     given-names: Efthymios
     email: e.pavlidis@lancaster.ac.uk
+    affiliation: Lancaster University
 abstract: >-
   Drawing statistical inference on the coefficients of a short- or long-horizon
   predictive regression with persistent regressors by using the IVX method of
