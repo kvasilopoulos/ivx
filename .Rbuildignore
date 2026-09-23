@@ -27,3 +27,4 @@
 ^tests/testthat/testthat-problems\.rds$
 ^Rplots\.pdf$
 ^cran-release\.md$
+^\.zenodo\.json$

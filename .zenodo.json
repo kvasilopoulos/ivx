@@ -1,0 +1,47 @@
+{
+  "title": "ivx: Robust Econometric Inference",
+  "description": "R package for statistical inference on the coefficients of short- and long-horizon predictive regressions with persistent regressors, using the IVX method of Magdalinos and Phillips (2009) and Kostakis, Magdalinos and Stamatogiannis (2015), its extensions (IVX-AR, residual-augmented and lag-augmented IVX, IVX quantile regression, systems IVX, wild-bootstrap and subsample inference, combined instruments) and the standard non-IVX predictability tests as benchmarks.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "gpl-3.0",
+  "creators": [
+    {
+      "name": "Vasilopoulos, Kostas"
+    },
+    {
+      "name": "Pavlidis, Efthymios",
+      "affiliation": "Lancaster University"
+    }
+  ],
+  "keywords": [
+    "R",
+    "econometrics",
+    "predictive regression",
+    "IVX",
+    "persistent regressors",
+    "return predictability"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://CRAN.R-project.org/package=ivx",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://kvasilopoulos.github.io/ivx/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.1017/S0266466608090154",
+      "relation": "cites",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1093/rfs/hhu139",
+      "relation": "cites",
+      "scheme": "doi"
+    }
+  ]
+}
