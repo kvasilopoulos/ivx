@@ -46,10 +46,16 @@ CRAN)
 [`spelling::spell_check_package()`](https://docs.ropensci.org/spelling//reference/spell_check_package.html)
 — 0 (Language en-GB, `inst/WORDLIST` updated)
 
-`urlchecker::url_check()` — all URLs OK except `zenodo.org` badge in
-README.md, which timed out (zenodo unreachable from this network, HTTP
-504 in the CRAN incoming check too). Verify manually before submitting;
-if Zenodo stays flaky, drop the badge from README.Rmd.
+`urlchecker::url_check()` — all URLs OK. The DOI badge in README now
+links to `doi.org` (concept DOI 10.5281/zenodo.3371391) rather than
+`zenodo.org`, which timed out in earlier checks (HTTP 504 in the CRAN
+incoming check too); only the badge image still comes from zenodo.org.
+
+After tagging the GitHub release, confirm Zenodo archived it (the
+GitHub-Zenodo hook did not fire for v1.1.1): check
+<https://zenodo.org/account/settings/github/> and the concept record.
+`.zenodo.json` supplies the deposit metadata; `CITATION.cff` needs
+`version` and `date-released` bumped with each release.
 
 `R CMD build` with vignettes (pandoc from RStudio, TinyTeX for the
 manual)
