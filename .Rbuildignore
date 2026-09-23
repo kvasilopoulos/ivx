@@ -28,3 +28,4 @@
 ^Rplots\.pdf$
 ^cran-release\.md$
 ^\.zenodo\.json$
+^tools$
