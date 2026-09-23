@@ -51,11 +51,9 @@ links to `doi.org` (concept DOI 10.5281/zenodo.3371391) rather than
 `zenodo.org`, which timed out in earlier checks (HTTP 504 in the CRAN
 incoming check too); only the badge image still comes from zenodo.org.
 
-After tagging the GitHub release, confirm Zenodo archived it (the
-GitHub-Zenodo hook did not fire for v1.1.1): check
-<https://zenodo.org/account/settings/github/> and the concept record.
-`.zenodo.json` supplies the deposit metadata; `CITATION.cff` needs
-`version` and `date-released` bumped with each release.
+`Rscript tools/version-consistency.R` — DESCRIPTION, `NEWS.md` and
+`CITATION.cff` agree (`--fix` syncs `CITATION.cff`). Also enforced by
+the `version-consistency` workflow on pushes touching those files.
 
 `R CMD build` with vignettes (pandoc from RStudio, TinyTeX for the
 manual)
@@ -96,10 +94,44 @@ changes)
 
 ## After acceptance
 
-- `usethis::use_github_release()` (release notes from NEWS.md), tag
-  `v2.0.0`
-- `usethis::use_dev_version(push = TRUE)` → 2.0.0.9000
-- Wait 48 h for the CRAN check page before submitting any correction
+Order matters: Zenodo archives the tree at the tag, and CRAN can still
+demand a version bump, so tag only once CRAN has accepted.
+
+1.  Re-knit `README.md` from `README.Rmd` **locally** before the release
+    commit. The `render-readme` workflow commits the re-knit README in a
+    *follow-up* commit, which a tag placed on your own commit would not
+    include — and that stale README is what Zenodo would archive.
+2.  `usethis::use_github_release()` (release notes from NEWS.md), tag
+    `v2.0.0`.
+3.  The `zenodo-archive` workflow polls the concept record for ten
+    minutes and opens an issue if the version never appears. Re-run it
+    by hand for any tag with
+    `gh workflow run zenodo-archive.yaml -f tag=v2.0.0`.
+4.  `usethis::use_dev_version(push = TRUE)` → 2.0.0.9000.
+5.  Wait 48 h for the CRAN check page before submitting any correction.
+
+### If Zenodo does not archive the release
+
+Zenodo deduplicates on the GitHub release id: once it has accepted the
+webhook it answers `409 The release has already been received`, so
+redelivering the event or re-firing the hook does nothing. The only
+retry is to delete the GitHub release and recreate it on the same tag:
+
+``` R
+gh release delete v2.0.0 --yes
+gh release create v2.0.0 --title "ivx 2.0.0" --notes-file <notes>
+```
+
+Read the failure first at <https://zenodo.org/account/settings/github/>;
+if it is an authorisation error, reconnect GitHub at
+<https://zenodo.org/account/settings/linkedaccounts/> and toggle the
+repository off and on. This is what happened to v1.1.1: the hook fired
+in September 2025, Zenodo accepted it and its background job failed,
+leaving the release unarchived for a year (fixed 2026-09-22, DOI
+10.5281/zenodo.3371425).
+
+Deposit metadata comes from `.zenodo.json`; the version and the archive
+date come from the tag, so that file needs no per-release edit.
 
 ## Files that must NOT ship
 

@@ -77,7 +77,7 @@
 <li><label><input type="checkbox" checked><code><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">covr::package_coverage()</a></code> — 94%</label></li>
 <li><label><input type="checkbox" checked><code><a href="https://docs.ropensci.org/spelling//reference/spell_check_package.html" class="external-link">spelling::spell_check_package()</a></code> — 0 (Language en-GB, <code>inst/WORDLIST</code> updated)</label></li>
 <li><label><input type="checkbox" checked><code>urlchecker::url_check()</code> — all URLs OK. The DOI badge in README now links to <code>doi.org</code> (concept DOI 10.5281/zenodo.3371391) rather than <code>zenodo.org</code>, which timed out in earlier checks (HTTP 504 in the CRAN incoming check too); only the badge image still comes from zenodo.org.</label></li>
-<li><label><input type="checkbox">After tagging the GitHub release, confirm Zenodo archived it (the GitHub-Zenodo hook did not fire for v1.1.1): check <a href="https://zenodo.org/account/settings/github/" class="external-link uri">https://zenodo.org/account/settings/github/</a> and the concept record. <code>.zenodo.json</code> supplies the deposit metadata; <code>CITATION.cff</code> needs <code>version</code> and <code>date-released</code> bumped with each release.</label></li>
+<li><label><input type="checkbox"><code>Rscript tools/version-consistency.R</code> — DESCRIPTION, <code>NEWS.md</code> and <code>CITATION.cff</code> agree (<code>--fix</code> syncs <code>CITATION.cff</code>). Also enforced by the <code>version-consistency</code> workflow on pushes touching those files.</label></li>
 <li><label><input type="checkbox" checked><code>R CMD build</code> with vignettes (pandoc from RStudio, TinyTeX for the manual)</label></li>
 <li><label><input type="checkbox"><code>R CMD check --as-cran</code> on the tarball with current R release: see <code>cran-comments.md</code> for the result of the last run</label></li>
 <li><label><input type="checkbox"><code>devtools::check_win_devel()</code> and <code>check_win_release()</code> — uploads to win-builder and emails the maintainer (not run automatically; run it yourself, or say so and it will be launched)</label></li>
@@ -98,13 +98,23 @@
 </ol></div>
 <div class="section level2">
 <h2 id="after-acceptance">After acceptance<a class="anchor" aria-label="anchor" href="#after-acceptance"></a></h2>
-<ul><li>
-<code>usethis::use_github_release()</code> (release notes from NEWS.md), tag <code>v2.0.0</code>
-</li>
+<p>Order matters: Zenodo archives the tree at the tag, and CRAN can still demand a version bump, so tag only once CRAN has accepted.</p>
+<ol style="list-style-type: decimal"><li>Re-knit <code>README.md</code> from <code>README.Rmd</code> <strong>locally</strong> before the release commit. The <code>render-readme</code> workflow commits the re-knit README in a <em>follow-up</em> commit, which a tag placed on your own commit would not include — and that stale README is what Zenodo would archive.</li>
 <li>
-<code>usethis::use_dev_version(push = TRUE)</code> → 2.0.0.9000</li>
-<li>Wait 48 h for the CRAN check page before submitting any correction</li>
-</ul></div>
+<code>usethis::use_github_release()</code> (release notes from NEWS.md), tag <code>v2.0.0</code>.</li>
+<li>The <code>zenodo-archive</code> workflow polls the concept record for ten minutes and opens an issue if the version never appears. Re-run it by hand for any tag with <code>gh workflow run zenodo-archive.yaml -f tag=v2.0.0</code>.</li>
+<li>
+<code>usethis::use_dev_version(push = TRUE)</code> → 2.0.0.9000.</li>
+<li>Wait 48 h for the CRAN check page before submitting any correction.</li>
+</ol><div class="section level3">
+<h3 id="if-zenodo-does-not-archive-the-release">If Zenodo does not archive the release<a class="anchor" aria-label="anchor" href="#if-zenodo-does-not-archive-the-release"></a></h3>
+<p>Zenodo deduplicates on the GitHub release id: once it has accepted the webhook it answers <code>409 The release has already been received</code>, so redelivering the event or re-firing the hook does nothing. The only retry is to delete the GitHub release and recreate it on the same tag:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>gh release delete v2.<span class="fl">0.0</span> <span class="sc">--</span>yes</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>gh release create v2.<span class="fl">0.0</span> <span class="sc">--</span>title <span class="st">"ivx 2.0.0"</span> <span class="sc">--</span>notes<span class="sc">-</span>file <span class="sc">&lt;</span>notes<span class="sc">&gt;</span></span></code></pre></div>
+<p>Read the failure first at <a href="https://zenodo.org/account/settings/github/" class="external-link uri">https://zenodo.org/account/settings/github/</a>; if it is an authorisation error, reconnect GitHub at <a href="https://zenodo.org/account/settings/linkedaccounts/" class="external-link uri">https://zenodo.org/account/settings/linkedaccounts/</a> and toggle the repository off and on. This is what happened to v1.1.1: the hook fired in September 2025, Zenodo accepted it and its background job failed, leaving the release unarchived for a year (fixed 2026-09-22, DOI 10.5281/zenodo.3371425).</p>
+<p>Deposit metadata comes from <code>.zenodo.json</code>; the version and the archive date come from the tag, so that file needs no per-release edit.</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="files-that-must-not-ship">Files that must NOT ship<a class="anchor" aria-label="anchor" href="#files-that-must-not-ship"></a></h2>
 <p>Excluded via <code>.Rbuildignore</code>: <code>research/</code>, <code>data-raw/</code>, <code>docs/</code>, <code>pkgdown/</code>, <code>_pkgdown.yml</code>, <code>README.Rmd</code>, <code>CLAUDE.md</code>, <code>cran-release.md</code>, <code>cran-comments.md</code>, <code>CITATION.cff</code>, <code>.github/</code>, <code>.env</code>, gcov files, <code>Rplots.pdf</code>, <code>codecov.yml</code>. Verify with <code>tar tzf ivx_2.0.0.tar.gz</code>.</p>
