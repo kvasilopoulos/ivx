@@ -1,0 +1,72 @@
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to verify on Zenodo (e.g. v2.0.0)
+        required: true
+
+name: zenodo-archive.yaml
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    name: Verify Zenodo archived the release
+
+    env:
+      # Concept record for kvasilopoulos/ivx; resolves to the latest version.
+      CONCEPT_RECID: "3371391"
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Poll the Zenodo concept record for this tag
+        id: poll
+        run: |
+          # size is capped at 25 for unauthenticated requests.
+          api="https://zenodo.org/api/records?q=conceptrecid:${CONCEPT_RECID}&all_versions=true&size=25&sort=newest"
+          for attempt in $(seq 1 10); do
+            hits=$(curl -sf --max-time 60 "$api" || echo '{}')
+            echo "attempt ${attempt}: $(echo "$hits" | jq -r '[.hits.hits[].metadata.version] | join(" ")')"
+            doi=$(echo "$hits" | jq -r --arg v "$TAG" '.hits.hits[] | select(.metadata.version == $v) | .doi')
+            if [ -n "$doi" ]; then
+              echo "archived=true" >> "$GITHUB_OUTPUT"
+              echo "::notice::Zenodo archived ${TAG} as ${doi}"
+              exit 0
+            fi
+            sleep 60
+          done
+          echo "archived=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::Zenodo has not archived ${TAG} after 10 minutes"
+
+      - name: Open an issue if the archive is missing
+        if: steps.poll.outputs.archived == 'false'
+        run: |
+          cat > issue-body.md <<'BODY'
+          The GitHub-Zenodo hook fired for this release but the version has not
+          appeared on the concept record after 10 minutes.
+
+          Check <https://zenodo.org/account/settings/github/> for the error on that
+          release, and <https://zenodo.org/account/settings/linkedaccounts/> if it is
+          an authorisation failure (disconnect and reconnect GitHub, then toggle the
+          repository off and on).
+
+          Zenodo deduplicates on the GitHub release id, so redelivering the webhook
+          returns `409 The release has already been received`. The only way to retry
+          is to delete the GitHub release and recreate it on the same tag:
+
+              gh release delete TAG_PLACEHOLDER --yes
+              gh release create TAG_PLACEHOLDER --title "ivx <version>" --notes-file <notes>
+
+          This happened to v1.1.1, which went unarchived for a year.
+          BODY
+          sed -i "s/TAG_PLACEHOLDER/${TAG}/g" issue-body.md
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Zenodo did not archive ${TAG}" \
+            --body-file issue-body.md
