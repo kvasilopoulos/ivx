@@ -8,16 +8,16 @@
 An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 174 rows and 12 columns.
 }
 \source{
-Yang, B., Long, W., Peng, L., and Cai, Z. (2020).
-Autoregressive-model-based inference for predictive regressions with
-persistent predictors. Journal of the American Statistical Association,
-115(530), 1029-1039. DOI: 10.1080/01621459.2019.1686392
+Yang, B., Long, W., Peng, L., and Cai, Z. (2020). Testing the
+predictability of U.S. housing price index returns based on an IVX-AR
+model. Journal of the American Statistical Association, 115(532),
+1598-1619. DOI: 10.1080/01621459.2019.1686392
 }
 \usage{
 ylpc
 }
 \description{
-The dataset that was used in ..., containing
-a range of  variables.
+The quarterly US housing data used in Yang, Long, Peng and
+Cai (2020), containing a range of variables.
 }
 \keyword{datasets}

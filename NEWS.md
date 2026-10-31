@@ -5,6 +5,8 @@
   labelled `forecast (BIC)` instead of `Fixed`.
 * `print()` of `hlt_test()` and `cy_test()` splits its output into short lines
   (at most 70 characters).
+* The `ylpc` help page cited the wrong title, issue and pages for its source;
+  it now cites Yang, Long, Peng & Cai (2020), JASA 115(532), 1598-1619.
 * New vignette "Choosing a test: a decision workflow" (`vignette("workflow")`)
   that walks from the plain `ivx()` fit through the diagnostics (`ac_test()`,
   `delta()`, ARCH check) to the extension each one calls for.
