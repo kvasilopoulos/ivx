@@ -69,3 +69,13 @@ test_that("ivx_ar passes tuning and robust through to ivx_fit", {
   expect_true(m2$robust)
   expect_false(isTRUE(all.equal(coef(m), coef(m2))))
 })
+
+test_that("print and summary name the lag selection method", {
+  auto <- ivx_ar(hpi ~ inv, ylpc)
+  expect_output(print(auto), "Auto (BIC)", fixed = TRUE)
+  expect_output(print(summary(auto)), "Auto (BIC)", fixed = TRUE)
+  expect_output(print(summary(ivx_ar(hpi ~ inv, ylpc, ar_ic = "aic"))),
+                "Auto (AIC)", fixed = TRUE)
+  expect_output(print(summary(ivx_ar(hpi ~ inv, ylpc, ar = 1))), "Fixed",
+                fixed = TRUE)
+})

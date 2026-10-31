@@ -108,7 +108,7 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
       list(
         coefficients = numeric(), residuals = y,
         fitted = 0 * y, df.residuals = length(y),
-        ar_method = ar, ar_aic = ar_ic
+        ar_method = ar, ar_ic = ar_ic
       )
     )
   }
@@ -151,7 +151,7 @@ print.ivx_ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
     sep = ""
   )
   cat("\n\nLag Selection:\n",
-    if (x$ar_method == "auto") paste0("Auto (", x$ar_ic, ")") else "Fixed",
+    ar_label(x),
     " with AR terms q = ", x$q, "\n\n",
     sep = ""
   )
@@ -231,7 +231,7 @@ summary.ivx_ar <- function(object, ...) {
   ans$rse <- z$rse
   ans$ar_coefs <- z$ar_coefs
   ans$ar_method <- z$ar_method
-  ans$ar_aic <- z$ar_aic
+  ans$ar_ic <- z$ar_ic
 
   if (is.null(z$na.action)) ans$na.action <- z$na.action
   class(ans) <- "summary.ivx_ar"
@@ -251,7 +251,7 @@ print.summary.ivx_ar <- function(x,
     sep = ""
   )
   cat("\n\n",
-    if (x$ar_method == "auto") paste0("Auto (", x$ar_aic, ")") else "Fixed",
+    ar_label(x),
     " with AR terms q = ", x$q, "\n\n",
     sep = ""
   )
@@ -299,6 +299,17 @@ print.summary.ivx_ar <- function(x,
   }
   cat("\n")
   invisible(x)
+}
+
+# "Auto (BIC)", "forecast (BIC)" or "Fixed"; as.character() stops switch()
+# from indexing by a numeric ar order
+ar_label <- function(x) {
+  ic <- toupper(x$ar_ic)
+  switch(as.character(x$ar_method),
+    auto = paste0("Auto (", ic, ")"),
+    forecast = paste0("forecast (", ic, ")"),
+    "Fixed"
+  )
 }
 
 #' @importFrom stats embed
