@@ -194,16 +194,18 @@ ar_var <- function(psi, s2) {
 print.cy_test <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   if (!is.null(x$call)) cat("\nCall:\n", paste(deparse(x$call), collapse = "\n"), "\n", sep = "")
   cat("\nBonferroni Q-test (Campbell & Yogo, 2006)\n\n")
-  cat("delta = ", formatC(x$delta, digits = digits), ", DF-GLS = ", formatC(x$dfgls, digits = digits),
-      " (p = ", x$lag, "), CI for c at levels (", formatC(x$alpha1[1], digits = 2), ", ",
-      formatC(x$alpha1[2], digits = 2), "): [", formatC(x$c_ci[1], digits = digits), ", ",
-      formatC(x$c_ci[2], digits = digits), "], rho: [", formatC(x$rho_ci[1], digits = 4), ", ",
-      formatC(x$rho_ci[2], digits = 4), "]\n", sep = "")
-  cat("OLS slope = ", formatC(x$estimate, digits = digits), "; Q-estimates at the ends of the rho interval: ",
-      formatC(x$beta_rho[1], digits = digits), ", ", formatC(x$beta_rho[2], digits = digits), "\n", sep = "")
-  cat("90% Bonferroni confidence interval for beta: [", formatC(x$ci[1], digits = digits), ", ",
-      formatC(x$ci[2], digits = digits), "]\n", sep = "")
-  cat("5% one-sided Q-tests: H1 beta > 0 ", if (x$reject["greater"]) "reject" else "do not reject",
-      " H0; H1 beta < 0 ", if (x$reject["less"]) "reject" else "do not reject", " H0\n\n", sep = "")
+  f <- function(v, d = digits) formatC(v, digits = d)
+  dec <- function(r) if (r) "reject H0" else "do not reject H0"
+  # lines kept under 70 characters (JSS code width)
+  cat("delta = ", f(x$delta), ", DF-GLS = ", f(x$dfgls), " (lags = ", x$lag, ")\n", sep = "")
+  cat("CI for c at levels (", f(x$alpha1[1], 2), ", ", f(x$alpha1[2], 2), "): [",
+      f(x$c_ci[1]), ", ", f(x$c_ci[2]), "]\n", sep = "")
+  cat("CI for rho: [", f(x$rho_ci[1], 4), ", ", f(x$rho_ci[2], 4), "]\n", sep = "")
+  cat("OLS slope = ", f(x$estimate), "\n", sep = "")
+  cat("Q-estimates at the ends of the rho interval: ", f(x$beta_rho[1]), ", ",
+      f(x$beta_rho[2]), "\n", sep = "")
+  cat("90% Bonferroni CI for beta: [", f(x$ci[1]), ", ", f(x$ci[2]), "]\n", sep = "")
+  cat("5% one-sided Q-tests:\n  H1: beta > 0, ", dec(x$reject["greater"]),
+      "\n  H1: beta < 0, ", dec(x$reject["less"]), "\n\n", sep = "")
   invisible(x)
 }

@@ -7,7 +7,7 @@ test_that("hlt_test runs, switches and prints", {
   expect_true(is.finite(h$statistic) && is.finite(h$cv))
   expect_true(abs(h$rho_xy) <= 1)
   expect_true(h$adf_lag >= 0 && h$adf_lag <= floor(12 * (nrow(kms) / 100)^0.25))
-  expect_error(capture.output(print(h)), NA)
+  expect_lte(max(nchar(capture.output(print(h)))), 70)
   hl <- hlt_test(Ret ~ DP, data = kms, alternative = "less", level = 0.1)
   expect_true(hl$cv < 0)
   expect_error(hlt_test(Ret ~ DP + TBL, data = kms), "single predictor")

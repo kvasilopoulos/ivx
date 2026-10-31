@@ -141,16 +141,17 @@ hlt_cv <- function(rho, level, gls) {
 print.hlt_test <- function(x, digits = max(3L, getOption("digits") - 3L), ...) {
   if (!is.null(x$call)) cat("\nCall:\n", paste(deparse(x$call), collapse = "\n"), "\n", sep = "")
   cat("\nHybrid predictability test (Harvey, Leybourne & Taylor, 2021)\n\n")
-  cat("Selected test: ", x$test,
-      switch(x$test, "T_N" = " (weak persistence, normal critical value)",
-             "T_con" = " (OLS-demeaned t, conservative critical value)",
-             "T~_con" = " (quasi-GLS-demeaned t, conservative critical value)"), "\n", sep = "")
-  cat("statistic = ", formatC(x$statistic, digits = digits), ", ", x$level * 100, "% critical value = ",
-      formatC(x$cv, digits = digits), " (alternative: beta ", if (x$alternative == "greater") ">" else "<",
-      " 0): ", if (x$reject) "reject" else "do not reject", "\n", sep = "")
-  cat("slope = ", formatC(x$estimate, digits = digits), ", t = ", formatC(x$t, digits = digits),
-      ", t (quasi-GLS) = ", formatC(x$t_gls, digits = digits), ", ADF = ", formatC(x$adf, digits = digits),
-      " (p = ", x$adf_lag, ", cutoff ", formatC(-4 * sqrt(x$n), digits = digits), "), rho_xy = ",
-      formatC(x$rho_xy, digits = digits), "\n\n", sep = "")
+  f <- function(v) formatC(v, digits = digits)
+  # lines kept under 70 characters (JSS code width)
+  cat("Selected test: ", x$test, "\n  ",
+      switch(x$test, "T_N" = "weak persistence, normal critical value",
+             "T_con" = "OLS-demeaned t, conservative critical value",
+             "T~_con" = "quasi-GLS-demeaned t, conservative critical value"), "\n", sep = "")
+  cat("Alternative: beta ", if (x$alternative == "greater") ">" else "<", " 0\n", sep = "")
+  cat("Statistic = ", f(x$statistic), ", ", x$level * 100, "% critical value = ", f(x$cv),
+      ": ", if (x$reject) "reject" else "do not reject", "\n", sep = "")
+  cat("Slope = ", f(x$estimate), ", t = ", f(x$t), ", t (quasi-GLS) = ", f(x$t_gls), "\n", sep = "")
+  cat("ADF = ", f(x$adf), " (lags = ", x$adf_lag, ", cutoff = ", f(-4 * sqrt(x$n)),
+      "), rho_xy = ", f(x$rho_xy), "\n\n", sep = "")
   invisible(x)
 }

@@ -3,6 +3,8 @@
 * `summary()` of `ivx_ar()` printed `Auto ()` without the information
   criterion; it now prints e.g. `Auto (BIC)`, and `ar = "forecast"` fits are
   labelled `forecast (BIC)` instead of `Fixed`.
+* `print()` of `hlt_test()` and `cy_test()` splits its output into short lines
+  (at most 70 characters).
 * New vignette "Choosing a test: a decision workflow" (`vignette("workflow")`)
   that walks from the plain `ivx()` fit through the diagnostics (`ac_test()`,
   `delta()`, ARCH check) to the extension each one calls for.

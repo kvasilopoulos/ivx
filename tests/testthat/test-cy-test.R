@@ -8,7 +8,7 @@ test_that("cy_test runs and its pieces are consistent", {
   expect_equal(unname(m$rho_ci), 1 + unname(m$c_ci) / nrow(kms))
   expect_equal(unname(m$reject), unname(c(m$ci["lower"] > 0, m$ci["upper"] < 0)))
   expect_true(abs(m$delta) <= 1)
-  expect_error(capture.output(print(m)), NA)
+  expect_lte(max(nchar(capture.output(print(m)))), 70)
   expect_error(cy_test(Ret ~ DP + TBL, data = kms), "single predictor")
   # sign flip: negating the predictor negates beta and the interval
   f <- cy_test_fit(kms$Ret, -kms$DP)
