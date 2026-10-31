@@ -49,6 +49,41 @@ vcov.summary.ivx <- function(object, complete = TRUE, ...) {
   stats::.vcov.aliased(object$aliased, object$vcov, complete = complete)
 }
 
+#' Predictions from an IVX fit
+#'
+#' The one-step-ahead conditional mean \eqn{\hat\mu + \hat\beta' x_t} of the
+#' predictive regression: each row of `newdata` holds the predictors
+#' \eqn{x_t}, and the value returned for it predicts \eqn{y_{t+1}}. Fitting on
+#' a training sample and predicting over the full sample gives an
+#' out-of-sample path with the coefficients held fixed.
+#'
+#' @param object a fitted `ivx` object (plain `ivx()`, `horizon = 1`, no
+#'   `lag_y` and no weights).
+#' @param newdata a data frame containing the predictors. If omitted, the
+#'   fitted values of the estimation sample are returned.
+#' @param ... further arguments, currently ignored.
+#'
+#' @return A numeric vector of predictions, one per row of `newdata`.
+#'
+#' @export
+#' @examples
+#' # coefficients from the first 600 months, predictions for the rest
+#' train <- ivx(Ret ~ DP + TBL, data = kms[1:600, ])
+#' head(predict(train, newdata = kms[601:nrow(kms), ]))
+predict.ivx <- function(object, newdata, ...) {
+  # the stored intercept is that of the untransformed one-step regression
+  if (!identical(class(object), "ivx") || object$horizon != 1 ||
+      isTRUE(object$lag_y) || !is.null(object$weights)) {
+    stop("predict() needs a plain ivx() fit with horizon = 1, lag_y = FALSE ",
+         "and no weights", call. = FALSE)
+  }
+  if (missing(newdata)) return(object$initial$fitted)
+  tt <- stats::delete.response(terms(object))
+  mf <- model.frame(tt, newdata, na.action = stats::na.pass, xlev = object$xlevels)
+  x <- model.matrix(tt, mf, contrasts.arg = object$contrasts)
+  drop(object$initial$intercept + x %*% object$coefficients)
+}
+
 #' @export
 model.matrix.ivx <- function(object, ...) {
   if (n_match <- match("x", names(object), 0L)) {

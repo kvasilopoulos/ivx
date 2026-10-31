@@ -1,5 +1,8 @@
 # ivx 2.0.0
 
+* New `predict()` method for `ivx()` fits: the one-step-ahead conditional mean
+  for the predictors in `newdata`, so coefficients estimated on a training
+  sample can be projected out of sample (e.g., a fundamental price path).
 * `summary()` of `ivx_ar()` printed `Auto ()` without the information
   criterion; it now prints e.g. `Auto (BIC)`, and `ar = "forecast"` fits are
   labelled `forecast (BIC)` instead of `Fixed`.

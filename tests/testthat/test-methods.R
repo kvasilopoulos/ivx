@@ -63,3 +63,23 @@ test_that("texreg extract method builds a texreg object", {
   expect_s4_class(tr, "texreg")
   expect_equal(length(tr@coef), 3)
 })
+
+test_that("predict() gives the one-step-ahead conditional mean", {
+  m <- ivx(Ret ~ DP + TBL, kms)
+  n <- nrow(kms)
+  expect_equal(predict(m), m$initial$fitted)
+  # row t holds x_t, which predicts y_{t+1}
+  p <- predict(m, newdata = kms)
+  expect_length(p, n)
+  expect_equal(unname(p[-n]), unname(m$initial$fitted))
+  # coefficients fixed on a training sample, predictions out of sample
+  train <- ivx(Ret ~ DP + TBL, kms[1:600, ])
+  expect_equal(unname(predict(train, newdata = kms[601:n, ])),
+               unname(train$initial$intercept + as.matrix(kms[601:n, c("DP", "TBL")]) %*% coef(train))[, 1])
+  # transformations in the formula are applied to newdata
+  ml <- ivx(Ret ~ log(BM), kms)
+  expect_equal(unname(predict(ml, newdata = kms)[-n]), unname(ml$initial$fitted))
+  expect_error(predict(ivx(Ret ~ DP, kms, horizon = 4)), "horizon = 1")
+  expect_error(predict(ivx(Ret ~ DP, kms, lag_y = TRUE)), "lag_y")
+  expect_error(predict(obj_ar), "plain ivx")
+})
