@@ -70,6 +70,11 @@ test_that("ivx_ar passes tuning and robust through to ivx_fit", {
   expect_false(isTRUE(all.equal(coef(m), coef(m2))))
 })
 
+test_that("ar_ic selects the AR order", {
+  expect_equal(ivx_ar(Ret ~ LTY, monthly, ar_ic = "aic")$q, 5)
+  expect_equal(ivx_ar(Ret ~ LTY, monthly, ar_ic = "bic")$q, 1)
+})
+
 test_that("print and summary name the lag selection method", {
   auto <- ivx_ar(hpi ~ inv, ylpc)
   expect_output(print(auto), "Auto (BIC)", fixed = TRUE)

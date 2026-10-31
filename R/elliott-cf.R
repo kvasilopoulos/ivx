@@ -24,8 +24,8 @@
 #' @param covariates a one-sided formula giving the orthogonalising
 #' covariates \eqn{z_t} (contemporaneous with the response).
 #' @param lags number of lags \eqn{q} of the covariates to include.
-#' @param robust logical; if `TRUE` (default) Eicker-White standard errors are
-#' used.
+#' @param robust logical; if `TRUE` Eicker-White standard errors are used. The
+#' default `FALSE` is the conventional Wald statistic of the paper (Theorem 2).
 #'
 #' @return an object of class "elliott_cf": a list with `coefficients` (on the
 #' predictors), `se`, `tstat`, `Wald`, `df`, `p.value`, `gamma` (coefficients on
@@ -43,7 +43,7 @@
 #' @examples
 #' # the T-bill rate as covariate for the dividend-price ratio (illustration only)
 #' elliott_cf(Ret ~ DP, ~ TBL, data = kms)
-elliott_cf <- function(formula, covariates, data, lags = 0, robust = TRUE, na.action) {
+elliott_cf <- function(formula, covariates, data, lags = 0, robust = FALSE, na.action) {
   cl <- match.call()
   fr <- ivx_frame(match.call(expand.dots = FALSE), parent.frame())
   zf <- stats::update(covariates, ~ . - 1)
@@ -59,7 +59,7 @@ elliott_cf <- function(formula, covariates, data, lags = 0, robust = TRUE, na.ac
 #' @param x matrix of predictors.
 #' @param z matrix of covariates.
 #' @export
-elliott_cf_fit <- function(y, x, z, lags = 0, robust = TRUE) {
+elliott_cf_fit <- function(y, x, z, lags = 0, robust = FALSE) {
   x <- as.matrix(x)
   z <- as.matrix(z)
   n <- NROW(x)

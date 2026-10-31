@@ -25,11 +25,11 @@ parameter $c$.
 
 Type-I instruments are functions of the predictor:
 
-* `"frac"`: the truncated fractional difference $\Delta_+^{d} x_{t-1}$,
-  $d = 1/2$ by default — $I(1/2)$ when $x$ is $I(1)$, still informative when
+* `"frac"`: the truncated fractional difference $\Delta_+^{1-d} x_{t-1}$,
+  $d = 1/2$ by default — $I(d)$ when $x$ is $I(1)$, still informative when
   $x$ is stationary;
-* `"diff"`: the long difference $x_{t-1} - x_{t-1-k_T}$ with
-  $k_T = \lfloor 0.2\,T^{0.85} \rfloor$;
+* `"diff"`: the long difference $x_{t-1} - x_{t-k_T}$ with
+  $k_T = \min\{\lfloor 0.2\,T^{0.85} \rfloor, t - 1\}$;
 * the IVX filter of Kostakis et al. (2015) is the paper's "mild integration"
   case (`ivx()`).
 

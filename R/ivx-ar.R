@@ -5,12 +5,15 @@
 #' terms of the linear predictive regression model.
 #'
 #' @inheritParams ivx
-#' @param ar Method to include the autoregressive terms. "auto" find the optimal
-#' ar order by using the information criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
-#' \code{ar > 1} uses a fixed order to estimate the model.
-#' @param ar_ic Information criterion to be used in model selection.
-#' @param ar_max	 Maximum ar order of model to fit.
-#' @param ar_grid The ar grid sequence of which to iterate.
+#' @param ar order of the autoregression fitted to the OLS residuals of the
+#' predictive regression: `"auto"` selects it by `ar_ic` over `0:ar_max`,
+#' `"forecast"` uses `forecast::auto.arima()` with `max.q = 0`, and a
+#' non-negative integer fixes it. \code{ar = 0} reduces to \code{\link{ivx}}.
+#' @param ar_ic information criterion used when `ar` is `"auto"` or `"forecast"`.
+#' @param ar_max maximum autoregressive order considered.
+#' @param ar_grid a function of one estimated AR coefficient returning the grid
+#' searched around it; the grid point that minimises the variance of the
+#' AR-filtered response is kept, which reproduces Table 1 of Yang et al. (2020).
 #'
 #' @references Yang, B., Long, W., Peng, L., & Cai, Z. (2020). Testing the
 #' Predictability of US Housing Price Index Returns Based on an IVX-AR Model.
@@ -91,9 +94,11 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
   }
   mdl_ivx <- fit(y, x)
   if (ar == "auto") {
-    mdl_ar <- auto_ar(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, ar_ic = ar_ic, ...)
+    mdl_ar <- auto_ar(mdl_ivx$ols$residuals, max.p = ar_max, ic = ar_ic, ...)
   } else if (ar == "forecast") {
-    requireNamespace("forecast", quietly = TRUE)
+    if (!requireNamespace("forecast", quietly = TRUE)) {
+      stop("package 'forecast' is required for `ar = \"forecast\"`", call. = FALSE)
+    }
     mdl_ar <- forecast::auto.arima(mdl_ivx$ols$residuals, d = 0, max.p = ar_max, max.q = 0, ic = ar_ic, ...)
   } else if (ar == 0) {
     message("Using `ivx` instead.")
@@ -124,6 +129,8 @@ ivx_ar_fit <- function(y, x, horizon = 1, offset = NULL, ar = "auto", ar_max = 5
     y_adj <- tilt(y, grid_seq[i, ], q)
     x_adj <- tilt(x, grid_seq[i, ], q)
     res_ivx[[i]] <- fit(y_adj, x_adj)
+    # the sum makes rse = var(y_adj), so the IVX fit does not enter the choice;
+    # this reproduces Yang et al. (2020) Table 1 (W = 13.785 for INV), see tests
     eps <- y_adj - sum(x_adj * res_ivx[[i]]$coefficients)
     rse[i] <- var(eps[!is.infinite(eps)])
   }

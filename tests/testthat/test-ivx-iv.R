@@ -22,8 +22,10 @@ test_that("instrument constructions are right", {
   ref <- sapply(1:2, function(j) sapply(1:n, function(t) sum(pi[1:t] * x[t:1, j])))
   expect_equal(frac_diff(x, d), ref)
   expect_equal(frac_diff(matrix(1:5), 1)[, 1], rep(1, 5))       # d = 1: first difference
-  expect_equal(long_diff(matrix(1:10), 0.2, 0.85)[, 1], rep(1, 10))  # k = 1
-  expect_equal(long_diff(matrix(1:10), 3, 1)[, 1], 1:10)  # k = 30 > t - 1: x_t - x_0
+  # z_{t-1} = x_{t-1} - x_{t-k_T}, k_T = min(k, t - 1) (BD 2015, case 4)
+  expect_equal(long_diff(matrix(1:10), 0.3, 1)[, 1], c(0, 1, rep(2, 8)))  # k = 3
+  expect_equal(long_diff(matrix(1:10), 3, 1)[, 1], 0:9)  # k = 30 > t - 1: x_{t-1} - x_1
+  expect_error(long_diff(matrix(1:10), 0.2, 0.85), "at least 2")  # k = 1
   expect_equal(dim(sin_inst(30, 2)), c(30, 2))
 })
 

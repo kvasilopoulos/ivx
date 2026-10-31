@@ -32,7 +32,7 @@ ivx_ar(
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
 a symbolic description of the model to be fitted.}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
@@ -44,15 +44,18 @@ K-period sums of the response and of the lagged predictors, a single-lag
 instrument in the signal matrix and the K-period sum of the instrument in
 the covariance.}
 
-\item{ar}{Method to include the autoregressive terms. "auto" find the optimal
-ar order by using the information criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
-\code{ar > 1} uses a fixed order to estimate the model.}
+\item{ar}{order of the autoregression fitted to the OLS residuals of the
+predictive regression: \code{"auto"} selects it by \code{ar_ic} over \code{0:ar_max},
+\code{"forecast"} uses \code{forecast::auto.arima()} with \code{max.q = 0}, and a
+non-negative integer fixes it. \code{ar = 0} reduces to \code{\link{ivx}}.}
 
-\item{ar_ic}{Information criterion to be used in model selection.}
+\item{ar_ic}{information criterion used when \code{ar} is \code{"auto"} or \code{"forecast"}.}
 
-\item{ar_max}{Maximum ar order of model to fit.}
+\item{ar_max}{maximum autoregressive order considered.}
 
-\item{ar_grid}{The ar grid sequence of which to iterate.}
+\item{ar_grid}{a function of one estimated AR coefficient returning the grid
+searched around it; the grid point that minimises the variance of the
+AR-filtered response is kept, which reproduces Table 1 of Yang et al. (2020).}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
@@ -86,8 +89,7 @@ The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
 form of the IVX covariance matrix is used (Demetrescu et al., 2023). Only
 available for \code{horizon = 1}.}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{...}{currently unused.}
 
 \item{digits}{the number of significant digits to use when printing.}
 }

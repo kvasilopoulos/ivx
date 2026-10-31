@@ -130,8 +130,9 @@ covariates "orthogonalise" the innovations (his Theorem 2 versus the
 Elliott–Stock 1994 distribution of Theorem 1). The covariates are a modelling
 choice, not a data construction — `arm()` and `ivx_ra()` are the feasible
 versions where the control variable is built from the predictor's own
-innovations. `elliott_cf()` runs the regression, reports the Wald test with
-Eicker-White standard errors and the correlation that remains between the
+innovations. `elliott_cf()` runs the regression, reports the paper's Wald
+test (`robust = TRUE` for Eicker-White standard errors) and the correlation
+that remains between the
 regression residuals and the predictor innovations, which should be near zero.
 
 ```{r}

@@ -8,11 +8,11 @@
 ivx_episodic(
   object,
   scheme = c("rolling", "forward", "backward"),
-  window = 0.2,
+  window = NULL,
   robust = FALSE,
   B = 999,
   type = c("frwb", "rwb"),
-  ar_max = 5,
+  ar_max = NULL,
   dist = c("rademacher", "normal"),
   seed = NULL,
   cores = 1L
@@ -27,9 +27,12 @@ ivx_episodic(
 windows starting at the first observation, or \code{"backward"} recursive windows
 ending at the last observation.}
 
-\item{window}{fraction of the sample: the window width for \code{"rolling"}, the
-warm-in fraction \eqn{\tau_L} for \code{"forward"}, and the latest start
-\eqn{\tau_U} for \code{"backward"}.}
+\item{window}{shortest window as a fraction of the sample: the window width
+\eqn{\pi} for \code{"rolling"}, the warm-in fraction \eqn{\tau_L} for \code{"forward"},
+and \eqn{1 - \tau_U} (\eqn{\tau_U} the latest start) for \code{"backward"}. The
+default \code{NULL} uses the settings of Demetrescu et al. (2022, Section 6):
+\eqn{\pi = 1/3} for rolling and \eqn{\tau_L = 1 - \tau_U = 1/4} for the
+recursive schemes.}
 
 \item{robust}{logical; use Eicker-White standard errors in the subsample
 statistics.}
@@ -39,8 +42,11 @@ statistics.}
 \item{type}{bootstrap scheme, see \code{\link[=ivx_boot]{ivx_boot()}}. The default fixed regressor
 wild bootstrap is the scheme used by Demetrescu et al. (2022).}
 
-\item{ar_max}{maximum lag order of the (vector) autoregression fitted to the
-regressors by the RWB scheme; the order is selected by BIC (Remark 24).}
+\item{ar_max}{maximum order of the (vector) autoregression in levels fitted
+to the regressors by the RWB scheme (Algorithm 1, Step 2); the order is
+selected by BIC (Remark 24). The default \code{NULL} is
+\eqn{\lfloor 4 (T/100)^{1/4} \rfloor + 1}, the range used in the paper's
+simulations (an AR(\eqn{p + 1}) with \eqn{p \le 4 (T/100)^{1/4}}).}
 
 \item{dist}{distribution of the wild multipliers.}
 
@@ -76,7 +82,7 @@ asymptotically valid for these sup-functionals.
 }
 \examples{
 mod <- ivx(Ret ~ DP, data = kms)
-ivx_episodic(mod, scheme = "rolling", window = 0.2, B = 99, seed = 1)
+ivx_episodic(mod, scheme = "rolling", B = 99, seed = 1)
 }
 \references{
 Demetrescu, M., Georgiev, I., Rodrigues, P. M. M., & Taylor, A. M. R.

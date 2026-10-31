@@ -6,9 +6,9 @@
 \alias{print.elliott_cf}
 \title{Control-Function Predictability Test of Elliott (2011)}
 \usage{
-elliott_cf(formula, covariates, data, lags = 0, robust = TRUE, na.action)
+elliott_cf(formula, covariates, data, lags = 0, robust = FALSE, na.action)
 
-elliott_cf_fit(y, x, z, lags = 0, robust = TRUE)
+elliott_cf_fit(y, x, z, lags = 0, robust = FALSE)
 
 \method{print}{elliott_cf}(x, digits = max(3L, getOption("digits") - 3L), ...)
 }
@@ -19,15 +19,15 @@ a symbolic description of the model to be fitted.}
 \item{covariates}{a one-sided formula giving the orthogonalising
 covariates \eqn{z_t} (contemporaneous with the response).}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
 
 \item{lags}{number of lags \eqn{q} of the covariates to include.}
 
-\item{robust}{logical; if \code{TRUE} (default) Eicker-White standard errors are
-used.}
+\item{robust}{logical; if \code{TRUE} Eicker-White standard errors are used. The
+default \code{FALSE} is the conventional Wald statistic of the paper (Theorem 2).}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},

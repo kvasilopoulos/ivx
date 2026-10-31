@@ -2,9 +2,9 @@
 
 auto_ar <- function(x, max.p = 5, ic = "aic", ...) {
   p <- max.p
-  bestfit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE)
+  bestfit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE, ...)
   while (p >= 0) {
-    fit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE)
+    fit <- arima2(x, order = c(p, 0, 0), include.mean = FALSE, ...)
     if (fit[[ic]] < bestfit[[ic]]) {
       bestfit <- fit
     }

@@ -37,15 +37,18 @@ the covariance.}
     specify an \emph{a priori} known component to be included in the
     linear predictor during fitting.}
 
-\item{ar}{Method to include the autoregressive terms. "auto" find the optimal
-ar order by using the information criteria. \code{ar = 0} reduces to simple \code{\link{ivx}}.
-\code{ar > 1} uses a fixed order to estimate the model.}
+\item{ar}{order of the autoregression fitted to the OLS residuals of the
+predictive regression: \code{"auto"} selects it by \code{ar_ic} over \code{0:ar_max},
+\code{"forecast"} uses \code{forecast::auto.arima()} with \code{max.q = 0}, and a
+non-negative integer fixes it. \code{ar = 0} reduces to \code{\link{ivx}}.}
 
-\item{ar_max}{Maximum ar order of model to fit.}
+\item{ar_max}{maximum autoregressive order considered.}
 
-\item{ar_ic}{Information criterion to be used in model selection.}
+\item{ar_ic}{information criterion used when \code{ar} is \code{"auto"} or \code{"forecast"}.}
 
-\item{ar_grid}{The ar grid sequence of which to iterate.}
+\item{ar_grid}{a function of one estimated AR coefficient returning the grid
+searched around it; the grid point that minimises the variance of the
+AR-filtered response is kept, which reproduces Table 1 of Yang et al. (2020).}
 
 \item{beta, cz}{tuning parameters of the IVX instrument
 \eqn{z_t = \sum_{j=0}^{t-1} (1 - c_z/n^\beta)^j \Delta x_{t-j}}. Defaults

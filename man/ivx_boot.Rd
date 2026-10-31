@@ -9,7 +9,7 @@ ivx_boot(
   object,
   B = 999,
   type = c("rwb", "frwb"),
-  ar_max = 5,
+  ar_max = NULL,
   dist = c("rademacher", "normal"),
   seed = NULL,
   cores = 1L
@@ -25,8 +25,11 @@ ivx_boot(
 \item{type}{bootstrap scheme: \code{"rwb"} (residual wild bootstrap, recommended
 for strongly persistent regressors) or \code{"frwb"} (fixed regressor wild bootstrap).}
 
-\item{ar_max}{maximum lag order of the (vector) autoregression fitted to the
-regressors by the RWB scheme; the order is selected by BIC (Remark 24).}
+\item{ar_max}{maximum order of the (vector) autoregression in levels fitted
+to the regressors by the RWB scheme (Algorithm 1, Step 2); the order is
+selected by BIC (Remark 24). The default \code{NULL} is
+\eqn{\lfloor 4 (T/100)^{1/4} \rfloor + 1}, the range used in the paper's
+simulations (an AR(\eqn{p + 1}) with \eqn{p \le 4 (T/100)^{1/4}}).}
 
 \item{dist}{distribution of the wild multipliers.}
 

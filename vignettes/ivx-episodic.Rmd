@@ -73,7 +73,7 @@ Forward and backward recursive sequences:
 
 ```{r}
 ivx_episodic(mod, scheme = "forward", window = 0.2, B = 199, seed = 1)$p.value
-ivx_episodic(mod, scheme = "backward", window = 0.8, B = 199, seed = 1)$p.value
+ivx_episodic(mod, scheme = "backward", window = 0.2, B = 199, seed = 1)$p.value
 ```
 
 ## Interpretation and caveats
@@ -82,10 +82,11 @@ ivx_episodic(mod, scheme = "backward", window = 0.8, B = 199, seed = 1)$p.value
   one window; the plot of the sequence locates it. The window(s) above the
   pointwise $\pm 1.96$ line are not individually significant at 5% — that
   ignores the multiplicity the sup-test accounts for.
-* `window` is a fraction of the regression sample; the paper uses window
-  fractions between 0.1 and 0.3 for rolling tests and warm-in fractions of
-  0.1–0.25 for recursive ones. Very short windows give noisy statistics and
-  low power.
+* `window` is the shortest window as a fraction of the regression sample,
+  for every scheme. The default follows Demetrescu et al. (2022): 1/3 for
+  rolling windows and 1/4 for the recursive ones ($\tau_L = 1/4$,
+  $\tau_U = 3/4$); their 2023 paper uses 1/3 throughout. Very short windows
+  give noisy statistics and low power.
 * The instrument is built once from the full sample. Refitting `ivx()` on
   each window (as in `vignette("rolling-ivx")`) rebuilds the instrument inside
   the window, which is a different statistic; the Bonferroni approach used

@@ -5,8 +5,8 @@
 #' Eicker-White standard errors (their eq. 12) using instruments that are less
 #' persistent than the predictor. Two families are available. Type-I
 #' instruments are transformations of the predictor itself: the fractional
-#' difference \eqn{\Delta_+^{d} x_{t-1}} (`"frac"`) and the long difference
-#' \eqn{x_{t-1} - x_{t-1-k_T}} (`"diff"`), which keep power when the predictor
+#' difference \eqn{\Delta_+^{1-d} x_{t-1}} (`"frac"`) and the long difference
+#' \eqn{x_{t-1} - x_{t-k_T}} (`"diff"`), which keep power when the predictor
 #' is stationary. Type-II instruments are deterministic and correlate with a
 #' near-integrated predictor only: the sine function \eqn{\sin(\pi t/T)}
 #' (`"sin"`). Their 2SLS combination (`"comb"`, the paper's `IVcomb` and the
@@ -23,10 +23,12 @@
 #'
 #' @inheritParams ivx
 #' @param instruments instrument set; see Details.
-#' @param d order of the fractional difference for `"frac"`, in (0, 1/2];
-#' the paper uses 1/2.
-#' @param kappa,eta the long-difference lag is \eqn{k_T = \lfloor \kappa T^\eta \rfloor}
-#' (paper: 0.2 and 0.85), truncated to \eqn{t - 1}.
+#' @param d memory of the fractional instrument \eqn{\Delta_+^{1-d} x_{t-1}}
+#' for `"frac"` and `"comb"` (Section 2.2, case 3), in (0, 1/2]; the paper's
+#' simulations use 1/2.
+#' @param kappa,eta the long-difference lag is
+#' \eqn{k_T = \min\{\lfloor \kappa T^\eta \rfloor, t - 1\}} (Section 2.2, case 4),
+#' with \eqn{\kappa > 0}, \eqn{0 < \eta < 1}; the paper's simulations use 0.2 and 0.85.
 #'
 #' @return an object of class `c("ivx_iv", "ivx")` so the `ivx` methods apply;
 #' `instruments` holds the instrument matrix aligned with the regressors.
@@ -70,6 +72,7 @@ ivx_iv_fit <- function(y, x, instruments = "comb", d = 0.5, kappa = 0.2, eta = 0
   if (is.null(n)) stop("'x' must be a matrix")
   if (NROW(y) != n) stop("incompatible dimensions")
   if (d <= 0 || d > 0.5) stop("`d` must be in (0, 1/2]", call. = FALSE)
+  if (kappa <= 0 || eta <= 0 || eta >= 1) stop("need `kappa` > 0 and `eta` in (0, 1)", call. = FALSE)
   cnames <- colnames(x)
   if (is.null(cnames)) cnames <- paste0("x", 1L:l)
 
@@ -78,10 +81,10 @@ ivx_iv_fit <- function(y, x, instruments = "comb", d = 0.5, kappa = 0.2, eta = 0
   nn <- n - 1
 
   Z <- switch(instruments,
-    frac = frac_diff(xl, d),
+    frac = frac_diff(xl, 1 - d),
     diff = long_diff(xl, kappa, eta),
     sin = sin_inst(nn, l),
-    comb = cbind(sin_inst(nn, l), frac_diff(xl, d))
+    comb = cbind(sin_inst(nn, l), frac_diff(xl, 1 - d))
   )
   colnames(Z) <- switch(instruments,
     frac = paste0("frac_", cnames), diff = paste0("diff_", cnames),
@@ -142,13 +145,12 @@ frac_diff <- function(x, d) {
   matrix(z, ncol = NCOL(x))
 }
 
-# x_{t} - x_{t-k}, k = min(floor(kappa n^eta), t - 1); x_0 taken as 0 (so t = 1 gives x_1)
+# row i of x is x_{t-1}, t = i + 1: z_{t-1} = x_{t-1} - x_{t-k}, k = min(floor(kappa n^eta), t - 1)
 long_diff <- function(x, kappa, eta) {
   n <- NROW(x)
-  k <- max(1L, floor(kappa * n^eta))
-  lagk <- pmax(seq_len(n) - k, 0L)
-  x0 <- rbind(0, x)
-  x - x0[lagk + 1, , drop = FALSE]
+  k <- floor(kappa * n^eta)
+  if (k < 2) stop("long-difference lag floor(kappa * T^eta) must be at least 2", call. = FALSE)
+  x - x[pmax(seq_len(n) + 1 - k, 1L), , drop = FALSE]
 }
 
 sin_inst <- function(n, l) {

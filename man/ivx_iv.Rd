@@ -26,18 +26,20 @@ ivx_iv(
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
 a symbolic description of the model to be fitted.}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
 
 \item{instruments}{instrument set; see Details.}
 
-\item{d}{order of the fractional difference for \code{"frac"}, in (0, 1/2];
-the paper uses 1/2.}
+\item{d}{memory of the fractional instrument \eqn{\Delta_+^{1-d} x_{t-1}}
+for \code{"frac"} and \code{"comb"} (Section 2.2, case 3), in (0, 1/2]; the paper's
+simulations use 1/2.}
 
-\item{kappa, eta}{the long-difference lag is \eqn{k_T = \lfloor \kappa T^\eta \rfloor}
-(paper: 0.2 and 0.85), truncated to \eqn{t - 1}.}
+\item{kappa, eta}{the long-difference lag is
+\eqn{k_T = \min\{\lfloor \kappa T^\eta \rfloor, t - 1\}} (Section 2.2, case 4),
+with \eqn{\kappa > 0}, \eqn{0 < \eta < 1}; the paper's simulations use 0.2 and 0.85.}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},
@@ -54,8 +56,7 @@ no action. Value \code{\link[stats:na.fail]{na.exclude}} can be useful.}
 
 \item{y}{logical. If \code{TRUE} the response of the fit is returned.}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{...}{currently unused.}
 
 \item{digits}{the number of significant digits to use when printing.}
 }
@@ -69,8 +70,8 @@ Demetrescu (2015): the predictive regression is estimated by 2SLS with
 Eicker-White standard errors (their eq. 12) using instruments that are less
 persistent than the predictor. Two families are available. Type-I
 instruments are transformations of the predictor itself: the fractional
-difference \eqn{\Delta_+^{d} x_{t-1}} (\code{"frac"}) and the long difference
-\eqn{x_{t-1} - x_{t-1-k_T}} (\code{"diff"}), which keep power when the predictor
+difference \eqn{\Delta_+^{1-d} x_{t-1}} (\code{"frac"}) and the long difference
+\eqn{x_{t-1} - x_{t-k_T}} (\code{"diff"}), which keep power when the predictor
 is stationary. Type-II instruments are deterministic and correlate with a
 near-integrated predictor only: the sine function \eqn{\sin(\pi t/T)}
 (\code{"sin"}). Their 2SLS combination (\code{"comb"}, the paper's \code{IVcomb} and the

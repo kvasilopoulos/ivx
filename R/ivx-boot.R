@@ -12,8 +12,11 @@
 #' @param B number of bootstrap replications.
 #' @param type bootstrap scheme: `"rwb"` (residual wild bootstrap, recommended
 #' for strongly persistent regressors) or `"frwb"` (fixed regressor wild bootstrap).
-#' @param ar_max maximum lag order of the (vector) autoregression fitted to the
-#' regressors by the RWB scheme; the order is selected by BIC (Remark 24).
+#' @param ar_max maximum order of the (vector) autoregression in levels fitted
+#' to the regressors by the RWB scheme (Algorithm 1, Step 2); the order is
+#' selected by BIC (Remark 24). The default `NULL` is
+#' \eqn{\lfloor 4 (T/100)^{1/4} \rfloor + 1}, the range used in the paper's
+#' simulations (an AR(\eqn{p + 1}) with \eqn{p \le 4 (T/100)^{1/4}}).
 #' @param dist distribution of the wild multipliers.
 #' @param seed optional integer seed. With `cores > 1` the L'Ecuyer-CMRG
 #' streams of the \pkg{parallel} package are used, so results are reproducible
@@ -39,7 +42,7 @@ ivx_boot <- function(
   object,
   B = 999,
   type = c("rwb", "frwb"),
-  ar_max = 5,
+  ar_max = NULL,
   dist = c("rademacher", "normal"),
   seed = NULL,
   cores = 1L
@@ -224,7 +227,7 @@ boot_setup <- function(object, type, ar_max, dist) {
   l <- NCOL(x)
   bs <- list(x = x, y = y, n = n, l = l, type = type, u_hat = object$ols$residuals)
   if (type == "rwb") {
-    va <- var_ols(x, ar_max)
+    va <- var_ols(x, ar_max %||% (floor(4 * (n / 100)^0.25) + 1))
     v_hat <- matrix(0, n - 1, l)
     v_hat[va$q:(n - 1), ] <- va$resid
     bs$A <- va$A

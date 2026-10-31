@@ -15,9 +15,12 @@
 #' @param scheme `"rolling"` windows of fixed width, `"forward"` recursive
 #' windows starting at the first observation, or `"backward"` recursive windows
 #' ending at the last observation.
-#' @param window fraction of the sample: the window width for `"rolling"`, the
-#' warm-in fraction \eqn{\tau_L} for `"forward"`, and the latest start
-#' \eqn{\tau_U} for `"backward"`.
+#' @param window shortest window as a fraction of the sample: the window width
+#' \eqn{\pi} for `"rolling"`, the warm-in fraction \eqn{\tau_L} for `"forward"`,
+#' and \eqn{1 - \tau_U} (\eqn{\tau_U} the latest start) for `"backward"`. The
+#' default `NULL` uses the settings of Demetrescu et al. (2022, Section 6):
+#' \eqn{\pi = 1/3} for rolling and \eqn{\tau_L = 1 - \tau_U = 1/4} for the
+#' recursive schemes.
 #' @param robust logical; use Eicker-White standard errors in the subsample
 #' statistics.
 #' @param type bootstrap scheme, see [ivx_boot()]. The default fixed regressor
@@ -38,14 +41,15 @@
 #' @export
 #' @examples
 #' mod <- ivx(Ret ~ DP, data = kms)
-#' ivx_episodic(mod, scheme = "rolling", window = 0.2, B = 99, seed = 1)
-ivx_episodic <- function(object, scheme = c("rolling", "forward", "backward"), window = 0.2,
-                         robust = FALSE, B = 999, type = c("frwb", "rwb"), ar_max = 5,
+#' ivx_episodic(mod, scheme = "rolling", B = 99, seed = 1)
+ivx_episodic <- function(object, scheme = c("rolling", "forward", "backward"), window = NULL,
+                         robust = FALSE, B = 999, type = c("frwb", "rwb"), ar_max = NULL,
                          dist = c("rademacher", "normal"), seed = NULL, cores = 1L) {
   scheme <- match.arg(scheme)
   type <- match.arg(type)
   dist <- match.arg(dist)
   if (object$horizon != 1) stop("subsample tests are available for horizon = 1 only", call. = FALSE)
+  window <- window %||% if (scheme == "rolling") 1 / 3 else 1 / 4
   if (window <= 0 || window >= 1) stop("`window` must be in (0, 1)", call. = FALSE)
   if (!is.null(seed) && cores == 1L) set.seed(seed)
 
@@ -61,7 +65,7 @@ ivx_episodic <- function(object, scheme = c("rolling", "forward", "backward"), w
   win <- switch(scheme,
     rolling  = cbind(start = 0:(nn - w), end = (w - 1):(nn - 1)),
     forward  = cbind(start = 0L, end = (w - 1):(nn - 1)),
-    backward = cbind(start = 0:w, end = nn - 1)
+    backward = cbind(start = 0:(nn - w), end = nn - 1)
   )
 
   stats <- function(y, x) {

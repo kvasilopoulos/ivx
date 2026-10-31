@@ -14,11 +14,13 @@ ivx_iv_fit(y, x, instruments = "comb", d = 0.5, kappa = 0.2, eta = 0.85, ...)
 
 \item{instruments}{instrument set; see Details.}
 
-\item{d}{order of the fractional difference for \code{"frac"}, in (0, 1/2];
-the paper uses 1/2.}
+\item{d}{memory of the fractional instrument \eqn{\Delta_+^{1-d} x_{t-1}}
+for \code{"frac"} and \code{"comb"} (Section 2.2, case 3), in (0, 1/2]; the paper's
+simulations use 1/2.}
 
-\item{kappa, eta}{the long-difference lag is \eqn{k_T = \lfloor \kappa T^\eta \rfloor}
-(paper: 0.2 and 0.85), truncated to \eqn{t - 1}.}
+\item{kappa, eta}{the long-difference lag is
+\eqn{k_T = \min\{\lfloor \kappa T^\eta \rfloor, t - 1\}} (Section 2.2, case 4),
+with \eqn{\kappa > 0}, \eqn{0 < \eta < 1}; the paper's simulations use 0.2 and 0.85.}
 
 \item{...}{currently unused.}
 }
