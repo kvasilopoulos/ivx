@@ -34,8 +34,11 @@
 #' and the alternative, and the results are mapped back.
 #'
 #' @inheritParams ivx
-#' @param lag_max maximum ADF lag order for the BIC search; the default is
-#' \eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences.
+#' @param lag_max maximum ADF lag order for the BIC search. Campbell and Yogo
+#' (2006, Section 5) cap the autoregressive order at 4, 6 and 8 for annual,
+#' quarterly and monthly data; the default
+#' \eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences is the
+#' frequency-free rule Harvey et al. (2021) use for the Q-test.
 #'
 #' @return an object of class "cy_test": a list with `ci` (the 90\% Bonferroni
 #' interval for \eqn{\beta}), `reject` (named logical: `greater`, `less`),

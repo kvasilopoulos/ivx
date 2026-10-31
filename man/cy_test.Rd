@@ -16,13 +16,16 @@ cy_test_fit(y, x, lag_max = NULL)
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
 a symbolic description of the model to be fitted.}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
 
-\item{lag_max}{maximum ADF lag order for the BIC search; the default is
-\eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences.}
+\item{lag_max}{maximum ADF lag order for the BIC search. Campbell and Yogo
+(2006, Section 5) cap the autoregressive order at 4, 6 and 8 for annual,
+quarterly and monthly data; the default
+\eqn{\lfloor 12 (T/100)^{1/4} \rfloor} lagged differences is the
+frequency-free rule Harvey et al. (2021) use for the Q-test.}
 
 \item{na.action}{a function which indicates what should happen when the data
 contain NAs. The default is set by the na.action setting of \code{\link[base:options]{options}},

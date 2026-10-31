@@ -29,7 +29,7 @@ ivx_sys(
 \item{formula}{a formula whose left-hand side is a matrix, e.g.
 \code{cbind(y1, y2) ~ x1 + x2}.}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
@@ -63,8 +63,7 @@ no action. Value \code{\link[stats:na.fail]{na.exclude}} can be useful.}
 \item{bandwidth}{Newey-West bandwidth for the long-run covariance estimate.
 The default \code{NULL} uses \eqn{n^{1/3}} as in Kostakis et al. (2015).}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{...}{currently unused.}
 
 \item{digits}{the number of significant digits to use when printing.}
 

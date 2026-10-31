@@ -7,7 +7,7 @@
 #'
 #' @param formula an object of class "formula" (or one that can be coerced to that class):
 #' a symbolic description of the model to be fitted.
-#' @param data n optional data frame, list or environment (or object coercible by
+#' @param data an optional data frame, list or environment (or object coercible by
 #' \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 #' the variables in the model. If not found in data, the variables are taken
 #' from environment(formula), typically the environment from which lm is called.
@@ -33,8 +33,7 @@
 #' numeric vector or matrix of extents matching those of the response. One or
 #' more offset terms can be included in the formula instead or as well, and if more
 #' than one are specified their sum is used. See \link[stats:model.extract]{model.offset}
-#' @param ... additional arguments to be passed to the low level regression fitting
-#' functions (see \link[stats:lm]{lm}).
+#' @param ... currently unused.
 #' @param model logical. If `TRUE` the model.frame of the fit is returned.
 #' @param x logical. If `TRUE` the model.matrix of the fit is returned.
 #' @param y logical. If `TRUE` the response of the fit is returned.

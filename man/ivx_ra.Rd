@@ -28,7 +28,7 @@ ivx_ra(
 \item{formula}{an object of class "formula" (or one that can be coerced to that class):
 a symbolic description of the model to be fitted.}
 
-\item{data}{n optional data frame, list or environment (or object coercible by
+\item{data}{an optional data frame, list or environment (or object coercible by
 \code{\link[base:as.data.frame]{as.data.frame}} to a data frame) containing
 the variables in the model. If not found in data, the variables are taken
 from environment(formula), typically the environment from which lm is called.}
@@ -62,8 +62,7 @@ no action. Value \code{\link[stats:na.fail]{na.exclude}} can be useful.}
 
 \item{y}{logical. If \code{TRUE} the response of the fit is returned.}
 
-\item{...}{additional arguments to be passed to the low level regression fitting
-functions (see \link[stats:lm]{lm}).}
+\item{...}{currently unused.}
 
 \item{digits}{the number of significant digits to use when printing.}
 }

@@ -12,7 +12,7 @@ persistent regressors. Rcpp/Armadillo backend.
   `horizon > 1` is the transformed-regression test (Demetrescu, Rodrigues & Taylor 2023).
 - `R/ivx-qr.R` — `ivx_qr()` IVX quantile regression (Lee 2016), `ivx_qr_boot()` block
   bootstrap (Fan & Lee 2019); uses `quantreg`.
-- `R/ivx-sys.R` — `ivx_sys()` systems IVX (Magdalinos 2022); `src/ivx_sys_fit_cpp.cpp`.
+- `R/ivx-sys.R` — `ivx_sys()` systems IVX (Kostakis, Magdalinos & Stamatogiannis 2023); `src/ivx_sys_fit_cpp.cpp`.
 - `R/ivx-boot.R` — `ivx_boot()` residual / fixed-regressor wild bootstrap (DGRT 2023);
   `src/var_sim.cpp` for the regressor recursion.
 - `R/ivx-episodic.R` — `ivx_episodic()` subsample sup/ave tests (DGRT 2022); `src/sub_ivx.cpp`.
